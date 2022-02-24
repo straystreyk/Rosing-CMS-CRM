@@ -1,0 +1,63 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'Gilroy', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+p {
+    margin: 0;
+}
+
+button {
+    background: none;
+    border: none;
+    font-family: 'Gilroy', sans-serif;
+    padding: 0;
+}
+
+.fade-enter-done {
+    opacity: 1;
+    transform: unset!important;
+}
+
+.fade-enter {
+    opacity: 1;
+    transition: opacity 300ms;
+    transform: unset!important;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+    transform: unset!important;
+}
+
+.fade-exit {
+    opacity: 1;
+    transform: unset!important;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+    transform: unset!important;
+}
+
+.fade-exit-done {
+    opacity: 0;
+    transition: opacity 300ms;
+    transform: unset!important;
+}
+
+@keyframes circular {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
