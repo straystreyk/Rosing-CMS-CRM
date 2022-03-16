@@ -1,7 +1,4 @@
-import { List } from "./genres";
-import { Edit } from "./genres";
-import { Create } from "./genres";
-import { Icon } from "./genres";
+import { List, Edit, Create, Icon } from "./genres";
 
 export const GenresVariables = {
   list: List,

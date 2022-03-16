@@ -1,4 +1,4 @@
-import { FC } from "react";
+import * as React from "react";
 import Icon from "@material-ui/icons/Movie";
 
 import { ResourceCreate, ResourceEdit, ResourceList } from "../../components/ResourceView";
@@ -11,23 +11,23 @@ import { ResourceShow } from "../../components/ResourceView/resource-show";
 const resource = "media_content/video/movies";
 const filters = [<SearchInput source="name" alwaysOn />];
 
-export const Create: FC = (props) => (
+export const Create: React.FC = (props) => (
   <ResourceCreate {...props} resource={resource}>
     <Form resource={resource} type="create" {...props} />
   </ResourceCreate>
 );
-export const Edit: FC = (props) => (
+export const Edit: React.FC = (props) => (
   <ResourceEdit {...props} redirect="list" resource={resource}>
     <Form resource={resource} type="edit" {...props} />
   </ResourceEdit>
 );
-export const List: FC = (props) => (
+export const List: React.FC = (props) => (
   <ResourceList {...props} listTabs={mediaContentTabs} filters={filters} resource={resource}>
     <DataGridList resource={resource} />
   </ResourceList>
 );
 
-export const Show: FC = (props) => (
+export const Show: React.FC = (props) => (
   <ResourceShow {...props} resource={resource}>
     <Form resource={resource} type="show" />
   </ResourceShow>

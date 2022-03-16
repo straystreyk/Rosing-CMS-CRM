@@ -1,7 +1,4 @@
-import { List } from "./news";
-import { Edit } from "./news";
-import { Create } from "./news";
-import { Icon } from "./news";
+import { List, Edit, Create, Icon } from "./news";
 
 export const NewsVariables = {
   list: List,

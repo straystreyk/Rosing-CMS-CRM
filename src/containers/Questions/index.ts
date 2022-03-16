@@ -1,7 +1,4 @@
-import { List } from "./question";
-import { Edit } from "./question";
-import { Create } from "./question";
-import { Icon } from "./question";
+import { List, Edit, Create, Icon } from "./question";
 
 export const QuestionsVariables = {
   list: List,

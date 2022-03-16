@@ -221,18 +221,6 @@ export const Form: FC<FormProps> = ({ type, resource }) => {
         title="Source"
         id="Source"
       >
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
-          inputType={type}
-          query={ALL_VIDEO_FILES}
-          label="Video files"
-          helperText={
-            "You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
-          }
-          source="streamSourceIds"
-          resource={resource}
-          idName="id"
-        />
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
