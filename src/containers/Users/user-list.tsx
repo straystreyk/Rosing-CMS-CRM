@@ -3,7 +3,6 @@ import { Datagrid, DateField, TextField } from "react-admin";
 import { ResourceList } from "../../components/ResourceView";
 import { filterTypes } from "../../types";
 import { FilterTextInput } from "../../components/Inputs";
-import { ListTabProps } from "../../components/Tabs/list-page-tabs";
 
 const filters: filterTypes[] = [
   {

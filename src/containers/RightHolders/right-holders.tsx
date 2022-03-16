@@ -1,4 +1,4 @@
-import { FC } from "react";
+import * as React from "react";
 import Icon from "@material-ui/icons/Lock";
 
 import { ResourceCreate, ResourceEdit, ResourceList } from "../../components/ResourceView";
@@ -21,17 +21,17 @@ const listTabs: ListTabProps[] = [
   },
 ];
 
-export const Create: FC = (props) => (
+export const Create: React.FC = (props) => (
   <ResourceCreate {...props} resource={resource}>
     <Form resource={resource} type="create" />
   </ResourceCreate>
 );
-export const Edit: FC = (props) => (
+export const Edit: React.FC = (props) => (
   <ResourceEdit {...props} resource={resource}>
     <Form resource={resource} type="edit" />
   </ResourceEdit>
 );
-export const List: FC = (props) => (
+export const List: React.FC = (props) => (
   <ResourceList {...props} filters={filters} resource={resource} listTabs={listTabs}>
     <Show resource={resource} />
   </ResourceList>

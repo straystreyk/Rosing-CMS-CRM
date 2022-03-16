@@ -1,7 +1,4 @@
-import { List } from './right-holders';
-import { Edit } from './right-holders';
-import { Create } from './right-holders';
-import { Icon } from './right-holders';
+import { Icon, Create, List, Edit } from "./right-holders";
 
 export const RightHoldersVariables = {
   list: List,
@@ -9,4 +6,3 @@ export const RightHoldersVariables = {
   create: Create,
   icon: Icon,
 };
-

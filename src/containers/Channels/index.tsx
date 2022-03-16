@@ -1,7 +1,4 @@
-import { List } from './channels';
-import { Edit } from './channels';
-import { Create } from './channels';
-import { Icon } from './channels';
+import { List, Edit, Create, Icon } from "./channels";
 
 export const ChannelsVariables = {
   list: List,

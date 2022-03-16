@@ -13,7 +13,6 @@ import {
   ALL_DATACENTERS,
 } from "../../components/Providers/custom-requests";
 import { SPBTVPlayer } from "../../components/SPBTVPlayer";
-import { RadiButtonsGroup } from "../../components/RadioButtonsGroup";
 
 export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
   return (

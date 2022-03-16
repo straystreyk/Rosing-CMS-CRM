@@ -1,33 +1,81 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-export const GET_CURRENT_SEASONS = gql`
-  query allSeasons($seriesId: ID!) {
-    allSeasons(filter:{ seriesId: $seriesId }) {
-      id
-      name
-      number
-    }
-  }
-`;
-
-export const GET_CURRENT_SERIES = gql`
+export const GET_ONE_SERIES = gql`
   query Series($id: ID!) {
-    Series(id: $id) {
-        description
+    data: Series(id: $id) {
+      castMembers {
+        characterName
+        createdAt
         id
-        markers
-        name
-        originalName
-        productionYear
-        slug
-        certificationRatingTag
-        certificationRatingSystem
-        releaseDate 
-        rightHolder {
+        person {
           id
-          name
+          fullName
+          kinopoiskId
+          imdbId
+          images {
+            createdAt
+            file
+            height
+            id
+            kind
+            originalUrl
+            updatedAt
+            width
+            __typename
+          }
+          __typename
         }
-        slogan
+        playableId
+        playableType
+        position
+        role
+        updatedAt
+        __typename
+      }
+      certificationRatingSystem
+      certificationRatingTag
+      description
+      extraVideos {
+        id
+        __typename
+      }
+      genreIds
+      id
+      imageIds
+      images {
+        createdAt
+        file
+        height
+        id
+        kind
+        originalUrl
+        size
+        updatedAt
+        width
+        __typename
+      }
+      markers
+      name
+      originalName
+      productionYear
+      releaseDate
+      rightHolder {
+        id
+        __typename
+      }
+      extraVideos {
+        name
+        streamSourceId
+        kind
+      }
+      rightHolderId
+      seasons {
+        id
+        __typename
+      }
+      slogan
+      slug
+      __typename
     }
   }
 `;

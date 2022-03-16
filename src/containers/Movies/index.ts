@@ -1,8 +1,4 @@
-import { List } from "./movie";
-import { Edit } from "./movie";
-import { Create } from "./movie";
-import { Show } from "./movie";
-import { Icon } from "./movie";
+import { Icon, Show, Create, List, Edit } from "./movie";
 
 export const MoviesVariables = {
   list: List,

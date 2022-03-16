@@ -1,7 +1,4 @@
-import { List } from './episodes';
-import { Edit } from './episodes';
-import { Create } from './episodes';
-import { Icon } from './episodes';
+import { List, Edit, Create, Icon } from "./episodes";
 
 export const EpisodesVariables = {
   list: List,
