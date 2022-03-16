@@ -16,12 +16,12 @@ export const List = (props: React.FC) => (
 );
 export const Create = (props: React.FC) => (
   <ResourceCreate {...props} resource={resource}>
-    <Form resource={resource} />
+    <Form resource={resource} type="create" />
   </ResourceCreate>
 );
 export const Edit = (props: React.FC) => (
   <ResourceEdit {...props} resource={resource}>
-    <Form resource={resource} />
+    <Form resource={resource} type="edit" />
   </ResourceEdit>
 );
 

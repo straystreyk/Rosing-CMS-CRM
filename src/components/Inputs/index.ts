@@ -1,18 +1,19 @@
 import { required, email } from "react-admin";
 import { range } from "lodash";
 
-import { ReferenceInput } from "./reference-input";
-import { TextInput } from "./text-input";
-import { SelectInput } from "./select-input";
-import { NumberInput } from "./numdber-input-component";
-import { AutocompleteArrayInput } from "./autocomplite-array-input";
+import { ReferenceInput } from "./ReferenceInputs/reference-input";
+import { TextInput } from "./StandatdInputs/TextInput/text-input";
+import { SelectInput } from "./StandatdInputs/SelectInput/select-input";
+import { NumberInput } from "./StandatdInputs/NumberInput/numdber-input";
+import { AutocompleteArrayInput } from "./ArrayInputs/AutoCompliteArrayInput/autocomplite-array-input";
 import { RichTextInput } from "./rich-text-input";
 import { FilterTextInput } from "./filter-text-input";
 import { BooleanInput } from "./boolean-input";
-import { SelectArrayInput } from "./select-array-input";
-import { ArrayInput } from "./array-input";
-import { ArrayInputNoDrag } from "./array-input-no-drag";
-import { ReferenceArrayInput } from "./reference-array-input";
+import { SelectArrayInput } from "./ArrayInputs/select-array-input";
+import { ArrayInput } from "./ArrayInputs/Arrayinput/array-input";
+import { ArrayInputNoDrag } from "./ArrayInputs/ArrayInputNoDrag/array-input-no-drag";
+import { ReferenceArrayInput } from "./ReferenceInputs/reference-array-input";
+import { DateTimeInput } from "./DateTimeInput/date-time-input";
 
 export {
   ReferenceInput,
@@ -26,6 +27,7 @@ export {
   SelectArrayInput,
   ArrayInput,
   ReferenceArrayInput,
+  DateTimeInput,
   ArrayInputNoDrag,
 };
 

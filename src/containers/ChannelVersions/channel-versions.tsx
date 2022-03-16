@@ -1,28 +1,28 @@
-import { FC } from 'react';
-import Icon from '@material-ui/icons/CastConnected';
+import { FC } from "react";
+import Icon from "@material-ui/icons/CastConnected";
 
-import { ResourceEdit, ResourceList, ResourceCreate } from '../../components/ResourceView';
-import { Show } from './show';
-import { Form } from './form';
+import { ResourceEdit, ResourceList, ResourceCreate } from "../../components/ResourceView";
+import { Show } from "./show";
+import { Form } from "./form";
 
-const resource = 'channel_versions';
+const resource = "channel_versions";
 
-export const List: FC = (props) =>
+export const List: FC = (props) => (
   <ResourceList {...props} resource={resource}>
     <Show resource={resource} />
-  </ResourceList>;
+  </ResourceList>
+);
 
-export const Edit: FC = (props) =>
+export const Edit: FC = (props) => (
   <ResourceEdit {...props} resource={resource}>
-    <Form resource={resource} />
-  </ResourceEdit>;
+    <Form resource={resource} type="edit" />
+  </ResourceEdit>
+);
 
-export const Create: FC = (props) =>
+export const Create: FC = (props) => (
   <ResourceCreate {...props} resource={resource}>
-    <Form resource={resource} />
-  </ResourceCreate>;
+    <Form resource={resource} type="create" />
+  </ResourceCreate>
+);
 
 export { Icon };
-
-
-

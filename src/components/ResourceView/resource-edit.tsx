@@ -1,8 +1,8 @@
+import * as React from "react";
 import { FC } from "react";
 import { Edit } from "react-admin";
 import { Box } from "@material-ui/core";
 
-import { ResourceTitle } from "./resource-title";
 import { EditForm } from "./edit-form";
 
 interface EditProps {
@@ -11,13 +11,16 @@ interface EditProps {
   id?: string;
 }
 
+const EmptyToolbar = () => <></>;
+
 export const ResourceEdit: FC<EditProps> = (props) => {
   return (
     <>
-      <ResourceTitle id={props.id} name={props.resource} form="edit" />
-      <Edit component="div" title={""} {...props}>
-        <EditForm redirect={props.redirect} resource={props.resource}>
-          <Box p={{ xs: "0 24px" }}>{props.children}</Box>
+      <Edit actions={<EmptyToolbar />} component="div" title={""} {...props}>
+        <EditForm form="edit" redirect={props.redirect} resource={props.resource}>
+          <Box style={{ position: "relative" }} p={{ xs: "0px 24px 100px 24px" }}>
+            {props.children}
+          </Box>
         </EditForm>
       </Edit>
     </>

@@ -3,11 +3,10 @@ import { makeStyles } from "@material-ui/core";
 import cn from "classnames";
 
 interface SectionProps {
-  text: string;
+  text: string | any[];
   title: string;
   formType?: string;
-  ref?: React.Ref<any>;
-  id?: string;
+  id: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
       color: "#005AA3",
       fontWeight: 500,
       cursor: "pointer",
-      marginBottom: 8,
+      marginBottom: 4,
       "& svg": {
         marginLeft: 11,
         verticalAlign: "middle",
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     fontSize: 18,
     lineHeight: "22px",
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
     marginBottom: 8,
     cursor: "pointer",
     "& > svg": {
@@ -62,7 +61,7 @@ export const FormSection: React.FC<SectionProps> = React.forwardRef(
     }, []);
 
     return (
-      <div ref={ref} className={classes.Section} id={id}>
+      <div className={classes.Section} id={id}>
         <div className={classes.TitleSection} onClick={() => setShowSection((p) => !p)}>
           {title}
           <svg
@@ -75,7 +74,7 @@ export const FormSection: React.FC<SectionProps> = React.forwardRef(
           >
             <path
               d="M6.61621 0.691425L3.99992 3.30772L1.38379 0.691406"
-              stroke="#00A991"
+              stroke="#005AA3"
               strokeWidth="1.3"
               strokeLinecap="round"
             />
@@ -101,8 +100,12 @@ export const FormSection: React.FC<SectionProps> = React.forwardRef(
             </svg>
           </button>
         )}
-        {showSection && showDescription && <div className={classes.TextSection}>{text}</div>}
-        {showSection && children}
+        {showSection && showDescription && (
+          <div className={classes.TextSection}>{text && text}</div>
+        )}
+        <div style={{ height: !showSection ? 0 : "auto", overflow: !showSection ? "hidden" : "" }}>
+          {children}
+        </div>
       </div>
     );
   }

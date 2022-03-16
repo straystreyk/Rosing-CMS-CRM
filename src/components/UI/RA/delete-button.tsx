@@ -1,13 +1,12 @@
 import * as React from "react";
-import {
-  DeleteButton as DeleteButtonRA,
-  DeleteButtonProps,
-} from "ra-ui-materialui";
+import { DeleteButton as DeleteButtonRA, DeleteButtonProps } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
+import { DeleteIcon } from "../../../constants/icons";
 
 const useStyles = makeStyles({
   DeleteButton: {
-    padding: "6px 16px",
+    color: "#D21C1C",
+    padding: 0,
     "& svg": {
       marginLeft: 0,
       marginRight: 6,
@@ -26,16 +25,12 @@ const useStyles = makeStyles({
   },
 });
 
-export const DeleteButton: React.FC<DeleteButtonProps> = ({
-  icon,
-  basePath,
-  ...props
-}) => {
+export const DeleteButton: React.FC<DeleteButtonProps> = ({ icon, basePath, ...props }) => {
   const classes = useStyles();
 
   return (
     <DeleteButtonRA
-      icon={icon}
+      icon={<DeleteIcon color="#D21C1C" />}
       basePath={basePath}
       className={classes.DeleteButton}
       {...props}

@@ -6,85 +6,72 @@ import {
   NumberInput,
   ArrayInput,
   AutocompleteArrayInput,
-  ReferenceInput,
   SelectInput,
   ArrayInputNoDrag,
   parseTimeInput,
   formatTimeInput,
   getYearsChoices,
+  DateTimeInput,
 } from "../../components/Inputs";
 
 import { FormProps } from "../../types";
-import { GroupInputs } from "../../components/GroupInputs";
+import { GroupInputsOrigin } from "../../components/GroupInputs";
 import { FormTabs } from "../../components/Tabs/form-tabs";
 import { ScrollTopButton } from "../../components/UI/Buttons/scroll-top-button";
 import { ImageUploaderV2 } from "../../components/ImageUploader";
-import { INPUT_LABEL_PROPS } from "../../constants/forms-constants";
+import { EXTRA_VIDEO_TYPES, INPUT_LABEL_PROPS } from "../../constants/forms-constants";
 import { FormSection } from "../../components/FormSection";
-import { ReferenceCustomInput } from "../../components/Inputs/reference-custom-input";
-import { ALL_COUNTRIES } from "../../components/Providers/custom-requests";
+import { ReferenceCustomInput } from "../../components/Inputs/ReferenceInputs/reference-custom-input";
+import {
+  ALL_COUNTRIES,
+  ALL_GENRES,
+  ALL_PRODUCTION_COUNTRIES,
+  ALL_RATING_SYSTEMS,
+  ALL_RIGHT_HOLDERS,
+  ALL_VIDEO_FILES,
+} from "../../components/Providers/custom-requests";
+import { CastMembers } from "../../components/Models/CastMembers/cast-members";
+import { Link } from "ra-ui-materialui";
+import { SelectInputOrigin } from "../../components/Inputs/StandatdInputs/SelectInput/select-input";
+import { CastMembersStyles } from "../../components/Models/CastMembers/styles";
+import { MetaData } from "../../components/Models/Metadata";
+import { useFormState } from "react-final-form";
+import { ExtraVideos } from "../../components/Models/ExtraVideos";
 
-const useStyles = makeStyles({
-  CastMembers: {
-    border: "1px dashed #9FA5A8",
-    borderRadius: 4,
-    padding: "12px 24px",
-    backgroundColor: "#fff",
+const useStyles = makeStyles((theme) => ({
+  Link: {
+    color: theme.palette.secondary.main,
+    textDecoration: "underline",
   },
-});
+  CastMembersStyles,
+}));
 
-const CastMembers: React.FC<{
-  parentSource?: string;
-  resource: string;
-}> = React.memo(({ parentSource, resource }) => {
-  return (
-    <>
-      <TextInput source={`${parentSource}.characterName`} label="Character name" fullWidth />
-      <ReferenceInput label="Person" source={`${parentSource}.personId`} reference="people">
-        <SelectInput optionText="fullName" resource={resource} />
-      </ReferenceInput>
-      <GroupInputs label="ID in the cinema database">
-        <NumberInput
-          source={`${parentSource}.kinopoiskId`}
-          label="Kinopoisk ID"
-          helperText={
-            "A digital identifier in the Kinopoisk system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
-          }
-        />
-        <NumberInput
-          source={`${parentSource}.imdbId`}
-          label="IMDB ID"
-          helperText={
-            "A digital identifier in the IMDB system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
-          }
-        />
-      </GroupInputs>
-      <TextInput
-        source={`${parentSource}.position`}
-        style={{ display: "none" }}
-        label=""
-        fullWidth
-      />
-      <TextInput source={`${parentSource}.id`} style={{ display: "none" }} label="" fullWidth />
-      <NumberInput
-        source={`${parentSource}.role`}
-        style={{ display: "none" }}
-        label="Role"
-        initialValue={1}
-        fullWidth
-      />
-      <TextInput
-        source={`${parentSource}.playableType`}
-        label=""
-        style={{ display: "none" }}
-        initialValue="Content::Movie"
-      />
-    </>
-  );
-});
+const RatingSystems: React.FC<any> = React.memo(
+  ({ parentSource, parentSourceWithIndex, index, inputType, helperText, ...props }) => (
+    <ReferenceCustomInput
+      component={SelectInputOrigin}
+      query={ALL_RATING_SYSTEMS}
+      parentSource={parentSource}
+      source={`${parentSourceWithIndex}.system`}
+      idName="system"
+      name="system"
+      label="Rating system"
+      helperText={helperText}
+      index={index.toString()}
+      inputType={inputType}
+      resource={props.resource}
+      dependencyInput
+      dependencyLabel="Tag"
+      dependencySource={`${parentSourceWithIndex}.tag`}
+      dependencyName="tags"
+      dependencyIdName="tags"
+    />
+  )
+);
 
-export const Form: React.FC<FormProps> = (props: any) => {
+export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }) => {
   const classes = useStyles();
+  const { values } = useFormState();
 
   return (
     <>
@@ -93,7 +80,8 @@ export const Form: React.FC<FormProps> = (props: any) => {
           "Attributes",
           "Actors and creative team",
           "Images",
-          "Video files",
+          "Source",
+          "Terms of publication",
           "Advertisement",
         ]}
       />
@@ -102,12 +90,13 @@ export const Form: React.FC<FormProps> = (props: any) => {
           The more detailed the section is, the higher the probability of the movie getting into the search results and filtering in the application."
         title="Attributes"
         id="Attributes"
-        formType={props.type}
+        formType={type}
       >
         <TextInput
-          resource={props.resource}
+          resource={resource}
           validate={requiredValidate}
-          inputType={props.type}
+          inputType={type}
+          label="Name"
           source="name"
           fullWidth
           helperText={
@@ -115,17 +104,9 @@ export const Form: React.FC<FormProps> = (props: any) => {
           }
         />
         <TextInput
-          resource={props.resource}
-          inputType={props.type}
-          source="originalName"
-          helperText={
-            "The original non-localized title of the movie, which users will see only in the description"
-          }
-          fullWidth
-        />
-        <TextInput
-          resource={props.resource}
-          inputType={props.type}
+          resource={resource}
+          inputType={type}
+          label="Slug"
           source="slug"
           helperText={
             "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
@@ -133,175 +114,294 @@ export const Form: React.FC<FormProps> = (props: any) => {
           fullWidth
         />
         <TextInput
-          resource={props.resource}
-          inputType={props.type}
+          resource={resource}
+          inputType={type}
+          source="originalName"
+          label="Original name"
+          helperText={
+            "The original non-localized title of the movie, which users will see only in the description"
+          }
+          fullWidth
+        />
+        <TextInput
+          resource={resource}
+          inputType={type}
+          label="Description"
           source="description"
+          resettable={false}
           fullWidth
           multiline
           rows={4}
         />
         <TextInput
           InputLabelProps={INPUT_LABEL_PROPS}
-          resource={props.resource}
-          inputType={props.type}
+          resource={resource}
+          inputType={type}
           resettable={false}
+          helperText={
+            "Release date in the country where the application is used. If the release is upcoming, then the date is mandatory."
+          }
+          label="Release date"
           source="releaseDate"
           type="date"
           fullWidth
         />
-        <ReferenceInput source="genres" reference="genres">
-          <AutocompleteArrayInput
-            helperText="You can select several genres from the list"
-            optionText="name"
-          />
-        </ReferenceInput>
         <ReferenceCustomInput
           component={AutocompleteArrayInput}
-          source="allowedCountries"
+          inputType={type}
+          resource={resource}
+          query={ALL_GENRES}
+          helperText="You can select several genres from the list"
+          source="genreIds"
+          label="Genres"
+          idName="id"
+        />
+        <ReferenceCustomInput
+          component={AutocompleteArrayInput}
+          inputType={type}
           query={ALL_COUNTRIES}
+          resource={resource}
+          source="allowedCountries"
+          label="Allowed Countries"
           idName="alpha2"
         />
         <ReferenceCustomInput
           component={AutocompleteArrayInput}
-          source="disallowedCountries"
+          inputType={type}
           query={ALL_COUNTRIES}
+          resource={resource}
+          label="Disallowed countries"
+          source="disallowedCountries"
           idName="alpha2"
+        />
+        <ReferenceCustomInput
+          component={AutocompleteArrayInput}
+          inputType={type}
+          query={ALL_PRODUCTION_COUNTRIES}
+          label="Production countries"
+          source="productionCountriesIds"
+          helperText="You can select several countries from the list"
+          resource={resource}
+          idName="id"
         />
         <TextInput
           InputLabelProps={INPUT_LABEL_PROPS}
-          resource={props.resource}
+          resource={resource}
           parse={parseTimeInput}
           format={formatTimeInput}
-          inputType={props.type}
+          inputType={type}
           resettable={false}
+          helperText="Specified in hours and minutes. If you leave the field empty, the duration will be filled in automatically after saving, provided that the video file is specified."
+          label="Duration"
           source="duration"
           type="time"
           fullWidth
         />
+        <ReferenceCustomInput
+          component={SelectInput}
+          query={ALL_RIGHT_HOLDERS}
+          inputType={type}
+          resource={resource}
+          label="Right Holder"
+          source="rightHolderId"
+          idName="id"
+          helperText="The company - the copyright holder of the film"
+        />
         <SelectInput
-          resource={props.resource}
+          resource={resource}
           choices={getYearsChoices()}
+          label="Production year"
+          inputType={type}
           source="productionYear"
         />
-        <GroupInputs label="ID in the cinema database">
+        <GroupInputsOrigin inputType={type} label="ID in the cinema database">
           <NumberInput
-            resource={props.resource}
-            helperText={
-              "A digital identifier in the Kinopoisk system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
-            }
+            resource={resource}
+            inputType={type}
+            helperText="A digital identifier in the Kinopoisk system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
             source="kinopoiskId"
             label="Kinopoisk ID"
           />
           <NumberInput
-            resource={props.resource}
+            resource={resource}
+            inputType={type}
             helperText={
               "A digital identifier in the IMDB system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
             }
             source="imdbId"
             label="IMDB ID"
           />
-        </GroupInputs>
+        </GroupInputsOrigin>
+        <NumberInput
+          source="position"
+          label="Position"
+          resource={resource}
+          inputType={type}
+          helperText="The serial number in the general list of films. Can be entered manually when creating or editing, the positions of the remaining films will be updated accordingly. If the field is left empty, the last sequential number will be assigned to the movie."
+        />
         <ArrayInputNoDrag
-          resource={props.resource}
-          formType={props.type}
+          resource={resource}
+          inputType={type}
           getItemLabel={() => ""}
+          fullWidth
           helperText={
             "A pair of custom fields that can be used for filtering. You can add multiple pairs."
           }
+          childcomponent={MetaData}
           source="metadata"
           label="Metadata"
           groupInputs
           switchable
-        >
-          <TextInput
-            label="Key"
-            source="key"
-            fullWidth
-            inputType={props.type}
-            validate={requiredValidate}
-          />
-          <TextInput
-            label="Value"
-            source="value"
-            fullWidth
-            inputType={props.type}
-            validate={requiredValidate}
-          />
-        </ArrayInputNoDrag>
+        />
       </FormSection>
       <FormSection
         text="An ordered list of roles for participants in the creation of the film. You can add not only existing participants in the list, but also new ones, they will be automatically added to the general list."
         title="Actors and creative team"
-        formType={props.type}
+        formType={type}
         id="Actors and creative team"
       >
         <ArrayInput
           source="castMembers"
-          resource={props.resource}
-          formType={props.type}
           getItemLabel={() => ""}
-          addReorder
-          draggable
-          itemClass={classes.CastMembers}
+          itemClass={classes.CastMembersStyles}
           childcomponent={CastMembers}
+          resource={resource}
+          inputType={type}
+          draggable
         />
       </FormSection>
       <FormSection
         text="The images are used as a background or cover for the visual representation of the movie in the application and help the user make a choice. To make the background or cover look attractive, upload an image with an aspect ratio and a minimum resolution according to the selected type. If the image does not match the selected type, the receiver will process the image itself, which may cause visual appeal to be lost."
         title="Images"
-        formType={props.type}
+        formType={type}
         id="Images"
       >
-        <ImageUploaderV2 resource={props.resource} />
+        <ImageUploaderV2
+          inputType={type}
+          resource={resource}
+          sourceIds="imageIds"
+          source="images"
+        />
       </FormSection>
       <FormSection
-        text="A file with a video track that the user will see in the application when playing the movie or an additional video file for the movie. To add a video file to a movie, it must be successfully transcoded. You can check the transcoding status in the <a>Video</a> files section."
-        title="Video files"
-        id="Video files"
+        text={[
+          "A file with a video track that the user will see in the application when playing the movie or an additional video file for the movie. To add a video file to a movie, it must be successfully transcoded. You can check the transcoding status in the ",
+          <Link to="/media_content/video/video_files" className={classes.Link}>
+            Video files
+          </Link>,
+          " section.",
+        ]}
+        title="Source"
+        id="Source"
       >
-        <ReferenceInput
-          reference="media_content/video_files"
+        <ReferenceCustomInput
+          component={AutocompleteArrayInput}
+          inputType={type}
+          query={ALL_VIDEO_FILES}
+          label="Video files"
+          helperText={
+            "You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
+          }
           source="streamSourceIds"
-          label={"Video file"}
-        >
-          <AutocompleteArrayInput
-            optionText="name"
-            resource={props.resource}
+          resource={resource}
+          idName="id"
+        />
+        <ArrayInputNoDrag
+          resource={resource}
+          inputType={type}
+          getItemLabel={() => ""}
+          fullWidth
+          choices={EXTRA_VIDEO_TYPES}
+          childcomponent={ExtraVideos}
+          source="extraVideos"
+          label="Extra videos"
+          groupInputs
+          switchable
+        />
+      </FormSection>
+      <FormSection
+        id="Terms of publication"
+        text="Configuration of the rule for publishing a movie. The rule will be automatically generated by the publishing system within one hour after saving. The generated rule will appear on the movie page in the current section."
+        title="Terms of publication"
+      >
+        <GroupInputsOrigin inputType={type}>
+          <DateTimeInput
             validate={requiredValidate}
-            helperText={
-              "You can select several video files from the list, the first one will be used by default"
-            }
+            resource={resource}
+            inputType={type}
+            source="availableStart"
+            label="Available start"
+            fullWidth
           />
-        </ReferenceInput>
+          <DateTimeInput
+            validate={requiredValidate}
+            resource={resource}
+            inputType={type}
+            source="availableEnd"
+            label="Available end"
+            fullWidth
+          />
+        </GroupInputsOrigin>
+        <GroupInputsOrigin
+          label="Downloading a movie"
+          groupHelperText="Download and play the movie offline, available in the app for Android and iOS"
+          inputType={type}
+          switchable
+        >
+          <NumberInput
+            label="Storage time"
+            helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
+            source="storageTime"
+            inputType={type}
+          />
+        </GroupInputsOrigin>
+        <ArrayInputNoDrag
+          resource={resource}
+          inputType={type}
+          getItemLabel={() => ""}
+          helperText={
+            "The age rating of the film in accordance with the legislation of the country in which the application is used"
+          }
+          source="certificationRatings"
+          label="Age rating"
+          childcomponent={RatingSystems}
+          groupInputs
+          switchable
+          fullWidth
+        />
       </FormSection>
       <FormSection
         text="Settings for displaying ad blocks inside the video. Ads are available for showing to both anonymous users of the application and logged-in users who have not paid for a tariff plan with the disabling of advertising. Global ad display rules (ad server address, ad display period) are set at the level of the Rosing platform settings for a specific project outside the current admin panel."
         title="Advertisement"
-        formType={props.type}
+        formType={type}
         id="Advertisement"
       >
-        <GroupInputs
+        <GroupInputsOrigin
           label="Preroll"
+          inputType={type}
           groupHelperText="Block of commercials at the beginning of the video, let's say one block"
         >
-          <NumberInput source="preRollCount" label="Number of commercials" />
-        </GroupInputs>
-        <GroupInputs
+          <NumberInput inputType={type} source="preRollCount" label="Number of commercials" />
+        </GroupInputsOrigin>
+        <GroupInputsOrigin
           label="Midroll"
+          inputType={type}
           groupHelperText="A block of commercials in the middle of the video, several blocks are allowed. The number of blocks depends on the offset time of their display and the duration of the video."
         >
-          <NumberInput source="midRollCount" label="Number of commercials" />
+          <NumberInput inputType={type} source="midRollCount" label="Number of commercials" />
           <NumberInput
+            inputType={type}
             source="firstMidRollOffset"
             label="Showing the first midroll"
             helperText="Shift time of the first midroll in seconds from the beginning of the video"
           />
           <NumberInput
+            inputType={type}
             source="nthMidRollOffset"
             label="Show subsequent midrolls"
             helperText="Time to shift the display of subsequent midrolls in seconds from the start of displaying the first midroll"
           />
-        </GroupInputs>
+        </GroupInputsOrigin>
       </FormSection>
       <ScrollTopButton />
     </>

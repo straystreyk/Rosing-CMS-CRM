@@ -30,14 +30,8 @@ import {
   main,
   title,
 } from "./styles";
-import {
-  AlertIcon,
-  AnnotationIcon,
-  InformationIcon,
-  LoginIcon,
-  RosingLogo,
-} from "../../constants/icons";
-import { PasswordInput } from "../Inputs/password-input";
+import { AnnotationIcon, InformationIcon, LoginIcon, RosingLogo } from "../../constants/icons";
+import { PasswordInput } from "../Inputs/StandatdInputs/password-input";
 
 const useStyles = makeStyles((theme) => ({
   main,
@@ -161,10 +155,10 @@ const Login = () => {
               </form>
             )}
           />
-          <a href="#" className={classes.linkHelp}>
-            <AlertIcon color="#005AA3" />
-            Написать в поддержку
-          </a>
+          {/*<a href="#" className={classes.linkHelp}>*/}
+          {/*  <AlertIcon color="#005AA3" />*/}
+          {/*  Написать в поддержку*/}
+          {/*</a>*/}
         </div>
       </div>
     </>

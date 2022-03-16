@@ -24,7 +24,8 @@ export interface ListProps {
 
 export interface FormProps {
   resource: string;
-  type?: string;
+  type: string;
+  id?: string;
 }
 
 export interface ShowProps {

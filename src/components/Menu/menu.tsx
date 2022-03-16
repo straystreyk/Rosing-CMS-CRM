@@ -189,20 +189,13 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         dense={dense}
       />
       <ExpandMenu
-        links={[
-          "/media_content",
-          "/series",
-          "/channels",
-          "/genres",
-          "/radio_stations",
-          "/audio_shows",
-        ]}
+        links={["/media_content", "/channels", "/genres", "/audio_shows"]}
         title={translate(`pos.expandMenu.mediaContent`)}
         icon={<MediaContentIcon color={"#fff"} />}
       >
         <MenuItemLink
-          to={`/media_content`}
-          primaryText={translate(`resources.media_content/movies.menu_name`, {
+          to={`/media_content/video`}
+          primaryText={translate(`resources.media_content/video/movies.menu_name`, {
             smart_count: 2,
           })}
           onClick={onMenuClick}
@@ -210,8 +203,8 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
           dense={dense}
         />
         <MenuItemLink
-          to={`/radio_stations`}
-          primaryText={translate(`resources.radio_stations.name`, {
+          to={`/media_content/radio`}
+          primaryText={translate(`resources.media_content/radio/radio_stations.name`, {
             smart_count: 2,
           })}
           onClick={onMenuClick}
@@ -233,15 +226,6 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
             smart_count: 2,
           })}
           // leftIcon={<genres.icon />}
-          onClick={onMenuClick}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/series`}
-          primaryText={translate(`resources.series.name`, {
-            smart_count: 2,
-          })}
           onClick={onMenuClick}
           sidebarIsOpen={open}
           dense={dense}

@@ -39,13 +39,13 @@ const Icon = ({ color }: IconProps) => (
 
 const UserCreate = (props: any) => (
   <ResourceCreate {...props} resource={resource}>
-    <Form resource={resource} />
+    <Form resource={resource} type="create" />
   </ResourceCreate>
 );
 
 const UserEdit = (props: any) => (
   <ResourceEdit {...props} resource={resource}>
-    <Form resource={resource} />
+    <Form resource={resource} type="edit" />
   </ResourceEdit>
 );
 

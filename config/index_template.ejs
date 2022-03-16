@@ -2,17 +2,16 @@
 <html lang='en'>
 <head>
     <meta charset='utf-8' />
-    <link rel='icon' href='./favicon.jpg' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link rel='icon' href='./favicon.jpg' />
     <link rel='apple-touch-icon' href='./favicon.jpg' />
     <link rel='manifest' href='./favicon.jpg' />
-    <title>Admin Panel 2</title>
-
     <%if(locals.css) {%>
-        <%locals.css.forEach(el => {%>
-        <link rel="stylesheet" href=<%=el%>>
+        <%locals.css.forEach(style => {%>
+        <link rel="stylesheet" href=<%=style%>>
         <%})%>
     <%}%>
+    <title>Admin Panel 2</title>
 
     <script type="text/javascript">
       window._GLOBALS_ =
@@ -26,8 +25,8 @@
 
 
 <%if(locals.js) {%>
-    <%locals.js.forEach(el => {%>
-        <script type="text/javascript" src=<%=el%> ></script>
+    <%locals.js.forEach(script => {%>
+        <script type="text/javascript" src=<%=script%> ></script>
     <%})%>
 <%}%>
 </body>

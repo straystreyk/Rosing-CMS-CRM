@@ -23,12 +23,12 @@ const listTabs: ListTabProps[] = [
 
 export const Create: FC = (props) => (
   <ResourceCreate {...props} resource={resource}>
-    <Form resource={resource} />
+    <Form resource={resource} type="create" />
   </ResourceCreate>
 );
 export const Edit: FC = (props) => (
   <ResourceEdit {...props} resource={resource}>
-    <Form resource={resource} />
+    <Form resource={resource} type="edit" />
   </ResourceEdit>
 );
 export const List: FC = (props) => (

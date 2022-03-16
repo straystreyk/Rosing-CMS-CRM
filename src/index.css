@@ -4,10 +4,16 @@ body {
     padding: 0;
     font-size: 16px;
     font-family: 'Gilroy', sans-serif;
-    letter-spacing: 0.05em;
+    color: #0F1F26;
 }
 
 p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
