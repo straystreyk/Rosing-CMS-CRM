@@ -69,7 +69,7 @@ export const en: TranslationMessages = {
         list: "News",
       },
     },
-    "media_content/movies": {
+    "media_content/video/movies": {
       name: "Movies",
       menu_name: "Video",
       titles: {
@@ -100,7 +100,7 @@ export const en: TranslationMessages = {
         list: "Genres",
       },
     },
-    radio_stations: {
+    "media_content/radio/radio_stations": {
       name: "Radio Stations",
       titles: {
         create: "New Radio Station",
@@ -124,7 +124,7 @@ export const en: TranslationMessages = {
         list: "Datacenter",
       },
     },
-    "media_content/video_files": {
+    "media_content/video/video_files": {
       name: "Video files",
       titles: {
         create: "New Video File",
@@ -138,7 +138,7 @@ export const en: TranslationMessages = {
         published: "Published",
       },
     },
-    series: {
+    "media_content/video/series": {
       name: "Series",
       titles: {
         create: "New Series",

@@ -1,16 +1,33 @@
 import * as React from "react";
+import _ from "lodash";
+import cn from "classnames";
 import { useForm, useFormState } from "react-final-form";
-import { Button } from "@material-ui/core";
+import { Button, Tooltip } from "@material-ui/core";
 import { useDropzone } from "react-dropzone";
-
 import { makeStyles } from "@material-ui/core";
-import { ChangeIcon, DeleteIcon, UploadIcon } from "../../constants/icons";
+
+import {
+  AcceptFilterIcon,
+  CancelFilterIcon,
+  ChangeIcon,
+  DeleteIcon,
+  EditIcon,
+  LoopIcon,
+  UploadIcon,
+} from "../../constants/icons";
 import { TextInput } from "../Inputs";
 import { SelectButton } from "../UI/Buttons/select-button";
-import { gql } from "@apollo/client";
 import { InfoComponent } from "../UI/Info/info-component";
 import { MainLoader } from "../MainLoader";
 import { useImageItem } from "../../custom-hooks/image-uploader";
+import { Slider } from "../Slider";
+import { GET_IMAGES_TYPES } from "./image-requests";
+import { STATIC_PARAM } from "../Providers/custom-requests";
+import { StaticParam } from "../StaticParam";
+import { useMutation } from "react-admin";
+import { useNotify } from "ra-core";
+import { StandardButton } from "../UI/Buttons/standard-button";
+import { EmptyShow } from "../Inputs/ArrayInputs/Arrayinput/show-view";
 
 const useStyles = makeStyles((theme) => ({
   ImagesWrapper: {
@@ -22,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   ImageItemWrapper: {
     "& button": {
       textTransform: "unset",
+      outline: "none",
       border: "none",
       fontFamily: "Gilroy, sans-serif",
     },
@@ -38,11 +56,15 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     color: "#9FA5A8",
     fontSize: 14,
-    padding: "0 20px",
+    padding: 15,
     "& img": {
       width: "100%",
       height: "100%",
       objectFit: "contain",
+    },
+    "&:hover .PopupButton": {
+      opacity: 1,
+      pointerEvents: "all",
     },
   },
   ImageItemChangeButton: {
@@ -60,10 +82,14 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    "& .StandardButton": {
+      marginTop: 10,
+    },
   },
   ButtonsWrapper: {
     marginTop: 8,
     display: "flex",
+    alignItems: "center",
     "& > button:first-child": {
       color: "#D21C1C",
     },
@@ -79,15 +105,18 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   ImagesSection: {
-    paddingTop: 8,
+    paddingTop: 16,
+    position: "relative",
+    "&:hover .ShowEditButton": {
+      opacity: 1,
+    },
   },
   ImagesInfo: {
     backgroundColor: "#F0F8FF",
     color: "#9FA5A8",
     display: "flex",
+    textAlign: "center",
     flexDirection: "column",
-    alignItems: "center",
-    marginBottom: 24,
     padding: "24px 8px",
     lineHeight: "20px",
     "& span": {
@@ -108,54 +137,125 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     fontWeight: 500,
     color: "#0f1f26",
-    zIndex: 20,
-    "& > div": {
-      marginRight: 15,
+    zIndex: 1,
+    "& > span": {
+      marginLeft: 15,
+      display: "inline-block",
+    },
+  },
+  ImageUploaderShowButtons: {
+    display: "flex",
+    justifyContent: "flex-end",
+    marginBottom: 10,
+    "& button": {
+      marginLeft: 8,
+    },
+  },
+  PopupButton: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 5,
+    transform: "translate(-50%, -50%)",
+    cursor: "pointer",
+    opacity: 0,
+    pointerEvents: "none",
+    transition: "0.35s opacity ease",
+    boxShadow: "0px 3px 12px -1px rgba(28, 52, 84, 0.2), 0px 2px 4px -1px rgba(28, 55, 90, 0.2)",
+    "&:hover": {
+      backgroundColor: "#fff",
+    },
+  },
+  ImageSize: {
+    color: "#9FA5A8",
+    fontSize: 14,
+  },
+  ShowEditButton: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    cursor: "pointer",
+    opacity: 0,
+    transition: "0.35s all ease",
+    "& svg path": {
+      transition: "0.35s all ease",
+    },
+    "&:hover svg path": {
+      fill: "#005AA3",
     },
   },
 }));
 
-interface ImageProps {
+export interface ImageProps {
   file: string;
   id: string;
   index?: number;
   kind: string;
+  size: number;
   name?: string;
+  inputType: string;
+  edit: boolean;
 }
 
 interface ImageItemProps extends ImageProps {
   setImageIds: any;
   setServerImages: any;
+  setShowSlider: any;
+  source: string;
+  serverImages: ImageProps[];
 }
 
-const GET_IMAGES_TYPES = gql`
-  query allImageTypes {
-    allImageTypes {
-      kind
-      prettyName
-    }
-  }
-`;
-
 const ImageItem: React.FC<ImageItemProps> = React.memo(
-  ({ setImageIds, setServerImages, kind, name, file, id, index }) => {
+  ({
+    setImageIds,
+    setServerImages,
+    kind,
+    name,
+    file,
+    id,
+    index,
+    source,
+    setShowSlider,
+    inputType,
+    size,
+    serverImages,
+    edit,
+  }) => {
     const classes = useStyles();
     const [imageType, setImageType] = React.useState(kind);
     const [imageName, setImageName] = React.useState(name);
-    const { loading, url, onDrop, deleteImage } = useImageItem({
+    const [imageSize, setImageSize] = React.useState(size);
+
+    const { loading, url, onDrop, deleteImage, imageId } = useImageItem({
       imageType,
       id,
       file,
       setImageIds,
       setServerImages,
+      setImageSize,
     });
 
     React.useEffect(() => setImageName(name), [name]);
     React.useEffect(() => setImageType(kind), [kind]);
 
+    React.useEffect(
+      () =>
+        setServerImages((p: ImageProps[]) =>
+          p.map((el) => (el.kind === kind ? { ...el, size: imageSize } : { ...el }))
+        ),
+      [imageSize]
+    );
+
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     const changeType = (value: string, prettyName: string) => {
+      setServerImages((p: ImageProps[]) =>
+        p.map((el) =>
+          el.kind === imageType ? { ...el, name: prettyName, kind: value } : { ...el }
+        )
+      );
       setImageType(value);
       setImageName(prettyName);
     };
@@ -164,53 +264,84 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
       setServerImages((p: ImageProps[]) => p.filter((el) => el.index !== index));
     };
 
+    const showSlider = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      setShowSlider(true);
+    };
+
     return (
-      <div className={classes.ImageItemWrapper}>
+      <div className={cn(classes.ImageItemWrapper, "ImageItemWrapper")}>
         <div className={classes.ImageTitle}>
-          <span>{imageName}</span>
+          <span>{imageName || kind}</span>
           <InfoComponent
             color="#9FA5A8"
             info="The image will be used on the screen with the description of the movie in the iOS and Android apps. There are no requirements for the location of the main elements of the image and the presence of inscriptions."
           />
         </div>
         <div
-          className={classes.ImageItem}
+          className={cn(classes.ImageItem, "ImageItem")}
           style={{ cursor: !url ? "pointer" : "" }}
           {...(!url && getRootProps())}
         >
           {loading && (
             <div className={classes.LoadingWrapper}>
-              <MainLoader size={30} /> Loading....
+              <MainLoader size={30} /> <span>Loading....</span>
             </div>
           )}
           {!url ? (
             <div className={classes.UploadWrapper}>
               <input {...getInputProps()} multiple={false} />
               Drag and drop the jpg or png file here to attach it, or click on the button below
-              <Button type="button" startIcon={<UploadIcon color="#005AA3" />} color="secondary">
+              <StandardButton
+                type="button"
+                startIcon={<UploadIcon color="#005AA3" />}
+                color="secondary"
+                variant="text"
+              >
                 Upload file
-              </Button>
+              </StandardButton>
             </div>
           ) : (
-            <img src={url} alt="admin panel" />
+            <>
+              {id && url && (
+                <Button onClick={showSlider} className={cn(classes.PopupButton, "PopupButton")}>
+                  <LoopIcon color="#008DFF" />
+                </Button>
+              )}
+              <img src={url} alt="admin panel" />
+            </>
           )}
         </div>
-        <div className={classes.ButtonsWrapper}>
-          <Button
-            onClick={url && id ? deleteImage : removeImageField}
-            startIcon={<DeleteIcon color={"#D21C1C"} />}
-            type="button"
-          >
-            Delete
-          </Button>
-          <SelectButton
-            buttonClassName={classes.ImageItemChangeButton}
-            label="Change type"
-            icon={<ChangeIcon color="#005AA3" />}
-            pushResource={changeType}
-            query={GET_IMAGES_TYPES}
-          />
-        </div>
+        {edit && (
+          <div className={classes.ButtonsWrapper}>
+            <StandardButton
+              customColor="#D21C1C"
+              onClick={id || imageId ? deleteImage : removeImageField}
+              startIcon={<DeleteIcon color={"#D21C1C"} />}
+              type="button"
+              variant="text"
+            >
+              Delete
+            </StandardButton>
+            <SelectButton
+              buttonClassName={classes.ImageItemChangeButton}
+              label="Change type"
+              icon={<ChangeIcon color="#005AA3" />}
+              pushResource={changeType}
+              setServerImages={setServerImages}
+              images={serverImages}
+              variables={
+                source.includes("castMember") ? { fieldName: "Person" } : { fieldName: "Movie" }
+              }
+              query={GET_IMAGES_TYPES}
+            />
+            {imageSize && (
+              <span className={classes.ImageSize}>
+                File size {(imageSize / 1024 / 1024).toFixed(2)} MB
+              </span>
+            )}
+          </div>
+        )}
       </div>
     );
   }
@@ -218,58 +349,174 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
 
 export const ImageUploaderV2: React.FC<{
   resource: string;
-}> = ({ resource, children, ...props }) => {
-  const classes = useStyles();
-  const form = useForm();
-  const {
-    values: { images },
-  } = useFormState();
-  const [serverImages, setServerImages] = React.useState<ImageProps[] | []>(images ?? []);
-  const [imageIds, setImageIds] = React.useState<string[] | []>(
-    images && images.filter(Boolean).length ? images.map((el: ImageProps) => el.id) : []
-  );
+  source: string;
+  sourceIds: string;
+  wrapperClassName?: string;
+  inputType: string;
+  index?: string;
+}> = React.memo(
+  ({ resource, children, source, index, wrapperClassName, sourceIds, inputType, ...props }) => {
+    const { values } = useFormState();
+    const classes = useStyles();
+    const notify = useNotify();
+    const form = useForm();
+    const [mutate, { loading, error }] = useMutation();
+    const [edit, setEdit] = React.useState(inputType !== "show");
+    const [showSlider, setShowSlider] = React.useState(false);
 
-  const pushResource = React.useCallback(
-    (kind: string, prettyName: string) => {
-      setServerImages((p: any) => [
-        ...p,
-        { name: prettyName, kind: kind, index: serverImages.length },
-      ]);
-    },
-    [serverImages.length]
-  );
+    let allImages: ImageProps[] | undefined;
+    switch (source) {
+      case "castMembers":
+        allImages =
+          index && values[source][index].person && values[source][index].person.images
+            ? values[source][index].person.images
+            : undefined;
+        break;
+      default:
+        allImages = values[source];
+    }
+    const [serverImages, setServerImages] = React.useState<ImageProps[] | []>(
+      allImages && allImages.length ? allImages : []
+    );
+    const [imageIds, setImageIds] = React.useState<string[] | []>(
+      allImages && allImages.filter(Boolean).length ? allImages.map((el: ImageProps) => el.id) : []
+    );
 
-  React.useEffect(() => {
-    form.change("images", imageIds);
-  }, [form, imageIds]);
+    const approve = React.useCallback(async () => {
+      await mutate({
+        type: "update",
+        resource: resource,
+        payload: { id: values.id, data: { ...values, [sourceIds]: values[sourceIds] } },
+      });
 
-  return (
-    <div className={classes.ImagesSection}>
-      <div className={classes.ImagesInfo}>
-        <span>The maximum size of uploaded files is 10MB</span>
-        Uploaded from 10MB
-      </div>
-      {serverImages.length ? (
-        <div className={classes.ImagesWrapper}>
-          {serverImages.map((image: ImageProps, index) => {
-            console.log("image", image.name);
-            return (
-              <ImageItem
-                name={image.name}
-                kind={image.kind}
-                id={image.id ?? ""}
-                file={image.file}
-                index={index}
-                key={index}
-                setImageIds={setImageIds}
-                setServerImages={setServerImages}
-              />
-            );
-          })}
+      setEdit(false);
+    }, [mutate, source, values]);
+
+    const size = serverImages.length
+      ? (_.sumBy(serverImages, (image) => (image.size ? image.size : 0)) / 1024 / 1024).toFixed(2)
+      : "0.00";
+
+    const pushResource = React.useCallback(
+      (kind: string, prettyName: string) => {
+        setServerImages((p: any) => [
+          ...p,
+          { name: prettyName, kind: kind, index: serverImages.length },
+        ]);
+      },
+      [serverImages.length, setServerImages]
+    );
+
+    React.useEffect(() => {
+      form.change(sourceIds, imageIds);
+    }, [form, imageIds, sourceIds]);
+
+    React.useEffect(() => {
+      setServerImages((p: ImageProps[]) =>
+        p.map((el: ImageProps, index: number) => ({ ...el, index }))
+      );
+    }, [serverImages.length]);
+
+    React.useEffect(() => {
+      if (error) {
+        notify(error.message, { type: "error" });
+        setEdit(true);
+      }
+    }, [error]);
+
+    return (
+      <>
+        <Slider showSlider={showSlider} setShowSlider={setShowSlider} images={serverImages} />
+        {!source.includes("castMember") && inputType !== "show" && (
+          <div className={classes.ImagesInfo}>
+            <span>
+              The maximum size of uploaded files is{" "}
+              <StaticParam variables={{ name: "max_upload_image_size" }} query={STATIC_PARAM} />
+              MB
+            </span>
+            Uploaded {size}MB from{" "}
+            <StaticParam variables={{ name: "max_upload_image_size" }} query={STATIC_PARAM} />
+            MB
+          </div>
+        )}
+        <div className={classes.ImagesSection}>
+          {inputType === "show" && edit && (
+            <div className={classes.ImageUploaderShowButtons}>
+              <StandardButton
+                startIcon={<AcceptFilterIcon color="#00A991" />}
+                type="button"
+                customColor="#00A991"
+                variant="text"
+                onClick={approve}
+              >
+                Save
+              </StandardButton>
+              <StandardButton
+                type="button"
+                color="secondary"
+                variant="text"
+                startIcon={<CancelFilterIcon color="#005AA3" />}
+                onClick={() => setEdit(false)}
+              >
+                Cancel
+              </StandardButton>
+            </div>
+          )}
+          {inputType === "show" && !edit && (
+            <Tooltip title="Fast edit" placement="left" arrow>
+              <div
+                className={cn(classes.ShowEditButton, "ShowEditButton")}
+                onClick={() => setEdit(true)}
+              >
+                <EditIcon color="#9FA5A8" />
+              </div>
+            </Tooltip>
+          )}
+          {serverImages.length ? (
+            <div className={cn(classes.ImagesWrapper, wrapperClassName && wrapperClassName)}>
+              {serverImages.map((image: ImageProps, index) => {
+                return (
+                  <ImageItem
+                    name={image.name}
+                    kind={image.kind}
+                    id={image.id ?? ""}
+                    file={image.file}
+                    size={image.size}
+                    source={source}
+                    inputType={inputType}
+                    index={index}
+                    key={index}
+                    edit={edit}
+                    setImageIds={setImageIds}
+                    setServerImages={setServerImages}
+                    setShowSlider={setShowSlider}
+                    serverImages={serverImages}
+                  />
+                );
+              })}
+            </div>
+          ) : null}
+          {edit && (
+            <SelectButton
+              label="Add image"
+              pushResource={pushResource}
+              images={serverImages}
+              setServerImages={setServerImages}
+              variables={
+                source.includes("castMember") ? { fieldName: "Person" } : { fieldName: "Movie" }
+              }
+              query={GET_IMAGES_TYPES}
+            />
+          )}
+          <TextInput
+            style={{ display: "none" }}
+            inputType="create"
+            label={sourceIds}
+            source={sourceIds}
+            fullWidth
+          />
+          {inputType === "show" && !edit && !serverImages.length && <EmptyShow />}
         </div>
-      ) : null}
-      <SelectButton label="Add image" pushResource={pushResource} query={GET_IMAGES_TYPES} />
-      <TextInput inputType={"create"} source="images" fullWidth />
-    </div>
-  );
-};
+      </>
+    );
+  }
+);

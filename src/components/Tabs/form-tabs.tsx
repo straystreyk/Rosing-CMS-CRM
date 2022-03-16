@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Tab, Tabs } from "@material-ui/core";
+import { Box, Tab, Tabs, Theme, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import cn from "classnames";
 
@@ -25,24 +25,21 @@ const useStyles = makeStyles({
     margin: "0 -20px",
     padding: "0 20px",
     backgroundColor: "#fff",
+    "& .MuiTabs-flexContainer": {
+      overflow: "auto",
+    },
   },
 });
 
-export const FormTabs: React.FC<FormTabProps> = ({ labels }) => {
-  const [value, setValue] = React.useState(0);
-  const [fixed, setFixed] = React.useState(false);
-  const tabRef = React.useRef<HTMLDivElement>(null);
-  const classes = useStyles();
-
-  const observer = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) setValue(labels.indexOf(entry.target.id));
-      });
-    },
-    { threshold: 0, rootMargin: "-20% 0% -80% 0%" }
-  );
-
+const useFormTabs = ({
+  tabRef,
+  fixed,
+  setFixed,
+}: {
+  tabRef: React.RefObject<HTMLDivElement>;
+  fixed: boolean;
+  setFixed: React.SetStateAction<any>;
+}) => {
   const scrollToSection = (label: string) => {
     const element = document.getElementById(label);
     if (element) {
@@ -52,7 +49,6 @@ export const FormTabs: React.FC<FormTabProps> = ({ labels }) => {
       }
     }
   };
-
   const checkTabPosition = React.useCallback(() => {
     if (
       tabRef.current &&
@@ -68,6 +64,25 @@ export const FormTabs: React.FC<FormTabProps> = ({ labels }) => {
       setFixed(false);
     }
   }, [fixed]);
+  return { scrollToSection, checkTabPosition };
+};
+
+export const FormTabs: React.FC<FormTabProps> = ({ labels }) => {
+  const [value, setValue] = React.useState(0);
+  const [fixed, setFixed] = React.useState(false);
+  const tabRef = React.useRef<HTMLDivElement>(null);
+  const { scrollToSection, checkTabPosition } = useFormTabs({ tabRef, fixed, setFixed });
+
+  const classes = useStyles();
+
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setValue(labels.indexOf(entry.target.id));
+      });
+    },
+    { threshold: 0, rootMargin: "-20% 0% -80% 0%" }
+  );
 
   React.useEffect(() => {
     window.addEventListener("scroll", checkTabPosition);
@@ -88,7 +103,6 @@ export const FormTabs: React.FC<FormTabProps> = ({ labels }) => {
         <Tabs
           value={value}
           onChange={(e, newValue: number) => setValue(newValue)}
-          variant="scrollable"
           scrollButtons="auto"
           className={classes.FormTabWrapper}
         >

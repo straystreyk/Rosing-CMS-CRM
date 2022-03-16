@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.idea
 
 # testing
 /coverage
@@ -16,6 +17,8 @@
 ../admin-api/.env.development.local
 ../admin-api/.env.production.local
 .env.test.local
+.env.development.local
+.env.production.local
 .vscode
 
 npm-debug.log*

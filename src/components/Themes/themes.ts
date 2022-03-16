@@ -67,6 +67,13 @@ export const lightTheme = {
         color: "#0F1F26",
       },
     },
+    RaCreate: {
+      noActions: {
+        "@media (min-width: 600px)": {
+          marginTop: 0,
+        },
+      },
+    },
     RaFormInput: {
       input: {
         width: "100%",
@@ -236,6 +243,7 @@ export const lightTheme = {
     },
     RaLayout: {
       content: {
+        zIndex: 0,
         "@media (min-width: 576px)": {
           padding: 0,
         },

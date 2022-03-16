@@ -21,10 +21,13 @@ const useStyles = makeStyles({
   spacer: {
     flex: 1,
   },
+  AppBar: {
+    zIndex: 0,
+  },
 });
 
 const FixedContainer: React.FC = (props) => {
-  return <div style={{ position: "fixed", zIndex: 10 }}>{props.children}</div>;
+  return <div style={{ display: "flex", position: "fixed", zIndex: 2 }}>{props.children}</div>;
 };
 
 const ConfigurationMenu = forwardRef<any, any>((props, ref) => {
@@ -51,15 +54,15 @@ const CustomAppBar = (props: any) => {
   const classes = useStyles();
   return (
     <>
-      <AppBar {...props} container={FixedContainer} userMenu={<CustomUserMenu />}>
+      <AppBar
+        className={classes.AppBar}
+        container={FixedContainer}
+        userMenu={<CustomUserMenu />}
+        {...props}
+      >
         <Logo />
         <Typography className={classes.title} component="span">
           SPB TV Russia
-          {/*<Typography*/}
-          {/*  color='inherit'*/}
-          {/*  className={classes.title}*/}
-          {/*  id='react-admin-title'*/}
-          {/*/>*/}
         </Typography>
         <span className={classes.spacer} />
         <GlobalSearch />

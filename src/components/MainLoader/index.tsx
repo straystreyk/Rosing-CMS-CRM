@@ -11,12 +11,25 @@ const useStyles = makeStyles({
   },
 });
 
-export const MainLoader = ({ size, centered }: { size: number; centered?: boolean }) => {
+export const MainLoader = ({
+  size,
+  centered,
+  flex,
+}: {
+  size: number;
+  centered?: boolean;
+  flex?: boolean;
+}) => {
   const classes = useStyles();
 
   return (
     <div
-      style={{ width: size, height: size, margin: centered ? "0 auto" : "" }}
+      style={{
+        display: flex ? "flex" : "inherit",
+        width: size,
+        height: size,
+        margin: centered ? "0 auto" : "5px 0px",
+      }}
       className={classes.MainLoader}
     >
       <svg

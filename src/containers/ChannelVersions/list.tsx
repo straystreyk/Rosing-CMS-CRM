@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useQuery } from "@apollo/client";
-import { Edit, SimpleForm } from "react-admin";
 import { CircularProgress } from "@material-ui/core";
 import { Error } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
@@ -8,7 +7,6 @@ import cn from "classnames";
 
 import { GET_ALL_CHANNEL_VERSIONS } from "./requests";
 import { authClient } from "../../components/Providers";
-import { Form } from "./form";
 
 const useStyles = makeStyles({
   ChannelVersionsWrapper: {
@@ -49,31 +47,7 @@ const ChannelVersion = (props: any) => {
   const channelVersion = React.useRef(null);
   const styles = useStyles();
 
-  return (
-    <div className={cn(styles.ChannelVersion, show && "active")}>
-      <div
-        className={styles.ChannelVersionName}
-        key={props.el.id}
-        onClick={() => setShow((p) => !p)}
-      >
-        {props.el.name}
-      </div>
-      {show ? (
-        <div ref={channelVersion}>
-          <Edit
-            className={styles.ChannelVersionEdit}
-            basePath={props.basePath}
-            resource="channel_versions"
-            id={props.el.id}
-          >
-            <SimpleForm className={styles.ChannelVersionForm} redirect={false}>
-              <Form resource={"channel_versions"} />
-            </SimpleForm>
-          </Edit>
-        </div>
-      ) : null}
-    </div>
-  );
+  return <div className={cn(styles.ChannelVersion, show && "active")}></div>;
 };
 
 export const ChannelVersionsList = (props: any) => {

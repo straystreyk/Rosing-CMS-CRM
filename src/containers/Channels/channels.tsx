@@ -26,12 +26,12 @@ export const List: FC = (props) => (
 //   resource={resource} /></ResourceList>;
 export const Edit: FC = (props) => (
   <ResourceEdit {...props} resource={resource}>
-    <Form {...props} resource={resource} />
+    <Form {...props} resource={resource} type="edit" />
   </ResourceEdit>
 );
 export const Create: FC = (props) => (
   <ResourceCreate {...props} resource={resource}>
-    <Form {...props} resource={resource} />
+    <Form {...props} resource={resource} type="create" />
   </ResourceCreate>
 );
 

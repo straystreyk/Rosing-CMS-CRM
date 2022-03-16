@@ -55,18 +55,7 @@ export const SELECT_DISTRIBUTION = [
   { id: "freemium", name: "Freemium" },
 ];
 
-export const CAST_MEMBERS_ROLES = {
-  actor: 1,
-  director: 2,
-  presenter: 3,
-  writer: 4,
-  composer: 5,
-  editor: 6,
-  producer: 7,
-  author: 8,
-  member: 9,
-  hero: 10,
-  juri: 11,
-  artist: 12,
-  mentor: 13,
-};
+export const EXTRA_VIDEO_TYPES = [
+  { id: "teaser", name: "teaser" },
+  { id: "trailer", name: "trailer" },
+];

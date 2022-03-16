@@ -1,13 +1,14 @@
 import buildGraphQLProvider, { buildQuery as buildQueryFactory } from "ra-data-graphql-simple";
 
 import { authClient } from "./auth-provider";
-import { ALL_COUNTRIES } from "./custom-requests";
+import { GET_ONE_MOVIE } from "../../containers/Movies/custom-requests";
+import { customParseResponse } from "../../Sh1t";
 
 const getGqlResource = (resource: string) => {
   switch (resource) {
     case "admin_users":
       return "AdminUser";
-    case "media_content/movies":
+    case "media_content/video/movies":
       return "Movie";
     case "datacenters":
       return "Datacenter";
@@ -15,11 +16,11 @@ const getGqlResource = (resource: string) => {
       return "RightHolder";
     case "streams":
       return "Stream";
-    case "media_content/video_files":
+    case "media_content/video/video_files":
       return "VideoFile";
     case "channel_versions":
       return "ChannelVersion";
-    case "series":
+    case "media_content/video/series":
       return "Series";
     case "seasons":
       return "Season";
@@ -29,7 +30,7 @@ const getGqlResource = (resource: string) => {
       return "Episode";
     case "genres":
       return "Genre";
-    case "radio_stations":
+    case "media_content/radio/radio_stations":
       return "RadioStation";
     case "audio_shows":
       return "AudioShow";
@@ -43,6 +44,8 @@ const getGqlResource = (resource: string) => {
       return "CastMember";
     case "countries":
       return "Country";
+    case "production_countries":
+      return "ProductionCountry";
     default:
       throw new Error(`Unknown resource ${resource}`);
   }
@@ -51,9 +54,10 @@ const getGqlResource = (resource: string) => {
 const customBuildQuery =
   (introspection: any) => (fetchType: string, resource: string, params: unknown) => {
     const builtQuery = buildQueryFactory(introspection)(fetchType, resource, params);
+    builtQuery.parseResponse = customParseResponse(fetchType);
 
-    if (fetchType === "GET_LIST" && resource === "Country") {
-      return { ...builtQuery, query: ALL_COUNTRIES };
+    if (fetchType === "GET_ONE" && resource === "Movie") {
+      return { ...builtQuery, query: GET_ONE_MOVIE };
     }
 
     return builtQuery;

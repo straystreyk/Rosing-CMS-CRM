@@ -1,9 +1,10 @@
 import * as React from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import cn from "classnames";
 
 import { breadcrumbsLinks } from "../../constants/breadcrumbs-link";
+import { useForm, useFormState } from "react-final-form";
 
 interface BreadcrumbsProps {
   className?: string;
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   breadcrumb: {
     color: theme.palette.secondary.main,
     fontWeight: 500,
+    fontSize: 12,
   },
   crumbLink: {
     color: theme.palette.secondary.main,
@@ -26,13 +28,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
   const {
     location: { pathname },
   } = useHistory();
   const classes = useStyles();
+  const { values } = useFormState();
+  const location = useLocation();
+  const [breadCrumbs, setBreadCrumbs] = React.useState(breadcrumbsLinks);
+  const isAlreadyIn = !!breadCrumbs.filter((el) => el.name === values.name).length;
 
-  const matched = breadcrumbsLinks.filter((el) => pathname.includes(el.href));
+  React.useEffect(() => {
+    if (values && values.name && !isAlreadyIn) {
+      setBreadCrumbs((p) => [...p, { name: values.name, href: location.pathname }]);
+    }
+  }, []);
+
+  const matched = breadCrumbs.filter((el) => pathname.includes(el.href));
 
   return (
     <div className={classes.breadcrumbs}>

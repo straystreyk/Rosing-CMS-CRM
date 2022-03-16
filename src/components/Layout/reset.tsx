@@ -133,10 +133,10 @@ const Reset: React.FC = () => {
               </form>
             )}
           />
-          <a href="#" className={classes.linkHelp}>
-            <AlertIcon color="#005AA3" />
-            Написать в поддержку
-          </a>
+          {/*<a href="#" className={classes.linkHelp}>*/}
+          {/*  <AlertIcon color="#005AA3" />*/}
+          {/*  Написать в поддержку*/}
+          {/*</a>*/}
         </div>
       </div>
     </>

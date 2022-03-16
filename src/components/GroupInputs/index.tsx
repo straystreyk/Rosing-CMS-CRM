@@ -1,23 +1,41 @@
 import * as React from "react";
 import { Switch } from "../UI/MaterialUI/switch";
 import { makeStyles } from "@material-ui/core";
-import { CSSTransition } from "react-transition-group";
 import cn from "classnames";
+import { GroupInputsShow } from "./show-view";
 
 const useStyles = makeStyles({
   GroupInputWrapper: {
-    paddingTop: 8,
     marginBottom: 8,
+    "& input": {
+      backgroundColor: "#fff",
+    },
+    "& .MuiSelect-root": {
+      backgroundColor: "#fff",
+      "&:hover": {
+        backgroundColor: "#fff",
+      },
+      "&:focus-within": {
+        backgroundColor: "#fff",
+      },
+    },
   },
   GroupInputs: {
     padding: "5px 24px",
+    marginTop: 8,
     backgroundColor: "#F0F8FF",
     borderRadius: 4,
+    "&.showView": {
+      backgroundColor: "transparent",
+      marginTop: 0,
+      paddingRight: 0,
+    },
   },
   GroupInputsLabelWrapper: {
     fontSize: 14,
     fontFamily: "Gilroy, sans-serif",
     fontWeight: 500,
+    marginTop: 8,
     lineHeight: "20px",
     display: "inline-block",
     marginBottom: 5,
@@ -29,7 +47,6 @@ const useStyles = makeStyles({
     fontFamily: "Gilroy, sans-serif",
     fontSize: 12,
     color: "#9FA5A8",
-    marginTop: 3,
     lineHeight: "16px",
   },
 });
@@ -40,51 +57,68 @@ interface GroupInputsProps {
   switchable?: boolean;
   groupHelperText?: string;
   className?: string;
+  inputType?: string;
+  source?: string;
+  resource?: string;
+  index?: number | string;
 }
 
-export const GroupInputs: React.FC<GroupInputsProps> = ({
+export const GroupInputsOrigin: React.FC<GroupInputsProps> = ({
   label,
   children,
   initialView,
   switchable,
   className,
+  inputType,
   groupHelperText,
 }) => {
   const classes = useStyles();
-  const [show, setShow] = React.useState(initialView || false);
-  const nodeRef = React.useRef<any>(null);
+  const [show, setShow] = React.useState(
+    initialView || (inputType && ["show", "edit"].includes(inputType)) || false
+  );
 
   return (
-    <div className={cn(classes.GroupInputWrapper, className)}>
-      {label && (
-        <span
-          style={{ cursor: switchable ? "pointer" : "" }}
-          onClick={() => setShow((p) => !p)}
-          className={classes.GroupInputsLabelWrapper}
-        >
-          <span>{label && label} </span>
-          {switchable && <Switch checked={show} />}
-          {groupHelperText && <p className={classes.GroupHelperText}>{groupHelperText}</p>}
-        </span>
-      )}
-      {switchable ? (
-        <CSSTransition
-          nodeRef={nodeRef}
-          unmountOnExit
-          mountOnEnter
-          timeout={200}
-          in={show}
-          classNames="fade"
-        >
-          <div ref={nodeRef} className={classes.GroupInputs}>
+    <>
+      <div>
+        {label && (
+          <>
+            <span
+              style={{ cursor: switchable && inputType !== "show" ? "pointer" : "" }}
+              onClick={() => setShow((p) => (inputType !== "show" ? !p : p))}
+              className={classes.GroupInputsLabelWrapper}
+            >
+              <span>{label && label} </span>
+              {switchable && inputType !== "show" && <Switch checked={show} />}
+            </span>
+            {groupHelperText && inputType !== "show" && (
+              <p className={classes.GroupHelperText}>{groupHelperText}</p>
+            )}
+          </>
+        )}
+      </div>
+      <div className={cn(classes.GroupInputWrapper, className)}>
+        {switchable ? (
+          <>
+            {show && (
+              <div className={cn(classes.GroupInputs, inputType === "show" && "showView")}>
+                {children}
+              </div>
+            )}
+          </>
+        ) : (
+          <div className={cn(classes.GroupInputs, inputType === "show" && "showView")}>
             {children}
           </div>
-        </CSSTransition>
-      ) : (
-        <div ref={nodeRef} className={classes.GroupInputs}>
-          {children}
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+export const GroupInputs: React.FC<GroupInputsProps> = (props) => {
+  return props.inputType && props.inputType === "show" ? (
+    <GroupInputsShow {...props} />
+  ) : (
+    <GroupInputsOrigin {...props} />
   );
 };

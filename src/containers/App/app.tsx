@@ -55,19 +55,20 @@ export const App = () => {
       <Resource name="channels" {...channels} />
       <Resource name="right_holders" {...rightHolders} />
       <Resource name="datacenters" {...datacenters} />
-      <Resource name="media_content/movies" {...movies} />
-      <Resource name="media_content/video_files" {...videoFiles} />
-      <Resource name="series" {...series} />
+      <Resource name="media_content/video/movies" {...movies} />
+      <Resource name="media_content/video/video_files" {...videoFiles} />
+      <Resource name="media_content/video/series" {...series} />
       <Resource name="seasons" {...seasons} />
       <Resource name="episodes" {...episodes} />
       <Resource name="genres" {...genres} />
-      <Resource name="radio_stations" {...radioStations} />
+      <Resource name="media_content/radio/radio_stations" {...radioStations} />
       <Resource name="audio_shows" {...audioShows} />
       <Resource name="questions" {...questions} />
       <Resource name="news" {...news} />
       <Resource name="people" />
       <Resource name="castMembers" />
       <Resource name="countries" />
+      <Resource name="production_countries" />
     </Admin>
   );
 };
