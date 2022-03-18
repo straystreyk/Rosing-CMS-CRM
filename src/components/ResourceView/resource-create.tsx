@@ -1,13 +1,14 @@
 import { FC } from "react";
 import { Create } from "react-admin";
+import { useRedirect, useNotify } from "react-admin";
 import { Box } from "@material-ui/core";
 
 import { EditForm } from "./edit-form";
 
 interface CreateProps {
-  tab?: string;
   redirect?: string;
   resource: string;
+  basePath?: string;
 }
 
 export const ResourceCreate: FC<CreateProps> = (props) => {

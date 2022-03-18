@@ -146,7 +146,7 @@ export const en: TranslationMessages = {
         list: "Series",
       },
     },
-    seasons: {
+    "media_content/video/seasons": {
       name: "Seasons",
       titles: {
         create: "New Season",

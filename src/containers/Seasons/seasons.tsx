@@ -5,7 +5,7 @@ import { Show } from "./show";
 import { Form } from "./form";
 import { SearchInput } from "../../components/Inputs/search-input";
 
-const resource = "seasons";
+const resource = "media_content/video/seasons";
 
 const filters = [<SearchInput source="name" alwaysOn />];
 

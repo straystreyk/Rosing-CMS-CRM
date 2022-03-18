@@ -105,9 +105,7 @@ export const Toolbar = (props: any) => {
         />
         <SaveButton
           redirect={() => props.basePath + "/create"}
-          label={`Save and add another one ${translate(
-            "resources." + props.resource + ".name"
-          ).toLowerCase()}`}
+          label={`Save and add another one`}
           icon={<PlusIcon color="#fff" />}
         />
       </ToolbarRA>
