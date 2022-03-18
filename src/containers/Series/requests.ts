@@ -55,6 +55,8 @@ export const GET_ONE_SERIES = gql`
         __typename
       }
       markers
+      createdAt
+      updatedAt
       name
       originalName
       productionYear

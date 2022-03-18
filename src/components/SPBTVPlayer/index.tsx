@@ -16,21 +16,30 @@ const useStyles = makeStyles({
 
 const UnsafeSPBTVPlayer: React.FC<{ streamUrl: string }> = ({ streamUrl }) => {
   const [player, setPlayer] = React.useState<SpbtvHtml5Player | null>(null);
+  const playerDiv = React.useRef<HTMLDivElement | null>(null);
   const classes = useStyles();
+
   React.useEffect(() => {
-    setPlayer(() =>
-      spbtvplayer("playerID", {
-        streamOpts: {
-          autoplay: true,
-        },
-      })
-    );
-  }, [player, setPlayer]);
+    if (playerDiv.current) {
+      setPlayer(() =>
+        spbtvplayer(playerDiv.current!.id, {
+          streamOpts: {
+            autoplay: true,
+          },
+        })
+      );
+    }
+  }, [setPlayer, playerDiv.current]);
 
   if (player) {
-    player.attachSource(streamUrl, {});
+    player.afterInitialize(() => {
+      player.attachSource(streamUrl, {});
+    });
   }
-  return <div className={classes.Player} id="playerID" style={{ height: "36vw" }}></div>;
+
+  return (
+    <div className={classes.Player} ref={playerDiv} id="playerID" style={{ height: "36vw" }} />
+  );
 };
 
 export const SPBTVPlayer: React.FC<{ streamSourceId: string }> = ({ streamSourceId }) => {
@@ -54,7 +63,7 @@ export const SPBTVPlayer: React.FC<{ streamSourceId: string }> = ({ streamSource
 
   if (error) return <>error</>;
 
-  return !loaded || loading ? (
+  return loading ? (
     <MainLoader size={50} flex centered />
   ) : (
     <UnsafeSPBTVPlayer streamUrl={data.stream.url} />

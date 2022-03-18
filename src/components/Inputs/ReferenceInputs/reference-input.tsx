@@ -1,7 +1,6 @@
 import React from "react";
 import { ReferenceInput as ReferenceInputAdmin } from "react-admin";
 import { makeStyles } from "@material-ui/core";
-import { useInput } from "react-admin";
 
 interface ReferenceInputProps {
   label?: string;
@@ -9,7 +8,7 @@ interface ReferenceInputProps {
   reference: string;
   helperText?: string;
   children: React.PropsWithChildren<JSX.Element>;
-  enableGetChoices?: any;
+  perPage?: number;
 }
 
 const useStyles = makeStyles({

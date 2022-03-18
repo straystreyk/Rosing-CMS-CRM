@@ -19,13 +19,12 @@ import {
   ALL_GENRES,
   ALL_PRODUCTION_COUNTRIES,
   ALL_RIGHT_HOLDERS,
-  ALL_VIDEO_FILES,
 } from "../../components/Providers/custom-requests";
 import { GroupInputsOrigin } from "../../components/GroupInputs";
 import { MetaData } from "../../components/Models/Metadata";
 import { CastMembers } from "../../components/Models/CastMembers/cast-members";
 import { makeStyles } from "@material-ui/core";
-import { CastMembersStyles } from "../../components/Models/CastMembers/styles";
+import { ArrayInputStyles } from "../../components/Models/CastMembers/styles";
 import { ImageUploaderV2 } from "../../components/ImageUploader";
 import { Link } from "ra-ui-materialui";
 import { ExtraVideos } from "../../components/Models/ExtraVideos";
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
     textDecoration: "underline",
   },
-  CastMembersStyles,
+  ArrayInputStyles,
 }));
 
 export const Form: FC<FormProps> = ({ type, resource }) => {
@@ -190,7 +189,7 @@ export const Form: FC<FormProps> = ({ type, resource }) => {
         <ArrayInput
           source="castMembers"
           getItemLabel={() => ""}
-          itemClass={classes.CastMembersStyles}
+          itemClass={classes.ArrayInputStyles}
           childcomponent={CastMembers}
           resource={resource}
           inputType={type}

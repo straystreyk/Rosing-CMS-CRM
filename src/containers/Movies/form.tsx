@@ -12,6 +12,7 @@ import {
   formatTimeInput,
   getYearsChoices,
   DateTimeInput,
+  ReferenceInput,
 } from "../../components/Inputs";
 
 import { FormProps } from "../../types";
@@ -33,7 +34,7 @@ import {
 import { CastMembers } from "../../components/Models/CastMembers/cast-members";
 import { Link } from "ra-ui-materialui";
 import { SelectInputOrigin } from "../../components/Inputs/StandatdInputs/SelectInput/select-input";
-import { CastMembersStyles } from "../../components/Models/CastMembers/styles";
+import { ArrayInputStyles } from "../../components/Models/CastMembers/styles";
 import { MetaData } from "../../components/Models/Metadata";
 import { useFormState } from "react-final-form";
 import { ExtraVideos } from "../../components/Models/ExtraVideos";
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
     textDecoration: "underline",
   },
-  CastMembersStyles,
+  ArrayInputStyles,
 }));
 
 const RatingSystems: React.FC<any> = React.memo(
@@ -263,7 +264,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }
         <ArrayInput
           source="castMembers"
           getItemLabel={() => ""}
-          itemClass={classes.CastMembersStyles}
+          itemClass={classes.ArrayInputStyles}
           childcomponent={CastMembers}
           resource={resource}
           inputType={type}
@@ -294,18 +295,19 @@ export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }
         title="Source"
         id="Source"
       >
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
-          inputType={type}
-          query={ALL_VIDEO_FILES}
-          label="Video files"
-          helperText={
-            "You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
-          }
+        <ReferenceInput
+          label="Video file"
           source="streamSourceIds"
-          resource={resource}
-          idName="id"
-        />
+          reference="media_content/video/video_files"
+          perPage={25}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            helperText={
+              "You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
+            }
+          />
+        </ReferenceInput>
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}

@@ -96,7 +96,7 @@ export const CastMembers: React.FC<{
         }}
       >
         {values[parentSource][index].role === "actor" && (
-          <TextInput
+          <TextInputOrigin
             source={`${parentSourceWithIndex}.characterName`}
             label="Character name"
             fullWidth

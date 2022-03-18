@@ -4,7 +4,7 @@ import { Toolbar as ToolbarRA, FormWithRedirect } from "react-admin";
 import { Box, Card, CardContent, makeStyles } from "@material-ui/core";
 
 import { SaveButton } from "../UI/RA/save-button";
-import { AcceptFilterIcon, CancelFilterIcon, DeleteIcon, PlusIcon } from "../../constants/icons";
+import { AcceptFilterIcon, CancelFilterIcon, PlusIcon } from "../../constants/icons";
 import { useSelector } from "react-redux";
 import { AppState } from "../../types";
 import { ResourceTitle } from "./resource-title";
@@ -56,6 +56,7 @@ interface EditFormProps {
   CustomToolbar?: React.FC;
   form?: string;
   offTitle?: boolean;
+  redirectToOtherModel?: string;
 }
 
 export const Toolbar = (props: any) => {
@@ -65,10 +66,14 @@ export const Toolbar = (props: any) => {
   const toolbar = React.useRef(null);
   const currentExist = !!toolbar.current;
   const history = useHistory();
-  const translate = useTranslate();
 
   const cancel = () => {
     history.push(props.basePath);
+  };
+
+  const saveWithRedirect: any = (basePath: string, id: string, data: unknown) => {
+    if (props.redirectToOtherModel) return props.redirectToOtherModel;
+    return props.basePath + "/create";
   };
 
   React.useEffect(() => {
@@ -104,7 +109,7 @@ export const Toolbar = (props: any) => {
           label="Save"
         />
         <SaveButton
-          redirect={() => props.basePath + "/create"}
+          redirect={saveWithRedirect}
           label={`Save and add another one`}
           icon={<PlusIcon color="#fff" />}
         />
@@ -113,13 +118,18 @@ export const Toolbar = (props: any) => {
   );
 };
 
-export const EditForm: React.FC<EditFormProps> = ({ offToolbar, offTitle, form, ...props }) => {
+export const EditForm: React.FC<EditFormProps> = ({
+  offToolbar,
+  offTitle,
+  form,
+  redirectToOtherModel,
+  ...props
+}) => {
   const classes = useStyles();
   return (
     <>
       <FormWithRedirect
         {...props}
-        redirect={props.redirect ?? "list"}
         render={(formProps: any) => {
           return (
             <>
@@ -142,6 +152,7 @@ export const EditForm: React.FC<EditFormProps> = ({ offToolbar, offTitle, form, 
                       handleSubmit={formProps.handleSubmit}
                       handleSubmitWithRedirect={formProps.handleSubmitWithRedirect}
                       saving={formProps.saving}
+                      redirectToOtherModel={redirectToOtherModel}
                       redirect={props.redirect}
                       resource={props.resource}
                     />

@@ -47,15 +47,15 @@ const ShowView: React.FC<InputProps> = (props) => {
         ) : (
           <div className="empty">Not filled in</div>
         );
-      case "rightHolder":
+      case "productionYear":
         return values[props.source] ? (
-          values[props.source]
+          values[props.source] + " year"
         ) : (
           <div className="empty">Not filled in</div>
         );
       default:
         return values[props.source] ? (
-          values[props.source] + " year"
+          values[props.source]
         ) : (
           <div className="empty">Not filled in</div>
         );
