@@ -1,28 +1,25 @@
-import { useSelector } from "react-redux";
-import { Layout, Sidebar } from "react-admin";
+import * as React from "react";
+import * as Redux from "react-redux";
+import { Layout, Sidebar, Notification } from "react-admin";
+import { LayoutProps } from "ra-ui-materialui";
 
-import AppBar from "./app-bar";
-import { Menu } from "../Menu";
+import { CustomAppBar } from "./app-bar";
+import { Menu } from "../Menu/menu";
 import { darkTheme, lightTheme } from "../Themes";
 import { AppState } from "../../types";
-import { Notification } from "../Notification";
 
-const CustomSidebar = (props: any) => {
-  return <Sidebar {...props} />;
-};
-
-const LayoutEditor = (props: any) => {
-  const theme = useSelector((state: AppState) => (state.theme === "dark" ? darkTheme : lightTheme));
+export const LayoutEditor: React.FC<LayoutProps> = (props) => {
+  const theme = Redux.useSelector((state: AppState) =>
+    state.theme === "dark" ? darkTheme : lightTheme
+  );
   return (
     <Layout
       {...props}
-      appBar={AppBar}
+      appBar={CustomAppBar}
       notification={Notification}
-      sidebar={CustomSidebar}
+      sidebar={Sidebar}
       menu={Menu}
       theme={theme}
     />
   );
 };
-
-export default LayoutEditor;

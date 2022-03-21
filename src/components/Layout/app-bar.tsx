@@ -1,12 +1,16 @@
-import React from "react";
-import { forwardRef } from "react";
+import * as React from "react";
 import { AppBar, UserMenu, MenuItemLink, useTranslate } from "react-admin";
+import { AppBarProps, UserMenuProps as UserMenuPropsMUI } from "ra-ui-materialui";
 import Typography from "@material-ui/core/Typography";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core";
 
-import Logo from "./logo";
+import { Logo } from "./logo";
 import { GlobalSearch } from "../GlobalSearch/global-search";
+
+interface UserMenuProps extends UserMenuPropsMUI {
+  onClick?: () => void;
+}
 
 const useStyles = makeStyles({
   title: {
@@ -24,51 +28,48 @@ const useStyles = makeStyles({
   AppBar: {
     zIndex: 0,
   },
+  FixedContainer: {
+    display: "flex",
+    position: "fixed",
+    zIndex: 2,
+  },
 });
 
-const FixedContainer: React.FC = (props) => {
-  return <div style={{ display: "flex", position: "fixed", zIndex: 2 }}>{props.children}</div>;
+const FixedContainer: React.FC = ({ children }) => {
+  const classes = useStyles();
+  return <div className={classes.FixedContainer}>{children}</div>;
 };
 
-const ConfigurationMenu = forwardRef<any, any>((props, ref) => {
+const CustomUserMenu: React.FC<UserMenuProps> = (props) => {
   const translate = useTranslate();
   return (
-    <MenuItemLink
-      ref={ref}
-      className="userMenu"
-      to="/configuration"
-      primaryText={translate("pos.configuration")}
-      leftIcon={<SettingsIcon />}
-      onClick={props.onClick}
-    />
-  );
-});
-
-const CustomUserMenu = (props: unknown) => (
-  <UserMenu {...props}>
-    <ConfigurationMenu />
-  </UserMenu>
-);
-
-const CustomAppBar = (props: any) => {
-  const classes = useStyles();
-  return (
-    <>
-      <AppBar
-        className={classes.AppBar}
-        container={FixedContainer}
-        userMenu={<CustomUserMenu />}
-        {...props}
-      >
-        <Logo />
-        <Typography className={classes.title} component="span">
-          SPB TV Russia
-        </Typography>
-        <span className={classes.spacer} />
-        <GlobalSearch />
-      </AppBar>
-    </>
+    <UserMenu {...props}>
+      <MenuItemLink
+        className="userMenu"
+        to="/configuration"
+        primaryText={translate("pos.configuration")}
+        leftIcon={<SettingsIcon />}
+        onClick={props.onClick}
+      />
+    </UserMenu>
   );
 };
 
-export default CustomAppBar;
+export const CustomAppBar: React.FC<AppBarProps> = (props) => {
+  const classes = useStyles();
+  return (
+    <AppBar
+      className={classes.AppBar}
+      container={FixedContainer}
+      userMenu={<CustomUserMenu />}
+      {...props}
+    >
+      <Logo />
+      <Typography className={classes.title} component="span">
+        SPB TV Russia
+      </Typography>
+      <span className={classes.spacer} />
+      <GlobalSearch />
+    </AppBar>
+  );
+};

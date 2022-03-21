@@ -1,6 +1,12 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core";
 
+interface MainLoaderProps {
+  size: number;
+  centered?: boolean;
+  flex?: boolean;
+}
+
 const useStyles = makeStyles({
   MainLoader: {
     "& svg": {
@@ -11,15 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const MainLoader = ({
-  size,
-  centered,
-  flex,
-}: {
-  size: number;
-  centered?: boolean;
-  flex?: boolean;
-}) => {
+export const MainLoader: React.FC<MainLoaderProps> = ({ size, centered, flex }) => {
   const classes = useStyles();
 
   return (

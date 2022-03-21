@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SpbtvHtml5Player } from "../../global";
+import { SpbtvHtml5Player } from "../../types/global";
 import { MainLoader } from "../MainLoader";
 import { loadPlayerAssets, gePlayerAssetsLoaded } from "../../helpers";
 import { makeStyles } from "@material-ui/core";

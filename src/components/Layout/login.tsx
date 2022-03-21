@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { withTypes } from "react-final-form";
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -15,39 +14,46 @@ import { lightTheme } from "../Themes";
 import { BooleanInput, TextInput, isEmail } from "../Inputs";
 import { ButtonPrimary } from "../UI/Buttons";
 import {
-  actions,
-  actionsWrapper,
-  annotation,
-  annotationWrapper,
-  authBg,
-  card,
-  cardButton,
-  form,
-  formWrapper,
-  link,
-  linkHelp,
-  logo,
-  main,
-  title,
+  actionsStyles,
+  actionsWrapperStyles,
+  annotationStyles,
+  annotationWrapperStyles,
+  authBgStyles,
+  cardStyles,
+  cardButtonStyles,
+  formStyles,
+  formWrapperStyles,
+  linkStyles,
+  linkHelpStyles,
+  logoStyles,
+  mainStyles,
+  titleStyles,
 } from "./styles";
-import { AnnotationIcon, InformationIcon, LoginIcon, RosingLogo } from "../../constants/icons";
+import {
+  AnnotationIcon,
+  BackIcon,
+  InformationIcon,
+  LoginIcon,
+  ResetIcon,
+  RosingLogo,
+} from "../../constants/icons";
 import { PasswordInput } from "../Inputs/StandatdInputs/password-input";
 
 const useStyles = makeStyles((theme) => ({
-  main,
-  card,
-  authBg,
-  logo,
-  title,
-  annotationWrapper,
-  annotation,
-  formWrapper,
-  form,
-  actionsWrapper,
-  actions: { ...actions, justifyContent: "space-between" },
-  link,
-  linkHelp,
-  cardButton: { ...cardButton, marginTop: 15 },
+  mainStyles,
+  cardStyles,
+  authBgStyles,
+  logoStyles,
+  titleStyles,
+  annotationWrapperStyles,
+  annotationStyles,
+  formWrapperStyles,
+  formStyles,
+  actionsWrapperStyles,
+  actions: { ...actionsStyles, justifyContent: "space-between" },
+  linkStyles,
+  linkHelpStyles,
+  cardButton: { ...cardButtonStyles, marginTop: 15 },
 }));
 
 interface FormValues {
@@ -57,7 +63,7 @@ interface FormValues {
 
 const { Form } = withTypes<FormValues>();
 
-const Login = () => {
+const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
   const [loading, setLoading] = React.useState(false);
   const translate = useTranslate();
   const classes = useStyles();
@@ -66,23 +72,27 @@ const Login = () => {
   const history = useHistory();
   const location = useLocation<{ nextPathname: string } | null>();
 
-  if (localStorage.getItem("token")) {
+  if (localStorage.getItem("token") && !isResetPage) {
     history.push("/");
   }
 
   const handleSubmit = (auth: FormValues) => {
-    setLoading(true);
-    login(auth, location.state ? location.state?.nextPathname : "/").catch((error: Error) => {
-      setLoading(false);
-      notify(
-        typeof error === "string"
-          ? error
-          : typeof error === "undefined" || !error.message
-          ? "ra.auth.sign_in_error"
-          : error.message,
-        "warning"
-      );
-    });
+    if (!isResetPage) {
+      setLoading(true);
+      login(auth, location.state ? location.state?.nextPathname : "/").catch((error: Error) => {
+        setLoading(false);
+        notify(
+          typeof error === "string"
+            ? error
+            : typeof error === "undefined" || !error.message
+            ? "ra.auth.sign_in_error"
+            : error.message,
+          "warning"
+        );
+      });
+    } else {
+      notify("actions.resetSuccess", { type: "success" });
+    }
   };
 
   const validate = (values: FormValues) => {
@@ -93,7 +103,7 @@ const Login = () => {
     if (!values.email) {
       errors.email = translate("validation.form.empty");
     }
-    if (!values.password) {
+    if (!values.password && !isResetPage) {
       errors.password = translate("validation.form.empty");
     }
     return errors;
@@ -101,24 +111,24 @@ const Login = () => {
 
   return (
     <>
-      <div className={classes.main}>
-        <div className={classes.authBg}>
-          <div className={classes.logo}>
+      <div className={classes.mainStyles}>
+        <div className={classes.authBgStyles}>
+          <div className={classes.logoStyles}>
             <RosingLogo color={""} />
           </div>
         </div>
-        <div className={classes.formWrapper}>
+        <div className={classes.formWrapperStyles}>
           <Form
             onSubmit={handleSubmit}
             validate={validate}
             render={({ handleSubmit }) => (
-              <form onSubmit={handleSubmit} noValidate className={classes.form}>
-                <Card className={classes.card}>
-                  <div className={classes.title}>
-                    Авторизация
-                    <div className={classes.annotationWrapper}>
+              <form onSubmit={handleSubmit} noValidate className={classes.formStyles}>
+                <Card className={classes.cardStyles}>
+                  <div className={classes.titleStyles}>
+                    {!isResetPage ? "Авторизация" : "Восстановление пароля"}
+                    <div className={classes.annotationWrapperStyles}>
                       <InformationIcon color="#0F1F26" />
-                      <div className={classes.annotation}>
+                      <div className={classes.annotationStyles}>
                         В целях безопасности используемый для авторизации email должен быть
                         добавлен админом в список пользователей. Если система не узнает email,
                         обратитесь к админу.
@@ -132,23 +142,33 @@ const Login = () => {
                     required
                     placeholder="example@example.com"
                   />
-                  <PasswordInput source="password" required fullWidth />
+                  {!isResetPage && <PasswordInput source="password" required fullWidth />}
                   <CardActions className={classes.actions}>
-                    <div className={classes.actionsWrapper}>
-                      <label htmlFor="remember">Stay logged in</label>
-                      <BooleanInput source="remember" label={""} />
-                    </div>
-                    <Link className={classes.link} to={"/login/reset"}>
-                      <AnnotationIcon color="#005AA3" />
-                      Forgot password
-                    </Link>
+                    {!isResetPage ? (
+                      <>
+                        <div className={classes.actionsWrapperStyles}>
+                          <label htmlFor="remember">Stay logged in</label>
+                          <BooleanInput source="remember" label={""} />
+                        </div>
+                        <Link className={classes.linkStyles} to={"/login/reset"}>
+                          <AnnotationIcon color="#005AA3" />
+                          Forgot password
+                        </Link>
+                      </>
+                    ) : (
+                      <Link className={classes.linkStyles} to={"/login"}>
+                        <BackIcon color="#005AA3" />I remember the password
+                      </Link>
+                    )}
                   </CardActions>
                   <ButtonPrimary
                     className={classes.cardButton}
-                    startIcon={<LoginIcon color="#ffffff" />}
+                    startIcon={
+                      !isResetPage ? <LoginIcon color="#ffffff" /> : <ResetIcon color="#ffffff" />
+                    }
                     disabled={loading}
                     type="submit"
-                    text={translate("actions.login")}
+                    text={translate(!isResetPage ? "actions.login" : "actions.reset")}
                   />
                 </Card>
                 <Notification />
@@ -165,18 +185,11 @@ const Login = () => {
   );
 };
 
-Login.propTypes = {
-  authProvider: PropTypes.func,
-  previousRoute: PropTypes.string,
-};
-
 // We need to put the ThemeProvider decoration in another component
 // Because otherwise the useStyles() hook used in Login won't get
 // the right theme
-const LoginWithTheme = (props: any) => (
+export const LoginWithTheme = (props: any) => (
   <ThemeProvider theme={createTheme(lightTheme)}>
     <Login {...props} />
   </ThemeProvider>
 );
-
-export default LoginWithTheme;

@@ -1,6 +1,6 @@
 import BG from "../../images/bg-auth.jpg";
 
-export const main = {
+export const mainStyles = {
   display: "flex",
   alignItems: "center",
   height: "100vh",
@@ -9,12 +9,12 @@ export const main = {
   },
 };
 
-export const card = {
+export const cardStyles = {
   borderRadius: 4,
   overflow: "visible",
 };
 
-export const authBg = {
+export const authBgStyles = {
   width: "33%",
   height: "100vh",
   backgroundRepeat: "no-repeat",
@@ -29,7 +29,7 @@ export const authBg = {
   },
 };
 
-export const logo = {
+export const logoStyles = {
   width: 250,
   "& svg": {
     width: "100%",
@@ -46,7 +46,7 @@ export const logo = {
   },
 };
 
-export const title = {
+export const titleStyles = {
   fontWeight: 600,
   fontSize: 16,
   color: "#0F1F26",
@@ -59,7 +59,7 @@ export const title = {
   marginBottom: 10,
 };
 
-export const annotationWrapper: any = {
+export const annotationWrapperStyles: any = {
   position: "relative",
   "& svg": {
     cursor: "pointer",
@@ -71,7 +71,7 @@ export const annotationWrapper: any = {
   },
 };
 
-export const annotation: any = {
+export const annotationStyles: any = {
   position: "absolute",
   top: "50%",
   left: "-12px",
@@ -104,7 +104,7 @@ export const annotation: any = {
   },
 };
 
-export const formWrapper = {
+export const formWrapperStyles = {
   width: 500,
   margin: "0 auto",
   "@media (max-width: 900px)": {
@@ -120,7 +120,7 @@ export const formWrapper = {
   },
 };
 
-export const form = {
+export const formStyles = {
   padding: 24,
   boxShadow: "0px 3px 12px -1px rgba(28, 52, 84, 0.1), 0px 2px 4px -1px rgba(28, 55, 90, 0.05)",
   "& label": {
@@ -129,7 +129,7 @@ export const form = {
   },
 };
 
-export const actionsWrapper = {
+export const actionsWrapperStyles = {
   display: "flex",
   alignItems: "center",
   "& > label": {
@@ -139,7 +139,7 @@ export const actionsWrapper = {
   },
 };
 
-export const actions = {
+export const actionsStyles = {
   padding: 0,
   marginTop: 5,
   fontSize: 14,
@@ -155,7 +155,7 @@ export const actions = {
   },
 };
 
-export const link = {
+export const linkStyles = {
   color: "#005AA3",
   display: "flex",
   alignItems: "center",
@@ -165,7 +165,7 @@ export const link = {
   },
 };
 
-export const linkHelp = {
+export const linkHelpStyles = {
   color: "#005AA3",
   display: "flex",
   textDecoration: "none",
@@ -177,7 +177,7 @@ export const linkHelp = {
   },
 };
 
-export const cardButton = {
+export const cardButtonStyles = {
   display: "flex",
   marginLeft: "auto",
   marginTop: 20,

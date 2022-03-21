@@ -1,6 +1,5 @@
-import AppBar from "./app-bar";
-import Layout from "./layout";
-import Login from "./login";
-import Reset from "./reset";
+import { LoginWithTheme as Login } from "./login";
+import { LayoutEditor as Layout } from "./layout";
+import { CustomAppBar as AppBar } from "./app-bar";
 
-export const Layouts = { AppBar, Layout, Login, Reset };
+export const Layouts = { AppBar, Layout, Login };
