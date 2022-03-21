@@ -61,17 +61,9 @@ export const ScrollTopButton: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
 
   const checkButton = () => {
-    if (
-      document.body.scrollHeight - window.scrollY - window.screen.height <
-        (document.body.scrollHeight - window.screen.height) * 0.5 &&
-      !visible
-    ) {
+    if (window.scrollY > 150 && !visible) {
       setVisible(true);
-    } else if (
-      document.body.scrollHeight - window.scrollY - window.screen.height >=
-        (document.body.scrollHeight - window.screen.height) * 0.5 &&
-      visible
-    ) {
+    } else if (window.scrollY <= 150 && visible) {
       setVisible(false);
     }
   };

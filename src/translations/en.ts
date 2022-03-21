@@ -77,6 +77,9 @@ export const en: TranslationMessages = {
         edit: "Edit Movie",
         list: "Movies",
       },
+      mutations: {
+        create: "New movie %{name} was created",
+      },
       fields: {
         name: "Name",
       },
@@ -131,6 +134,9 @@ export const en: TranslationMessages = {
         edit: "Edit Video File",
         list: "Videofiles",
       },
+      mutations: {
+        create: "New video file %{name} was created",
+      },
       filtersLabels: {
         name: "Name",
         streamingUid: "StreamingUID",
@@ -144,6 +150,9 @@ export const en: TranslationMessages = {
         create: "New Series",
         edit: "Edit Series",
         list: "Series",
+      },
+      mutations: {
+        create: "New series %{name} was created",
       },
     },
     "media_content/video/seasons": {

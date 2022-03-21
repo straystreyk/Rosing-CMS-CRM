@@ -25,8 +25,6 @@ export const GET_ONE_SERIES = gql`
           }
           __typename
         }
-        playableId
-        playableType
         position
         role
         updatedAt
@@ -60,6 +58,7 @@ export const GET_ONE_SERIES = gql`
       name
       originalName
       productionYear
+      productionCountriesIds
       releaseDate
       rightHolder {
         id

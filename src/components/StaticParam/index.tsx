@@ -15,5 +15,5 @@ export const StaticParam: React.FC<{ query: any; variables: {} }> = ({ query, va
     return <>error</>;
   }
 
-  return data.items.value;
+  return (data.items && data.items.value) ?? "error";
 };

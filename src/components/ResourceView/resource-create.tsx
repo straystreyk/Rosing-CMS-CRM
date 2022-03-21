@@ -1,5 +1,6 @@
-import { FC } from "react";
-import { Create } from "react-admin";
+import * as React from "react";
+import { Create, useRedirect, useRefresh } from "react-admin";
+import { useNotify } from "ra-core";
 import { Box } from "@material-ui/core";
 import { EditForm } from "./edit-form";
 
@@ -8,12 +9,26 @@ interface CreateProps {
   resource: string;
   basePath?: string;
   redirectToOtherModel?: string;
+  messageArgs?: Record<string, string>;
 }
 
-export const ResourceCreate: FC<CreateProps> = ({ redirectToOtherModel, ...props }) => {
+export const ResourceCreate: React.FC<CreateProps> = ({ redirectToOtherModel, ...props }) => {
+  const notify = useNotify();
+  const redirect = useRedirect();
+  const refresh = useRefresh();
+
+  const onSuccess: (data: any) => void = ({ data }) => {
+    notify(`resources.${props.resource}.mutations.create`, {
+      type: "info",
+      messageArgs: { name: data.name },
+    });
+    redirect("list", props.basePath, data.id, data);
+    refresh();
+  };
+
   return (
     <>
-      <Create {...props} component="div">
+      <Create {...props} onSuccess={onSuccess} component="div">
         <EditForm
           form="create"
           redirect={props.redirect}

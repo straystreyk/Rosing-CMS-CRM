@@ -1,7 +1,6 @@
-import { FC, useState } from "react";
+import * as React from "react";
 import { FormProps } from "../../types";
 import { FormTabs } from "../../components/Tabs/form-tabs";
-import * as React from "react";
 import {
   ArrayInput,
   ArrayInputNoDrag,
@@ -28,6 +27,8 @@ import { ArrayInputStyles } from "../../components/Models/CastMembers/styles";
 import { ImageUploaderV2 } from "../../components/ImageUploader";
 import { Link } from "ra-ui-materialui";
 import { ExtraVideos } from "../../components/Models/ExtraVideos";
+import { RatingSystems } from "../../components/Models/RatingSytems";
+import { ScrollTopButton } from "../../components/UI/Buttons/scroll-top-button";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -37,14 +38,13 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputStyles,
 }));
 
-export const Form: FC<FormProps> = ({ type, resource }) => {
+export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const classes = useStyles();
   return (
     <>
       <FormTabs labels={["Attributes", "Actors and creative team", "Images", "Source"]} />
       <FormSection
-        text="Attributes are used to visually represent the movie in the app and help the user make a choice.
-          The more detailed the section is, the higher the probability of the movie getting into the search results and filtering in the application."
+        text="Used for the visual content of the application"
         title="Attributes"
         id="Attributes"
         formType={type}
@@ -94,6 +94,7 @@ export const Form: FC<FormProps> = ({ type, resource }) => {
           resource={resource}
           choices={getYearsChoices()}
           label="Production year"
+          placeholder="гггг"
           inputType={type}
           source="productionYear"
         />
@@ -232,7 +233,22 @@ export const Form: FC<FormProps> = ({ type, resource }) => {
           groupInputs
           switchable
         />
+        <ArrayInputNoDrag
+          resource={resource}
+          inputType={type}
+          getItemLabel={() => ""}
+          helperText={
+            "The age rating of the film in accordance with the legislation of the country in which the application is used"
+          }
+          source="certificationRatings"
+          label="Age rating"
+          childcomponent={RatingSystems}
+          groupInputs
+          switchable
+          fullWidth
+        />
       </FormSection>
+      <ScrollTopButton />
     </>
   );
 };

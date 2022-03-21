@@ -17,11 +17,7 @@ export const List: React.FC = (props) => (
   </ResourceList>
 );
 export const Create: React.FC = (props) => (
-  <ResourceCreate
-    {...props}
-    resource={resource}
-    redirectToOtherModel="/media_content/video/seasons/create"
-  >
+  <ResourceCreate {...props} resource={resource}>
     <Form resource={resource} type="create" />
   </ResourceCreate>
 );

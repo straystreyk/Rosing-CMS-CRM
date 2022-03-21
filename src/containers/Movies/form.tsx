@@ -29,15 +29,14 @@ import {
   ALL_PRODUCTION_COUNTRIES,
   ALL_RATING_SYSTEMS,
   ALL_RIGHT_HOLDERS,
-  ALL_VIDEO_FILES,
 } from "../../components/Providers/custom-requests";
 import { CastMembers } from "../../components/Models/CastMembers/cast-members";
 import { Link } from "ra-ui-materialui";
 import { SelectInputOrigin } from "../../components/Inputs/StandatdInputs/SelectInput/select-input";
 import { ArrayInputStyles } from "../../components/Models/CastMembers/styles";
 import { MetaData } from "../../components/Models/Metadata";
-import { useFormState } from "react-final-form";
 import { ExtraVideos } from "../../components/Models/ExtraVideos";
+import { RatingSystems } from "../../components/Models/RatingSytems";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -47,32 +46,8 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputStyles,
 }));
 
-const RatingSystems: React.FC<any> = React.memo(
-  ({ parentSource, parentSourceWithIndex, index, inputType, helperText, ...props }) => (
-    <ReferenceCustomInput
-      component={SelectInputOrigin}
-      query={ALL_RATING_SYSTEMS}
-      parentSource={parentSource}
-      source={`${parentSourceWithIndex}.system`}
-      idName="system"
-      name="system"
-      label="Rating system"
-      helperText={helperText}
-      index={index.toString()}
-      inputType={inputType}
-      resource={props.resource}
-      dependencyInput
-      dependencyLabel="Tag"
-      dependencySource={`${parentSourceWithIndex}.tag`}
-      dependencyName="tags"
-      dependencyIdName="tags"
-    />
-  )
-);
-
 export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }) => {
   const classes = useStyles();
-  const { values } = useFormState();
 
   return (
     <>
