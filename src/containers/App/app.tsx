@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Admin, Resource } from "react-admin";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -25,7 +24,6 @@ import { QuestionsVariables as questions } from "../Questions";
 import { NewsVariables as news } from "../News";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
-import "./app.css";
 
 const { Login, Layout } = Layouts;
 

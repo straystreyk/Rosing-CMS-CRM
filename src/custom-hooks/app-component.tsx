@@ -12,7 +12,6 @@ export const useApp = () => {
         block = false;
         if (!block && dataProviderInstance) {
           setDataProvider(
-            // GOTCHA: dataProviderInstance can be a function
             () => dataProviderInstance,
           );
         }

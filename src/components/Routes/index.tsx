@@ -25,7 +25,7 @@ const authCustomRoutes = [
 ];
 
 let customRoutes = [
-  <RouteWithoutLayout exact path="/login/reset" render={() => <Layouts.Reset />} />,
+  <RouteWithoutLayout exact path="/login/reset" render={() => <Layouts.Login isResetPage />} />,
 ];
 
 if (localStorage.getItem("token")) {

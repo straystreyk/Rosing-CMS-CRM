@@ -1,9 +1,10 @@
-import { FC } from "react";
+import * as React from "react";
 import { useSelector } from "react-redux";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { useMediaQuery, Theme } from "@material-ui/core";
 import { useTranslate, MenuItemLink } from "react-admin";
 import { makeStyles } from "@material-ui/core";
+import { LineCloseStyles, LineStyles, MenuItemLinkStyles, MenuItemLinkCloseStyles } from "./styles";
 import cn from "classnames";
 
 import { ExpandMenu } from "../ExpandMenu/expand-menu";
@@ -32,88 +33,37 @@ interface MenuProps {
   onMenuClick: () => void;
 }
 
-const useStyles = makeStyles({
-  Line: {
-    margin: "5px 0 8px 0",
-    height: 1,
-    backgroundColor: "#27353C",
-  },
-  LineClose: {
-    maxWidth: 34,
-  },
-  MenuItemLink: {
-    maxHeight: 28,
-    borderRadius: 5,
-    padding: "4px 0",
-    margin: "4px 0",
-    flexShrink: 0,
-    minHeight: "auto",
-    "& .MuiListItemIcon-root": {
-      minWidth: "auto",
-      marginRight: 6,
-      padding: "4px 8px",
-      height: 20,
-      maxWidth: 20,
-      borderRadius: 4,
-      transition: "0.35s all ease",
-      "& svg": {
-        width: "100%",
-        height: "auto",
-      },
-    },
-  },
-  MenuItemLinkClose: {
-    color: "#0f1f26",
-    maxWidth: 45,
-    "& .MuiTouchRipple-root": {
-      display: "none",
-    },
-    "& .MuiListItemIcon-root:hover": {
-      background: "#2D3D44",
-    },
-    "&:hover": {
-      background: "none",
-    },
-    '&[class*="RaMenuItemLink-active"]': {
-      backgroundColor: "unset",
-    },
-    '&[class*="RaMenuItemLink-active"]:focus': {
-      outline: "none",
-    },
-    '&[class*="RaMenuItemLink-active"] .MuiListItemIcon-root': {
-      backgroundColor: "#00A991",
-    },
-    '&[class*="RaMenuItemLink-active"] .MuiListItemIcon-root:hover': {
-      backgroundColor: "#00D6B5",
-    },
-  },
-});
-
 const tooltipProps = {
   arrow: true,
 };
 
-const Line = () => {
+const useStyles = makeStyles({
+  LineStyles,
+  LineCloseStyles,
+  MenuItemLinkStyles,
+  MenuItemLinkCloseStyles,
+});
+
+const Line = React.memo(() => {
   const classes = useStyles();
   const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
-  return <div className={cn(classes.Line, !open && classes.LineClose)} />;
-};
+  return <div className={cn(classes.LineStyles, !open && classes.LineCloseStyles)} />;
+});
 
 const redirectAdmin = (url: string) => {
   window.location.href = url;
 };
 
-export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) => {
+export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logout, ...props }) => {
   const translate = useTranslate();
   const isXSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down("xs"));
   const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
   const classes = useStyles();
-  useSelector((state: AppState) => state.theme);
 
   return (
     <>
       <MenuItemLink
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         to={"/dashboard"}
         primaryText={"Dashboard"}
         leftIcon={<DashboardIcon color="#fff" />}
@@ -125,7 +75,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
       <Line />
       <MenuItemLink
         to={`/admin_users`}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={translate(`resources.admin_users.name`, {
           smart_count: 2,
         })}
@@ -137,7 +87,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
       />
       <MenuItemLink
         to={`/payments`}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Payments"}
         leftIcon={<PaymentIcon color="#fff" />}
         onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/payments")}
@@ -147,7 +97,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
       />
       <MenuItemLink
         to={`/tarrif_plans`}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Tariff plans"}
         leftIcon={<TariffIcon color="#fff" />}
         onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_rent_plans")}
@@ -157,7 +107,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
       />
       <MenuItemLink
         to={`/promocodes`}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Promocode"}
         leftIcon={<PromocodeIcon color="#fff" />}
         onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_promo_codes")}
@@ -167,7 +117,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
       />
       <MenuItemLink
         to={`/push_campaigns`}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Push campaigns"}
         leftIcon={<PushCopmaniesIcon color="#fff" />}
         onClick={() =>
@@ -180,7 +130,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
       <Line />
       <MenuItemLink
         to={`/pages_and_attributes`}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Pages and attributes"}
         leftIcon={<PagesAndAttributesIcon color="#fff" />}
         tooltipProps={tooltipProps}
@@ -243,7 +193,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
       <MenuItemLink
         to={`/streaming`}
         primaryText={"Streaming"}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         leftIcon={<StreamingIcon color="#fff" />}
         onClick={() =>
           redirectAdmin("https://dev-admin.spbtv.com/admin/content_stream_params_rules")
@@ -269,7 +219,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         <MenuItemLink
           to={`/api_clients`}
           primaryText={"Api clients"}
-          className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           onClick={() =>
             redirectAdmin(
               "https://dev-admin.spbtv.com/admin/api_client_authentication_api_client_active_records"
@@ -281,7 +231,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         <MenuItemLink
           to={`/api_clients_configs`}
           primaryText={"Api clients configs"}
-          className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/content_client_configs")}
           sidebarIsOpen={open}
           dense={dense}
@@ -289,7 +239,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         <MenuItemLink
           to={`/content_platforms`}
           primaryText={"Content platforms"}
-          className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/content_platforms")}
           sidebarIsOpen={open}
           dense={dense}
@@ -297,7 +247,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         <MenuItemLink
           to={`/email_templates`}
           primaryText={"Email templates"}
-          className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/email_templates")}
           sidebarIsOpen={open}
           dense={dense}
@@ -305,7 +255,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         <MenuItemLink
           to={`/geo_rewrites`}
           primaryText={"Geo rewrites"}
-          className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/geo_rewrites")}
           sidebarIsOpen={open}
           dense={dense}
@@ -313,7 +263,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         <MenuItemLink
           to={`/internet_service_providers`}
           primaryText={"Internet service providers"}
-          className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           onClick={() =>
             redirectAdmin("https://dev-admin.spbtv.com/admin/isp_internet_service_providers")
           }
@@ -323,7 +273,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         <MenuItemLink
           to={`/iptv_networks`}
           primaryText={"IPTV Networks"}
-          className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/iptv_networks")}
           sidebarIsOpen={open}
           dense={dense}
@@ -331,7 +281,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         <MenuItemLink
           to={`/publishing_rules`}
           primaryText={"Publishing rules"}
-          className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/publishing_rules")}
           sidebarIsOpen={open}
           dense={dense}
@@ -339,7 +289,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         <MenuItemLink
           to={`/stopwords`}
           primaryText={"Stopwords"}
-          className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/content_stopwords")}
           sidebarIsOpen={open}
           dense={dense}
@@ -350,7 +300,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         primaryText={translate(`resources.right_holders.name`, {
           smart_count: 2,
         })}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         leftIcon={<rightHolders.icon />}
         tooltipProps={tooltipProps}
         onClick={onMenuClick}
@@ -362,7 +312,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         primaryText={translate(`resources.questions.name`, {
           smart_count: 2,
         })}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         leftIcon={<questions.icon />}
         tooltipProps={tooltipProps}
         onClick={onMenuClick}
@@ -374,7 +324,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
         primaryText={translate(`resources.news.name`, {
           smart_count: 2,
         })}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         leftIcon={<news.icon />}
         tooltipProps={tooltipProps}
         onClick={onMenuClick}
@@ -383,7 +333,7 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
       />
       <MenuItemLink
         to={`/datacenters`}
-        className={cn(classes.MenuItemLink, !open && classes.MenuItemLinkClose)}
+        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={translate(`resources.datacenters.name`, {
           smart_count: 2,
         })}
@@ -407,4 +357,4 @@ export const Menu: FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) =>
       {isXSmall && logout}
     </>
   );
-};
+});
