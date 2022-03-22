@@ -13,8 +13,18 @@ import {
   ALL_DATACENTERS,
 } from "../../components/Providers/custom-requests";
 import { SPBTVPlayer } from "../../components/SPBTVPlayer";
+import { scrollToErrorInput } from "../../helpers/form";
+import { useFormState } from "react-final-form";
 
 export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
+  const formState = useFormState();
+
+  React.useEffect(() => {
+    if (formState.submitFailed) {
+      scrollToErrorInput(80);
+    }
+  }, [formState.submitFailed]);
+
   return (
     <>
       <TextInput

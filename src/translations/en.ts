@@ -78,7 +78,10 @@ export const en: TranslationMessages = {
         list: "Movies",
       },
       mutations: {
-        create: "New movie %{name} was created",
+        create: {
+          success: 'New movie "%{name}" was created',
+          error: "Cant create movie: %{error}",
+        },
       },
       fields: {
         name: "Name",
@@ -132,10 +135,13 @@ export const en: TranslationMessages = {
       titles: {
         create: "New Video File",
         edit: "Edit Video File",
-        list: "Videofiles",
+        list: "Video files",
       },
       mutations: {
-        create: "New video file %{name} was created",
+        create: {
+          success: 'New video file "%{name}" was created',
+          error: "Cant create video file: %{error}",
+        },
       },
       filtersLabels: {
         name: "Name",
@@ -152,7 +158,10 @@ export const en: TranslationMessages = {
         list: "Series",
       },
       mutations: {
-        create: "New series %{name} was created",
+        create: {
+          success: 'New series "%{name}" was created',
+          error: "Cant create series: %{error}",
+        },
       },
     },
     "media_content/video/seasons": {

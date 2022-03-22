@@ -17,18 +17,33 @@ export const ResourceCreate: React.FC<CreateProps> = ({ redirectToOtherModel, ..
   const redirect = useRedirect();
   const refresh = useRefresh();
 
-  const onSuccess: (data: any) => void = ({ data }) => {
-    notify(`resources.${props.resource}.mutations.create`, {
-      type: "info",
-      messageArgs: { name: data.name },
-    });
-    redirect("list", props.basePath, data.id, data);
-    refresh();
-  };
+  const onSuccess: (data: any) => void = React.useCallback(
+    ({ data }) => {
+      notify(`resources.${props.resource}.mutations.create.success`, {
+        type: "info",
+        messageArgs: { name: data.name },
+      });
+      redirect("list", props.basePath, data.id, data);
+      refresh();
+    },
+    [notify, props.basePath, props.resource, redirect, refresh]
+  );
+
+  const onFailure = React.useCallback(
+    (error: Error) => {
+      notify(`resources.${props.resource}.mutations.create.error`, {
+        type: "error",
+        messageArgs: { error: error.message },
+      });
+      redirect("list", props.basePath);
+      refresh();
+    },
+    [notify, props.basePath, props.resource, refresh, redirect]
+  );
 
   return (
     <>
-      <Create {...props} onSuccess={onSuccess} component="div">
+      <Create {...props} onSuccess={onSuccess} onFailure={onFailure} component="div">
         <EditForm
           form="create"
           redirect={props.redirect}

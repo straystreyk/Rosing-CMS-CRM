@@ -10,7 +10,6 @@ import { AppState } from "../../types";
 import { ResourceTitle } from "./resource-title";
 import { SecondaryButton } from "../UI/Buttons";
 import { useHistory } from "react-router-dom";
-import { useTranslate } from "ra-core";
 
 const useStyles = makeStyles({
   FixedToolBar: {
@@ -126,6 +125,7 @@ export const EditForm: React.FC<EditFormProps> = ({
   ...props
 }) => {
   const classes = useStyles();
+
   return (
     <>
       <FormWithRedirect

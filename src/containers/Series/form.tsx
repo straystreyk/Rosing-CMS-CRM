@@ -29,6 +29,8 @@ import { Link } from "ra-ui-materialui";
 import { ExtraVideos } from "../../components/Models/ExtraVideos";
 import { RatingSystems } from "../../components/Models/RatingSytems";
 import { ScrollTopButton } from "../../components/UI/Buttons/scroll-top-button";
+import { useFormState } from "react-final-form";
+import { scrollToErrorInput } from "../../helpers/form";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -40,6 +42,14 @@ const useStyles = makeStyles((theme) => ({
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const classes = useStyles();
+  const formState = useFormState();
+
+  React.useEffect(() => {
+    if (formState.submitFailed) {
+      scrollToErrorInput(130);
+    }
+  }, [formState.submitFailed]);
+
   return (
     <>
       <FormTabs labels={["Attributes", "Actors and creative team", "Images", "Source"]} />

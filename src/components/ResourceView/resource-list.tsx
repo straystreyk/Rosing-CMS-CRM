@@ -1,5 +1,5 @@
 import { FC, useState, createContext, useContext } from "react";
-import { List, Pagination, TopToolbar, Form } from "react-admin";
+import { List, Pagination, TopToolbar } from "react-admin";
 import { PaginationProps } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
 import { useTranslate } from "ra-core";
@@ -8,12 +8,12 @@ import { Box } from "@material-ui/core";
 import { FilterSidebar } from "../SidebarFilter";
 import { ListProps } from "../../types";
 import { ResourceTitle } from "./resource-title";
-import { CreateIcon } from "../../constants/forms-constants";
 import { Filters } from "../Filters";
 import { CreateButton } from "../UI/RA/create-button";
 import { ExportButton } from "../UI/RA/export-button";
 import { ListPageTabs } from "../Tabs/list-page-tabs";
 import { EditForm } from "./edit-form";
+import { PlusIcon } from "../../constants/icons";
 
 const useStyles = makeStyles({
   TopToolBar: {
@@ -41,7 +41,7 @@ const ToolBar = (props: any) => {
     <div>
       <TopToolbar className={styles.TopToolBar}>
         <CreateButton
-          startIcon={<CreateIcon color="#fff" />}
+          icon={<PlusIcon color="#fff" />}
           basePath={props.basePath}
           label={"Create " + translate(`resources.${props.resource}.name`)}
         />

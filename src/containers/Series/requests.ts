@@ -30,8 +30,12 @@ export const GET_ONE_SERIES = gql`
         updatedAt
         __typename
       }
-      certificationRatingSystem
-      certificationRatingTag
+      certificationRatings {
+        id
+        system
+        tag
+        __typename
+      }
       description
       extraVideos {
         id

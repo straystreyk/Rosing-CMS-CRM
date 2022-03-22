@@ -1,5 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core";
+import { useFormState } from "react-final-form";
 import {
   TextInput,
   requiredValidate,
@@ -27,16 +28,15 @@ import {
   ALL_COUNTRIES,
   ALL_GENRES,
   ALL_PRODUCTION_COUNTRIES,
-  ALL_RATING_SYSTEMS,
   ALL_RIGHT_HOLDERS,
 } from "../../components/Providers/custom-requests";
 import { CastMembers } from "../../components/Models/CastMembers/cast-members";
 import { Link } from "ra-ui-materialui";
-import { SelectInputOrigin } from "../../components/Inputs/StandatdInputs/SelectInput/select-input";
 import { ArrayInputStyles } from "../../components/Models/CastMembers/styles";
 import { MetaData } from "../../components/Models/Metadata";
 import { ExtraVideos } from "../../components/Models/ExtraVideos";
 import { RatingSystems } from "../../components/Models/RatingSytems";
+import { scrollToErrorInput } from "../../helpers/form";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -48,6 +48,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }) => {
   const classes = useStyles();
+  const formState = useFormState();
+
+  React.useEffect(() => {
+    if (formState.submitFailed) {
+      scrollToErrorInput(130);
+    }
+  }, [formState.submitFailed]);
 
   return (
     <>
