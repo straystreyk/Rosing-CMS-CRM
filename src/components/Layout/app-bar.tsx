@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FC } from "react";
 import { AppBar, UserMenu, MenuItemLink, useTranslate } from "react-admin";
 import { AppBarProps, UserMenuProps as UserMenuPropsMUI } from "ra-ui-materialui";
 import Typography from "@material-ui/core/Typography";
@@ -35,12 +35,12 @@ const useStyles = makeStyles({
   },
 });
 
-const FixedContainer: React.FC = ({ children }) => {
+const FixedContainer: FC = ({ children }) => {
   const classes = useStyles();
   return <div className={classes.FixedContainer}>{children}</div>;
 };
 
-const CustomUserMenu: React.FC<UserMenuProps> = (props) => {
+const CustomUserMenu: FC<UserMenuProps> = (props) => {
   const translate = useTranslate();
   return (
     <UserMenu {...props}>
@@ -55,7 +55,7 @@ const CustomUserMenu: React.FC<UserMenuProps> = (props) => {
   );
 };
 
-export const CustomAppBar: React.FC<AppBarProps> = (props) => {
+export const CustomAppBar: FC<AppBarProps> = (props) => {
   const classes = useStyles();
   return (
     <AppBar

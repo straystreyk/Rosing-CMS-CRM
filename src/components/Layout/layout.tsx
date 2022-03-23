@@ -4,7 +4,7 @@ import { Layout, Sidebar, Notification } from "react-admin";
 import { LayoutProps } from "ra-ui-materialui";
 
 import { CustomAppBar } from "./app-bar";
-import { Menu } from "../Menu/menu";
+import { Menu } from "../Menu";
 import { darkTheme, lightTheme } from "../Themes";
 import { AppState } from "../../types";
 
