@@ -1,4 +1,4 @@
-// This file needs for override standard Create React App webpack config
+// This file needs for override standard Create React Index webpack config
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const { getGlobals } = require("./config/get-globals.js");
