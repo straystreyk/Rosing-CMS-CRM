@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { RouteWithoutLayout } from "react-admin";
 import { Configuration } from "../../containers/Configuration";

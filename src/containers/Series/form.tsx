@@ -40,13 +40,15 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputStyles,
 }));
 
+const fixedHeaderOffset = 130;
+
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const classes = useStyles();
   const formState = useFormState();
 
   React.useEffect(() => {
     if (formState.submitFailed) {
-      scrollToErrorInput(130);
+      scrollToErrorInput(fixedHeaderOffset);
     }
   }, [formState.submitFailed]);
 

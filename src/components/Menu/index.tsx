@@ -44,17 +44,17 @@ const useStyles = makeStyles({
   MenuItemLinkCloseStyles,
 });
 
+const redirectAdmin = (url: string) => {
+  window.location.href = url;
+};
+
 const Line = React.memo(() => {
   const classes = useStyles();
   const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
   return <div className={cn(classes.LineStyles, !open && classes.LineCloseStyles)} />;
 });
 
-const redirectAdmin = (url: string) => {
-  window.location.href = url;
-};
-
-export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logout, ...props }) => {
+export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props }) => {
   const translate = useTranslate();
   const isXSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down("xs"));
   const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
@@ -67,7 +67,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
         to={"/dashboard"}
         primaryText={"Dashboard"}
         leftIcon={<DashboardIcon color="#fff" />}
-        onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/dashboard")}
+        onClick={React.useCallback(
+          () => redirectAdmin("https://dev-admin.spbtv.com/admin/dashboard"),
+          []
+        )}
         tooltipProps={tooltipProps}
         sidebarIsOpen={open}
         dense={dense}
@@ -90,7 +93,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Payments"}
         leftIcon={<PaymentIcon color="#fff" />}
-        onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/payments")}
+        onClick={React.useCallback(
+          () => redirectAdmin("https://dev-admin.spbtv.com/admin/payments"),
+          []
+        )}
         tooltipProps={tooltipProps}
         sidebarIsOpen={open}
         dense={dense}
@@ -100,7 +106,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Tariff plans"}
         leftIcon={<TariffIcon color="#fff" />}
-        onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_rent_plans")}
+        onClick={React.useCallback(
+          () => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_rent_plans"),
+          []
+        )}
         tooltipProps={tooltipProps}
         sidebarIsOpen={open}
         dense={dense}
@@ -110,7 +119,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Promocode"}
         leftIcon={<PromocodeIcon color="#fff" />}
-        onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_promo_codes")}
+        onClick={React.useCallback(
+          () => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_promo_codes"),
+          []
+        )}
         tooltipProps={tooltipProps}
         sidebarIsOpen={open}
         dense={dense}
@@ -120,9 +132,11 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Push campaigns"}
         leftIcon={<PushCopmaniesIcon color="#fff" />}
-        onClick={() =>
-          redirectAdmin("https://dev-admin.spbtv.com/admin/push_notifications_push_campaigns")
-        }
+        onClick={React.useCallback(
+          () =>
+            redirectAdmin("https://dev-admin.spbtv.com/admin/push_notifications_push_campaigns"),
+          []
+        )}
         tooltipProps={tooltipProps}
         sidebarIsOpen={open}
         dense={dense}
@@ -195,9 +209,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
         primaryText={"Streaming"}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         leftIcon={<StreamingIcon color="#fff" />}
-        onClick={() =>
-          redirectAdmin("https://dev-admin.spbtv.com/admin/content_stream_params_rules")
-        }
+        onClick={React.useCallback(
+          () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_stream_params_rules"),
+          []
+        )}
         tooltipProps={tooltipProps}
         sidebarIsOpen={open}
         dense={dense}
@@ -220,11 +235,13 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
           to={`/api_clients`}
           primaryText={"Api clients"}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={() =>
-            redirectAdmin(
-              "https://dev-admin.spbtv.com/admin/api_client_authentication_api_client_active_records"
-            )
-          }
+          onClick={React.useCallback(
+            () =>
+              redirectAdmin(
+                "https://dev-admin.spbtv.com/admin/api_client_authentication_api_client_active_records"
+              ),
+            []
+          )}
           sidebarIsOpen={open}
           dense={dense}
         />
@@ -232,7 +249,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
           to={`/api_clients_configs`}
           primaryText={"Api clients configs"}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/content_client_configs")}
+          onClick={React.useCallback(
+            () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_client_configs"),
+            []
+          )}
           sidebarIsOpen={open}
           dense={dense}
         />
@@ -240,7 +260,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
           to={`/content_platforms`}
           primaryText={"Content platforms"}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/content_platforms")}
+          onClick={React.useCallback(
+            () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_platforms"),
+            []
+          )}
           sidebarIsOpen={open}
           dense={dense}
         />
@@ -248,7 +271,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
           to={`/email_templates`}
           primaryText={"Email templates"}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/email_templates")}
+          onClick={React.useCallback(
+            () => redirectAdmin("https://dev-admin.spbtv.com/admin/email_templates"),
+            []
+          )}
           sidebarIsOpen={open}
           dense={dense}
         />
@@ -256,7 +282,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
           to={`/geo_rewrites`}
           primaryText={"Geo rewrites"}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/geo_rewrites")}
+          onClick={React.useCallback(
+            () => redirectAdmin("https://dev-admin.spbtv.com/admin/geo_rewrites"),
+            []
+          )}
           sidebarIsOpen={open}
           dense={dense}
         />
@@ -264,9 +293,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
           to={`/internet_service_providers`}
           primaryText={"Internet service providers"}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={() =>
-            redirectAdmin("https://dev-admin.spbtv.com/admin/isp_internet_service_providers")
-          }
+          onClick={React.useCallback(
+            () => redirectAdmin("https://dev-admin.spbtv.com/admin/isp_internet_service_providers"),
+            []
+          )}
           sidebarIsOpen={open}
           dense={dense}
         />
@@ -274,7 +304,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
           to={`/iptv_networks`}
           primaryText={"IPTV Networks"}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/iptv_networks")}
+          onClick={React.useCallback(
+            () => redirectAdmin("https://dev-admin.spbtv.com/admin/iptv_networks"),
+            []
+          )}
           sidebarIsOpen={open}
           dense={dense}
         />
@@ -282,7 +315,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
           to={`/publishing_rules`}
           primaryText={"Publishing rules"}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/publishing_rules")}
+          onClick={React.useCallback(
+            () => redirectAdmin("https://dev-admin.spbtv.com/admin/publishing_rules"),
+            []
+          )}
           sidebarIsOpen={open}
           dense={dense}
         />
@@ -290,7 +326,10 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
           to={`/stopwords`}
           primaryText={"Stopwords"}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={() => redirectAdmin("https://dev-admin.spbtv.com/admin/content_stopwords")}
+          onClick={React.useCallback(
+            () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_stopwords"),
+            []
+          )}
           sidebarIsOpen={open}
           dense={dense}
         />
@@ -357,4 +396,4 @@ export const Menu: React.FC<MenuProps> = React.memo(({ onMenuClick, dense, logou
       {isXSmall && logout}
     </>
   );
-});
+};

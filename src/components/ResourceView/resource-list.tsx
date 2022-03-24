@@ -45,7 +45,7 @@ const ToolBar = (props: any) => {
           basePath={props.basePath}
           label={"Create " + translate(`resources.${props.resource}.name`)}
         />
-        <ExportButton label={"Export"} />
+        {/*<ExportButton label={"Export"} />*/}
       </TopToolbar>
       {context.filtersArray ? <Filters /> : null}
     </div>

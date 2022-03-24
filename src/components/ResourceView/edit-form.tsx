@@ -1,6 +1,7 @@
 import * as React from "react";
 import cn from "classnames";
 import { Toolbar as ToolbarRA, FormWithRedirect } from "react-admin";
+import { RedirectionSideEffect, FormWithRedirectProps } from "ra-core";
 import { Box, Card, CardContent, makeStyles } from "@material-ui/core";
 
 import { SaveButton } from "../UI/RA/save-button";
@@ -70,16 +71,16 @@ export const Toolbar = (props: any) => {
     history.push(props.basePath);
   };
 
-  const saveWithRedirect: any = (basePath: string, id: string, data: unknown) => {
-    if (props.redirectToOtherModel) return props.redirectToOtherModel;
-    return props.basePath + "/create";
-  };
+  const saveWithRedirect: RedirectionSideEffect = React.useCallback(
+    () => props.basePath + "/create",
+    [props.basePath]
+  );
 
   React.useEffect(() => {
     if (currentExist) {
       setMounted(true);
     }
-  }, [toolbar.current, currentExist]);
+  }, [toolbar, currentExist]);
 
   return (
     <div ref={toolbar}>
@@ -117,52 +118,51 @@ export const Toolbar = (props: any) => {
   );
 };
 
-export const EditForm: React.FC<EditFormProps> = ({
-  offToolbar,
-  offTitle,
-  form,
-  redirectToOtherModel,
-  ...props
-}) => {
-  const classes = useStyles();
+export const EditForm: React.FC<EditFormProps> = React.memo(
+  ({ offToolbar, offTitle, form, redirectToOtherModel, ...props }) => {
+    const classes = useStyles();
 
-  return (
-    <>
-      <FormWithRedirect
-        {...props}
-        render={(formProps: any) => {
-          return (
-            <>
-              {!offTitle && <ResourceTitle {...props} name={props.resource} form={form} />}
-              <Card
-                className={cn(offToolbar && classes.offToolbar)}
-                style={{ overflow: "visible" }}
-              >
-                <form>
-                  <CardContent>
-                    <Box display={{ md: "block", lg: "flex" }}>
-                      <Box flex={1}>{props.children}</Box>
-                    </Box>
-                  </CardContent>
-                  {!offToolbar && (
-                    <Toolbar
-                      record={formProps.record}
-                      basePath={formProps.basePath}
-                      invalid={formProps.invalid}
-                      handleSubmit={formProps.handleSubmit}
-                      handleSubmitWithRedirect={formProps.handleSubmitWithRedirect}
-                      saving={formProps.saving}
-                      redirectToOtherModel={redirectToOtherModel}
-                      redirect={props.redirect}
-                      resource={props.resource}
-                    />
-                  )}
-                </form>
-              </Card>
-            </>
-          );
-        }}
-      />
-    </>
-  );
-};
+    return (
+      <>
+        <FormWithRedirect
+          {...props}
+          render={React.useCallback(
+            (formProps: FormWithRedirectProps) => {
+              return (
+                <>
+                  {!offTitle && <ResourceTitle {...props} name={props.resource} form={form} />}
+                  <Card
+                    className={cn(offToolbar && classes.offToolbar)}
+                    style={{ overflow: "visible" }}
+                  >
+                    <form>
+                      <CardContent>
+                        <Box display={{ md: "block", lg: "flex" }}>
+                          <Box flex={1}>{props.children}</Box>
+                        </Box>
+                      </CardContent>
+                      {!offToolbar && (
+                        <Toolbar
+                          record={formProps.record}
+                          basePath={formProps.basePath}
+                          invalid={formProps.invalid}
+                          handleSubmit={formProps.handleSubmit}
+                          handleSubmitWithRedirect={formProps.handleSubmitWithRedirect}
+                          saving={formProps.saving}
+                          redirectToOtherModel={redirectToOtherModel}
+                          redirect={props.redirect}
+                          resource={props.resource}
+                        />
+                      )}
+                    </form>
+                  </Card>
+                </>
+              );
+            },
+            [classes.offToolbar, form, offTitle, offToolbar, props, redirectToOtherModel]
+          )}
+        />
+      </>
+    );
+  }
+);

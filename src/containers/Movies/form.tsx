@@ -46,13 +46,16 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputStyles,
 }));
 
-export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }) => {
+const fixedHeaderOffset = 130;
+const inputItemsPerPage = 25;
+
+export const Form: React.FC<FormProps> = React.memo(({ type, resource, children }) => {
   const classes = useStyles();
   const formState = useFormState();
 
   React.useEffect(() => {
     if (formState.submitFailed) {
-      scrollToErrorInput(130);
+      scrollToErrorInput(fixedHeaderOffset);
     }
   }, [formState.submitFailed]);
 
@@ -225,7 +228,6 @@ export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          getItemLabel={() => ""}
           fullWidth
           helperText={
             "A pair of custom fields that can be used for filtering. You can add multiple pairs."
@@ -245,7 +247,6 @@ export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }
       >
         <ArrayInput
           source="castMembers"
-          getItemLabel={() => ""}
           itemClass={classes.ArrayInputStyles}
           childcomponent={CastMembers}
           resource={resource}
@@ -281,7 +282,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }
           label="Video file"
           source="streamSourceIds"
           reference="media_content/video/video_files"
-          perPage={25}
+          perPage={inputItemsPerPage}
         >
           <AutocompleteArrayInput
             optionText="name"
@@ -293,7 +294,6 @@ export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          getItemLabel={() => ""}
           fullWidth
           choices={EXTRA_VIDEO_TYPES}
           childcomponent={ExtraVideos}
@@ -342,7 +342,6 @@ export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          getItemLabel={() => ""}
           helperText={
             "The age rating of the film in accordance with the legislation of the country in which the application is used"
           }
@@ -390,6 +389,6 @@ export const Form: React.FC<FormProps> = ({ type, resource, children, ...props }
       <ScrollTopButton />
     </>
   );
-};
+});
 
 export default Form;

@@ -15,7 +15,6 @@ import { SelectButton } from "../../../UI/Buttons/select-button";
 import { ALL_ROLES } from "../../../Providers/custom-requests";
 import { StandardButton } from "../../../UI/Buttons/standard-button";
 import { ArrayInputShow } from "./show-view";
-import { CastMembers } from "../../../Models/CastMembers/cast-members";
 
 export interface ArrayInputProps {
   source: string;

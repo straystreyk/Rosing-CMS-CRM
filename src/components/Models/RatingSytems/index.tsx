@@ -3,7 +3,14 @@ import { ReferenceCustomInput } from "../../Inputs/ReferenceInputs/reference-cus
 import { SelectInputOrigin } from "../../Inputs/StandatdInputs/SelectInput/select-input";
 import { ALL_RATING_SYSTEMS } from "../../Providers/custom-requests";
 
-export const RatingSystems: React.FC<any> = React.memo(
+export const RatingSystems: React.FC<{
+  parentSource: string;
+  resource: string;
+  inputType: string;
+  index: string;
+  parentSourceWithIndex: string;
+  helperText?: string;
+}> = React.memo(
   ({ parentSource, parentSourceWithIndex, index, inputType, helperText, ...props }) => (
     <ReferenceCustomInput
       component={SelectInputOrigin}
