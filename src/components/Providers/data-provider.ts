@@ -24,7 +24,7 @@ const getGqlResource = (resource: string) => {
     case "media_content/video/series":
       return "Series";
     case "media_content/video/seasons":
-      return "Season";
+      return "Seasons";
     case "channels":
       return "Channel";
     case "episodes":

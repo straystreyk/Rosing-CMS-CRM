@@ -16,18 +16,8 @@ const Season: React.FC<{
   resource: string;
   type: string;
 }> = ({ parentSourceWithIndex, resource, type, show }) => {
-  const { id } = useParams<{ id: string }>();
-
   return (
     <>
-      <TextInputOrigin
-        resource={resource}
-        inputType={type}
-        source={`${parentSourceWithIndex}.seriesId`}
-        label="seriesId"
-        initialValue={id.replace(/%3D/g, "=")}
-        fullWidth
-      />
       <TextInputOrigin resource={resource} inputType={type} label="Name" source="name" fullWidth />
       <TextInputOrigin resource={resource} inputType={type} label="Slug" source="slug" fullWidth />
       <TextInput
@@ -46,8 +36,18 @@ const Season: React.FC<{
 
 export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
   const classes = useStyles();
+  const { id } = useParams<{ id: string }>();
+
   return (
     <>
+      <TextInputOrigin
+        resource={resource}
+        inputType={type}
+        source="seriesId"
+        label="Series id"
+        initialValue={id.replace(/%3D/g, "=")}
+        fullWidth
+      />
       <ArrayInput
         source="seasons"
         getItemLabel={() => ""}
