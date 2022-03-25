@@ -9,10 +9,11 @@ import {
   ArrayInputIconUp,
   DeleteIcon,
   HideIcon,
+  PlusIcon,
+  UploadIcon,
 } from "../../../../constants/icons";
 import { useForm, useFormState } from "react-final-form";
 import { SelectButton } from "../../../UI/Buttons/select-button";
-import { ALL_ROLES } from "../../../Providers/custom-requests";
 import { StandardButton } from "../../../UI/Buttons/standard-button";
 import { ArrayInputShow } from "./show-view";
 
@@ -29,6 +30,7 @@ export interface ArrayInputProps {
   itemClass?: string;
   childcomponent: any;
   resettable?: boolean;
+  query?: any;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -138,6 +140,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
     draggable,
     itemClass,
     resettable,
+    query,
     ...props
   }) => {
     const classes = useStyles();
@@ -205,7 +208,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
         <ArrayInputRA {...props} source={source} resource={resource} label="">
           <FieldArray name={source}>
             {(fieldProps) => {
-              const pushResource = (value: string, name: string) => {
+              const pushResource = (value?: string, name?: string) => {
                 fieldProps.fields.push(
                   addReorder || draggable
                     ? { position: values[source] ? values[source].length : 0, role: value }
@@ -266,13 +269,26 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                             );
                           })}
                           {provided.placeholder}
-                          <SelectButton
-                            query={ALL_ROLES}
-                            name="roleName"
-                            value="roleName"
-                            pushResource={pushResource}
-                            label="Add another role"
-                          />
+                          {query ? (
+                            <SelectButton
+                              query={query}
+                              name="roleName"
+                              value="roleName"
+                              pushResource={pushResource}
+                              label="Add another role"
+                            />
+                          ) : (
+                            <StandardButton
+                              startIcon={<PlusIcon color="#00A991" />}
+                              type="button"
+                              color="primary"
+                              onClick={(e) => pushResource()}
+                              customColor="#00A991"
+                              variant="text"
+                            >
+                              Add another one
+                            </StandardButton>
+                          )}
                         </div>
                       </>
                     )}

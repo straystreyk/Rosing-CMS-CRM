@@ -16,6 +16,7 @@ import { ListTabProps } from "../components/Tabs/list-page-tabs";
 
 export interface ListProps {
   resource: string;
+  basePath?: string;
   filters?: object;
   sideFilters?: object[];
   filtersArray?: string[];

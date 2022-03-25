@@ -27,19 +27,19 @@ const Season: React.FC<{
         label="seriesId"
         initialValue={id.replace(/%3D/g, "=")}
         fullWidth
-        helperText={"The name of the series that users will see in any sections of the application"}
       />
-      <TextInputOrigin
+      <TextInputOrigin resource={resource} inputType={type} label="Name" source="name" fullWidth />
+      <TextInputOrigin resource={resource} inputType={type} label="Slug" source="slug" fullWidth />
+      <TextInput
         resource={resource}
         inputType={type}
-        label="Slug"
-        source="slug"
-        helperText={
-          "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
-        }
+        label="Description"
+        source="description"
+        resettable={false}
         fullWidth
+        multiline
+        rows={4}
       />
-      <TextInputOrigin source={`${parentSourceWithIndex}.position`} label="Position" fullWidth />
     </>
   );
 };
@@ -55,7 +55,6 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
         itemClass={classes.ArrayInputStyles}
         resource={resource}
         inputType={type}
-        draggable
       />
     </>
   );

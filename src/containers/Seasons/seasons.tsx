@@ -11,7 +11,7 @@ interface ResourceCreateProps extends CreateProps {
   id?: string;
 }
 
-const resource = "media_content/video/seasons";
+export const resource = "media_content/video/seasons";
 
 const filters = [<SearchInput source="name" alwaysOn />];
 

@@ -172,6 +172,12 @@ export const en: TranslationMessages = {
         empty: "No seasons yet",
         list: "Seasons",
       },
+      mutations: {
+        create: {
+          success: "Seasons was created",
+          error: "Cant create seasons: %{error}",
+        },
+      },
     },
     episodes: {
       name: "Episodes",

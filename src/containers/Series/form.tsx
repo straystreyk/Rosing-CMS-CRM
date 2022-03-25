@@ -18,6 +18,7 @@ import {
   ALL_GENRES,
   ALL_PRODUCTION_COUNTRIES,
   ALL_RIGHT_HOLDERS,
+  ALL_ROLES,
 } from "../../components/Providers/custom-requests";
 import { GroupInputsOrigin } from "../../components/GroupInputs";
 import { MetaData } from "../../components/Models/Metadata";
@@ -205,6 +206,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           itemClass={classes.ArrayInputStyles}
           childcomponent={CastMembers}
           resource={resource}
+          query={ALL_ROLES}
           inputType={type}
           draggable
         />

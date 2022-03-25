@@ -2,15 +2,32 @@ import { Route, Redirect } from "react-router-dom";
 import { RouteWithoutLayout } from "react-admin";
 import { Configuration } from "../../containers/Configuration";
 import { Layouts } from "../Layout";
-import { Create } from "../../containers/Seasons/seasons";
+import {
+  Create as CreateSeasons,
+  List as SeasonsList,
+  resource as SeasonResource,
+} from "../../containers/Seasons/seasons";
 
 const authCustomRoutes = [
   <Route exact path="/configuration" render={() => <Configuration />} />,
   <Route
     exact
+    path="/media_content/video/series/:id/seasons"
+    render={(props: any) => (
+      <SeasonsList
+        resource={SeasonResource}
+        basePath={`/media_content/video/series/${props.match.params.id?.replace(
+          /%3D/g,
+          "="
+        )}/seasons`}
+      />
+    )}
+  />,
+  <Route
+    exact
     path="/media_content/video/series/:id/seasons/create"
     render={(props) => (
-      <Create
+      <CreateSeasons
         basePath={`/media_content/video/series/${props.match.params.id?.replace(
           /%3D/g,
           "="

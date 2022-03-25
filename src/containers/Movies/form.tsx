@@ -29,6 +29,7 @@ import {
   ALL_GENRES,
   ALL_PRODUCTION_COUNTRIES,
   ALL_RIGHT_HOLDERS,
+  ALL_ROLES,
 } from "../../components/Providers/custom-requests";
 import { CastMembers } from "../../components/Models/CastMembers/cast-members";
 import { Link } from "ra-ui-materialui";
@@ -251,6 +252,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, children 
           childcomponent={CastMembers}
           resource={resource}
           inputType={type}
+          query={ALL_ROLES}
           draggable
         />
       </FormSection>
