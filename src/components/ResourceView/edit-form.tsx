@@ -56,7 +56,6 @@ interface EditFormProps {
   CustomToolbar?: React.FC;
   form?: string;
   offTitle?: boolean;
-  redirectToOtherModel?: string;
 }
 
 export const Toolbar = (props: any) => {
@@ -119,7 +118,7 @@ export const Toolbar = (props: any) => {
 };
 
 export const EditForm: React.FC<EditFormProps> = React.memo(
-  ({ offToolbar, offTitle, form, redirectToOtherModel, ...props }) => {
+  ({ offToolbar, offTitle, form, ...props }) => {
     const classes = useStyles();
 
     return (
@@ -149,7 +148,6 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
                           handleSubmit={formProps.handleSubmit}
                           handleSubmitWithRedirect={formProps.handleSubmitWithRedirect}
                           saving={formProps.saving}
-                          redirectToOtherModel={redirectToOtherModel}
                           redirect={props.redirect}
                           resource={props.resource}
                         />
@@ -159,7 +157,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
                 </>
               );
             },
-            [classes.offToolbar, form, offTitle, offToolbar, props, redirectToOtherModel]
+            [classes.offToolbar, form, offTitle, offToolbar, props]
           )}
         />
       </>

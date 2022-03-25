@@ -18,13 +18,25 @@ const Season: React.FC<{
 }> = ({ parentSourceWithIndex, resource, type, show }) => {
   return (
     <>
-      <TextInputOrigin resource={resource} inputType={type} label="Name" source="name" fullWidth />
-      <TextInputOrigin resource={resource} inputType={type} label="Slug" source="slug" fullWidth />
+      <TextInputOrigin
+        resource={resource}
+        inputType={type}
+        label="Name"
+        source={`${parentSourceWithIndex}.name`}
+        fullWidth
+      />
+      <TextInputOrigin
+        resource={resource}
+        inputType={type}
+        label="Slug"
+        source={`${parentSourceWithIndex}.slug`}
+        fullWidth
+      />
       <TextInput
         resource={resource}
         inputType={type}
         label="Description"
-        source="description"
+        source={`${parentSourceWithIndex}.description`}
         resettable={false}
         fullWidth
         multiline
@@ -45,12 +57,12 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
         inputType={type}
         source="seriesId"
         label="Series id"
-        initialValue={id.replace(/%3D/g, "=")}
+        initialValue={unescape(id)}
         fullWidth
       />
       <ArrayInput
         source="seasons"
-        getItemLabel={() => ""}
+        getItemLabel={React.useCallback(() => "", [])}
         childcomponent={Season}
         itemClass={classes.ArrayInputStyles}
         resource={resource}

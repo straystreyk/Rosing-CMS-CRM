@@ -3,24 +3,29 @@ import { ResourceList, ResourceCreate, ResourceEdit } from "../../components/Res
 import Icon from "@material-ui/icons/ImageAspectRatioOutlined";
 import { Show } from "./show";
 import { Form } from "./form";
-import { SearchInput } from "../../components/Inputs/search-input";
 import { CreateProps, EditProps } from "ra-ui-materialui";
 import { ListProps } from "../../types";
+import { useParams } from "react-router-dom";
+import { SearchInput } from "../../components/Inputs/search-input";
 
-interface ResourceCreateProps extends CreateProps {
-  id?: string;
-}
-
-export const resource = "media_content/video/seasons";
+export const resource = "media_content/video/series/:id/seasons";
 
 const filters = [<SearchInput source="name" alwaysOn />];
 
-export const List: React.FC<ListProps> = (props) => (
-  <ResourceList {...props} filters={filters} resource={resource}>
-    <Show resource={resource} />
-  </ResourceList>
-);
-export const Create: React.FC<ResourceCreateProps> = (props) => (
+export const List: React.FC<ListProps> = (props) => {
+  const { id } = useParams<{ id: string }>();
+  return (
+    <ResourceList
+      {...props}
+      filters={filters}
+      permanentFilter={{ seriesId: unescape(id) }}
+      resource={resource}
+    >
+      <Show resource={resource} />
+    </ResourceList>
+  );
+};
+export const Create: React.FC<CreateProps> = (props) => (
   <ResourceCreate {...props} resource={resource}>
     <Form resource={resource} type="create" {...props} />
   </ResourceCreate>

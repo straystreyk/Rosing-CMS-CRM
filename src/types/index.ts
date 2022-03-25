@@ -18,6 +18,7 @@ export interface ListProps {
   resource: string;
   basePath?: string;
   filters?: object;
+  permanentFilter?: object;
   sideFilters?: object[];
   filtersArray?: string[];
   listTabs?: ListTabProps[];

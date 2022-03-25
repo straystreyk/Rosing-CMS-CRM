@@ -164,7 +164,7 @@ export const en: TranslationMessages = {
         },
       },
     },
-    "media_content/video/seasons": {
+    "media_content/video/series/:id/seasons": {
       name: "Seasons",
       titles: {
         create: "New Season",

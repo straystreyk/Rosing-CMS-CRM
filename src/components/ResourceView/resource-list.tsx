@@ -10,7 +10,6 @@ import { ListProps } from "../../types";
 import { ResourceTitle } from "./resource-title";
 import { Filters } from "../Filters";
 import { CreateButton } from "../UI/RA/create-button";
-import { ExportButton } from "../UI/RA/export-button";
 import { ListPageTabs } from "../Tabs/list-page-tabs";
 import { EditForm } from "./edit-form";
 import { PlusIcon } from "../../constants/icons";
@@ -54,8 +53,14 @@ const ToolBar = (props: any) => {
 
 export const FilterContext = createContext<any>({});
 
-export const ResourceList: FC<ListProps> = ({ sideFilters, filtersArray, listTabs, ...props }) => {
-  const [filter, setFilter] = useState<object>({});
+export const ResourceList: FC<ListProps> = ({
+  sideFilters,
+  permanentFilter,
+  filtersArray,
+  listTabs,
+  ...props
+}) => {
+  const [filter, setFilter] = useState<object>(permanentFilter ?? {});
   const classes = useStyles();
 
   return (
@@ -69,11 +74,13 @@ export const ResourceList: FC<ListProps> = ({ sideFilters, filtersArray, listTab
       <List
         {...props}
         perPage={15}
+        filters={props.filters}
         filter={filter}
         sort={{ field: "streamingUid", order: "DESC" }}
         pagination={<PostPagination />}
         actions={<ToolBar />}
         aside={<FilterSidebar sideFilters={sideFilters} />}
+        basePath={props.basePath}
       >
         {props.children}
       </List>

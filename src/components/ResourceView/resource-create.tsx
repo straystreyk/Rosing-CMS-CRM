@@ -8,11 +8,10 @@ interface CreateProps {
   redirect?: string;
   resource: string;
   basePath?: string;
-  redirectToOtherModel?: string;
   messageArgs?: Record<string, string>;
 }
 
-export const ResourceCreate: React.FC<CreateProps> = ({ redirectToOtherModel, ...props }) => {
+export const ResourceCreate: React.FC<CreateProps> = ({ ...props }) => {
   const notify = useNotify();
   const redirect = useRedirect();
   const refresh = useRefresh();
@@ -44,12 +43,7 @@ export const ResourceCreate: React.FC<CreateProps> = ({ redirectToOtherModel, ..
   return (
     <>
       <Create {...props} onSuccess={onSuccess} onFailure={onFailure} component="div">
-        <EditForm
-          form="create"
-          redirect={props.redirect}
-          resource={props.resource}
-          redirectToOtherModel={redirectToOtherModel}
-        >
+        <EditForm form="create" redirect={props.redirect} resource={props.resource}>
           <Box style={{ position: "relative" }} p={{ xs: "0px 24px 100px 24px" }}>
             {props.children}
           </Box>
