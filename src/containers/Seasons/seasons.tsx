@@ -1,11 +1,12 @@
 import React from "react";
-import { ResourceList, ResourceCreate, ResourceEdit } from "../../components/ResourceView";
+import { CreateProps, EditProps } from "ra-ui-materialui";
+import { useListContext } from "react-admin";
 import Icon from "@material-ui/icons/ImageAspectRatioOutlined";
+
+import { ResourceList, ResourceCreate, ResourceEdit } from "../../components/ResourceView";
 import { Show } from "./show";
 import { Form } from "./form";
-import { CreateProps, EditProps } from "ra-ui-materialui";
 import { ListProps } from "../../types";
-import { useParams } from "react-router-dom";
 import { SearchInput } from "../../components/Inputs/search-input";
 
 export const resource = "media_content/video/series/:id/seasons";
@@ -13,12 +14,12 @@ export const resource = "media_content/video/series/:id/seasons";
 const filters = [<SearchInput source="name" alwaysOn />];
 
 export const List: React.FC<ListProps> = (props) => {
-  const { id } = useParams<{ id: string }>();
   return (
     <ResourceList
       {...props}
       filters={filters}
-      permanentFilter={{ seriesId: unescape(id) }}
+      breadCrumbs
+      permanentFilter={props.id ? { seriesId: unescape(props.id) } : {}}
       resource={resource}
     >
       <Show resource={resource} />

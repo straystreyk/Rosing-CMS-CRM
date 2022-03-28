@@ -8,6 +8,11 @@ interface CreateProps {
   redirect?: string;
   resource: string;
   basePath?: string;
+  onSuccess?: (data: any) => void;
+  onFailure?: (error: Error) => void;
+  onSuccessWithRedirect?: (data: any) => void;
+  redirectButtonLabel?: string;
+  redirectButtonIcon?: React.ReactElement;
   messageArgs?: Record<string, string>;
 }
 
@@ -42,8 +47,17 @@ export const ResourceCreate: React.FC<CreateProps> = ({ ...props }) => {
 
   return (
     <>
-      <Create {...props} onSuccess={onSuccess} onFailure={onFailure} component="div">
-        <EditForm form="create" redirect={props.redirect} resource={props.resource}>
+      <Create {...props} component="div">
+        <EditForm
+          onSuccess={props.onSuccess ?? onSuccess}
+          onFailure={props.onFailure ?? onFailure}
+          onSuccessWithRedirect={props.onSuccessWithRedirect}
+          redirectButtonLabel={props.redirectButtonLabel}
+          redirectButtonIcon={props.redirectButtonIcon}
+          redirect={props.redirect}
+          resource={props.resource}
+          form="create"
+        >
           <Box style={{ position: "relative" }} p={{ xs: "0px 24px 100px 24px" }}>
             {props.children}
           </Box>

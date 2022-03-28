@@ -89,6 +89,10 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 0,
     },
   },
+  AddButtonWrapper: {
+    display: "flex",
+    justifyContent: "center",
+  },
 }));
 
 const ArrayInputHeader: React.FC<{
@@ -269,26 +273,28 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                             );
                           })}
                           {provided.placeholder}
-                          {query ? (
-                            <SelectButton
-                              query={query}
-                              name="roleName"
-                              value="roleName"
-                              pushResource={pushResource}
-                              label="Add another role"
-                            />
-                          ) : (
-                            <StandardButton
-                              startIcon={<PlusIcon color="#00A991" />}
-                              type="button"
-                              color="primary"
-                              onClick={(e) => pushResource()}
-                              customColor="#00A991"
-                              variant="text"
-                            >
-                              Add another one
-                            </StandardButton>
-                          )}
+                          <div className={classes.AddButtonWrapper}>
+                            {query ? (
+                              <SelectButton
+                                query={query}
+                                name="roleName"
+                                value="roleName"
+                                pushResource={pushResource}
+                                label="Add another role"
+                              />
+                            ) : (
+                              <StandardButton
+                                startIcon={<PlusIcon color="#00A991" />}
+                                type="button"
+                                color="primary"
+                                onClick={(e) => pushResource()}
+                                customColor="#00A991"
+                                variant="text"
+                              >
+                                Add another one
+                              </StandardButton>
+                            )}
+                          </div>
                         </div>
                       </>
                     )}

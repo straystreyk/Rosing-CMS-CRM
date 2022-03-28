@@ -4,39 +4,39 @@ import { ArrayInput, TextInput } from "../../components/Inputs";
 import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { ArrayInputStyles } from "../../components/Models/CastMembers/styles";
-import { TextInputOrigin } from "../../components/Inputs/StandatdInputs/TextInput/text-input";
 
 const useStyles = makeStyles({
   ArrayInputStyles,
 });
 
 const Season: React.FC<{
-  parentSourceWithIndex: string;
-  show: boolean;
+  parentSourceWithIndex?: string;
+  show?: boolean;
+  index?: string;
   resource: string;
   type: string;
-}> = ({ parentSourceWithIndex, resource, type, show }) => {
+}> = ({ parentSourceWithIndex, resource, ...props }) => {
   return (
     <>
-      <TextInputOrigin
+      <TextInput
         resource={resource}
-        inputType={type}
         label="Name"
-        source={`${parentSourceWithIndex}.name`}
-        fullWidth
-      />
-      <TextInputOrigin
-        resource={resource}
-        inputType={type}
-        label="Slug"
-        source={`${parentSourceWithIndex}.slug`}
+        inputType={props.type}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.name` : "name"}
         fullWidth
       />
       <TextInput
         resource={resource}
-        inputType={type}
+        label="Slug"
+        inputType={props.type}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.slug` : "slug"}
+        fullWidth
+      />
+      <TextInput
+        resource={resource}
+        inputType={props.type}
         label="Description"
-        source={`${parentSourceWithIndex}.description`}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.description` : "description"}
         resettable={false}
         fullWidth
         multiline
@@ -50,9 +50,11 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
   const classes = useStyles();
   const { id } = useParams<{ id: string }>();
 
+  const getItemsLabel = React.useCallback(() => "", []);
+
   return (
     <>
-      <TextInputOrigin
+      <TextInput
         resource={resource}
         inputType={type}
         source="seriesId"
@@ -60,14 +62,17 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
         initialValue={unescape(id)}
         fullWidth
       />
-      <ArrayInput
-        source="seasons"
-        getItemLabel={React.useCallback(() => "", [])}
-        childcomponent={Season}
-        itemClass={classes.ArrayInputStyles}
-        resource={resource}
-        inputType={type}
-      />
+      {type !== "create" && <Season resource={resource} type={type} />}
+      {type === "create" && (
+        <ArrayInput
+          source="seasons"
+          getItemLabel={getItemsLabel}
+          childcomponent={Season}
+          itemClass={classes.ArrayInputStyles}
+          resource={resource}
+          inputType={type}
+        />
+      )}
     </>
   );
 };

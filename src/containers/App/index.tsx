@@ -55,8 +55,8 @@ export const App = () => {
       <Resource name="datacenters" {...datacenters} />
       <Resource name="media_content/video/movies" {...movies} />
       <Resource name="media_content/video/video_files" {...videoFiles} />
-      <Resource name="media_content/video/series" {...series} />
-      <Resource name="media_content/video/series/:id/seasons" {...seasons} />
+      <Resource exec name="media_content/video/series" {...series} />
+      <Resource exec name="media_content/video/series/:id/seasons" />
       <Resource name="episodes" {...episodes} />
       <Resource name="genres" {...genres} />
       <Resource name="media_content/radio/radio_stations" {...radioStations} />

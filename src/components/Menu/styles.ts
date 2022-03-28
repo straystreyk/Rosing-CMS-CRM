@@ -2,6 +2,7 @@ export const LineStyles = {
   margin: "5px 0 8px 0",
   height: 1,
   backgroundColor: "#27353C",
+  flexShrink: 0,
 };
 
 export const LineCloseStyles = {

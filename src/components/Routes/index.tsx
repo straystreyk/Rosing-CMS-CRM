@@ -5,6 +5,7 @@ import { Layouts } from "../Layout";
 import {
   Create as CreateSeasons,
   List as SeasonsList,
+  Edit as EditSeasons,
   resource as SeasonResource,
 } from "../../containers/Seasons/seasons";
 
@@ -13,13 +14,12 @@ const authCustomRoutes = [
   <Route
     exact
     path="/media_content/video/series/:id/seasons"
-    render={(props: any) => (
+    render={(props) => (
       <SeasonsList
+        {...props}
         resource={SeasonResource}
-        basePath={`/media_content/video/series/${props.match.params.id?.replace(
-          /%3D/g,
-          "="
-        )}/seasons`}
+        id={unescape(props.match.params.id)}
+        basePath={`/media_content/video/series/${unescape(props.match.params.id)}/seasons`}
       />
     )}
   />,
@@ -28,12 +28,23 @@ const authCustomRoutes = [
     path="/media_content/video/series/:id/seasons/create"
     render={(props) => (
       <CreateSeasons
-        basePath={`/media_content/video/series/${props.match.params.id?.replace(
-          /%3D/g,
-          "="
-        )}/seasons`}
+        basePath={`/media_content/video/series/${unescape(props.match.params.id)}/seasons`}
       />
     )}
+  />,
+  <Route
+    exact
+    path="/media_content/video/series/:seriesId/seasons/:id"
+    render={(props) => {
+      return (
+        <EditSeasons
+          basePath={`/media_content/video/series/${unescape(
+            props.match.params.seriesId
+          )}/seasons/${unescape(props.match.params.id)}`}
+          id={unescape(props.match.params.id)}
+        />
+      );
+    }}
   />,
   <Redirect exact from="/media_content" to="/media_content/video/movies" />,
   <Redirect exact from="/media_content/video" to="/media_content/video/movies" />,

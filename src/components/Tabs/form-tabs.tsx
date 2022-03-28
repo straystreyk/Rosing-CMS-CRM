@@ -27,6 +27,7 @@ const useStyles = makeStyles({
     backgroundColor: "#fff",
     "& .MuiTabs-flexContainer": {
       overflow: "auto",
+      alignItems: "center",
     },
   },
 });
@@ -67,7 +68,7 @@ const useFormTabs = ({
   return { scrollToSection, checkTabPosition };
 };
 
-export const FormTabs: React.FC<FormTabProps> = ({ labels }) => {
+export const FormTabs: React.FC<FormTabProps> = ({ labels, children }) => {
   const [value, setValue] = React.useState(0);
   const [fixed, setFixed] = React.useState(false);
   const tabRef = React.useRef<HTMLDivElement>(null);
@@ -116,6 +117,7 @@ export const FormTabs: React.FC<FormTabProps> = ({ labels }) => {
               />
             );
           })}
+          {children}
         </Tabs>
       </Box>
     </div>

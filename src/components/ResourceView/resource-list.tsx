@@ -13,11 +13,14 @@ import { CreateButton } from "../UI/RA/create-button";
 import { ListPageTabs } from "../Tabs/list-page-tabs";
 import { EditForm } from "./edit-form";
 import { PlusIcon } from "../../constants/icons";
+import { useListContext } from "react-admin";
+import { useList } from "react-admin";
 
 const useStyles = makeStyles({
   TopToolBar: {
     paddingRight: 20,
     alignItems: "center",
+    paddingTop: 8,
     "& button": {
       marginLeft: 10,
     },
@@ -58,6 +61,9 @@ export const ResourceList: FC<ListProps> = ({
   permanentFilter,
   filtersArray,
   listTabs,
+  offTitle,
+  breadCrumbs,
+  empty,
   ...props
 }) => {
   const [filter, setFilter] = useState<object>(permanentFilter ?? {});
@@ -73,6 +79,7 @@ export const ResourceList: FC<ListProps> = ({
       </Box>
       <List
         {...props}
+        empty={empty}
         perPage={15}
         filters={props.filters}
         filter={filter}

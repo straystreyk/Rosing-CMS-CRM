@@ -1,7 +1,7 @@
 import * as React from "react";
 import cn from "classnames";
 import { Toolbar as ToolbarRA, FormWithRedirect } from "react-admin";
-import { RedirectionSideEffect, FormWithRedirectProps } from "ra-core";
+import { FormWithRedirectProps } from "ra-core";
 import { Box, Card, CardContent, makeStyles } from "@material-ui/core";
 
 import { SaveButton } from "../UI/RA/save-button";
@@ -53,6 +53,11 @@ interface EditFormProps {
   resource: string;
   redirect?: string;
   offToolbar?: boolean;
+  onSuccess?: (data: any) => void;
+  onSuccessWithRedirect?: (data: any) => void;
+  onFailure?: (error: Error) => void;
+  redirectButtonLabel?: string;
+  redirectButtonIcon?: React.ReactElement;
   CustomToolbar?: React.FC;
   form?: string;
   offTitle?: boolean;
@@ -66,14 +71,9 @@ export const Toolbar = (props: any) => {
   const currentExist = !!toolbar.current;
   const history = useHistory();
 
-  const cancel = () => {
-    history.push(props.basePath);
-  };
-
-  const saveWithRedirect: RedirectionSideEffect = React.useCallback(
-    () => props.basePath + "/create",
-    [props.basePath]
-  );
+  const cancel = React.useCallback(() => {
+    history.goBack();
+  }, [history]);
 
   React.useEffect(() => {
     if (currentExist) {
@@ -103,15 +103,19 @@ export const Toolbar = (props: any) => {
           onClick={cancel}
         />
         <SaveButton
-          redirect={props.redirect}
           icon={<AcceptFilterIcon color="#fff" />}
           label="Save"
+          onSuccess={props.onSuccess}
+          onFailure={props.onFailure}
         />
-        <SaveButton
-          redirect={saveWithRedirect}
-          label={`Save and add another one`}
-          icon={<PlusIcon color="#fff" />}
-        />
+        {props.formType !== "edit" && (
+          <SaveButton
+            label={props.redirectButtonLabel ?? `Save and add another one`}
+            icon={props.redirectButtonIcon ?? <PlusIcon color="#fff" />}
+            onSuccess={props.onSuccessWithRedirect ?? props.onSuccess}
+            onFailure={props.onFailure}
+          />
+        )}
       </ToolbarRA>
     </div>
   );
@@ -120,7 +124,6 @@ export const Toolbar = (props: any) => {
 export const EditForm: React.FC<EditFormProps> = React.memo(
   ({ offToolbar, offTitle, form, ...props }) => {
     const classes = useStyles();
-
     return (
       <>
         <FormWithRedirect
@@ -147,7 +150,13 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
                           invalid={formProps.invalid}
                           handleSubmit={formProps.handleSubmit}
                           handleSubmitWithRedirect={formProps.handleSubmitWithRedirect}
+                          onSuccessWithRedirect={props.onSuccessWithRedirect}
+                          redirectButtonIcon={props.redirectButtonIcon}
+                          redirectButtonLabel={props.redirectButtonLabel}
+                          onSuccess={props.onSuccess}
+                          onFailure={props.onFailure}
                           saving={formProps.saving}
+                          formType={form}
                           redirect={props.redirect}
                           resource={props.resource}
                         />

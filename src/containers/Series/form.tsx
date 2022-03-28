@@ -32,6 +32,9 @@ import { RatingSystems } from "../../components/Models/RatingSytems";
 import { ScrollTopButton } from "../../components/UI/Buttons/scroll-top-button";
 import { useFormState } from "react-final-form";
 import { scrollToErrorInput } from "../../helpers/form";
+import { StandardButton } from "../../components/UI/Buttons/standard-button";
+import { ResourceCountIcon } from "../../constants/icons";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -46,6 +49,15 @@ const fixedHeaderOffset = 130;
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const classes = useStyles();
   const formState = useFormState();
+  const history = useHistory();
+
+  const goToSeasons = React.useCallback(() => {
+    if (type === "show") {
+      history.push(history.location.pathname.replace("/show", "") + "/seasons");
+      return;
+    }
+    history.push(history.location.pathname + "/seasons");
+  }, [type, history]);
 
   React.useEffect(() => {
     if (formState.submitFailed) {
@@ -55,7 +67,18 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
 
   return (
     <>
-      <FormTabs labels={["Attributes", "Actors and creative team", "Images", "Source"]} />
+      <FormTabs labels={["Attributes", "Actors and creative team", "Images", "Source"]}>
+        {type !== "create" && (
+          <StandardButton
+            onClick={goToSeasons}
+            startIcon={<ResourceCountIcon color="#00A991" />}
+            variant="text"
+            customColor="#00A991"
+          >
+            Seasons ({formState.values["seasons"].length})
+          </StandardButton>
+        )}
+      </FormTabs>
       <FormSection
         text="Used for the visual content of the application"
         title="Attributes"

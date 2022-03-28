@@ -1,4 +1,4 @@
-import { ReactChildren } from "react";
+import { ReactChildren, ReactElement } from "react";
 import {
   useListController,
   ReduxState,
@@ -22,6 +22,10 @@ export interface ListProps {
   sideFilters?: object[];
   filtersArray?: string[];
   listTabs?: ListTabProps[];
+  offTitle?: boolean;
+  breadCrumbs?: boolean;
+  id?: string;
+  empty?: ReactElement;
 }
 
 export interface FormProps {
