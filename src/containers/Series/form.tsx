@@ -31,7 +31,7 @@ import { ExtraVideos } from "../../components/Models/ExtraVideos";
 import { RatingSystems } from "../../components/Models/RatingSytems";
 import { ScrollTopButton } from "../../components/UI/Buttons/scroll-top-button";
 import { useFormState } from "react-final-form";
-import { scrollToErrorInput } from "../../helpers/form";
+import { alwaysEmptyString, scrollToErrorInput } from "../../helpers/form";
 import { StandardButton } from "../../components/UI/Buttons/standard-button";
 import { ResourceCountIcon } from "../../constants/icons";
 import { useHistory } from "react-router-dom";
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputStyles,
 }));
 
-const fixedHeaderOffset = 130;
+const FIXED_HEADER_OFFSET = 130;
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const classes = useStyles();
@@ -61,7 +61,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
 
   React.useEffect(() => {
     if (formState.submitFailed) {
-      scrollToErrorInput(fixedHeaderOffset);
+      scrollToErrorInput(FIXED_HEADER_OFFSET);
     }
   }, [formState.submitFailed]);
 
@@ -71,9 +71,9 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         {type !== "create" && (
           <StandardButton
             onClick={goToSeasons}
-            startIcon={<ResourceCountIcon color="#00A991" />}
+            startIcon={<ResourceCountIcon color="var(--accent-color)" />}
             variant="text"
-            customColor="#00A991"
+            customColor="var(--accent-color)"
           >
             Seasons ({formState.values["seasons"].length})
           </StandardButton>
@@ -205,7 +205,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          getItemLabel={() => ""}
+          getItemLabel={alwaysEmptyString}
           fullWidth
           helperText={
             "A pair of custom fields that can be used for filtering. You can add multiple pairs."
@@ -225,7 +225,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
       >
         <ArrayInput
           source="castMembers"
-          getItemLabel={() => ""}
+          getItemLabel={alwaysEmptyString}
           itemClass={classes.ArrayInputStyles}
           childcomponent={CastMembers}
           resource={resource}
@@ -261,7 +261,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          getItemLabel={() => ""}
+          getItemLabel={alwaysEmptyString}
           fullWidth
           choices={EXTRA_VIDEO_TYPES}
           childcomponent={ExtraVideos}
@@ -273,7 +273,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          getItemLabel={() => ""}
+          getItemLabel={alwaysEmptyString}
           helperText={
             "The age rating of the film in accordance with the legislation of the country in which the application is used"
           }

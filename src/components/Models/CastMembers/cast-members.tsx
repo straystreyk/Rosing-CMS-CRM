@@ -82,7 +82,7 @@ export const CastMembers: React.FC<{
           >
             <path
               d="M6.61524 0.691913L3.99894 3.30821L1.38281 0.691895"
-              stroke="#0F1F26"
+              stroke="var(--secondary-color-main)"
               strokeWidth="1.3"
               strokeLinecap="round"
             />

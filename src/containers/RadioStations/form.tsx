@@ -13,6 +13,7 @@ import { ReferenceCustomInput } from "../../components/Inputs/ReferenceInputs/re
 import { ALL_GENRES } from "../../components/Providers/custom-requests";
 import { MetaData } from "../../components/Models/Metadata";
 import { ImageUploaderV2 } from "../../components/ImageUploader";
+import { alwaysEmptyString } from "../../helpers/form";
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   return (
@@ -75,7 +76,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          getItemLabel={() => ""}
+          getItemLabel={alwaysEmptyString}
           fullWidth
           helperText={
             "A pair of custom fields that can be used for filtering. You can add multiple pairs."

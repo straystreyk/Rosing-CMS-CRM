@@ -4,7 +4,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { authProvider, i18nProvider } from "../../components/Providers";
 import { themeReducer } from "../../components/Themes";
 import { Layouts } from "../../components/Layout";
-import customRoutes from "../../components/Routes";
+import { getRoutes } from "./get-custom-routes";
 import { useApp } from "../../custom-hooks/app-component";
 
 import { UserVariables as users } from "../Users";
@@ -42,7 +42,7 @@ export const App = () => {
     <Admin
       dataProvider={dataProvider}
       customReducers={{ theme: themeReducer }}
-      customRoutes={customRoutes}
+      customRoutes={getRoutes(localStorage.getItem("token"))}
       authProvider={authProvider}
       loginPage={Login}
       layout={Layout}

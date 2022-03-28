@@ -10,7 +10,7 @@ const useStyles = makeStyles({
       right: 0,
     },
     "& input": {
-      color: "#023864",
+      color: "var(--primary-text-default)",
       padding: "8px 12px",
       lineHeight: "20px",
       fontSize: 14,
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
         color: "red",
       },
       "&:hover": {
-        borderColor: "#023864",
+        borderColor: "var(--primary-text-default)",
       },
       "&:focus": {
         outline: "2px solid #7FC5FF",
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     "& > p.MuiFormHelperText-root": {
       margin: 0,
       marginTop: 2,
-      color: "#023864",
+      color: "var(--primary-text-default)",
     },
     "& > p.MuiFormHelperText-root.Mui-error": {
       color: "#D21C1C",
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
       marginBottom: 5,
       lineHeight: "20px",
       fontFamily: "Gilroy, sans-serif",
-      color: "#0F1F26 !important",
+      color: "var(--secondary-color-main) !important",
     },
     "& div": {
       backgroundColor: "inherit",

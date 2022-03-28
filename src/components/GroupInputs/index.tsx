@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   GroupInputs: {
     padding: "5px 24px",
     marginTop: 8,
-    backgroundColor: "#F0F8FF",
+    backgroundColor: "var(--primary-bg)",
     borderRadius: 4,
     "&.showView": {
       backgroundColor: "transparent",

@@ -32,7 +32,7 @@ export const MenuItemLinkStyles = {
 };
 
 export const MenuItemLinkCloseStyles = {
-  color: "#0f1f26",
+  color: "var(--secondary-color-main)",
   maxWidth: 45,
   "& .MuiTouchRipple-root": {
     display: "none",
@@ -50,9 +50,9 @@ export const MenuItemLinkCloseStyles = {
     outline: "none",
   },
   '&[class*="RaMenuItemLink-active"] .MuiListItemIcon-root': {
-    backgroundColor: "#00A991",
+    backgroundColor: "var(--accent-color)",
   },
   '&[class*="RaMenuItemLink-active"] .MuiListItemIcon-root:hover': {
-    backgroundColor: "#00D6B5",
+    backgroundColor: "var(--accent-color-hover)",
   },
 };

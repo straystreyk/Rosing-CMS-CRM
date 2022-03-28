@@ -8,6 +8,7 @@ import { Show } from "./show";
 import { Form } from "./form";
 import { ListProps } from "../../types";
 import { SearchInput } from "../../components/Inputs/search-input";
+import { sanytizeId } from "../../helpers/form";
 
 export const resource = "media_content/video/series/:id/seasons";
 
@@ -18,8 +19,7 @@ export const List: React.FC<ListProps> = (props) => {
     <ResourceList
       {...props}
       filters={filters}
-      breadCrumbs
-      permanentFilter={props.id ? { seriesId: unescape(props.id) } : {}}
+      permanentFilter={props.id ? { seriesId: sanytizeId(props.id) } : {}}
       resource={resource}
     >
       <Show resource={resource} />

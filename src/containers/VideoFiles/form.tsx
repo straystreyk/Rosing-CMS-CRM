@@ -16,14 +16,14 @@ import { SPBTVPlayer } from "../../components/SPBTVPlayer";
 import { scrollToErrorInput } from "../../helpers/form";
 import { useFormState } from "react-final-form";
 
-const fixedHeaderOffset = 80;
+const FIXED_HEADER_OFFSET = 80;
 
 export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
   const formState = useFormState();
 
   React.useEffect(() => {
     if (formState.submitFailed) {
-      scrollToErrorInput(fixedHeaderOffset);
+      scrollToErrorInput(FIXED_HEADER_OFFSET);
     }
   }, [formState.submitFailed]);
 

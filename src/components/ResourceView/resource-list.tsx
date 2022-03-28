@@ -13,8 +13,6 @@ import { CreateButton } from "../UI/RA/create-button";
 import { ListPageTabs } from "../Tabs/list-page-tabs";
 import { EditForm } from "./edit-form";
 import { PlusIcon } from "../../constants/icons";
-import { useListContext } from "react-admin";
-import { useList } from "react-admin";
 
 const useStyles = makeStyles({
   TopToolBar: {

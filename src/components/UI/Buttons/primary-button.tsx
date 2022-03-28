@@ -22,7 +22,7 @@ const useStyles = makeStyles({
       marginRight: 6,
     },
     "&:hover": {
-      backgroundColor: "#00D6B5",
+      backgroundColor: "var(--accent-color-hover)",
     },
     "&:focus": {
       outline: "2px solid #7FC5FF",

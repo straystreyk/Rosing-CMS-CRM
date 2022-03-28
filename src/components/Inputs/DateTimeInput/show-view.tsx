@@ -10,7 +10,7 @@ import { TextInputStyles } from "../StandatdInputs/TextInput/styles";
 const useStyles = makeStyles({
   TextInputStyles,
   ShowView: {
-    color: "#023864",
+    color: "var(--primary-text-default)",
     fontSize: 14,
     lineHeight: "20px",
     marginTop: 4,

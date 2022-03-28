@@ -8,5 +8,5 @@ export const labelStyles: any = {
   marginBottom: 5,
   lineHeight: "20px",
   fontFamily: "Gilroy, sans-serif",
-  color: "#0F1F26 !important",
+  color: "var(--secondary-color-main) !important",
 };

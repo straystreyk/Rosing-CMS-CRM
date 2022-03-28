@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     },
     "& .MuiSelect-root": {
       padding: "8px 12px",
-      color: "#023864",
+      color: "var(--primary-text-default)",
       border: "1px solid #9FA5A8",
       borderRadius: 4,
       fontSize: 14,

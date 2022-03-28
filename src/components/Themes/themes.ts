@@ -61,10 +61,10 @@ export const lightTheme = {
   overrides: {
     MuiTooltip: {
       tooltip: {
-        backgroundColor: "#0F1F26",
+        backgroundColor: "var(--secondary-color-main)",
       },
       arrow: {
-        color: "#0F1F26",
+        color: "var(--secondary-color-main)",
       },
     },
     RaCreate: {
@@ -96,7 +96,7 @@ export const lightTheme = {
     RaNotification: {
       success: {
         color: "#fff",
-        backgroundColor: "#00A991",
+        backgroundColor: "var(--accent-color)",
       },
     },
     RaMenuItemLink: {
@@ -114,14 +114,14 @@ export const lightTheme = {
           outlineOffset: "2px",
         },
         "&:hover": {
-          backgroundColor: "#00D6B5",
+          backgroundColor: "var(--accent-color-hover)",
         },
         "&.userMenu": {
-          background: "#F0F8FF",
-          color: "#008DFF",
+          background: "var(--primary-bg)",
+          color: "var(--primary-focus)",
           borderLeft: "none",
           "& .MuiListItemIcon-root": {
-            color: "#008DFF",
+            color: "var(--primary-focus)",
           },
         },
       },
@@ -138,7 +138,7 @@ export const lightTheme = {
     },
     MuiTableSortLabel: {
       root: {
-        color: "#023864",
+        color: "var(--primary-text-default)",
         fontWeight: 600,
       },
     },
@@ -146,13 +146,13 @@ export const lightTheme = {
       root: {
         color: "#fff",
         "&.userMenu .MuiListItemIcon-root": {
-          color: "#0f1f26",
+          color: "var(--secondary-color-main)",
         },
       },
     },
     MuiTab: {
       root: {
-        color: "#0f1f26",
+        color: "var(--secondary-color-main)",
         fontSize: 14,
         fontFamily: "inherit",
         "@media (min-width: 600px)": {
@@ -162,7 +162,7 @@ export const lightTheme = {
     },
     PrivateTabIndicator: {
       colorSecondary: {
-        backgroundColor: "#0f1f26",
+        backgroundColor: "var(--secondary-color-main)",
         height: 3,
       },
     },
@@ -174,7 +174,7 @@ export const lightTheme = {
     MuiTypography: {
       body2: {
         fontFamily: "unset",
-        color: "#023864",
+        color: "var(--primary-text-default)",
       },
     },
     RaDeleteWithUndoButton: {
@@ -191,20 +191,20 @@ export const lightTheme = {
         "& .MuiListItem-root": {
           fontSize: 14,
           borderRadius: 4,
-          color: "#023864",
+          color: "var(--primary-text-default)",
           lineHeight: "20px",
           transition: "0.35s color ease, 0.35s background-color ease",
           margin: "4px 16px",
           "&:hover": {
-            color: "#008DFF",
-            backgroundColor: "#F0F8FF",
+            color: "var(--primary-focus)",
+            backgroundColor: "var(--primary-bg)",
           },
         },
       },
     },
     RaAutocompleteSuggestionItem: {
       suggestion: {
-        color: "#023864",
+        color: "var(--primary-text-default)",
       },
     },
     RaBulkDeleteWithUndoButton: {
@@ -238,7 +238,7 @@ export const lightTheme = {
         color: "#fff",
       },
       icon: {
-        color: "#0f1f26",
+        color: "var(--secondary-color-main)",
       },
     },
     RaLayout: {
@@ -249,7 +249,7 @@ export const lightTheme = {
         },
       },
       contentWithSidebar: {
-        backgroundColor: "#0f1f26",
+        backgroundColor: "var(--secondary-color-main)",
       },
     },
     MuiPaper: {
@@ -277,7 +277,7 @@ export const lightTheme = {
     RaSidebar: {
       drawerPaper: {
         "@media (min-width: 0)": {
-          backgroundColor: "#0f1f26",
+          backgroundColor: "var(--secondary-color-main)",
         },
       },
       fixed: {
@@ -286,7 +286,7 @@ export const lightTheme = {
         flexDirection: "column",
         width: 216,
         "@media (min-width: 0)": {
-          backgroundColor: "#0f1f26",
+          backgroundColor: "var(--secondary-color-main)",
         },
       },
     },
@@ -352,31 +352,31 @@ export const lightTheme = {
         "& .MuiListItem-root": {
           fontSize: 14,
           borderRadius: 4,
-          color: "#023864",
+          color: "var(--primary-text-default)",
           lineHeight: "20px",
           transition: "0.35s color ease, 0.35s background-color ease",
           margin: "8px 0",
           "&.Mui-selected": {
-            color: "#008DFF",
-            backgroundColor: "#F0F8FF",
+            color: "var(--primary-focus)",
+            backgroundColor: "var(--primary-bg)",
             outline: "2px solid #7FC5FF",
             outlineOffset: "2px",
           },
           "&.Mui-selected:hover": {
-            color: "#008DFF",
-            backgroundColor: "#F0F8FF",
+            color: "var(--primary-focus)",
+            backgroundColor: "var(--primary-bg)",
           },
           "&:hover": {
-            color: "#008DFF",
-            backgroundColor: "#F0F8FF",
+            color: "var(--primary-focus)",
+            backgroundColor: "var(--primary-bg)",
           },
         },
       },
     },
     MuiAppBar: {
       colorSecondary: {
-        backgroundColor: "#0f1f26",
-        borderColor: "#0f1f26",
+        backgroundColor: "var(--secondary-color-main)",
+        borderColor: "var(--secondary-color-main)",
       },
     },
     MuiLinearProgress: {

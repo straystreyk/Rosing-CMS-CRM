@@ -127,7 +127,7 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
                   <div className={classes.titleStyles}>
                     {!isResetPage ? "Авторизация" : "Восстановление пароля"}
                     <div className={classes.annotationWrapperStyles}>
-                      <InformationIcon color="#0F1F26" />
+                      <InformationIcon color="var(--secondary-color-main)" />
                       <div className={classes.annotationStyles}>
                         В целях безопасности используемый для авторизации email должен быть
                         добавлен админом в список пользователей. Если система не узнает email,

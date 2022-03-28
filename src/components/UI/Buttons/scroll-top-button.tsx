@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
 
-const minPxToShow = 150;
+const MIN_PX_TO_SHOW = 150;
 
 const useStyles = makeStyles({
   ScrollButton: {
@@ -63,9 +63,9 @@ export const ScrollTopButton: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
 
   const checkButton = () => {
-    if (window.scrollY > minPxToShow && !visible) {
+    if (window.scrollY > MIN_PX_TO_SHOW && !visible) {
       setVisible(true);
-    } else if (window.scrollY <= minPxToShow && visible) {
+    } else if (window.scrollY <= MIN_PX_TO_SHOW && visible) {
       setVisible(false);
     }
   };

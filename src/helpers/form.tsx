@@ -9,3 +9,9 @@ export const scrollToErrorInput: (offset?: number) => void = (offset = 0) => {
     });
   }
 };
+
+export const sanytizeId: (id: string) => string = (id) => {
+  return id.replace(/%3D/g, "=");
+};
+
+export const alwaysEmptyString = () => "";

@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     },
   },
   CastMembersShowItem: {
-    backgroundColor: "#F0F8FF",
+    backgroundColor: "var(--primary-bg)",
     padding: 16,
     display: "flex",
     width: "33.3333%",
@@ -59,7 +59,7 @@ const useStyles = makeStyles({
         fontWeight: 400,
         lineHeight: "20px",
         marginTop: 8,
-        color: "#023864",
+        color: "var(--primary-text-default)",
         "& span": {
           color: "#9FA5A8",
         },

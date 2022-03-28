@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   AutoCompleteShow: {
     marginTop: 4,
     "& span": {
-      color: "#023864",
+      color: "var(--primary-text-default)",
       position: "relative",
       fontSize: 14,
       marginLeft: 4,
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
         left: 0,
         width: "100%",
         height: 1,
-        backgroundColor: "#023864",
+        backgroundColor: "var(--primary-text-default)",
         position: "absolute",
       },
       "&.empty": {

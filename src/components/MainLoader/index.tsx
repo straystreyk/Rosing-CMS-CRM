@@ -52,7 +52,7 @@ export const MainLoader: React.FC<MainLoaderProps> = ({ size, centered, flex }) 
           >
             <stop stopColor="#00FFD9" />
             <stop offset="0.684233" stopColor="#00C0FF" />
-            <stop offset="1" stopColor="#008DFF" />
+            <stop offset="1" stopColor="var(--primary-focus)" />
           </linearGradient>
         </defs>
       </svg>

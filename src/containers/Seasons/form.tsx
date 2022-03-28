@@ -4,6 +4,7 @@ import { ArrayInput, TextInput } from "../../components/Inputs";
 import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { ArrayInputStyles } from "../../components/Models/CastMembers/styles";
+import { alwaysEmptyString, sanytizeId } from "../../helpers/form";
 
 const useStyles = makeStyles({
   ArrayInputStyles,
@@ -50,8 +51,6 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
   const classes = useStyles();
   const { id } = useParams<{ id: string }>();
 
-  const getItemsLabel = React.useCallback(() => "", []);
-
   return (
     <>
       <TextInput
@@ -59,14 +58,14 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
         inputType={type}
         source="seriesId"
         label="Series id"
-        initialValue={unescape(id)}
+        initialValue={sanytizeId(id)}
         fullWidth
       />
       {type !== "create" && <Season resource={resource} type={type} />}
       {type === "create" && (
         <ArrayInput
           source="seasons"
-          getItemLabel={getItemsLabel}
+          getItemLabel={alwaysEmptyString}
           childcomponent={Season}
           itemClass={classes.ArrayInputStyles}
           resource={resource}

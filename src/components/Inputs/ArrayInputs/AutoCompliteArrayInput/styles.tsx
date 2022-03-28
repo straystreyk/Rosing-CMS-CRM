@@ -13,15 +13,15 @@ export const AutoCompleteInputStyles = {
     },
     "& .MuiChip-root": {
       background: "#F2FDFB",
-      border: "1px solid #00A991",
+      border: "1px solid var(--accent-color)",
       fontWeight: 500,
       fontSize: 14,
       lineHeight: "20px",
-      color: "#00A991",
+      color: "var(--accent-color)",
       borderRadius: 4,
     },
     "& .MuiSvgIcon-root path": {
-      color: "#00A991",
+      color: "var(--accent-color)",
     },
   },
   "& input": {

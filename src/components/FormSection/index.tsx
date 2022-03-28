@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   TextSection: {
     fontSize: 14,
     lineHeight: "20px",
-    color: "#023864",
+    color: "var(--primary-text-default)",
     marginBottom: 8,
   },
   ActiveSvg: {

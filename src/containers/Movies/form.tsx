@@ -47,16 +47,16 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputStyles,
 }));
 
-const fixedHeaderOffset = 130;
-const inputItemsPerPage = 25;
+const FIXED_HEADER_OFFSET = 130;
+const INPUT_ITEMS_PER_PAGE = 25;
 
-export const Form: React.FC<FormProps> = React.memo(({ type, resource, children }) => {
+export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
   const classes = useStyles();
   const formState = useFormState();
 
   React.useEffect(() => {
     if (formState.submitFailed) {
-      scrollToErrorInput(fixedHeaderOffset);
+      scrollToErrorInput(FIXED_HEADER_OFFSET);
     }
   }, [formState.submitFailed]);
 
@@ -284,7 +284,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, children 
           label="Video file"
           source="streamSourceIds"
           reference="media_content/video/video_files"
-          perPage={inputItemsPerPage}
+          perPage={INPUT_ITEMS_PER_PAGE}
         >
           <AutocompleteArrayInput
             optionText="name"

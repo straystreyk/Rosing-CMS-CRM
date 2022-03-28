@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   ImagesInfo: {
-    backgroundColor: "#F0F8FF",
+    backgroundColor: "var(--primary-bg)",
     color: "#9FA5A8",
     display: "flex",
     textAlign: "center",
@@ -136,7 +136,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     backgroundColor: "#fff",
     fontWeight: 500,
-    color: "#0f1f26",
+    color: "var(--secondary-color-main)",
     zIndex: 1,
     "& > span": {
       marginLeft: 15,
@@ -305,7 +305,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
             <>
               {id && url && (
                 <Button onClick={showSlider} className={cn(classes.PopupButton, "PopupButton")}>
-                  <LoopIcon color="#008DFF" />
+                  <LoopIcon color="var(--primary-focus)" />
                 </Button>
               )}
               <img src={url} alt="admin panel" />
@@ -442,9 +442,9 @@ export const ImageUploaderV2: React.FC<{
           {inputType === "show" && edit && (
             <div className={classes.ImageUploaderShowButtons}>
               <StandardButton
-                startIcon={<AcceptFilterIcon color="#00A991" />}
+                startIcon={<AcceptFilterIcon color="var(--accent-color)" />}
                 type="button"
-                customColor="#00A991"
+                customColor="var(--accent-color)"
                 variant="text"
                 onClick={approve}
               >

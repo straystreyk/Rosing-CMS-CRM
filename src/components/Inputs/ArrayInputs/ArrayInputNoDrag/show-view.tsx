@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     "& .metadataField": {
       width: "50%",
-      color: "#023864",
+      color: "var(--primary-text-default)",
       "&.field": {
         width: "100%",
       },
@@ -52,20 +52,20 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 500,
         lineHeight: "20px",
         marginBottom: 4,
-        color: "#0F1F26",
+        color: "var(--secondary-color-main)",
       },
     },
   },
   RatingItem: {
     "& .name": {
       borderBottom: "1px solid #E7E9E9",
-      color: "#023864",
+      color: "var(--primary-text-default)",
       paddingBottom: 10,
       paddingTop: 10,
     },
     "& .value": {
       borderBottom: "1px solid #E7E9E9",
-      color: "#023864",
+      color: "var(--primary-text-default)",
       paddingBottom: 10,
       paddingTop: 10,
     },

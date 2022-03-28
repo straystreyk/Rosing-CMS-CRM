@@ -3,7 +3,7 @@ import { labelStyles } from "../../styles";
 export const TextInputStyles = {
   backgroundColor: "none !important",
   "& input": {
-    color: "#023864",
+    color: "var(--primary-text-default)",
     padding: "8px 12px",
     lineHeight: "20px",
     fontSize: 14,
@@ -15,7 +15,7 @@ export const TextInputStyles = {
       opacity: "1 !important",
     },
     "&:hover": {
-      borderColor: "#023864",
+      borderColor: "var(--primary-text-default)",
     },
     "&:focus": {
       outline: "2px solid #7FC5FF",
@@ -39,7 +39,7 @@ export const TextInputStyles = {
     border: "1px solid #9FA5A8",
     borderRadius: 4,
     transition: "0.35s border ease, 0.35s color ease",
-    color: "#023864",
+    color: "var(--primary-text-default)",
     padding: "8px 12px",
     "&:focus": {
       outline: "2px solid #7FC5FF",

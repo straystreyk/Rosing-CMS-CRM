@@ -284,11 +284,11 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                               />
                             ) : (
                               <StandardButton
-                                startIcon={<PlusIcon color="#00A991" />}
+                                startIcon={<PlusIcon color="var(--accent-color)" />}
                                 type="button"
                                 color="primary"
                                 onClick={(e) => pushResource()}
-                                customColor="#00A991"
+                                customColor="var(--accent-color)"
                                 variant="text"
                               >
                                 Add another one

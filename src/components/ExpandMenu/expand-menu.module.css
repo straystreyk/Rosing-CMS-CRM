@@ -84,12 +84,12 @@
 }
 
 .expandSubMenu a[class*="RaMenuItemLink-active"] {
-    background-color: #00A991;
+    background-color: var(--accent-color);
     border: none;
 }
 
 .expandSubMenu a:hover {
-    background-color: #00D6B5;
+    background-color: var(--accent-color-hover);
 }
 
 .sidebarClose .expandTitle{
@@ -109,9 +109,9 @@
 }
 
 .iconActive {
-    background-color: #00A991;
+    background-color: var(--accent-color);
 }
 
 .iconActive:hover {
-    background-color: #00D6B5;
+    background-color: var(--accent-color-hover);
 }

@@ -11,9 +11,8 @@ export const StaticParam: React.FC<{ query: any; variables: {} }> = ({ query, va
 
   if (loading) return <MainLoader centered size={20} />;
   if (error) {
-    console.log(error);
-    return <>error</>;
+    return <span>error</span>;
   }
 
-  return (data.items && data.items.value) ?? "error";
+  return <span>{data.items.value}</span>;
 };

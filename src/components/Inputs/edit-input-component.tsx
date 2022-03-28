@@ -105,11 +105,9 @@ export const EditInputComponent: React.FC<any> = ({
       {showInput ? (
         <div className={classes.ShowEditButtonsWrapper}>
           <StandardButton
-            startIcon={
-              loading ? <MainLoader flex size={10} /> : <AcceptFilterIcon color="#00A991" />
-            }
+            startIcon={loading ? <MainLoader flex size={10} /> : <AcceptFilterIcon color="" />}
             type="button"
-            customColor="#00A991"
+            customColor="var(--accent-color)"
             variant="text"
             onClick={approve}
           >

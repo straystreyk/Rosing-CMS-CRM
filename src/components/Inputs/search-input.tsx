@@ -6,7 +6,7 @@ const useStyles = makeStyles({
   custom: {
     backgroundColor: "none !important",
     "& input": {
-      color: "#023864",
+      color: "var(--primary-text-default)",
       padding: "8px 12px",
       lineHeight: "20px",
       fontSize: 14,
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
       borderRadius: 4,
       transition: "0.35s border ease, 0.35s color ease",
       "&:hover": {
-        borderColor: "#023864",
+        borderColor: "var(--primary-text-default)",
       },
       "&:focus": {
         outline: "2px solid #7FC5FF",
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
       marginBottom: 5,
       lineHeight: "20px",
       fontFamily: "Gilroy, sans-serif",
-      color: "#0F1F26 !important",
+      color: "var(--secondary-color-main) !important",
     },
     "& div": {
       backgroundColor: "inherit",

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
   lastCrumb: {
-    color: "#023864",
+    color: "var(--primary-text-default)",
   },
 }));
 

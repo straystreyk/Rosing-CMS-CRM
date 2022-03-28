@@ -19,12 +19,12 @@ const useStyles = makeStyles({
   },
   ChannelVersionEdit: {
     paddingTop: 10,
-    background: "#F0F8FF",
+    background: "var(--primary-bg)",
     "& > div": {
       marginTop: 0,
     },
     "& .MuiPaper-root": {
-      background: "#F0F8FF",
+      background: "var(--primary-bg)",
     },
   },
   ChannelVersionName: {

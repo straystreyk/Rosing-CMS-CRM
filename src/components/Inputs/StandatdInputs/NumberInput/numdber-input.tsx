@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     backgroundColor: "none !important",
     fontFamily: "Gilroy, sans-serif",
     "& input": {
-      color: "#023864",
+      color: "var(--primary-text-default)",
       padding: "8px 12px",
       fontFamily: "Gilroy, sans-serif",
       lineHeight: "20px",
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
       fontWeight: 500,
       marginBottom: 5,
       lineHeight: "20px",
-      color: "#0F1F26 !important",
+      color: "var(--secondary-color-main) !important",
     },
     "& div": {
       backgroundColor: "inherit",

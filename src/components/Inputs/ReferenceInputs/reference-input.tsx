@@ -33,7 +33,7 @@ const useStyles = makeStyles({
       fontSize: 14,
       marginBottom: 5,
       lineHeight: "20px",
-      color: "#0F1F26 !important",
+      color: "var(--secondary-color-main) !important",
     },
     "& .MuiFormHelperText-root": {
       margin: 0,

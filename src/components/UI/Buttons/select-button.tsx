@@ -25,10 +25,10 @@ const useStyles = makeStyles((theme) => ({
       outline: "none",
     },
     "&:hover": {
-      color: "#00D6B5",
+      color: "var(--accent-color-hover)",
       backgroundColor: "transparent",
       "& svg path": {
-        fill: "#00D6B5",
+        fill: "var(--accent-color-hover)",
       },
     },
   },
@@ -111,7 +111,7 @@ export const SelectButton: React.FC<{
           id="basic-button"
           className={cn(classes.PushButton, buttonClassName && buttonClassName)}
           variant="text"
-          startIcon={icon ?? <CreateIcon color="#00A991" />}
+          startIcon={icon ?? <CreateIcon color="var(--accent-color)" />}
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}

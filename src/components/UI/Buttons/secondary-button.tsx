@@ -33,14 +33,14 @@ const useStyles = makeStyles({
       marginRight: 6,
     },
     "&:hover": {
-      border: "1px solid #008DFF",
-      color: "#008DFF",
+      border: "1px solid var(--primary-focus)",
+      color: "var(--primary-focus)",
       background: "transparent",
       "& .MuiButton-startIcon svg circle": {
-        stroke: "#008DFF",
+        stroke: "var(--primary-focus)",
       },
       "& .MuiButton-startIcon svg line": {
-        stroke: "#008DFF",
+        stroke: "var(--primary-focus)",
       },
     },
     "&:focus": {

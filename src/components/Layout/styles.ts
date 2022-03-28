@@ -49,7 +49,7 @@ export const logoStyles = {
 export const titleStyles = {
   fontWeight: 600,
   fontSize: 16,
-  color: "#0F1F26",
+  color: "var(--secondary-color-main)",
   lineHeight: "22px",
   paddingBottom: 16,
   borderBottom: "1px solid #E7E9E9",
@@ -125,7 +125,7 @@ export const formStyles = {
   boxShadow: "0px 3px 12px -1px rgba(28, 52, 84, 0.1), 0px 2px 4px -1px rgba(28, 55, 90, 0.05)",
   "& label": {
     fontWeight: 500,
-    color: "#0F1F26",
+    color: "var(--secondary-color-main)",
   },
 };
 

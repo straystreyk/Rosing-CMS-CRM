@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     marginTop: 4,
     fontSize: 14,
     lineHeight: "20px",
-    color: "#023864",
+    color: "var(--primary-text-default)",
     "& .empty": {
       color: "#9FA5A8",
     },

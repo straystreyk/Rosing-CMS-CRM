@@ -30,14 +30,14 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: "Gilroy, sans-serif",
       fontWeight: 500,
       lineHeight: "20px",
-      color: "#0F1F26 !important",
+      color: "var(--secondary-color-main) !important",
     },
     "& input": {
       padding: "8px 12px",
     },
     "& .MuiChip-root": {
       background: "#F2FDFB",
-      border: "1px solid #00A991",
+      border: "1px solid var(--accent-color)",
       fontWeight: 500,
       fontSize: 14,
       lineHeight: "20px",
