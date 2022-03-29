@@ -10,7 +10,7 @@ const useStyles = makeStyles({
       padding: "8px 12px",
       lineHeight: "20px",
       fontSize: 14,
-      border: "1px solid #9FA5A8",
+      border: "1px solid var(--secondary-color-default)",
       borderRadius: 4,
       transition: "0.35s border ease, 0.35s color ease",
       "&:hover": {

@@ -7,11 +7,11 @@ export const TextInputStyles = {
     padding: "8px 12px",
     lineHeight: "20px",
     fontSize: 14,
-    border: "1px solid #9FA5A8",
+    border: "1px solid var(--secondary-color-default)",
     borderRadius: 4,
     transition: "0.35s border ease, 0.35s color ease",
     "&::placeholder": {
-      color: "#9FA5A8 !important",
+      color: "var(--secondary-color-default) !important",
       opacity: "1 !important",
     },
     "&:hover": {
@@ -36,7 +36,7 @@ export const TextInputStyles = {
   "& textarea": {
     lineHeight: "20px",
     fontSize: 14,
-    border: "1px solid #9FA5A8",
+    border: "1px solid var(--secondary-color-default)",
     borderRadius: 4,
     transition: "0.35s border ease, 0.35s color ease",
     color: "var(--primary-text-default)",
@@ -52,7 +52,7 @@ export const TextInputStyles = {
     marginTop: 5,
     fontSize: 12,
     fontFamily: "Gilroy, sans-serif",
-    color: "#9FA5A8",
+    color: "var(--secondary-color-default)",
   },
   "& > p.MuiFormHelperText-root.Mui-error": {
     color: "#D21C1C",

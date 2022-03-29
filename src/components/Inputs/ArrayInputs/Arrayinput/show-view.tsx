@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     paddingTop: 20,
   },
   EmptyShow: {
-    color: "#9FA5A8",
+    color: "var(--secondary-color-default)",
     textAlign: "center",
     fontSize: 20,
     padding: "40px 20px",
@@ -61,7 +61,7 @@ const useStyles = makeStyles({
         marginTop: 8,
         color: "var(--primary-text-default)",
         "& span": {
-          color: "#9FA5A8",
+          color: "var(--secondary-color-default)",
         },
       },
     },

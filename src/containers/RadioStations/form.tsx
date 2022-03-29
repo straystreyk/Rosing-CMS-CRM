@@ -83,7 +83,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           }
           source="metadata"
           label="Metadata"
-          childcomponent={MetaData}
+          ChildComponent={MetaData}
           groupInputs
           switchable
         />

@@ -15,7 +15,7 @@
 
 .inputSearch::placeholder {
     font-family: "Gilroy", sans-serif;
-    color: #9FA5A8;
+    color: var(--secondary-color-default);
 }
 
 @media (max-width: 576px) {

@@ -1,0 +1,9 @@
+.EmptyPageWrapper {
+    text-align: center;
+    padding: 100px 24px;
+}
+
+.EmptyPageWrapper p {
+    color: var(--secondary-color-default);
+    margin-top: 4px;
+}

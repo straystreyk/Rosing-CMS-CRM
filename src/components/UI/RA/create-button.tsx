@@ -21,6 +21,11 @@ const useStyles = makeStyles({
       outline: "2px solid #7FC5FF",
       outlineOffset: "2px",
     },
+    "&.MuiFab-root": {
+      "& svg": {
+        margin: 0,
+      },
+    },
   },
 });
 
@@ -30,6 +35,7 @@ export const CreateButton: React.FC<CreateButtonProps> = ({
   startIcon,
   label,
   icon,
+  to,
 }) => {
   const classes = useStyles();
 
@@ -38,6 +44,7 @@ export const CreateButton: React.FC<CreateButtonProps> = ({
       icon={icon}
       endIcon={endIcon}
       className={classes.CreateButton}
+      to={to}
       basePath={basePath}
       startIcon={startIcon}
       label={label}

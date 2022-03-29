@@ -12,6 +12,7 @@ export type TitleProps = {
   form?: string;
   id?: string;
   record?: any;
+  breadCrumbsOn?: boolean;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -63,11 +64,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const ResourceTitle: React.FC<TitleProps> = ({ name, form, children, ...props }) => {
+export const ResourceTitle: React.FC<TitleProps> = ({
+  name,
+  form,
+  breadCrumbsOn,
+  children,
+  ...props
+}) => {
   const { values } = useFormState();
   const [title] = React.useState<string>(values.name ?? "");
   const date = values.updatedAt ? new Date(values.updatedAt).toLocaleDateString() : "";
   const time = values.updatedAt ? new Date(values.updatedAt).toLocaleTimeString() : "";
+
+  console.log(breadCrumbsOn);
 
   const translate = useTranslate();
   const classes = useStyles();
@@ -138,7 +147,7 @@ export const ResourceTitle: React.FC<TitleProps> = ({ name, form, children, ...p
           </span>
         </div>
       </div>
-      {form !== "list" && <Breadcrumbs />}
+      {form !== "list" || breadCrumbsOn ? <Breadcrumbs /> : null}
     </div>
   );
 };

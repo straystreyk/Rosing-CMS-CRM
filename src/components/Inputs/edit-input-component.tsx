@@ -97,7 +97,7 @@ export const EditInputComponent: React.FC<any> = ({
           fullWidth={props.fullWidth ?? false}
           helperText={props.helperText && showInput ? props.helperText : false}
           resettable={props.resettable && showInput ? props.resettable : false}
-          childcomponent={props.childcomponent ?? false}
+          ChildComponent={props.ChildComponent ?? false}
           draggable={props.draggable ?? false}
         />
       )}
@@ -131,7 +131,7 @@ export const EditInputComponent: React.FC<any> = ({
                 className={cn(classes.ShowEditButton, "ShowEditButton")}
                 onClick={() => setShowInput(true)}
               >
-                <EditIcon color="#9FA5A8" />
+                <EditIcon color="var(--secondary-color-default)" />
               </div>
             </Tooltip>
           )}

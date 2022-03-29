@@ -10,7 +10,14 @@ export const scrollToErrorInput: (offset?: number) => void = (offset = 0) => {
   }
 };
 
-export const sanytizeId: (id: string) => string = (id) => {
+export const sanytizeId: (
+  id: string,
+  searchValue?: RegExp | string,
+  replaceValue?: string
+) => string = (id, searchValue, replaceValue) => {
+  if (searchValue && replaceValue) {
+    return id.replace(searchValue, replaceValue);
+  }
   return id.replace(/%3D/g, "=");
 };
 

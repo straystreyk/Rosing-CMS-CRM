@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   custom: {
     "& > div": {
       backgroundColor: "inherit",
-      border: "1px solid #9FA5A8",
+      border: "1px solid var(--secondary-color-default)",
       borderRadius: 4,
       "&:before": {
         display: "none",

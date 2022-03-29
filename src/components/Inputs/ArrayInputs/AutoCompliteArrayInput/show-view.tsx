@@ -26,7 +26,7 @@ const useStyles = makeStyles({
         position: "absolute",
       },
       "&.empty": {
-        color: "#9FA5A8",
+        color: "var(--secondary-color-default)",
         position: "static",
       },
       "&:first-child": {

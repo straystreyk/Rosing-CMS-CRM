@@ -210,7 +210,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           helperText={
             "A pair of custom fields that can be used for filtering. You can add multiple pairs."
           }
-          childcomponent={MetaData}
+          ChildComponent={MetaData}
           source="metadata"
           label="Metadata"
           groupInputs
@@ -227,7 +227,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           source="castMembers"
           getItemLabel={alwaysEmptyString}
           itemClass={classes.ArrayInputStyles}
-          childcomponent={CastMembers}
+          ChildComponent={CastMembers}
           resource={resource}
           query={ALL_ROLES}
           inputType={type}
@@ -264,7 +264,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           getItemLabel={alwaysEmptyString}
           fullWidth
           choices={EXTRA_VIDEO_TYPES}
-          childcomponent={ExtraVideos}
+          ChildComponent={ExtraVideos}
           source="extraVideos"
           label="Extra videos"
           groupInputs
@@ -279,7 +279,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           }
           source="certificationRatings"
           label="Age rating"
-          childcomponent={RatingSystems}
+          ChildComponent={RatingSystems}
           groupInputs
           switchable
           fullWidth

@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     lineHeight: "20px",
     marginTop: 4,
     "& .empty": {
-      color: "#9FA5A8",
+      color: "var(--secondary-color-default)",
     },
   },
 });

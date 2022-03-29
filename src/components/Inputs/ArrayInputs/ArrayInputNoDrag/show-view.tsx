@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     "& label": { ...labelStyles, marginBottom: 8, display: "inline-block" },
     "& .empty": {
-      color: "#9FA5A8",
+      color: "var(--secondary-color-default)",
       borderBottom: "1px solid #E7E9E9",
       paddingBottom: 8,
     },

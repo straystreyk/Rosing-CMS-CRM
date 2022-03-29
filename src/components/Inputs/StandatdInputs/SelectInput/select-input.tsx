@@ -14,12 +14,12 @@ const useStyles = makeStyles({
     "& .MuiSelect-root": {
       padding: "8px 12px",
       color: "var(--primary-text-default)",
-      border: "1px solid #9FA5A8",
+      border: "1px solid var(--secondary-color-default)",
       borderRadius: 4,
       fontSize: 14,
     },
     "& > p.MuiFormHelperText-root": {
-      color: "#9FA5A8",
+      color: "var(--secondary-color-default)",
       margin: 0,
       fontSize: 12,
       marginTop: 5,

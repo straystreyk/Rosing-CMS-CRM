@@ -23,8 +23,10 @@ export interface ListProps {
   filtersArray?: string[];
   listTabs?: ListTabProps[];
   offTitle?: boolean;
-  breadCrumbs?: boolean;
   id?: string;
+  form?: string;
+  breadCrumbsOn?: boolean;
+  location?: Location;
   empty?: ReactElement;
 }
 

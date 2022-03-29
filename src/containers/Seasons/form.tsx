@@ -12,13 +12,14 @@ const useStyles = makeStyles({
 
 const Season: React.FC<{
   parentSourceWithIndex?: string;
-  show?: boolean;
+  parentSource?: string;
   index?: string;
+  show?: boolean;
   resource: string;
   type: string;
-}> = ({ parentSourceWithIndex, resource, ...props }) => {
+}> = ({ parentSourceWithIndex, resource, parentSource, index, ...props }) => {
   return (
-    <>
+    <div>
       <TextInput
         resource={resource}
         label="Name"
@@ -43,13 +44,13 @@ const Season: React.FC<{
         multiline
         rows={4}
       />
-    </>
+    </div>
   );
 };
 
 export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
   const classes = useStyles();
-  const { id } = useParams<{ id: string }>();
+  const { seriesId } = useParams<{ seriesId: string }>();
 
   return (
     <>
@@ -58,7 +59,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
         inputType={type}
         source="seriesId"
         label="Series id"
-        initialValue={sanytizeId(id)}
+        initialValue={sanytizeId(seriesId)}
         fullWidth
       />
       {type !== "create" && <Season resource={resource} type={type} />}
@@ -66,7 +67,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
         <ArrayInput
           source="seasons"
           getItemLabel={alwaysEmptyString}
-          childcomponent={Season}
+          ChildComponent={Season}
           itemClass={classes.ArrayInputStyles}
           resource={resource}
           inputType={type}

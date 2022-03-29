@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   GroupHelperText: {
     fontFamily: "Gilroy, sans-serif",
     fontSize: 12,
-    color: "#9FA5A8",
+    color: "var(--secondary-color-default)",
     lineHeight: "16px",
   },
 });

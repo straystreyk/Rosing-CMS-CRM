@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     "& .MuiInputBase-root": {
       backgroundColor: "transparent",
-      border: "1px solid #9FA5A8",
+      border: "1px solid var(--secondary-color-default)",
       paddingLeft: 4,
       borderRadius: 4,
       "& > div": {
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     "& > p.MuiFormHelperText-contained": {
       fontSize: 12,
       margin: "5px 0px 0px 0px",
-      color: "#9FA5A8",
+      color: "var(--secondary-color-default)",
       fontFamily: "Gilroy, sans-serif",
     },
     "& > p.MuiFormHelperText-root.Mui-error": {

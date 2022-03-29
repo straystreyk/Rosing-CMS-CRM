@@ -42,10 +42,10 @@ const ToolBar = (props: any) => {
       <TopToolbar className={styles.TopToolBar}>
         <CreateButton
           icon={<PlusIcon color="#fff" />}
-          basePath={props.basePath}
           label={"Create " + translate(`resources.${props.resource}.name`)}
+          basePath={props.basePath}
+          to={props.basePath + "/create"}
         />
-        {/*<ExportButton label={"Export"} />*/}
       </TopToolbar>
       {context.filtersArray ? <Filters /> : null}
     </div>
@@ -60,8 +60,9 @@ export const ResourceList: FC<ListProps> = ({
   filtersArray,
   listTabs,
   offTitle,
-  breadCrumbs,
   empty,
+  breadCrumbsOn,
+  form,
   ...props
 }) => {
   const [filter, setFilter] = useState<object>(permanentFilter ?? {});
@@ -71,7 +72,11 @@ export const ResourceList: FC<ListProps> = ({
     <FilterContext.Provider value={{ filter, filtersArray, setFilter }}>
       <Box className={classes.TopList}>
         <EditForm offToolbar offTitle resource={props.resource}>
-          <ResourceTitle name={props.resource} form="list" />
+          <ResourceTitle
+            breadCrumbsOn={breadCrumbsOn}
+            name={props.resource}
+            form={form ?? "list"}
+          />
         </EditForm>
         {listTabs && <ListPageTabs tabs={listTabs} />}
       </Box>
@@ -83,7 +88,7 @@ export const ResourceList: FC<ListProps> = ({
         filter={filter}
         sort={{ field: "streamingUid", order: "DESC" }}
         pagination={<PostPagination />}
-        actions={<ToolBar />}
+        actions={<ToolBar {...props} />}
         aside={<FilterSidebar sideFilters={sideFilters} />}
         basePath={props.basePath}
       >

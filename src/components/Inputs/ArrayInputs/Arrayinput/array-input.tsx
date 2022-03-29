@@ -28,7 +28,7 @@ export interface ArrayInputProps {
   addReorder?: boolean;
   draggable?: boolean;
   itemClass?: string;
-  childcomponent: any;
+  ChildComponent: any;
   resettable?: boolean;
   query?: any;
 }
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   GroupHelperText: {
     fontFamily: "Gilroy, sans-serif",
     fontSize: 12,
-    color: "#9FA5A8",
+    color: "var(--secondary-color-default)",
     lineHeight: "16px",
   },
   DeleteButton: {
@@ -145,6 +145,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
     itemClass,
     resettable,
     query,
+    ChildComponent,
     ...props
   }) => {
     const classes = useStyles();
@@ -247,7 +248,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                                         reorder={reorder}
                                         source={source}
                                       />
-                                      <props.childcomponent
+                                      <ChildComponent
                                         parentSourceWithIndex={`${source}[${index}]`}
                                         parentSource={`${source}`}
                                         resource={resource}
@@ -315,7 +316,7 @@ export const ArrayInput: React.FC<ArrayInputProps> = ({ inputType, ...props }) =
       source={props.source}
       resource={props.resource}
       inputType={inputType}
-      childcomponent={props.childcomponent}
+      ChildComponent={props.ChildComponent}
       itemClass={props.itemClass}
       draggable
     />

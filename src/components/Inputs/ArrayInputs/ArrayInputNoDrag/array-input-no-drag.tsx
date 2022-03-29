@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   GroupHelperText: {
     fontFamily: "Gilroy, sans-serif",
     fontSize: 12,
-    color: "#9FA5A8",
+    color: "var(--secondary-color-default)",
     lineHeight: "16px",
   },
   ArrayInputWrapper: {
@@ -69,7 +69,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
     const [show, setShow] = React.useState(!switchable || ["edit", "show"].includes(inputType));
     const classes = useStyles();
     const { values } = useFormState();
-    const { childcomponent, ...rest } = props;
+    const { ChildComponent, ...rest } = props;
 
     return (
       <div className={classes.ArrayInputWrapper}>
@@ -98,7 +98,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                               key={index}
                               index={index.toString()}
                             >
-                              <props.childcomponent
+                              <props.ChildComponent
                                 resource={resource}
                                 inputType={inputType}
                                 parentSource={source}
@@ -109,7 +109,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                             </GroupInputsOrigin>
                           ) : (
                             <>
-                              <props.childcomponent
+                              <props.ChildComponent
                                 resource={resource}
                                 index={index}
                                 inputType={inputType}

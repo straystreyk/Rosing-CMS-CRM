@@ -3,7 +3,7 @@ import { labelStyles } from "../../styles";
 export const AutoCompleteInputStyles = {
   "& .MuiInputBase-root": {
     backgroundColor: "#fff !important",
-    border: "1px solid #9FA5A8",
+    border: "1px solid var(--secondary-color-default)",
     borderRadius: 4,
     "& > div": {
       margin: 0,
@@ -32,7 +32,7 @@ export const AutoCompleteInputStyles = {
     marginTop: 5,
     fontSize: 12,
     fontFamily: "Gilroy, sans-serif",
-    color: "#9FA5A8",
+    color: "var(--secondary-color-default)",
   },
   "& > p.MuiFormHelperText-root.Mui-error": {
     color: "#D21C1C",

@@ -233,7 +233,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           helperText={
             "A pair of custom fields that can be used for filtering. You can add multiple pairs."
           }
-          childcomponent={MetaData}
+          ChildComponent={MetaData}
           source="metadata"
           label="Metadata"
           groupInputs
@@ -249,7 +249,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         <ArrayInput
           source="castMembers"
           itemClass={classes.ArrayInputStyles}
-          childcomponent={CastMembers}
+          ChildComponent={CastMembers}
           resource={resource}
           inputType={type}
           query={ALL_ROLES}
@@ -298,7 +298,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           inputType={type}
           fullWidth
           choices={EXTRA_VIDEO_TYPES}
-          childcomponent={ExtraVideos}
+          ChildComponent={ExtraVideos}
           source="extraVideos"
           label="Extra videos"
           groupInputs
@@ -349,7 +349,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           }
           source="certificationRatings"
           label="Age rating"
-          childcomponent={RatingSystems}
+          ChildComponent={RatingSystems}
           groupInputs
           switchable
           fullWidth

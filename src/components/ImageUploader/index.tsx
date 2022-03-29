@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   ImageItem: {
     marginTop: 8,
-    border: "1px dashed #9FA5A8",
+    border: "1px dashed var(--secondary-color-default)",
     height: 250,
     textAlign: "center",
     display: "flex",
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 4,
-    color: "#9FA5A8",
+    color: "var(--secondary-color-default)",
     fontSize: 14,
     padding: 15,
     "& img": {
@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
   },
   ImagesInfo: {
     backgroundColor: "var(--primary-bg)",
-    color: "#9FA5A8",
+    color: "var(--secondary-color-default)",
     display: "flex",
     textAlign: "center",
     flexDirection: "column",
@@ -169,7 +169,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   ImageSize: {
-    color: "#9FA5A8",
+    color: "var(--secondary-color-default)",
     fontSize: 14,
   },
   ShowEditButton: {
@@ -274,7 +274,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
         <div className={classes.ImageTitle}>
           <span>{imageName || kind}</span>
           <InfoComponent
-            color="#9FA5A8"
+            color="var(--secondary-color-default)"
             info="The image will be used on the screen with the description of the movie in the iOS and Android apps. There are no requirements for the location of the main elements of the image and the presence of inscriptions."
           />
         </div>
@@ -467,7 +467,7 @@ export const ImageUploaderV2: React.FC<{
                 className={cn(classes.ShowEditButton, "ShowEditButton")}
                 onClick={() => setEdit(true)}
               >
-                <EditIcon color="#9FA5A8" />
+                <EditIcon color="var(--secondary-color-default)" />
               </div>
             </Tooltip>
           )}

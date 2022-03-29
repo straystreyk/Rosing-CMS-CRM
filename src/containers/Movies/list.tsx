@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Datagrid, DateField, TextField } from "react-admin";
+import { EmptyTablePage } from "../../components/EmptyTablePage";
 
 interface ShowProps {
   resource: string;
@@ -7,7 +8,7 @@ interface ShowProps {
 
 export const List: React.FC<ShowProps> = (props) => {
   return (
-    <Datagrid {...props} optimized rowClick="show">
+    <Datagrid empty={<EmptyTablePage />} {...props} optimized rowClick="show">
       <TextField source="name" />
       <TextField source="slug" />
       <TextField source="cmsDistribution" />

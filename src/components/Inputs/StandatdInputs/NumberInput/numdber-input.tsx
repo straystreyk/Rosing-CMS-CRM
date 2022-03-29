@@ -16,7 +16,7 @@ const useStyles = makeStyles({
       fontFamily: "Gilroy, sans-serif",
       lineHeight: "20px",
       fontSize: 14,
-      border: "1px solid #9FA5A8",
+      border: "1px solid var(--secondary-color-default)",
       borderRadius: 4,
       "&:focus": {
         outline: "2px solid #7FC5FF",
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
       marginTop: 5,
       fontSize: 12,
       fontFamily: "Gilroy, sans-serif",
-      color: "#9FA5A8",
+      color: "var(--secondary-color-default)",
     },
     "& > p.MuiFormHelperText-root.Mui-error": {
       color: "#f44336",

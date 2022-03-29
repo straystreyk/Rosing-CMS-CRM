@@ -2,7 +2,9 @@
     --accent-color: #00A991;
     --accent-color-hover: #00D6B5;
     --secondary-color-main: #0F1F26;
+    --secondary-color-default: #9FA5A8;
     --primary-text-default: #023864;
+    --primary-button-default: #005AA3;
     --primary-focus: #008DFF;
     --primary-bg: #F0F8FF;
 }
@@ -23,6 +25,7 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
+    color: var(--secondary-color-main);
 }
 
 button {

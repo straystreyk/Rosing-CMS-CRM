@@ -1,7 +1,7 @@
 import React from "react";
 import { CreateProps, EditProps } from "ra-ui-materialui";
-import { useListContext } from "react-admin";
 import Icon from "@material-ui/icons/ImageAspectRatioOutlined";
+import { useParams } from "react-router-dom";
 
 import { ResourceList, ResourceCreate, ResourceEdit } from "../../components/ResourceView";
 import { Show } from "./show";
@@ -10,27 +10,39 @@ import { ListProps } from "../../types";
 import { SearchInput } from "../../components/Inputs/search-input";
 import { sanytizeId } from "../../helpers/form";
 
-export const resource = "media_content/video/series/:id/seasons";
+export const resource = "media_content/video/series/:seriesId/seasons";
 
 const filters = [<SearchInput source="name" alwaysOn />];
 
 export const List: React.FC<ListProps> = (props) => {
+  const { seriesId } = useParams<{ seriesId: string }>();
+
   return (
     <ResourceList
       {...props}
       filters={filters}
-      permanentFilter={props.id ? { seriesId: sanytizeId(props.id) } : {}}
+      basePath={sanytizeId(props.basePath!, /:seriesId/g, seriesId)}
+      permanentFilter={{ seriesId: sanytizeId(seriesId) }}
       resource={resource}
+      breadCrumbsOn
     >
       <Show resource={resource} />
     </ResourceList>
   );
 };
-export const Create: React.FC<CreateProps> = (props) => (
-  <ResourceCreate {...props} resource={resource}>
-    <Form resource={resource} type="create" {...props} />
-  </ResourceCreate>
-);
+export const Create: React.FC<CreateProps> = (props) => {
+  const { seriesId } = useParams<{ seriesId: string }>();
+
+  return (
+    <ResourceCreate
+      {...props}
+      basePath={sanytizeId(props.basePath!, /:seriesId/g, seriesId)}
+      resource={resource}
+    >
+      <Form resource={resource} type="create" {...props} />
+    </ResourceCreate>
+  );
+};
 export const Edit: React.FC<EditProps> = (props) => (
   <ResourceEdit {...props} resource={resource}>
     <Form resource={resource} type="edit" />
