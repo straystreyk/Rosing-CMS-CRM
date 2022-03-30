@@ -390,7 +390,7 @@ export const ImageUploaderV2: React.FC<{
       });
 
       setEdit(false);
-    }, [mutate, source, values]);
+    }, [resource, sourceIds, mutate, values]);
 
     const size = serverImages.length
       ? (_.sumBy(serverImages, (image) => (image.size ? image.size : 0)) / 1024 / 1024).toFixed(2)

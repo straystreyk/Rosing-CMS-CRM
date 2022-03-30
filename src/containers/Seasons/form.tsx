@@ -19,7 +19,7 @@ const Season: React.FC<{
   type: string;
 }> = ({ parentSourceWithIndex, resource, parentSource, index, ...props }) => {
   return (
-    <div>
+    <>
       <TextInput
         resource={resource}
         label="Name"
@@ -44,7 +44,7 @@ const Season: React.FC<{
         multiline
         rows={4}
       />
-    </div>
+    </>
   );
 };
 
@@ -60,6 +60,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
         source="seriesId"
         label="Series id"
         initialValue={sanytizeId(seriesId)}
+        style={{ display: "none" }}
         fullWidth
       />
       {type !== "create" && <Season resource={resource} type={type} />}

@@ -45,6 +45,11 @@
 
 .MoreActionsPopup button {
     margin: 5px 0;
+    width: 100%;
+}
+
+.MoreActionsPopup a {
+    width: 100%;
 }
 
 .MoreActionsButtonWrapper.active .MoreActionsPopup{

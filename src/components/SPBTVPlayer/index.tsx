@@ -106,7 +106,7 @@ interface SpbtvPlayerOptions {
     bufferingSpinner: boolean;
     contextMenu: { enable: boolean };
   };
-  uiConfig?: { hideControls: boolean; focusAtInit?: boolean; autoshowToolbox?: boolean };
+  uiConfig?: { hideControls?: boolean; focusAtInit?: boolean; autoshowToolbox?: boolean };
   playback?: { supportTimeshift?: boolean };
   features?: {
     drm?: boolean;
@@ -128,6 +128,9 @@ const UnsafeSPBTVPlayer: React.FC<{ streamUrl: string }> = ({ streamUrl }) => {
   React.useEffect(() => {
     setPlayer(() =>
       spbtvplayer("playerID", {
+        uiConfig: {
+          focusAtInit: false,
+        },
         streamOpts: {
           autoplay: true,
         },

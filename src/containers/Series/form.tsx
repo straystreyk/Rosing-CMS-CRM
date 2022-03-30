@@ -52,12 +52,10 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const history = useHistory();
 
   const goToSeasons = React.useCallback(() => {
-    if (type === "show") {
-      history.push(history.location.pathname.replace("/show", "") + "/seasons");
-      return;
+    if (formState.values && formState.values.id) {
+      history.push(`/media_content/video/series/${formState.values.id}/seasons`);
     }
-    history.push(history.location.pathname + "/seasons");
-  }, [type, history]);
+  }, [formState, history]);
 
   React.useEffect(() => {
     if (formState.submitFailed) {

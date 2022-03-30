@@ -8,6 +8,7 @@ import { EditForm } from "./edit-form";
 interface EditProps {
   resource: string;
   redirect?: string;
+  basePath?: string;
   id?: string;
 }
 

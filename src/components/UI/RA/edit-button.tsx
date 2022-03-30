@@ -6,7 +6,8 @@ import { EditIcon } from "../../../constants/icons";
 const useStyles = makeStyles({
   EditButton: {
     color: "#005AA3",
-    padding: 0,
+    padding: "2px 5px",
+    minWidth: "auto",
     "& svg": {
       marginLeft: 0,
       marginRight: 6,
@@ -17,6 +18,8 @@ const useStyles = makeStyles({
     },
     "& .MuiButton-label": {
       textTransform: "none",
+      justifyContent: "flex-start",
+      fontFamily: "Gilroy, sans-serif",
     },
     "&:focus": {
       outline: "2px solid #7FC5FF",

@@ -6,7 +6,7 @@ import { DeleteIcon } from "../../../constants/icons";
 const useStyles = makeStyles({
   DeleteButton: {
     color: "#D21C1C",
-    padding: 0,
+    padding: "2px 5px",
     "& svg": {
       marginLeft: 0,
       marginRight: 6,
@@ -17,6 +17,8 @@ const useStyles = makeStyles({
     },
     "& .MuiButton-label": {
       textTransform: "none",
+      fontFamily: "Gilroy, sans-serif",
+      justifyContent: "flex-start",
     },
     "&:focus": {
       outline: "2px solid #7FC5FF",

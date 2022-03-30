@@ -169,21 +169,27 @@ export const en: TranslationMessages = {
       titles: {
         create: "New Season",
         edit: "Edit Season",
-        empty: "No seasons yet",
         list: "Seasons",
       },
       mutations: {
         create: {
-          success: "Seasons was created",
+          success: 'New season "%{name}" was created',
           error: "Cant create seasons: %{error}",
         },
       },
     },
-    episodes: {
+    "media_content/video/seasons/:seasonId/episodes": {
       name: "Episodes",
       titles: {
         create: "New Episode",
         edit: "Edit Episode",
+        list: "Episodes",
+      },
+      mutations: {
+        create: {
+          success: 'New episode "%{name}" was created',
+          error: "Cant create episodes: %{error}",
+        },
       },
     },
     channels: {

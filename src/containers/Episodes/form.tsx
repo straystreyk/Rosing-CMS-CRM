@@ -1,87 +1,126 @@
-import { FC } from 'react';
-import { NumberInput, ReferenceInput, SelectInput, TextInput } from 'react-admin';
+import * as React from "react";
+import { useFormState } from "react-final-form";
 
-import { requiredValidate, parseTimeInput, formatTimeInput } from '../../components/Inputs';
-import { INPUT_LABEL_PROPS } from '../../constants/forms-constants';
-import { FormProps } from '../../types';
+import { FormProps } from "../../types";
+import {
+  ArrayInput,
+  formatTimeInput,
+  parseTimeInput,
+  requiredValidate,
+  TextInput,
+} from "../../components/Inputs";
+import { alwaysEmptyString, sanytizeId, scrollToErrorInput } from "../../helpers/form";
+import { useParams } from "react-router-dom";
+import { INPUT_LABEL_PROPS } from "../../constants/forms-constants";
 
-export const Form: FC<FormProps> = (props) => {
+const FIXED_HEADER_OFFSET = 80;
+
+const Episode: React.FC<{
+  parentSourceWithIndex?: string;
+  parentSource?: string;
+  index?: string;
+  show?: boolean;
+  resource: string;
+  inputType: string;
+}> = ({ parentSourceWithIndex, resource, parentSource, index, inputType, ...props }) => {
   return (
     <>
       <TextInput
-        fullWidth
-        source='name'
-        resource={props.resource}
+        resource={resource}
         validate={requiredValidate}
+        inputType={inputType}
+        label="Name"
+        source={`${parentSourceWithIndex}.name`}
+        fullWidth
+        helperText={
+          "The name of the episode that users will see in any sections of the application"
+        }
       />
       <TextInput
+        resource={resource}
+        inputType={inputType}
+        label="Slug"
+        source={`${parentSourceWithIndex}.slug`}
+        helperText={
+          "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
+        }
         fullWidth
-        source='originalName'
-        resource={props.resource}
-        validate={requiredValidate}
       />
       <TextInput
+        resource={resource}
+        inputType={inputType}
+        source={`${parentSourceWithIndex}.originalName`}
+        label="Original name"
+        helperText={
+          "The original non-localized title of the movie, which users will see only in the description"
+        }
         fullWidth
-        source='slug'
-        resource={props.resource}
-        validate={requiredValidate}
       />
       <TextInput
+        resource={resource}
+        inputType={inputType}
+        label="Number"
+        source={`${parentSourceWithIndex}.number`}
+        fullWidth
+      />
+      <TextInput
+        resource={resource}
+        inputType={inputType}
+        label="Description"
+        source={`${parentSourceWithIndex}.description`}
+        resettable={false}
+        fullWidth
         multiline
-        fullWidth
-        source='description'
-        resource={props.resource}
         rows={4}
       />
       <TextInput
-        fullWidthx
-        source='markers'
-        resource={props.resource}
-        validate={requiredValidate}
-        helperText='Content UI labels: new - blue, popular - red, free - yellow, featured - green'
-      />
-      <NumberInput
-        fullWidth
-        source='number'
-        resource={props.resource}
-        validate={requiredValidate}
-      />
-      <TextInput
-        source='duration'
-        resource={props.resource}
-        type='time'
-        validate={requiredValidate}
+        InputLabelProps={INPUT_LABEL_PROPS}
+        resource={resource}
         parse={parseTimeInput}
         format={formatTimeInput}
-        InputLabelProps={INPUT_LABEL_PROPS}
-      />
-      <NumberInput
+        inputType={inputType}
+        resettable={false}
+        helperText="Specified in hours and minutes. If you leave the field empty, the duration will be filled in automatically after saving, provided that the video file is specified."
+        label="Duration"
+        source={`${parentSourceWithIndex}.duration`}
+        type="time"
         fullWidth
-        source='productionYear'
-        resource={props.resource}
-        validate={requiredValidate}
       />
-      <ReferenceInput
-        label='Stream source'
-        source='streamSourceId'
-        reference='video_files'
-      >
-        <SelectInput
-          fullWidth
-          optionText='name'
+    </>
+  );
+};
+
+export const Form: React.FC<FormProps> = ({ resource, type }) => {
+  const formState = useFormState();
+  const { seasonId } = useParams<{ seasonId: string }>();
+
+  React.useEffect(() => {
+    if (formState.submitFailed) {
+      scrollToErrorInput(FIXED_HEADER_OFFSET);
+    }
+  }, [formState.submitFailed]);
+
+  return (
+    <>
+      <TextInput
+        resource={resource}
+        inputType={type}
+        source="seasonId"
+        label="Series id"
+        initialValue={sanytizeId(seasonId)}
+        style={{ display: "none" }}
+        fullWidth
+      />
+      {type !== "create" && <Episode resource={resource} inputType={type} />}
+      {type === "create" && (
+        <ArrayInput
+          source="episodes"
+          getItemLabel={alwaysEmptyString}
+          ChildComponent={Episode}
+          resource={resource}
+          inputType={type}
         />
-      </ReferenceInput>
-      <ReferenceInput
-        label='Seasons'
-        source='seasonId'
-        reference='seasons'
-        validate={requiredValidate}
-      >
-        <SelectInput
-          fullWidth
-          optionText='name'
-        />
-      </ReferenceInput>
+      )}
     </>
   );
 };

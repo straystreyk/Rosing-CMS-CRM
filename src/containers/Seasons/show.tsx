@@ -7,6 +7,7 @@ import { StandardButton } from "../../components/UI/Buttons/standard-button";
 import { EditIcon, ResourceCountEpisodesIcon } from "../../constants/icons";
 import { MoreActionsButton } from "../../components/UI/Buttons/MoreActionsButton";
 import { DeleteButton } from "../../components/UI/RA/delete-button";
+import { EditButton } from "../../components/UI/RA/edit-button";
 
 interface ShowInterface {
   resource: string;
@@ -15,13 +16,6 @@ interface ShowInterface {
 
 export const Show: React.FC<ShowInterface> = (props) => {
   const history = useHistory();
-
-  const editSeason: (id: string) => void = React.useCallback(
-    (id) => {
-      history.push(history.location.pathname + "/" + id);
-    },
-    [history]
-  );
 
   return (
     <Datagrid empty={<EmptyTablePage />} {...props} optimized>
@@ -33,6 +27,7 @@ export const Show: React.FC<ShowInterface> = (props) => {
             startIcon={<ResourceCountEpisodesIcon color="var(--accent-color)" />}
             variant="text"
             customColor="var(--accent-color)"
+            onClick={() => history.push(`/media_content/video/seasons/${record.id}/episodes`)}
           >
             Episodes ({record.episodes.length})
           </StandardButton>
@@ -42,14 +37,7 @@ export const Show: React.FC<ShowInterface> = (props) => {
         label=""
         render={(record: { id: string; episodes: { id: string }[] }) => (
           <MoreActionsButton>
-            <StandardButton
-              color="secondary"
-              variant="text"
-              onClick={() => editSeason(record.id)}
-              startIcon={<EditIcon color="var(--primary-button-default)" />}
-            >
-              Edit
-            </StandardButton>
+            <EditButton color="secondary" record={record} basePath={history.location.pathname} />
             <DeleteButton record={record} basePath={history.location.pathname} />
           </MoreActionsButton>
         )}
