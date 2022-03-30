@@ -30,10 +30,12 @@ const useStyles = makeStyles((theme) => ({
   GroupHelperText: {
     fontFamily: "Gilroy, sans-serif",
     fontSize: 12,
+    marginBottom: 8,
     color: "var(--secondary-color-default)",
     lineHeight: "16px",
   },
   ArrayInputWrapper: {
+    paddingBottom: 8,
     "& .MuiFormControl-marginNormal": {
       marginTop: 0,
     },

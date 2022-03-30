@@ -23,6 +23,7 @@ export interface ReferenceCustomInputProps {
   index?: number | string;
   helperText?: string | any[];
   fullWidth?: boolean;
+  checkBoxLabel?: string;
 }
 
 interface ReferenceCustomInputElementProps {

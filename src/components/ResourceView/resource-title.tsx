@@ -76,8 +76,6 @@ export const ResourceTitle: React.FC<TitleProps> = ({
   const date = values.updatedAt ? new Date(values.updatedAt).toLocaleDateString() : "";
   const time = values.updatedAt ? new Date(values.updatedAt).toLocaleTimeString() : "";
 
-  console.log(breadCrumbsOn);
-
   const translate = useTranslate();
   const classes = useStyles();
 

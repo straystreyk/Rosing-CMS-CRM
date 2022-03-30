@@ -82,6 +82,10 @@ export const en: TranslationMessages = {
           success: 'New movie "%{name}" was created',
           error: "Cant create movie: %{error}",
         },
+        edit: {
+          success: "Movie was updated",
+          error: "Cant update movie: %{error}",
+        },
       },
       fields: {
         name: "Name",
@@ -142,6 +146,10 @@ export const en: TranslationMessages = {
           success: 'New video file "%{name}" was created',
           error: "Cant create video file: %{error}",
         },
+        edit: {
+          success: "Video file was updated",
+          error: "Cant update video file: %{error}",
+        },
       },
       filtersLabels: {
         name: "Name",
@@ -162,6 +170,10 @@ export const en: TranslationMessages = {
           success: 'New series "%{name}" was created',
           error: "Cant create series: %{error}",
         },
+        edit: {
+          success: "Series was updated",
+          error: "Cant update series: %{error}",
+        },
       },
     },
     "media_content/video/series/:seriesId/seasons": {
@@ -176,6 +188,10 @@ export const en: TranslationMessages = {
           success: 'New season "%{name}" was created',
           error: "Cant create seasons: %{error}",
         },
+        edit: {
+          success: "Season was updated",
+          error: "Cant update season: %{error}",
+        },
       },
     },
     "media_content/video/seasons/:seasonId/episodes": {
@@ -189,6 +205,10 @@ export const en: TranslationMessages = {
         create: {
           success: 'New episode "%{name}" was created',
           error: "Cant create episodes: %{error}",
+        },
+        edit: {
+          success: "Episode was updated",
+          error: "Cant update episode: %{error}",
         },
       },
     },

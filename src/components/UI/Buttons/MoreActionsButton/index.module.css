@@ -44,12 +44,13 @@
 }
 
 .MoreActionsPopup button {
-    margin: 5px 0;
+    margin: 2px 0;
     width: 100%;
 }
 
 .MoreActionsPopup a {
     width: 100%;
+    margin: 2px 0;
 }
 
 .MoreActionsButtonWrapper.active .MoreActionsPopup{

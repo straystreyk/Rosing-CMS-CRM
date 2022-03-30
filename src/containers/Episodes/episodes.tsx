@@ -24,7 +24,7 @@ export const List: React.FC<ListProps> = (props) => {
       permanentFilter={{ seasonId: sanytizeId(seasonId) }}
       resource={resource}
     >
-      <Show resource={resource} />
+      <Show resource={resource} basePath={sanytizeId(props.basePath!, /:seasonId/g, seasonId)} />
     </ResourceList>
   );
 };
@@ -41,10 +41,18 @@ export const Create: React.FC<CreateProps> = (props) => {
     </ResourceCreate>
   );
 };
-export const Edit: React.FC<EditProps> = (props) => (
-  <ResourceEdit {...props} resource={resource}>
-    <Form resource={resource} type="edit" />
-  </ResourceEdit>
-);
+export const Edit: React.FC<EditProps> = (props) => {
+  const { seasonId } = useParams<{ seasonId: string }>();
+
+  return (
+    <ResourceEdit
+      {...props}
+      resource={resource}
+      basePath={sanytizeId(props.basePath!, /:seasonId/g, seasonId)}
+    >
+      <Form resource={resource} type="edit" />
+    </ResourceEdit>
+  );
+};
 
 export { Icon };

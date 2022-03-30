@@ -5,6 +5,7 @@ import { FormProps } from "../../types";
 import {
   ArrayInput,
   formatTimeInput,
+  NumberInput,
   parseTimeInput,
   requiredValidate,
   TextInput,
@@ -30,7 +31,7 @@ const Episode: React.FC<{
         validate={requiredValidate}
         inputType={inputType}
         label="Name"
-        source={`${parentSourceWithIndex}.name`}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.name` : "name"}
         fullWidth
         helperText={
           "The name of the episode that users will see in any sections of the application"
@@ -40,7 +41,7 @@ const Episode: React.FC<{
         resource={resource}
         inputType={inputType}
         label="Slug"
-        source={`${parentSourceWithIndex}.slug`}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.slug` : "slug"}
         helperText={
           "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
         }
@@ -49,25 +50,25 @@ const Episode: React.FC<{
       <TextInput
         resource={resource}
         inputType={inputType}
-        source={`${parentSourceWithIndex}.originalName`}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.originalName` : "originalName"}
         label="Original name"
         helperText={
           "The original non-localized title of the movie, which users will see only in the description"
         }
         fullWidth
       />
-      <TextInput
+      <NumberInput
         resource={resource}
         inputType={inputType}
         label="Number"
-        source={`${parentSourceWithIndex}.number`}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.number` : "number"}
         fullWidth
       />
       <TextInput
         resource={resource}
         inputType={inputType}
         label="Description"
-        source={`${parentSourceWithIndex}.description`}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.description` : "description"}
         resettable={false}
         fullWidth
         multiline
@@ -82,7 +83,7 @@ const Episode: React.FC<{
         resettable={false}
         helperText="Specified in hours and minutes. If you leave the field empty, the duration will be filled in automatically after saving, provided that the video file is specified."
         label="Duration"
-        source={`${parentSourceWithIndex}.duration`}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.duration` : "duration"}
         type="time"
         fullWidth
       />
