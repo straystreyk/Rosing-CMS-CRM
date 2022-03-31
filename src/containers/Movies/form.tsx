@@ -21,7 +21,11 @@ import { GroupInputsOrigin } from "../../components/GroupInputs";
 import { FormTabs } from "../../components/Tabs/form-tabs";
 import { ScrollTopButton } from "../../components/UI/Buttons/scroll-top-button";
 import { ImageUploaderV2 } from "../../components/ImageUploader";
-import { EXTRA_VIDEO_TYPES, INPUT_LABEL_PROPS } from "../../constants/forms-constants";
+import {
+  EXTRA_VIDEO_TYPES,
+  INPUT_LABEL_PROPS,
+  SELECT_MARKERS,
+} from "../../constants/forms-constants";
 import { FormSection } from "../../components/FormSection";
 import { ReferenceCustomInput } from "../../components/Inputs/ReferenceInputs/reference-custom-input";
 import {
@@ -167,16 +171,17 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           type="time"
           fullWidth
         />
-        <ReferenceCustomInput
-          component={SelectInput}
-          query={ALL_RIGHT_HOLDERS}
-          inputType={type}
-          resource={resource}
+        <ReferenceInput
           label="Right Holder"
           source="rightHolderId"
-          idName="id"
-          helperText="The company - the copyright holder of the film"
-        />
+          reference="right_holders"
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <SelectInput
+            optionText="name"
+            helperText="The company - the copyright holder of the film"
+          />
+        </ReferenceInput>
         <SelectInput
           resource={resource}
           choices={getYearsChoices()}
@@ -202,6 +207,12 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
             label="IMDB ID"
           />
         </GroupInputsOrigin>
+        <AutocompleteArrayInput
+          source="markers"
+          label="Label"
+          choices={SELECT_MARKERS}
+          helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
+        />
         <NumberInput
           source="position"
           label="Position"
@@ -212,7 +223,6 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          fullWidth
           helperText={
             "A pair of custom fields that can be used for filtering. You can add multiple pairs."
           }
@@ -221,6 +231,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           label="Metadata"
           groupInputs
           switchable
+          fullWidth
         />
       </FormSection>
       <FormSection

@@ -3,11 +3,14 @@ import { FormProps } from "../../types";
 import { ArrayInput, TextInput } from "../../components/Inputs";
 import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { ArrayInputStyles } from "../../components/Models/CastMembers/styles";
+import { ArrayInputStyles as ArrayInputItemStyles } from "../../components/Models/CastMembers/styles";
 import { alwaysEmptyString, sanytizeId } from "../../helpers/form";
 
 const useStyles = makeStyles({
-  ArrayInputStyles,
+  ArrayInputItemStyles,
+  ArrayInputWrapper: {
+    marginTop: 15,
+  },
 });
 
 const Season: React.FC<{
@@ -48,7 +51,7 @@ const Season: React.FC<{
   );
 };
 
-export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
+export const Form: React.FC<FormProps> = ({ resource, type }) => {
   const classes = useStyles();
   const { seriesId } = useParams<{ seriesId: string }>();
 
@@ -69,8 +72,9 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
           source="seasons"
           getItemLabel={alwaysEmptyString}
           ChildComponent={Season}
-          itemClass={classes.ArrayInputStyles}
           resource={resource}
+          itemClass={classes.ArrayInputItemStyles}
+          inputClass={classes.ArrayInputWrapper}
           inputType={type}
         />
       )}

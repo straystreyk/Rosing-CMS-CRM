@@ -36,6 +36,7 @@ export const Create: React.FC<CreateProps> = (props) => {
       {...props}
       resource={resource}
       basePath={sanytizeId(props.basePath!, /:seasonId/g, seasonId)}
+      offRedirectButton
     >
       <Form resource={resource} type="create" />
     </ResourceCreate>

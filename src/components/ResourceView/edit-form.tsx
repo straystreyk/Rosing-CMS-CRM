@@ -59,6 +59,7 @@ interface EditFormProps {
   redirectButtonLabel?: string;
   redirectButtonIcon?: React.ReactElement;
   CustomToolbar?: React.FC;
+  offRedirectButton?: boolean;
   form?: string;
   offTitle?: boolean;
 }
@@ -108,21 +109,21 @@ export const Toolbar = (props: any) => {
           onSuccess={props.onSuccess}
           onFailure={props.onFailure}
         />
-        {props.formType !== "edit" && (
+        {props.formType !== "edit" && !props.offRedirectButton ? (
           <SaveButton
             label={props.redirectButtonLabel ?? `Save and add another one`}
             icon={props.redirectButtonIcon ?? <PlusIcon color="#fff" />}
             onSuccess={props.onSuccessWithRedirect ?? props.onSuccess}
             onFailure={props.onFailure}
           />
-        )}
+        ) : null}
       </ToolbarRA>
     </div>
   );
 };
 
 export const EditForm: React.FC<EditFormProps> = React.memo(
-  ({ offToolbar, offTitle, form, ...props }) => {
+  ({ offToolbar, offTitle, form, offRedirectButton, ...props }) => {
     const classes = useStyles();
     return (
       <>
@@ -159,6 +160,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
                           formType={form}
                           redirect={props.redirect}
                           resource={props.resource}
+                          offRedirectButton={offRedirectButton}
                         />
                       )}
                     </form>

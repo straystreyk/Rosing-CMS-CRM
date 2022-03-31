@@ -28,6 +28,7 @@ export interface ArrayInputProps {
   addReorder?: boolean;
   draggable?: boolean;
   itemClass?: string;
+  inputClass?: string;
   ChildComponent: any;
   resettable?: boolean;
   query?: any;
@@ -144,6 +145,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
     draggable,
     itemClass,
     resettable,
+    inputClass,
     query,
     ChildComponent,
     ...props
@@ -190,7 +192,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
     );
 
     return (
-      <div>
+      <div className={inputClass}>
         {label && (
           <span className={classes.GroupInputsLabel}>
             <span>{label}</span>

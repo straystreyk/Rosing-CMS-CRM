@@ -15,6 +15,7 @@ import {
 import { SPBTVPlayer } from "../../components/SPBTVPlayer";
 import { scrollToErrorInput } from "../../helpers/form";
 import { useFormState } from "react-final-form";
+import { CheckBoxGroup } from "../../components/UI/MaterialUI/check-box-group";
 
 const FIXED_HEADER_OFFSET = 80;
 
@@ -83,26 +84,30 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
         helperText="The default template https://{host}{/encoded_session}{/signature}{/bucket*}{/streaming_uid}{+protocol_suffix}{?params*}"
         fullWidth
       />
-      <ReferenceCustomInput
-        component={AutocompleteArrayInput}
-        inputType={type}
-        query={ALL_COUNTRIES}
-        resource={resource}
-        fullWidth
-        source="allowedCountries"
-        label="Allowed Countries"
-        idName="alpha2"
-      />
-      <ReferenceCustomInput
-        component={AutocompleteArrayInput}
-        inputType={type}
-        query={ALL_COUNTRIES}
-        resource={resource}
-        fullWidth
-        label="Disallowed countries"
-        source="disallowedCountries"
-        idName="alpha2"
-      />
+      <CheckBoxGroup initialSourceState="allowedCountries">
+        <ReferenceCustomInput
+          component={AutocompleteArrayInput}
+          inputType={type}
+          query={ALL_COUNTRIES}
+          resource={resource}
+          source="allowedCountries"
+          checkBoxLabel="Allowed Countries"
+          helperText="The list of countries in which the film is available, access is prohibited for other countries. Leave the field empty if access is allowed for all countries."
+          label=""
+          idName="alpha2"
+        />
+        <ReferenceCustomInput
+          component={AutocompleteArrayInput}
+          inputType={type}
+          query={ALL_COUNTRIES}
+          resource={resource}
+          checkBoxLabel="Disallowed countries"
+          helperText="List of countries where the film is not available"
+          label=""
+          source="disallowedCountries"
+          idName="alpha2"
+        />
+      </CheckBoxGroup>
       {type === "show" && <SPBTVPlayer streamSourceId={props.id ? props.id : ""} />}
     </>
   );

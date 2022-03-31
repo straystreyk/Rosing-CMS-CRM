@@ -14,9 +14,14 @@ interface CreateProps {
   redirectButtonLabel?: string;
   redirectButtonIcon?: React.ReactElement;
   messageArgs?: Record<string, string>;
+  offRedirectButton?: boolean;
 }
 
-export const ResourceCreate: React.FC<CreateProps> = ({ ...props }) => {
+export const ResourceCreate: React.FC<CreateProps> = ({
+  onSuccessWithRedirect,
+  offRedirectButton,
+  ...props
+}) => {
   const notify = useNotify();
   const redirect = useRedirect();
   const refresh = useRefresh();
@@ -51,11 +56,12 @@ export const ResourceCreate: React.FC<CreateProps> = ({ ...props }) => {
         <EditForm
           onSuccess={props.onSuccess ?? onSuccess}
           onFailure={props.onFailure ?? onFailure}
-          onSuccessWithRedirect={props.onSuccessWithRedirect}
+          onSuccessWithRedirect={onSuccessWithRedirect}
           redirectButtonLabel={props.redirectButtonLabel}
           redirectButtonIcon={props.redirectButtonIcon}
           redirect={props.redirect}
           resource={props.resource}
+          offRedirectButton={offRedirectButton}
           form="create"
         >
           <Box style={{ position: "relative" }} p={{ xs: "0px 24px 100px 24px" }}>
