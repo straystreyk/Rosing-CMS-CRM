@@ -79,10 +79,18 @@ export const lightTheme = {
         width: "100%",
       },
     },
+    RaFilterForm: {
+      form: {
+        minHeight: "auto",
+        marginTop: "unset",
+      },
+    },
     RaListToolbar: {
       toolbar: {
         "@media (min-width: 0px)": {
           paddingLeft: 24,
+          display: "flex",
+          alignItems: "center",
         },
       },
     },

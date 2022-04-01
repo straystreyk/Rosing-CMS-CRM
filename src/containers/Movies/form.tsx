@@ -54,6 +54,14 @@ const useStyles = makeStyles((theme) => ({
 
 const FIXED_HEADER_OFFSET = 130;
 const INPUT_ITEMS_PER_PAGE = 25;
+const FIXED_TAB_LABELS = [
+  "Attributes",
+  "Actors and creative team",
+  "Images",
+  "Source",
+  "Advertisement",
+  "Terms of publication",
+];
 
 export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
   const classes = useStyles();
@@ -67,16 +75,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
 
   return (
     <>
-      <FormTabs
-        labels={[
-          "Attributes",
-          "Actors and creative team",
-          "Images",
-          "Source",
-          "Advertisement",
-          "Terms of publication",
-        ]}
-      />
+      <FormTabs labels={FIXED_TAB_LABELS} />
       <FormSection
         text="Attributes are used to visually represent the movie in the app and help the user make a choice.
           The more detailed the section is, the higher the probability of the movie getting into the search results and filtering in the application."
@@ -153,7 +152,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           inputType={type}
           query={ALL_PRODUCTION_COUNTRIES}
           label="Production countries"
-          source="productionCountriesIds"
+          source="productionCountryIds"
           helperText="You can select several countries from the list"
           resource={resource}
           idName="id"
@@ -171,17 +170,16 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           type="time"
           fullWidth
         />
-        <ReferenceInput
+        <ReferenceCustomInput
+          component={SelectInput}
+          query={ALL_RIGHT_HOLDERS}
+          inputType={type}
+          resource={resource}
           label="Right Holder"
           source="rightHolderId"
-          reference="right_holders"
-          perPage={INPUT_ITEMS_PER_PAGE}
-        >
-          <SelectInput
-            optionText="name"
-            helperText="The company - the copyright holder of the film"
-          />
-        </ReferenceInput>
+          idName="id"
+          helperText="The company - the copyright holder of the film"
+        />
         <SelectInput
           resource={resource}
           choices={getYearsChoices()}
@@ -282,6 +280,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         >
           <AutocompleteArrayInput
             optionText="name"
+            validate={requiredValidate}
             helperText={
               "You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
             }
@@ -404,6 +403,34 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
             source="disallowedCountries"
             idName="alpha2"
           />
+        </CheckBoxGroup>
+        <CheckBoxGroup initialSourceState="allowedApiClientsIds">
+          <ReferenceInput
+            label=""
+            source="allowedApiClientsIds"
+            reference="api_clients"
+            checkBoxLabel="Allowed api clients"
+            perPage={INPUT_ITEMS_PER_PAGE}
+          >
+            <AutocompleteArrayInput
+              optionText="name"
+              inputType={type}
+              helperText="The list of API clients for which access to the series is allowed, access is denied for other API clients. Leave the field empty if access is allowed for all API clients."
+            />
+          </ReferenceInput>
+          <ReferenceInput
+            label=""
+            source="forbiddenApiClientsIds"
+            reference="api_clients"
+            checkBoxLabel="Forbidden api clients"
+            perPage={INPUT_ITEMS_PER_PAGE}
+          >
+            <AutocompleteArrayInput
+              optionText="name"
+              inputType={type}
+              helperText="List of API clients for which access to the series is prohibited"
+            />
+          </ReferenceInput>
         </CheckBoxGroup>
       </FormSection>
       <ScrollTopButton />

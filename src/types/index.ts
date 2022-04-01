@@ -1,4 +1,4 @@
-import { ReactChildren, ReactElement } from "react";
+import { ReactChildren, ReactElement, FC } from "react";
 import {
   useListController,
   ReduxState,
@@ -28,6 +28,7 @@ export interface ListProps {
   breadCrumbsOn?: boolean;
   location?: Location;
   empty?: ReactElement;
+  toolbar?: FC<{ basePath: string; buttonLabel: string }>;
 }
 
 export interface FormProps {

@@ -9,6 +9,7 @@ interface ReferenceInputProps {
   helperText?: string;
   children: React.PropsWithChildren<JSX.Element>;
   perPage?: number;
+  checkBoxLabel?: string;
 }
 
 const useStyles = makeStyles({

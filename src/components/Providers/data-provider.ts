@@ -31,6 +31,8 @@ const getGqlResource = (resource: string) => {
       return "Channel";
     case "episodes":
       return "Episode";
+    case "api_clients":
+      return "ApiClient";
     case "genres":
       return "Genre";
     case "media_content/radio/radio_stations":

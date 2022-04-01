@@ -5,7 +5,7 @@ import { labelStyles } from "../../Inputs/styles";
 
 const useStyles = makeStyles({
   CheckBoxGroup: {
-    marginTop: 8,
+    paddingTop: 8,
   },
   label: {
     marginRight: 25,

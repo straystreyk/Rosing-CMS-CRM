@@ -1,34 +1,51 @@
-import * as React from 'react';
-import { ExportButton as ExportButtonRA, ExportButtonProps } from 'ra-ui-materialui';
-import { makeStyles } from '@material-ui/core';
+import * as React from "react";
+import cn from "classnames";
+import { ExportButton as ExportButtonRA, ExportButtonProps } from "ra-ui-materialui";
+import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   ExportButton: {
-    '& .MuiButton-startIcon': {
-      marginLeft: 0,
-      marginRight: 6,
+    "& .MuiButton-label": {
+      "& svg": {
+        marginRight: 6,
+      },
+      "& span": {
+        paddingLeft: 0,
+        textTransform: "none",
+        fontFamily: "Gilroy, sans-serif",
+      },
     },
-    '& .MuiButton-label span': {
-      paddingLeft: 0,
+    "&:focus": {
+      outline: "2px solid #7FC5FF",
+      outlineOffset: "2px",
     },
-    '&:focus': {
-      outline: '2px solid #7FC5FF',
-      outlineOffset: '2px',
+  },
+  ExportButtonText: {
+    "&.MuiButtonBase-root": {
+      backgroundColor: "unset",
     },
   },
 });
 
-export const ExportButton: React.FC<ExportButtonProps> = ({ startIcon, label, basePath, endIcon }) => {
+export const ExportButton: React.FC<ExportButtonProps> = ({
+  label,
+  basePath,
+  endIcon,
+  variant,
+  color,
+  icon,
+}) => {
   const classes = useStyles();
 
   return (
     <ExportButtonRA
-      className={classes.ExportButton}
+      className={cn(classes.ExportButton, variant === "text" && classes.ExportButtonText)}
       endIcon={endIcon}
-      startIcon={startIcon}
+      variant={variant}
+      color={color}
       basePath={basePath}
       label={label}
-      icon={<></>}
+      icon={icon}
     />
   );
 };

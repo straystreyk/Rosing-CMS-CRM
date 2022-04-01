@@ -68,6 +68,7 @@ export const App = () => {
       <Resource name="castMembers" />
       <Resource name="countries" />
       <Resource name="production_countries" />
+      <Resource name="api_clients" />
     </Admin>
   );
 };

@@ -1,41 +1,50 @@
 import * as React from "react";
-import { CreateButton as CreateButtonRA, CreateButtonProps } from "ra-ui-materialui";
+import {
+  CreateButton as CreateButtonRA,
+  CreateButtonProps as CreateButtonPropsRA,
+} from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
+import cn from "classnames";
 
 const useStyles = makeStyles({
   CreateButton: {
-    padding: "8px 16px",
-    fontFamily: "Gilroy, sans-serif",
-    "& svg": {
-      marginLeft: 0,
-      marginRight: 6,
-    },
-    "& span": {
-      fontSize: 14,
-      padding: 0,
-    },
     "& .MuiButton-label": {
-      textTransform: "none",
+      "& svg": {
+        marginRight: 6,
+      },
+      "& span": {
+        paddingLeft: 0,
+        textTransform: "none",
+        fontFamily: "Gilroy, sans-serif",
+      },
     },
     "&:focus": {
       outline: "2px solid #7FC5FF",
       outlineOffset: "2px",
     },
-    "&.MuiFab-root": {
-      "& svg": {
-        margin: 0,
-      },
+  },
+  CreateButtonText: {
+    padding: "4px 5px",
+    "&.MuiButtonBase-root": {
+      backgroundColor: "unset",
     },
   },
 });
+
+interface CreateButtonProps extends CreateButtonPropsRA {
+  customColor?: string;
+}
 
 export const CreateButton: React.FC<CreateButtonProps> = ({
   basePath,
   endIcon,
   startIcon,
   label,
-  icon,
   to,
+  customColor,
+  color,
+  variant,
+  icon,
 }) => {
   const classes = useStyles();
 
@@ -43,10 +52,11 @@ export const CreateButton: React.FC<CreateButtonProps> = ({
     <CreateButtonRA
       icon={icon}
       endIcon={endIcon}
-      className={classes.CreateButton}
+      className={cn(classes.CreateButton, variant === "text" && classes.CreateButtonText)}
       to={to}
+      style={{ color: customColor ?? "" }}
+      color={color}
       basePath={basePath}
-      startIcon={startIcon}
       label={label}
     />
   );

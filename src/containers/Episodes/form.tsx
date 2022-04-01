@@ -13,8 +13,16 @@ import {
 import { alwaysEmptyString, sanytizeId, scrollToErrorInput } from "../../helpers/form";
 import { useParams } from "react-router-dom";
 import { INPUT_LABEL_PROPS } from "../../constants/forms-constants";
+import { makeStyles } from "@material-ui/core/styles";
+import { ArrayInputStyles as ArrayInputItemStyles } from "../../components/Models/CastMembers/styles";
 
 const FIXED_HEADER_OFFSET = 80;
+const useStyles = makeStyles({
+  ArrayInputItemStyles,
+  ArrayInputWrapper: {
+    marginTop: 15,
+  },
+});
 
 const Episode: React.FC<{
   parentSourceWithIndex?: string;
@@ -93,6 +101,7 @@ const Episode: React.FC<{
 
 export const Form: React.FC<FormProps> = ({ resource, type }) => {
   const formState = useFormState();
+  const classes = useStyles();
   const { seasonId } = useParams<{ seasonId: string }>();
 
   React.useEffect(() => {
@@ -117,6 +126,8 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
         <ArrayInput
           source="episodes"
           getItemLabel={alwaysEmptyString}
+          itemClass={classes.ArrayInputItemStyles}
+          inputClass={classes.ArrayInputWrapper}
           ChildComponent={Episode}
           resource={resource}
           inputType={type}

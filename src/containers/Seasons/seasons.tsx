@@ -9,10 +9,41 @@ import { Form } from "./form";
 import { ListProps } from "../../types";
 import { SearchInput } from "../../components/Inputs/search-input";
 import { sanytizeId } from "../../helpers/form";
+import { ExportButton } from "../../components/UI/RA/export-button";
+import { CreateButton } from "../../components/UI/RA/create-button";
+import { ExportButtonIcon, ResourceAddIcon } from "../../constants/icons";
+import { SelectInput } from "../../components/Inputs";
+import { FilterButton } from "../../components/UI/RA/filter-button";
 
 export const resource = "media_content/video/series/:seriesId/seasons";
+const filters = [
+  <SearchInput placeholder="Name, id or slug of season" source="name" alwaysOn />,
+  <SelectInput source="Test" />,
+];
 
-const filters = [<SearchInput source="name" alwaysOn />];
+const Toolbar: React.FC<{ basePath: string; buttonLabel: string }> = ({
+  basePath,
+  buttonLabel,
+}) => {
+  return (
+    <>
+      <CreateButton
+        label={buttonLabel}
+        variant="text"
+        customColor="var(--accent-color)"
+        to={basePath + "/create"}
+        icon={<ResourceAddIcon color="var(--accent-color)" />}
+      />
+      <ExportButton
+        icon={<ExportButtonIcon color="var(--primary-button-default)" />}
+        variant="text"
+        color="secondary"
+        label="Download"
+      />
+      <FilterButton variant="text" />
+    </>
+  );
+};
 
 export const List: React.FC<ListProps> = (props) => {
   const { seriesId } = useParams<{ seriesId: string }>();
@@ -21,6 +52,7 @@ export const List: React.FC<ListProps> = (props) => {
     <ResourceList
       {...props}
       filters={filters}
+      toolbar={Toolbar}
       basePath={sanytizeId(props.basePath!, /:seriesId/g, seriesId)}
       permanentFilter={{ seriesId: sanytizeId(seriesId) }}
       resource={resource}

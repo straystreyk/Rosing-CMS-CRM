@@ -40,12 +40,19 @@ const ToolBar = (props: any) => {
   return (
     <div>
       <TopToolbar className={styles.TopToolBar}>
-        <CreateButton
-          icon={<PlusIcon color="#fff" />}
-          label={"Create " + translate(`resources.${props.resource}.name`)}
-          basePath={props.basePath}
-          to={props.basePath + "/create"}
-        />
+        {props.toolbar ? (
+          <props.toolbar
+            basePath={props.basePath}
+            buttonLabel={"Create " + translate(`resources.${props.resource}.name`)}
+          />
+        ) : (
+          <CreateButton
+            icon={<PlusIcon color="#fff" />}
+            label={"Create " + translate(`resources.${props.resource}.name`)}
+            basePath={props.basePath}
+            to={props.basePath + "/create"}
+          />
+        )}
       </TopToolbar>
       {context.filtersArray ? <Filters /> : null}
     </div>
@@ -63,6 +70,7 @@ export const ResourceList: FC<ListProps> = ({
   empty,
   breadCrumbsOn,
   form,
+  toolbar,
   ...props
 }) => {
   const [filter, setFilter] = useState<object>(permanentFilter ?? {});
@@ -74,6 +82,7 @@ export const ResourceList: FC<ListProps> = ({
         <EditForm offToolbar offTitle resource={props.resource}>
           <ResourceTitle
             breadCrumbsOn={breadCrumbsOn}
+            filter={filter}
             name={props.resource}
             form={form ?? "list"}
           />
@@ -86,9 +95,8 @@ export const ResourceList: FC<ListProps> = ({
         perPage={15}
         filters={props.filters}
         filter={filter}
-        sort={{ field: "streamingUid", order: "DESC" }}
         pagination={<PostPagination />}
-        actions={<ToolBar {...props} />}
+        actions={<ToolBar toolbar={toolbar} {...props} />}
         aside={<FilterSidebar sideFilters={sideFilters} />}
         basePath={props.basePath}
       >

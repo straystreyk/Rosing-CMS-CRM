@@ -13,7 +13,7 @@ interface ShowProps {
 export const Show: React.FC<ShowProps> = (props) => {
   return (
     <Datagrid {...props} optimized empty={<EmptyTablePage />}>
-      <TextField source="name" label="Episode" />
+      <TextField source="name" label="Name" />
       <FunctionField
         label=""
         render={(record: { id: string; episodes: { id: string }[] }) => (

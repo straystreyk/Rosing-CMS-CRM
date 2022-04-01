@@ -3,6 +3,10 @@
     padding: 100px 24px;
 }
 
+.EmptyPageWrapper + div.MuiCardContent-root {
+    display: none;
+}
+
 .EmptyPageWrapper p {
     color: var(--secondary-color-default);
     margin-top: 4px;

@@ -1,10 +1,11 @@
 import * as React from "react";
 import cn from "classnames";
-import { useHistory, Link, useLocation, useParams } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 
 import { breadcrumbsLinks } from "../../constants/breadcrumbs-link";
 import { useFormState } from "react-final-form";
+import { useListContext } from "react-admin";
 
 interface BreadcrumbsProps {
   className?: string;
@@ -33,8 +34,8 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
     location: { pathname },
   } = useHistory();
   const classes = useStyles();
-  const { values } = useFormState();
   const location = useLocation();
+  const { values } = useFormState();
   const [breadCrumbs, setBreadCrumbs] = React.useState(breadcrumbsLinks);
 
   const isAlreadyIn = !!breadCrumbs.filter((el) => el.name === values.name).length;

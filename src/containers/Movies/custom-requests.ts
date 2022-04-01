@@ -3,11 +3,9 @@ import { gql } from "@apollo/client";
 export const GET_ONE_MOVIE = gql`
   query Movie($id: ID!) {
     data: Movie(id: $id) {
-      allowedApiClients
+      allowedApiClientIds
       allowedCountries
       altDescription
-      availableEnd
-      availableStart
       castMembers {
         id
         characterName
@@ -39,7 +37,7 @@ export const GET_ONE_MOVIE = gql`
       downloadable
       duration
       firstMidRollOffset
-      forbiddenApiClients
+      forbiddenApiClientIds
       genreIds
       id
       images {
@@ -56,7 +54,7 @@ export const GET_ONE_MOVIE = gql`
       }
       imdbId
       kinopoiskId
-      languages
+      languageIds
       markers
       metadata
       midRollCount
@@ -65,7 +63,7 @@ export const GET_ONE_MOVIE = gql`
       originalName
       position
       preRollCount
-      productionCountriesIds
+      productionCountryIds
       productionYear
       published
       releaseDate
@@ -84,7 +82,7 @@ export const GET_ONE_MOVIE = gql`
       slug
       storageTime
       streamSourceIds
-      studios
+      studioIds
       updatedAt
       __typename
     }
