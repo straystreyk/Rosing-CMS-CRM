@@ -7,6 +7,7 @@ import {
   AutocompleteArrayInput,
   NumberInput,
   requiredValidate,
+  RichTextInput,
   TextInput,
 } from "../../components/Inputs";
 import { ReferenceCustomInput } from "../../components/Inputs/ReferenceInputs/reference-custom-input";
@@ -46,15 +47,11 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           }
           fullWidth
         />
-        <TextInput
+        <RichTextInput
           resource={resource}
           inputType={type}
           label="Description"
           source="description"
-          resettable={false}
-          fullWidth
-          multiline
-          rows={4}
         />
         <ReferenceCustomInput
           component={AutocompleteArrayInput}

@@ -62,7 +62,7 @@ export const GET_ONE_SERIES = gql`
       name
       originalName
       productionYear
-      productionCountriesIds
+      productionCountryIds
       releaseDate
       rightHolder {
         id

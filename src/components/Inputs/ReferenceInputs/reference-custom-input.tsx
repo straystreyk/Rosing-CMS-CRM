@@ -17,6 +17,7 @@ export interface ReferenceCustomInputProps {
   name?: string;
   dependencySource?: string;
   dependencyName?: string;
+  validate?: any;
   dependencyIdName?: string;
   dependencyLabel?: string;
   parentSource?: string;

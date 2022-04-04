@@ -8,9 +8,10 @@ import {
   NumberInput,
   parseTimeInput,
   requiredValidate,
+  RichTextInput,
   TextInput,
 } from "../../components/Inputs";
-import { alwaysEmptyString, sanytizeId, scrollToErrorInput } from "../../helpers/form";
+import { alwaysEmptyString, sanitizeId, scrollToErrorInput } from "../../helpers/form";
 import { useParams } from "react-router-dom";
 import { INPUT_LABEL_PROPS } from "../../constants/forms-constants";
 import { makeStyles } from "@material-ui/core/styles";
@@ -72,15 +73,11 @@ const Episode: React.FC<{
         source={parentSourceWithIndex ? `${parentSourceWithIndex}.number` : "number"}
         fullWidth
       />
-      <TextInput
+      <RichTextInput
         resource={resource}
         inputType={inputType}
         label="Description"
         source={parentSourceWithIndex ? `${parentSourceWithIndex}.description` : "description"}
-        resettable={false}
-        fullWidth
-        multiline
-        rows={4}
       />
       <TextInput
         InputLabelProps={INPUT_LABEL_PROPS}
@@ -117,7 +114,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
         inputType={type}
         source="seasonId"
         label="Series id"
-        initialValue={sanytizeId(seasonId)}
+        initialValue={sanitizeId(seasonId)}
         style={{ display: "none" }}
         fullWidth
       />

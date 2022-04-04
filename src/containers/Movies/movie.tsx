@@ -14,6 +14,11 @@ import { CreateProps } from "ra-ui-materialui";
 const resource = "media_content/video/movies";
 const filters = [<SearchInput source="name" alwaysOn />];
 
+const SCROLL_TO_OPTS: ScrollToOptions = {
+  behavior: "smooth",
+  top: 0,
+};
+
 export const Create: React.FC<CreateProps> = (props) => {
   const notify = useNotify();
   const refresh = useRefresh();
@@ -26,6 +31,7 @@ export const Create: React.FC<CreateProps> = (props) => {
         messageArgs: { name: data.name },
       });
       redirect("list", `${props.basePath}/create`, data.id, data);
+      window.scrollTo(SCROLL_TO_OPTS);
       refresh();
     },
     [notify, props.basePath, props.resource, redirect, refresh]

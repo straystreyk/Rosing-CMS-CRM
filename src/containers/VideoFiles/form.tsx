@@ -70,6 +70,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
         component={AutocompleteArrayInput}
         query={ALL_ALLOWED_DRMS}
         inputType={type}
+        validate={requiredValidate}
         resource={resource}
         label="Allowed drms"
         source="allowedDrms"

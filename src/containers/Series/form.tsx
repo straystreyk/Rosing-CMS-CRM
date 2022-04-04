@@ -8,11 +8,16 @@ import {
   getYearsChoices,
   NumberInput,
   requiredValidate,
+  RichTextInput,
   SelectInput,
   TextInput,
 } from "../../components/Inputs";
 import { FormSection } from "../../components/FormSection";
-import { EXTRA_VIDEO_TYPES, INPUT_LABEL_PROPS } from "../../constants/forms-constants";
+import {
+  EXTRA_VIDEO_TYPES,
+  INPUT_LABEL_PROPS,
+  SELECT_MARKERS,
+} from "../../constants/forms-constants";
 import { ReferenceCustomInput } from "../../components/Inputs/ReferenceInputs/reference-custom-input";
 import {
   ALL_GENRES,
@@ -114,15 +119,11 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           }
           fullWidth
         />
-        <TextInput
+        <RichTextInput
           resource={resource}
           inputType={type}
           label="Description"
           source="description"
-          resettable={false}
-          fullWidth
-          multiline
-          rows={4}
         />
         <SelectInput
           resource={resource}
@@ -160,7 +161,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           inputType={type}
           query={ALL_PRODUCTION_COUNTRIES}
           label="Production countries"
-          source="productionCountriesIds"
+          source="productionCountryIds"
           helperText="You can select several countries from the list"
           resource={resource}
           idName="id"
@@ -193,6 +194,13 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
             label="IMDB ID"
           />
         </GroupInputsOrigin>
+        <AutocompleteArrayInput
+          source="markers"
+          label="Label"
+          inputType={type}
+          choices={SELECT_MARKERS}
+          helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
+        />
         <NumberInput
           source="position"
           label="Position"

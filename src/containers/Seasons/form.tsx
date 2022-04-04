@@ -1,10 +1,10 @@
 import * as React from "react";
 import { FormProps } from "../../types";
-import { ArrayInput, TextInput } from "../../components/Inputs";
+import { ArrayInput, RichTextInput, TextInput } from "../../components/Inputs";
 import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { ArrayInputStyles as ArrayInputItemStyles } from "../../components/Models/CastMembers/styles";
-import { alwaysEmptyString, sanytizeId } from "../../helpers/form";
+import { alwaysEmptyString, sanitizeId } from "../../helpers/form";
 
 const useStyles = makeStyles({
   ArrayInputItemStyles,
@@ -37,15 +37,11 @@ const Season: React.FC<{
         source={parentSourceWithIndex ? `${parentSourceWithIndex}.slug` : "slug"}
         fullWidth
       />
-      <TextInput
+      <RichTextInput
         resource={resource}
         inputType={props.type}
         label="Description"
         source={parentSourceWithIndex ? `${parentSourceWithIndex}.description` : "description"}
-        resettable={false}
-        fullWidth
-        multiline
-        rows={4}
       />
     </>
   );
@@ -62,7 +58,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
         inputType={type}
         source="seriesId"
         label="Series id"
-        initialValue={sanytizeId(seriesId)}
+        initialValue={sanitizeId(seriesId)}
         style={{ display: "none" }}
         fullWidth
       />

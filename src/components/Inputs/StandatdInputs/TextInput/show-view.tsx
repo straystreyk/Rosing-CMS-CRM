@@ -53,6 +53,10 @@ const ShowView: React.FC<InputProps> = (props) => {
 
 export const TextInputShow: React.FC<InputProps> = (props) => {
   return (
-    <EditInputComponent ComponentInput={TextInputOrigin} ComponentShow={ShowView} {...props} />
+    <EditInputComponent
+      ComponentInput={props.ComponentInput ?? TextInputOrigin}
+      ComponentShow={ShowView}
+      {...props}
+    />
   );
 };

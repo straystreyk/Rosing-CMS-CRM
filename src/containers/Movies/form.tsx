@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core";
-import { useFormState } from "react-final-form";
+import { useForm, useFormState } from "react-final-form";
 import {
   TextInput,
   requiredValidate,
@@ -14,6 +14,7 @@ import {
   getYearsChoices,
   DateTimeInput,
   ReferenceInput,
+  RichTextInput,
 } from "../../components/Inputs";
 
 import { FormProps } from "../../types";
@@ -73,6 +74,8 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
     }
   }, [formState.submitFailed]);
 
+  console.log(formState.values);
+
   return (
     <>
       <FormTabs labels={FIXED_TAB_LABELS} />
@@ -89,6 +92,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           inputType={type}
           label="Name"
           source="name"
+          placeholder="name"
           fullWidth
           helperText={
             "The name of the movie that users will see in any sections of the application"
@@ -114,15 +118,11 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           }
           fullWidth
         />
-        <TextInput
+        <RichTextInput
           resource={resource}
           inputType={type}
           label="Description"
           source="description"
-          resettable={false}
-          fullWidth
-          multiline
-          rows={4}
         />
         <TextInput
           InputLabelProps={INPUT_LABEL_PROPS}
@@ -152,7 +152,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           inputType={type}
           query={ALL_PRODUCTION_COUNTRIES}
           label="Production countries"
-          source="productionCountryIds"
+          source="productionCountriesIds"
           helperText="You can select several countries from the list"
           resource={resource}
           idName="id"
@@ -208,6 +208,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         <AutocompleteArrayInput
           source="markers"
           label="Label"
+          inputType={type}
           choices={SELECT_MARKERS}
           helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
         />
@@ -404,10 +405,10 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
             idName="alpha2"
           />
         </CheckBoxGroup>
-        <CheckBoxGroup initialSourceState="allowedApiClientsIds">
+        <CheckBoxGroup initialSourceState="allowedApiClients">
           <ReferenceInput
             label=""
-            source="allowedApiClientsIds"
+            source="allowedApiClients"
             reference="api_clients"
             checkBoxLabel="Allowed api clients"
             perPage={INPUT_ITEMS_PER_PAGE}
@@ -420,7 +421,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           </ReferenceInput>
           <ReferenceInput
             label=""
-            source="forbiddenApiClientsIds"
+            source="forbiddenApiClients"
             reference="api_clients"
             checkBoxLabel="Forbidden api clients"
             perPage={INPUT_ITEMS_PER_PAGE}

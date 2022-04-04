@@ -9,7 +9,7 @@ export const scrollToErrorInput: (offset?: number) => void = (offset = 0) => {
   }
 };
 
-export const sanytizeId: (
+export const sanitizeId: (
   id: string,
   searchValue?: RegExp | string,
   replaceValue?: string

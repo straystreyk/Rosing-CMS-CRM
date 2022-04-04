@@ -8,7 +8,7 @@ import { Show } from "./show";
 import { Form } from "./form";
 import { ListProps } from "../../types";
 import { SearchInput } from "../../components/Inputs/search-input";
-import { sanytizeId } from "../../helpers/form";
+import { sanitizeId } from "../../helpers/form";
 import { ExportButton } from "../../components/UI/RA/export-button";
 import { CreateButton } from "../../components/UI/RA/create-button";
 import { ExportButtonIcon, ResourceAddIcon } from "../../constants/icons";
@@ -53,8 +53,8 @@ export const List: React.FC<ListProps> = (props) => {
       {...props}
       filters={filters}
       toolbar={Toolbar}
-      basePath={sanytizeId(props.basePath!, /:seriesId/g, seriesId)}
-      permanentFilter={{ seriesId: sanytizeId(seriesId) }}
+      basePath={sanitizeId(props.basePath!, /:seriesId/g, seriesId)}
+      permanentFilter={{ seriesId: sanitizeId(seriesId) }}
       resource={resource}
       breadCrumbsOn
     >
@@ -69,7 +69,7 @@ export const Create: React.FC<CreateProps> = (props) => {
     <ResourceCreate
       {...props}
       offRedirectButton
-      basePath={sanytizeId(props.basePath!, /:seriesId/g, seriesId)}
+      basePath={sanitizeId(props.basePath!, /:seriesId/g, seriesId)}
       resource={resource}
     >
       <Form resource={resource} type="create" {...props} />

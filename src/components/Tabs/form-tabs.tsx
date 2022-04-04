@@ -68,7 +68,7 @@ const useFormTabs = ({
   return { scrollToSection, checkTabPosition };
 };
 
-export const FormTabs: React.FC<FormTabProps> = ({ labels, children }) => {
+export const FormTabs: React.FC<FormTabProps> = React.memo(({ labels, children }) => {
   const [value, setValue] = React.useState(0);
   const [fixed, setFixed] = React.useState(false);
   const tabRef = React.useRef<HTMLDivElement>(null);
@@ -122,4 +122,4 @@ export const FormTabs: React.FC<FormTabProps> = ({ labels, children }) => {
       </Box>
     </div>
   );
-};
+});

@@ -3,6 +3,7 @@ import * as React from "react";
 export const labelStyles: any = {
   position: "static",
   transform: "none !important",
+  transition: "none",
   fontSize: 14,
   fontWeight: 500,
   marginBottom: 5,

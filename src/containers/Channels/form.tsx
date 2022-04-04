@@ -6,16 +6,17 @@ import {
   NumberInput,
   AutocompleteArrayInput,
   BooleanInput,
+  RichTextInput,
 } from "../../components/Inputs";
 
 import { INPUT_LABEL_PROPS, SELECT_MARKERS } from "../../constants/forms-constants";
 import { FormProps } from "../../types";
+import * as React from "react";
 
 export const Form: FC<FormProps> = () => {
   return (
     <>
       <TextInput fullWidth source="name" validate={requiredValidate} />
-      <TextInput fullWidth multiline source="description" rows={4} />
       <TextInput
         fullWidth
         source="slug"

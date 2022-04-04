@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   TabListLink: {
     paddingBottom: 10,
+    fontSize: 18,
     fontWeight: 600,
     marginRight: 24,
     "&:last-child": {

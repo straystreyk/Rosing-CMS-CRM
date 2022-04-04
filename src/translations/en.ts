@@ -75,7 +75,7 @@ export const en: TranslationMessages = {
       titles: {
         create: "New Movie",
         edit: "Edit Movie",
-        list: "Movies",
+        list: "Video",
       },
       mutations: {
         create: {
@@ -139,7 +139,7 @@ export const en: TranslationMessages = {
       titles: {
         create: "New Video File",
         edit: "Edit Video File",
-        list: "Video files",
+        list: "Video",
       },
       mutations: {
         create: {
@@ -163,7 +163,7 @@ export const en: TranslationMessages = {
       titles: {
         create: "New Series",
         edit: "Edit Series",
-        list: "Series",
+        list: "Video",
       },
       mutations: {
         create: {

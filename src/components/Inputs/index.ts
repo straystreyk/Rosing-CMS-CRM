@@ -1,4 +1,4 @@
-import { required, email } from "react-admin";
+import { required, email, maxLength } from "react-admin";
 import { range } from "lodash";
 
 import { ReferenceInput } from "./ReferenceInputs/reference-input";
@@ -6,7 +6,7 @@ import { TextInput } from "./StandatdInputs/TextInput/text-input";
 import { SelectInput } from "./StandatdInputs/SelectInput/select-input";
 import { NumberInput } from "./StandatdInputs/NumberInput/numdber-input";
 import { AutocompleteArrayInput } from "./ArrayInputs/AutoCompliteArrayInput/autocomplite-array-input";
-import { RichTextInput } from "./rich-text-input";
+import { RichTextInput } from "./RichTextInput/rich-text-input";
 import { FilterTextInput } from "./filter-text-input";
 import { BooleanInput } from "./boolean-input";
 import { SelectArrayInput } from "./ArrayInputs/select-array-input";
@@ -31,7 +31,7 @@ export {
   ArrayInputNoDrag,
 };
 
-export const requiredValidate = [required("This field is required")];
+export const requiredValidate = [required("validation.form.empty")];
 export const emailValidate = [email("Email is not valid")];
 
 export const parseTimeInput = (value: string) => {
@@ -43,14 +43,18 @@ export const parseTimeInput = (value: string) => {
 
 export function formatTimeInput(value: number) {
   if (!value) return "00:00";
+
   const hours = Math.floor(value / 60 / 60);
   const minutes = Math.floor(value / 60) - hours * 60;
+
   let validHours = hours.toString();
   let validMinutes = minutes.toString();
+
   if (hours < 10) validHours = "0" + validHours;
   if (minutes < 10) validMinutes = "0" + validMinutes;
   if (hours === 0) validHours = "00";
   if (minutes === 0) validMinutes = "00";
+
   const valid = validHours + ":" + validMinutes;
   return valid;
 }

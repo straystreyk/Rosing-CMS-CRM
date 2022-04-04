@@ -9,6 +9,7 @@ import {
   SelectInput,
   AutocompleteArrayInput,
   getYearsChoices,
+  RichTextInput,
 } from "../../components/Inputs";
 import { INPUT_LABEL_PROPS, SELECT_MARKERS } from "../../constants/forms-constants";
 
@@ -24,7 +25,12 @@ export const Form: React.FC<FormProps> = (props) => {
       <TextInput source="originalName" resource={props.resource} fullWidth />
       <TextInput source="slug" resource={props.resource} fullWidth />
       <TextInput source="slogan" resource={props.resource} validate={requiredValidate} fullWidth />
-      <TextInput source="description" rows={4} resource={props.resource} fullWidth multiline />
+      <RichTextInput
+        resource={props.resource}
+        inputType={props.type}
+        label="Description"
+        source="description"
+      />
       <TextInput source="altDescription" rows={4} resource={props.resource} fullWidth multiline />
       <SelectInput source="productionYear" resource={props.resource} choices={getYearsChoices()} />
       <TextInput
