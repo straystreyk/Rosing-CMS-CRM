@@ -21,7 +21,7 @@ const filters = [
   <SelectInput source="Test" />,
 ];
 
-const Toolbar: React.FC<{ basePath: string; buttonLabel: string }> = ({
+export const Toolbar: React.FC<{ basePath: string; buttonLabel: string }> = ({
   basePath,
   buttonLabel,
 }) => {
@@ -58,7 +58,7 @@ export const List: React.FC<ListProps> = (props) => {
       resource={resource}
       breadCrumbsOn
     >
-      <Show resource={resource} />
+      <Show resource={resource} basePath={props.basePath} />
     </ResourceList>
   );
 };
@@ -76,10 +76,18 @@ export const Create: React.FC<CreateProps> = (props) => {
     </ResourceCreate>
   );
 };
-export const Edit: React.FC<EditProps> = (props) => (
-  <ResourceEdit {...props} resource={resource}>
-    <Form resource={resource} type="edit" />
-  </ResourceEdit>
-);
+export const Edit: React.FC<EditProps> = (props) => {
+  const { seriesId } = useParams<{ seriesId: string }>();
+
+  return (
+    <ResourceEdit
+      {...props}
+      resource={resource}
+      basePath={sanitizeId(props.basePath!, /:seriesId/g, seriesId)}
+    >
+      <Form resource={resource} type="edit" />
+    </ResourceEdit>
+  );
+};
 
 export { Icon };

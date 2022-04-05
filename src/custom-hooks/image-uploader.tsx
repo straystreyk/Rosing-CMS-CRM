@@ -15,19 +15,18 @@ export const useImageItem = ({
   setServerImages: any;
   setImageSize: any;
 }) => {
-  const [type, setType] = React.useState(imageType ?? "");
-  const [loading, setLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [imageId, setImageId] = React.useState(id ?? "");
   const [url, setUrl] = React.useState(file ?? "");
 
   const onDrop = React.useCallback(
     async (file) => {
       if (file) {
-        setLoading(true);
+        setIsLoading(true);
         const formData = new FormData();
         const fr = new FileReader();
         formData.append("image", file[0]);
-        formData.append("kind", type);
+        formData.append("kind", imageType);
         fr.readAsDataURL(file[0]);
         fr.addEventListener("load", () => {
           if (typeof fr.result === "string") {
@@ -48,11 +47,11 @@ export const useImageItem = ({
             console.log(e.message);
           }
         } finally {
-          setLoading(false);
+          setIsLoading(false);
         }
       }
     },
-    [setImageSize, setImageIds, type]
+    [setImageSize, setImageIds, imageType]
   );
 
   const deleteImage = React.useCallback(
@@ -61,7 +60,7 @@ export const useImageItem = ({
       if (!imageId) return;
       try {
         if (imageId) {
-          setLoading(true);
+          setIsLoading(true);
           const res = await fetch(`${window._GLOBALS_.REACT_APP_IMAGE_ENDPOINT}/${imageId}`, {
             method: "DELETE",
           });
@@ -80,17 +79,15 @@ export const useImageItem = ({
           console.log(error.message);
         }
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     },
     [setImageSize, setServerImages, setImageIds, imageId]
   );
 
   return {
-    type,
-    setType,
-    loading,
-    setLoading,
+    isLoading,
+    setIsLoading,
     imageId,
     setImageId,
     url,

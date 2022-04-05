@@ -22,7 +22,7 @@ export const Slider: React.FC<SliderProps> = ({ images, showSlider, setShowSlide
   const next = useRef(null);
   const bullets = useRef(null);
 
-  const hideSlider = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const hideSlider = () => {
     setShowSlider(false);
   };
 
@@ -30,13 +30,14 @@ export const Slider: React.FC<SliderProps> = ({ images, showSlider, setShowSlide
     if (showSlider) {
       window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
-          setShowSlider(false);
+          hideSlider();
         }
       });
     }
   }, [showSlider]);
 
   if (!showSlider) return null;
+
   return (
     <div className="ModalSlider">
       <div className="ModalContent">

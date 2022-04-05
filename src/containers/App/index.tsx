@@ -2,11 +2,11 @@ import { Admin, Resource } from "react-admin";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { authProvider, i18nProvider } from "../../components/Providers";
-import { themeReducer } from "../../components/Themes";
 import { Layouts } from "../../components/Layout";
 import { getRoutes } from "./get-custom-routes";
 import { useApp } from "../../custom-hooks/app-component";
 
+import { customReducers } from "./custom-reducers";
 import { UserVariables as users } from "../Users";
 import { DatacentersVariables as datacenters } from "../Datacenters";
 import { VideoFilesVariables as videoFiles } from "../VideoFiles";
@@ -41,7 +41,7 @@ export const App = () => {
   return (
     <Admin
       dataProvider={dataProvider}
-      customReducers={{ theme: themeReducer }}
+      customReducers={customReducers}
       customRoutes={getRoutes(localStorage.getItem("token"))}
       authProvider={authProvider}
       loginPage={Login}
@@ -69,6 +69,7 @@ export const App = () => {
       <Resource name="countries" />
       <Resource name="production_countries" />
       <Resource name="api_clients" />
+      <Resource name="images" />
     </Admin>
   );
 };

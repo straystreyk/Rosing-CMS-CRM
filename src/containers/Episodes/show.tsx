@@ -10,23 +10,28 @@ interface ShowProps {
   basePath?: string;
 }
 
+interface Record {
+  id: string;
+  episodes: {
+    id: string;
+  }[];
+}
+
 export const Show: React.FC<ShowProps> = (props) => {
   return (
-    <Datagrid {...props} optimized empty={<EmptyTablePage />}>
-      <TextField source="name" label="Name" />
-      <FunctionField
-        label=""
-        render={(record: { id: string; episodes: { id: string }[] }) => (
-          <MoreActionsButton>
-            <EditButton
-              color="secondary"
-              record={record}
-              basePath={props.basePath + "/" + record.id}
-            />
-            <DeleteButton record={record} basePath={props.basePath + "/" + record.id} />
-          </MoreActionsButton>
-        )}
-      />
-    </Datagrid>
+    <>
+      <Datagrid {...props} optimized empty={<EmptyTablePage />}>
+        <TextField source="name" label="Name" />
+        <FunctionField
+          label=""
+          render={(record: Record) => (
+            <MoreActionsButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          )}
+        />
+      </Datagrid>
+    </>
   );
 };

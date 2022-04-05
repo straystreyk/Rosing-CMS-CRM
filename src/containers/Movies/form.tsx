@@ -74,8 +74,6 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
     }
   }, [formState.submitFailed]);
 
-  console.log(formState.values);
-
   return (
     <>
       <FormTabs labels={FIXED_TAB_LABELS} />

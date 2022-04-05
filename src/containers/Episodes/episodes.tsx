@@ -9,37 +9,10 @@ import { useParams } from "react-router-dom";
 import { sanitizeId } from "../../helpers/form";
 import { ListProps } from "../../types";
 import { CreateProps, EditProps } from "ra-ui-materialui";
-import { CreateButton } from "../../components/UI/RA/create-button";
-import { ExportButtonIcon, ResourceAddIcon } from "../../constants/icons";
-import { ExportButton } from "../../components/UI/RA/export-button";
-import { FilterButton } from "../../components/UI/RA/filter-button";
+import { Toolbar } from "../Seasons/seasons";
 
 const resource = "media_content/video/seasons/:seasonId/episodes";
 const filters = [<SearchInput source="name" alwaysOn />];
-
-const Toolbar: React.FC<{ basePath: string; buttonLabel: string }> = ({
-  basePath,
-  buttonLabel,
-}) => {
-  return (
-    <>
-      <CreateButton
-        label={buttonLabel}
-        variant="text"
-        customColor="var(--accent-color)"
-        to={basePath + "/create"}
-        icon={<ResourceAddIcon color="var(--accent-color)" />}
-      />
-      <ExportButton
-        icon={<ExportButtonIcon color="var(--primary-button-default)" />}
-        variant="text"
-        color="secondary"
-        label="Download"
-      />
-      <FilterButton variant="text" />
-    </>
-  );
-};
 
 export const List: React.FC<ListProps> = (props) => {
   const { seasonId } = useParams<{ seasonId: string }>();

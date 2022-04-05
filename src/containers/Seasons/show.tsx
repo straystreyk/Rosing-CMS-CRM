@@ -25,7 +25,7 @@ export const Show: React.FC<ShowInterface> = (props) => {
   const history = useHistory();
 
   return (
-    <Datagrid size="medium" className="popaConasd" empty={<EmptyTablePage />} {...props} optimized>
+    <Datagrid className="popaConasd" empty={<EmptyTablePage />} {...props} optimized>
       <TextField source="name" />
       <FunctionField
         label="Episodes"
@@ -58,8 +58,8 @@ export const Show: React.FC<ShowInterface> = (props) => {
         label=""
         render={(record: Record) => (
           <MoreActionsButton>
-            <EditButton color="secondary" record={record} basePath={history.location.pathname} />
-            <DeleteButton record={record} basePath={history.location.pathname} />
+            <EditButton color="secondary" record={record} basePath={props.basePath} />
+            <DeleteButton record={record} basePath={props.basePath} />
           </MoreActionsButton>
         )}
       />

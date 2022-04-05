@@ -39,12 +39,17 @@ const useStyles = makeStyles({
       bottom: 0,
       left: 0,
       right: 0,
+      display: "flex",
+      justifyContent: "space-between",
       border: "none",
       borderTop: "1px solid var(--secondary-color-disable)",
       margin: "0px 1px 1px 1px",
       borderBottomLeftRadius: 4,
       borderBottomRightRadius: 4,
       zIndex: 2,
+      "&:after": {
+        content: "unset",
+      },
     },
     "& .MuiFormHelperText-root": {
       display: "none",
@@ -64,7 +69,10 @@ const useStyles = makeStyles({
   },
 });
 
-const TOOLBAR_CONTAINER = [["bold", "italic", "strike", { list: "bullet" }, { list: "ordered" }]];
+const TOOLBAR_CONTAINER = [
+  ["bold", "italic", "strike", { list: "bullet" }, { list: "ordered" }, "code-block"],
+  ["image"],
+];
 
 export const RichTextInputOrigin: React.FC<{
   label?: string;
@@ -74,7 +82,7 @@ export const RichTextInputOrigin: React.FC<{
 }> = React.memo(({ source, helperText, ...props }) => {
   const classes = useStyles();
 
-  // needs to override react-admin default styles
+  // needs to override react-admin (quill) default styles
   const configureQuill = React.useCallback(
     (quill: {
       getModule: (module: string) => { controls: [string, HTMLButtonElement][] };
@@ -101,6 +109,32 @@ export const RichTextInputOrigin: React.FC<{
     []
   );
 
+  const loadImage: (input: HTMLInputElement, editor: Element) => void = React.useCallback(
+    async (input, editor) => {
+      const formData = new FormData();
+      if (input.files) {
+        formData.append("image", input.files[0]);
+        try {
+          const res = await fetch(`${window._GLOBALS_.REACT_APP_IMAGE_ENDPOINT}`, {
+            method: "POST",
+            body: formData,
+          });
+          const {
+            file: { url },
+          } = await res.json();
+          if (url) {
+            editor.innerHTML += `<p><img src=${url} alt="" /></p>`;
+          }
+        } catch (e) {
+          if (e instanceof Error) {
+            console.log(e.message);
+          }
+        }
+      }
+    },
+    []
+  );
+
   return (
     <RichTextInputDefault
       {...props}
@@ -108,6 +142,24 @@ export const RichTextInputOrigin: React.FC<{
       source={source}
       toolbar={{
         container: TOOLBAR_CONTAINER,
+        handlers: {
+          image: function () {
+            const input = document.createElement("input");
+            const quillImage = document.querySelector(".ql-image");
+            const editor = document.querySelector(".ql-editor");
+
+            if (input && editor) input.addEventListener("change", () => loadImage(input, editor));
+
+            if (input && quillImage) {
+              input.type = "file";
+              input.hidden = true;
+              if (!quillImage.querySelector("input")) {
+                quillImage.append(input);
+              }
+              input.click();
+            }
+          },
+        },
       }}
       options={{
         theme: "snow",

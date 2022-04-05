@@ -218,7 +218,6 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
     index,
     source,
     setShowSlider,
-    inputType,
     size,
     serverImages,
     edit,
@@ -227,8 +226,17 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
     const [imageType, setImageType] = React.useState(kind);
     const [imageName, setImageName] = React.useState(name);
     const [imageSize, setImageSize] = React.useState(size);
+    const [mutate, { loading, error }] = useMutation();
 
-    const { loading, url, onDrop, deleteImage, imageId } = useImageItem({
+    const approve = React.useCallback((imageType: string) => {
+      mutate({
+        type: "update",
+        resource: "images",
+        payload: { id, data: { kind: imageType } },
+      });
+    }, []);
+
+    const { isLoading, url, onDrop, deleteImage, imageId, setIsLoading } = useImageItem({
       imageType,
       id,
       file,
@@ -250,12 +258,24 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
 
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-    const changeType = (value: string, prettyName: string) => {
+    const changeType = async (value: string, prettyName: string) => {
       setServerImages((p: ImageProps[]) =>
         p.map((el) =>
           el.kind === imageType ? { ...el, name: prettyName, kind: value } : { ...el }
         )
       );
+
+      if (url) {
+        try {
+          setIsLoading(true);
+          await approve(value);
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+
       setImageType(value);
       setImageName(prettyName);
     };
@@ -283,7 +303,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
           style={{ cursor: !url ? "pointer" : "" }}
           {...(!url && getRootProps())}
         >
-          {loading && (
+          {isLoading && (
             <div className={classes.LoadingWrapper}>
               <MainLoader size={30} /> <span>Loading....</span>
             </div>

@@ -64,6 +64,7 @@ export const GET_ONE_SERIES = gql`
       productionYear
       productionCountryIds
       releaseDate
+      hasSeason
       rightHolder {
         id
         __typename

@@ -17,6 +17,9 @@ const useStyles = makeStyles({
     "& span.empty": {
       color: "var(--secondary-color-default)",
     },
+    "& img": {
+      width: "100%",
+    },
   },
 });
 
@@ -34,7 +37,7 @@ const ShowView: React.FC<InputProps> = (props) => {
         );
       default:
         return values[props.source] ? (
-          values[props.source]
+          <div dangerouslySetInnerHTML={{ __html: values[props.source] }} />
         ) : (
           <span className="empty">Not filled in</span>
         );
