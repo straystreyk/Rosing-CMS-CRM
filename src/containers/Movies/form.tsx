@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core";
-import { useForm, useFormState } from "react-final-form";
+import { useFormState } from "react-final-form";
 import {
   TextInput,
   requiredValidate,
@@ -12,7 +12,6 @@ import {
   parseTimeInput,
   formatTimeInput,
   getYearsChoices,
-  DateTimeInput,
   ReferenceInput,
   RichTextInput,
 } from "../../components/Inputs";
@@ -25,6 +24,7 @@ import { ImageUploaderV2 } from "../../components/ImageUploader";
 import {
   EXTRA_VIDEO_TYPES,
   INPUT_LABEL_PROPS,
+  SELECT_DISTRIBUTION,
   SELECT_MARKERS,
 } from "../../constants/forms-constants";
 import { FormSection } from "../../components/FormSection";
@@ -44,6 +44,8 @@ import { ExtraVideos } from "../../components/Models/ExtraVideos";
 import { RatingSystems } from "../../components/Models/RatingSytems";
 import { scrollToErrorInput } from "../../helpers/form";
 import { CheckBoxGroup } from "../../components/UI/MaterialUI/check-box-group";
+import { SwitchInput } from "../../components/Inputs/SwitchInput";
+import { RadioButtonGroupInput } from "../../components/Inputs/RadioButtonGroupInput";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -62,6 +64,10 @@ const FIXED_TAB_LABELS = [
   "Source",
   "Advertisement",
   "Terms of publication",
+];
+const PUBLISHED_CHOICES = [
+  { name: "Not published", id: false },
+  { name: "Published", id: true },
 ];
 
 export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
@@ -135,6 +141,21 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           type="date"
           fullWidth
         />
+        <ReferenceInput
+          label="Languages"
+          source="languagesIds"
+          reference="languages"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            resource={resource}
+            optionValue="id"
+            inputType={type}
+            helperText="The language of the movie's audio track. You can select multiple languages from the list."
+          />
+        </ReferenceInput>
         <ReferenceCustomInput
           component={AutocompleteArrayInput}
           inputType={type}
@@ -165,6 +186,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           helperText="Specified in hours and minutes. If you leave the field empty, the duration will be filled in automatically after saving, provided that the video file is specified."
           label="Duration"
           source="duration"
+          step="1"
           type="time"
           fullWidth
         />
@@ -178,6 +200,34 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           idName="id"
           helperText="The company - the copyright holder of the film"
         />
+        <ReferenceInput
+          label="Studios"
+          source="studioIds"
+          reference="studios"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            inputType={type}
+            resource={resource}
+            helperText="A film production or rental company. You can select several studios from the list."
+          />
+        </ReferenceInput>
+        <ReferenceInput
+          label="External catalog"
+          source="externalCatalogId"
+          reference="external_catalog"
+          perPage={INPUT_ITEMS_PER_PAGE}
+          resource={resource}
+        >
+          <SelectInput
+            optionText="name"
+            resource={resource}
+            inputType={type}
+            helperText="The partner directory from which the movie is imported. The logo of the external catalog will be displayed when previewing the movie in the app."
+          />
+        </ReferenceInput>
         <SelectInput
           resource={resource}
           choices={getYearsChoices()}
@@ -196,9 +246,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           <NumberInput
             resource={resource}
             inputType={type}
-            helperText={
-              "A digital identifier in the IMDB system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
-            }
+            helperText="A digital identifier in the IMDB system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
             source="imdbId"
             label="IMDB ID"
           />
@@ -275,14 +323,14 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           label="Video file"
           source="streamSourceIds"
           reference="media_content/video/video_files"
+          resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >
           <AutocompleteArrayInput
             optionText="name"
             validate={requiredValidate}
-            helperText={
-              "You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
-            }
+            inputType={type}
+            helperText="You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
           />
         </ReferenceInput>
         <ArrayInputNoDrag
@@ -329,43 +377,40 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
             helperText="Time to shift the display of subsequent midrolls in seconds from the start of displaying the first midroll"
           />
         </GroupInputsOrigin>
-        <GroupInputsOrigin
+        <SwitchInput
           label="Downloading a movie"
-          groupHelperText="Download and play the movie offline, available in the app for Android and iOS"
+          source="downloadable"
+          helperText="Download and play the movie offline, available in the app for Android and iOS"
           inputType={type}
-          switchable
-        >
-          <NumberInput
-            label="Storage time"
-            helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
-            source="storageTime"
-            inputType={type}
-          />
-        </GroupInputsOrigin>
+          labelPlacement="start"
+        />
+        {formState.values["downloadable"] && (
+          <GroupInputsOrigin inputType={type}>
+            <NumberInput
+              label="Storage time"
+              helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
+              source="storageTime"
+              inputType={type}
+            />
+          </GroupInputsOrigin>
+        )}
       </FormSection>
       <FormSection
         id="Terms of publication"
         text="Configuration of the rule for publishing a movie. The rule will be automatically generated by the publishing system within one hour after saving. The generated rule will appear on the movie page in the current section."
         title="Terms of publication"
       >
-        <GroupInputsOrigin inputType={type}>
-          <DateTimeInput
-            validate={requiredValidate}
-            resource={resource}
-            inputType={type}
-            source="availableStart"
-            label="Available start"
-            fullWidth
-          />
-          <DateTimeInput
-            validate={requiredValidate}
-            resource={resource}
-            inputType={type}
-            source="availableEnd"
-            label="Available end"
-            fullWidth
-          />
-        </GroupInputsOrigin>
+        <RadioButtonGroupInput
+          source="published"
+          label="Publishing"
+          initialValue={false}
+          choices={PUBLISHED_CHOICES}
+        />
+        <RadioButtonGroupInput
+          source="cmsDistribution"
+          label="Distribution"
+          choices={SELECT_DISTRIBUTION}
+        />
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
@@ -409,6 +454,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
             source="allowedApiClients"
             reference="api_clients"
             checkBoxLabel="Allowed api clients"
+            resource={resource}
             perPage={INPUT_ITEMS_PER_PAGE}
           >
             <AutocompleteArrayInput
@@ -422,6 +468,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
             source="forbiddenApiClients"
             reference="api_clients"
             checkBoxLabel="Forbidden api clients"
+            resource={resource}
             perPage={INPUT_ITEMS_PER_PAGE}
           >
             <AutocompleteArrayInput

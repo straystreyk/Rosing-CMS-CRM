@@ -1,5 +1,5 @@
 import * as React from "react";
-import { makeStyles, Switch as SwitchMaterial } from "@material-ui/core";
+import { makeStyles, Switch as SwitchMaterial, SwitchProps } from "@material-ui/core";
 
 const useStyles = makeStyles({
   BooleanInput: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Switch: React.FC<{ checked?: boolean }> = ({ checked, ...props }) => {
+export const Switch: React.FC<SwitchProps> = ({ checked, ...props }) => {
   const classes = useStyles();
 
   return (

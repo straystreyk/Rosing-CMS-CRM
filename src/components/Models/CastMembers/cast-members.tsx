@@ -45,14 +45,7 @@ export const CastMembers: React.FC<{
 }> = React.memo(({ parentSource, resource, parentSourceWithIndex, index, show }) => {
   const classes = useStyles();
   const { values } = useFormState();
-  const form = useForm();
   const [showResource, setShowResource] = React.useState(show);
-
-  //нужно пересмотреть этот метод
-  React.useEffect(() => {
-    form.change(`${parentSourceWithIndex}.person.images`, []);
-  }, []);
-  //
 
   React.useEffect(() => {
     setShowResource(show);

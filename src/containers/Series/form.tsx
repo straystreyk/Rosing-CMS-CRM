@@ -40,7 +40,7 @@ import { alwaysEmptyString, scrollToErrorInput } from "../../helpers/form";
 import { StandardButton } from "../../components/UI/Buttons/standard-button";
 import { ResourceCountIcon } from "../../constants/icons";
 import { useHistory } from "react-router-dom";
-import { CheckBox } from "../../components/Inputs/Checkbox";
+import { Checkbox } from "../../components/Inputs/Checkbox";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -209,11 +209,12 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           inputType={type}
           helperText="The serial number in the general list of films. Can be entered manually when creating or editing, the positions of the remaining films will be updated accordingly. If the field is left empty, the last sequential number will be assigned to the movie."
         />
-        <CheckBox
+        <Checkbox
           source="hasSeason"
           label="Number of seasons"
           checkboxLabel="More than one season"
           initialValue={false}
+          inputType={type}
           helperText="
 On the series page, users will see a menu with the numbering of seasons, the season number in the episode preview card and in the title on the player. If the series has only one season or it is a multi-part movie, you can deactivate the checkbox so that the application does not display information about the seasons."
         />

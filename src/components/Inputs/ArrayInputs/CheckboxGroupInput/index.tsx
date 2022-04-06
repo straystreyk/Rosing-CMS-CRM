@@ -4,7 +4,7 @@ import {
   CheckboxGroupInputProps,
 } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
-import { labelStyles } from "../styles";
+import { labelStyles } from "../../styles";
 
 const useStyles = makeStyles({
   CheckBoxGroupInput: {

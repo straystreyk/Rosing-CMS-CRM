@@ -63,6 +63,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
     helperText,
     switchable,
     getItemLabel,
+    initialPushObject,
     disableReordering,
     inputType,
     groupInputs,
@@ -72,6 +73,9 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
     const classes = useStyles();
     const { values } = useFormState();
     const { ChildComponent, ...rest } = props;
+    const current = props.parentSource
+      ? values[props.parentSource][props.index][props.standardSource]
+      : values[source];
 
     return (
       <div className={classes.ArrayInputWrapper}>
@@ -144,7 +148,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                         </React.Fragment>
                       );
                     })}
-                    {!values[source] || values[source].length === 0 ? (
+                    {!current || current.length === 0 ? (
                       <div
                         className={cn(classes.ArrayInputButtonsWrapper, "ArrayInputFirstButton")}
                       >
@@ -152,7 +156,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                           type="button"
                           variant="text"
                           startIcon={<CreateIcon color="#005AA3" />}
-                          onClick={() => fieldProps.fields.push(undefined)}
+                          onClick={() => fieldProps.fields.push(initialPushObject ?? undefined)}
                           color="secondary"
                         >
                           Add another one

@@ -8,4 +8,5 @@ export interface AutocompleteArrayInputProps {
   resource?: string;
   inputType?: string;
   label?: string;
+  optionValue?: string;
 }

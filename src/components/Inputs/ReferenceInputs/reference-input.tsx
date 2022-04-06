@@ -10,6 +10,9 @@ interface ReferenceInputProps {
   children: React.PropsWithChildren<JSX.Element>;
   perPage?: number;
   checkBoxLabel?: string;
+  allowEmpty?: boolean;
+  enableGetChoices?: (q: string) => boolean;
+  resource?: string;
 }
 
 const useStyles = makeStyles({

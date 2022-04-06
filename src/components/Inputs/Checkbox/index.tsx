@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Checkbox, FormControlLabel, FormHelperText } from "@material-ui/core";
-import { useField, Field } from "react-final-form";
+import { Checkbox as CheckboxMUI, FormControlLabel, FormHelperText } from "@material-ui/core";
+import { Field } from "react-final-form";
 import { makeStyles } from "@material-ui/core/styles";
 import { labelStyles } from "../styles";
+import { CheckboxShow } from "./show-view";
 
 const useStyles = makeStyles({
   Checkbox: {
@@ -34,18 +35,27 @@ const useStyles = makeStyles({
   },
 });
 
-export const CheckBox: React.FC<{
+export interface CheckboxProps {
   helperText?: string;
   source: string;
   checkboxLabel?: string;
   label?: string;
   initialValue?: boolean;
-}> = ({ helperText, source, checkboxLabel, label, initialValue }) => {
+  inputType?: string;
+}
+
+export const CheckboxOrigin: React.FC<CheckboxProps> = ({
+  helperText,
+  source,
+  checkboxLabel,
+  label,
+  initialValue,
+}) => {
   const classes = useStyles();
 
   return (
     <div className={classes.Checkbox}>
-      <Field name={source} type="checkbox" initialValue={initialValue}>
+      <Field type="checkbox" name={source} defaultValue={initialValue}>
         {({ input, meta, ...rest }) => {
           return (
             <>
@@ -53,7 +63,7 @@ export const CheckBox: React.FC<{
                 <span>{label}</span>
               </div>
               <FormControlLabel
-                control={<Checkbox color="primary" size="small" {...input} />}
+                control={<CheckboxMUI color="primary" size="small" {...input} />}
                 label={checkboxLabel}
               />
               {helperText && <FormHelperText>{helperText}</FormHelperText>}
@@ -63,5 +73,13 @@ export const CheckBox: React.FC<{
         }}
       </Field>
     </div>
+  );
+};
+
+export const Checkbox: React.FC<CheckboxProps> = ({ inputType, ...rest }) => {
+  return inputType === "show" ? (
+    <CheckboxShow inputType={inputType} {...rest} />
+  ) : (
+    <CheckboxOrigin inputType={inputType} {...rest} />
   );
 };

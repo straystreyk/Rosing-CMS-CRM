@@ -39,6 +39,7 @@ export const GET_ONE_MOVIE = gql`
       firstMidRollOffset
       forbiddenApiClientIds
       genreIds
+      externalCatalogId
       id
       images {
         createdAt

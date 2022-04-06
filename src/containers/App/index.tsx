@@ -70,6 +70,9 @@ export const App = () => {
       <Resource name="production_countries" />
       <Resource name="api_clients" />
       <Resource name="images" />
+      <Resource name="studios" />
+      <Resource name="languages" />
+      <Resource name="external_catalog" />
     </Admin>
   );
 };

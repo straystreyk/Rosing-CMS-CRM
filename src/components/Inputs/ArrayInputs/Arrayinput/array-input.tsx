@@ -32,6 +32,7 @@ export interface ArrayInputProps {
   ChildComponent: any;
   resettable?: boolean;
   query?: any;
+  initialPushObject?: {};
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -145,6 +146,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
     draggable,
     itemClass,
     resettable,
+    initialPushObject,
     inputClass,
     query,
     ChildComponent,
@@ -216,10 +218,11 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
           <FieldArray name={source}>
             {(fieldProps) => {
               const pushResource = (value?: string, name?: string) => {
+                const initial = initialPushObject ?? undefined;
                 fieldProps.fields.push(
                   addReorder || draggable
                     ? { position: values[source] ? values[source].length : 0, role: value }
-                    : undefined
+                    : initial
                 );
               };
               return (

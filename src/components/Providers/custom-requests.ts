@@ -100,6 +100,24 @@ export const ALL_RIGHT_HOLDERS = gql`
   }
 `;
 
+export const GET_ONE_RIGHT_HOLDER = gql`
+  query RightHolder($id: ID!) {
+    item: RightHolder(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_ONE_EXTERNAL_CATALOG = gql`
+  query ExternalCatalog($id: ID!) {
+    item: ExternalCatalog(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const ALL_DATACENTERS = gql`
   query {
     items: allDatacenters {
