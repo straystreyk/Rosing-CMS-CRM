@@ -1,9 +1,9 @@
 import * as React from "react";
 import { SelectInputOrigin } from "../../Inputs/StandatdInputs/SelectInput/select-input";
 import { TextInputOrigin } from "../../Inputs/StandatdInputs/TextInput/text-input";
-import { requiredValidate } from "../../Inputs";
-import { ReferenceCustomInput } from "../../Inputs/ReferenceInputs/reference-custom-input";
-import { ALL_VIDEO_FILES } from "../../Providers/custom-requests";
+import { AutocompleteArrayInput, ReferenceInput, requiredValidate } from "../../Inputs";
+
+const INPUT_ITEMS_PER_PAGE = 25;
 
 export const ExtraVideos: React.FC<{
   parentSourceWithIndex: string;
@@ -27,16 +27,20 @@ export const ExtraVideos: React.FC<{
         inputType={inputType}
         validate={requiredValidate}
       />
-      <ReferenceCustomInput
-        component={SelectInputOrigin}
-        inputType={inputType}
-        query={ALL_VIDEO_FILES}
-        label="Video files"
-        helperText="You can select only one video file from the list"
-        source={`${parentSourceWithIndex}.streamSourceId`}
+      <ReferenceInput
+        label="Video file"
+        source="streamSourceIds"
+        reference="media_content/video/video_files"
         resource={resource}
-        idName="id"
-      />
+        perPage={INPUT_ITEMS_PER_PAGE}
+      >
+        <AutocompleteArrayInput
+          optionText="name"
+          validate={requiredValidate}
+          inputType={inputType}
+          helperText="You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
+        />
+      </ReferenceInput>
     </>
   );
 });

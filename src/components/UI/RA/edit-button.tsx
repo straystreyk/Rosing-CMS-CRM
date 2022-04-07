@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     },
     "& span": {
       fontSize: 14,
+      lineHeight: "20px",
       padding: 0,
     },
     "& .MuiButton-label": {

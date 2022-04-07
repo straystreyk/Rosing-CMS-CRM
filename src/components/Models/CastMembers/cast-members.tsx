@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core";
-import { useForm, useFormState } from "react-final-form";
+import { useFormState } from "react-final-form";
 
 import { NumberInput, TextInput } from "../../Inputs";
 import { GroupInputsOrigin } from "../../GroupInputs";
@@ -34,6 +34,8 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
 });
+
+const INPUT_ITEMS_PER_PAGE = 25;
 
 export const CastMembers: React.FC<{
   parentSource: string;

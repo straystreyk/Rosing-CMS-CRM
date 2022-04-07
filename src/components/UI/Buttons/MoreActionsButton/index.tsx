@@ -1,8 +1,33 @@
 import * as React from "react";
-import cn from "classnames";
+import { Menu } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
 import { IconProps } from "../../../../constants/icons";
 
-import classes from "./index.module.css";
+const useStyles = makeStyles({
+  MoreActionsButton: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "50%",
+    cursor: "pointer",
+    width: 16,
+    height: 16,
+    backgroundColor: "var(--primary-bg)",
+    transition: "0.35s all ease",
+  },
+  MoreActionButtonChild: {
+    marginBottom: 5,
+    "& > a, & > button ": {
+      width: "100%",
+      padding: "4px 6px",
+      justifyContent: "flex-start",
+    },
+    "&:last-child": {
+      marginBottom: 0,
+    },
+  },
+});
 
 const MoreActionsButtonIcon = ({ color }: IconProps) => (
   <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,22 +38,54 @@ const MoreActionsButtonIcon = ({ color }: IconProps) => (
 );
 
 export const MoreActionsButton: React.FC = ({ children }) => {
-  const [active, setActive] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const classes = useStyles();
 
-  const handleClick = React.useCallback((e) => {
-    setActive((p) => !p);
-  }, []);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <div className={cn(classes.MoreActionsButtonWrapper, active && classes.active)}>
-      <button onClick={handleClick} className={classes.MoreActionsButton}>
+    <div className="MoreActionsButtonWrapper">
+      <button
+        id="basic-button"
+        aria-controls={open ? "basic-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+        className={classes.MoreActionsButton}
+      >
         <MoreActionsButtonIcon color="var(--primary-button-default)" />
       </button>
-      <div className={classes.MoreActionsPopup}>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
         {React.Children.map(children, (child) => {
-          return <div>{child}</div>;
+          return (
+            <div className={classes.MoreActionButtonChild} onClick={handleClose}>
+              {child}
+            </div>
+          );
         })}
-      </div>
+      </Menu>
     </div>
   );
 };

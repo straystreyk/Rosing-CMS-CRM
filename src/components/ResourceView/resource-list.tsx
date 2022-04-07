@@ -1,7 +1,6 @@
 import { FC, useState, createContext, useContext } from "react";
-import { List, Pagination, TopToolbar } from "react-admin";
-import { PaginationProps } from "ra-ui-materialui";
-import { makeStyles } from "@material-ui/core";
+import { List, TopToolbar } from "react-admin";
+import { makeStyles, Paper } from "@material-ui/core";
 import { useTranslate } from "ra-core";
 import { Box } from "@material-ui/core";
 
@@ -13,6 +12,7 @@ import { CreateButton } from "../UI/RA/create-button";
 import { ListPageTabs } from "../Tabs/list-page-tabs";
 import { EditForm } from "./edit-form";
 import { PlusIcon } from "../../constants/icons";
+import { Pagination } from "../Pagination";
 
 const useStyles = makeStyles({
   TopToolBar: {
@@ -27,10 +27,6 @@ const useStyles = makeStyles({
     backgroundColor: "#F2F7FB",
   },
 });
-
-const PostPagination = (props: PaginationProps) => (
-  <Pagination rowsPerPageOptions={[5, 15, 25, 50]} {...props} />
-);
 
 const ToolBar = (props: any) => {
   const styles = useStyles();
@@ -95,7 +91,7 @@ export const ResourceList: FC<ListProps> = ({
         perPage={15}
         filters={props.filters}
         filter={filter}
-        pagination={<PostPagination />}
+        pagination={<Pagination />}
         actions={<ToolBar toolbar={toolbar} {...props} />}
         aside={<FilterSidebar sideFilters={sideFilters} />}
         basePath={props.basePath}

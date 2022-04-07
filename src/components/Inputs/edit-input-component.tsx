@@ -7,6 +7,7 @@ import { AcceptFilterIcon, CancelFilterIcon, EditIcon } from "../../constants/ic
 import { makeStyles, Tooltip } from "@material-ui/core";
 import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
+import { useRefresh } from "react-admin";
 
 const useStyles = makeStyles((theme) => ({
   ShowWrapper: {
@@ -59,6 +60,7 @@ export const EditInputComponent: React.FC<any> = ({
   const [initialValue] = React.useState(values[props.source]);
   const notify = useNotify();
   const classes = useStyles();
+  const refresh = useRefresh();
 
   React.useEffect(() => {
     if (error) {

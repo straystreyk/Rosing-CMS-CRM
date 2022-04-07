@@ -87,9 +87,6 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
   const classes = useStyles();
   const { seriesId } = useParams<{ seriesId: string }>();
 
-  const { values } = useFormState();
-  console.log(values);
-
   return (
     <>
       <TextInput

@@ -28,13 +28,17 @@ const useStyles = makeStyles({
   },
 });
 
-const Resource: React.FC<{ resourceId: string; query: any }> = ({ resourceId, query }) => {
+export const Resource: React.FC<{
+  resourceId: string;
+  query: any;
+  loaderOptions?: { size?: number; flex: boolean };
+}> = ({ resourceId, query, loaderOptions }) => {
   const { loading, data, error } = useQuery(query, {
     client: authClient,
     variables: { id: resourceId },
   });
 
-  if (loading) return <MainLoader size={20} />;
+  if (loading) return <MainLoader size={20} {...(loaderOptions && loaderOptions)} />;
   if (error) return <span>error</span>;
 
   return <>{data.item.name}</>;

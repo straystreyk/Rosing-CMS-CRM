@@ -2,7 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core";
 
 interface MainLoaderProps {
-  size: number;
+  size: number | string;
   centered?: boolean;
   flex?: boolean;
 }

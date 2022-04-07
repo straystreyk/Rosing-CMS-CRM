@@ -384,17 +384,19 @@ export const ImageUploaderV2: React.FC<{
     const [edit, setEdit] = React.useState(inputType !== "show");
     const [showSlider, setShowSlider] = React.useState(false);
 
-    let allImages: ImageProps[] | undefined;
-    switch (source) {
-      case "castMembers":
-        allImages =
-          index && values[source][index].person && values[source][index].person.images
+    let allImages: ImageProps[] | [];
+    const getAllImages = React.useCallback(() => {
+      switch (source) {
+        case "castMembers":
+          return index && values[source][index].person && values[source][index].person.images
             ? values[source][index].person.images
             : undefined;
-        break;
-      default:
-        allImages = values[source];
-    }
+        default:
+          return values[source];
+      }
+    }, [values, source, index]);
+    allImages = getAllImages();
+
     const [serverImages, setServerImages] = React.useState<ImageProps[] | []>(
       allImages && allImages.length ? allImages : []
     );
@@ -429,6 +431,13 @@ export const ImageUploaderV2: React.FC<{
     React.useEffect(() => {
       form.change(sourceIds, imageIds);
     }, [form, imageIds, sourceIds]);
+
+    React.useEffect(() => {
+      if (allImages && allImages.length) {
+        allImages = getAllImages();
+        setServerImages(() => allImages);
+      }
+    }, [values[source]]);
 
     React.useEffect(() => {
       setServerImages((p: ImageProps[]) =>

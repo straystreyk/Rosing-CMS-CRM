@@ -86,6 +86,10 @@ export const en: TranslationMessages = {
           success: "Movie was updated",
           error: "Cant update movie: %{error}",
         },
+        list: {
+          success: 'Movie "%{name}" was successfully updated',
+          error: "Cant update movie: %{error}",
+        },
       },
       fields: {
         name: "Name",

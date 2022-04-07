@@ -5,8 +5,8 @@ import { FieldArray } from "react-final-form-arrays";
 import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
 
 import {
-  ArrayInputIconDown,
-  ArrayInputIconUp,
+  ArrowIconDown,
+  ArrowIconUp,
   DeleteIcon,
   HideIcon,
   PlusIcon,
@@ -118,12 +118,12 @@ const ArrayInputHeader: React.FC<{
           <div className={classes.ReorderIcons}>
             {index !== 0 && (
               <button onClick={(e) => reorder(e, fieldProps, index, index - 1, source)}>
-                <ArrayInputIconUp />
+                <ArrowIconUp />
               </button>
             )}
             {fieldProps.fields.length && index !== fieldProps.fields.length - 1 && (
               <button onClick={(e) => reorder(e, fieldProps, index, index + 1, source)}>
-                <ArrayInputIconDown />
+                <ArrowIconDown />
               </button>
             )}
           </div>
@@ -323,6 +323,7 @@ export const ArrayInput: React.FC<ArrayInputProps> = ({ inputType, ...props }) =
       inputType={inputType}
       ChildComponent={props.ChildComponent}
       itemClass={props.itemClass}
+      query={props.query}
       draggable
     />
   ) : (

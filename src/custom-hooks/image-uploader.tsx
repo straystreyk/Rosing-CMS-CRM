@@ -19,6 +19,10 @@ export const useImageItem = ({
   const [imageId, setImageId] = React.useState(id ?? "");
   const [url, setUrl] = React.useState(file ?? "");
 
+  React.useEffect(() => {
+    setUrl(file);
+  }, [file]);
+
   const onDrop = React.useCallback(
     async (file) => {
       if (file) {
