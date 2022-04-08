@@ -8,6 +8,11 @@
     --primary-button-default: #005AA3;
     --primary-focus: #008DFF;
     --primary-bg: #F0F8FF;
+    --primary-bg-3: #FAFDFF;
+}
+
+input {
+    outline: none;
 }
 
 body {
@@ -34,6 +39,7 @@ button {
     border: none;
     font-family: 'Gilroy', sans-serif;
     padding: 0;
+    cursor: pointer;
 }
 
 @keyframes circular {

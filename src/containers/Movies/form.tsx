@@ -404,11 +404,13 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           source="published"
           label="Publishing"
           initialValue={false}
+          inputType={type}
           choices={PUBLISHED_CHOICES}
         />
         <RadioButtonGroupInput
           source="cmsDistribution"
           label="Distribution"
+          inputType={type}
           choices={SELECT_DISTRIBUTION}
         />
         <ArrayInputNoDrag

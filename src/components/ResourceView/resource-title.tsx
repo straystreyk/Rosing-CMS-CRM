@@ -18,7 +18,7 @@ export type TitleProps = {
 
 const useStyles = makeStyles((theme) => ({
   titleWrapper: {
-    backgroundColor: "#F2F7FB",
+    backgroundColor: "var(--primary-bg-3)",
     padding: "16px 24px",
   },
   ButtonsShow: {

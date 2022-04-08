@@ -1258,3 +1258,76 @@ export const UnPublishIcon = () => (
     />
   </svg>
 );
+
+export const Arrow = ({ color }: IconProps) => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle
+      cx="10"
+      cy="10"
+      r="7.35"
+      transform="rotate(-90 10 10)"
+      stroke={color}
+      strokeWidth="1.3"
+    />
+    <line
+      x1="9.5335"
+      y1="7.38379"
+      x2="12.1498"
+      y2="10.0001"
+      stroke={color}
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <line
+      x1="0.65"
+      y1="-0.65"
+      x2="4.35"
+      y2="-0.65"
+      transform="matrix(0.707107 -0.707107 -0.707107 -0.707107 8.61426 12.6162)"
+      stroke={color}
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+export const SortIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line
+      x1="2.80527"
+      y1="4.15078"
+      x2="3.50527"
+      y2="4.15078"
+      stroke="#023864"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <line
+      x1="2.80527"
+      y1="8.15078"
+      x2="5.50527"
+      y2="8.15078"
+      stroke="#023864"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <line
+      x1="2.80527"
+      y1="12.1508"
+      x2="7.50527"
+      y2="12.1508"
+      stroke="#023864"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <line
+      x1="2.65"
+      y1="16.1508"
+      x2="17.35"
+      y2="16.1508"
+      stroke="#023864"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+  </svg>
+);

@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     },
   },
   TopList: {
-    backgroundColor: "#F2F7FB",
+    backgroundColor: "var(--primary-bg-3)",
   },
 });
 

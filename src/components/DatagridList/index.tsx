@@ -1,8 +1,65 @@
 import * as React from "react";
-import { Datagrid, DatagridBody } from "react-admin";
+import { Datagrid, DatagridBody, useListContext } from "react-admin";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Checkbox from "@material-ui/core/Checkbox";
+import { DatagridWrapper } from "./datagrid-wrapper";
+import { TableHead } from "@material-ui/core";
+import { SortIcon } from "../../constants/icons";
+
+const inverseOrder = (sort: string) => (sort === "ASC" ? "DESC" : "ASC");
+
+export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
+  const {
+    currentSort,
+    setSort,
+    onSelect,
+    perPage,
+    ids,
+    selectedIds,
+    onUnselectItems,
+    filterValues,
+    setFilters,
+  } = useListContext();
+
+  const sort = (source: string) => {
+    setSort(source, source === currentSort.field ? inverseOrder(currentSort.order) : "ASC");
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        <TableCell size="small" padding="checkbox">
+          <Checkbox
+            color="primary"
+            checked={selectedIds.length === perPage}
+            onClick={() => (selectedIds.length !== perPage ? onSelect(ids) : onUnselectItems())}
+          />
+        </TableCell>
+        {React.Children.map(children, (child: any) => (
+          <TableCell width={200} key={child.props.source}>
+            {child.props.label}{" "}
+            {child.props.source && child.props.label && (
+              <button
+                style={{
+                  verticalAlign: "middle",
+                  transformOrigin: "center center",
+                  transform:
+                    child.props.source === currentSort.field && currentSort.order === "DESC"
+                      ? "rotate(180deg)"
+                      : "",
+                }}
+                onClick={() => sort(child.props.source)}
+              >
+                <SortIcon />
+              </button>
+            )}
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+};
 
 const MyDatagridRow: React.FC<any> = ({
   record,
@@ -19,13 +76,7 @@ const MyDatagridRow: React.FC<any> = ({
     </TableCell>
     {React.Children.map(children, (field, index) => {
       return (
-        <TableCell
-          component="th"
-          scope="row"
-          width={150}
-          size="small"
-          key={`${id}-${field.props.source}`}
-        >
+        <TableCell component="th" scope="row" size="small" key={`${id}-${field.props.source}`}>
           {React.cloneElement(field, {
             record,
             basePath,
@@ -38,4 +89,8 @@ const MyDatagridRow: React.FC<any> = ({
 );
 
 const MyDatagridBody = (props: any) => <DatagridBody {...props} row={<MyDatagridRow />} />;
-export const DatagridList = (props: any) => <Datagrid {...props} body={<MyDatagridBody />} />;
+export const DatagridList = (props: any) => (
+  <DatagridWrapper>
+    <Datagrid header={props.header ?? <DatagridHeader />} {...props} body={<MyDatagridBody />} />
+  </DatagridWrapper>
+);

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Datagrid, FunctionField, TextField, useMutation, useRefresh } from "react-admin";
+import { FunctionField, TextField, useMutation, useRefresh } from "react-admin";
 import { EmptyTablePage } from "../../components/EmptyTablePage";
 import { Resource } from "../../components/Inputs/StandatdInputs/SelectInput/show-view";
 import { GET_ONE_EXTERNAL_CATALOG } from "../../components/Providers/custom-requests";
@@ -19,7 +19,6 @@ import { EditButton } from "../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../components/UI/RA/delete-button";
 import { StandardButton } from "../../components/UI/Buttons/standard-button";
 import { useNotify } from "ra-core";
-import { MainLoader } from "../../components/MainLoader";
 import { DatagridList } from "../../components/DatagridList";
 
 const useStyles = makeStyles({
@@ -84,7 +83,7 @@ export const List: React.FC<ShowProps> = (props) => {
   );
 
   React.useEffect(() => {
-    if (data) {
+    if (data && !error) {
       notify(`resources.${props.resource}.mutations.list.success`, {
         type: "success",
         messageArgs: { name: data.name },
@@ -100,131 +99,126 @@ export const List: React.FC<ShowProps> = (props) => {
   }, [data, error]);
 
   return (
-    <div className={classes.DataGridWrapper}>
-      {loading && (
-        <div className="LoaderWrapper">
-          <MainLoader size="10%" />
-        </div>
-      )}
-      <DatagridList empty={<EmptyTablePage />} {...props} optimized>
-        <TextField source="name" style={{ textDecoration: "underline" }} />
-        <FunctionField
-          label="Position"
-          render={({ position }: { position: number }) => (position ? position : "Not filled in")}
-        />
-        <TextField source="slug" />
-        <FunctionField
-          label="External catalog"
-          render={({ externalCatalogId }: { externalCatalogId: string }) =>
-            externalCatalogId ? (
-              <Resource
-                loaderOptions={{ flex: true, size: 10 }}
-                resourceId={externalCatalogId}
-                query={GET_ONE_EXTERNAL_CATALOG}
-              />
-            ) : (
-              <span className={classes.Empty}>Not filled in</span>
-            )
-          }
-        />
-        <FunctionField
-          label=""
-          render={(record: {
-            id: string;
-            published: boolean;
-            position: number;
-            name: string;
-            streamSourceIds: string[];
-          }) => {
-            return (
-              <div className={classes.MoreInfo}>
-                {record.published ? <PublishedIcons /> : <UnPublishedIcons />}
-                <MoreActionsButton>
-                  <StandardButton
-                    onClick={() =>
-                      approve(
-                        record.id,
-                        {
-                          ...record,
-                          published: true,
-                        },
-                        { name: record.name }
-                      )
-                    }
-                    disabled={loading}
-                    color="secondary"
-                    variant="textWithBg"
-                    startIcon={<PublishIcon />}
-                  >
-                    Publish
-                  </StandardButton>
-                  <StandardButton
-                    onClick={() =>
-                      approve(record.id, { ...record, published: false }, { name: record.name })
-                    }
-                    disabled={loading}
-                    color="secondary"
-                    variant="textWithBg"
-                    startIcon={<UnPublishIcon />}
-                  >
-                    Unpublish
-                  </StandardButton>
-                  <StandardButton
-                    onClick={() =>
-                      approve(record.id, { ...record, downloadable: true }, { name: record.name })
-                    }
-                    disabled={loading}
-                    color="secondary"
-                    variant="textWithBg"
-                    startIcon={<AllowDownload />}
-                  >
-                    Allow downloading
-                  </StandardButton>
-                  <StandardButton
-                    onClick={() =>
-                      approve(record.id, { ...record, downloadable: false }, { name: record.name })
-                    }
-                    disabled={loading}
-                    color="secondary"
-                    variant="textWithBg"
-                    startIcon={<ProhibitDownload />}
-                  >
-                    Prohibit downloading
-                  </StandardButton>
-                  <StandardButton
-                    onClick={() =>
-                      approve(record.id, { ...record, position: 1 }, { name: record.name })
-                    }
-                    disabled={loading}
-                    color="secondary"
-                    variant="textWithBg"
-                    startIcon={<ArrowIconUp />}
-                  >
-                    To the top of the list
-                  </StandardButton>
-                  <StandardButton
-                    onClick={() =>
-                      approve(
-                        record.id,
-                        { ...record, position: props.total ?? 0 },
-                        { name: record.name }
-                      )
-                    }
-                    startIcon={<ArrowIconDown />}
-                    disabled={loading}
-                    variant="textWithBg"
-                    color="secondary"
-                  >
-                    To the bottom of the list
-                  </StandardButton>
-                  <EditButton color="secondary" record={record} basePath={props.basePath} />
-                  <DeleteButton record={record} basePath={props.basePath} />
-                </MoreActionsButton>
-              </div>
-            );
-          }}
-        />
-      </DatagridList>
-    </div>
+    <DatagridList empty={<EmptyTablePage />} {...props} optimized>
+      <TextField label="Name" source="name" style={{ textDecoration: "underline" }} />
+      <FunctionField
+        label="Position"
+        source="position"
+        render={({ position }: { position: number }) => position ?? "Not filled in"}
+      />
+      <TextField label="Slug" source="slug" />
+      <FunctionField
+        label="External catalog"
+        source="External catalog"
+        render={({ externalCatalogId }: { externalCatalogId: string }) =>
+          externalCatalogId ? (
+            <Resource
+              loaderOptions={{ flex: true, size: 10 }}
+              resourceId={externalCatalogId}
+              query={GET_ONE_EXTERNAL_CATALOG}
+            />
+          ) : (
+            <span className={classes.Empty}>Not filled in</span>
+          )
+        }
+      />
+      <FunctionField
+        label=""
+        render={(record: {
+          id: string;
+          published: boolean;
+          position: number;
+          name: string;
+          streamSourceIds: string[];
+        }) => {
+          return (
+            <div className={classes.MoreInfo}>
+              {record.published ? <PublishedIcons /> : <UnPublishedIcons />}
+              <MoreActionsButton>
+                <StandardButton
+                  onClick={() =>
+                    approve(
+                      record.id,
+                      {
+                        ...record,
+                        published: true,
+                      },
+                      { name: record.name }
+                    )
+                  }
+                  disabled={loading}
+                  color="secondary"
+                  variant="textWithBg"
+                  startIcon={<PublishIcon />}
+                >
+                  Publish
+                </StandardButton>
+                <StandardButton
+                  onClick={() =>
+                    approve(record.id, { ...record, published: false }, { name: record.name })
+                  }
+                  disabled={loading}
+                  color="secondary"
+                  variant="textWithBg"
+                  startIcon={<UnPublishIcon />}
+                >
+                  Unpublish
+                </StandardButton>
+                <StandardButton
+                  onClick={() =>
+                    approve(record.id, { ...record, downloadable: true }, { name: record.name })
+                  }
+                  disabled={loading}
+                  color="secondary"
+                  variant="textWithBg"
+                  startIcon={<AllowDownload />}
+                >
+                  Allow downloading
+                </StandardButton>
+                <StandardButton
+                  onClick={() =>
+                    approve(record.id, { ...record, downloadable: false }, { name: record.name })
+                  }
+                  disabled={loading}
+                  color="secondary"
+                  variant="textWithBg"
+                  startIcon={<ProhibitDownload />}
+                >
+                  Prohibit downloading
+                </StandardButton>
+                <StandardButton
+                  onClick={() =>
+                    approve(record.id, { ...record, position: 1 }, { name: record.name })
+                  }
+                  disabled={loading}
+                  color="secondary"
+                  variant="textWithBg"
+                  startIcon={<ArrowIconUp />}
+                >
+                  To the top of the list
+                </StandardButton>
+                <StandardButton
+                  onClick={() =>
+                    approve(
+                      record.id,
+                      { ...record, position: props.total ?? 0 },
+                      { name: record.name }
+                    )
+                  }
+                  startIcon={<ArrowIconDown />}
+                  disabled={loading}
+                  variant="textWithBg"
+                  color="secondary"
+                >
+                  To the bottom of the list
+                </StandardButton>
+                <EditButton color="secondary" record={record} basePath={props.basePath} />
+                <DeleteButton record={record} basePath={props.basePath} />
+              </MoreActionsButton>
+            </div>
+          );
+        }}
+      />
+    </DatagridList>
   );
 };

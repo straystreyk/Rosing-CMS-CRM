@@ -141,7 +141,7 @@ export const lightTheme = {
     },
     MuiTableHead: {
       root: {
-        backgroundColor: "#F2F7FB",
+        backgroundColor: "var(--primary-bg)",
       },
     },
     MuiTableSortLabel: {

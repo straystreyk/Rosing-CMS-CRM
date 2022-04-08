@@ -1,10 +1,11 @@
 import * as React from "react";
 import {
   RadioButtonGroupInput as RadioButtonGroupInputRA,
-  RadioButtonGroupInputProps,
+  RadioButtonGroupInputProps as RadioButtonGroupInputPropsRA,
 } from "ra-ui-materialui";
-import { makeStyles } from "@material-ui/core";
+import { ButtonProps, makeStyles } from "@material-ui/core";
 import { labelStyles } from "../styles";
+import { RadioButtonGroupInputShow } from "./show-view";
 
 const useStyles = makeStyles({
   RadioButtonGroupInput: {
@@ -26,19 +27,30 @@ const useStyles = makeStyles({
   },
 });
 
+interface RadioButtonGroupInputProps extends Omit<RadioButtonGroupInputPropsRA, "source"> {
+  source: string;
+}
+
 export const RadioButtonGroupInput: React.FC<RadioButtonGroupInputProps> = ({
   label,
+  inputType,
   ...props
 }) => {
   const classes = useStyles();
   return (
-    <div className={classes.RadioButtonGroupInput}>
-      <RadioButtonGroupInputRA
-        size="small"
-        helperText={props.helperText ?? false}
-        label={label}
-        {...props}
-      />
-    </div>
+    <>
+      {inputType === "show" ? (
+        <RadioButtonGroupInputShow label={label} {...props} />
+      ) : (
+        <div className={classes.RadioButtonGroupInput}>
+          <RadioButtonGroupInputRA
+            size="small"
+            helperText={props.helperText ?? false}
+            label={label}
+            {...props}
+          />
+        </div>
+      )}
+    </>
   );
 };
