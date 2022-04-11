@@ -1,4 +1,4 @@
-import { required, email, maxLength } from "react-admin";
+import { required, email } from "react-admin";
 import { range } from "lodash";
 
 import { ReferenceInput } from "./ReferenceInputs/reference-input";
@@ -7,7 +7,6 @@ import { SelectInput } from "./StandatdInputs/SelectInput/select-input";
 import { NumberInput } from "./StandatdInputs/NumberInput/numdber-input";
 import { AutocompleteArrayInput } from "./ArrayInputs/AutoCompliteArrayInput/autocomplite-array-input";
 import { RichTextInput } from "./RichTextInput/rich-text-input";
-import { FilterTextInput } from "./filter-text-input";
 import { BooleanInput } from "./boolean-input";
 import { SelectArrayInput } from "./ArrayInputs/select-array-input";
 import { ArrayInput } from "./ArrayInputs/Arrayinput/array-input";
@@ -22,7 +21,6 @@ export {
   NumberInput,
   AutocompleteArrayInput,
   RichTextInput,
-  FilterTextInput,
   BooleanInput,
   SelectArrayInput,
   ArrayInput,

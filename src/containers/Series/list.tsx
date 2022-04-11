@@ -1,13 +1,14 @@
 import React from "react";
-import { Datagrid, TextField } from "react-admin";
+import { TextField } from "react-admin";
 
 import { ShowProps } from "../../types";
 import { EmptyTablePage } from "../../components/EmptyTablePage";
+import { DatagridList } from "../../components/DatagridList";
 
 export const List: React.FC<ShowProps> = (props) => {
   return (
-    <Datagrid empty={<EmptyTablePage />} rowClick="show" optimized {...props}>
+    <DatagridList empty={<EmptyTablePage />} rowClick="show" optimized {...props}>
       <TextField source="name" />
-    </Datagrid>
+    </DatagridList>
   );
 };

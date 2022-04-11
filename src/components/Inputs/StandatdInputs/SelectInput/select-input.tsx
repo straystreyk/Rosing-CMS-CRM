@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import { SelectInput as SelectInputInner } from "react-admin";
 import { SelectInputShow } from "./show-view";
 import { labelStyles } from "../../styles";
+import cn from "classnames";
 
 type Props = React.ComponentProps<typeof SelectInputInner>;
 
@@ -14,6 +15,7 @@ const useStyles = makeStyles({
     "& .MuiSelect-root": {
       padding: "8px 12px",
       color: "var(--primary-text-default)",
+      fontFamily: "Gilroy, sans-serif",
       border: "1px solid var(--secondary-color-default)",
       borderRadius: 4,
       fontSize: 14,
@@ -50,14 +52,14 @@ const useStyles = makeStyles({
   },
 });
 
-export const SelectInputOrigin: React.FC<Props> = ({ inputType, ...props }) => {
+export const SelectInputOrigin: React.FC<Props> = ({ inputType, className, ...props }) => {
   const classes = useStyles();
   return (
     <>
       <SelectInputInner
         fullWidth
-        options={{ className: classes.SelectInput }}
-        helperText={props.helperText ? props.helperText : false}
+        options={{ className: cn(classes.SelectInput, className) }}
+        helperText={props.helperText ?? false}
         {...props}
       />
     </>

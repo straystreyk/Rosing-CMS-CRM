@@ -1,9 +1,10 @@
 import buildGraphQLProvider, { buildQuery as buildQueryFactory } from "ra-data-graphql-simple";
 
 import { authClient } from "./auth-provider";
-import { GET_ONE_MOVIE } from "../../containers/Movies/custom-requests";
+import { GET_ALL_MOVIE, GET_ONE_MOVIE } from "../../containers/Movies/custom-requests";
 import { customParseResponse } from "../../react-admin-overrides";
 import { GET_ONE_SERIES } from "../../containers/Series/requests";
+import { GET_ALL_VIDEO_FILES } from "../../containers/VideoFiles/custom-requests";
 
 const getGqlResource = (resource: string) => {
   switch (resource) {
@@ -71,6 +72,12 @@ const customBuildQuery =
 
     if (fetchType === "GET_ONE" && resource === "Movie") {
       return { ...builtQuery, query: GET_ONE_MOVIE };
+    }
+    if (fetchType === "GET_LIST" && resource === "Movie") {
+      return { ...builtQuery, query: GET_ALL_MOVIE };
+    }
+    if (fetchType === "GET_LIST" && resource === "VideoFile") {
+      return { ...builtQuery, query: GET_ALL_VIDEO_FILES };
     }
     if (fetchType === "GET_ONE" && resource === "Series") {
       return { ...builtQuery, query: GET_ONE_SERIES };

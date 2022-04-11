@@ -1,26 +1,11 @@
 import { Datagrid, DateField, TextField } from "react-admin";
 
 import { ResourceList } from "../../components/ResourceView";
-import { filterTypes } from "../../types";
-import { FilterTextInput } from "../../components/Inputs";
-
-const filters: filterTypes[] = [
-  {
-    source: "username",
-    title: "Имя пользователя",
-    component: FilterTextInput,
-  },
-  {
-    source: "firstName",
-    title: "Имя",
-    component: FilterTextInput,
-  },
-];
 
 export const UserList = (props: any) => {
   return (
     <>
-      <ResourceList {...props} filtersArray={filters} resource={props.resource}>
+      <ResourceList {...props} resource={props.resource}>
         <Datagrid optimized rowClick="edit">
           <TextField source="email" />
           <TextField source="firstName" />

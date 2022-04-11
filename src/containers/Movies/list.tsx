@@ -1,8 +1,6 @@
 import * as React from "react";
-import { FunctionField, TextField, useMutation, useRefresh } from "react-admin";
+import { FunctionField, ReferenceField, TextField, useMutation, useRefresh } from "react-admin";
 import { EmptyTablePage } from "../../components/EmptyTablePage";
-import { Resource } from "../../components/Inputs/StandatdInputs/SelectInput/show-view";
-import { GET_ONE_EXTERNAL_CATALOG } from "../../components/Providers/custom-requests";
 import {
   AllowDownload,
   ArrowIconDown,
@@ -28,21 +26,6 @@ const useStyles = makeStyles({
     justifyContent: "center",
     "& .MoreActionsButtonWrapper": {
       marginLeft: 15,
-    },
-  },
-  DataGridWrapper: {
-    position: "relative",
-    "& .LoaderWrapper": {
-      backgroundColor: "rgba(0, 0, 0, 0.1)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      zIndex: 200,
-      top: 0,
-      left: 0,
     },
   },
   NameField: {
@@ -100,28 +83,22 @@ export const List: React.FC<ShowProps> = (props) => {
 
   return (
     <DatagridList empty={<EmptyTablePage />} {...props} optimized>
-      <TextField label="Name" source="name" style={{ textDecoration: "underline" }} />
+      <TextField label="Name" source="name" className={classes.NameField} />
       <FunctionField
         label="Position"
         source="position"
         render={({ position }: { position: number }) => position ?? "Not filled in"}
       />
       <TextField label="Slug" source="slug" />
-      <FunctionField
+
+      <ReferenceField
         label="External catalog"
-        source="External catalog"
-        render={({ externalCatalogId }: { externalCatalogId: string }) =>
-          externalCatalogId ? (
-            <Resource
-              loaderOptions={{ flex: true, size: 10 }}
-              resourceId={externalCatalogId}
-              query={GET_ONE_EXTERNAL_CATALOG}
-            />
-          ) : (
-            <span className={classes.Empty}>Not filled in</span>
-          )
-        }
-      />
+        source="externalCatalogId"
+        reference="external_catalog"
+        emptyText={<span className={classes.Empty}>Empty</span>}
+      >
+        <TextField source="name" fullWidth />
+      </ReferenceField>
       <FunctionField
         label=""
         render={(record: {

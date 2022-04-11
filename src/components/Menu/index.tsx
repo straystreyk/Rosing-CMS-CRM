@@ -1,11 +1,11 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
 import SettingsIcon from "@material-ui/icons/Settings";
+import cn from "classnames";
+import { useSelector } from "react-redux";
 import { useMediaQuery, Theme } from "@material-ui/core";
 import { useTranslate, MenuItemLink } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { LineCloseStyles, LineStyles, MenuItemLinkStyles, MenuItemLinkCloseStyles } from "./styles";
-import cn from "classnames";
 
 import { ExpandMenu } from "../ExpandMenu/expand-menu";
 import { AppState } from "../../types";

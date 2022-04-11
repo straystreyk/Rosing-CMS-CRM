@@ -10,31 +10,26 @@ import { SortIcon } from "../../constants/icons";
 const inverseOrder = (sort: string) => (sort === "ASC" ? "DESC" : "ASC");
 
 export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
-  const {
-    currentSort,
-    setSort,
-    onSelect,
-    perPage,
-    ids,
-    selectedIds,
-    onUnselectItems,
-    filterValues,
-    setFilters,
-  } = useListContext();
+  const { currentSort, setSort, onSelect, perPage, ids, selectedIds, onUnselectItems } =
+    useListContext();
 
   const sort = (source: string) => {
     setSort(source, source === currentSort.field ? inverseOrder(currentSort.order) : "ASC");
   };
 
+  const checkedAll = React.useCallback(() => {
+    if (selectedIds.length !== perPage) {
+      onSelect(ids);
+    } else {
+      onUnselectItems();
+    }
+  }, [selectedIds.length, perPage, onSelect, onUnselectItems]);
+
   return (
     <TableHead>
       <TableRow>
         <TableCell size="small" padding="checkbox">
-          <Checkbox
-            color="primary"
-            checked={selectedIds.length === perPage}
-            onClick={() => (selectedIds.length !== perPage ? onSelect(ids) : onUnselectItems())}
-          />
+          <Checkbox color="primary" checked={selectedIds.length === perPage} onClick={checkedAll} />
         </TableCell>
         {React.Children.map(children, (child: any) => (
           <TableCell width={200} key={child.props.source}>

@@ -89,3 +89,33 @@ export const GET_ONE_MOVIE = gql`
     }
   }
 `;
+
+export const GET_ALL_MOVIE = gql`
+  query allMovies(
+    $page: Int
+    $perPage: Int
+    $sortField: String
+    $sortOrder: String
+    $filter: MovieFilter
+  ) {
+    items: allMovies(
+      page: $page
+      perPage: $perPage
+      sortField: $sortField
+      sortOrder: $sortOrder
+      filter: $filter
+    ) {
+      id
+      streamSourceIds
+      position
+      externalCatalogId
+      name
+      published
+      slug
+    }
+    total: _allMoviesMeta(page: $page, perPage: $perPage, filter: $filter) {
+      count
+      __typename
+    }
+  }
+`;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { MainLoader } from "../MainLoader";
 import { SortList } from "../Pagination/sort-list";
-import { makeStyles, TableContainer } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { useListContext } from "react-admin";
 
 const useStyles = makeStyles({

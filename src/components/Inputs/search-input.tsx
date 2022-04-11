@@ -4,10 +4,12 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   SearchInput: {
-    padding: "8px 12px",
+    padding: "9.2px 12px",
     border: "1px solid var(--secondary-color-default)",
-    borderRadius: 4,
+    borderTopRightRadius: 4,
+    borderBottomRightRadius: 4,
     backgroundColor: "#fff",
+    width: "100%",
     "& .MuiFormHelperText-root": {
       display: "none",
     },

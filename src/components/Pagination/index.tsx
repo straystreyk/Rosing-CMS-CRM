@@ -91,7 +91,7 @@ const useStyles = makeStyles({
 const MAX_PAGES = 6;
 
 export const Pagination = () => {
-  const { page, perPage, total, setPage, setPerPage } = useListContext();
+  const { page, perPage, total, setPage } = useListContext();
   const [arrOfPages, setArrOfPages] = React.useState<(string | number)[]>([]);
   const [value, setValue] = React.useState<string>("");
   const nbPages = Math.ceil(total / perPage) || 1;
@@ -167,6 +167,7 @@ export const Pagination = () => {
             <button
               className={cn(classes.Button, page === nbPages && "disabled")}
               onClick={() => setPage(page + 1)}
+              disabled={page === nbPages}
             >
               <Arrow color="var(--secondary-color-main)" />
             </button>
