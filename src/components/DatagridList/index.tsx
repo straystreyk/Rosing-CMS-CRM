@@ -18,18 +18,18 @@ export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
   };
 
   const checkedAll = React.useCallback(() => {
-    if (selectedIds.length !== perPage) {
+    if (selectedIds !== ids) {
       onSelect(ids);
     } else {
       onUnselectItems();
     }
-  }, [selectedIds.length, perPage, onSelect, onUnselectItems]);
+  }, [selectedIds.length, perPage, onSelect, onUnselectItems, ids]);
 
   return (
     <TableHead>
       <TableRow>
         <TableCell size="small" padding="checkbox">
-          <Checkbox color="primary" checked={selectedIds.length === perPage} onClick={checkedAll} />
+          <Checkbox color="primary" checked={selectedIds === ids} onClick={checkedAll} />
         </TableCell>
         {React.Children.map(children, (child: any) => (
           <TableCell width={200} key={child.props.source}>
@@ -85,7 +85,7 @@ const MyDatagridRow: React.FC<any> = ({
 
 const MyDatagridBody = (props: any) => <DatagridBody {...props} row={<MyDatagridRow />} />;
 export const DatagridList = (props: any) => (
-  <DatagridWrapper>
+  <DatagridWrapper filters={props.filters}>
     <Datagrid header={props.header ?? <DatagridHeader />} {...props} body={<MyDatagridBody />} />
   </DatagridWrapper>
 );

@@ -60,7 +60,6 @@ export const EditInputComponent: React.FC<any> = ({
   const [initialValue] = React.useState(values[props.source]);
   const notify = useNotify();
   const classes = useStyles();
-  const refresh = useRefresh();
 
   React.useEffect(() => {
     if (error) {

@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core";
 
 import { breadcrumbsLinks } from "../../constants/breadcrumbs-link";
 import { useFormState } from "react-final-form";
-import { useListContext } from "react-admin";
 
 interface BreadcrumbsProps {
   className?: string;

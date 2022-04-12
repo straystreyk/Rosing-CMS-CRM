@@ -35,8 +35,6 @@ const useStyles = makeStyles({
   },
 });
 
-const INPUT_ITEMS_PER_PAGE = 25;
-
 export const CastMembers: React.FC<{
   parentSource: string;
   resource: string;

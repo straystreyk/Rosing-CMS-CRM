@@ -49,6 +49,7 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
   startIcon,
   onClick,
   endIcon,
+  className,
   ...props
 }) => {
   const classes = useStyles();
@@ -64,7 +65,8 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
         classes.StandardButton,
         "StandardButton",
         variant === "text" && classes.TextButton,
-        variant === "textWithBg" && classes.TextWithBG
+        variant === "textWithBg" && classes.TextWithBG,
+        className && className
       )}
       {...props}
     >

@@ -8,31 +8,16 @@ import Icon from "@material-ui/icons/Movie";
 import { Form } from "./form";
 import { ResourceCreate, ResourceEdit, ResourceList } from "../../components/ResourceView";
 import { List as DataGridList } from "./list";
-import { SearchInput } from "../../components/Inputs/search-input";
 import { mediaContentTabs } from "../../constants/breadcrumbs-link";
 import { ResourceShow } from "../../components/ResourceView/resource-show";
-import { SelectInputOrigin } from "../../components/Inputs/StandatdInputs/SelectInput/select-input";
 import { SearchSelect } from "../../components/Inputs/StandatdInputs/SelectInput/styles";
-import { searchChoices } from "../../constants/list-constants";
+import { filtersRA } from "./movie-filters";
 
 const useStyles = makeStyles({
   SearchSelect,
 });
 
 const resource = "media_content/video/movies";
-
-const filters = (selectClass: string) => [
-  <SelectInputOrigin
-    source="searchRule"
-    initialValue="contains"
-    allowEmpty={false}
-    className={selectClass}
-    choices={searchChoices}
-    label=""
-    alwaysOn
-  />,
-  <SearchInput placeholder="ID, slug or movie name" label="" source="q" alwaysOn />,
-];
 
 const SCROLL_TO_OPTS: ScrollToOptions = {
   behavior: "smooth",
@@ -74,7 +59,7 @@ export const List: React.FC = (props) => {
     <ResourceList
       {...props}
       listTabs={mediaContentTabs}
-      filters={filters(classes.SearchSelect)}
+      filters={filtersRA(classes.SearchSelect)}
       resource={resource}
     >
       <DataGridList resource={resource} />

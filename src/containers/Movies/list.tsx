@@ -18,6 +18,7 @@ import { DeleteButton } from "../../components/UI/RA/delete-button";
 import { StandardButton } from "../../components/UI/Buttons/standard-button";
 import { useNotify } from "ra-core";
 import { DatagridList } from "../../components/DatagridList";
+import { customFilters } from "./movie-filters";
 
 const useStyles = makeStyles({
   MoreInfo: {
@@ -82,7 +83,7 @@ export const List: React.FC<ShowProps> = (props) => {
   }, [data, error]);
 
   return (
-    <DatagridList empty={<EmptyTablePage />} {...props} optimized>
+    <DatagridList filters={customFilters} empty={<EmptyTablePage />} {...props} optimized>
       <TextField label="Name" source="name" className={classes.NameField} />
       <FunctionField
         label="Position"

@@ -7,8 +7,8 @@ import { DatagridList } from "../../components/DatagridList";
 
 export const List: React.FC<ShowProps> = (props) => {
   return (
-    <DatagridList empty={<EmptyTablePage />} rowClick="show" optimized {...props}>
-      <TextField source="name" />
+    <DatagridList empty={<EmptyTablePage />} optimized {...props}>
+      <TextField source="name" label="name" />
     </DatagridList>
   );
 };

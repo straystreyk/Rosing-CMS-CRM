@@ -1,8 +1,11 @@
 import * as React from "react";
-import { MainLoader } from "../MainLoader";
+import { useListContext } from "react-admin";
 import { SortList } from "../Pagination/sort-list";
 import { makeStyles } from "@material-ui/core";
-import { useListContext } from "react-admin";
+
+import { MainLoader } from "../MainLoader";
+import { Filters } from "../CustomListFilters";
+import { CustomDatagridProps } from "./custom-datagrid-types";
 
 const useStyles = makeStyles({
   DataGridWrapper: {
@@ -22,17 +25,20 @@ const useStyles = makeStyles({
   },
 });
 
-export const DatagridWrapper: React.FC<{ loading?: boolean }> = ({ children }) => {
+const LOADER_SIZE = 50;
+
+export const DatagridWrapper: React.FC<CustomDatagridProps> = ({ children, filters }) => {
   const classes = useStyles();
   const { loading } = useListContext();
 
   return (
     <>
+      {filters && <Filters filters={filters} />}
       <SortList />
       <div className={classes.DataGridWrapper}>{children}</div>
       {loading && (
         <div className={classes.LoaderWrapper}>
-          <MainLoader flex size={50} centered />
+          <MainLoader flex size={LOADER_SIZE} centered />
         </div>
       )}
     </>
