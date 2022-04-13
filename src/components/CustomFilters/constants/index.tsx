@@ -10,6 +10,17 @@ export const DOWNLOADABLE_CHOICES = [
   { name: "Undownloadable", value: false },
 ];
 
+export const PUBLISHED_CHOICES = [
+  { name: "Published", value: true },
+  { name: "Unpublished", value: false },
+];
+
+export const MARKERS_CHOICES = [
+  { value: "popular", name: "Popular" },
+  { value: "free", name: "Free" },
+  { value: "featured", name: "Featured" },
+];
+
 export const ArrowFilterIcon = ({ color }: IconProps) => (
   <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path

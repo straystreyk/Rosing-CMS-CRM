@@ -4,7 +4,7 @@ import { SortList } from "../Pagination/sort-list";
 import { makeStyles } from "@material-ui/core";
 
 import { MainLoader } from "../MainLoader";
-import { Filters } from "../CustomListFilters";
+import { Filters } from "../CustomFilters";
 import { CustomDatagridProps } from "./custom-datagrid-types";
 
 const useStyles = makeStyles({

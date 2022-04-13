@@ -1,23 +1,24 @@
 import * as React from "react";
 import * as _ from "lodash";
+import cn from "classnames";
 import { useListContext } from "react-admin";
 import { Menu, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 
 import { FilterContext } from "./index";
-import { ChoicesCustomFilter } from "./custom-filters-types";
+import { ChoicesCustomFilter, ChoicesItem } from "./custom-filters-types";
 import { ArrowFilterIcon, DeleteFilterIcon } from "./constants";
-import cn from "classnames";
 import { DefaultRoundedFilterStyles } from "./styles";
 
 const useStyles = makeStyles({ ...DefaultRoundedFilterStyles });
 
-const FilterRounded: React.FC<{
+export const FilterRounded: React.FC<{
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  choices: ChoicesItem[] | undefined;
   deleteFilter: () => void;
   source: string;
   label: string;
-}> = ({ handleClick, source, deleteFilter, label }) => {
+}> = ({ handleClick, source, deleteFilter, label, choices }) => {
   const classes = useStyles();
   const { filterValues } = useListContext();
   const isAlreadyIn = Object.keys(filterValues).includes(source);
@@ -25,7 +26,15 @@ const FilterRounded: React.FC<{
   return (
     <span className={cn(classes.RoundedFilter, isAlreadyIn && classes.RoundedFilterActive)}>
       <button onClick={handleClick}>
-        {label}{" "}
+        <span className="label">
+          {Object.keys(filterValues).includes(source) &&
+          choices &&
+          !!choices.find((el) => el.value === filterValues[source]) ? (
+            <>{choices.filter((el) => el.value === filterValues[source])[0].name}</>
+          ) : (
+            <>{label}</>
+          )}
+        </span>{" "}
         <ArrowFilterIcon
           color={!isAlreadyIn ? "var(--primary-focus)" : "var(--primary-button-default)"}
         />
@@ -39,15 +48,10 @@ const FilterRounded: React.FC<{
   );
 };
 
-export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({
-  source,
-  label,
-  choices,
-  defaultActive,
-}) => {
+export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({ source, label, choices }) => {
   const { setFilters, filterValues } = useListContext();
+  const { setActiveFilters } = React.useContext(FilterContext);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const { setActiveFilters, setInitialFilters, filters } = React.useContext(FilterContext);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -68,9 +72,6 @@ export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({
 
   const deleteFilter = React.useCallback(() => {
     setFilters(_.omit(filterValues, [source]));
-    // if (!defaultActive) {
-    //   setActiveFilters((prev: any) => prev.filter((el: any) => el.props.source !== source));
-    // }
   }, [source, filterValues, setActiveFilters, setFilters]);
 
   return (
@@ -80,19 +81,21 @@ export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({
         label={label}
         source={source}
         handleClick={handleClick}
+        choices={choices}
       />
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        {choices.map((el) => {
-          return (
-            <MenuItem
-              selected={filterValues[source] === el.value}
-              onClick={() => handleMenuItemClick(el.value)}
-              key={el.value.toString()}
-            >
-              {el.name}
-            </MenuItem>
-          );
-        })}
+        {choices &&
+          choices.map((el) => {
+            return (
+              <MenuItem
+                selected={filterValues[source] === el.value}
+                onClick={() => handleMenuItemClick(el.value)}
+                key={el.value.toString()}
+              >
+                {el.name}
+              </MenuItem>
+            );
+          })}
       </Menu>
     </>
   );

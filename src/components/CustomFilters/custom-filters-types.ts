@@ -1,14 +1,16 @@
 export interface StandardCustomFilterProps {
   label: string;
   source: string;
+  initialValue?: string;
   defaultActive?: boolean;
 }
 
-interface ChoicesItem {
+export interface ChoicesItem {
   name: string;
   value: string | boolean;
 }
 
 export interface ChoicesCustomFilter extends StandardCustomFilterProps {
-  choices: ChoicesItem[];
+  choices?: ChoicesItem[];
+  query?: any;
 }

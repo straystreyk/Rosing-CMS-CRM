@@ -2,7 +2,6 @@ import * as React from "react";
 import { useRedirect, useRefresh } from "react-admin";
 import { useNotify } from "ra-core";
 import { CreateProps } from "ra-ui-materialui";
-import { makeStyles } from "@material-ui/core";
 import Icon from "@material-ui/icons/Movie";
 
 import { Form } from "./form";
@@ -10,12 +9,6 @@ import { ResourceCreate, ResourceEdit, ResourceList } from "../../components/Res
 import { List as DataGridList } from "./list";
 import { mediaContentTabs } from "../../constants/breadcrumbs-link";
 import { ResourceShow } from "../../components/ResourceView/resource-show";
-import { SearchSelect } from "../../components/Inputs/StandatdInputs/SelectInput/styles";
-import { filtersRA } from "./movie-filters";
-
-const useStyles = makeStyles({
-  SearchSelect,
-});
 
 const resource = "media_content/video/movies";
 
@@ -54,14 +47,8 @@ export const Edit: React.FC = (props) => (
   </ResourceEdit>
 );
 export const List: React.FC = (props) => {
-  const classes = useStyles();
   return (
-    <ResourceList
-      {...props}
-      listTabs={mediaContentTabs}
-      filters={filtersRA(classes.SearchSelect)}
-      resource={resource}
-    >
+    <ResourceList {...props} listTabs={mediaContentTabs} resource={resource}>
       <DataGridList resource={resource} />
     </ResourceList>
   );

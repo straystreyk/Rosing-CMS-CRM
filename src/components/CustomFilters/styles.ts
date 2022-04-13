@@ -1,6 +1,8 @@
-export const RoundedFiltersWrapperStyles: any = {
+export const CustomFiltersWrapperStyles: any = {
+  CustomFiltersWrapper: {
+    padding: "0 20px 0 24px",
+  },
   RoundedFiltersWrapper: {
-    padding: "0 24px",
     marginBottom: 24,
     display: "flex",
     flexWrap: "wrap",
@@ -8,13 +10,6 @@ export const RoundedFiltersWrapperStyles: any = {
     gap: "15px 8px",
     "& .filterButton": {
       padding: 0,
-    },
-  },
-  ListItem: {
-    display: "flex",
-    alignItems: "center",
-    "& span.label": {
-      marginLeft: 10,
     },
   },
 };
@@ -30,6 +25,9 @@ export const DefaultRoundedFilterStyles = {
       color: "var(--primary-focus)",
       fontSize: 14,
       fontWeight: 500,
+      "& span.label + svg": {
+        marginLeft: 10,
+      },
     },
     "& svg": {
       verticalAlign: "middle",

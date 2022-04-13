@@ -1,31 +1,23 @@
 import * as React from "react";
-import { ChoicesFilter } from "../../components/CustomListFilters/ChoicesFilter";
+import { ChoicesFilter } from "../../components/CustomFilters/ChoicesFilter";
 import {
   DOWNLOADABLE_CHOICES,
   EXTRA_VIDEO_CHOICES,
-} from "../../components/CustomListFilters/constants";
-import { SelectInputOrigin } from "../../components/Inputs/StandatdInputs/SelectInput/select-input";
-import { searchChoices } from "../../constants/list-constants";
-import { SearchInput } from "../../components/Inputs/search-input";
+  MARKERS_CHOICES,
+  PUBLISHED_CHOICES,
+} from "../../components/CustomFilters/constants";
+import { MultipleFiltersList } from "../../components/CustomFilters/MultipleFiltersList";
+import { ALL_GENRES_FILTER } from "../../components/Providers/custom-requests";
 
 export const customFilters = [
   <ChoicesFilter
-    choices={EXTRA_VIDEO_CHOICES}
+    choices={DOWNLOADABLE_CHOICES}
+    label="Downloadable"
+    source="downloadable"
     defaultActive
-    label="Extra videos"
-    source="extraVideo"
   />,
-  <ChoicesFilter choices={DOWNLOADABLE_CHOICES} label="Downloadable" source="downloadable" />,
-];
-
-export const filtersRA = (selectClass: string) => [
-  <SelectInputOrigin
-    source="searchRule"
-    initialValue="contains"
-    className={selectClass}
-    choices={searchChoices}
-    label=""
-    alwaysOn
-  />,
-  <SearchInput placeholder="ID, slug or movie name" label="" source="q" alwaysOn />,
+  <ChoicesFilter choices={PUBLISHED_CHOICES} label="Publish" source="published" />,
+  <ChoicesFilter choices={EXTRA_VIDEO_CHOICES} label="Extra videos" source="extraVideo" />,
+  <MultipleFiltersList query={ALL_GENRES_FILTER} label="Genres" source="genreIds" />,
+  <MultipleFiltersList choices={MARKERS_CHOICES} label="Labels" source="markers" />,
 ];

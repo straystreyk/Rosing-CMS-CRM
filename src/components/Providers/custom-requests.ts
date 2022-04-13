@@ -27,6 +27,15 @@ export const ALL_GENRES = gql`
   }
 `;
 
+export const ALL_GENRES_FILTER = gql`
+  query {
+    items: allGenres {
+      value
+      name
+    }
+  }
+`;
+
 export const ALL_RATING_SYSTEMS = gql`
   query {
     items: allRatingSystems {
