@@ -15,7 +15,7 @@ const useStyles = makeStyles(CustomFiltersWrapperStyles);
 export const FilterContext = React.createContext<any>({});
 
 export const Filters: React.FC<{ filters: any }> = ({ filters }) => {
-  const { filterValues, setFilters } = useListContext();
+  const { filterValues, setFilters, displayedFilters } = useListContext();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [activeFilters, setActiveFilters] = React.useState<any>([]);
@@ -48,7 +48,7 @@ export const Filters: React.FC<{ filters: any }> = ({ filters }) => {
       if (activeFilters.includes(filter)) {
         setActiveFilters((prev: any) => prev.filter((el: any) => el !== filter));
         if (Object.keys(filterValues).includes(filter.props.source)) {
-          setFilters(_.omit(filterValues, [filter.props.source]));
+          setFilters(_.omit(filterValues, [filter.props.source]), displayedFilters);
         }
       } else {
         setActiveFilters(() => [...activeFilters, filter]);

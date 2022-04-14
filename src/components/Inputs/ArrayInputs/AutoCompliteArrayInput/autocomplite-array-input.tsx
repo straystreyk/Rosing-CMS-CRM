@@ -9,7 +9,7 @@ import { AutoCompleteArrayInputShow } from "./show-view";
 
 const useStyles = makeStyles({ AutoCompleteInputStyles });
 
-export const AutocompleteArrayInputOrigin: React.FC<AutocompleteArrayInputProps> = ({
+export const AutocompleteArrayInputOrigin: React.FC<any> = ({
   className,
   helperText,
   validate,
@@ -23,9 +23,6 @@ export const AutocompleteArrayInputOrigin: React.FC<AutocompleteArrayInputProps>
   return (
     <>
       <StandardAutocompleteArrayInput
-        options={{
-          className: cn(classes.AutoCompleteInputStyles, className && className),
-        }}
         helperText={helperText ?? false}
         validate={validate}
         source={source}

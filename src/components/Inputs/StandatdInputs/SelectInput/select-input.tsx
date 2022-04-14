@@ -1,11 +1,16 @@
 import * as React from "react";
-import { makeStyles, Select } from "@material-ui/core";
-import { SelectInput as SelectInputInner } from "react-admin";
+import cn from "classnames";
+import { makeStyles } from "@material-ui/core";
+import {
+  SelectInput as SelectInputInner,
+  SelectInputProps as SelectInputPropsRA,
+} from "react-admin";
 import { SelectInputShow } from "./show-view";
 import { labelStyles } from "../../styles";
-import cn from "classnames";
 
-type Props = React.ComponentProps<typeof SelectInputInner>;
+export interface SelectInputProps extends SelectInputPropsRA {
+  inputType: "create" | "edit" | "show";
+}
 
 const useStyles = makeStyles({
   SelectInput: {
@@ -52,7 +57,11 @@ const useStyles = makeStyles({
   },
 });
 
-export const SelectInputOrigin: React.FC<Props> = ({ inputType, className, ...props }) => {
+export const SelectInputOrigin: React.FC<SelectInputProps> = ({
+  inputType,
+  className,
+  ...props
+}) => {
   const classes = useStyles();
   return (
     <>
@@ -66,7 +75,7 @@ export const SelectInputOrigin: React.FC<Props> = ({ inputType, className, ...pr
   );
 };
 
-export const SelectInput: React.FC<Props> = ({ inputType, ...rest }) => {
+export const SelectInput: React.FC<SelectInputProps> = ({ inputType, ...rest }) => {
   return inputType === "show" ? (
     <SelectInputShow inputType={inputType} {...rest} />
   ) : (

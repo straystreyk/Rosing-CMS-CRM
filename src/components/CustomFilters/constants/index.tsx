@@ -16,10 +16,25 @@ export const PUBLISHED_CHOICES = [
 ];
 
 export const MARKERS_CHOICES = [
-  { value: "popular", name: "Popular" },
-  { value: "free", name: "Free" },
-  { value: "featured", name: "Featured" },
+  { name: "Popular", value: "popular" },
+  { name: "Free", value: "free" },
+  { name: "Featured", value: "featured" },
 ];
+
+export const PaperProps = {
+  style: {
+    width: "32ch",
+    padding: 15,
+  },
+};
+
+export const MenuListProps = {
+  "aria-labelledby": "long-button",
+  style: {
+    width: "100%",
+    padding: 0,
+  },
+};
 
 export const ArrowFilterIcon = ({ color }: IconProps) => (
   <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">

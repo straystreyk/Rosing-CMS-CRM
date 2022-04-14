@@ -10,6 +10,9 @@ export interface ChoicesItem {
   value: string | boolean;
 }
 
+// export const isChoicesItem = (value: unknown): value is ChoicesItem =>
+//   typeof value === "object" && typeof value.name === "string";
+
 export interface ChoicesCustomFilter extends StandardCustomFilterProps {
   choices?: ChoicesItem[];
   query?: any;

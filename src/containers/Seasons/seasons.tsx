@@ -16,10 +16,7 @@ import { SelectInput } from "../../components/Inputs";
 import { FilterButton } from "../../components/UI/RA/filter-button";
 
 export const resource = "media_content/video/series/:seriesId/seasons";
-const filters = [
-  <SearchInput placeholder="Name, id or slug of season" source="name" alwaysOn />,
-  <SelectInput source="Test" />,
-];
+const filters = [<SearchInput placeholder="Name, id or slug of season" source="name" alwaysOn />];
 
 export const Toolbar: React.FC<{ basePath: string; buttonLabel: string }> = ({
   basePath,

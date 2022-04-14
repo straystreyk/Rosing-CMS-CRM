@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 
 const filters = (selectClass: string) => [
   <SelectInputOrigin
+    inputType="create"
     source="searchRule"
     initialValue="contains"
     allowEmpty={false}

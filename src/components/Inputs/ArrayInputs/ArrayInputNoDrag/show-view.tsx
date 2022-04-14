@@ -1,5 +1,4 @@
 import * as React from "react";
-import { ArrayInputProps } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 
@@ -8,9 +7,9 @@ import { ArrayInputNoDragOrigin } from "./array-input-no-drag";
 import { labelStyles } from "../../styles";
 import { useQuery } from "@apollo/client";
 import { authClient } from "../../../Providers";
-import { ALL_VIDEO_FILES, GET_ONE_VIDEO_FILE } from "../../../Providers/custom-requests";
+import { GET_ONE_VIDEO_FILE } from "../../../Providers/custom-requests";
 import { MainLoader } from "../../../MainLoader";
-import { divide } from "lodash";
+import { ArrayInputProps } from "../Arrayinput/array-input";
 
 interface ArrayInputShowProps {
   system?: string;
@@ -112,7 +111,7 @@ const ExtraVideos: React.FC<ArrayInputShowProps> = ({ kind, name, streamSourceId
   );
 };
 
-const ShowView: React.FC<ArrayInputProps> = ({ source, label, choices, ...props }) => {
+const ShowView: React.FC<ArrayInputProps> = ({ source, label, ...props }) => {
   const { values } = useFormState();
   const classes = useStyles();
 

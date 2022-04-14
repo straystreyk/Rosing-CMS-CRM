@@ -36,7 +36,7 @@ export const List: React.FC<ListProps> = (props) => {
       <ReferenceField
         label="Datacenter"
         source="datacenterId"
-        emptyText={<span className={classes.Empty}>Empty</span>}
+        emptyText={"<span className={classes.Empty}>Empty</span>"}
         reference="datacenters"
       >
         <TextField source="name" fullWidth />

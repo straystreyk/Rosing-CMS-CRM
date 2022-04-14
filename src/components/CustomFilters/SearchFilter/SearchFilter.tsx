@@ -20,19 +20,19 @@ interface SelectProps extends Omit<ChoicesCustomFilter, "choices"> {
 }
 
 const Select: React.FC<SelectProps> = ({ choices, initialValue, source }) => {
-  const { filterValues, setFilters } = useListContext();
+  const { filterValues, setFilters, displayedFilters } = useListContext();
   const classes = useStyles();
   const [value, setValue] = React.useState(filterValues[source] ?? initialValue);
 
   React.useEffect(() => {
     if (!Object.keys(filterValues).includes(source)) {
-      setFilters({ ...filterValues, [source]: initialValue });
+      setFilters({ ...filterValues, [source]: initialValue }, displayedFilters);
     }
   }, []);
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setFilters({ ...filterValues, [source]: event.target.value });
+      setFilters({ ...filterValues, [source]: event.target.value }, displayedFilters);
       setValue(event.target.value);
     },
     [filterValues, source]
@@ -61,7 +61,7 @@ const Select: React.FC<SelectProps> = ({ choices, initialValue, source }) => {
 
 const SearchInputFilter: React.FC<StandardCustomFilterProps> = ({ source }) => {
   const classes = useStyles();
-  const { filterValues, setFilters, resource } = useListContext();
+  const { filterValues, setFilters, resource, displayedFilters } = useListContext();
   const translate = useTranslate();
   const [inputValue, setInputValue] = React.useState("");
 
@@ -74,7 +74,7 @@ const SearchInputFilter: React.FC<StandardCustomFilterProps> = ({ source }) => {
   const changeInput = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputValue(() => e.target.value);
-      setFilters({ ...filterValues, [source]: e.target.value });
+      setFilters({ ...filterValues, [source]: e.target.value }, displayedFilters);
     },
     [filterValues]
   );

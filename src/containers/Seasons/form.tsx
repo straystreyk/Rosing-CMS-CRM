@@ -8,7 +8,6 @@ import { alwaysEmptyString, sanitizeId } from "../../helpers/form";
 import { RadioButtonGroupInput } from "../../components/Inputs/RadioButtonGroupInput";
 import { SELECT_DISTRIBUTION } from "../../constants/forms-constants";
 import { MetaData } from "../../components/Models/Metadata";
-import { useFormState } from "react-final-form";
 
 const useStyles = makeStyles({
   ArrayInputItemStyles,
@@ -28,7 +27,7 @@ const Season: React.FC<{
   index?: string;
   show?: boolean;
   resource: string;
-  type: string;
+  type: "show" | "create" | "edit";
 }> = ({ parentSourceWithIndex, resource, parentSource, index, ...props }) => {
   return (
     <>

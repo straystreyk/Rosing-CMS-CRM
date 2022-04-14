@@ -7,4 +7,11 @@ export const AllFiltersListStyles = {
       marginLeft: 10,
     },
   },
+  EmptyFilterList: {
+    marginTop: 8,
+    fontSize: 14,
+  },
+  Checkbox: {
+    padding: 0,
+  },
 };

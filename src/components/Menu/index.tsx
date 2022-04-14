@@ -1,11 +1,11 @@
 import * as React from "react";
-import SettingsIcon from "@material-ui/icons/Settings";
 import cn from "classnames";
+import { Tooltip } from "recharts";
 import { useSelector } from "react-redux";
-import { useMediaQuery, Theme } from "@material-ui/core";
+import { useMediaQuery, Theme, TooltipProps } from "@material-ui/core";
 import { useTranslate, MenuItemLink } from "react-admin";
 import { makeStyles } from "@material-ui/core";
-import { LineCloseStyles, LineStyles, MenuItemLinkStyles, MenuItemLinkCloseStyles } from "./styles";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 import { ExpandMenu } from "../ExpandMenu/expand-menu";
 import { AppState } from "../../types";
@@ -15,6 +15,7 @@ import { DatacentersVariables as datacenters } from "../../containers/Datacenter
 import { RightHoldersVariables as rightHolders } from "../../containers/RightHolders";
 import { QuestionsVariables as questions } from "../../containers/Questions";
 import { NewsVariables as news } from "../../containers/News";
+import { LineCloseStyles, LineStyles, MenuItemLinkStyles, MenuItemLinkCloseStyles } from "./styles";
 import {
   DashboardIcon,
   MediaContentIcon,
@@ -33,9 +34,11 @@ interface MenuProps {
   onMenuClick: () => void;
 }
 
-const tooltipProps = {
-  arrow: true,
-};
+const tooltipProps: (title: string, arrow?: boolean) => TooltipProps = (title, arrow = true) => ({
+  arrow,
+  title,
+  children: <Tooltip />,
+});
 
 const useStyles = makeStyles({
   LineStyles,
@@ -71,7 +74,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           () => redirectAdmin("https://dev-admin.spbtv.com/admin/dashboard"),
           []
         )}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps("Dashboard")}
         sidebarIsOpen={open}
         dense={dense}
       />
@@ -83,7 +86,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           smart_count: 2,
         })}
         leftIcon={<users.icon color="#fff" />}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps(translate(`resources.admin_users.name`))}
         onClick={onMenuClick}
         sidebarIsOpen={open}
         dense={dense}
@@ -97,47 +100,47 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           () => redirectAdmin("https://dev-admin.spbtv.com/admin/payments"),
           []
         )}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps("Payments")}
         sidebarIsOpen={open}
         dense={dense}
       />
       <MenuItemLink
-        to={`/tarrif_plans`}
+        to="/tarrif_plans"
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-        primaryText={"Tariff plans"}
+        primaryText="Tariff plans"
         leftIcon={<TariffIcon color="#fff" />}
         onClick={React.useCallback(
           () => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_rent_plans"),
           []
         )}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps("Tariff plans")}
         sidebarIsOpen={open}
         dense={dense}
       />
       <MenuItemLink
-        to={`/promocodes`}
+        to="/promocodes"
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-        primaryText={"Promocode"}
+        primaryText="Promocode"
         leftIcon={<PromocodeIcon color="#fff" />}
         onClick={React.useCallback(
           () => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_promo_codes"),
           []
         )}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps("Promocode")}
         sidebarIsOpen={open}
         dense={dense}
       />
       <MenuItemLink
         to={`/push_campaigns`}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-        primaryText={"Push campaigns"}
+        primaryText="Push campaigns"
         leftIcon={<PushCopmaniesIcon color="#fff" />}
         onClick={React.useCallback(
           () =>
             redirectAdmin("https://dev-admin.spbtv.com/admin/push_notifications_push_campaigns"),
           []
         )}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps("Push campaigns")}
         sidebarIsOpen={open}
         dense={dense}
       />
@@ -147,7 +150,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Pages and attributes"}
         leftIcon={<PagesAndAttributesIcon color="#fff" />}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps("Pages and attributes")}
         onClick={onMenuClick}
         sidebarIsOpen={open}
         dense={dense}
@@ -213,7 +216,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_stream_params_rules"),
           []
         )}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps("Streaming")}
         sidebarIsOpen={open}
         dense={dense}
       />
@@ -341,7 +344,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         })}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         leftIcon={<rightHolders.icon />}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps(translate("resources.right_holders.name"))}
         onClick={onMenuClick}
         sidebarIsOpen={open}
         dense={dense}
@@ -353,7 +356,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         })}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         leftIcon={<questions.icon />}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps(translate("resources.questions.name"))}
         onClick={onMenuClick}
         sidebarIsOpen={open}
         dense={dense}
@@ -365,7 +368,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         })}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         leftIcon={<news.icon />}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps(translate("resources.news.name"))}
         onClick={onMenuClick}
         sidebarIsOpen={open}
         dense={dense}
@@ -377,7 +380,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           smart_count: 2,
         })}
         leftIcon={<datacenters.icon />}
-        tooltipProps={tooltipProps}
+        tooltipProps={tooltipProps(translate("resources.datacenters.name"))}
         onClick={onMenuClick}
         sidebarIsOpen={open}
         dense={dense}
@@ -387,7 +390,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           to="/configuration"
           primaryText={translate("pos.configuration")}
           leftIcon={<SettingsIcon />}
-          tooltipProps={tooltipProps}
+          tooltipProps={tooltipProps(translate("pos.configuration"))}
           onClick={onMenuClick}
           sidebarIsOpen={open}
           dense={dense}

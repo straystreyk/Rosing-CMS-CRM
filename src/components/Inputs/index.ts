@@ -11,7 +11,6 @@ import { BooleanInput } from "./boolean-input";
 import { SelectArrayInput } from "./ArrayInputs/select-array-input";
 import { ArrayInput } from "./ArrayInputs/Arrayinput/array-input";
 import { ArrayInputNoDrag } from "./ArrayInputs/ArrayInputNoDrag/array-input-no-drag";
-import { ReferenceArrayInput } from "./ReferenceInputs/reference-array-input";
 import { DateTimeInput } from "./DateTimeInput/date-time-input";
 
 export {
@@ -24,7 +23,6 @@ export {
   BooleanInput,
   SelectArrayInput,
   ArrayInput,
-  ReferenceArrayInput,
   DateTimeInput,
   ArrayInputNoDrag,
 };

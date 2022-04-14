@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SearchInput as SearchInputRA } from "react-admin";
+import { SearchInput as SearchInputRA, SearchInputProps } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const SearchInput = ({ ...props }) => {
+export const SearchInput: React.FC<SearchInputProps> = ({ ...props }) => {
   const classes = useStyles();
   return <SearchInputRA className={classes.SearchInput} {...props} />;
 };

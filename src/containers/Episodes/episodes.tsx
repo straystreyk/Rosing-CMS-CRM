@@ -7,19 +7,20 @@ import { Form } from "./form";
 import { SearchInput } from "../../components/Inputs/search-input";
 import { useParams } from "react-router-dom";
 import { sanitizeId } from "../../helpers/form";
-import { ListProps } from "../../types";
-import { CreateProps, EditProps } from "ra-ui-materialui";
+import { CreateProps, EditProps, ListProps } from "ra-ui-materialui";
 import { Toolbar } from "../Seasons/seasons";
+import { ResourceComponentProps } from "react-admin";
+import { StaticContext } from "react-router";
 
 const resource = "media_content/video/seasons/:seasonId/episodes";
 const filters = [<SearchInput source="name" alwaysOn />];
 
-export const List: React.FC<ListProps> = (props) => {
+export const List: React.FC<ResourceComponentProps<{}, StaticContext, unknown>> = (props) => {
   const { seasonId } = useParams<{ seasonId: string }>();
+  console.log(props);
 
   return (
     <ResourceList
-      {...props}
       toolbar={Toolbar}
       filters={filters}
       basePath={sanitizeId(props.basePath!, /:seasonId/g, seasonId)}

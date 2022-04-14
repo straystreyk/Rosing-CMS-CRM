@@ -1,6 +1,6 @@
 import * as React from "react";
 import cn from "classnames";
-import { ArrayInput as ArrayInputRA } from "react-admin";
+import { ArrayInput as ArrayInputRA, ArrayInputProps as ArrayInputPropsRA } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 import { FieldArray } from "react-final-form-arrays";
@@ -12,7 +12,12 @@ import { DeleteIcon } from "../../../../constants/icons";
 import { CreateIcon } from "../../../../constants/forms-constants";
 import { StandardButton } from "../../../UI/Buttons/standard-button";
 
-type ArrayInputProps = React.ComponentProps<typeof ArrayInputRA>;
+export interface ArrayInputProps extends Omit<ArrayInputPropsRA, "children"> {
+  inputType: "create" | "edit" | "show";
+  ChildComponent: React.FC<any>;
+  source: string;
+  resource: string;
+}
 
 const useStyles = makeStyles((theme) => ({
   GroupInputsLabel: {
@@ -56,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
   ({
-    children,
     source,
     resource,
     label,

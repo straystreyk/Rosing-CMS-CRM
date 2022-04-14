@@ -7,7 +7,7 @@ const INPUT_ITEMS_PER_PAGE = 25;
 
 export const ExtraVideos: React.FC<{
   parentSourceWithIndex: string;
-  inputType: string;
+  inputType: "create" | "edit" | "show";
   resource: string;
   choices: { id: string; name: string }[];
 }> = React.memo(({ parentSourceWithIndex, inputType, resource, choices, ...props }) => {
@@ -29,7 +29,7 @@ export const ExtraVideos: React.FC<{
       />
       <ReferenceInput
         label="Video file"
-        source="streamSourceIds"
+        source={`${parentSourceWithIndex}.streamSourceIds`}
         reference="media_content/video/video_files"
         resource={resource}
         perPage={INPUT_ITEMS_PER_PAGE}

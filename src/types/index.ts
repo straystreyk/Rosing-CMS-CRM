@@ -33,7 +33,7 @@ export interface ListProps {
 
 export interface FormProps {
   resource: string;
-  type: string;
+  type: "create" | "edit" | "show";
   id?: string;
 }
 

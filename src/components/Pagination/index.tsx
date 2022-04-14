@@ -100,6 +100,10 @@ export const Pagination = () => {
     .map((el, index) => index + 1);
   const classes = useStyles();
 
+  const changePage = (numberOfPage: number) => {
+    setPage(numberOfPage);
+  };
+
   const goToCurrentPage = React.useCallback(() => {
     if (value) {
       setPage(+value);
@@ -116,7 +120,6 @@ export const Pagination = () => {
   }, [value]);
 
   React.useEffect(() => {
-    // template for pagination buttons
     let template: (string | number)[] = [...currentPagesArray];
     if (currentPagesArray.length > MAX_PAGES) {
       if (page >= 1 && page <= 3) {
@@ -148,7 +151,7 @@ export const Pagination = () => {
             <button
               disabled={page <= 1}
               className={cn(classes.Button, "buttonPrev", page <= 1 && "disabled")}
-              onClick={() => setPage(page - 1)}
+              onClick={() => changePage(page - 1)}
             >
               <Arrow color="var(--secondary-color-main)" />
             </button>
@@ -157,7 +160,7 @@ export const Pagination = () => {
                 <button
                   key={index.toString()}
                   disabled={el === "..."}
-                  onClick={() => setPage(el)}
+                  onClick={() => (typeof el === "number" ? changePage(el) : null)}
                   className={cn(classes.Page, "page", page === el && "active")}
                 >
                   {el}
@@ -166,7 +169,7 @@ export const Pagination = () => {
             })}
             <button
               className={cn(classes.Button, page === nbPages && "disabled")}
-              onClick={() => setPage(page + 1)}
+              onClick={() => changePage(page + 1)}
               disabled={page === nbPages}
             >
               <Arrow color="var(--secondary-color-main)" />

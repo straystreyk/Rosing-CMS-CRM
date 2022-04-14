@@ -1,4 +1,4 @@
-import { FC, useState, createContext, useContext } from "react";
+import * as React from "react";
 import { List, TopToolbar } from "react-admin";
 import { makeStyles, Paper } from "@material-ui/core";
 import { useTranslate } from "ra-core";
@@ -54,7 +54,7 @@ const ToolBar = (props: any) => {
   );
 };
 
-export const ResourceList: FC<ListProps> = ({
+export const ResourceList: React.FC<ListProps> = ({
   sideFilters,
   permanentFilter,
   listTabs,
@@ -66,7 +66,7 @@ export const ResourceList: FC<ListProps> = ({
   filters,
   ...props
 }) => {
-  const [filter, setFilter] = useState<object>(permanentFilter ?? {});
+  const [filter, setFilter] = React.useState<object>(permanentFilter ?? {});
   const classes = useStyles();
 
   return (

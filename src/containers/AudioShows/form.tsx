@@ -32,7 +32,6 @@ export const Form: React.FC<FormProps> = (props) => {
         source="description"
       />
       <TextInput source="altDescription" rows={4} resource={props.resource} fullWidth multiline />
-      <SelectInput source="productionYear" resource={props.resource} choices={getYearsChoices()} />
       <TextInput
         source="releaseDate"
         type="date"

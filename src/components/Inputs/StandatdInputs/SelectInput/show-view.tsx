@@ -1,7 +1,7 @@
 import * as React from "react";
 import { InputProps } from "ra-core";
 import { EditInputComponent } from "../../edit-input-component";
-import { SelectInputOrigin } from "./select-input";
+import { SelectInputOrigin, SelectInputProps } from "./select-input";
 import { makeStyles } from "@material-ui/core";
 import { labelStyles } from "../../styles";
 import { useFormState } from "react-final-form";
@@ -10,7 +10,6 @@ import {
   GET_ONE_DATA_CENTER,
   GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_RIGHT_HOLDER,
-  GET_ONE_VIDEO_FILE,
 } from "../../../Providers/custom-requests";
 import { authClient } from "../../../Providers";
 import { MainLoader } from "../../../MainLoader";
@@ -91,7 +90,7 @@ const ShowView: React.FC<InputProps> = (props) => {
   );
 };
 
-export const SelectInputShow: React.FC<InputProps> = (props) => {
+export const SelectInputShow: React.FC<SelectInputProps> = (props) => {
   return (
     <EditInputComponent ComponentInput={SelectInputOrigin} ComponentShow={ShowView} {...props} />
   );

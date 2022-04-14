@@ -1,25 +1,30 @@
 import * as React from "react";
 import * as Redux from "react-redux";
-import { Layout, Sidebar, Notification } from "react-admin";
-import { LayoutProps } from "ra-ui-materialui";
+import {
+  Layout as LayoutRA,
+  Sidebar,
+  Notification,
+  LayoutProps,
+  NotificationProps,
+} from "react-admin";
 
 import { CustomAppBar } from "./app-bar";
 import { Menu } from "../Menu";
 import { darkTheme, lightTheme } from "../Themes";
 import { AppState } from "../../types";
 
-export const LayoutEditor: React.FC<LayoutProps> = (props) => {
+export const Layout: React.FC<LayoutProps> = (props) => {
   const theme = Redux.useSelector((state: AppState) =>
     state.theme === "dark" ? darkTheme : lightTheme
   );
   return (
-    <Layout
+    <LayoutRA
       {...props}
       appBar={CustomAppBar}
-      notification={Notification}
-      sidebar={Sidebar}
-      menu={Menu}
-      theme={theme}
+      notification={Notification as any}
+      sidebar={Sidebar as any}
+      menu={Menu as any}
+      theme={theme as any}
     />
   );
 };

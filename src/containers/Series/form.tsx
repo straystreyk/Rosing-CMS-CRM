@@ -222,7 +222,6 @@ On the series page, users will see a menu with the numbering of seasons, the sea
           resource={resource}
           inputType={type}
           getItemLabel={alwaysEmptyString}
-          fullWidth
           helperText={
             "A pair of custom fields that can be used for filtering. You can add multiple pairs."
           }
@@ -231,6 +230,7 @@ On the series page, users will see a menu with the numbering of seasons, the sea
           label="Metadata"
           groupInputs
           switchable
+          fullWidth
         />
       </FormSection>
       <FormSection
