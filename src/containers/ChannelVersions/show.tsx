@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Datagrid, TextField, FunctionField } from "react-admin";
+import { Datagrid, TextField, FunctionField, Record as RecordRA } from "react-admin";
 import { Box } from "@material-ui/core";
 
 interface ShowInterface {
@@ -92,8 +92,8 @@ export const Show: FC<ShowInterface> = (props) => {
       <TextField source="name" />
       <FunctionField
         label="Published"
-        render={({ published }: { published: boolean }) =>
-          published ? <PublishedIcons /> : <UnPublishedIcons />
+        render={(record?: RecordRA) =>
+          record?.published ? <PublishedIcons /> : <UnPublishedIcons />
         }
       />
     </Datagrid>

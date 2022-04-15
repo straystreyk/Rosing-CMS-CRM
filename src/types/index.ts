@@ -12,24 +12,6 @@ import { StaticContext } from "react-router";
 import * as H from "history";
 import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import { FormRenderProps } from "react-final-form";
-import { ListTabProps } from "../components/Tabs/list-page-tabs";
-
-export interface ListProps {
-  resource: string;
-  basePath?: string;
-  filters?: JSX.Element[] | [];
-  permanentFilter?: object;
-  sideFilters?: object[];
-  filtersArray?: string[];
-  listTabs?: ListTabProps[];
-  offTitle?: boolean;
-  id?: string;
-  form?: string;
-  breadCrumbsOn?: boolean;
-  location?: Location;
-  empty?: ReactElement;
-  toolbar?: FC<{ basePath: string; buttonLabel: string }>;
-}
 
 export interface FormProps {
   resource: string;

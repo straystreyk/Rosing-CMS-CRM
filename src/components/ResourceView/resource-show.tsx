@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box } from "@material-ui/core";
 import { Edit } from "react-admin";
-import { EditForm } from "./edit-form";
+import { EditForm } from "./FormWithRedirect";
 
 interface ResourceShowProps {
   resource: string;

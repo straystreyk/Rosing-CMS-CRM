@@ -1,18 +1,16 @@
 import React from "react";
-import { CreateProps, EditProps } from "ra-ui-materialui";
+import { CreateProps, EditProps, ListProps } from "ra-ui-materialui";
 import Icon from "@material-ui/icons/ImageAspectRatioOutlined";
 import { useParams } from "react-router-dom";
 
 import { ResourceList, ResourceCreate, ResourceEdit } from "../../components/ResourceView";
 import { Show } from "./show";
 import { Form } from "./form";
-import { ListProps } from "../../types";
 import { SearchInput } from "../../components/Inputs/search-input";
 import { sanitizeId } from "../../helpers/form";
 import { ExportButton } from "../../components/UI/RA/export-button";
 import { CreateButton } from "../../components/UI/RA/create-button";
 import { ExportButtonIcon, ResourceAddIcon } from "../../constants/icons";
-import { SelectInput } from "../../components/Inputs";
 import { FilterButton } from "../../components/UI/RA/filter-button";
 
 export const resource = "media_content/video/series/:seriesId/seasons";

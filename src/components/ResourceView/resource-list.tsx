@@ -1,17 +1,16 @@
 import * as React from "react";
-import { List, TopToolbar } from "react-admin";
-import { makeStyles, Paper } from "@material-ui/core";
+import { List } from "react-admin";
+import { makeStyles } from "@material-ui/core";
 import { useTranslate } from "ra-core";
 import { Box } from "@material-ui/core";
 
-import { FilterSidebar } from "../SidebarFilter";
-import { ListProps } from "../../types";
 import { ResourceTitle } from "./resource-title";
 import { CreateButton } from "../UI/RA/create-button";
 import { ListPageTabs } from "../Tabs/list-page-tabs";
-import { EditForm } from "./edit-form";
+import { EditForm } from "./FormWithRedirect";
 import { PlusIcon } from "../../constants/icons";
 import { Pagination } from "../Pagination";
+import { ResourcesListProps } from "./resources-types";
 
 const useStyles = makeStyles({
   TopToolBar: {
@@ -54,16 +53,16 @@ const ToolBar = (props: any) => {
   );
 };
 
-export const ResourceList: React.FC<ListProps> = ({
-  sideFilters,
+export const ResourceList: React.FC<ResourcesListProps> = ({
   permanentFilter,
   listTabs,
   offTitle,
   empty,
   breadCrumbsOn,
-  form,
+  form = "list",
   toolbar,
   filters,
+  children,
   ...props
 }) => {
   const [filter, setFilter] = React.useState<object>(permanentFilter ?? {});
@@ -72,7 +71,7 @@ export const ResourceList: React.FC<ListProps> = ({
   return (
     <>
       <Box className={classes.TopList}>
-        <EditForm offToolbar offTitle resource={props.resource}>
+        <EditForm form={form} offToolbar offTitle resource={props.resource}>
           <ResourceTitle
             breadCrumbsOn={breadCrumbsOn}
             filter={filter}
@@ -90,10 +89,9 @@ export const ResourceList: React.FC<ListProps> = ({
         filter={filter}
         pagination={<Pagination />}
         actions={<ToolBar toolbar={toolbar} {...props} />}
-        aside={<FilterSidebar sideFilters={sideFilters} />}
         basePath={props.basePath}
       >
-        {props.children}
+        {children}
       </List>
     </>
   );

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Create, useRedirect, useRefresh } from "react-admin";
 import { useNotify } from "ra-core";
 import { Box } from "@material-ui/core";
-import { EditForm } from "./edit-form";
+import { EditForm } from "./FormWithRedirect";
 
 interface CreateProps {
   redirect?: string;

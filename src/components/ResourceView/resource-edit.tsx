@@ -3,7 +3,7 @@ import { FC } from "react";
 import { Edit, useRedirect, useRefresh } from "react-admin";
 import { Box } from "@material-ui/core";
 
-import { EditForm } from "./edit-form";
+import { EditForm } from "./FormWithRedirect";
 import { useNotify } from "ra-core";
 
 interface EditProps {

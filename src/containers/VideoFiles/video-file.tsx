@@ -12,6 +12,7 @@ import { SelectInputOrigin } from "../../components/Inputs/StandatdInputs/Select
 import { searchChoices } from "../../constants/list-constants";
 import { makeStyles } from "@material-ui/core";
 import { SearchSelect } from "../../components/Inputs/StandatdInputs/SelectInput/styles";
+import { ListProps } from "ra-ui-materialui";
 
 const useStyles = makeStyles({
   SearchSelect,
@@ -42,7 +43,7 @@ export const Create: FC = (props) => (
     <Form resource={resource} type="create" {...props} />
   </ResourceCreate>
 );
-export const List: FC = (props) => {
+export const List: FC<ListProps> = (props) => {
   const classes = useStyles();
 
   return (
@@ -52,7 +53,7 @@ export const List: FC = (props) => {
       filters={filters(classes.SearchSelect)}
       resource={resource}
     >
-      <DataGridList resource={resource} />
+      <DataGridList resource={resource} basePath={props.basePath} />
     </ResourceList>
   );
 };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Datagrid, FunctionField, TextField } from "react-admin";
+import { Datagrid, FunctionField, TextField, Record as RecordRA } from "react-admin";
 import { EmptyTablePage } from "../../components/EmptyTablePage";
 import { MoreActionsButton } from "../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../components/UI/RA/edit-button";
@@ -10,13 +10,6 @@ interface ShowProps {
   basePath?: string;
 }
 
-interface Record {
-  id: string;
-  episodes: {
-    id: string;
-  }[];
-}
-
 export const Show: React.FC<ShowProps> = (props) => {
   return (
     <>
@@ -24,7 +17,7 @@ export const Show: React.FC<ShowProps> = (props) => {
         <TextField source="name" label="Name" />
         <FunctionField
           label=""
-          render={(record: Record) => (
+          render={(record?: RecordRA) => (
             <MoreActionsButton>
               <EditButton color="secondary" record={record} basePath={props.basePath} />
               <DeleteButton record={record} basePath={props.basePath} />

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useRedirect, useRefresh } from "react-admin";
 import { useNotify } from "ra-core";
-import { CreateProps } from "ra-ui-materialui";
+import { CreateProps, ListProps } from "ra-ui-materialui";
 import Icon from "@material-ui/icons/Movie";
 
 import { Form } from "./form";
@@ -46,7 +46,7 @@ export const Edit: React.FC = (props) => (
     <Form resource={resource} type="edit" {...props} />
   </ResourceEdit>
 );
-export const List: React.FC = (props) => {
+export const List: React.FC<ListProps> = (props) => {
   return (
     <ResourceList {...props} listTabs={mediaContentTabs} resource={resource}>
       <DataGridList resource={resource} />

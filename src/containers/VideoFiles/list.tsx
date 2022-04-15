@@ -1,13 +1,13 @@
 import * as React from "react";
 import { TextField, ReferenceField } from "react-admin";
 import { EmptyTablePage } from "../../components/EmptyTablePage";
-import { ListProps } from "../../types";
 import { DatagridList } from "../../components/DatagridList";
 import { makeStyles } from "@material-ui/core";
 import { FunctionField } from "ra-ui-materialui";
 import { MoreActionsButton } from "../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../components/UI/RA/delete-button";
+import { ShowProps } from "../../types";
 const useStyles = makeStyles({
   MoreInfo: {
     display: "flex",
@@ -27,7 +27,8 @@ const useStyles = makeStyles({
   },
 });
 
-export const List: React.FC<ListProps> = (props) => {
+export const List: React.FC<{ basePath?: string; resource: string }> = (props) => {
+  console.log(props);
   const classes = useStyles();
   return (
     <DatagridList empty={<EmptyTablePage />} {...props} optimized rowClick="show">

@@ -1,5 +1,5 @@
 import React from "react";
-import { Datagrid, TextField, FunctionField } from "react-admin";
+import { Datagrid, TextField, FunctionField, Record } from "react-admin";
 import { useHistory } from "react-router-dom";
 
 import { EmptyTablePage } from "../../components/EmptyTablePage";
@@ -14,13 +14,6 @@ interface ShowInterface {
   basePath?: string;
 }
 
-interface Record {
-  id: string;
-  episodes: {
-    id: string;
-  }[];
-}
-
 export const Show: React.FC<ShowInterface> = (props) => {
   const history = useHistory();
 
@@ -29,11 +22,11 @@ export const Show: React.FC<ShowInterface> = (props) => {
       <TextField source="name" />
       <FunctionField
         label="Episodes"
-        render={(record: Record) => (
+        render={(record?: Record) => (
           <>
             <StandardButton
               startIcon={
-                record.episodes.length ? (
+                record?.episodes.length ? (
                   <ResourceCountEpisodesIcon color="var(--accent-color)" />
                 ) : (
                   <ResourceAddIcon color="var(--accent-color)" />
@@ -43,20 +36,20 @@ export const Show: React.FC<ShowInterface> = (props) => {
               customColor="var(--accent-color)"
               onClick={() =>
                 history.push(
-                  record.episodes.length
-                    ? `/media_content/video/seasons/${record.id}/episodes`
-                    : `/media_content/video/seasons/${record.id}/episodes/create`
+                  record?.episodes.length
+                    ? `/media_content/video/seasons/${record?.id}/episodes`
+                    : `/media_content/video/seasons/${record?.id}/episodes/create`
                 )
               }
             >
-              {record.episodes.length ? `Episodes (${record.episodes.length})` : "Add episodes"}
+              {record?.episodes.length ? `Episodes (${record?.episodes.length})` : "Add episodes"}
             </StandardButton>
           </>
         )}
       />
       <FunctionField
         label=""
-        render={(record: Record) => (
+        render={(record?: Record) => (
           <MoreActionsButton>
             <EditButton color="secondary" record={record} basePath={props.basePath} />
             <DeleteButton record={record} basePath={props.basePath} />

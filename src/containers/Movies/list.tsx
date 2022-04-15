@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core";
 import { EditButton } from "../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../components/UI/RA/delete-button";
 import { StandardButton } from "../../components/UI/Buttons/standard-button";
-import { useNotify } from "ra-core";
+import { Identifier, Record as RecordRA, useNotify } from "ra-core";
 import { DatagridList } from "../../components/DatagridList";
 import { customFilters } from "./movie-filters";
 
@@ -53,17 +53,19 @@ export const List: React.FC<ShowProps> = (props) => {
 
   const approve = React.useCallback(
     async (
-      id: string,
-      updateOpts: Record<string, string | boolean | number | string[]>,
-      required: Record<string, string | boolean>
+      id?: Identifier,
+      updateOpts?: Record<string, string | boolean | number | string[]>,
+      required?: Record<string, string | boolean>
     ) => {
+      if (!id || !updateOpts || !required) return;
+
       await mutate({
         type: "update",
         resource: props.resource,
         payload: { id, data: { ...required, ...updateOpts } },
       });
     },
-    []
+    [mutate, props.resource]
   );
 
   React.useEffect(() => {
@@ -80,7 +82,7 @@ export const List: React.FC<ShowProps> = (props) => {
         messageArgs: { error },
       });
     }
-  }, [data, error]);
+  }, [notify, props.resource, refresh, data, error]);
 
   return (
     <DatagridList filters={customFilters} empty={<EmptyTablePage />} {...props} optimized>
@@ -88,7 +90,7 @@ export const List: React.FC<ShowProps> = (props) => {
       <FunctionField
         label="Position"
         source="position"
-        render={({ position }: { position: number }) => position ?? "Not filled in"}
+        render={(record?: RecordRA) => record?.position ?? "Not filled in"}
       />
       <TextField label="Slug" source="slug" />
 
@@ -96,32 +98,26 @@ export const List: React.FC<ShowProps> = (props) => {
         label="External catalog"
         source="externalCatalogId"
         reference="external_catalog"
-        emptyText={<span className={classes.Empty}>Empty</span>}
+        emptyText={"<span className={classes.Empty}>Empty</span>"}
       >
         <TextField source="name" fullWidth />
       </ReferenceField>
       <FunctionField
         label=""
-        render={(record: {
-          id: string;
-          published: boolean;
-          position: number;
-          name: string;
-          streamSourceIds: string[];
-        }) => {
+        render={(record?: RecordRA) => {
           return (
             <div className={classes.MoreInfo}>
-              {record.published ? <PublishedIcons /> : <UnPublishedIcons />}
+              {record?.published ? <PublishedIcons /> : <UnPublishedIcons />}
               <MoreActionsButton>
                 <StandardButton
                   onClick={() =>
                     approve(
-                      record.id,
+                      record?.id,
                       {
                         ...record,
                         published: true,
                       },
-                      { name: record.name }
+                      { name: record?.name }
                     )
                   }
                   disabled={loading}
@@ -133,7 +129,7 @@ export const List: React.FC<ShowProps> = (props) => {
                 </StandardButton>
                 <StandardButton
                   onClick={() =>
-                    approve(record.id, { ...record, published: false }, { name: record.name })
+                    approve(record?.id, { ...record, published: false }, { name: record?.name })
                   }
                   disabled={loading}
                   color="secondary"
@@ -144,7 +140,7 @@ export const List: React.FC<ShowProps> = (props) => {
                 </StandardButton>
                 <StandardButton
                   onClick={() =>
-                    approve(record.id, { ...record, downloadable: true }, { name: record.name })
+                    approve(record?.id, { ...record, downloadable: true }, { name: record?.name })
                   }
                   disabled={loading}
                   color="secondary"
@@ -155,7 +151,7 @@ export const List: React.FC<ShowProps> = (props) => {
                 </StandardButton>
                 <StandardButton
                   onClick={() =>
-                    approve(record.id, { ...record, downloadable: false }, { name: record.name })
+                    approve(record?.id, { ...record, downloadable: false }, { name: record?.name })
                   }
                   disabled={loading}
                   color="secondary"
@@ -166,7 +162,7 @@ export const List: React.FC<ShowProps> = (props) => {
                 </StandardButton>
                 <StandardButton
                   onClick={() =>
-                    approve(record.id, { ...record, position: 1 }, { name: record.name })
+                    approve(record?.id, { ...record, position: 1 }, { name: record?.name })
                   }
                   disabled={loading}
                   color="secondary"
@@ -178,9 +174,9 @@ export const List: React.FC<ShowProps> = (props) => {
                 <StandardButton
                   onClick={() =>
                     approve(
-                      record.id,
+                      record?.id,
                       { ...record, position: props.total ?? 0 },
-                      { name: record.name }
+                      { name: record?.name }
                     )
                   }
                   startIcon={<ArrowIconDown />}
