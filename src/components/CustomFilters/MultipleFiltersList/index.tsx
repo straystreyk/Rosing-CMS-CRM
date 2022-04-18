@@ -47,8 +47,8 @@ export const MultipleFiltersList: React.FC<ChoicesCustomFilter> = ({
       <AllFiltersList
         handleClose={handleClose}
         anchorEl={anchorEl}
-        handleMenuItemClick={handleMenuItemClick}
-        setFilteredFilters={setFilteredFilters}
+        handleMenuItemClick={handleMenuItemClick as any}
+        setFilteredFilters={setFilteredFilters as any}
         initialFilters={choices}
         activeFilters={activeFilters}
         filteredFilters={filteredFilters}

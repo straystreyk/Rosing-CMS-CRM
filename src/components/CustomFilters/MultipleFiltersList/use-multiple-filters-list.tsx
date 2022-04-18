@@ -17,10 +17,6 @@ interface UseMultipleFiltersListProps {
   query: TypedDocumentNode<any, {}>;
 }
 
-const useGetChoices = () => {
-  return {};
-};
-
 export const useMultipleFiltersList = ({
   setChoices,
   setFilteredFilters,
@@ -44,7 +40,8 @@ export const useMultipleFiltersList = ({
 
   const deleteFilter = React.useCallback(() => {
     setFilters(_.omit(filterValues, [source]), displayedFilters);
-  }, [displayedFilters, source, filterValues, setFilters]);
+    setActiveFilters([]);
+  }, [setActiveFilters, displayedFilters, source, filterValues, setFilters]);
 
   const handleMenuItemClick = React.useCallback(
     (e: React.MouseEvent, index: number, filter: ChoicesItem) => {
@@ -109,7 +106,7 @@ export const useMultipleFiltersList = ({
         setActiveFilters((prev) => [...prev, filter]);
       }
     });
-  }, [setActiveFilters, choices, filterValues, source]);
+  }, []);
 
   return {
     handleClick,

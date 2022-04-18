@@ -1,8 +1,12 @@
 import { ListTabProps } from "../components/Tabs/list-page-tabs";
+import { GET_ONE_MOVIE_NAME } from "../containers/Movies/custom-requests";
+import { DocumentNode } from "graphql";
 
 interface breadcrumbsLinkInterface {
   name: string;
   href: string;
+  query?: DocumentNode;
+  dynamicParam?: string;
 }
 
 export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
@@ -17,6 +21,12 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
   {
     name: "Movies",
     href: "/media_content/video/movies",
+  },
+  {
+    name: "",
+    href: "/media_content/video/movies",
+    query: GET_ONE_MOVIE_NAME,
+    dynamicParam: "id",
   },
   {
     name: "Radio",

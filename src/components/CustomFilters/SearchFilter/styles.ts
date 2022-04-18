@@ -1,7 +1,8 @@
-export const SearchFilterStyles = {
+export const SearchFilterStyles: any = {
   SearchFilterWrapper: {
     display: "flex",
     marginBottom: 16,
+    position: "relative",
   },
   SearchInput: {
     width: "100%",
@@ -12,7 +13,7 @@ export const SearchFilterStyles = {
     borderBottomRightRadius: 4,
     fontFamily: "Gilroy, sans-serif",
     fontSize: 14,
-    padding: "8px 24px 8px 12px",
+    padding: "8px 30px 8px 12px",
     "&::placeholder": {
       color: "var(--secondary-color-default)",
     },
@@ -41,5 +42,11 @@ export const SearchFilterStyles = {
         display: "none",
       },
     },
+  },
+  LoopIcon: {
+    position: "absolute",
+    right: 8,
+    top: "calc(50% + 1px)",
+    transform: "translateY(-50%)",
   },
 };

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { ChoicesFilter } from "../../components/CustomFilters/ChoicesFilter";
 import {
   DOWNLOADABLE_CHOICES,
@@ -32,6 +31,12 @@ export const filtersTmp: FilterTemplate[] = [
     source: "extraVideo",
   },
   {
+    component: DateFilter,
+    label: "Created at",
+    source: "createdFrom",
+    secondSource: "createdTo",
+  },
+  {
     component: MultipleFiltersList,
     query: ALL_GENRES_FILTER,
     label: "Genres",
@@ -39,22 +44,8 @@ export const filtersTmp: FilterTemplate[] = [
   },
   {
     component: MultipleFiltersList,
-    query: MARKERS_CHOICES,
+    choices: MARKERS_CHOICES,
     label: "Labels",
     source: "markers",
   },
-];
-
-export const customFilters = [
-  <ChoicesFilter
-    choices={DOWNLOADABLE_CHOICES}
-    label="Downloadable"
-    source="downloadable"
-    defaultActive
-  />,
-  <ChoicesFilter choices={PUBLISHED_CHOICES} label="Publish" source="published" />,
-  <ChoicesFilter choices={EXTRA_VIDEO_CHOICES} label="Extra videos" source="extraVideo" />,
-  <DateFilter source="createdFrom" secondSource="createdTo" label="Created at" />,
-  <MultipleFiltersList query={ALL_GENRES_FILTER} label="Genres" source="genreIds" />,
-  <MultipleFiltersList choices={MARKERS_CHOICES} label="Labels" source="markers" />,
 ];

@@ -9,6 +9,7 @@ import { ResourceCreate, ResourceEdit, ResourceList } from "../../components/Res
 import { List as DataGridList } from "./list";
 import { mediaContentTabs } from "../../constants/breadcrumbs-link";
 import { ResourceShow } from "../../components/ResourceView/resource-show";
+import { GET_ONE_MOVIE_NAME } from "./custom-requests";
 
 const resource = "media_content/video/movies";
 
@@ -42,7 +43,7 @@ export const Create: React.FC<CreateProps> = (props) => {
   );
 };
 export const Edit: React.FC = (props) => (
-  <ResourceEdit {...props} redirect="list" resource={resource}>
+  <ResourceEdit query={GET_ONE_MOVIE_NAME} {...props} redirect="list" resource={resource}>
     <Form resource={resource} type="edit" {...props} />
   </ResourceEdit>
 );

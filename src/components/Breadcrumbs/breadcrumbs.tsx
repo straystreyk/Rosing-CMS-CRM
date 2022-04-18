@@ -1,13 +1,15 @@
 import * as React from "react";
 import cn from "classnames";
-import { useHistory, Link, useLocation } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 
 import { breadcrumbsLinks } from "../../constants/breadcrumbs-link";
-import { useFormState } from "react-final-form";
+import { useNotify } from "ra-core";
+import { authClient } from "../Providers";
 
 interface BreadcrumbsProps {
   className?: string;
+  resource: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -28,24 +30,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ resource }) => {
   const {
     location: { pathname },
   } = useHistory();
   const classes = useStyles();
-  const location = useLocation();
-  const { values } = useFormState();
-  const [breadCrumbs, setBreadCrumbs] = React.useState(breadcrumbsLinks);
-
-  const isAlreadyIn = !!breadCrumbs.filter((el) => el.name === values.name).length;
+  const notify = useNotify();
+  const params = useParams<{ [id: string]: string }>();
+  const [matched, setMatched] = React.useState(
+    breadcrumbsLinks.filter((el) => pathname.includes(el.href))
+  );
 
   React.useEffect(() => {
-    if (values && values.name && !isAlreadyIn) {
-      setBreadCrumbs((p) => [...p, { name: values.name, href: location.pathname }]);
-    }
-  }, []);
+    let unmounted = false;
+    if (Object.keys(params).length) {
+      matched.forEach(async (el) => {
+        if (el.dynamicParam && el.query) {
+          try {
+            const res = await authClient.query({
+              query: el.query,
+              variables: { [el.dynamicParam]: params[el.dynamicParam] },
+            });
 
-  const matched = breadCrumbs.filter((el) => pathname.includes(el.href));
+            const { name } = res.data.item;
+            if (!unmounted) {
+              setMatched((prevState) =>
+                prevState.map((item) => (item === el ? { ...item, name } : item))
+              );
+            }
+          } catch (e) {
+            if (e instanceof Error) {
+              notify(e.message);
+            }
+          }
+        }
+      });
+    }
+
+    return () => {
+      unmounted = true;
+    };
+  }, []);
 
   return (
     <div className={classes.breadcrumbs}>

@@ -10,6 +10,7 @@ interface EditProps {
   resource: string;
   redirect?: string;
   basePath?: string;
+  query?: any;
   id?: string;
 }
 

@@ -5,6 +5,7 @@ import { SearchFilterStyles } from "./styles";
 import { StandardCustomFilterProps } from "../custom-filters-types";
 import { useTranslate } from "ra-core";
 import { SelectSearchFilter } from "./select-search-filter";
+import { LoopInputIcon } from "../constants";
 
 const useStyles = makeStyles(SearchFilterStyles);
 
@@ -21,7 +22,7 @@ const useSearchFilters = ({ source }: { source: string }) => {
     if (source in filterValues && filterValues[source] !== inputValue) {
       setInputValue(() => filterValues[source]);
     }
-  }, [filterValues, inputValue, source]);
+  }, [filterValues, source]);
 
   const changeInput = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,15 +45,20 @@ const SearchInputFilter: React.FC<StandardCustomFilterProps> = ({ source }) => {
   const { resource, inputValue, changeInput } = useSearchFilters({ source });
 
   return (
-    <input
-      className={classes.SearchInput}
-      type="text"
-      placeholder={`ID, slug or ${translate(
-        ["resources", resource, "name"].join(".")
-      ).toLowerCase()} name`}
-      value={inputValue}
-      onChange={changeInput}
-    />
+    <>
+      <input
+        className={classes.SearchInput}
+        type="text"
+        placeholder={`ID, slug or ${translate(
+          ["resources", resource, "name"].join(".")
+        ).toLowerCase()} name`}
+        value={inputValue}
+        onChange={changeInput}
+      />
+      <div className={classes.LoopIcon}>
+        <LoopInputIcon color="var(--secondary-color-default)" />
+      </div>
+    </>
   );
 };
 

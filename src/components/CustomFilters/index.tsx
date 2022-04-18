@@ -9,7 +9,7 @@ import { PlusIcon } from "../../constants/icons";
 import { CustomFiltersWrapperStyles } from "./styles";
 import { SearchFilters } from "./SearchFilter";
 import { AllFiltersList } from "./AllFilterList";
-import { getJsxElements } from "../../helpers/filters";
+import { renderJsxElements } from "../../helpers/filters";
 import { FilterTemplate } from "./custom-filters-types";
 
 const useStyles = makeStyles(CustomFiltersWrapperStyles);
@@ -100,8 +100,8 @@ export const Filters: React.FC<{ filters: FilterTemplate[] }> = ({ filters }) =>
       <div className={classes.RoundedFiltersWrapper}>
         <FilterContext.Provider value={{ setActiveFilters, setInitialFilters, filters }}>
           {activeFilters.length
-            ? getJsxElements(activeFilters).map((filter, index: number) => (
-                <React.Fragment key={index}>{filter}</React.Fragment>
+            ? renderJsxElements(activeFilters).map(({ Component, props: rest }, index: number) => (
+                <Component key={index} {...rest} />
               ))
             : null}
         </FilterContext.Provider>
@@ -116,8 +116,8 @@ export const Filters: React.FC<{ filters: FilterTemplate[] }> = ({ filters }) =>
         </StandardButton>
         <AllFiltersList
           initialFilters={initialFilters}
-          setFilteredFilters={setFilteredFilters}
-          handleMenuItemClick={handleMenuItemClick}
+          setFilteredFilters={setFilteredFilters as any}
+          handleMenuItemClick={handleMenuItemClick as any}
           filteredFilters={filteredFilters}
           anchorEl={anchorEl}
           open={open}

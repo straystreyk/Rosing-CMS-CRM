@@ -25,13 +25,23 @@ const useStyles = makeStyles({
   },
 });
 
-export const SortList: React.FC<{ showBy?: number[] }> = ({ showBy = [15, 25, 50, 100] }) => {
+const SKELETON_WIDTH = 15;
+const SKELETON_HEIGHT = 17;
+
+export const PerPageCounter: React.FC<{ showBy?: number[] }> = ({ showBy = [15, 25, 50, 100] }) => {
   const { total, perPage, setPerPage } = useListContext();
   const classes = useStyles();
   return (
     <div className={classes.Sort}>
-      Total {total ?? <Skeleton style={{ display: "inline-block" }} width={15} height={17} />}, show
-      by:{" "}
+      Total&nbsp;
+      {total ?? (
+        <Skeleton
+          style={{ display: "inline-block" }}
+          width={SKELETON_WIDTH}
+          height={SKELETON_HEIGHT}
+        />
+      )}
+      , show by:&nbsp;
       {showBy?.map((number) => (
         <button
           className={cn("sortButton", perPage === number && "active")}

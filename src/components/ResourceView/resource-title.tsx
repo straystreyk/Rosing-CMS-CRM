@@ -147,7 +147,7 @@ export const ResourceTitle: React.FC<TitleProps> = ({
           </span>
         </div>
       </div>
-      {form !== "list" || breadCrumbsOn ? <Breadcrumbs /> : null}
+      {form !== "list" || breadCrumbsOn ? <Breadcrumbs resource={name} /> : null}
     </div>
   );
 };

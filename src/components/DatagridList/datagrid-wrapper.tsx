@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useListContext } from "react-admin";
-import { SortList } from "../Pagination/sort-list";
+import { PerPageCounter } from "../Pagination/per-page-counter";
 import { makeStyles } from "@material-ui/core";
 
 import { MainLoader } from "../MainLoader";
@@ -34,7 +34,7 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({ children, filte
   return (
     <>
       {filters && <Filters filters={filters} />}
-      <SortList />
+      <PerPageCounter />
       <div className={classes.DataGridWrapper}>{children}</div>
       {loading && (
         <div className={classes.LoaderWrapper}>

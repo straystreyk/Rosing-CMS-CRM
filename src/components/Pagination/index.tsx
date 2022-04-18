@@ -90,26 +90,28 @@ const useStyles = makeStyles({
 
 const MAX_PAGES = 6;
 
-export const Pagination = () => {
-  const { page, perPage, total, setPage } = useListContext();
-  const [arrOfPages, setArrOfPages] = React.useState<(string | number)[]>([]);
+const usePagination = () => {
+  const { setPage, total, perPage, page } = useListContext();
   const [value, setValue] = React.useState<string>("");
+  const [arrOfPages, setArrOfPages] = React.useState<(string | number)[]>([]);
+
   const nbPages = Math.ceil(total / perPage) || 1;
   const currentPagesArray = Array(nbPages)
     .fill(true)
     .map((el, index) => index + 1);
-  const classes = useStyles();
 
-  const changePage = (numberOfPage: number) => {
-    setPage(numberOfPage);
-  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(() => e.target.value);
 
   const goToCurrentPage = React.useCallback(() => {
     if (value) {
       setPage(+value);
       setValue("");
     }
-  }, [value]);
+  }, [setPage, value]);
+
+  const changePage = (numberOfPage: number) => {
+    setPage(numberOfPage);
+  };
 
   React.useEffect(() => {
     window.addEventListener("keypress", (e) => {
@@ -117,7 +119,7 @@ export const Pagination = () => {
         goToCurrentPage();
       }
     });
-  }, [value]);
+  }, [goToCurrentPage, value]);
 
   React.useEffect(() => {
     let template: (string | number)[] = [...currentPagesArray];
@@ -142,6 +144,30 @@ export const Pagination = () => {
 
     setArrOfPages(() => currentPagesArray);
   }, [nbPages, page]);
+
+  return {
+    value,
+    handleChange,
+    goToCurrentPage,
+    changePage,
+    nbPages,
+    arrOfPages,
+    currentPagesArray,
+  };
+};
+
+export const Pagination = () => {
+  const classes = useStyles();
+  const { page } = useListContext();
+  const {
+    value,
+    handleChange,
+    goToCurrentPage,
+    changePage,
+    arrOfPages,
+    nbPages,
+    currentPagesArray,
+  } = usePagination();
 
   return (
     <>
@@ -178,14 +204,7 @@ export const Pagination = () => {
           {currentPagesArray.length > MAX_PAGES && (
             <div className={classes.SearchPage}>
               <span>Go to the page</span>
-              <input
-                placeholder="10"
-                type="text"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setValue(() => e.target.value)
-                }
-                value={value}
-              />
+              <input placeholder="10" type="text" onChange={handleChange} value={value} />
               <button className={classes.Button} onClick={goToCurrentPage}>
                 <Arrow color="var(--secondary-color-default)" />
               </button>

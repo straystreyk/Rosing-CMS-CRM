@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core";
 
 import { ChoicesItem } from "../custom-filters-types";
 import { ArrowFilterIcon, DeleteFilterIcon } from "../constants";
-import { DefaultRoundedFilterStyles } from "../styles";
+import { DefaultRoundedFilterStyles } from "./styles";
 
 const useStyles = makeStyles(DefaultRoundedFilterStyles);
 

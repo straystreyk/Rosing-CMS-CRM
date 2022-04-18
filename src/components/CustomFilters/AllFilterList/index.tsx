@@ -13,18 +13,20 @@ const isChoiceItem = (item: ChoicesItem | FilterTemplate): item is ChoicesItem =
   return (item as ChoicesItem).value !== undefined;
 };
 
+type HandleMenuItemClick = (
+  e: React.MouseEvent,
+  index: number,
+  filter: FilterTemplate | ChoicesItem
+) => void;
+
 interface AllFiltersListProps {
   anchorEl: null | HTMLElement;
   initialFilters: FilterTemplate[] | ChoicesItem[];
   filteredFilters: FilterTemplate[] | ChoicesItem[];
   activeFilters: FilterTemplate[] | ChoicesItem[];
-  handleMenuItemClick:
-    | ((e: React.MouseEvent, index: number, filter: FilterTemplate) => void)
-    | ((e: React.MouseEvent, index: number, filter: ChoicesItem) => void);
+  handleMenuItemClick: HandleMenuItemClick;
   handleClose: () => void;
-  setFilteredFilters:
-    | React.Dispatch<React.SetStateAction<ChoicesItem[]>>
-    | React.Dispatch<React.SetStateAction<FilterTemplate[]>>;
+  setFilteredFilters: React.Dispatch<React.SetStateAction<ChoicesItem[] | FilterTemplate[]>>;
   open: boolean;
 }
 

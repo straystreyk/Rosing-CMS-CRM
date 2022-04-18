@@ -218,7 +218,6 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           label="External catalog"
           source="externalCatalogId"
           reference="external_catalog"
-          perPage={INPUT_ITEMS_PER_PAGE}
           resource={resource}
         >
           <SelectInput

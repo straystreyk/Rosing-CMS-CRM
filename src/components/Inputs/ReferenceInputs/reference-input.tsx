@@ -16,34 +16,7 @@ interface ReferenceInputProps {
 }
 
 const useStyles = makeStyles({
-  custom: {
-    "& > div": {
-      backgroundColor: "inherit",
-      border: "1px solid var(--secondary-color-default)",
-      borderRadius: 4,
-      "&:before": {
-        display: "none",
-      },
-      "&:after": {
-        display: "none",
-      },
-    },
-    "& div.MuiSelect-root": {
-      padding: "8px 12px",
-    },
-    "& label": {
-      position: "static",
-      transform: "none !important",
-      fontSize: 14,
-      marginBottom: 5,
-      lineHeight: "20px",
-      color: "var(--secondary-color-main) !important",
-    },
-    "& .MuiFormHelperText-root": {
-      margin: 0,
-      marginTop: 2,
-    },
-  },
+  custom: {},
 });
 
 export const ReferenceInput: React.FC<ReferenceInputProps> = (props) => {
@@ -52,7 +25,6 @@ export const ReferenceInput: React.FC<ReferenceInputProps> = (props) => {
   return (
     <ReferenceInputAdmin
       {...props}
-      className={classes.custom}
       label={props.label}
       source={props.source}
       reference={props.reference}

@@ -90,6 +90,14 @@ export const GET_ONE_MOVIE = gql`
   }
 `;
 
+export const GET_ONE_MOVIE_NAME = gql`
+  query Movie($id: ID!) {
+    item: Movie(id: $id) {
+      name
+    }
+  }
+`;
+
 export const GET_ALL_MOVIE = gql`
   query allMovies(
     $page: Int

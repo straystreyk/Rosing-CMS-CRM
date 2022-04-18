@@ -3,8 +3,8 @@ import * as _ from "lodash";
 import { useListContext } from "react-admin";
 import { Menu, MenuItem } from "@material-ui/core";
 
-import { ChoicesCustomFilter } from "./custom-filters-types";
-import { RoundedFilterShow } from "./RoundedFilterShow";
+import { ChoicesCustomFilter } from "../custom-filters-types";
+import { RoundedFilterShow } from "../RoundedFilterShow";
 
 const useChoiceFilter = ({ source }: { source: string }) => {
   const { setFilters, filterValues, displayedFilters } = useListContext();
