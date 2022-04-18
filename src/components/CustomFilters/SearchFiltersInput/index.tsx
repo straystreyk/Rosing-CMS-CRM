@@ -17,13 +17,13 @@ export const SearchFiltersInput = React.forwardRef<
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setFilteredFilters(() =>
         initialFilters.filter((filter: any) =>
-          filter.props
-            ? filter.props.label.toLowerCase().includes(e.target.value.toLowerCase())
+          filter.label
+            ? filter.label.toLowerCase().includes(e.target.value.toLowerCase())
             : filter.name.toLowerCase().includes(e.target.value.toLowerCase())
         )
       );
     },
-    [initialFilters]
+    [setFilteredFilters, initialFilters]
   );
 
   return (

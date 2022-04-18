@@ -7,33 +7,44 @@ import { makeStyles } from "@material-ui/core";
 import { StandardButton } from "../UI/Buttons/standard-button";
 import { PlusIcon } from "../../constants/icons";
 import { CustomFiltersWrapperStyles } from "./styles";
-import { SearchFilters } from "./SearchFilter/SearchFilter";
+import { SearchFilters } from "./SearchFilter";
 import { AllFiltersList } from "./AllFilterList";
+import { getJsxElements } from "../../helpers/filters";
+import { FilterTemplate } from "./custom-filters-types";
 
 const useStyles = makeStyles(CustomFiltersWrapperStyles);
 
-export const FilterContext = React.createContext<any>({});
+export const FilterContext = React.createContext<{
+  setActiveFilters?: React.Dispatch<React.SetStateAction<FilterTemplate[]>>;
+  setInitialFilters?: React.Dispatch<React.SetStateAction<FilterTemplate[]>>;
+  filters?: FilterTemplate[];
+}>({});
 
-export const Filters: React.FC<{ filters: any }> = ({ filters }) => {
-  const { filterValues, setFilters, displayedFilters } = useListContext();
-  const classes = useStyles();
+interface UseFiltersProps {
+  initialFilters: FilterTemplate[];
+  activeFilters: FilterTemplate[];
+  setActiveFilters: React.Dispatch<React.SetStateAction<FilterTemplate[]>>;
+  setInitialFilters: React.Dispatch<React.SetStateAction<FilterTemplate[]>>;
+  setFilteredFilters: React.Dispatch<React.SetStateAction<FilterTemplate[]>>;
+}
+
+const useFilters = ({
+  initialFilters,
+  activeFilters,
+  setActiveFilters,
+  setInitialFilters,
+  setFilteredFilters,
+}: UseFiltersProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [activeFilters, setActiveFilters] = React.useState<any>([]);
-  const [initialFilters, setInitialFilters] = React.useState<any>(filters);
-  const [filteredFilters, setFilteredFilters] = React.useState<any>(filters);
-  const open = Boolean(anchorEl);
+  const { filterValues, setFilters, displayedFilters } = useListContext();
 
   React.useEffect(() => {
-    initialFilters.map((filter: any) => {
-      if (Object.keys(filterValues).includes(filter.props.source) || filter.props.defaultActive) {
-        setActiveFilters((prev: any) => [...prev, filter]);
-        if (filter.props.defaultActive) {
-          setInitialFilters((prev: any) =>
-            prev.filter((initialFilter: any) => initialFilter !== filter)
-          );
-          setFilteredFilters((prev: any) =>
-            prev.filter((initialFilter: any) => initialFilter !== filter)
-          );
+    initialFilters.forEach((filter) => {
+      if (filter.source in filterValues || filter.defaultActive) {
+        setActiveFilters((prev) => [...prev, filter]);
+        if (filter.defaultActive) {
+          setInitialFilters((prev) => prev.filter((initialFilter) => initialFilter !== filter));
+          setFilteredFilters((prev) => prev.filter((initialFilter) => initialFilter !== filter));
         }
       }
     });
@@ -44,22 +55,44 @@ export const Filters: React.FC<{ filters: any }> = ({ filters }) => {
   }, []);
 
   const handleMenuItemClick = React.useCallback(
-    (e: React.MouseEvent, index: number, filter: any) => {
+    (e: React.MouseEvent, index: number, filter: FilterTemplate) => {
       if (activeFilters.includes(filter)) {
-        setActiveFilters((prev: any) => prev.filter((el: any) => el !== filter));
-        if (Object.keys(filterValues).includes(filter.props.source)) {
-          setFilters(_.omit(filterValues, [filter.props.source]), displayedFilters);
+        setActiveFilters((prev) => prev.filter((el) => el !== filter));
+        if (filter.source in filterValues) {
+          setFilters(_.omit(filterValues, [filter.source]), displayedFilters);
         }
       } else {
         setActiveFilters(() => [...activeFilters, filter]);
       }
     },
-    [activeFilters, filterValues]
+    [setActiveFilters, displayedFilters, setFilters, activeFilters, filterValues]
   );
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+  return {
+    anchorEl,
+    handleClick,
+    handleClose,
+    handleMenuItemClick,
+  };
+};
+
+export const Filters: React.FC<{ filters: FilterTemplate[] }> = ({ filters }) => {
+  const classes = useStyles();
+  const [activeFilters, setActiveFilters] = React.useState<FilterTemplate[]>([]);
+  const [initialFilters, setInitialFilters] = React.useState<FilterTemplate[]>(filters);
+  const [filteredFilters, setFilteredFilters] = React.useState<FilterTemplate[]>(filters);
+  const { anchorEl, handleClick, handleClose, handleMenuItemClick } = useFilters({
+    initialFilters,
+    setFilteredFilters,
+    setActiveFilters,
+    setInitialFilters,
+    activeFilters,
+  });
+
+  const open = Boolean(anchorEl);
 
   return (
     <div className={classes.CustomFiltersWrapper}>
@@ -67,7 +100,7 @@ export const Filters: React.FC<{ filters: any }> = ({ filters }) => {
       <div className={classes.RoundedFiltersWrapper}>
         <FilterContext.Provider value={{ setActiveFilters, setInitialFilters, filters }}>
           {activeFilters.length
-            ? activeFilters.map((filter: any, index: number) => (
+            ? getJsxElements(activeFilters).map((filter, index: number) => (
                 <React.Fragment key={index}>{filter}</React.Fragment>
               ))
             : null}
@@ -84,12 +117,12 @@ export const Filters: React.FC<{ filters: any }> = ({ filters }) => {
         <AllFiltersList
           initialFilters={initialFilters}
           setFilteredFilters={setFilteredFilters}
+          handleMenuItemClick={handleMenuItemClick}
           filteredFilters={filteredFilters}
           anchorEl={anchorEl}
           open={open}
           handleClose={handleClose}
           activeFilters={activeFilters}
-          handleMenuItemClick={handleMenuItemClick}
         />
       </div>
     </div>

@@ -3,15 +3,12 @@ import * as _ from "lodash";
 import { useListContext } from "react-admin";
 import { Menu, MenuItem } from "@material-ui/core";
 
-import { FilterContext } from "./index";
 import { ChoicesCustomFilter } from "./custom-filters-types";
 import { RoundedFilterShow } from "./RoundedFilterShow";
 
-export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({ source, label, choices }) => {
+const useChoiceFilter = ({ source }: { source: string }) => {
   const { setFilters, filterValues, displayedFilters } = useListContext();
-  const { setActiveFilters } = React.useContext(FilterContext);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -22,7 +19,7 @@ export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({ source, label, ch
       setFilters({ ...filterValues, [source]: value }, displayedFilters);
       setAnchorEl(null);
     },
-    [source, filterValues]
+    [setFilters, displayedFilters, source, filterValues]
   );
 
   const handleClose = () => {
@@ -31,7 +28,23 @@ export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({ source, label, ch
 
   const deleteFilter = React.useCallback(() => {
     setFilters(_.omit(filterValues, [source]), displayedFilters);
-  }, [source, filterValues, setActiveFilters, setFilters]);
+  }, [displayedFilters, source, filterValues, setFilters]);
+
+  return {
+    anchorEl,
+    deleteFilter,
+    handleClose,
+    handleMenuItemClick,
+    handleClick,
+  };
+};
+
+export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({ source, label, choices }) => {
+  const { filterValues } = useListContext();
+  const { deleteFilter, anchorEl, handleClick, handleClose, handleMenuItemClick } = useChoiceFilter(
+    { source }
+  );
+  const open = Boolean(anchorEl);
 
   return (
     <>

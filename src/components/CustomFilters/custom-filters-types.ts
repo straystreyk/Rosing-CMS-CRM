@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 export interface StandardCustomFilterProps {
   label: string;
   source: string;
@@ -10,10 +12,11 @@ export interface ChoicesItem {
   value: string | boolean;
 }
 
-// export const isChoicesItem = (value: unknown): value is ChoicesItem =>
-//   typeof value === "object" && typeof value.name === "string";
-
 export interface ChoicesCustomFilter extends StandardCustomFilterProps {
   choices?: ChoicesItem[];
   query?: any;
+}
+
+export interface FilterTemplate extends ChoicesCustomFilter {
+  component: FC<ChoicesCustomFilter> | FC<StandardCustomFilterProps>;
 }

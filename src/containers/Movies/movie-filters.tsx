@@ -9,19 +9,41 @@ import {
 import { MultipleFiltersList } from "../../components/CustomFilters/MultipleFiltersList";
 import { ALL_GENRES_FILTER } from "../../components/Providers/custom-requests";
 import { DateFilter } from "../../components/CustomFilters/DateFilter";
+import { FilterTemplate } from "../../components/CustomFilters/custom-filters-types";
 
-// const tmp = [
-//   {
-//     component: ChoicesFilter,
-//     choices: DOWNLOADABLE_CHOICES,
-//     label: "Downloadable",
-//     source: "downloadable",
-//     defaultActive: true,
-//   },
-// ];
-
-// const getJsxElements = (arr) =>
-//   tmp.map(({ component: Component, ...rest } = <Component {...rest} />));
+export const filtersTmp: FilterTemplate[] = [
+  {
+    component: ChoicesFilter,
+    choices: DOWNLOADABLE_CHOICES,
+    label: "Downloadable",
+    source: "downloadable",
+    defaultActive: true,
+  },
+  {
+    component: ChoicesFilter,
+    choices: PUBLISHED_CHOICES,
+    label: "Publish",
+    source: "published",
+  },
+  {
+    component: ChoicesFilter,
+    choices: EXTRA_VIDEO_CHOICES,
+    label: "Extra videos",
+    source: "extraVideo",
+  },
+  {
+    component: MultipleFiltersList,
+    query: ALL_GENRES_FILTER,
+    label: "Genres",
+    source: "genreIds",
+  },
+  {
+    component: MultipleFiltersList,
+    query: MARKERS_CHOICES,
+    label: "Labels",
+    source: "markers",
+  },
+];
 
 export const customFilters = [
   <ChoicesFilter

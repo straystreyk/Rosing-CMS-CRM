@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FunctionField, ReferenceField, TextField, useMutation, useRefresh } from "react-admin";
+import { FunctionField, TextField, useMutation, useRefresh } from "react-admin";
 import { EmptyTablePage } from "../../components/EmptyTablePage";
 import {
   AllowDownload,
@@ -18,7 +18,8 @@ import { DeleteButton } from "../../components/UI/RA/delete-button";
 import { StandardButton } from "../../components/UI/Buttons/standard-button";
 import { Identifier, Record as RecordRA, useNotify } from "ra-core";
 import { DatagridList } from "../../components/DatagridList";
-import { customFilters } from "./movie-filters";
+import { filtersTmp } from "./movie-filters";
+import { ReferenceField } from "../../components/TableFields/reference-field";
 
 const useStyles = makeStyles({
   MoreInfo: {
@@ -85,7 +86,7 @@ export const List: React.FC<ShowProps> = (props) => {
   }, [notify, props.resource, refresh, data, error]);
 
   return (
-    <DatagridList filters={customFilters} empty={<EmptyTablePage />} {...props} optimized>
+    <DatagridList filters={filtersTmp} empty={<EmptyTablePage />} {...props} optimized>
       <TextField label="Name" source="name" className={classes.NameField} />
       <FunctionField
         label="Position"
@@ -98,7 +99,7 @@ export const List: React.FC<ShowProps> = (props) => {
         label="External catalog"
         source="externalCatalogId"
         reference="external_catalog"
-        emptyText={"<span className={classes.Empty}>Empty</span>"}
+        emptyText={<span className={classes.Empty}>Empty</span>}
       >
         <TextField source="name" fullWidth />
       </ReferenceField>

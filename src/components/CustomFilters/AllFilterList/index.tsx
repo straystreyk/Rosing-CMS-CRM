@@ -4,21 +4,31 @@ import { Checkbox, Menu, MenuItem, makeStyles } from "@material-ui/core";
 
 import { SearchFiltersInput } from "../SearchFiltersInput";
 import { AllFiltersListStyles } from "./styles";
-import { ChoicesItem } from "../custom-filters-types";
 import { MenuListProps, PaperProps } from "../constants";
+import { ChoicesItem, FilterTemplate } from "../custom-filters-types";
 
 const useStyles = makeStyles(AllFiltersListStyles);
 
-export const AllFiltersList: React.FC<{
+const isChoiceItem = (item: ChoicesItem | FilterTemplate): item is ChoicesItem => {
+  return (item as ChoicesItem).value !== undefined;
+};
+
+interface AllFiltersListProps {
   anchorEl: null | HTMLElement;
-  initialFilters: ChoicesItem[] | JSX.Element[];
-  filteredFilters: any[];
-  activeFilters: any[];
-  handleMenuItemClick: (e: React.MouseEvent, index: number, filter: any) => void;
+  initialFilters: FilterTemplate[] | ChoicesItem[];
+  filteredFilters: FilterTemplate[] | ChoicesItem[];
+  activeFilters: FilterTemplate[] | ChoicesItem[];
+  handleMenuItemClick:
+    | ((e: React.MouseEvent, index: number, filter: FilterTemplate) => void)
+    | ((e: React.MouseEvent, index: number, filter: ChoicesItem) => void);
   handleClose: () => void;
-  setFilteredFilters: any;
+  setFilteredFilters:
+    | React.Dispatch<React.SetStateAction<ChoicesItem[]>>
+    | React.Dispatch<React.SetStateAction<FilterTemplate[]>>;
   open: boolean;
-}> = ({
+}
+
+export const AllFiltersList: React.FC<AllFiltersListProps> = ({
   initialFilters,
   setFilteredFilters,
   filteredFilters,
@@ -44,23 +54,23 @@ export const AllFiltersList: React.FC<{
     >
       <SearchFiltersInput initialFilters={initialFilters} setFilteredFilters={setFilteredFilters} />
       {filteredFilters && filteredFilters.length ? (
-        filteredFilters.map((filter: any, index: number) => {
+        filteredFilters.map((filter, index: number) => {
           return (
             <MenuItem
               className={classes.ListItem}
               key={index}
               aria-disabled={true}
               disabled={loading}
-              value={filter.props ?? filter.value}
+              value={isChoiceItem(filter) ? filter.value.toString() : filter.source}
               onClick={(event) => handleMenuItemClick(event, index, filter)}
             >
               <Checkbox
-                checked={activeFilters.includes(filter)}
+                checked={activeFilters.includes(filter as ChoicesItem & FilterTemplate)}
                 size="small"
                 color="primary"
                 className={classes.Checkbox}
               />
-              <span className="label">{filter.props ? filter.props.label : filter.name}</span>
+              <span className="label">{isChoiceItem(filter) ? filter.name : filter.label}</span>
             </MenuItem>
           );
         })

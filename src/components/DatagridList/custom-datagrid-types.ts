@@ -1,6 +1,6 @@
 import { DatagridProps } from "ra-ui-materialui";
-import { ReactElement } from "react";
+import { FilterTemplate } from "../CustomFilters/custom-filters-types";
 
 export interface CustomDatagridProps extends DatagridProps {
-  filters?: ReactElement[];
+  filters?: FilterTemplate[];
 }

@@ -19,6 +19,7 @@ export const MultipleFiltersList: React.FC<ChoicesCustomFilter> = ({
   const [filteredFilters, setFilteredFilters] = React.useState<[] | ChoicesItem[]>(
     rest.choices ?? []
   );
+
   const { anchorEl, handleClick, handleClose, deleteFilter, handleMenuItemClick } =
     useMultipleFiltersList({
       setChoices,

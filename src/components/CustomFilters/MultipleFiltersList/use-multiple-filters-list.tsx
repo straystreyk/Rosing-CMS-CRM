@@ -17,6 +17,10 @@ interface UseMultipleFiltersListProps {
   query: TypedDocumentNode<any, {}>;
 }
 
+const useGetChoices = () => {
+  return {};
+};
+
 export const useMultipleFiltersList = ({
   setChoices,
   setFilteredFilters,
@@ -40,7 +44,7 @@ export const useMultipleFiltersList = ({
 
   const deleteFilter = React.useCallback(() => {
     setFilters(_.omit(filterValues, [source]), displayedFilters);
-  }, [source, filterValues, setFilters]);
+  }, [displayedFilters, source, filterValues, setFilters]);
 
   const handleMenuItemClick = React.useCallback(
     (e: React.MouseEvent, index: number, filter: ChoicesItem) => {
@@ -48,13 +52,13 @@ export const useMultipleFiltersList = ({
         setFilters(
           {
             ...filterValues,
-            [source]: filterValues[source].filter((el: unknown) => el !== filter.value),
+            [source]: filterValues[source].filter((el: string | boolean) => el !== filter.value),
           },
           displayedFilters
         );
-        setActiveFilters((prev: ChoicesItem[]) => prev.filter((el) => el !== filter));
+        setActiveFilters((prev) => prev.filter((el) => el !== filter));
       } else {
-        setActiveFilters((prev: ChoicesItem[]) => [...prev, filter]);
+        setActiveFilters((prev) => [...prev, filter]);
         if (filterValues[source] && filterValues[source].length) {
           setFilters(
             { ...filterValues, [source]: [...filterValues[source], filter.value] },
@@ -65,7 +69,7 @@ export const useMultipleFiltersList = ({
         }
       }
     },
-    [activeFilters, filterValues, source]
+    [displayedFilters, setFilters, setActiveFilters, activeFilters, filterValues, source]
   );
 
   React.useEffect(() => {
@@ -100,12 +104,12 @@ export const useMultipleFiltersList = ({
   }, []);
 
   React.useEffect(() => {
-    choices.map((filter) => {
+    choices.forEach((filter) => {
       if (filterValues[source] && filterValues[source].includes(filter.value)) {
-        setActiveFilters((prev: ChoicesItem[] | []) => [...prev, filter]);
+        setActiveFilters((prev) => [...prev, filter]);
       }
     });
-  }, [choices, filterValues, source]);
+  }, [setActiveFilters, choices, filterValues, source]);
 
   return {
     handleClick,
