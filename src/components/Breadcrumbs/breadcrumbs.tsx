@@ -2,60 +2,78 @@ import * as React from "react";
 import cn from "classnames";
 import { useHistory, Link, useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
-
-import { breadcrumbsLinks } from "../../constants/breadcrumbs-link";
 import { useNotify } from "ra-core";
+
+import { breadcrumbsLinks } from "./breadcrumbs-link";
+import { sanitizeId } from "../../helpers/form";
 import { authClient } from "../Providers";
+import { BreadcrumbsStyles } from "./syles";
 
 interface BreadcrumbsProps {
   className?: string;
   resource: string;
 }
 
-const useStyles = makeStyles((theme) => ({
-  breadcrumbs: {
-    marginTop: "5px",
-  },
-  breadcrumb: {
-    color: theme.palette.secondary.main,
-    fontWeight: 500,
-    fontSize: 12,
-  },
-  crumbLink: {
-    color: theme.palette.secondary.main,
-    textDecoration: "none",
-  },
-  lastCrumb: {
-    color: "var(--primary-text-default)",
-  },
-}));
+const useStyles = makeStyles(BreadcrumbsStyles);
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ resource }) => {
+const useBreadcrumbs = () => {
   const {
     location: { pathname },
   } = useHistory();
-  const classes = useStyles();
   const notify = useNotify();
   const params = useParams<{ [id: string]: string }>();
   const [matched, setMatched] = React.useState(
-    breadcrumbsLinks.filter((el) => pathname.includes(el.href))
+    breadcrumbsLinks.filter((el) => {
+      let href = el.href;
+
+      if (el.dynamicParam && href.includes(`:${el.dynamicParam}`)) {
+        href = href.replace(`:${el.dynamicParam}`, params[el.dynamicParam]);
+      }
+
+      if (el.secondDynamicParam && href.includes(`:${el.secondDynamicParam}`)) {
+        href = href.replace(`:${el.secondDynamicParam}`, params[el.secondDynamicParam]);
+      }
+
+      return pathname.includes(href);
+    })
   );
 
   React.useEffect(() => {
     let unmounted = false;
     if (Object.keys(params).length) {
       matched.forEach(async (el) => {
-        if (el.dynamicParam && el.query) {
+        if (el.query && el.dynamicParam && params[el.dynamicParam]) {
           try {
             const res = await authClient.query({
               query: el.query,
-              variables: { [el.dynamicParam]: params[el.dynamicParam] },
+              variables: { id: sanitizeId(params[el.dynamicParam]) },
             });
-
             const { name } = res.data.item;
+
             if (!unmounted) {
               setMatched((prevState) =>
-                prevState.map((item) => (item === el ? { ...item, name } : item))
+                prevState.map((item) => {
+                  if (item === el && el.dynamicParam && el.secondDynamicParam) {
+                    console.log("aswd");
+                    return {
+                      ...item,
+                      name,
+                      href: el.href
+                        .replace(`:${el.dynamicParam}`, params[el.dynamicParam])
+                        .replace(`:${el.secondDynamicParam}`, params[el.secondDynamicParam]),
+                    };
+                  }
+
+                  if (item === el && el.dynamicParam) {
+                    return {
+                      ...item,
+                      name,
+                      href: el.href.replace(`:${el.dynamicParam}`, params[el.dynamicParam]),
+                    };
+                  }
+
+                  return item;
+                })
               );
             }
           } catch (e) {
@@ -71,6 +89,13 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ resource }) => {
       unmounted = true;
     };
   }, []);
+
+  return { matched };
+};
+
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = React.memo(({ resource }) => {
+  const classes = useStyles();
+  const { matched } = useBreadcrumbs();
 
   return (
     <div className={classes.breadcrumbs}>
@@ -89,4 +114,4 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ resource }) => {
       })}
     </div>
   );
-};
+});

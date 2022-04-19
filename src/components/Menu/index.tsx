@@ -156,7 +156,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         dense={dense}
       />
       <ExpandMenu
-        links={["/media_content", "/channels", "/genres", "/audio_shows"]}
+        links={["/media_content", "/channels", "/genres"]}
         title={translate(`pos.expandMenu.mediaContent`)}
         icon={<MediaContentIcon color={"#fff"} />}
       >
@@ -179,8 +179,8 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           dense={dense}
         />
         <MenuItemLink
-          to={`/audio_shows`}
-          primaryText={translate(`resources.audio_shows.name`, {
+          to={`/media_content/audio`}
+          primaryText={translate("resources.media_content/audio/audio_shows.menu_name", {
             smart_count: 2,
           })}
           onClick={onMenuClick}

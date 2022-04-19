@@ -33,7 +33,7 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({ children, filte
 
   return (
     <>
-      {filters && <Filters filters={filters} />}
+      <Filters filters={filters} />
       <PerPageCounter />
       <div className={classes.DataGridWrapper}>{children}</div>
       {loading && (

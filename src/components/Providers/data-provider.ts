@@ -1,10 +1,10 @@
 import buildGraphQLProvider, { buildQuery as buildQueryFactory } from "ra-data-graphql-simple";
 
 import { authClient } from "./auth-provider";
-import { GET_ALL_MOVIE, GET_ONE_MOVIE } from "../../containers/Movies/custom-requests";
+import { GET_ALL_MOVIE, GET_ONE_MOVIE } from "../../containers/MediaContent/Movies/custom-requests";
 import { customParseResponse } from "../../react-admin-overrides";
-import { GET_ONE_SERIES } from "../../containers/Series/requests";
-import { GET_ALL_VIDEO_FILES } from "../../containers/VideoFiles/custom-requests";
+import { GET_ALL_SERIES, GET_ONE_SERIES } from "../../containers/MediaContent/Series/requests";
+import { GET_ALL_VIDEO_FILES } from "../../containers/MediaContent/VideoFiles/custom-requests";
 
 const getGqlResource = (resource: string) => {
   switch (resource) {
@@ -28,6 +28,8 @@ const getGqlResource = (resource: string) => {
       return "Season";
     case "media_content/video/series":
       return "Series";
+    case "media_content/audio/audio_shows":
+      return "AudioShow";
     case "channels":
       return "Channel";
     case "studios":
@@ -44,8 +46,6 @@ const getGqlResource = (resource: string) => {
       return "Genre";
     case "media_content/radio/radio_stations":
       return "RadioStation";
-    case "audio_shows":
-      return "AudioShow";
     case "questions":
       return "Question";
     case "images":
@@ -75,6 +75,9 @@ const customBuildQuery =
     }
     if (fetchType === "GET_LIST" && resource === "Movie") {
       return { ...builtQuery, query: GET_ALL_MOVIE };
+    }
+    if (fetchType === "GET_LIST" && resource === "Series") {
+      return { ...builtQuery, query: GET_ALL_SERIES };
     }
     if (fetchType === "GET_LIST" && resource === "VideoFile") {
       return { ...builtQuery, query: GET_ALL_VIDEO_FILES };

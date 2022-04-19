@@ -122,12 +122,13 @@ export const en: TranslationMessages = {
         list: "Radio Stations",
       },
     },
-    audio_shows: {
+    "media_content/audio/audio_shows": {
       name: "Audio Shows",
+      menu_name: "Audio",
       titles: {
         create: "New Audio Show",
         edit: "Edit Audio Show",
-        list: "Audio Shows",
+        list: "Audio",
       },
     },
     datacenters: {

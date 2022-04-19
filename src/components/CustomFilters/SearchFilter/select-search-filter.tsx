@@ -21,7 +21,7 @@ const useSelectSearchFilter = ({
   const [value, setValue] = React.useState(filterValues[source] ?? initialValue);
 
   React.useEffect(() => {
-    if (source in filterValues) {
+    if (!(source in filterValues)) {
       setFilters({ ...filterValues, [source]: initialValue }, displayedFilters);
     }
   }, []);

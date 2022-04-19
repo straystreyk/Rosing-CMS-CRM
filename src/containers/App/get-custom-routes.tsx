@@ -11,6 +11,7 @@ export const getRoutes: (token: string | null) => ReactElement[] = (token) => {
       <Redirect exact from="/media_content" to="/media_content/video/movies" />,
       <Redirect exact from="/media_content/video" to="/media_content/video/movies" />,
       <Redirect exact from="/media_content/radio" to="/media_content/radio/radio_stations" />,
+      <Redirect exact from="/media_content/audio" to="/media_content/audio/audio_shows" />,
     ];
   }
 

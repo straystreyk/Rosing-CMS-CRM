@@ -9,17 +9,17 @@ import { useApp } from "../../custom-hooks/app-component";
 import { customReducers } from "./custom-reducers";
 import { UserVariables as users } from "../Users";
 import { DatacentersVariables as datacenters } from "../Datacenters";
-import { VideoFilesVariables as videoFiles } from "../VideoFiles";
+import { VideoFilesVariables as videoFiles } from "../MediaContent/VideoFiles";
 import { RightHoldersVariables as rightHolders } from "../RightHolders";
-import { MoviesVariables as movies } from "../Movies";
-import { SeriesVariables as series } from "../Series";
+import { MoviesVariables as movies } from "../MediaContent/Movies";
+import { SeriesVariables as series } from "../MediaContent/Series";
 import { ChannelsVariables as channels } from "../Channels";
-import { SeasonsVariables as seasons } from "../Seasons";
-import { EpisodesVariables as episodes } from "../Episodes";
+import { SeasonsVariables as seasons } from "../MediaContent/Seasons";
+import { EpisodesVariables as episodes } from "../MediaContent/Episodes";
 import { GenresVariables as genres } from "../Genres";
 import { ChannelVersions as channelVersions } from "../ChannelVersions";
 import { RadioStationsVariables as radioStations } from "../RadioStations";
-import { AudioShowsVariables as audioShows } from "../AudioShows";
+import { AudioShowsVariables as audioShows } from "../Audio/AudioShows";
 import { QuestionsVariables as questions } from "../Questions";
 import { NewsVariables as news } from "../News";
 
@@ -61,7 +61,7 @@ export const App = () => {
       <Resource name="episodes" {...episodes} />
       <Resource name="genres" {...genres} />
       <Resource name="media_content/radio/radio_stations" {...radioStations} />
-      <Resource name="audio_shows" {...audioShows} />
+      <Resource name="media_content/audio/audio_shows" {...audioShows} />
       <Resource name="questions" {...questions} />
       <Resource name="news" {...news} />
       <Resource name="people" />

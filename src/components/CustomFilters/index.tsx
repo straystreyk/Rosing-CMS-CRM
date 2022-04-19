@@ -79,11 +79,11 @@ const useFilters = ({
   };
 };
 
-export const Filters: React.FC<{ filters: FilterTemplate[] }> = ({ filters }) => {
+export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) => {
   const classes = useStyles();
   const [activeFilters, setActiveFilters] = React.useState<FilterTemplate[]>([]);
-  const [initialFilters, setInitialFilters] = React.useState<FilterTemplate[]>(filters);
-  const [filteredFilters, setFilteredFilters] = React.useState<FilterTemplate[]>(filters);
+  const [initialFilters, setInitialFilters] = React.useState<FilterTemplate[]>(filters ?? []);
+  const [filteredFilters, setFilteredFilters] = React.useState<FilterTemplate[]>(filters ?? []);
   const { anchorEl, handleClick, handleClose, handleMenuItemClick } = useFilters({
     initialFilters,
     setFilteredFilters,
@@ -97,34 +97,40 @@ export const Filters: React.FC<{ filters: FilterTemplate[] }> = ({ filters }) =>
   return (
     <div className={classes.CustomFiltersWrapper}>
       <SearchFilters />
-      <div className={classes.RoundedFiltersWrapper}>
-        <FilterContext.Provider value={{ setActiveFilters, setInitialFilters, filters }}>
-          {activeFilters.length
-            ? renderJsxElements(activeFilters).map(({ Component, props: rest }, index: number) => (
-                <Component key={index} {...rest} />
-              ))
-            : null}
-        </FilterContext.Provider>
-        <StandardButton
-          variant="text"
-          color="secondary"
-          startIcon={<PlusIcon color="var(--primary-button-default)" />}
-          className="filterButton"
-          onClick={handleClick}
-        >
-          Add Filter
-        </StandardButton>
-        <AllFiltersList
-          initialFilters={initialFilters}
-          setFilteredFilters={setFilteredFilters as any}
-          handleMenuItemClick={handleMenuItemClick as any}
-          filteredFilters={filteredFilters}
-          anchorEl={anchorEl}
-          open={open}
-          handleClose={handleClose}
-          activeFilters={activeFilters}
-        />
-      </div>
+      {initialFilters.length ? (
+        <div className={classes.RoundedFiltersWrapper}>
+          <FilterContext.Provider value={{ setActiveFilters, setInitialFilters, filters }}>
+            {activeFilters.length
+              ? renderJsxElements(activeFilters).map(
+                  ({ Component, props: rest }, index: number) => <Component key={index} {...rest} />
+                )
+              : null}
+          </FilterContext.Provider>
+
+          <>
+            {" "}
+            <StandardButton
+              variant="text"
+              color="secondary"
+              startIcon={<PlusIcon color="var(--primary-button-default)" />}
+              className="filterButton"
+              onClick={handleClick}
+            >
+              Add Filter
+            </StandardButton>
+            <AllFiltersList
+              initialFilters={initialFilters}
+              setFilteredFilters={setFilteredFilters as any}
+              handleMenuItemClick={handleMenuItemClick as any}
+              filteredFilters={filteredFilters}
+              anchorEl={anchorEl}
+              open={open}
+              handleClose={handleClose}
+              activeFilters={activeFilters}
+            />
+          </>
+        </div>
+      ) : null}
     </div>
   );
 };

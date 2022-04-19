@@ -1,4 +1,4 @@
-import { ReactChildren, ReactElement, FC } from "react";
+import { ReactChildren } from "react";
 import {
   useListController,
   ReduxState,
@@ -21,6 +21,7 @@ export interface FormProps {
 
 export interface ShowProps {
   resource: string;
+  basePath?: string;
 }
 
 export type ThemeName = string;

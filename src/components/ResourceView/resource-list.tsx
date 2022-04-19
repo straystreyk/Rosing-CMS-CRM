@@ -61,7 +61,7 @@ export const ResourceList: React.FC<ResourcesListProps> = ({
   breadCrumbsOn,
   form = "list",
   toolbar,
-  filters,
+  filters = [],
   children,
   ...props
 }) => {

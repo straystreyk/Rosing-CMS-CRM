@@ -6,6 +6,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { DatagridWrapper } from "./datagrid-wrapper";
 import { TableHead } from "@material-ui/core";
 import { SortIcon } from "../../constants/icons";
+import { CustomDatagridProps } from "./custom-datagrid-types";
 
 const inverseOrder = (sort: string) => (sort === "ASC" ? "DESC" : "ASC");
 
@@ -84,7 +85,7 @@ const MyDatagridRow: React.FC<any> = ({
 );
 
 const MyDatagridBody = (props: any) => <DatagridBody {...props} row={<MyDatagridRow />} />;
-export const DatagridList = (props: any) => (
+export const DatagridList = (props: CustomDatagridProps) => (
   <DatagridWrapper filters={props.filters}>
     <Datagrid header={props.header ?? <DatagridHeader />} {...props} body={<MyDatagridBody />} />
   </DatagridWrapper>

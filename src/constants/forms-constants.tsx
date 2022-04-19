@@ -59,3 +59,8 @@ export const EXTRA_VIDEO_TYPES = [
   { id: "teaser", name: "teaser" },
   { id: "trailer", name: "trailer" },
 ];
+
+export const PUBLISHED_CHOICES_FORM = [
+  { name: "Not published", id: false },
+  { name: "Published", id: true },
+];

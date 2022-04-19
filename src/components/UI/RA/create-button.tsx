@@ -16,6 +16,7 @@ const useStyles = makeStyles({
         paddingLeft: 0,
         textTransform: "none",
         fontFamily: "Gilroy, sans-serif",
+        fontSize: 14,
       },
     },
     "&:focus": {
@@ -38,7 +39,6 @@ interface CreateButtonProps extends CreateButtonPropsRA {
 export const CreateButton: React.FC<CreateButtonProps> = ({
   basePath,
   endIcon,
-  startIcon,
   label,
   to,
   customColor,
