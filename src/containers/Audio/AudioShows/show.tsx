@@ -7,7 +7,7 @@ import { EditButton } from "../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../components/UI/RA/delete-button";
 
 export const Show: React.FC<ShowProps> = (props) => (
-  <DatagridList {...props} optimized rowClick="edit">
+  <DatagridList {...props} empty={<>This section is empty</>} optimized rowClick="edit">
     <TextField source="name" label="Name" />
     <TextField source="position" label="Position" />
     <TextField source="slug" label="Slug" />

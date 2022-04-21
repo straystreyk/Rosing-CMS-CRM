@@ -92,6 +92,16 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     secondDynamicParam: "seriesId",
   },
   {
+    name: "Seasons",
+    href: "/media_content/video/seasons",
+  },
+  {
+    name: "",
+    href: "/media_content/video/seasons/:seasonId",
+    query: GET_ONE_SEASON_NAME,
+    dynamicParam: "seasonId",
+  },
+  {
     name: "New series",
     href: "/media_content/video/series/create",
   },

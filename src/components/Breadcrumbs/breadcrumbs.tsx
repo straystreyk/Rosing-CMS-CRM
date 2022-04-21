@@ -38,6 +38,8 @@ const useBreadcrumbs = () => {
     })
   );
 
+  console.log(params);
+
   React.useEffect(() => {
     let unmounted = false;
     if (Object.keys(params).length) {

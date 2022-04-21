@@ -5,10 +5,8 @@ import { FormTabs } from "../../../components/Tabs/form-tabs";
 import {
   ArrayInputNoDrag,
   AutocompleteArrayInput,
-  formatTimeInput,
   getYearsChoices,
   NumberInput,
-  parseTimeInput,
   ReferenceInput,
   requiredValidate,
   RichTextInput,
@@ -22,9 +20,8 @@ import {
   ALL_PRODUCTION_COUNTRIES,
   ALL_RIGHT_HOLDERS,
 } from "../../../components/Providers/custom-requests";
-import { GroupInputsOrigin } from "../../../components/GroupInputs";
-import { MetaData } from "../../../components/Models/Metadata";
 import { FormSection } from "../../../components/FormSection";
+import { MetaData } from "../../../components/Models/Metadata";
 
 const FIXED_TAB_LABELS = ["Attributes"];
 const INPUT_ITEMS_PER_PAGE = 25;
@@ -183,6 +180,19 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           resource={resource}
           inputType={type}
           helperText="The serial number in the general list of films. Can be entered manually when creating or editing, the positions of the remaining films will be updated accordingly. If the field is left empty, the last sequential number will be assigned to the movie."
+        />
+        <ArrayInputNoDrag
+          resource={resource}
+          inputType={type}
+          helperText={
+            "A pair of custom fields that can be used for filtering. You can add multiple pairs."
+          }
+          ChildComponent={MetaData}
+          source="metadata"
+          label="Metadata"
+          groupInputs
+          switchable
+          fullWidth
         />
       </FormSection>
     </>

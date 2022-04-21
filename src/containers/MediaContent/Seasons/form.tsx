@@ -6,8 +6,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ArrayInputStyles as ArrayInputItemStyles } from "../../../components/Models/CastMembers/styles";
 import { alwaysEmptyString, sanitizeId } from "../../../helpers/form";
 import { RadioButtonGroupInput } from "../../../components/Inputs/RadioButtonGroupInput";
-import { SELECT_DISTRIBUTION } from "../../../constants/forms-constants";
+import { PUBLISHED_CHOICES_FORM } from "../../../constants/forms-constants";
 import { MetaData } from "../../../components/Models/Metadata";
+import { useFormState } from "react-final-form";
 
 const useStyles = makeStyles({
   ArrayInputItemStyles,
@@ -29,8 +30,19 @@ const Season: React.FC<{
   resource: string;
   type: "show" | "create" | "edit";
 }> = ({ parentSourceWithIndex, resource, parentSource, index, ...props }) => {
+  const { seriesId } = useParams<{ seriesId: string }>();
+
   return (
     <>
+      <TextInput
+        resource={resource}
+        inputType={props.type}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.seriesId` : "seriesId"}
+        label="Series id"
+        initialValue={sanitizeId(seriesId)}
+        style={{ display: "none" }}
+        fullWidth
+      />
       <TextInput
         resource={resource}
         label="Name"
@@ -52,7 +64,11 @@ const Season: React.FC<{
         source={parentSourceWithIndex ? `${parentSourceWithIndex}.description` : "description"}
       />
       <RadioButtonGroupInput
-        source="reversedEpisodesOrder"
+        source={
+          parentSourceWithIndex
+            ? `${parentSourceWithIndex}.reversedEpisodesOrder`
+            : "reversedEpisodesOrder"
+        }
         label="Distribution"
         initialValue={false}
         choices={REVERSED_EPISODES_ORDER}
@@ -74,9 +90,11 @@ const Season: React.FC<{
         fullWidth
       />
       <RadioButtonGroupInput
-        source="cmsDistribution"
-        label="Distribution"
-        choices={SELECT_DISTRIBUTION}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.published` : "published"}
+        label="Publishing"
+        initialValue={false}
+        inputType={props.type}
+        choices={PUBLISHED_CHOICES_FORM}
       />
     </>
   );
@@ -84,19 +102,9 @@ const Season: React.FC<{
 
 export const Form: React.FC<FormProps> = ({ resource, type }) => {
   const classes = useStyles();
-  const { seriesId } = useParams<{ seriesId: string }>();
 
   return (
     <>
-      <TextInput
-        resource={resource}
-        inputType={type}
-        source="seriesId"
-        label="Series id"
-        initialValue={sanitizeId(seriesId)}
-        style={{ display: "none" }}
-        fullWidth
-      />
       {type !== "create" && <Season resource={resource} type={type} />}
       {type === "create" && (
         <ArrayInput
