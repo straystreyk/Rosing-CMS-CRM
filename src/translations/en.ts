@@ -130,6 +130,42 @@ export const en: TranslationMessages = {
         edit: "Edit Audio Show",
         list: "Audio",
       },
+      mutations: {
+        create: {
+          success: 'New audio show "%{name}" was created',
+          error: "Cant create audio show: %{error}",
+        },
+        edit: {
+          success: "Audio show was updated",
+          error: "Cant update audio show: %{error}",
+        },
+        list: {
+          success: 'Audio show "%{name}" was successfully updated',
+          error: "Cant update audio show: %{error}",
+        },
+      },
+    },
+    "media_content/audio/audio_shows/:audioShowId/parts": {
+      name: "Part",
+      titles: {
+        create: "New Part",
+        edit: "Edit Part",
+        list: "Parts",
+      },
+      mutations: {
+        create: {
+          success: 'New part "%{name}" was created',
+          error: "Cant create part: %{error}",
+        },
+        edit: {
+          success: "Part was updated",
+          error: "Cant update part: %{error}",
+        },
+        list: {
+          success: 'Part "%{name}" was successfully updated',
+          error: "Cant update part: %{error}",
+        },
+      },
     },
     datacenters: {
       name: "Datacenters",

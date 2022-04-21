@@ -5,10 +5,12 @@ import { DatagridList } from "../../../components/DatagridList";
 import { MoreActionsButton } from "../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../components/UI/RA/delete-button";
+import { EmptyTablePage } from "../../../components/EmptyTablePage";
+import { Record as RecordRA } from "ra-core/esm/types";
 
 export const Show: React.FC<ShowProps> = (props) => (
-  <DatagridList {...props} empty={<>This section is empty</>} optimized rowClick="edit">
-    <TextField source="name" label="Name" />
+  <DatagridList {...props} empty={<EmptyTablePage />} optimized rowClick="edit">
+    <FunctionField label="Name" render={(record?: RecordRA) => record?.name} />
     <TextField source="position" label="Position" />
     <TextField source="slug" label="Slug" />
     <FunctionField

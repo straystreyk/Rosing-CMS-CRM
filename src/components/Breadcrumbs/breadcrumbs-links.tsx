@@ -3,7 +3,8 @@ import { DocumentNode } from "graphql";
 import { GET_ONE_VIDEO_FILE } from "../../containers/MediaContent/VideoFiles/custom-requests";
 import { GET_ONE_SERIES_NAME } from "../../containers/MediaContent/Series/requests";
 import { GET_ONE_SEASON_NAME } from "../../containers/MediaContent/Seasons/requests";
-import { GET_ONE_AUDIO_SHOW } from "../../containers/Audio/AudioShows/requests";
+import { GET_ONE_AUDIO_SHOW_NAME } from "../../containers/Audio/AudioShows/requests";
+import { GET_ONE_PART_NAME } from "../../containers/Audio/Parts/requests";
 
 interface breadcrumbsLinkInterface {
   name: string;
@@ -54,7 +55,20 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     name: "",
     href: "/media_content/audio/audio_shows/:id",
     dynamicParam: "id",
-    query: GET_ONE_AUDIO_SHOW,
+    query: GET_ONE_AUDIO_SHOW_NAME,
+  },
+  {
+    name: "",
+    href: "/media_content/audio/audio_shows/:audioShowId/parts",
+    dynamicParam: "audioShowId",
+    query: GET_ONE_AUDIO_SHOW_NAME,
+  },
+  {
+    name: "",
+    href: "/media_content/audio/audio_shows/:audioShowId/parts/:id",
+    dynamicParam: "id",
+    secondDynamicParam: "audioShowId",
+    query: GET_ONE_PART_NAME,
   },
   {
     name: "Radio",

@@ -1,10 +1,11 @@
 import buildGraphQLProvider, { buildQuery as buildQueryFactory } from "ra-data-graphql-simple";
+import { customParseResponse } from "../../react-admin-overrides";
 
 import { authClient } from "./auth-provider";
 import { GET_ALL_MOVIE, GET_ONE_MOVIE } from "../../containers/MediaContent/Movies/custom-requests";
-import { customParseResponse } from "../../react-admin-overrides";
 import { GET_ALL_SERIES, GET_ONE_SERIES } from "../../containers/MediaContent/Series/requests";
 import { GET_ALL_VIDEO_FILES } from "../../containers/MediaContent/VideoFiles/custom-requests";
+import { GET_ONE_AUDIO_SHOW } from "../../containers/Audio/AudioShows/requests";
 
 const getGqlResource = (resource: string) => {
   switch (resource) {
@@ -28,6 +29,8 @@ const getGqlResource = (resource: string) => {
       return "Season";
     case "media_content/video/series":
       return "Series";
+    case "media_content/audio/audio_shows/:audioShowId/parts":
+      return "Part";
     case "media_content/audio/audio_shows":
       return "AudioShow";
     case "channels":
@@ -84,6 +87,9 @@ const customBuildQuery =
     }
     if (fetchType === "GET_ONE" && resource === "Series") {
       return { ...builtQuery, query: GET_ONE_SERIES };
+    }
+    if (fetchType === "GET_ONE" && resource === "AudioShow") {
+      return { ...builtQuery, query: GET_ONE_AUDIO_SHOW };
     }
 
     return builtQuery;

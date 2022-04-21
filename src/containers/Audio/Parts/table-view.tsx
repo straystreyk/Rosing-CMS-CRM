@@ -1,17 +1,18 @@
 import * as React from "react";
-import { FunctionField, TextField, Record as RecordRA } from "react-admin";
+import { DatagridList } from "../../../components/DatagridList";
 import { EmptyTablePage } from "../../../components/EmptyTablePage";
+import { FunctionField, TextField } from "react-admin";
+import { Record as RecordRA } from "ra-core/esm/types";
 import { MoreActionsButton } from "../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../components/UI/RA/delete-button";
-import { DatagridList } from "../../../components/DatagridList";
 
 interface ShowProps {
   resource: string;
   basePath?: string;
 }
 
-export const Show: React.FC<ShowProps> = (props) => {
+export const TableView: React.FC<ShowProps> = (props) => {
   return (
     <>
       <DatagridList {...props} optimized empty={<EmptyTablePage />}>

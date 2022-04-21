@@ -5,6 +5,7 @@ interface MainLoaderProps {
   size: number | string;
   centered?: boolean;
   flex?: boolean;
+  component?: React.ElementType;
 }
 
 const useStyles = makeStyles({
@@ -17,7 +18,12 @@ const useStyles = makeStyles({
   },
 });
 
-export const MainLoader: React.FC<MainLoaderProps> = ({ size, centered, flex }) => {
+export const MainLoader: React.FC<MainLoaderProps> = ({
+  size,
+  centered,
+  flex,
+  component = "div",
+}) => {
   const classes = useStyles();
 
   return (

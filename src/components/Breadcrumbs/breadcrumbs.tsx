@@ -4,7 +4,7 @@ import { useHistory, Link, useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import { useNotify } from "ra-core";
 
-import { breadcrumbsLinks } from "./breadcrumbs-link";
+import { breadcrumbsLinks } from "./breadcrumbs-links";
 import { sanitizeId } from "../../helpers/form";
 import { authClient } from "../Providers";
 import { BreadcrumbsStyles } from "./syles";
@@ -37,8 +37,6 @@ const useBreadcrumbs = () => {
       return pathname.includes(href);
     })
   );
-
-  console.log(params);
 
   React.useEffect(() => {
     let unmounted = false;

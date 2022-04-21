@@ -1,17 +1,16 @@
-import React from 'react';
-import * as lodash from 'lodash';
-import { Card as MuiCard, CardContent, withStyles } from '@material-ui/core';
+import React from "react";
+import * as lodash from "lodash";
+import { Card as MuiCard, CardContent, withStyles } from "@material-ui/core";
 
-
-const Card = withStyles(theme => ({
+const Card = withStyles((theme) => ({
   root: {
-    [theme.breakpoints.up('md')]: {
-      order: 1, // display on the left rather than on the right of the list
-      maxWidth: '15em',
-      marginLeft: '1em',
+    [theme.breakpoints.up("md")]: {
+      order: 1, // display on the left rather than on the right of the table-view.tsx
+      maxWidth: "15em",
+      marginLeft: "1em",
     },
-    [theme.breakpoints.down('md')]: {
-      display: 'none',
+    [theme.breakpoints.down("md")]: {
+      display: "none",
     },
   },
 }))(MuiCard);

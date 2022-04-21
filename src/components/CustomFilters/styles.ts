@@ -1,6 +1,7 @@
 export const CustomFiltersWrapperStyles: any = {
   CustomFiltersWrapper: {
     padding: "0 20px 0 24px",
+    marginTop: 20,
   },
   RoundedFiltersWrapper: {
     marginBottom: 24,

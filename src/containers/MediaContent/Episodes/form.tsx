@@ -33,8 +33,19 @@ const Episode: React.FC<{
   resource: string;
   inputType: string;
 }> = ({ parentSourceWithIndex, resource, parentSource, index, inputType, ...props }) => {
+  const { seasonId } = useParams<{ seasonId: string }>();
+
   return (
     <>
+      <TextInput
+        resource={resource}
+        inputType={inputType}
+        source={parentSourceWithIndex ? `${parentSourceWithIndex}.seasonId` : "seasonId"}
+        label="Series id"
+        initialValue={sanitizeId(seasonId)}
+        style={{ display: "none" }}
+        fullWidth
+      />
       <TextInput
         resource={resource}
         validate={requiredValidate}
@@ -99,7 +110,6 @@ const Episode: React.FC<{
 export const Form: React.FC<FormProps> = ({ resource, type }) => {
   const formState = useFormState();
   const classes = useStyles();
-  const { seasonId } = useParams<{ seasonId: string }>();
 
   React.useEffect(() => {
     if (formState.submitFailed) {
@@ -109,15 +119,6 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
 
   return (
     <>
-      <TextInput
-        resource={resource}
-        inputType={type}
-        source="seasonId"
-        label="Series id"
-        initialValue={sanitizeId(seasonId)}
-        style={{ display: "none" }}
-        fullWidth
-      />
       {type !== "create" && <Episode resource={resource} inputType={type} />}
       {type === "create" && (
         <ArrayInput

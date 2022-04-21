@@ -22,6 +22,7 @@ import { RadioStationsVariables as radioStations } from "../RadioStations";
 import { AudioShowsVariables as audioShows } from "../Audio/AudioShows";
 import { QuestionsVariables as questions } from "../Questions";
 import { NewsVariables as news } from "../News";
+import { PartVariables as parts } from "../Audio/Parts";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -58,9 +59,9 @@ export const App = () => {
       <Resource name="media_content/video/seasons/:seasonId/episodes" {...episodes} />
       <Resource name="media_content/video/series/:seriesId/seasons" {...seasons} />
       <Resource name="media_content/video/series" {...series} />
-      <Resource name="episodes" {...episodes} />
       <Resource name="genres" {...genres} />
       <Resource name="media_content/radio/radio_stations" {...radioStations} />
+      <Resource name="media_content/audio/audio_shows/:audioShowId/parts" {...parts} />
       <Resource name="media_content/audio/audio_shows" {...audioShows} />
       <Resource name="questions" {...questions} />
       <Resource name="news" {...news} />

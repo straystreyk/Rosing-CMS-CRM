@@ -8,7 +8,6 @@ import { alwaysEmptyString, sanitizeId } from "../../../helpers/form";
 import { RadioButtonGroupInput } from "../../../components/Inputs/RadioButtonGroupInput";
 import { PUBLISHED_CHOICES_FORM } from "../../../constants/forms-constants";
 import { MetaData } from "../../../components/Models/Metadata";
-import { useFormState } from "react-final-form";
 
 const useStyles = makeStyles({
   ArrayInputItemStyles,
