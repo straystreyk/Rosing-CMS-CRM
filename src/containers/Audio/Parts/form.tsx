@@ -110,16 +110,20 @@ const Part: React.FC<{
         inputType={inputType}
         labelPlacement="start"
       />
-      {formState.values.parts[index ?? 0] && formState.values.parts[index ?? 0]["downloadable"] && (
-        <GroupInputsOrigin inputType={inputType}>
-          <NumberInput
-            label="Storage time"
-            helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
-            source={parentSourceWithIndex ? `${parentSourceWithIndex}.storageTime` : "storageTime"}
-            inputType={inputType}
-          />
-        </GroupInputsOrigin>
-      )}
+      {index &&
+        formState.values.parts[index ?? 0] &&
+        formState.values.parts[index ?? 0]["downloadable"] && (
+          <GroupInputsOrigin inputType={inputType}>
+            <NumberInput
+              label="Storage time"
+              helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
+              source={
+                parentSourceWithIndex ? `${parentSourceWithIndex}.storageTime` : "storageTime"
+              }
+              inputType={inputType}
+            />
+          </GroupInputsOrigin>
+        )}
       <RadioButtonGroupInput
         source={parentSourceWithIndex ? `${parentSourceWithIndex}.published` : "published"}
         label="Publishing"
