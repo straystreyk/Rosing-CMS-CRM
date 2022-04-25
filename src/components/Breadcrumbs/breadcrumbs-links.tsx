@@ -71,6 +71,15 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     secondDynamicParam: "audioShowId",
     query: GET_ONE_PART_NAME,
   },
+  // News
+  {
+    name: "News",
+    href: "/media_content/news",
+  },
+  {
+    name: "New News",
+    href: "/media_content/news/create",
+  },
   {
     name: "Radio",
     href: "/media_content/radio",

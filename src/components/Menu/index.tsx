@@ -188,6 +188,17 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           dense={dense}
         />
         <MenuItemLink
+          to={`/media_content/news`}
+          primaryText={translate(`resources.media_content/news.name`, {
+            smart_count: 2,
+          })}
+          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
+          tooltipProps={tooltipProps(translate("resources.media_content/news.name"))}
+          onClick={onMenuClick}
+          sidebarIsOpen={open}
+          dense={dense}
+        />
+        <MenuItemLink
           to={`/genres`}
           primaryText={translate(`resources.genres.name`, {
             smart_count: 2,
@@ -357,18 +368,6 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         leftIcon={<questions.icon />}
         tooltipProps={tooltipProps(translate("resources.questions.name"))}
-        onClick={onMenuClick}
-        sidebarIsOpen={open}
-        dense={dense}
-      />
-      <MenuItemLink
-        to={`/news`}
-        primaryText={translate(`resources.news.name`, {
-          smart_count: 2,
-        })}
-        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-        leftIcon={<news.icon />}
-        tooltipProps={tooltipProps(translate("resources.news.name"))}
         onClick={onMenuClick}
         sidebarIsOpen={open}
         dense={dense}

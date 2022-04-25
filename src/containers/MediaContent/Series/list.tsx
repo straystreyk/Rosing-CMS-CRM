@@ -29,6 +29,7 @@ export const List: React.FC<ShowProps> = (props) => {
       {...props}
     >
       <FunctionField
+        label="Name"
         render={(record?: RecordRA) => (
           <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
             {record?.name}

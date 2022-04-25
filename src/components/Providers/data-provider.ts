@@ -57,7 +57,7 @@ const getGqlResource = (resource: string) => {
       return "Question";
     case "images":
       return "Image";
-    case "news":
+    case "media_content/news":
       return "News";
     case "people":
       return "Person";
@@ -76,8 +76,6 @@ const customBuildQuery =
   (introspection: any) => (fetchType: string, resource: string, params: unknown) => {
     const builtQuery = buildQueryFactory(introspection)(fetchType, resource, params);
     builtQuery.parseResponse = customParseResponse(fetchType);
-
-    console.log(fetchType, resource);
 
     if (fetchType === "GET_ONE" && resource === "Movie") {
       return { ...builtQuery, query: GET_ONE_MOVIE };

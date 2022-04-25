@@ -81,7 +81,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
             variant="text"
             customColor="var(--accent-color)"
           >
-            Seasons ({formState.values["seasons"].length})
+            Seasons ({formState.values.seasons.length})
           </StandardButton>
         )}
       </FormTabs>

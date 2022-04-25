@@ -3,6 +3,7 @@ import { default as RichTextInputDefault } from "ra-input-rich-text";
 import { makeStyles } from "@material-ui/core";
 import { InputProps } from "ra-core";
 import { TextInputShow } from "../StandatdInputs/TextInput/show-view";
+import Quill from "quill";
 import { icons } from "./icons";
 import { RaRichTextInputStyles } from "./styles";
 
@@ -22,31 +23,31 @@ export const RichTextInputOrigin: React.FC<{
   const classes = useStyles();
 
   // needs to override react-admin (quill) default styles
-  const configureQuill = React.useCallback(
-    (quill: {
-      getModule: (module: string) => { controls: [string, HTMLButtonElement][] };
-      container: { parentElement: HTMLDivElement };
-    }) => {
-      const parent = quill.container.parentElement;
-      const controls = quill.getModule("toolbar").controls;
+  const configureQuill: (quill: Quill) => void = React.useCallback((quill) => {
+    const toolbar = quill.getModule("toolbar");
+    const container = (quill as any).container;
+    // this is necessary so that the toolbar is
+    // always at the bottom in the layout
+    container.append(toolbar.container);
+    //
+    const parent = container.parentElement;
+    const controls = toolbar.controls;
 
-      if (controls) {
-        controls.forEach((el) => {
-          const current = icons.find((icon) =>
-            // some icons in quill (like table-view.tsx) got same names
-            // but their values are not the same
-            el[1].value ? icon.name === el[1].value : icon.name === el[0]
-          );
-          if (current) el[1].innerHTML = current.icon;
-        });
-      }
+    if (parent) {
+      parent.className = classes.RaRichTextInput;
+    }
 
-      if (parent) {
-        parent.className = classes.RaRichTextInput;
-      }
-    },
-    []
-  );
+    if (controls) {
+      controls.forEach((el: [string, HTMLButtonElement]) => {
+        const current = icons.find((icon) =>
+          // some icons in quill (like table-view.tsx) got same names
+          // but their values are not the same
+          el[1].value ? icon.name === el[1].value : icon.name === el[0]
+        );
+        if (current) el[1].innerHTML = current.icon;
+      });
+    }
+  }, []);
 
   const loadImage: (input: HTMLInputElement, editor: Element) => void = React.useCallback(
     async (input, editor) => {
@@ -77,6 +78,7 @@ export const RichTextInputOrigin: React.FC<{
   return (
     <RichTextInputDefault
       {...props}
+      helperText={helperText ?? false}
       configureQuill={configureQuill}
       source={source}
       toolbar={{
@@ -104,7 +106,6 @@ export const RichTextInputOrigin: React.FC<{
         theme: "snow",
         placeholder: "",
       }}
-      helperText={helperText ?? false}
     />
   );
 });

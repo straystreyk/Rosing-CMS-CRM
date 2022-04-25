@@ -26,6 +26,7 @@ export const List: React.FC<{ basePath?: string; resource: string }> = (props) =
       rowClick="show"
     >
       <FunctionField
+        label="Name"
         render={(record?: RecordRA) => (
           <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
             {record?.name}

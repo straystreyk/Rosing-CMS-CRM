@@ -6,10 +6,12 @@ export const RaRichTextInputStyles: any = {
     display: "flex",
     flexDirection: "column",
     position: "relative",
-    margin: "8px 0px",
+    marginBottom: 8,
+    paddingTop: 8,
     "& label": labelStyles,
     "& .ql-editor": {
       padding: "8px 12px 50px 12px",
+      backgroundColor: "#fff",
       border: "1px solid var(--secondary-color-default)",
       fontSize: 14,
       borderRadius: 4,
@@ -46,7 +48,11 @@ export const RaRichTextInputStyles: any = {
       },
     },
     "& .MuiFormHelperText-root": {
-      display: "none",
+      color: "var(--secondary-color-default)",
+      margin: 0,
+      fontSize: 12,
+      marginTop: 5,
+      fontFamily: "Gilroy, sans-serif",
     },
     "& .ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button": {
       padding: 0,

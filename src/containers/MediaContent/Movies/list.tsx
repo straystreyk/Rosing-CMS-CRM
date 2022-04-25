@@ -71,7 +71,7 @@ export const List: React.FC<ShowProps> = (props) => {
   }, [notify, props.resource, refresh, data, error]);
 
   return (
-    <DatagridList filters={movieFilters} empty={<EmptyTablePage />} draggable {...props} optimized>
+    <DatagridList filters={movieFilters} empty={<EmptyTablePage />} draggable optimized {...props}>
       <FunctionField
         label="Name"
         render={(record?: RecordRA) => (

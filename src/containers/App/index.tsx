@@ -64,7 +64,7 @@ export const App = () => {
       <Resource name="media_content/audio/audio_shows/:audioShowId/parts" {...parts} />
       <Resource name="media_content/audio/audio_shows" {...audioShows} />
       <Resource name="questions" {...questions} />
-      <Resource name="news" {...news} />
+      <Resource name="media_content/news" {...news} />
       <Resource name="people" />
       <Resource name="castMembers" />
       <Resource name="countries" />

@@ -4,10 +4,8 @@ import Icon from "@material-ui/icons/Announcement";
 import { ResourceCreate, ResourceEdit, ResourceList } from "../../components/ResourceView";
 import { Form } from "./form";
 import { Show } from "./show";
-import { SearchInput } from "../../components/Inputs/search-input";
 
-const resource = "news";
-const filters = [<SearchInput source="name" alwaysOn />];
+const resource = "media_content/news";
 
 export const Create: FC = (props) => (
   <ResourceCreate {...props} resource={resource}>
@@ -20,7 +18,7 @@ export const Edit: FC = (props) => (
   </ResourceEdit>
 );
 export const List: FC = (props) => (
-  <ResourceList {...props} filters={filters} resource={resource}>
+  <ResourceList {...props} resource={resource}>
     <Show resource={resource} />
   </ResourceList>
 );

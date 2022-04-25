@@ -1,20 +1,30 @@
 import * as React from "react";
+import { useNotify } from "ra-core";
+import { TableHead } from "@material-ui/core";
 import { Datagrid, DatagridBody, useListContext, useMutation, useRefresh } from "react-admin";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
+import { makeStyles } from "@material-ui/core";
 
 import { DatagridWrapper } from "./datagrid-wrapper";
-import { TableHead } from "@material-ui/core";
 import { SortIcon } from "../../constants/icons";
 import { CustomDatagridProps } from "./custom-datagrid-types";
-import { useNotify } from "ra-core";
 
 const inverseOrder = (sort: string) => (sort === "ASC" ? "DESC" : "ASC");
 
+const useStyles = makeStyles({
+  TableCheckbox: {
+    "&.MuiTableCell-paddingCheckbox": {
+      padding: "0 12px 0 24px",
+    },
+  },
+});
+
 export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
   const { currentSort, setSort, onSelect, ids, selectedIds, onUnselectItems } = useListContext();
+  const classes = useStyles();
 
   const sort = (source: string) => {
     setSort(source, source === currentSort.field ? inverseOrder(currentSort.order) : "ASC");
@@ -31,7 +41,7 @@ export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
   return (
     <TableHead>
       <TableRow>
-        <TableCell size="small" padding="checkbox">
+        <TableCell className={classes.TableCheckbox} padding="checkbox">
           <Checkbox color="primary" checked={selectedIds === ids} onClick={checkedAll} />
         </TableCell>
         {React.Children.map(children, (child: any) => (
@@ -68,9 +78,11 @@ const MyDatagridRow: React.FC<any> = ({
   selected,
   basePath,
 }) => {
+  const classes = useStyles();
+
   return (
     <TableRow key={id} hover>
-      <TableCell size="small" padding="checkbox">
+      <TableCell className={classes.TableCheckbox} size="small" padding="checkbox">
         <Checkbox
           color="primary"
           checked={selected}
@@ -102,11 +114,17 @@ const MyDatagridRowWithDnd: React.FC<any> = ({
   basePath,
   ids,
 }) => {
+  const classes = useStyles();
+
   return (
     <Draggable key={id} draggableId={id} index={ids.indexOf(id)}>
       {(provided, snapshot) => (
         <TableRow key={id} hover ref={provided.innerRef} {...provided.draggableProps}>
-          <TableCell size="small" padding="checkbox" {...provided.dragHandleProps}>
+          <TableCell
+            className={classes.TableCheckbox}
+            padding="checkbox"
+            {...provided.dragHandleProps}
+          >
             <Checkbox
               color="primary"
               checked={selected}

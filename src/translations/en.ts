@@ -61,12 +61,26 @@ export const en: TranslationMessages = {
         createdAt: "Date of creation",
       },
     },
-    news: {
+    "media_content/news": {
       name: "News",
       titles: {
         create: "New News",
         edit: "Edit News",
         list: "News",
+      },
+      mutations: {
+        create: {
+          success: 'New news "%{name}" was created',
+          error: "Cant create news: %{error}",
+        },
+        edit: {
+          success: "News was updated",
+          error: "Cant update news: %{error}",
+        },
+        list: {
+          success: 'News "%{name}" was successfully updated',
+          error: "Cant update news: %{error}",
+        },
       },
     },
     "media_content/video/movies": {
