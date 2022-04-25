@@ -7,7 +7,7 @@ import { AcceptFilterIcon, CancelFilterIcon, EditIcon } from "../../constants/ic
 import { makeStyles, Tooltip } from "@material-ui/core";
 import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
-import { useRefresh } from "react-admin";
+import { authClient } from "../Providers";
 
 const useStyles = makeStyles((theme) => ({
   ShowWrapper: {
@@ -55,7 +55,7 @@ export const EditInputComponent: React.FC<any> = ({
 }) => {
   const { values } = useFormState();
   const form = useForm();
-  const [mutate, { loading, error }] = useMutation();
+  const [mutate, { loading, error, data }] = useMutation();
   const [showInput, setShowInput] = React.useState(false);
   const [initialValue] = React.useState(values[props.source]);
   const notify = useNotify();
@@ -68,6 +68,12 @@ export const EditInputComponent: React.FC<any> = ({
     }
   }, [error]);
 
+  React.useEffect(() => {
+    if (data) {
+      form.change(props.source, data[props.source]);
+    }
+  }, [data]);
+
   const approve = React.useCallback(async () => {
     await mutate({
       type: "update",
@@ -76,12 +82,12 @@ export const EditInputComponent: React.FC<any> = ({
     });
 
     setShowInput(false);
-  }, [mutate, props.source, values]);
+  }, [props.resource, mutate, props.source, values]);
 
   const cancelEdit = React.useCallback(() => {
     form.change(props.source, initialValue);
     setShowInput(false);
-  }, [form, initialValue]);
+  }, [props.source, form, initialValue]);
 
   return (
     <div

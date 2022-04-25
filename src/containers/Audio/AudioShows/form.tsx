@@ -32,7 +32,7 @@ import {
 } from "../../../components/Providers/custom-requests";
 import { FormSection } from "../../../components/FormSection";
 import { MetaData } from "../../../components/Models/Metadata";
-import { CastMembers } from "../../../components/Models/CastMembers/cast-members";
+import { CastMembers } from "../../../components/Models/CastMembers";
 import { ArrayInputStyles } from "../../../components/Models/CastMembers/styles";
 import { makeStyles } from "@material-ui/core";
 import { RadioButtonGroupInput } from "../../../components/Inputs/RadioButtonGroupInput";

@@ -1,33 +1,19 @@
 import * as React from "react";
 import { TextField, Record as RecordRA } from "react-admin";
-import { EmptyTablePage } from "../../../components/EmptyTablePage";
-import { DatagridList } from "../../../components/DatagridList";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import { FunctionField } from "ra-ui-materialui";
+
+import { EmptyTablePage } from "../../../components/EmptyTablePage";
+import { DatagridList } from "../../../components/DatagridList";
 import { MoreActionsButton } from "../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../components/UI/RA/delete-button";
 import { ReferenceField } from "../../../components/TableFields/reference-field";
 import { videoFilesFilters } from "./videofiles-filter";
+import { TableFieldsStyles } from "../../../components/TableFields/styles";
 
-const useStyles = makeStyles({
-  MoreInfo: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    "& .MoreActionsButtonWrapper": {
-      marginLeft: 15,
-    },
-  },
-  NameField: {
-    textDecoration: "underline",
-    fontSize: 14,
-    lineHeight: "20px",
-  },
-  Empty: {
-    color: "var(--secondary-color-default)",
-  },
-});
+const useStyles = makeStyles(TableFieldsStyles);
 
 export const List: React.FC<{ basePath?: string; resource: string }> = (props) => {
   const classes = useStyles();
@@ -39,7 +25,13 @@ export const List: React.FC<{ basePath?: string; resource: string }> = (props) =
       optimized
       rowClick="show"
     >
-      <TextField label="Name" source="name" className={classes.NameField} />
+      <FunctionField
+        render={(record?: RecordRA) => (
+          <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
+            {record?.name}
+          </Link>
+        )}
+      />
       <TextField label="Streaming UID" source="streamingUid" />
       <ReferenceField
         label="Datacenter"

@@ -3,7 +3,7 @@ import {
   RadioButtonGroupInput as RadioButtonGroupInputRA,
   RadioButtonGroupInputProps as RadioButtonGroupInputPropsRA,
 } from "ra-ui-materialui";
-import { ButtonProps, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { labelStyles } from "../styles";
 import { RadioButtonGroupInputShow } from "./show-view";
 

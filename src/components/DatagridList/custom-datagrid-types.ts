@@ -3,4 +3,5 @@ import { FilterTemplate } from "../CustomFilters/custom-filters-types";
 
 export interface CustomDatagridProps extends DatagridProps {
   filters?: FilterTemplate[];
+  draggable?: boolean;
 }

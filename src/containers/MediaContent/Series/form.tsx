@@ -27,7 +27,7 @@ import {
 } from "../../../components/Providers/custom-requests";
 import { GroupInputsOrigin } from "../../../components/GroupInputs";
 import { MetaData } from "../../../components/Models/Metadata";
-import { CastMembers } from "../../../components/Models/CastMembers/cast-members";
+import { CastMembers } from "../../../components/Models/CastMembers";
 import { makeStyles } from "@material-ui/core";
 import { ArrayInputStyles } from "../../../components/Models/CastMembers/styles";
 import { ImageUploaderV2 } from "../../../components/ImageUploader";

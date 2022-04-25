@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useFormState } from "react-final-form";
+import { AutocompleteArrayInputProps } from "react-admin";
 import { EditInputComponent } from "../../edit-input-component";
 import { makeStyles } from "@material-ui/core";
 import { AutoCompleteInputStyles } from "./styles";
-import { AutocompleteArrayInputProps } from "./type";
 import { AutocompleteArrayInputOrigin } from "./autocomplite-array-input";
 import cn from "classnames";
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FunctionField, TextField, useMutation, useRefresh } from "react-admin";
+import { FunctionField, TextField, UrlField, useMutation, useRefresh } from "react-admin";
 import { EmptyTablePage } from "../../../components/EmptyTablePage";
 import {
   AllowDownload,
@@ -20,25 +20,10 @@ import { Identifier, Record as RecordRA, useNotify } from "ra-core";
 import { DatagridList } from "../../../components/DatagridList";
 import { movieFilters } from "./movie-filters";
 import { ReferenceField } from "../../../components/TableFields/reference-field";
+import { Link } from "react-router-dom";
+import { TableFieldsStyles } from "../../../components/TableFields/styles";
 
-const useStyles = makeStyles({
-  MoreInfo: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    "& .MoreActionsButtonWrapper": {
-      marginLeft: 15,
-    },
-  },
-  NameField: {
-    textDecoration: "underline",
-    fontSize: 14,
-    lineHeight: "20px",
-  },
-  Empty: {
-    color: "var(--secondary-color-default)",
-  },
-});
+const useStyles = makeStyles(TableFieldsStyles);
 
 interface ShowProps {
   resource: string;
@@ -86,8 +71,15 @@ export const List: React.FC<ShowProps> = (props) => {
   }, [notify, props.resource, refresh, data, error]);
 
   return (
-    <DatagridList filters={movieFilters} empty={<EmptyTablePage />} {...props} optimized>
-      <TextField label="Name" source="name" className={classes.NameField} />
+    <DatagridList filters={movieFilters} empty={<EmptyTablePage />} draggable {...props} optimized>
+      <FunctionField
+        label="Name"
+        render={(record?: RecordRA) => (
+          <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
+            {record?.name}
+          </Link>
+        )}
+      />
       <FunctionField
         label="Position"
         source="position"

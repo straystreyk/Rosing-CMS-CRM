@@ -54,6 +54,15 @@ export const ALL_VIDEO_FILES = gql`
   }
 `;
 
+export const ALL_LANGUAGES = gql`
+  query {
+    items: allLanguages {
+      id
+      name
+    }
+  }
+`;
+
 export const GET_ONE_VIDEO_FILE = gql`
   query VideoFile($id: ID!) {
     item: VideoFile(id: $id) {

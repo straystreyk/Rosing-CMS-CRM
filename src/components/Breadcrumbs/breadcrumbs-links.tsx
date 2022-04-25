@@ -1,10 +1,11 @@
-import { GET_ONE_MOVIE_NAME } from "../../containers/MediaContent/Movies/custom-requests";
 import { DocumentNode } from "graphql";
+import { GET_ONE_MOVIE_NAME } from "../../containers/MediaContent/Movies/custom-requests";
 import { GET_ONE_VIDEO_FILE } from "../../containers/MediaContent/VideoFiles/custom-requests";
 import { GET_ONE_SERIES_NAME } from "../../containers/MediaContent/Series/requests";
 import { GET_ONE_SEASON_NAME } from "../../containers/MediaContent/Seasons/requests";
 import { GET_ONE_AUDIO_SHOW_NAME } from "../../containers/Audio/AudioShows/requests";
 import { GET_ONE_PART_NAME } from "../../containers/Audio/Parts/requests";
+import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Episodes/requests";
 
 interface breadcrumbsLinkInterface {
   name: string;
@@ -114,6 +115,13 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     href: "/media_content/video/seasons/:seasonId",
     query: GET_ONE_SEASON_NAME,
     dynamicParam: "seasonId",
+  },
+  {
+    name: "",
+    href: "/media_content/video/seasons/:seasonId/episodes/:id",
+    query: GET_ONE_EPISODE_NAME,
+    secondDynamicParam: "seasonId",
+    dynamicParam: "id",
   },
   {
     name: "New series",

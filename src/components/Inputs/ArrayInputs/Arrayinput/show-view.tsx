@@ -11,6 +11,7 @@ const useStyles = makeStyles({
     width: "100%",
     display: "flex",
     gap: 20,
+    flexWrap: "wrap",
     paddingTop: 20,
   },
   EmptyShow: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
     backgroundColor: "var(--primary-bg)",
     padding: 16,
     display: "flex",
-    width: "33.3333%",
+    width: "calc(33.3333% - 60px)",
     borderRadius: 4,
     "& .personInfo": {
       display: "flex",

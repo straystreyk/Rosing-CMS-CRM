@@ -9,7 +9,7 @@ export const StaticParam: React.FC<{ query: any; variables: {} }> = ({ query, va
     variables,
   });
 
-  if (loading) return <MainLoader centered size={20} />;
+  if (loading) return <MainLoader component="span" display="inline-block" centered size={20} />;
   if (error) {
     return <span>error</span>;
   }

@@ -10,7 +10,6 @@ import {
   DeleteIcon,
   HideIcon,
   PlusIcon,
-  UploadIcon,
 } from "../../../../constants/icons";
 import { useForm, useFormState } from "react-final-form";
 import { SelectButton } from "../../../UI/Buttons/select-button";
@@ -241,6 +240,14 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                                     {...provided.draggableProps}
                                     className={classes.ArrayInputItem}
                                   >
+                                    {/* this one only needs in dev mode
+                                      remove the react dnd err
+                                    */}
+                                    <div
+                                      {...(!draggable && provided.dragHandleProps)}
+                                      style={{ display: "none" }}
+                                    ></div>
+                                    {/* */}
                                     <div
                                       key={index}
                                       className={itemClass}

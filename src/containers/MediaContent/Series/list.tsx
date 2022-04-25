@@ -1,20 +1,25 @@
 import React from "react";
 import { FunctionField, Record, TextField } from "react-admin";
+import { Record as RecordRA } from "ra-core";
+import { makeStyles } from "@material-ui/core";
 
 import { ShowProps } from "../../../types";
 import { EmptyTablePage } from "../../../components/EmptyTablePage";
 import { DatagridList } from "../../../components/DatagridList";
 import { StandardButton } from "../../../components/UI/Buttons/standard-button";
 import { ResourceAddIcon, ResourceCountEpisodesIcon } from "../../../constants/icons";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { MoreActionsButton } from "../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../components/UI/RA/delete-button";
+import { TableFieldsStyles } from "../../../components/TableFields/styles";
 import { seriesFilters } from "./series-filter";
+
+const useStyles = makeStyles(TableFieldsStyles);
 
 export const List: React.FC<ShowProps> = (props) => {
   const history = useHistory();
-
+  const classes = useStyles();
   return (
     <DatagridList
       filters={seriesFilters}
@@ -23,7 +28,13 @@ export const List: React.FC<ShowProps> = (props) => {
       optimized
       {...props}
     >
-      <TextField source="name" label="Name" />
+      <FunctionField
+        render={(record?: RecordRA) => (
+          <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
+            {record?.name}
+          </Link>
+        )}
+      />
       <TextField source="position" label="Position" />
       <TextField source="slug" label="Slug" />
       <FunctionField

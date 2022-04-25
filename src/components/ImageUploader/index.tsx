@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     padding: "24px 8px",
     lineHeight: "20px",
-    "& span": {
+    "& > span:first-child": {
       color: "#005AA3",
       fontWeight: 500,
       marginBottom: 5,
@@ -462,9 +462,11 @@ export const ImageUploaderV2: React.FC<{
               <StaticParam variables={{ name: "max_upload_image_size" }} query={STATIC_PARAM} />
               MB
             </span>
-            Uploaded {size}MB from{" "}
-            <StaticParam variables={{ name: "max_upload_image_size" }} query={STATIC_PARAM} />
-            MB
+            <span>
+              Uploaded {size}MB from{" "}
+              <StaticParam variables={{ name: "max_upload_image_size" }} query={STATIC_PARAM} />
+              MB
+            </span>
           </div>
         )}
         <div className={classes.ImagesSection}>

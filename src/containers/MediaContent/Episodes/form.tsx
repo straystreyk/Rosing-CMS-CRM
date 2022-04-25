@@ -32,77 +32,91 @@ const Episode: React.FC<{
   show?: boolean;
   resource: string;
   inputType: string;
-}> = ({ parentSourceWithIndex, resource, parentSource, index, inputType, ...props }) => {
+}> = ({ parentSourceWithIndex, resource, parentSource, index, show, inputType, ...props }) => {
   const { seasonId } = useParams<{ seasonId: string }>();
+
+  const [showResource, setShowResource] = React.useState(show);
+
+  React.useEffect(() => {
+    setShowResource(show);
+  }, [show]);
 
   return (
     <>
-      <TextInput
-        resource={resource}
-        inputType={inputType}
-        source={parentSourceWithIndex ? `${parentSourceWithIndex}.seasonId` : "seasonId"}
-        label="Series id"
-        initialValue={sanitizeId(seasonId)}
-        style={{ display: "none" }}
-        fullWidth
-      />
-      <TextInput
-        resource={resource}
-        validate={requiredValidate}
-        inputType={inputType}
-        label="Name"
-        source={parentSourceWithIndex ? `${parentSourceWithIndex}.name` : "name"}
-        fullWidth
-        helperText={
-          "The name of the episode that users will see in any sections of the application"
-        }
-      />
-      <TextInput
-        resource={resource}
-        inputType={inputType}
-        label="Slug"
-        source={parentSourceWithIndex ? `${parentSourceWithIndex}.slug` : "slug"}
-        helperText={
-          "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
-        }
-        fullWidth
-      />
-      <TextInput
-        resource={resource}
-        inputType={inputType}
-        source={parentSourceWithIndex ? `${parentSourceWithIndex}.originalName` : "originalName"}
-        label="Original name"
-        helperText={
-          "The original non-localized title of the movie, which users will see only in the description"
-        }
-        fullWidth
-      />
-      <NumberInput
-        resource={resource}
-        inputType={inputType}
-        label="Number"
-        source={parentSourceWithIndex ? `${parentSourceWithIndex}.number` : "number"}
-        fullWidth
-      />
-      <RichTextInput
-        resource={resource}
-        inputType={inputType}
-        label="Description"
-        source={parentSourceWithIndex ? `${parentSourceWithIndex}.description` : "description"}
-      />
-      <TextInput
-        InputLabelProps={INPUT_LABEL_PROPS}
-        resource={resource}
-        parse={parseTimeInput}
-        format={formatTimeInput}
-        inputType={inputType}
-        resettable={false}
-        helperText="Specified in hours and minutes. If you leave the field empty, the duration will be filled in automatically after saving, provided that the video file is specified."
-        label="Duration"
-        source={parentSourceWithIndex ? `${parentSourceWithIndex}.duration` : "duration"}
-        type="time"
-        fullWidth
-      />
+      {index && <div>New episode number {+index + 1}</div>}
+      <div
+        style={{
+          height: !showResource ? 0 : "auto",
+          overflow: !showResource ? "hidden" : "unset",
+        }}
+      >
+        <TextInput
+          resource={resource}
+          inputType={inputType}
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.seasonId` : "seasonId"}
+          label="Series id"
+          initialValue={sanitizeId(seasonId)}
+          style={{ display: "none" }}
+          fullWidth
+        />
+        <TextInput
+          resource={resource}
+          validate={requiredValidate}
+          inputType={inputType}
+          label="Name"
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.name` : "name"}
+          fullWidth
+          helperText={
+            "The name of the episode that users will see in any sections of the application"
+          }
+        />
+        <TextInput
+          resource={resource}
+          inputType={inputType}
+          label="Slug"
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.slug` : "slug"}
+          helperText={
+            "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
+          }
+          fullWidth
+        />
+        <TextInput
+          resource={resource}
+          inputType={inputType}
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.originalName` : "originalName"}
+          label="Original name"
+          helperText={
+            "The original non-localized title of the movie, which users will see only in the description"
+          }
+          fullWidth
+        />
+        <NumberInput
+          resource={resource}
+          inputType={inputType}
+          label="Number"
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.number` : "number"}
+          fullWidth
+        />
+        <RichTextInput
+          resource={resource}
+          inputType={inputType}
+          label="Description"
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.description` : "description"}
+        />
+        <TextInput
+          InputLabelProps={INPUT_LABEL_PROPS}
+          resource={resource}
+          parse={parseTimeInput}
+          format={formatTimeInput}
+          inputType={inputType}
+          resettable={false}
+          helperText="Specified in hours and minutes. If you leave the field empty, the duration will be filled in automatically after saving, provided that the video file is specified."
+          label="Duration"
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.duration` : "duration"}
+          type="time"
+          fullWidth
+        />
+      </div>
     </>
   );
 };

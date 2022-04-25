@@ -6,6 +6,7 @@ interface MainLoaderProps {
   centered?: boolean;
   flex?: boolean;
   component?: React.ElementType;
+  display?: string;
 }
 
 const useStyles = makeStyles({
@@ -22,12 +23,15 @@ export const MainLoader: React.FC<MainLoaderProps> = ({
   size,
   centered,
   flex,
-  component = "div",
+  display = "inherit",
+  component: Component = "div",
 }) => {
   const classes = useStyles();
 
   return (
-    <div style={{ display: flex ? "flex" : "inherit", margin: centered ? "0 auto" : "5px 0px" }}>
+    <Component
+      style={{ display: flex ? "flex" : display, margin: centered ? "0 auto" : "5px 0px" }}
+    >
       <div
         style={{
           width: size,
@@ -62,6 +66,6 @@ export const MainLoader: React.FC<MainLoaderProps> = ({
           </defs>
         </svg>
       </div>
-    </div>
+    </Component>
   );
 };

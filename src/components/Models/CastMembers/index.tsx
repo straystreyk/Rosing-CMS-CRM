@@ -2,12 +2,9 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 
-import { NumberInput, TextInput } from "../../Inputs";
+import { NumberInput, ReferenceInput, SelectInput, TextInput } from "../../Inputs";
 import { GroupInputsOrigin } from "../../GroupInputs";
 import { ImageUploaderV2 } from "../../ImageUploader";
-import { ReferenceCustomInput } from "../../Inputs/ReferenceInputs/reference-custom-input";
-import { ALL_PEOPLE } from "../../Providers/custom-requests";
-import { SelectInputOrigin } from "../../Inputs/StandatdInputs/SelectInput/select-input";
 import { TextInputOrigin } from "../../Inputs/StandatdInputs/TextInput/text-input";
 import { NumberInputOrigin } from "../../Inputs/StandatdInputs/NumberInput/numdber-input";
 
@@ -34,6 +31,8 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
 });
+
+const INPUT_ITEMS_PER_PAGE = 25;
 
 export const CastMembers: React.FC<{
   parentSource: string;
@@ -95,17 +94,21 @@ export const CastMembers: React.FC<{
             fullWidth
           />
         )}
-        <ReferenceCustomInput
-          source={`${parentSourceWithIndex}.person.id`}
-          component={SelectInputOrigin}
-          inputType="create"
-          resource={resource}
-          query={ALL_PEOPLE}
-          name="fullName"
+        <ReferenceInput
           label="Person"
-          idName="id"
-          fullWidth
-        />
+          source={`${parentSourceWithIndex}.person.id`}
+          reference="people"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <SelectInput
+            onChange={() => console.log("sads")}
+            resource={resource}
+            optionText="fullName"
+            inputType="create"
+            fullWidth
+          />
+        </ReferenceInput>
         <ImageUploaderV2
           wrapperClassName={classes.CastMemberImagesWrapper}
           sourceIds={`${parentSourceWithIndex}.person.imageIds`}

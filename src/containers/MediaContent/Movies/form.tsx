@@ -30,14 +30,8 @@ import {
 } from "../../../constants/forms-constants";
 import { FormSection } from "../../../components/FormSection";
 import { ReferenceCustomInput } from "../../../components/Inputs/ReferenceInputs/reference-custom-input";
-import {
-  ALL_COUNTRIES,
-  ALL_GENRES,
-  ALL_PRODUCTION_COUNTRIES,
-  ALL_RIGHT_HOLDERS,
-  ALL_ROLES,
-} from "../../../components/Providers/custom-requests";
-import { CastMembers } from "../../../components/Models/CastMembers/cast-members";
+import { ALL_COUNTRIES, ALL_ROLES } from "../../../components/Providers/custom-requests";
+import { CastMembers } from "../../../components/Models/CastMembers";
 import { Link } from "ra-ui-materialui";
 import { ArrayInputStyles } from "../../../components/Models/CastMembers/styles";
 import { MetaData } from "../../../components/Models/Metadata";
@@ -47,6 +41,7 @@ import { scrollToErrorInput } from "../../../helpers/form";
 import { CheckBoxGroup } from "../../../components/UI/MaterialUI/check-box-group";
 import { SwitchInput } from "../../../components/Inputs/SwitchInput";
 import { RadioButtonGroupInput } from "../../../components/Inputs/RadioButtonGroupInput";
+import { ReferenceArrayInput } from "../../../components/Inputs/ReferenceInputs/reference-array-input";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -138,7 +133,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           type="date"
           fullWidth
         />
-        <ReferenceInput
+        <ReferenceArrayInput
           label="Languages"
           source="languagesIds"
           reference="languages"
@@ -147,32 +142,42 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         >
           <AutocompleteArrayInput
             optionText="name"
-            resource={resource}
             optionValue="id"
+            resource={resource}
             inputType={type}
             helperText="The language of the movie's audio track. You can select multiple languages from the list."
           />
-        </ReferenceInput>
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
-          inputType={type}
-          resource={resource}
-          query={ALL_GENRES}
-          helperText="You can select several genres from the list"
-          source="genreIds"
+        </ReferenceArrayInput>
+        <ReferenceArrayInput
           label="Genres"
-          idName="id"
-        />
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
-          inputType={type}
-          query={ALL_PRODUCTION_COUNTRIES}
+          source="genreIds"
+          reference="genres"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            optionValue="id"
+            resource={resource}
+            inputType={type}
+            helperText="You can select several genres from the list"
+          />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput
           label="Production countries"
           source="productionCountriesIds"
-          helperText="You can select several countries from the list"
+          reference="production_countries"
           resource={resource}
-          idName="id"
-        />
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            optionValue="id"
+            resource={resource}
+            inputType={type}
+            helperText="You can select several countries from the list"
+          />
+        </ReferenceArrayInput>
         <TextInput
           InputLabelProps={INPUT_LABEL_PROPS}
           resource={resource}
@@ -187,17 +192,20 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           type="time"
           fullWidth
         />
-        <ReferenceCustomInput
-          component={SelectInput}
-          query={ALL_RIGHT_HOLDERS}
-          inputType={type}
-          resource={resource}
+        <ReferenceInput
           label="Right Holder"
           source="rightHolderId"
-          idName="id"
-          helperText="The company - the copyright holder of the film"
-        />
-        <ReferenceInput
+          reference="right_holders"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <SelectInput
+            resource={resource}
+            inputType={type}
+            helperText="The company - the copyright holder of the film"
+          />
+        </ReferenceInput>
+        <ReferenceArrayInput
           label="Studios"
           source="studioIds"
           reference="studios"
@@ -210,7 +218,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
             resource={resource}
             helperText="A film production or rental company. You can select several studios from the list."
           />
-        </ReferenceInput>
+        </ReferenceArrayInput>
         <ReferenceInput
           label="External catalog"
           source="externalCatalogId"

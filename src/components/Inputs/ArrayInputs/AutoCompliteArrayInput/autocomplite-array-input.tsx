@@ -1,9 +1,10 @@
 import * as React from "react";
-import cn from "classnames";
-import { AutocompleteArrayInput as StandardAutocompleteArrayInput } from "react-admin";
+import {
+  AutocompleteArrayInput as StandardAutocompleteArrayInput,
+  AutocompleteArrayInputProps,
+} from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
-import { AutocompleteArrayInputProps } from "./type";
 import { AutoCompleteInputStyles } from "./styles";
 import { AutoCompleteArrayInputShow } from "./show-view";
 
