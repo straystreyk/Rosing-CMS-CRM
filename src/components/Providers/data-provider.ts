@@ -2,7 +2,11 @@ import buildGraphQLProvider, { buildQuery as buildQueryFactory } from "ra-data-g
 import { customParseResponse } from "../../react-admin-overrides";
 
 import { authClient } from "./auth-provider";
-import { GET_ALL_MOVIE, GET_ONE_MOVIE } from "../../containers/MediaContent/Movies/custom-requests";
+import {
+  GET_ALL_MOVIE,
+  GET_ONE_MOVIE,
+  UPDATE_MOVIE,
+} from "../../containers/MediaContent/Movies/custom-requests";
 import { GET_ALL_SERIES, GET_ONE_SERIES } from "../../containers/MediaContent/Series/requests";
 import { GET_ALL_VIDEO_FILES } from "../../containers/MediaContent/VideoFiles/custom-requests";
 import { GET_ONE_AUDIO_SHOW } from "../../containers/Audio/AudioShows/requests";
@@ -73,11 +77,16 @@ const customBuildQuery =
     const builtQuery = buildQueryFactory(introspection)(fetchType, resource, params);
     builtQuery.parseResponse = customParseResponse(fetchType);
 
+    console.log(fetchType, resource);
+
     if (fetchType === "GET_ONE" && resource === "Movie") {
       return { ...builtQuery, query: GET_ONE_MOVIE };
     }
     if (fetchType === "GET_LIST" && resource === "Movie") {
       return { ...builtQuery, query: GET_ALL_MOVIE };
+    }
+    if (fetchType === "UPDATE" && resource === "Movie") {
+      return { ...builtQuery, query: UPDATE_MOVIE };
     }
     if (fetchType === "GET_LIST" && resource === "Series") {
       return { ...builtQuery, query: GET_ALL_SERIES };

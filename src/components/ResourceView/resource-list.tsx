@@ -65,7 +65,7 @@ export const ResourceList: React.FC<ResourcesListProps> = ({
   children,
   ...props
 }) => {
-  const [filter, setFilter] = React.useState<object>(permanentFilter ?? {});
+  const [filter, setFilter] = React.useState<Record<string, any>>(permanentFilter ?? {});
   const classes = useStyles();
 
   return (

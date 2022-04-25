@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     position: "relative",
   },
   LoaderWrapper: {
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

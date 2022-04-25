@@ -7,7 +7,6 @@ import { AcceptFilterIcon, CancelFilterIcon, EditIcon } from "../../constants/ic
 import { makeStyles, Tooltip } from "@material-ui/core";
 import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
-import { authClient } from "../Providers";
 
 const useStyles = makeStyles((theme) => ({
   ShowWrapper: {
@@ -62,17 +61,19 @@ export const EditInputComponent: React.FC<any> = ({
   const classes = useStyles();
 
   React.useEffect(() => {
+    if (data) {
+      form.change(props.source, data[props.source]);
+      notify(`resources.${props.resource}.mutations.list.success`, {
+        type: "success",
+        messageArgs: { name: data.name },
+      });
+    }
+
     if (error) {
       notify(error.message, { type: "error" });
       form.change(props.source, initialValue);
     }
-  }, [error]);
-
-  React.useEffect(() => {
-    if (data) {
-      form.change(props.source, data[props.source]);
-    }
-  }, [data]);
+  }, [error, data]);
 
   const approve = React.useCallback(async () => {
     await mutate({
@@ -108,7 +109,9 @@ export const EditInputComponent: React.FC<any> = ({
           draggable={props.draggable ?? false}
         />
       )}
-      {ComponentShow && !showInput && <ComponentShow {...props} label={props.label} />}
+      {ComponentShow && !showInput && (
+        <ComponentShow newData={data && data[props.source]} {...props} label={props.label} />
+      )}
       {showInput ? (
         <div className={classes.ShowEditButtonsWrapper}>
           <StandardButton

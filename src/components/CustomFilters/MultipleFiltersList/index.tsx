@@ -20,7 +20,7 @@ export const MultipleFiltersList: React.FC<ChoicesCustomFilter> = ({
     rest.choices ?? []
   );
 
-  const { anchorEl, handleClick, handleClose, deleteFilter, handleMenuItemClick } =
+  const { anchorEl, handleClick, handleClose, deleteFilter, handleMenuItemClick, loading } =
     useMultipleFiltersList({
       setChoices,
       setFilteredFilters,
@@ -33,7 +33,8 @@ export const MultipleFiltersList: React.FC<ChoicesCustomFilter> = ({
 
   const open = Boolean(anchorEl);
 
-  if (!choices || !choices.length) return <MainLoader size={LOADER_SIZE} />;
+  if (loading) return <MainLoader size={LOADER_SIZE} />;
+  if (!choices || !choices.length) return <span>No filters</span>;
 
   return (
     <>

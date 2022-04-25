@@ -27,6 +27,7 @@ export const useMultipleFiltersList = ({
   source,
 }: UseMultipleFiltersListProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [loading, setLoading] = React.useState(false);
   const { filterValues, displayedFilters, setFilters } = useListContext();
   const notify = useNotify();
 
@@ -75,6 +76,7 @@ export const useMultipleFiltersList = ({
     let unmounted = false;
 
     try {
+      setLoading(true);
       const getChoices = async () => {
         const res = await authClient.query({
           query,
@@ -93,6 +95,8 @@ export const useMultipleFiltersList = ({
       if (e instanceof Error) {
         notify(e.message);
       }
+    } finally {
+      setLoading(false);
     }
 
     return () => {
@@ -114,5 +118,6 @@ export const useMultipleFiltersList = ({
     deleteFilter,
     anchorEl,
     handleMenuItemClick,
+    loading,
   };
 };

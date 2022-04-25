@@ -93,13 +93,16 @@ export const EmptyShow: React.FC = () => {
   );
 };
 
-const ShowView: React.FC<ArrayInputProps> = ({ source }) => {
+interface ShowViewProps extends ArrayInputProps {}
+
+const ShowView: React.FC<ShowViewProps> = ({ source }) => {
   const { values } = useFormState();
+  const data = values[source];
   const classes = useStyles();
 
   return (
     <>
-      {values[source] && values[source].length ? (
+      {data && data.length ? (
         <div className={classes.CastMembersShowWrapper}>
           {values[source].map((el: any, index: number) => {
             return (
