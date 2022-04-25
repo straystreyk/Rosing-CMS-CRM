@@ -87,7 +87,7 @@ export const ResourceTitle: React.FC<TitleProps> = ({
         {form === "show" && (
           <div className={classes.topTitleWrapper}>
             <span className="time">
-              <TimeIcon color="#005AA3" />
+              {(date || time) && <TimeIcon color="#005AA3" />}
               {date && `${date}`}
               {time && `, ${time}`}
             </span>

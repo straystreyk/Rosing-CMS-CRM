@@ -10,6 +10,7 @@ import {
 import { GET_ALL_SERIES, GET_ONE_SERIES } from "../../containers/MediaContent/Series/requests";
 import { GET_ALL_VIDEO_FILES } from "../../containers/MediaContent/VideoFiles/custom-requests";
 import { GET_ONE_AUDIO_SHOW } from "../../containers/Audio/AudioShows/requests";
+import { GET_ONE_NEWS } from "../../containers/MediaContent/News/requests";
 
 const getGqlResource = (resource: string) => {
   switch (resource) {
@@ -97,6 +98,9 @@ const customBuildQuery =
     }
     if (fetchType === "GET_ONE" && resource === "AudioShow") {
       return { ...builtQuery, query: GET_ONE_AUDIO_SHOW };
+    }
+    if (fetchType === "GET_ONE" && resource === "News") {
+      return { ...builtQuery, query: GET_ONE_NEWS };
     }
 
     return builtQuery;

@@ -7,7 +7,6 @@ import {
 } from "../../../components/CustomFilters/constants";
 import { MultipleFiltersList } from "../../../components/CustomFilters/MultipleFiltersList";
 import { ALL_GENRES_FILTER } from "../../../components/Providers/custom-requests";
-import { DateFilter } from "../../../components/CustomFilters/DateFilter";
 import { FilterTemplate } from "../../../components/CustomFilters/custom-filters-types";
 
 export const movieFilters: FilterTemplate[] = [

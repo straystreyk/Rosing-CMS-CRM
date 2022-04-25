@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormProps } from "../../types";
+import { FormProps } from "../../../types";
 import {
   ArrayInputNoDrag,
   AutocompleteArrayInput,
@@ -7,20 +7,31 @@ import {
   requiredValidate,
   RichTextInput,
   TextInput,
-} from "../../components/Inputs";
-import { FormTabs } from "../../components/Tabs/form-tabs";
-import { FormSection } from "../../components/FormSection";
-import { ReferenceArrayInput } from "../../components/Inputs/ReferenceInputs/reference-array-input";
-import { PUBLISHED_CHOICES_FORM, SELECT_MARKERS } from "../../constants/forms-constants";
-import { GroupInputsOrigin } from "../../components/GroupInputs";
-import { MetaData } from "../../components/Models/Metadata";
-import { ImageUploaderV2 } from "../../components/ImageUploader";
-import { RadioButtonGroupInput } from "../../components/Inputs/RadioButtonGroupInput";
+} from "../../../components/Inputs";
+import { FormTabs } from "../../../components/Tabs/form-tabs";
+import { FormSection } from "../../../components/FormSection";
+import { ReferenceArrayInput } from "../../../components/Inputs/ReferenceInputs/reference-array-input";
+import { PUBLISHED_CHOICES_FORM, SELECT_MARKERS } from "../../../constants/forms-constants";
+import { GroupInputsOrigin } from "../../../components/GroupInputs";
+import { MetaData } from "../../../components/Models/Metadata";
+import { ImageUploaderV2 } from "../../../components/ImageUploader";
+import { RadioButtonGroupInput } from "../../../components/Inputs/RadioButtonGroupInput";
+import { useFormState } from "react-final-form";
+import { scrollToErrorInput } from "../../../helpers/form";
 
 const FIXED_TAB_LABELS = ["Attributes", "Images", "Terms of publication"];
 const INPUT_ITEMS_PER_PAGE = 25;
+const FIXED_HEADER_OFFSET = 130;
 
 export const Form: React.FC<FormProps> = ({ resource, type }) => {
+  const formState = useFormState();
+
+  React.useEffect(() => {
+    if (formState.submitFailed) {
+      scrollToErrorInput(FIXED_HEADER_OFFSET);
+    }
+  }, [formState.submitFailed]);
+
   return (
     <>
       <FormTabs labels={FIXED_TAB_LABELS} />
@@ -54,9 +65,11 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
         <RichTextInput
           resource={resource}
           inputType={type}
-          label="Description"
-          source="description"
+          label="Body (Description)"
+          source="bodyTemplate"
+          validate={requiredValidate}
         />
+        <RichTextInput resource={resource} inputType={type} label="Body text" source="bodyText" />
         <ReferenceArrayInput
           label="Languages"
           source="languagesIds"
@@ -110,6 +123,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           <TextInput
             label="Seo keywords"
             source="seoKeywords"
+            inputType={type}
             helperText="Keywords optimized for search engines that are used in the HTML markup of the page. To separate words, use a comma with a space."
             fullWidth
           />

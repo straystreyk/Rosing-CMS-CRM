@@ -6,6 +6,7 @@ import { GET_ONE_SEASON_NAME } from "../../containers/MediaContent/Seasons/reque
 import { GET_ONE_AUDIO_SHOW_NAME } from "../../containers/Audio/AudioShows/requests";
 import { GET_ONE_PART_NAME } from "../../containers/Audio/Parts/requests";
 import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Episodes/requests";
+import { GET_ONE_NEWS_NAME } from "../../containers/MediaContent/News/requests";
 
 interface breadcrumbsLinkInterface {
   name: string;
@@ -79,6 +80,12 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
   {
     name: "New News",
     href: "/media_content/news/create",
+  },
+  {
+    name: "",
+    href: "/media_content/news/:id",
+    dynamicParam: "id",
+    query: GET_ONE_NEWS_NAME,
   },
   {
     name: "Radio",

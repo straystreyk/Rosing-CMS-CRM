@@ -8,7 +8,12 @@ export const RaRichTextInputStyles: any = {
     position: "relative",
     marginBottom: 8,
     paddingTop: 8,
-    "& label": labelStyles,
+    "& label": {
+      ...labelStyles,
+      "&.Mui-error + div > .ql-editor": {
+        borderColor: "#D21C1C",
+      },
+    },
     "& .ql-editor": {
       padding: "8px 12px 50px 12px",
       backgroundColor: "#fff",
@@ -53,6 +58,9 @@ export const RaRichTextInputStyles: any = {
       fontSize: 12,
       marginTop: 5,
       fontFamily: "Gilroy, sans-serif",
+      "&.Mui-error": {
+        color: "#D21C1C",
+      },
     },
     "& .ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button": {
       padding: 0,

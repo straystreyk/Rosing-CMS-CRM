@@ -78,6 +78,7 @@ export const RichTextInputOrigin: React.FC<{
   return (
     <RichTextInputDefault
       {...props}
+      isRequired={true}
       helperText={helperText ?? false}
       configureQuill={configureQuill}
       source={source}

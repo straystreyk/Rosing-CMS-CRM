@@ -21,7 +21,7 @@ import { ChannelVersions as channelVersions } from "../ChannelVersions";
 import { RadioStationsVariables as radioStations } from "../RadioStations";
 import { AudioShowsVariables as audioShows } from "../Audio/AudioShows";
 import { QuestionsVariables as questions } from "../Questions";
-import { NewsVariables as news } from "../News";
+import { NewsVariables as news } from "../MediaContent/News";
 import { PartVariables as parts } from "../Audio/Parts";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";

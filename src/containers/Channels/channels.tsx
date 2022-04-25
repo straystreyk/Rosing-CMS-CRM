@@ -22,7 +22,7 @@ export const List: FC = (props) => (
   </ResourceList>
 );
 // if u need sidebar filters u must do this
-// <ResourceList {...props} sideFilters={sideFilters} filters={filters} resource={resource}><Show
+// <ResourceList {...props} sideFilters={sideFilters} filters={filters} resource={resource}><TableView
 //   resource={resource} /></ResourceList>;
 export const Edit: FC = (props) => (
   <ResourceEdit {...props} resource={resource}>
