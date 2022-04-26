@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 import { TextInputStyles } from "../TextInput/styles";
 import { NumberInputOrigin } from "./numdber-input";
-import { formatTimeInput } from "../../index";
 
 const useStyles = makeStyles({
   TextInputStyles,
