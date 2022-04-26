@@ -129,11 +129,35 @@ export const en: TranslationMessages = {
       },
     },
     "media_content/radio/radio_stations": {
-      name: "Radio Stations",
+      name: "Radio stations",
+      menu_name: "Radio",
       titles: {
-        create: "New Radio Station",
-        edit: "Edit Radio Station",
-        list: "Radio Stations",
+        create: "New Radio station",
+        edit: "Edit Radio station",
+        list: "Radio",
+      },
+    },
+    "media_content/radio/radio_live_streams": {
+      name: "Radio live streams",
+      menu_name: "Radio",
+      titles: {
+        create: "New radio live stream",
+        edit: "Edit radio live stream",
+        list: "Radio",
+      },
+      mutations: {
+        create: {
+          success: 'New audio live stream "%{name}" was created',
+          error: "Cant create audio live stream: %{error}",
+        },
+        edit: {
+          success: "Audio live stream was updated",
+          error: "Cant update audio live stream: %{error}",
+        },
+        list: {
+          success: 'Audio live stream "%{name}" was successfully updated',
+          error: "Cant update audio live stream: %{error}",
+        },
       },
     },
     "media_content/audio/audio_shows": {

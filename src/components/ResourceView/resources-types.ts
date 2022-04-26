@@ -9,6 +9,5 @@ export interface ResourcesListProps extends Omit<ListProps, "resource"> {
   offTitle?: boolean;
   breadCrumbsOn?: boolean;
   form?: "create" | "edit" | "show" | "list";
-  toolbar?: any;
   children: ReactElement<any, string | JSXElementConstructor<any>>;
 }

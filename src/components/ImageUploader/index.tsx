@@ -21,7 +21,7 @@ import { InfoComponent } from "../UI/Info/info-component";
 import { MainLoader } from "../MainLoader";
 import { useImageItem } from "../../custom-hooks/image-uploader";
 import { Slider } from "../Slider";
-import { GET_IMAGES_TYPES } from "./image-requests";
+import { GET_IMAGES_TYPES } from "./requests";
 import { STATIC_PARAM } from "../Providers/custom-requests";
 import { StaticParam } from "../StaticParam";
 import { useMutation } from "react-admin";
@@ -205,6 +205,7 @@ interface ImageItemProps extends ImageProps {
   setShowSlider: any;
   source: string;
   serverImages: ImageProps[];
+  requestVariables: Record<string, string>;
 }
 
 const ImageItem: React.FC<ImageItemProps> = React.memo(
@@ -216,6 +217,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
     file,
     id,
     index,
+    requestVariables,
     source,
     setShowSlider,
     size,
@@ -226,15 +228,18 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
     const [imageType, setImageType] = React.useState(kind);
     const [imageName, setImageName] = React.useState(name);
     const [imageSize, setImageSize] = React.useState(size);
-    const [mutate, { loading, error }] = useMutation();
+    const [mutate] = useMutation();
 
-    const approve = React.useCallback((imageType: string) => {
-      mutate({
-        type: "update",
-        resource: "images",
-        payload: { id, data: { kind: imageType } },
-      });
-    }, []);
+    const approve = React.useCallback(
+      (imageType: string) => {
+        mutate({
+          type: "update",
+          resource: "images",
+          payload: { id, data: { kind: imageType } },
+        });
+      },
+      [id, mutate]
+    );
 
     const { isLoading, url, onDrop, deleteImage, imageId, setIsLoading } = useImageItem({
       imageType,
@@ -350,9 +355,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
               pushResource={changeType}
               setServerImages={setServerImages}
               images={serverImages}
-              variables={
-                source.includes("castMember") ? { fieldName: "Person" } : { fieldName: "Movie" }
-              }
+              variables={requestVariables}
               query={GET_IMAGES_TYPES}
             />
             {imageSize && (
@@ -374,8 +377,19 @@ export const ImageUploaderV2: React.FC<{
   wrapperClassName?: string;
   inputType: string;
   index?: string;
+  requestVariables: Record<string, string>;
 }> = React.memo(
-  ({ resource, children, source, index, wrapperClassName, sourceIds, inputType, ...props }) => {
+  ({
+    resource,
+    children,
+    source,
+    index,
+    wrapperClassName,
+    sourceIds,
+    inputType,
+    requestVariables,
+    ...props
+  }) => {
     const { values } = useFormState();
     const classes = useStyles();
     const notify = useNotify();
@@ -383,6 +397,7 @@ export const ImageUploaderV2: React.FC<{
     const [mutate, { loading, error }] = useMutation();
     const [edit, setEdit] = React.useState(inputType !== "show");
     const [showSlider, setShowSlider] = React.useState(false);
+    const [initialValue] = React.useState(values[source]);
 
     let allImages: ImageProps[] | [];
     const getAllImages = React.useCallback(() => {
@@ -428,6 +443,11 @@ export const ImageUploaderV2: React.FC<{
       [serverImages.length, setServerImages]
     );
 
+    const cancel = React.useCallback(() => {
+      setServerImages(initialValue);
+      setEdit(false);
+    }, [initialValue]);
+
     React.useEffect(() => {
       form.change(sourceIds, imageIds);
     }, [form, imageIds, sourceIds]);
@@ -435,7 +455,7 @@ export const ImageUploaderV2: React.FC<{
     React.useEffect(() => {
       if (allImages && allImages.length) {
         allImages = getAllImages();
-        setServerImages(() => allImages);
+        setServerImages(allImages);
       }
     }, [values[source]]);
 
@@ -486,7 +506,7 @@ export const ImageUploaderV2: React.FC<{
                 color="secondary"
                 variant="text"
                 startIcon={<CancelFilterIcon color="#005AA3" />}
-                onClick={() => setEdit(false)}
+                onClick={cancel}
               >
                 Cancel
               </StandardButton>
@@ -517,6 +537,7 @@ export const ImageUploaderV2: React.FC<{
                     index={index}
                     key={index}
                     edit={edit}
+                    requestVariables={requestVariables}
                     setImageIds={setImageIds}
                     setServerImages={setServerImages}
                     setShowSlider={setShowSlider}
@@ -532,9 +553,7 @@ export const ImageUploaderV2: React.FC<{
               pushResource={pushResource}
               images={serverImages}
               setServerImages={setServerImages}
-              variables={
-                source.includes("castMember") ? { fieldName: "Person" } : { fieldName: "Movie" }
-              }
+              variables={requestVariables}
               query={GET_IMAGES_TYPES}
             />
           )}

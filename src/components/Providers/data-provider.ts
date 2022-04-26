@@ -6,10 +6,14 @@ import {
   GET_ALL_MOVIE,
   GET_ONE_MOVIE,
   UPDATE_MOVIE,
-} from "../../containers/MediaContent/Movies/custom-requests";
-import { GET_ALL_SERIES, GET_ONE_SERIES } from "../../containers/MediaContent/Series/requests";
-import { GET_ALL_VIDEO_FILES } from "../../containers/MediaContent/VideoFiles/custom-requests";
-import { GET_ONE_AUDIO_SHOW } from "../../containers/Audio/AudioShows/requests";
+} from "../../containers/MediaContent/Video/Movies/custom-requests";
+import {
+  GET_ALL_SERIES,
+  GET_ONE_SERIES,
+  UPDATE_SERIES,
+} from "../../containers/MediaContent/Video/Series/requests";
+import { GET_ALL_VIDEO_FILES } from "../../containers/MediaContent/Video/VideoFiles/custom-requests";
+import { GET_ONE_AUDIO_SHOW } from "../../containers/MediaContent/Audio/AudioShows/requests";
 import { GET_ONE_NEWS } from "../../containers/MediaContent/News/requests";
 
 const getGqlResource = (resource: string) => {
@@ -54,6 +58,8 @@ const getGqlResource = (resource: string) => {
       return "Genre";
     case "media_content/radio/radio_stations":
       return "RadioStation";
+    case "media_content/radio/radio_live_streams":
+      return "RadioLiveStream";
     case "questions":
       return "Question";
     case "images":
@@ -89,6 +95,9 @@ const customBuildQuery =
     }
     if (fetchType === "GET_LIST" && resource === "Series") {
       return { ...builtQuery, query: GET_ALL_SERIES };
+    }
+    if (fetchType === "UPDATE" && resource === "Series") {
+      return { ...builtQuery, query: UPDATE_SERIES };
     }
     if (fetchType === "GET_LIST" && resource === "VideoFile") {
       return { ...builtQuery, query: GET_ALL_VIDEO_FILES };

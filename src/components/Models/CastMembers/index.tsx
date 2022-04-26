@@ -33,6 +33,7 @@ const useStyles = makeStyles({
 });
 
 const INPUT_ITEMS_PER_PAGE = 25;
+const IMAGE_REQUEST_VARS = { fieldName: "Person" };
 
 export const CastMembers: React.FC<{
   parentSource: string;
@@ -111,6 +112,7 @@ export const CastMembers: React.FC<{
         </ReferenceInput>
         <ImageUploaderV2
           wrapperClassName={classes.CastMemberImagesWrapper}
+          requestVariables={IMAGE_REQUEST_VARS}
           sourceIds={`${parentSourceWithIndex}.person.imageIds`}
           source={parentSource}
           index={index}

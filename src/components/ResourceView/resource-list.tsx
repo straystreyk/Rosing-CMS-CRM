@@ -11,47 +11,13 @@ import { EditForm } from "./FormWithRedirect";
 import { PlusIcon } from "../../constants/icons";
 import { Pagination } from "../Pagination";
 import { ResourcesListProps } from "./resources-types";
+import { ReactElement } from "react";
 
 const useStyles = makeStyles({
-  TopToolBar: {
-    paddingRight: 20,
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "flex-end",
-    paddingTop: 8,
-    "& button": {
-      marginLeft: 10,
-    },
-  },
   TopList: {
     backgroundColor: "var(--primary-bg-3)",
   },
 });
-
-const ToolBar = (props: any) => {
-  const styles = useStyles();
-  const translate = useTranslate();
-
-  return (
-    <>
-      <div className={styles.TopToolBar}>
-        {props.toolbar ? (
-          <props.toolbar
-            basePath={props.basePath}
-            buttonLabel={"Create " + translate(`resources.${props.resource}.name`)}
-          />
-        ) : (
-          <CreateButton
-            icon={<PlusIcon color="#fff" />}
-            label={"Create " + translate(`resources.${props.resource}.name`)}
-            basePath={props.basePath}
-            to={props.basePath + "/create"}
-          />
-        )}
-      </div>
-    </>
-  );
-};
 
 export const ResourceList: React.FC<ResourcesListProps> = ({
   permanentFilter,
@@ -60,8 +26,7 @@ export const ResourceList: React.FC<ResourcesListProps> = ({
   empty,
   breadCrumbsOn,
   form = "list",
-  toolbar,
-  filters = [],
+  filters = null,
   children,
   ...props
 }) => {
@@ -84,12 +49,12 @@ export const ResourceList: React.FC<ResourcesListProps> = ({
       <List
         {...props}
         empty={empty}
+        filters={filters as ReactElement | ReactElement[]}
         perPage={15}
-        filters={filters}
         filter={filter}
         pagination={<Pagination />}
-        actions={<ToolBar toolbar={toolbar} {...props} />}
         basePath={props.basePath}
+        actions={false}
       >
         {children}
       </List>

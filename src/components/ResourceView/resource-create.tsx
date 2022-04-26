@@ -17,6 +17,11 @@ interface CreateProps {
   offRedirectButton?: boolean;
 }
 
+const SCROLL_TO_OPTS: ScrollToOptions = {
+  behavior: "smooth",
+  top: 0,
+};
+
 export const ResourceCreate: React.FC<CreateProps> = ({
   onSuccessWithRedirect,
   offRedirectButton,
@@ -25,6 +30,19 @@ export const ResourceCreate: React.FC<CreateProps> = ({
   const notify = useNotify();
   const redirect = useRedirect();
   const refresh = useRefresh();
+
+  const onSuccessWithRedirectDefault: (data: any) => void = React.useCallback(
+    ({ data }) => {
+      notify(`resources.${props.resource}.mutations.create.success`, {
+        type: "info",
+        messageArgs: { name: data.name },
+      });
+      redirect("list", `${props.basePath}/create`, data.id, data);
+      window.scrollTo(SCROLL_TO_OPTS);
+      refresh();
+    },
+    [notify, props.basePath, props.resource, redirect, refresh]
+  );
 
   const onSuccess: (data: any) => void = React.useCallback(
     ({ data }) => {
@@ -56,7 +74,7 @@ export const ResourceCreate: React.FC<CreateProps> = ({
         <EditForm
           onSuccess={props.onSuccess ?? onSuccess}
           onFailure={props.onFailure ?? onFailure}
-          onSuccessWithRedirect={onSuccessWithRedirect}
+          onSuccessWithRedirect={onSuccessWithRedirect ?? onSuccessWithRedirectDefault}
           redirectButtonLabel={props.redirectButtonLabel}
           redirectButtonIcon={props.redirectButtonIcon}
           redirect={props.redirect}

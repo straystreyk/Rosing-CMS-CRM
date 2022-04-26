@@ -1,11 +1,11 @@
 import { DocumentNode } from "graphql";
-import { GET_ONE_MOVIE_NAME } from "../../containers/MediaContent/Movies/custom-requests";
-import { GET_ONE_VIDEO_FILE } from "../../containers/MediaContent/VideoFiles/custom-requests";
-import { GET_ONE_SERIES_NAME } from "../../containers/MediaContent/Series/requests";
-import { GET_ONE_SEASON_NAME } from "../../containers/MediaContent/Seasons/requests";
-import { GET_ONE_AUDIO_SHOW_NAME } from "../../containers/Audio/AudioShows/requests";
-import { GET_ONE_PART_NAME } from "../../containers/Audio/Parts/requests";
-import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Episodes/requests";
+import { GET_ONE_MOVIE_NAME } from "../../containers/MediaContent/Video/Movies/custom-requests";
+import { GET_ONE_VIDEO_FILE } from "../../containers/MediaContent/Video/VideoFiles/custom-requests";
+import { GET_ONE_SERIES_NAME } from "../../containers/MediaContent/Video/Series/requests";
+import { GET_ONE_SEASON_NAME } from "../../containers/MediaContent/Video/Seasons/requests";
+import { GET_ONE_AUDIO_SHOW_NAME } from "../../containers/MediaContent/Audio/AudioShows/requests";
+import { GET_ONE_PART_NAME } from "../../containers/MediaContent/Audio/Parts/requests";
+import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Video/Episodes/requests";
 import { GET_ONE_NEWS_NAME } from "../../containers/MediaContent/News/requests";
 
 interface breadcrumbsLinkInterface {
@@ -100,6 +100,14 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     href: "/media_content/radio/radio_stations/create",
   },
   {
+    name: "Radio live streams",
+    href: "/media_content/radio/radio_live_streams",
+  },
+  {
+    name: "New radio live stream",
+    href: "/media_content/radio/radio_live_streams/create",
+  },
+  {
     name: "Series",
     href: "/media_content/video/series",
   },
@@ -148,8 +156,12 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     href: "/media_content/video/video_files",
   },
   {
+    name: "New video file",
+    href: "/media_content/video/video_files/create",
+  },
+  {
     name: "",
-    href: "/media_content/video/video_files",
+    href: "/media_content/video/video_files/:id",
     query: GET_ONE_VIDEO_FILE,
     dynamicParam: "id",
   },

@@ -10,7 +10,6 @@ import {
 } from "../../../components/Inputs";
 import { FormTabs } from "../../../components/Tabs/form-tabs";
 import { FormSection } from "../../../components/FormSection";
-import { ReferenceArrayInput } from "../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { PUBLISHED_CHOICES_FORM, SELECT_MARKERS } from "../../../constants/forms-constants";
 import { GroupInputsOrigin } from "../../../components/GroupInputs";
 import { MetaData } from "../../../components/Models/Metadata";
@@ -18,10 +17,13 @@ import { ImageUploaderV2 } from "../../../components/ImageUploader";
 import { RadioButtonGroupInput } from "../../../components/Inputs/RadioButtonGroupInput";
 import { useFormState } from "react-final-form";
 import { scrollToErrorInput } from "../../../helpers/form";
+import { ScrollTopButton } from "../../../components/UI/Buttons/scroll-top-button";
+import { AutocompleteInput } from "../../../components/Inputs/autocomplete-input";
 
 const FIXED_TAB_LABELS = ["Attributes", "Images", "Terms of publication"];
 const INPUT_ITEMS_PER_PAGE = 25;
 const FIXED_HEADER_OFFSET = 130;
+const IMAGE_REQUEST_VARS = { fieldName: "News" };
 
 export const Form: React.FC<FormProps> = ({ resource, type }) => {
   const formState = useFormState();
@@ -65,34 +67,19 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
         <RichTextInput
           resource={resource}
           inputType={type}
-          label="Body (Description)"
+          label="Body Template"
           source="bodyTemplate"
           validate={requiredValidate}
         />
         <RichTextInput resource={resource} inputType={type} label="Body text" source="bodyText" />
-        <ReferenceArrayInput
-          label="Languages"
-          source="languagesIds"
-          reference="languages"
-          resource={resource}
-          perPage={INPUT_ITEMS_PER_PAGE}
-        >
-          <AutocompleteArrayInput
-            optionText="name"
-            optionValue="id"
-            resource={resource}
-            inputType={type}
-            helperText="The language of the movie's audio track. You can select multiple languages from the list."
-          />
-        </ReferenceArrayInput>
         <ReferenceInput
           label="Video file"
-          source="streamSourceIds"
+          source="streamSourceId"
           reference="media_content/video/video_files"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >
-          <AutocompleteArrayInput
+          <AutocompleteInput
             optionText="name"
             inputType={type}
             helperText="You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
@@ -150,6 +137,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
       >
         <ImageUploaderV2
           inputType={type}
+          requestVariables={IMAGE_REQUEST_VARS}
           resource={resource}
           sourceIds="imageIds"
           source="images"
@@ -169,6 +157,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           choices={PUBLISHED_CHOICES_FORM}
         />
       </FormSection>
+      <ScrollTopButton />
     </>
   );
 };

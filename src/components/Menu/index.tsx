@@ -14,7 +14,6 @@ import { UserVariables as users } from "../../containers/Users";
 import { DatacentersVariables as datacenters } from "../../containers/Datacenters";
 import { RightHoldersVariables as rightHolders } from "../../containers/RightHolders";
 import { QuestionsVariables as questions } from "../../containers/Questions";
-import { NewsVariables as news } from "../../containers/MediaContent/News";
 import { LineCloseStyles, LineStyles, MenuItemLinkStyles, MenuItemLinkCloseStyles } from "./styles";
 import {
   DashboardIcon,
@@ -170,15 +169,6 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           dense={dense}
         />
         <MenuItemLink
-          to={`/media_content/radio`}
-          primaryText={translate(`resources.media_content/radio/radio_stations.name`, {
-            smart_count: 2,
-          })}
-          onClick={onMenuClick}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
           to={`/media_content/audio`}
           primaryText={translate("resources.media_content/audio/audio_shows.menu_name", {
             smart_count: 2,
@@ -194,6 +184,15 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           })}
           className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
           tooltipProps={tooltipProps(translate("resources.media_content/news.name"))}
+          onClick={onMenuClick}
+          sidebarIsOpen={open}
+          dense={dense}
+        />
+        <MenuItemLink
+          to={`/media_content/radio`}
+          primaryText={translate(`resources.media_content/radio/radio_stations.menu_name`, {
+            smart_count: 2,
+          })}
           onClick={onMenuClick}
           sidebarIsOpen={open}
           dense={dense}

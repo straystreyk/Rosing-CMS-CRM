@@ -86,7 +86,7 @@ export const SelectButton: React.FC<{
       }
     }, [images, data]);
 
-    if (loading) return <MainLoader size={30} centered />;
+    if (loading) return <MainLoader component="span" size={30} flex centered />;
     if (error) return <div>Something went wrong</div>;
     if (!data) return null;
 

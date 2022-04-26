@@ -9,20 +9,21 @@ import { useApp } from "../../custom-hooks/app-component";
 import { customReducers } from "./custom-reducers";
 import { UserVariables as users } from "../Users";
 import { DatacentersVariables as datacenters } from "../Datacenters";
-import { VideoFilesVariables as videoFiles } from "../MediaContent/VideoFiles";
+import { VideoFilesVariables as videoFiles } from "../MediaContent/Video/VideoFiles";
 import { RightHoldersVariables as rightHolders } from "../RightHolders";
-import { MoviesVariables as movies } from "../MediaContent/Movies";
-import { SeriesVariables as series } from "../MediaContent/Series";
+import { MoviesVariables as movies } from "../MediaContent/Video/Movies";
+import { SeriesVariables as series } from "../MediaContent/Video/Series";
 import { ChannelsVariables as channels } from "../Channels";
-import { SeasonsVariables as seasons } from "../MediaContent/Seasons";
-import { EpisodesVariables as episodes } from "../MediaContent/Episodes";
+import { SeasonsVariables as seasons } from "../MediaContent/Video/Seasons";
+import { EpisodesVariables as episodes } from "../MediaContent/Video/Episodes";
 import { GenresVariables as genres } from "../Genres";
 import { ChannelVersions as channelVersions } from "../ChannelVersions";
-import { RadioStationsVariables as radioStations } from "../RadioStations";
-import { AudioShowsVariables as audioShows } from "../Audio/AudioShows";
+import { RadioStationsVariables as radioStations } from "../MediaContent/Radio/RadioStations";
+import { RadioLiveStreamsVariables as radioLiveStreams } from "../MediaContent/Radio/RadioLiveStreams";
+import { AudioShowsVariables as audioShows } from "../MediaContent/Audio/AudioShows";
 import { QuestionsVariables as questions } from "../Questions";
 import { NewsVariables as news } from "../MediaContent/News";
-import { PartVariables as parts } from "../Audio/Parts";
+import { PartVariables as parts } from "../MediaContent/Audio/Parts";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -61,6 +62,7 @@ export const App = () => {
       <Resource name="media_content/video/series" {...series} />
       <Resource name="genres" {...genres} />
       <Resource name="media_content/radio/radio_stations" {...radioStations} />
+      <Resource name="media_content/radio/radio_live_streams" {...radioLiveStreams} />
       <Resource name="media_content/audio/audio_shows/:audioShowId/parts" {...parts} />
       <Resource name="media_content/audio/audio_shows" {...audioShows} />
       <Resource name="questions" {...questions} />

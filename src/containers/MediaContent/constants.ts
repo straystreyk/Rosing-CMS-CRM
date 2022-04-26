@@ -1,6 +1,6 @@
 import { ListTabProps } from "../../components/Tabs/list-page-tabs";
 
-export const mediaContentTabs: ListTabProps[] = [
+export const videoTabs: ListTabProps[] = [
   {
     name: "Movies",
     link: "/media_content/video/movies",
@@ -12,5 +12,16 @@ export const mediaContentTabs: ListTabProps[] = [
   {
     name: "Series",
     link: "/media_content/video/series",
+  },
+];
+
+export const radioTabs: ListTabProps[] = [
+  {
+    name: "Radio stations",
+    link: "/media_content/radio/radio_stations",
+  },
+  {
+    name: "Radio live streams",
+    link: "/media_content/radio/radio_live_streams",
   },
 ];

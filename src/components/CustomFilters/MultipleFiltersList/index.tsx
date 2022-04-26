@@ -34,7 +34,6 @@ export const MultipleFiltersList: React.FC<ChoicesCustomFilter> = ({
   const open = Boolean(anchorEl);
 
   if (loading) return <MainLoader size={LOADER_SIZE} />;
-  if (!choices || !choices.length) return <span>No filters</span>;
 
   return (
     <>

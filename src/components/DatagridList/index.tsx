@@ -1,4 +1,5 @@
 import * as React from "react";
+import cn from "classnames";
 import { useNotify } from "ra-core";
 import { TableHead } from "@material-ui/core";
 import { Datagrid, DatagridBody, useListContext, useMutation, useRefresh } from "react-admin";
@@ -9,7 +10,7 @@ import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core";
 
 import { DatagridWrapper } from "./datagrid-wrapper";
-import { SortIcon } from "../../constants/icons";
+import { DNDIcon, SortIcon } from "../../constants/icons";
 import { CustomDatagridProps } from "./custom-datagrid-types";
 
 const inverseOrder = (sort: string) => (sort === "ASC" ? "DESC" : "ASC");
@@ -19,6 +20,23 @@ const useStyles = makeStyles({
     "&.MuiTableCell-paddingCheckbox": {
       padding: "0 12px 0 24px",
     },
+    position: "relative",
+  },
+  DraggableTableRow: {
+    "&:hover .DNDIcon": {
+      opacity: 1,
+      pointerEvents: "all",
+    },
+  },
+  DNDIcon: {
+    position: "absolute",
+    left: 8,
+    top: "50%",
+    transform: "translateY(-42%)",
+    zIndex: 1,
+    opacity: 0,
+    pointerEvents: "none",
+    transition: "0.35s all ease",
   },
 });
 
@@ -119,12 +137,17 @@ const MyDatagridRowWithDnd: React.FC<any> = ({
   return (
     <Draggable key={id} draggableId={id} index={ids.indexOf(id)}>
       {(provided, snapshot) => (
-        <TableRow key={id} hover ref={provided.innerRef} {...provided.draggableProps}>
-          <TableCell
-            className={classes.TableCheckbox}
-            padding="checkbox"
-            {...provided.dragHandleProps}
-          >
+        <TableRow
+          className={classes.DraggableTableRow}
+          key={id}
+          hover
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+        >
+          <TableCell className={classes.TableCheckbox} padding="checkbox">
+            <div className={cn(classes.DNDIcon, "DNDIcon")} {...provided.dragHandleProps}>
+              <DNDIcon />
+            </div>
             <Checkbox
               color="primary"
               checked={selected}
@@ -228,10 +251,17 @@ const MyDatagridBody = (props: any) => {
     );
   }
 
-  return <DatagridBody {...props} row={<MyDatagridRow />} />;
+  return <DatagridBody {...props} row={<MyDatagridRow ids={props.ids} />} />;
 };
-export const DatagridList = (props: CustomDatagridProps) => (
-  <DatagridWrapper filters={props.filters}>
+export const DatagridList: React.FC<CustomDatagridProps> = ({ listText, ...props }) => (
+  <DatagridWrapper
+    toolbar={props.toolbar}
+    resource={props.resource}
+    basePath={props.basePath}
+    offDescription={props.offDescription}
+    filters={props.filters}
+    listText={listText}
+  >
     <Datagrid
       header={props.header ?? <DatagridHeader />}
       {...props}
