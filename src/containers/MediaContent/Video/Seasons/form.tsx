@@ -16,6 +16,7 @@ import { PUBLISHED_CHOICES_FORM } from "../../../../constants/forms-constants";
 import { MetaData } from "../../../../components/Models/Metadata";
 import { FormProps } from "../../../../types";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
+import { log } from "util";
 
 const useStyles = makeStyles({
   ArrayInputItemStyles,
@@ -39,7 +40,6 @@ const Season: React.FC<{
   type: "show" | "create" | "edit";
 }> = ({ parentSourceWithIndex, resource, parentSource, index, show, ...props }) => {
   const { seriesId } = useParams<{ seriesId: string }>();
-
   const [showResource, setShowResource] = React.useState(show);
 
   React.useEffect(() => {
@@ -48,11 +48,11 @@ const Season: React.FC<{
 
   return (
     <>
-      {index && <div>New season number {+index + 1}</div>}
+      {index && !["edit", "show"].includes(props.type) && <div>New season number {+index + 1}</div>}
       <div
         style={{
-          height: !showResource ? 0 : "auto",
-          overflow: !showResource ? "hidden" : "unset",
+          height: !showResource && !["edit", "show"].includes(props.type) ? 0 : "auto",
+          overflow: !showResource && !["edit", "show"].includes(props.type) ? "hidden" : "unset",
         }}
       >
         <TextInput

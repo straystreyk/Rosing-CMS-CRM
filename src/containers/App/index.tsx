@@ -10,7 +10,7 @@ import { customReducers } from "./custom-reducers";
 import { UserVariables as users } from "../Users";
 import { DatacentersVariables as datacenters } from "../Datacenters";
 import { VideoFilesVariables as videoFiles } from "../MediaContent/Video/VideoFiles";
-import { RightHoldersVariables as rightHolders } from "../RightHolders";
+import { RightHoldersVariables as rightHolders } from "../MediaContent/Attributes/Providers/RightHolders";
 import { MoviesVariables as movies } from "../MediaContent/Video/Movies";
 import { SeriesVariables as series } from "../MediaContent/Video/Series";
 import { ChannelsVariables as channels } from "../Channels";
@@ -24,6 +24,8 @@ import { AudioShowsVariables as audioShows } from "../MediaContent/Audio/AudioSh
 import { QuestionsVariables as questions } from "../Questions";
 import { NewsVariables as news } from "../MediaContent/News";
 import { PartVariables as parts } from "../MediaContent/Audio/Parts";
+import { ContentProvidersVariables as contentProviders } from "../MediaContent/Attributes/Providers/ContentProviders";
+import { StudiosVariables as studios } from "../MediaContent/Attributes/Providers/Studios";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -53,7 +55,6 @@ export const App = () => {
       <Resource name="admin_users" {...users} />
       <Resource name="channel_versions" {...channelVersions} />
       <Resource name="channels" {...channels} />
-      <Resource name="right_holders" {...rightHolders} />
       <Resource name="datacenters" {...datacenters} />
       <Resource name="media_content/video/movies" {...movies} />
       <Resource name="media_content/video/video_files" {...videoFiles} />
@@ -65,6 +66,9 @@ export const App = () => {
       <Resource name="media_content/radio/radio_live_streams" {...radioLiveStreams} />
       <Resource name="media_content/audio/audio_shows/:audioShowId/parts" {...parts} />
       <Resource name="media_content/audio/audio_shows" {...audioShows} />
+      <Resource name="media_content/attributes/providers/content_providers" {...contentProviders} />
+      <Resource name="media_content/attributes/providers/right_holders" {...rightHolders} />
+      <Resource name="media_content/attributes/providers/studios" {...studios} />
       <Resource name="questions" {...questions} />
       <Resource name="media_content/news" {...news} />
       <Resource name="people" />
@@ -73,9 +77,7 @@ export const App = () => {
       <Resource name="production_countries" />
       <Resource name="api_clients" />
       <Resource name="images" />
-      <Resource name="studios" />
       <Resource name="languages" />
-      <Resource name="external_catalog" />
     </Admin>
   );
 };

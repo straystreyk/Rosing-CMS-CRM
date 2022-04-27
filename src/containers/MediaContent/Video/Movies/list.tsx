@@ -98,7 +98,7 @@ export const List: React.FC<ShowProps> = (props) => {
       <ReferenceField
         label="External catalog"
         source="externalCatalogId"
-        reference="external_catalog"
+        reference="media_content/attributes/providers/content_providers"
         emptyText={<span className={classes.Empty}>Empty</span>}
       >
         <TextField source="name" fullWidth />

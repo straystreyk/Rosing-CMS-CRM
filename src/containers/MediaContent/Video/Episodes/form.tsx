@@ -44,11 +44,11 @@ const Episode: React.FC<{
 
   return (
     <>
-      {index && <div>New episode number {+index + 1}</div>}
+      {index && !["edit", "show"].includes(inputType) && <div>New episode number {+index + 1}</div>}
       <div
         style={{
-          height: !showResource ? 0 : "auto",
-          overflow: !showResource ? "hidden" : "unset",
+          height: !showResource && !["edit", "show"].includes(inputType) ? 0 : "auto",
+          overflow: !showResource && !["edit", "show"].includes(inputType) ? "hidden" : "unset",
         }}
       >
         <TextInput

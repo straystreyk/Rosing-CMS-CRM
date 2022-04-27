@@ -7,6 +7,11 @@ import { GET_ONE_AUDIO_SHOW_NAME } from "../../containers/MediaContent/Audio/Aud
 import { GET_ONE_PART_NAME } from "../../containers/MediaContent/Audio/Parts/requests";
 import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Video/Episodes/requests";
 import { GET_ONE_NEWS_NAME } from "../../containers/MediaContent/News/requests";
+import {
+  GET_ONE_EXTERNAL_CATALOG,
+  GET_ONE_RIGHT_HOLDER,
+  GET_ONE_STUDIO,
+} from "../Providers/custom-requests";
 
 interface breadcrumbsLinkInterface {
   name: string;
@@ -28,6 +33,14 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
   {
     name: "Audio",
     href: "/media_content/audio",
+  },
+  {
+    name: "Attributes",
+    href: "/media_content/attributes",
+  },
+  {
+    name: "Providers",
+    href: "/media_content/attributes/providers",
   },
   //Movie
   {
@@ -163,6 +176,51 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     name: "",
     href: "/media_content/video/video_files/:id",
     query: GET_ONE_VIDEO_FILE,
+    dynamicParam: "id",
+  },
+  //content_providers (External catalog)
+  {
+    name: "Content providers",
+    href: "/media_content/attributes/providers/content_providers",
+  },
+  {
+    name: "New content provider",
+    href: "/media_content/attributes/providers/content_providers/create",
+  },
+  {
+    name: "",
+    href: "/media_content/attributes/providers/content_providers/:id",
+    query: GET_ONE_EXTERNAL_CATALOG,
+    dynamicParam: "id",
+  },
+  //RightHolders
+  {
+    name: "Right holders",
+    href: "/media_content/attributes/providers/right_holders",
+  },
+  {
+    name: "New right holder",
+    href: "/media_content/attributes/providers/right_holders/create",
+  },
+  {
+    name: "",
+    href: "/media_content/attributes/providers/right_holders/:id",
+    query: GET_ONE_RIGHT_HOLDER,
+    dynamicParam: "id",
+  },
+  //Studios
+  {
+    name: "Studios",
+    href: "/media_content/attributes/providers/studios",
+  },
+  {
+    name: "New studio",
+    href: "/media_content/attributes/providers/studios/create",
+  },
+  {
+    name: "",
+    href: "/media_content/attributes/providers/studios/:id",
+    query: GET_ONE_STUDIO,
     dynamicParam: "id",
   },
 ];

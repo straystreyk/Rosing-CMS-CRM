@@ -6,6 +6,7 @@ export interface ResourcesListProps extends Omit<ListProps, "resource"> {
   resource: string;
   permanentFilter?: Record<string, string | number>;
   listTabs?: ListTabProps[];
+  listSubTabs?: ListTabProps[];
   offTitle?: boolean;
   breadCrumbsOn?: boolean;
   form?: "create" | "edit" | "show" | "list";

@@ -1,6 +1,4 @@
 import * as React from "react";
-import { useRedirect, useRefresh } from "react-admin";
-import { useNotify } from "ra-core";
 import { CreateProps, ListProps } from "ra-ui-materialui";
 import Icon from "@material-ui/icons/Movie";
 
@@ -13,7 +11,7 @@ import {
 } from "../../../../components/ResourceView";
 import { List as DataGridList } from "./list";
 import { GET_ONE_MOVIE_NAME } from "./custom-requests";
-import { videoTabs } from "../../constants";
+import { videoTabs } from "../constants";
 
 const resource = "media_content/video/movies";
 

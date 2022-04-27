@@ -16,7 +16,7 @@ import { PUBLISHED_CHOICES_FORM, SELECT_MARKERS } from "../../../../constants/fo
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
-import { AutocompleteInput } from "../../../../components/Inputs/autocomplete-input";
+import { AutocompleteInput } from "../../../../components/Inputs/AutocompleteInput";
 import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
 import { PlusIcon } from "../../../../constants/icons";
 import { useHistory } from "react-router-dom";

@@ -11,12 +11,14 @@ export interface ListTabProps {
 
 interface ListPageTabsProps {
   tabs: ListTabProps[];
+  isSubTabs?: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
   TabsList: {
     paddingTop: 14,
     paddingLeft: 24,
+    paddingRight: 20,
     display: "flex",
   },
   TabListLink: {
@@ -29,22 +31,48 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   TabListLinkActive: {
-    borderBottom: `3px solid ${theme.palette.primary.main}`,
+    borderBottom: `3px solid var(--accent-color)`,
+  },
+  SubTabsList: {
+    display: "flex",
+    flexWrap: "wrap",
+    paddingLeft: 24,
+    paddingRight: 20,
+    marginTop: 13,
+    borderBottom: `1px solid var(--secondary-color-disable)`,
+  },
+  SubTabListLink: {
+    color: "var(--secondary-color-main)",
+    fontSize: 14,
+    lineHeight: "20px",
+    fontWeight: 500,
+    marginRight: 12,
+    paddingBottom: 4,
+  },
+  SubTabListLinkActive: {
+    borderBottom: `3px solid var(--secondary-color-main)`,
   },
 }));
 
-export const ListPageTabs: React.FC<ListPageTabsProps> = ({ tabs }) => {
+export const ListPageTabs: React.FC<ListPageTabsProps> = ({ tabs, isSubTabs }) => {
   const history = useHistory();
   const classes = useStyles();
   return (
-    <Box sx={{ maxWidth: "100%" }} className={classes.TabsList}>
+    <Box sx={{ maxWidth: "100%" }} className={!isSubTabs ? classes.TabsList : classes.SubTabsList}>
       {tabs.map(({ link, name }: ListTabProps) => (
         <Link
           key={link + name}
-          className={cn(
-            classes.TabListLink,
-            history.location.pathname.includes(link) && classes.TabListLinkActive
-          )}
+          className={
+            !isSubTabs
+              ? cn(
+                  classes.TabListLink,
+                  history.location.pathname.includes(link) && classes.TabListLinkActive
+                )
+              : cn(
+                  classes.SubTabListLink,
+                  history.location.pathname.includes(link) && classes.SubTabListLinkActive
+                )
+          }
           to={link}
         >
           {name}

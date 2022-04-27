@@ -375,6 +375,7 @@ export const ImageUploaderV2: React.FC<{
   source: string;
   sourceIds: string;
   wrapperClassName?: string;
+  offInfo?: boolean;
   inputType: string;
   index?: string;
   requestVariables: Record<string, string>;
@@ -383,6 +384,7 @@ export const ImageUploaderV2: React.FC<{
     resource,
     children,
     source,
+    offInfo,
     index,
     wrapperClassName,
     sourceIds,
@@ -475,7 +477,7 @@ export const ImageUploaderV2: React.FC<{
     return (
       <>
         <Slider showSlider={showSlider} setShowSlider={setShowSlider} images={serverImages} />
-        {!source.includes("castMember") && inputType !== "show" && (
+        {!offInfo && inputType !== "show" && (
           <div className={classes.ImagesInfo}>
             <span>
               The maximum size of uploaded files is{" "}

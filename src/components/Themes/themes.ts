@@ -1,3 +1,5 @@
+import { outlineStyles } from "./main-styles";
+
 export const darkTheme = {
   palette: {
     primary: {
@@ -110,16 +112,17 @@ export const lightTheme = {
     RaMenuItemLink: {
       root: {
         color: "#fff",
+        overflow: "visible",
         "&:hover": {
           background: "#2D3D44",
         },
       },
       active: {
         color: "#fff",
-        backgroundColor: "#00A991",
+        backgroundColor: "var(--accent-color)",
+        position: "relative",
         "&:focus": {
-          outline: "2px solid #7FC5FF",
-          outlineOffset: "2px",
+          ...outlineStyles,
         },
         "&:hover": {
           backgroundColor: "var(--accent-color-hover)",
@@ -364,11 +367,11 @@ export const lightTheme = {
           lineHeight: "20px",
           transition: "0.35s color ease, 0.35s background-color ease",
           margin: "8px 0",
+          overflow: "visible",
           "&.Mui-selected": {
+            ...outlineStyles,
             color: "var(--primary-focus)",
             backgroundColor: "var(--primary-bg)",
-            outline: "2px solid #7FC5FF",
-            outlineOffset: "2px",
           },
           "&.Mui-selected:hover": {
             color: "var(--primary-focus)",
@@ -395,13 +398,5 @@ export const lightTheme = {
         backgroundColor: "#d7d7d7",
       },
     },
-    // MuiFilledInput: {
-    //   root: {
-    //     backgroundColor: 'rgba(35,35,35,0.04)',
-    //     '&$disabled': {
-    //       backgroundColor: 'rgba(0, 0, 0, 0.04)',
-    //     },
-    //   },
-    // },
   },
 };

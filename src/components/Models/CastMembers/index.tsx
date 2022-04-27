@@ -118,6 +118,7 @@ export const CastMembers: React.FC<{
           index={index}
           resource={resource}
           inputType="create"
+          offInfo
         />
         <TextInput
           inputType="create"

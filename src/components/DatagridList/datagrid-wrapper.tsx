@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useListContext } from "react-admin";
+import { useListContext, useLoading } from "react-admin";
 import { PerPageCounter } from "../Pagination/per-page-counter";
 import { makeStyles } from "@material-ui/core";
 
@@ -94,7 +94,7 @@ const ToolBar: React.FC<{
 export const DatagridWrapper: React.FC<CustomDatagridProps> = ({ children, filters, ...props }) => {
   const classes = useStyles();
   const translate = useTranslate();
-  const { loading } = useListContext();
+  const loading = useLoading();
   const [showDescription, setShowDescription] = React.useState<boolean>(true);
 
   return (

@@ -18,7 +18,7 @@ import { RadioButtonGroupInput } from "../../../components/Inputs/RadioButtonGro
 import { useFormState } from "react-final-form";
 import { scrollToErrorInput } from "../../../helpers/form";
 import { ScrollTopButton } from "../../../components/UI/Buttons/scroll-top-button";
-import { AutocompleteInput } from "../../../components/Inputs/autocomplete-input";
+import { AutocompleteInput } from "../../../components/Inputs/AutocompleteInput";
 
 const FIXED_TAB_LABELS = ["Attributes", "Images", "Terms of publication"];
 const INPUT_ITEMS_PER_PAGE = 25;

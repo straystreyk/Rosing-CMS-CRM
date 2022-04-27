@@ -8,7 +8,7 @@ import { ResourceShow } from "../../../../components/ResourceView/resource-show"
 import { ResourceList, ResourceCreate, ResourceEdit } from "../../../../components/ResourceView";
 import { CreateProps } from "ra-ui-materialui";
 import { RedirectButtonIcon } from "../../../../constants/icons";
-import { videoTabs } from "../../constants";
+import { videoTabs } from "../constants";
 
 const resource = "media_content/video/series";
 

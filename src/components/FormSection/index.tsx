@@ -117,7 +117,11 @@ export const FormSection: React.FC<SectionProps> = React.forwardRef(
           />
         )}
         {showSection && showDescription && (
-          <div className={classes.TextSection}>{text && text}</div>
+          <div className={classes.TextSection}>
+            {text && typeof text !== "string"
+              ? text.map((string, index) => <React.Fragment key={index}>{string}</React.Fragment>)
+              : text}
+          </div>
         )}
         <div style={{ height: !showSection ? 0 : "auto", overflow: !showSection ? "hidden" : "" }}>
           {children}

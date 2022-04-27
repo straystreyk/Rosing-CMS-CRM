@@ -15,6 +15,8 @@ import {
 import { GET_ALL_VIDEO_FILES } from "../../containers/MediaContent/Video/VideoFiles/custom-requests";
 import { GET_ONE_AUDIO_SHOW } from "../../containers/MediaContent/Audio/AudioShows/requests";
 import { GET_ONE_NEWS } from "../../containers/MediaContent/News/requests";
+import { GET_EDIT_EXTERNAL_CATALOG } from "../../containers/MediaContent/Attributes/Providers/ContentProviders/requests";
+import { GET_EDIT_STUDIO } from "../../containers/MediaContent/Attributes/Providers/Studios/requests";
 
 const getGqlResource = (resource: string) => {
   switch (resource) {
@@ -24,8 +26,6 @@ const getGqlResource = (resource: string) => {
       return "Movie";
     case "datacenters":
       return "Datacenter";
-    case "right_holders":
-      return "RightHolder";
     case "streams":
       return "Stream";
     case "media_content/video/video_files":
@@ -44,7 +44,7 @@ const getGqlResource = (resource: string) => {
       return "AudioShow";
     case "channels":
       return "Channel";
-    case "studios":
+    case "media_content/attributes/providers/studios":
       return "Studio";
     case "languages":
       return "Language";
@@ -52,8 +52,10 @@ const getGqlResource = (resource: string) => {
       return "Episode";
     case "api_clients":
       return "ApiClient";
-    case "external_catalog":
+    case "media_content/attributes/providers/content_providers":
       return "ExternalCatalog";
+    case "media_content/attributes/providers/right_holders":
+      return "RightHolder";
     case "genres":
       return "Genre";
     case "media_content/radio/radio_stations":
@@ -110,6 +112,12 @@ const customBuildQuery =
     }
     if (fetchType === "GET_ONE" && resource === "News") {
       return { ...builtQuery, query: GET_ONE_NEWS };
+    }
+    if (fetchType === "GET_ONE" && resource === "ExternalCatalog") {
+      return { ...builtQuery, query: GET_EDIT_EXTERNAL_CATALOG };
+    }
+    if (fetchType === "GET_ONE" && resource === "Studio") {
+      return { ...builtQuery, query: GET_EDIT_STUDIO };
     }
 
     return builtQuery;

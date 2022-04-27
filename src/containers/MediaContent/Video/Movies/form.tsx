@@ -209,7 +209,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         <ReferenceArrayInput
           label="Studios"
           source="studioIds"
-          reference="studios"
+          reference="media_content/attributes/providers/studios"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >
@@ -223,7 +223,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         <ReferenceInput
           label="External catalog"
           source="externalCatalogId"
-          reference="external_catalog"
+          reference="media_content/attributes/providers/content_providers"
           resource={resource}
         >
           <SelectInput

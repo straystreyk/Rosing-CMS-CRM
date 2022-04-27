@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 export const ResourceList: React.FC<ResourcesListProps> = ({
   permanentFilter,
   listTabs,
+  listSubTabs,
   offTitle,
   empty,
   breadCrumbsOn,
@@ -46,6 +47,7 @@ export const ResourceList: React.FC<ResourcesListProps> = ({
         </EditForm>
         {listTabs && <ListPageTabs tabs={listTabs} />}
       </Box>
+      {listSubTabs && <ListPageTabs isSubTabs tabs={listSubTabs} />}
       <List
         {...props}
         empty={empty}

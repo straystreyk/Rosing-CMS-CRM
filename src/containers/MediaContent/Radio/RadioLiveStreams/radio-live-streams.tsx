@@ -7,7 +7,7 @@ import {
 } from "../../../../components/ResourceView";
 import { Form } from "./form";
 import { TableView } from "./table-view";
-import { radioTabs } from "../../constants";
+import { radioTabs } from "../constants";
 import { CreateProps } from "ra-ui-materialui";
 
 const resource = "media_content/radio/radio_live_streams";

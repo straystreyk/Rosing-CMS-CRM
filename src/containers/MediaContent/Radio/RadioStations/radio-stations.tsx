@@ -9,7 +9,7 @@ import {
 } from "../../../../components/ResourceView";
 import { TableView } from "./table-view";
 import { Form } from "./form";
-import { radioTabs } from "../../constants";
+import { radioTabs } from "../constants";
 
 const resource = "media_content/radio/radio_stations";
 

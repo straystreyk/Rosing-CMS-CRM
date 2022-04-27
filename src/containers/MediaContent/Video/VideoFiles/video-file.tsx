@@ -11,7 +11,7 @@ import {
 import { Form } from "./form";
 import { List as DataGridList } from "./list";
 import { ListProps } from "ra-ui-materialui";
-import { videoTabs } from "../../constants";
+import { videoTabs } from "../constants";
 
 const resource = "media_content/video/video_files";
 

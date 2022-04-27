@@ -201,7 +201,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         <ReferenceInput
           label="Studios"
           source="studioIds"
-          reference="studios"
+          reference="media_content/attributes/providers/studios"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >
@@ -215,7 +215,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         <ReferenceInput
           label="External catalog"
           source="externalCatalogId"
-          reference="external_catalog"
+          reference="media_content/attributes/providers/content_providers"
           resource={resource}
         >
           <SelectInput

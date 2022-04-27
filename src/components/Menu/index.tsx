@@ -12,7 +12,7 @@ import { AppState } from "../../types";
 
 import { UserVariables as users } from "../../containers/Users";
 import { DatacentersVariables as datacenters } from "../../containers/Datacenters";
-import { RightHoldersVariables as rightHolders } from "../../containers/RightHolders";
+import { RightHoldersVariables as rightHolders } from "../../containers/MediaContent/Attributes/Providers/RightHolders";
 import { QuestionsVariables as questions } from "../../containers/Questions";
 import { LineCloseStyles, LineStyles, MenuItemLinkStyles, MenuItemLinkCloseStyles } from "./styles";
 import {
@@ -216,6 +216,13 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           sidebarIsOpen={open}
           dense={dense}
         />
+        <MenuItemLink
+          to={`/media_content/attributes`}
+          primaryText="Attributes"
+          onClick={onMenuClick}
+          sidebarIsOpen={open}
+          dense={dense}
+        />
       </ExpandMenu>
       <MenuItemLink
         to={`/streaming`}
@@ -347,18 +354,6 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           dense={dense}
         />
       </ExpandMenu>
-      <MenuItemLink
-        to={`/right_holders`}
-        primaryText={translate(`resources.right_holders.name`, {
-          smart_count: 2,
-        })}
-        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-        leftIcon={<rightHolders.icon />}
-        tooltipProps={tooltipProps(translate("resources.right_holders.name"))}
-        onClick={onMenuClick}
-        sidebarIsOpen={open}
-        dense={dense}
-      />
       <MenuItemLink
         to={`/questions`}
         primaryText={translate(`resources.questions.name`, {

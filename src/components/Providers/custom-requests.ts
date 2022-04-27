@@ -127,6 +127,15 @@ export const GET_ONE_RIGHT_HOLDER = gql`
   }
 `;
 
+export const GET_ONE_STUDIO = gql`
+  query Studio($id: ID!) {
+    item: Studio(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const GET_ONE_EXTERNAL_CATALOG = gql`
   query ExternalCatalog($id: ID!) {
     item: ExternalCatalog(id: $id) {

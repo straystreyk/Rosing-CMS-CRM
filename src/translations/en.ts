@@ -205,6 +205,50 @@ export const en: TranslationMessages = {
         },
       },
     },
+    "media_content/attributes/providers/content_providers": {
+      name: "Content providers",
+      titles: {
+        create: "New content provider",
+        edit: "Edit content provider",
+        list: "Attributes",
+      },
+      mutations: {
+        create: {
+          success: 'New content provider "%{name}" was created',
+          error: "Cant create content provider: %{error}",
+        },
+        edit: {
+          success: "Content provider was updated",
+          error: "Cant update content provider: %{error}",
+        },
+        list: {
+          success: 'Content provider "%{name}" was successfully updated',
+          error: "Cant update content provider: %{error}",
+        },
+      },
+    },
+    "media_content/attributes/providers/studios": {
+      name: "Studios",
+      titles: {
+        create: "New studio",
+        edit: "Edit studio",
+        list: "Attributes",
+      },
+      mutations: {
+        create: {
+          success: 'New studio "%{name}" was created',
+          error: "Cant create studio: %{error}",
+        },
+        edit: {
+          success: "Studio was updated",
+          error: "Cant update studio: %{error}",
+        },
+        list: {
+          success: 'Studio "%{name}" was successfully updated',
+          error: "Cant update studio: %{error}",
+        },
+      },
+    },
     datacenters: {
       name: "Datacenters",
       titles: {
@@ -303,12 +347,12 @@ export const en: TranslationMessages = {
         markers: "markers",
       },
     },
-    right_holders: {
+    "media_content/attributes/providers/right_holders": {
       name: "Right Holders",
       titles: {
         create: "New Right Holder",
         edit: "Edit Right Holder",
-        list: "Right Holders",
+        list: "Attributes",
       },
     },
     channel_versions: {
