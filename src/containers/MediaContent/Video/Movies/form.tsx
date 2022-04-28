@@ -42,6 +42,7 @@ import { CheckBoxGroup } from "../../../../components/UI/MaterialUI/check-box-gr
 import { SwitchInput } from "../../../../components/Inputs/SwitchInput";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
+import { ColorPickerInput } from "../../../../components/Inputs/color-picker-input";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -73,9 +74,12 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
     }
   }, [formState.submitFailed]);
 
+  console.log(formState.values);
+
   return (
     <>
       <FormTabs labels={FIXED_TAB_LABELS} />
+      <ColorPickerInput source="coco" />
       <FormSection
         text="Attributes are used to visually represent the movie in the app and help the user make a choice.
           The more detailed the section is, the higher the probability of the movie getting into the search results and filtering in the application."
@@ -196,7 +200,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         <ReferenceInput
           label="Right Holder"
           source="rightHolderId"
-          reference="right_holders"
+          reference="media_content/attributes/providers/right_holders"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >

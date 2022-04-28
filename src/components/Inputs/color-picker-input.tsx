@@ -1,6 +1,7 @@
 import * as React from "react";
+import * as _ from "lodash";
 import { makeStyles } from "@material-ui/core";
-import { useRef } from "react";
+import { useField } from "react-final-form";
 
 const useStyles = makeStyles({
   PaletteButton: {
@@ -11,16 +12,19 @@ const useStyles = makeStyles({
   },
 });
 
-export const ColorPickerInput = () => {
-  const ref = useRef(null);
-  const [target, setTarget] = React.useState<HTMLInputElement | null>(null);
-  const [value, setValue] = React.useState<string>("#000000");
+export const ColorPickerInput: React.FC<{ source: string }> = ({ source }) => {
   const classes = useStyles();
+  const ref = React.useRef(null);
+  const { input } = useField(source, { type: "color", initialValue: "#000000" });
+  const [target, setTarget] = React.useState<HTMLInputElement | null>(null);
 
-  const changeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event);
-    setValue(event.target.value);
+  const debounced = _.debounce(input.onChange, 1);
+
+  const customOnChange = (event: any) => {
+    debounced(event);
   };
+
+  React.useEffect(() => {}, [input.value]);
 
   const showPalette = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,15 +44,11 @@ export const ColorPickerInput = () => {
 
   return (
     <>
-      <button
-        style={{ backgroundColor: value }}
-        className={classes.PaletteButton}
-        onClick={showPalette}
-      />
+      <button className={classes.PaletteButton} onClick={showPalette} />
       <input
+        {...input}
+        onChange={customOnChange}
         type="color"
-        onChange={changeColor}
-        value={value}
         ref={ref}
         style={{ width: 0, height: 0, opacity: 0 }}
       />

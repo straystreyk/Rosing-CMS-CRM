@@ -4,7 +4,7 @@ import { useListContext } from "react-admin";
 import { makeStyles, Menu, TextField } from "@material-ui/core";
 
 import { RoundedFilterShow } from "../RoundedFilterShow";
-import { DateFilterProps } from "../custom-filters-types";
+import { StandardCustomFilterProps } from "../custom-filters-types";
 import { StandardButton } from "../../UI/Buttons/standard-button";
 import { AcceptFilterIcon, CancelFilterIcon } from "../../../constants/icons";
 import { MenuListProps, PaperProps } from "../constants";
@@ -12,18 +12,15 @@ import { DateFilterStyles } from "./styles";
 
 const useStyles = makeStyles(DateFilterStyles);
 
-export const DateFilter: React.FC<DateFilterProps> = ({
-  source,
-  secondSource,
-  label,
-  defaultActive,
-}) => {
+const useDateFilter = ({ source }: { source: string }) => {
   const { filterValues, setFilters, displayedFilters } = useListContext();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [fromValue, setFromValue] = React.useState("");
-  const [toValue, setToValue] = React.useState("");
-  const classes = useStyles();
-  const open = Boolean(anchorEl);
+  const [fromValue, setFromValue] = React.useState(
+    filterValues[source] && filterValues[source].from ? filterValues[source].from : ""
+  );
+  const [toValue, setToValue] = React.useState(
+    filterValues[source] && filterValues[source].to ? filterValues[source].to : ""
+  );
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -42,8 +39,51 @@ export const DateFilter: React.FC<DateFilterProps> = ({
   };
 
   const deleteFilter = React.useCallback(() => {
-    setFilters(_.omit(filterValues, [source, secondSource]), displayedFilters);
-  }, [secondSource, displayedFilters, source, filterValues, setFilters]);
+    setFilters(_.omit(filterValues, [source]), displayedFilters);
+  }, [displayedFilters, source, filterValues, setFilters]);
+
+  const acceptFilter = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (fromValue || toValue) {
+      const filter: { from?: string; to?: string } = {};
+      if (fromValue) filter.from = fromValue;
+      if (toValue) filter.to = toValue;
+      setFilters({ ...filterValues, [source]: filter }, displayedFilters);
+      handleClose();
+    }
+  };
+
+  return {
+    deleteFilter,
+    acceptFilter,
+    getToValue,
+    getFromValue,
+    handleClick,
+    handleClose,
+    anchorEl,
+    fromValue,
+    toValue,
+  };
+};
+
+export const DateFilter: React.FC<StandardCustomFilterProps> = ({
+  source,
+  label,
+  defaultActive,
+}) => {
+  const {
+    anchorEl,
+    handleClose,
+    getFromValue,
+    getToValue,
+    handleClick,
+    fromValue,
+    toValue,
+    deleteFilter,
+    acceptFilter,
+  } = useDateFilter({ source });
+  const classes = useStyles();
+  const open = Boolean(anchorEl);
 
   return (
     <>
@@ -52,7 +92,6 @@ export const DateFilter: React.FC<DateFilterProps> = ({
         deleteFilter={deleteFilter}
         defaultActive={defaultActive}
         source={source}
-        secondSource={secondSource}
         label={label}
       />
       <Menu
@@ -70,6 +109,7 @@ export const DateFilter: React.FC<DateFilterProps> = ({
             onChange={getFromValue}
             value={fromValue}
             className={classes.DateInput}
+            label="From"
             id="date"
             type="date"
           />
@@ -77,6 +117,7 @@ export const DateFilter: React.FC<DateFilterProps> = ({
             onChange={getToValue}
             value={toValue}
             className={classes.DateInput}
+            label="To"
             id="date"
             type="date"
           />
@@ -86,6 +127,7 @@ export const DateFilter: React.FC<DateFilterProps> = ({
             startIcon={<AcceptFilterIcon color="var(--accent-color)" />}
             variant="text"
             customColor="var(--accent-color)"
+            onClick={acceptFilter}
           >
             Accept
           </StandardButton>

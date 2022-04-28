@@ -8,6 +8,9 @@ export const DateFilterStyles: any = {
   DateInput: {
     ...TextInputStyles,
     width: "48%",
+    "& label + .MuiInput-formControl": {
+      marginTop: 0,
+    },
   },
   ButtonsWrapper: {
     marginTop: 10,

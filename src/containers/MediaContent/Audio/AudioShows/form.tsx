@@ -192,7 +192,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         <ReferenceInput
           label="Right Holder"
           source="rightHolderId"
-          reference="right_holders"
+          reference="media_content/attributes/providers/right_holders"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >

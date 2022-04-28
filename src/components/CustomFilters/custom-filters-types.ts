@@ -17,10 +17,6 @@ export interface ChoicesCustomFilter extends StandardCustomFilterProps {
   query?: any;
 }
 
-export interface DateFilterProps extends StandardCustomFilterProps {
-  secondSource: string;
-}
-
 export interface FilterTemplate extends ChoicesCustomFilter {
   component: FC<any>;
   secondSource?: string;

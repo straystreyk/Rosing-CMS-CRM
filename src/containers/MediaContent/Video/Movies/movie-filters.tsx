@@ -45,8 +45,11 @@ export const movieFilters: FilterTemplate[] = [
   {
     component: DateFilter,
     label: "Created At",
-    source: "from",
-    secondSource: "to",
-    defaultActive: true,
+    source: "createdAt",
+  },
+  {
+    component: DateFilter,
+    label: "Updated At",
+    source: "updatedAt",
   },
 ];
