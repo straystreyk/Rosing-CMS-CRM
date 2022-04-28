@@ -34,6 +34,13 @@ const imageIcon =
   '<path d="M0.5 16.3365C0.5 16.2537 0.567157 16.1865 0.65 16.1865L15.35 16.1865C15.4328 16.1865 15.5 16.2537 15.5 16.3365C15.5 16.4194 15.4328 16.4865 15.35 16.4865L0.65 16.4865C0.567157 16.4865 0.5 16.4194 0.5 16.3365Z" fill="#9FA5A8" stroke="#9FA5A8"/>\n' +
   "</svg>\n";
 
+const codeIcon =
+  '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
+  '<path d="M13.7969 7.38476L16.2718 9.85963C16.3499 9.93774 16.3499 10.0644 16.2718 10.1425L13.7969 12.6172" stroke="#9FA5A8" stroke-width="1.3" stroke-linecap="round"/>\n' +
+  '<path d="M6.20311 12.6172L3.72824 10.1423C3.65013 10.0642 3.65013 9.93758 3.72824 9.85947L6.20312 7.38477" stroke="#9FA5A8" stroke-width="1.3" stroke-linecap="round"/>\n' +
+  '<line x1="8.95054" y1="14.034" x2="11.2023" y2="5.63044" stroke="#9FA5A8" stroke-width="1.3" stroke-linecap="round"/>\n' +
+  "</svg>\n";
+
 export const icons = [
   {
     name: "bold",
@@ -58,5 +65,9 @@ export const icons = [
   {
     name: "image",
     icon: imageIcon,
+  },
+  {
+    name: "code-block",
+    icon: codeIcon,
   },
 ];

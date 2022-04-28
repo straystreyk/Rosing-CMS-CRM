@@ -144,7 +144,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           type="date"
           fullWidth
         />
-        <ReferenceInput
+        <ReferenceArrayInput
           label="Languages"
           source="languagesIds"
           reference="media_content/attributes/languages"
@@ -158,7 +158,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
             inputType={type}
             helperText="The language of the movie's audio track. You can select multiple languages from the list."
           />
-        </ReferenceInput>
+        </ReferenceArrayInput>
         <ReferenceArrayInput
           label="Genres"
           source="genreIds"

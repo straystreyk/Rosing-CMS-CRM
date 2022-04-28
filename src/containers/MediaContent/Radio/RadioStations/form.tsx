@@ -97,6 +97,13 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           inputType={type}
           helperText="The serial number in the general list of films. Can be entered manually when creating or editing, the positions of the remaining films will be updated accordingly. If the field is left empty, the last sequential number will be assigned to the movie."
         />
+        <NumberInput
+          source="number"
+          label="Number"
+          resource={resource}
+          inputType={type}
+          helperText="The serial number in the general list of films. Can be entered manually when creating or editing, the positions of the remaining films will be updated accordingly. If the field is left empty, the last sequential number will be assigned to the movie."
+        />
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}

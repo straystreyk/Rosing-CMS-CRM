@@ -74,15 +74,12 @@ export const ResourceTitle: React.FC<TitleProps> = ({
   ...props
 }) => {
   const { values } = useFormState();
-  const [title] = React.useState<string>(values.name ?? "");
+  const [title] = React.useState<string>((values.name || values.fullName) ?? "");
   const date = values.updatedAt ? new Date(values.updatedAt).toLocaleDateString() : "";
   const time = values.updatedAt ? new Date(values.updatedAt).toLocaleTimeString() : "";
 
   const translate = useTranslate();
   const classes = useStyles();
-
-  console.log(name);
-  console.log(form);
 
   return (
     <div className={classes.titleWrapper}>

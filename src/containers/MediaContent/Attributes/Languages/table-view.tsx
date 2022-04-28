@@ -37,7 +37,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         source="position"
         render={(record?: RecordRA) => record?.position ?? "Not filled in"}
       />
-      <TextField emptyText="Not filled in" label="ISO2 Code" source="slug" />
+      <TextField emptyText="Not filled in" label="ISO2 Code" source="iso2" />
       <FunctionField
         label=""
         render={(record?: RecordRA) => (
