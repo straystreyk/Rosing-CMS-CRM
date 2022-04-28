@@ -81,6 +81,9 @@ export const ResourceTitle: React.FC<TitleProps> = ({
   const translate = useTranslate();
   const classes = useStyles();
 
+  console.log(name);
+  console.log(form);
+
   return (
     <div className={classes.titleWrapper}>
       <div>

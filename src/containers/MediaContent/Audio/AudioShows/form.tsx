@@ -147,7 +147,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         <ReferenceInput
           label="Languages"
           source="languagesIds"
-          reference="languages"
+          reference="media_content/attributes/languages"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >

@@ -26,6 +26,8 @@ import { NewsVariables as news } from "../MediaContent/News";
 import { PartVariables as parts } from "../MediaContent/Audio/Parts";
 import { ContentProvidersVariables as contentProviders } from "../MediaContent/Attributes/Providers/ContentProviders";
 import { StudiosVariables as studios } from "../MediaContent/Attributes/Providers/Studios";
+import { LanguagesVariables as languages } from "../MediaContent/Attributes/Languages";
+import { PeopleVariables as people } from "../MediaContent/Attributes/People";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -69,15 +71,15 @@ export const App = () => {
       <Resource name="media_content/attributes/providers/right_holders" {...rightHolders} />
       <Resource name="media_content/attributes/providers/studios" {...studios} />
       <Resource name="media_content/attributes/genres" {...genres} />
+      <Resource name="media_content/attributes/languages" {...languages} />
+      <Resource name="media_content/attributes/people" {...people} />
       <Resource name="questions" {...questions} />
       <Resource name="media_content/news" {...news} />
-      <Resource name="people" />
       <Resource name="castMembers" />
       <Resource name="countries" />
       <Resource name="production_countries" />
       <Resource name="api_clients" />
       <Resource name="images" />
-      <Resource name="languages" />
     </Admin>
   );
 };

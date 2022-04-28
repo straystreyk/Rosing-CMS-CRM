@@ -125,7 +125,23 @@ export const en: TranslationMessages = {
       titles: {
         create: "New Genre",
         edit: "Edit Genre",
-        list: "Genres",
+        list: "Attributes",
+      },
+    },
+    "media_content/attributes/languages": {
+      name: "Languages",
+      titles: {
+        create: "New Language",
+        edit: "Edit Language",
+        list: "Attributes",
+      },
+    },
+    "media_content/attributes/people": {
+      name: "Persons",
+      titles: {
+        create: "New Person",
+        edit: "Edit Person",
+        list: "Attributes",
       },
     },
     "media_content/radio/radio_stations": {

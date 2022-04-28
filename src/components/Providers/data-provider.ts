@@ -17,6 +17,7 @@ import { GET_ONE_AUDIO_SHOW } from "../../containers/MediaContent/Audio/AudioSho
 import { GET_ONE_NEWS } from "../../containers/MediaContent/News/requests";
 import { GET_EDIT_EXTERNAL_CATALOG } from "../../containers/MediaContent/Attributes/Providers/ContentProviders/requests";
 import { GET_EDIT_STUDIO } from "../../containers/MediaContent/Attributes/Providers/Studios/requests";
+import { GET_ONE_PERSON } from "../../containers/MediaContent/Attributes/People/requests";
 
 const getGqlResource = (resource: string) => {
   switch (resource) {
@@ -46,7 +47,7 @@ const getGqlResource = (resource: string) => {
       return "Channel";
     case "media_content/attributes/providers/studios":
       return "Studio";
-    case "languages":
+    case "media_content/attributes/languages":
       return "Language";
     case "episodes":
       return "Episode";
@@ -58,6 +59,8 @@ const getGqlResource = (resource: string) => {
       return "RightHolder";
     case "media_content/attributes/genres":
       return "Genre";
+    case "media_content/attributes/people":
+      return "Person";
     case "media_content/radio/radio_stations":
       return "RadioStation";
     case "media_content/radio/radio_live_streams":
@@ -68,8 +71,6 @@ const getGqlResource = (resource: string) => {
       return "Image";
     case "media_content/news":
       return "News";
-    case "people":
-      return "Person";
     case "castMembers":
       return "CastMember";
     case "countries":
@@ -118,6 +119,9 @@ const customBuildQuery =
     }
     if (fetchType === "GET_ONE" && resource === "Studio") {
       return { ...builtQuery, query: GET_EDIT_STUDIO };
+    }
+    if (fetchType === "GET_ONE" && resource === "Person") {
+      return { ...builtQuery, query: GET_ONE_PERSON };
     }
 
     return builtQuery;

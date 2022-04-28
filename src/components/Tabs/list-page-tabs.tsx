@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: `1px solid var(--secondary-color-disable)`,
   },
   SubTabListLink: {
-    color: "var(--secondary-color-main)",
+    color: "var(--secondary-color-default)",
     fontSize: 14,
     lineHeight: "20px",
     fontWeight: 500,
@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 4,
   },
   SubTabListLinkActive: {
+    color: "var(--secondary-color-main)",
     borderBottom: `3px solid var(--secondary-color-main)`,
   },
 }));

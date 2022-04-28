@@ -98,7 +98,7 @@ export const CastMembers: React.FC<{
         <ReferenceInput
           label="Person"
           source={`${parentSourceWithIndex}.person.id`}
-          reference="people"
+          reference="media_content/attributes/people"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >

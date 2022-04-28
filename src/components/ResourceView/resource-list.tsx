@@ -51,6 +51,7 @@ export const ResourceList: React.FC<ResourcesListProps> = ({
       <List
         {...props}
         empty={empty}
+        // bulkActionButtons={false}
         filters={filters as ReactElement | ReactElement[]}
         perPage={15}
         filter={filter}
