@@ -12,6 +12,7 @@ export const MultipleFiltersList: React.FC<ChoicesCustomFilter> = ({
   label,
   source,
   query,
+  defaultActive,
   ...rest
 }) => {
   const [choices, setChoices] = React.useState<[] | ChoicesItem[]>(rest.choices ?? []);
@@ -42,6 +43,7 @@ export const MultipleFiltersList: React.FC<ChoicesCustomFilter> = ({
         source={source}
         handleClick={handleClick}
         choices={choices}
+        defaultActive={defaultActive}
         deleteFilter={deleteFilter}
       />
       <AllFiltersList

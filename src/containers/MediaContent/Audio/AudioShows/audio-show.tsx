@@ -1,8 +1,12 @@
 import * as React from "react";
-import Icon from "@material-ui/icons/VideoCallRounded";
 
-import { ResourceList, ResourceCreate, ResourceEdit } from "../../../../components/ResourceView";
-import { Show } from "./show";
+import {
+  ResourceList,
+  ResourceCreate,
+  ResourceEdit,
+  ResourceShow,
+} from "../../../../components/ResourceView";
+import { TableView } from "./table-view";
 import { Form } from "./form";
 import { audioTabs } from "../constants";
 import { useRedirect, useRefresh } from "react-admin";
@@ -14,7 +18,7 @@ const resource = "media_content/audio/audio_shows";
 
 export const List: React.FC = (props) => (
   <ResourceList {...props} listTabs={audioTabs} resource={resource}>
-    <Show resource={resource} />
+    <TableView resource={resource} />
   </ResourceList>
 );
 export const Create: React.FC<CreateProps> = (props) => {
@@ -51,4 +55,8 @@ export const Edit: React.FC = (props) => (
   </ResourceEdit>
 );
 
-export { Icon };
+export const Show: React.FC = (props) => (
+  <ResourceShow {...props} resource={resource}>
+    <Form resource={resource} type="show" />
+  </ResourceShow>
+);

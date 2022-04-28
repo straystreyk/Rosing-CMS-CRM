@@ -9,6 +9,7 @@ import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Video/Episod
 import { GET_ONE_NEWS_NAME } from "../../containers/MediaContent/News/requests";
 import {
   GET_ONE_EXTERNAL_CATALOG,
+  GET_ONE_GENRE,
   GET_ONE_RIGHT_HOLDER,
   GET_ONE_STUDIO,
 } from "../Providers/custom-requests";
@@ -221,6 +222,21 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     name: "",
     href: "/media_content/attributes/providers/studios/:id",
     query: GET_ONE_STUDIO,
+    dynamicParam: "id",
+  },
+  //Genres
+  {
+    name: "Genres",
+    href: "/media_content/attributes/genres",
+  },
+  {
+    name: "New genre",
+    href: "/media_content/attributes/genres/create",
+  },
+  {
+    name: "",
+    href: "/media_content/attributes/genres/:id",
+    query: GET_ONE_GENRE,
     dynamicParam: "id",
   },
 ];

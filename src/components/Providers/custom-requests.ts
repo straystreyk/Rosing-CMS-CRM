@@ -45,24 +45,6 @@ export const ALL_RATING_SYSTEMS = gql`
   }
 `;
 
-export const ALL_VIDEO_FILES = gql`
-  query {
-    items: allVideoFiles {
-      id
-      name
-    }
-  }
-`;
-
-export const ALL_LANGUAGES = gql`
-  query {
-    items: allLanguages {
-      id
-      name
-    }
-  }
-`;
-
 export const GET_ONE_VIDEO_FILE = gql`
   query VideoFile($id: ID!) {
     item: VideoFile(id: $id) {
@@ -75,6 +57,15 @@ export const GET_ONE_VIDEO_FILE = gql`
 export const GET_ONE_DATA_CENTER = gql`
   query Datacenter($id: ID!) {
     item: Datacenter(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_ONE_GENRE = gql`
+  query Genre($id: ID!) {
+    item: Genre(id: $id) {
       id
       name
     }

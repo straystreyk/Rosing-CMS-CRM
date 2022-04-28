@@ -18,9 +18,50 @@
       <%- JSON.stringify(locals.globals) %>
       <% } %>
     </script>
+
+    <style>
+        .lds-ring {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            left: 50vw;
+            top: 50vh;
+            transform: translate(-50%, -50%);
+        }
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border: 8px solid #00A991;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.2, 0, 0.2, 0.7) infinite;
+            border-color: #00A991FF transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 <body>
-<div id='root'></div>
+<div id='root'><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
 
 
 <%if(locals.js) {%>

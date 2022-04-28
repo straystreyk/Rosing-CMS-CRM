@@ -13,6 +13,9 @@ export const DefaultRoundedFilterStyles = {
         marginLeft: 10,
       },
     },
+    "& .pinIcon": {
+      marginRight: 5,
+    },
     "& svg": {
       verticalAlign: "middle",
     },

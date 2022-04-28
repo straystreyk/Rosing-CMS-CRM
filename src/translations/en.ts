@@ -120,7 +120,7 @@ export const en: TranslationMessages = {
         name: "Name",
       },
     },
-    genres: {
+    "media_content/attributes/genres": {
       name: "Genres",
       titles: {
         create: "New Genre",

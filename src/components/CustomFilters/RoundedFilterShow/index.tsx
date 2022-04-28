@@ -4,13 +4,14 @@ import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
 import { ChoicesItem } from "../custom-filters-types";
-import { ArrowFilterIcon, DeleteFilterIcon } from "../constants";
+import { ArrowFilterIcon, DeleteFilterIcon, PinIcon } from "../constants";
 import { DefaultRoundedFilterStyles } from "./styles";
 
 const useStyles = makeStyles(DefaultRoundedFilterStyles);
 
 interface RoundedFilterShowProps {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  defaultActive?: boolean;
   choices?: ChoicesItem[];
   deleteFilter: () => void;
   secondSource?: string;
@@ -43,6 +44,7 @@ export const RoundedFilterShow: React.FC<RoundedFilterShowProps> = ({
   handleClick,
   source,
   deleteFilter,
+  defaultActive,
   label,
   choices,
   secondSource,
@@ -52,6 +54,11 @@ export const RoundedFilterShow: React.FC<RoundedFilterShowProps> = ({
 
   return (
     <span className={cn(classes.RoundedFilter, isAlreadyIn && classes.RoundedFilterActive)}>
+      {defaultActive && (
+        <span className="pinIcon">
+          <PinIcon />
+        </span>
+      )}
       <button onClick={handleClick}>
         <span className="label">{foundedFilter ? foundedFilter.name : label}</span>
         <ArrowFilterIcon

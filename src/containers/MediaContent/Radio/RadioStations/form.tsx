@@ -71,7 +71,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <ReferenceArrayInput
           label="Genres"
           source="genreIds"
-          reference="genres"
+          reference="media_content/attributes/genres"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >

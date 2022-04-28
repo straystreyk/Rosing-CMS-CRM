@@ -56,7 +56,7 @@ const getGqlResource = (resource: string) => {
       return "ExternalCatalog";
     case "media_content/attributes/providers/right_holders":
       return "RightHolder";
-    case "genres":
+    case "media_content/attributes/genres":
       return "Genre";
     case "media_content/radio/radio_stations":
       return "RadioStation";

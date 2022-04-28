@@ -8,6 +8,7 @@ import {
 import { MultipleFiltersList } from "../../../../components/CustomFilters/MultipleFiltersList";
 import { ALL_GENRES_FILTER } from "../../../../components/Providers/custom-requests";
 import { FilterTemplate } from "../../../../components/CustomFilters/custom-filters-types";
+import { DateFilter } from "../../../../components/CustomFilters/DateFilter";
 
 export const movieFilters: FilterTemplate[] = [
   {
@@ -40,5 +41,12 @@ export const movieFilters: FilterTemplate[] = [
     choices: MARKERS_CHOICES,
     label: "Labels",
     source: "markers",
+  },
+  {
+    component: DateFilter,
+    label: "Created At",
+    source: "from",
+    secondSource: "to",
+    defaultActive: true,
   },
 ];

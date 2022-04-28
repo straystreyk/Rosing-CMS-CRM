@@ -23,13 +23,7 @@ import {
   SELECT_MARKERS,
 } from "../../../../constants/forms-constants";
 import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input";
-import {
-  ALL_COUNTRIES,
-  ALL_GENRES,
-  ALL_PRODUCTION_COUNTRIES,
-  ALL_RIGHT_HOLDERS,
-  ALL_ROLES,
-} from "../../../../components/Providers/custom-requests";
+import { ALL_COUNTRIES, ALL_ROLES } from "../../../../components/Providers/custom-requests";
 import { FormSection } from "../../../../components/FormSection";
 import { MetaData } from "../../../../components/Models/Metadata";
 import { CastMembers } from "../../../../components/Models/CastMembers";
@@ -43,6 +37,7 @@ import { StandardButton } from "../../../../components/UI/Buttons/standard-butto
 import { ResourceCountIcon } from "../../../../constants/icons";
 import { useFormState } from "react-final-form";
 import { useHistory } from "react-router-dom";
+import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
 
 const useStyles = makeStyles({
   ArrayInputStyles,
@@ -89,18 +84,14 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           source="name"
           placeholder="name"
           fullWidth
-          helperText={
-            "The name of the audio show that users will see in any sections of the application"
-          }
+          helperText="The name of the audio show that users will see in any sections of the application"
         />
         <TextInput
           resource={resource}
           inputType={type}
           label="Slug"
           source="slug"
-          helperText={
-            "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
-          }
+          helperText="It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
           fullWidth
         />
         <TextInput
@@ -168,36 +159,49 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
             helperText="The language of the movie's audio track. You can select multiple languages from the list."
           />
         </ReferenceInput>
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
-          inputType={type}
-          resource={resource}
-          query={ALL_GENRES}
-          helperText="You can select several genres from the list"
-          source="genreIds"
+        <ReferenceArrayInput
           label="Genres"
-          idName="id"
-        />
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
-          inputType={type}
-          query={ALL_PRODUCTION_COUNTRIES}
+          source="genreIds"
+          reference="media_content/attributes/genres"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            optionValue="id"
+            resource={resource}
+            inputType={type}
+            helperText="You can select several genres from the list"
+          />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput
           label="Production countries"
           source="productionCountriesIds"
-          helperText="You can select several countries from the list"
+          reference="production_countries"
           resource={resource}
-          idName="id"
-        />
-        <ReferenceCustomInput
-          component={SelectInput}
-          query={ALL_RIGHT_HOLDERS}
-          inputType={type}
-          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            optionValue="id"
+            resource={resource}
+            inputType={type}
+            helperText="You can select several countries from the list"
+          />
+        </ReferenceArrayInput>
+        <ReferenceInput
           label="Right Holder"
           source="rightHolderId"
-          idName="id"
-          helperText="The company - the copyright holder of the audio show"
-        />
+          reference="right_holders"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <SelectInput
+            resource={resource}
+            inputType={type}
+            helperText="The company - the copyright holder of the film"
+          />
+        </ReferenceInput>
         <ReferenceInput
           label="Studios"
           source="studioIds"

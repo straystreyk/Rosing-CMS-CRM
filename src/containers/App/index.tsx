@@ -16,7 +16,7 @@ import { SeriesVariables as series } from "../MediaContent/Video/Series";
 import { ChannelsVariables as channels } from "../Channels";
 import { SeasonsVariables as seasons } from "../MediaContent/Video/Seasons";
 import { EpisodesVariables as episodes } from "../MediaContent/Video/Episodes";
-import { GenresVariables as genres } from "../Genres";
+import { GenresVariables as genres } from "../MediaContent/Attributes/Genres";
 import { ChannelVersions as channelVersions } from "../ChannelVersions";
 import { RadioStationsVariables as radioStations } from "../MediaContent/Radio/RadioStations";
 import { RadioLiveStreamsVariables as radioLiveStreams } from "../MediaContent/Radio/RadioLiveStreams";
@@ -61,7 +61,6 @@ export const App = () => {
       <Resource name="media_content/video/seasons/:seasonId/episodes" {...episodes} />
       <Resource name="media_content/video/series/:seriesId/seasons" {...seasons} />
       <Resource name="media_content/video/series" {...series} />
-      <Resource name="genres" {...genres} />
       <Resource name="media_content/radio/radio_stations" {...radioStations} />
       <Resource name="media_content/radio/radio_live_streams" {...radioLiveStreams} />
       <Resource name="media_content/audio/audio_shows/:audioShowId/parts" {...parts} />
@@ -69,6 +68,7 @@ export const App = () => {
       <Resource name="media_content/attributes/providers/content_providers" {...contentProviders} />
       <Resource name="media_content/attributes/providers/right_holders" {...rightHolders} />
       <Resource name="media_content/attributes/providers/studios" {...studios} />
+      <Resource name="media_content/attributes/genres" {...genres} />
       <Resource name="questions" {...questions} />
       <Resource name="media_content/news" {...news} />
       <Resource name="people" />

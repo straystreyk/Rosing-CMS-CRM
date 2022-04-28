@@ -108,7 +108,6 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
           </FilterContext.Provider>
 
           <>
-            {" "}
             <StandardButton
               variant="text"
               color="secondary"

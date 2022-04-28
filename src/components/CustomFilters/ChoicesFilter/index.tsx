@@ -39,7 +39,12 @@ const useChoiceFilter = ({ source }: { source: string }) => {
   };
 };
 
-export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({ source, label, choices }) => {
+export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({
+  source,
+  label,
+  choices,
+  defaultActive,
+}) => {
   const { filterValues } = useListContext();
   const { deleteFilter, anchorEl, handleClick, handleClose, handleMenuItemClick } = useChoiceFilter(
     { source }
@@ -50,6 +55,7 @@ export const ChoicesFilter: React.FC<ChoicesCustomFilter> = ({ source, label, ch
     <>
       <RoundedFilterShow
         deleteFilter={deleteFilter}
+        defaultActive={defaultActive}
         label={label}
         source={source}
         handleClick={handleClick}

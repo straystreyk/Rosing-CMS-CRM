@@ -76,9 +76,7 @@ const Episode: React.FC<{
           inputType={inputType}
           label="Slug"
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.slug` : "slug"}
-          helperText={
-            "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
-          }
+          helperText="It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
           fullWidth
         />
         <TextInput
