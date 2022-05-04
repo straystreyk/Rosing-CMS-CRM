@@ -14,25 +14,26 @@ interface RoundedFilterShowProps {
   defaultActive?: boolean;
   choices?: ChoicesItem[];
   deleteFilter: () => void;
-  secondSource?: string;
   source: string;
   label: string;
 }
 
-const useRoundedFilter = ({
-  source,
-  choices,
-  secondSource,
-}: {
-  source: string;
-  choices?: ChoicesItem[];
-  secondSource?: string;
-}) => {
+const useRoundedFilter = ({ source, choices }: { source: string; choices?: ChoicesItem[] }) => {
   const { filterValues } = useListContext();
-  const isAlreadyIn = source in filterValues || (secondSource && secondSource in filterValues);
+  const isAlreadyIn = source in filterValues;
+  let foundedFilter: (ChoicesItem | null)[] = [];
 
-  const foundedFilter =
-    source in filterValues && choices?.find((el) => el.value === filterValues[source]);
+  if (source in filterValues && choices) {
+    foundedFilter = choices
+      ?.map((el) => {
+        console.log(el);
+        if (filterValues[source] instanceof Array && filterValues[source].includes(el.value)) {
+          return el;
+        }
+        return el.value === filterValues[source] ? el : null;
+      })
+      .filter(Boolean);
+  }
 
   return {
     isAlreadyIn,
@@ -47,10 +48,9 @@ export const RoundedFilterShow: React.FC<RoundedFilterShowProps> = ({
   defaultActive,
   label,
   choices,
-  secondSource,
 }) => {
   const classes = useStyles();
-  const { isAlreadyIn, foundedFilter } = useRoundedFilter({ source, choices, secondSource });
+  const { isAlreadyIn, foundedFilter } = useRoundedFilter({ source, choices });
 
   return (
     <span className={cn(classes.RoundedFilter, isAlreadyIn && classes.RoundedFilterActive)}>
@@ -60,7 +60,16 @@ export const RoundedFilterShow: React.FC<RoundedFilterShowProps> = ({
         </span>
       )}
       <button onClick={handleClick}>
-        <span className="label">{foundedFilter ? foundedFilter.name : label}</span>
+        <span className="label">
+          {foundedFilter && foundedFilter.length ? (
+            <>
+              {foundedFilter[0]?.name}{" "}
+              {foundedFilter.length > 1 && <>&nbsp;+{foundedFilter.length - 1}</>}
+            </>
+          ) : (
+            label
+          )}
+        </span>
         <ArrowFilterIcon
           color={!isAlreadyIn ? "var(--primary-focus)" : "var(--primary-button-default)"}
         />

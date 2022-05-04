@@ -76,6 +76,11 @@ export const lightTheme = {
         },
       },
     },
+    RaList: {
+      bulkActionsDisplayed: {
+        marginTop: 0,
+      },
+    },
     RaFormInput: {
       input: {
         width: "100%",
@@ -224,8 +229,9 @@ export const lightTheme = {
       },
     },
     RaDatagrid: {
-      headerCell: {
-        backgroundColor: "#F2F7FB",
+      headerCell: {},
+      table: {
+        userSelect: "unset",
       },
     },
     MuiTableCell: {

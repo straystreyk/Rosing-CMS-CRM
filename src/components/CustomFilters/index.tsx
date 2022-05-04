@@ -5,7 +5,7 @@ import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
 import { StandardButton } from "../UI/Buttons/standard-button";
-import { PlusIcon } from "../../constants/icons";
+import { DeleteIcon, PlusIcon } from "../../constants/icons";
 import { CustomFiltersWrapperStyles } from "./styles";
 import { SearchFilters } from "./SearchFilter";
 import { AllFiltersList } from "./AllFilterList";
@@ -81,6 +81,7 @@ const useFilters = ({
 
 export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) => {
   const classes = useStyles();
+  const { filterValues, setFilters, displayedFilters } = useListContext();
   const [activeFilters, setActiveFilters] = React.useState<FilterTemplate[]>([]);
   const [initialFilters, setInitialFilters] = React.useState<FilterTemplate[]>(filters ?? []);
   const [filteredFilters, setFilteredFilters] = React.useState<FilterTemplate[]>(filters ?? []);
@@ -93,6 +94,15 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
   });
 
   const open = Boolean(anchorEl);
+  const allActiveFiltersWithValue = Object.keys(filterValues).filter((el) => {
+    if (el !== "q" && el !== "searchRule") {
+      return el;
+    }
+  });
+
+  const deleteAllFilters = React.useCallback(() => {
+    setFilters(_.omit(filterValues, allActiveFiltersWithValue), displayedFilters);
+  }, [setFilters, filterValues, allActiveFiltersWithValue, displayedFilters]);
 
   return (
     <div className={classes.CustomFiltersWrapper}>
@@ -117,6 +127,17 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
             >
               Add Filter
             </StandardButton>
+            {allActiveFiltersWithValue.length !== 0 && (
+              <StandardButton
+                variant="text"
+                startIcon={<DeleteIcon color="var(--additional-red-default)" />}
+                customColor="var(--additional-red-default)"
+                className="filterButton"
+                onClick={deleteAllFilters}
+              >
+                Delete ({allActiveFiltersWithValue.length})
+              </StandardButton>
+            )}
             <AllFiltersList
               initialFilters={initialFilters}
               setFilteredFilters={setFilteredFilters as any}

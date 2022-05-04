@@ -28,6 +28,7 @@ import { ContentProvidersVariables as contentProviders } from "../MediaContent/A
 import { StudiosVariables as studios } from "../MediaContent/Attributes/Providers/Studios";
 import { LanguagesVariables as languages } from "../MediaContent/Attributes/Languages";
 import { PeopleVariables as people } from "../MediaContent/Attributes/People";
+import { ProgramsTypesVariables as programsTypes } from "../MediaContent/Attributes/ProgramsTypes";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -73,6 +74,7 @@ export const App = () => {
       <Resource name="media_content/attributes/genres" {...genres} />
       <Resource name="media_content/attributes/languages" {...languages} />
       <Resource name="media_content/attributes/people" {...people} />
+      <Resource name="media_content/attributes/programs_types" {...programsTypes} />
       <Resource name="questions" {...questions} />
       <Resource name="media_content/news" {...news} />
       <Resource name="castMembers" />

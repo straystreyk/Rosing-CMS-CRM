@@ -72,10 +72,7 @@ export const useImageItem = ({
           if (message) {
             setImageIds((p: string[]) => p.filter((el: string) => el !== imageId));
             setServerImages((p: any) => p.filter((el: any) => el.id !== imageId));
-            setImageId("");
             setUrl("");
-            setImageSize("");
-          } else {
           }
         }
       } catch (error) {

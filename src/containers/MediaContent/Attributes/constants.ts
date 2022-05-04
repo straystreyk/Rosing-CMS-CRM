@@ -17,4 +17,8 @@ export const attributesTabs: ListTabProps[] = [
     name: "Persons",
     link: "/media_content/attributes/people",
   },
+  {
+    name: "Types of TV shows",
+    link: "/media_content/attributes/programs_types",
+  },
 ];

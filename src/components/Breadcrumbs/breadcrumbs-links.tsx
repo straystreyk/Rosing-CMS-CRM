@@ -10,6 +10,8 @@ import { GET_ONE_NEWS_NAME } from "../../containers/MediaContent/News/requests";
 import {
   GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_GENRE,
+  GET_ONE_PERSON,
+  GET_ONE_PROGRAM_TYPE,
   GET_ONE_RIGHT_HOLDER,
   GET_ONE_STUDIO,
 } from "../Providers/custom-requests";
@@ -237,6 +239,36 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     name: "",
     href: "/media_content/attributes/genres/:id",
     query: GET_ONE_GENRE,
+    dynamicParam: "id",
+  },
+  //Person
+  {
+    name: "Persons",
+    href: "/media_content/attributes/people",
+  },
+  {
+    name: "New person",
+    href: "/media_content/attributes/people/create",
+  },
+  {
+    name: "",
+    href: "/media_content/attributes/people/:id",
+    query: GET_ONE_PERSON,
+    dynamicParam: "id",
+  },
+  //Types of TV show
+  {
+    name: "Types of TV shows",
+    href: "/media_content/attributes/programs_types",
+  },
+  {
+    name: "New type of TV show",
+    href: "/media_content/attributes/programs_types/create",
+  },
+  {
+    name: "",
+    href: "/media_content/attributes/programs_types/:id",
+    query: GET_ONE_PROGRAM_TYPE,
     dynamicParam: "id",
   },
 ];

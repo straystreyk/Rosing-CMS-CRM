@@ -1332,6 +1332,72 @@ export const SortIcon = () => (
   </svg>
 );
 
+export const ActiveSortIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line
+      x1="10.65"
+      y1="4.15078"
+      x2="11.35"
+      y2="4.15078"
+      stroke="#008DFF"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <line
+      x1="10.65"
+      y1="8.15078"
+      x2="13.35"
+      y2="8.15078"
+      stroke="#008DFF"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <line
+      x1="10.65"
+      y1="12.1508"
+      x2="15.35"
+      y2="12.1508"
+      stroke="#008DFF"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <line
+      x1="2.65"
+      y1="16.1508"
+      x2="17.35"
+      y2="16.1508"
+      stroke="#008DFF"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <line
+      x1="2.78711"
+      y1="6.73505"
+      x2="5.4034"
+      y2="4.11876"
+      stroke="#008DFF"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <line
+      x1="0.65"
+      y1="-0.65"
+      x2="4.35"
+      y2="-0.65"
+      transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 8.01953 7.6543)"
+      stroke="#008DFF"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+    <path
+      d="M5.40332 12.1406L5.40332 4.2104"
+      stroke="#008DFF"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 export const DNDIcon = () => (
   <svg width="8" height="35" viewBox="0 0 8 35" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle

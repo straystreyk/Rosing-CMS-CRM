@@ -18,7 +18,7 @@ export const TextInputOrigin: React.FC<InputProps> = ({ inputType, ...props }) =
         helperText={props.helperText ?? false}
         resettable={props.resettable ?? true}
         className={classes.TextInputStyles}
-        disabled={inputType !== "create" && props.source === "slug"}
+        disabled={(inputType !== "create" && props.source === "slug") || props.disabled}
       />
     </>
   );

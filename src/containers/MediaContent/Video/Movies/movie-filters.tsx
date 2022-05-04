@@ -28,7 +28,7 @@ export const movieFilters: FilterTemplate[] = [
     component: ChoicesFilter,
     choices: EXTRA_VIDEO_CHOICES,
     label: "Extra videos",
-    source: "extraVideo",
+    source: "extraVideosExist",
   },
   {
     component: MultipleFiltersList,

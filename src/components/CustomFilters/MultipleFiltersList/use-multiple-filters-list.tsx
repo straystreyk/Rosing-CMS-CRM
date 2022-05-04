@@ -39,6 +39,12 @@ export const useMultipleFiltersList = ({
     setAnchorEl(null);
   };
 
+  React.useEffect(() => {
+    if (!(source in filterValues)) {
+      setActiveFilters([]);
+    }
+  }, [filterValues]);
+
   const deleteFilter = React.useCallback(() => {
     setFilters(_.omit(filterValues, [source]), displayedFilters);
     setActiveFilters([]);
@@ -110,7 +116,7 @@ export const useMultipleFiltersList = ({
         setActiveFilters((prev) => [...prev, filter]);
       }
     });
-  }, []);
+  }, [choices]);
 
   return {
     handleClick,

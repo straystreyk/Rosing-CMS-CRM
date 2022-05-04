@@ -61,6 +61,8 @@ const getGqlResource = (resource: string) => {
       return "Genre";
     case "media_content/attributes/people":
       return "Person";
+    case "media_content/attributes/programs_types":
+      return "ProgramType";
     case "media_content/radio/radio_stations":
       return "RadioStation";
     case "media_content/radio/radio_live_streams":

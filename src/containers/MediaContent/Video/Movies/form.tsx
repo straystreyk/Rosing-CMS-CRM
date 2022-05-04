@@ -42,6 +42,7 @@ import { CheckBoxGroup } from "../../../../components/UI/MaterialUI/check-box-gr
 import { SwitchInput } from "../../../../components/Inputs/SwitchInput";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
+import { ColorPickerInput } from "../../../../components/Inputs/color-picker-input";
 
 const useStyles = makeStyles((theme) => ({
   Link: {

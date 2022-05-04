@@ -3,8 +3,7 @@ import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import cn from "classnames";
 import { Skeleton } from "@material-ui/lab";
-import { useHistory, useLocation, useParams } from "react-router-dom";
-import { log } from "util";
+import { useHistory, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
   Sort: {
@@ -33,10 +32,10 @@ const SKELETON_HEIGHT = 17;
 export const PerPageCounter: React.FC<{ showBy?: (number | string)[] }> = ({
   showBy = [15, 25, 50, 100],
 }) => {
-  // const location = useLocation();
-  // const history = useHistory();
+  const location = useLocation();
+  const history = useHistory();
   const { total, perPage, setPerPage } = useListContext();
-  // const queryParams = new URLSearchParams(location.search);
+  const queryParams = new URLSearchParams(location.search);
   const classes = useStyles();
 
   const changePerPage = React.useCallback(
@@ -46,11 +45,9 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[] }> = ({
         return;
       }
       // queryParams.delete("perPage");
-      // history.replace({
-      //   search: queryParams.toString(),
-      // });
+      // history.push(`${location.pathname}?${queryParams}`);
     },
-    [setPerPage]
+    [history, queryParams, setPerPage, location.pathname]
   );
 
   return (
@@ -64,9 +61,13 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[] }> = ({
         />
       )}
       , show by:&nbsp;
-      {showBy?.map((el) => (
+      {showBy?.map((el, index) => (
         <button
-          className={cn("sortButton", perPage === el && "active")}
+          className={cn(
+            "sortButton",
+            queryParams.has("perPage") && perPage === el && "active",
+            !queryParams.has("perPage") && typeof el === "string" && "active"
+          )}
           key={el}
           onClick={() => changePerPage(el)}
         >

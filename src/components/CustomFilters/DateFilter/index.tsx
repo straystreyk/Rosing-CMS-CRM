@@ -22,6 +22,13 @@ const useDateFilter = ({ source }: { source: string }) => {
     filterValues[source] && filterValues[source].to ? filterValues[source].to : ""
   );
 
+  React.useEffect(() => {
+    if (!(source in filterValues)) {
+      setFromValue("");
+      setToValue("");
+    }
+  }, [filterValues, source]);
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };

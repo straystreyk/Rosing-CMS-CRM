@@ -10,10 +10,26 @@ import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core";
 
 import { DatagridWrapper } from "./datagrid-wrapper";
-import { DNDIcon, SortIcon } from "../../constants/icons";
+import { ActiveSortIcon, DNDIcon, SortIcon } from "../../constants/icons";
 import { CustomDatagridProps } from "./custom-datagrid-types";
+import { BulkActions } from "../BulkActions";
 
 const inverseOrder = (sort: string) => (sort === "ASC" ? "DESC" : "ASC");
+
+const CheckedIcon = () => (
+  <svg width="21" height="21" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="20" height="20" rx="2" fill="#00A991" />
+    <line
+      x1="7"
+      y1="12.0049"
+      x2="16"
+      y2="12.0049"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
 
 const useStyles = makeStyles({
   TableCheckbox: {
@@ -38,6 +54,16 @@ const useStyles = makeStyles({
     pointerEvents: "none",
     transition: "0.35s all ease",
   },
+  TableCellHeader: {
+    "& button": {
+      color: "var(--primary-text-default)",
+      fontWeight: 600,
+      fontSize: 14,
+    },
+    "&.active button": {
+      color: "var(--primary-focus)",
+    },
+  },
 });
 
 export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
@@ -59,25 +85,41 @@ export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
   return (
     <TableHead>
       <TableRow>
-        <TableCell className={classes.TableCheckbox} padding="checkbox">
-          <Checkbox color="primary" checked={selectedIds === ids} onClick={checkedAll} />
+        <TableCell
+          className={cn(classes.TableCheckbox, classes.TableCellHeader)}
+          padding="checkbox"
+        >
+          <Checkbox
+            checkedIcon={<CheckedIcon />}
+            color="primary"
+            checked={selectedIds === ids}
+            onClick={checkedAll}
+          />
         </TableCell>
         {React.Children.map(children, (child: any) => (
-          <TableCell width={200} key={child.props.source}>
-            {child.props.label}&nbsp;
+          <TableCell
+            className={cn(
+              classes.TableCellHeader,
+              currentSort.field === child.props.source && "active"
+            )}
+            width={200}
+            key={child.props.source}
+          >
             {child.props.label && (
-              <button
-                style={{
-                  verticalAlign: "middle",
-                  transformOrigin: "center center",
-                  transform:
-                    child.props.source === currentSort.field && currentSort.order === "DESC"
-                      ? "rotate(180deg)"
-                      : "",
-                }}
-                onClick={() => sort(child.props.source)}
-              >
-                <SortIcon />
+              <button onClick={() => sort(child.props.source)}>
+                {child.props.label}&nbsp;
+                <span
+                  style={{
+                    verticalAlign: "middle",
+                    display: "inline-block",
+                    transform:
+                      child.props.source === currentSort.field && currentSort.order === "DESC"
+                        ? "rotate(180deg) translateY(3px)"
+                        : "",
+                  }}
+                >
+                  {child.props.source !== currentSort.field ? <SortIcon /> : <ActiveSortIcon />}
+                </span>
               </button>
             )}
           </TableCell>
@@ -262,6 +304,7 @@ export const DatagridList: React.FC<CustomDatagridProps> = ({ listText, ...props
     filters={props.filters}
     listText={listText}
   >
+    <BulkActions />
     <Datagrid
       header={props.header ?? <DatagridHeader />}
       {...props}

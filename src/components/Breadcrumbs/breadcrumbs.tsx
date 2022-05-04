@@ -48,16 +48,15 @@ const useBreadcrumbs = () => {
               query: el.query,
               variables: { id: sanitizeId(params[el.dynamicParam]) },
             });
-            const { name } = res.data.item;
+            const { name, fullName } = res.data.item;
 
             if (!unmounted) {
               setMatched((prevState) =>
                 prevState.map((item) => {
                   if (item === el && el.dynamicParam && el.secondDynamicParam) {
-                    console.log("aswd");
                     return {
                       ...item,
-                      name,
+                      name: name || fullName,
                       href: el.href
                         .replace(`:${el.dynamicParam}`, params[el.dynamicParam])
                         .replace(`:${el.secondDynamicParam}`, params[el.secondDynamicParam]),
@@ -67,7 +66,7 @@ const useBreadcrumbs = () => {
                   if (item === el && el.dynamicParam) {
                     return {
                       ...item,
-                      name,
+                      name: name || fullName,
                       href: el.href.replace(`:${el.dynamicParam}`, params[el.dynamicParam]),
                     };
                   }

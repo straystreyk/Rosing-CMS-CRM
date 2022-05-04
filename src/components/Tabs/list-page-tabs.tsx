@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18,
     fontWeight: 600,
     marginRight: 24,
+    transition: "0.35s all ease",
+    "&:hover": {
+      color: "var(--accent-color-hover)",
+      borderColor: "var(--accent-color-hover)",
+    },
     "&:last-child": {
       marginRight: 0,
     },

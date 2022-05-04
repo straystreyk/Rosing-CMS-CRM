@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useListContext, useLoading } from "react-admin";
+import { useLoading } from "react-admin";
 import { PerPageCounter } from "../Pagination/per-page-counter";
 import { makeStyles } from "@material-ui/core";
 
@@ -14,6 +14,9 @@ import { ShowDescriptionButton } from "../FormSection";
 const useStyles = makeStyles({
   DataGridWrapper: {
     position: "relative",
+    "& tbody": {
+      userSelect: "unset",
+    },
   },
   LoaderWrapper: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",

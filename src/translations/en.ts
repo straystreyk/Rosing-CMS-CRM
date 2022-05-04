@@ -128,6 +128,28 @@ export const en: TranslationMessages = {
         list: "Attributes",
       },
     },
+    "media_content/attributes/programs_types": {
+      name: "Types of TV shows",
+      titles: {
+        create: "New type of TV show",
+        edit: "Edit type of TV show",
+        list: "Attributes",
+      },
+      mutations: {
+        create: {
+          success: 'New type of TV show "%{name}" was created',
+          error: "Cant create type of TV show: %{error}",
+        },
+        edit: {
+          success: "Type of TV show was updated",
+          error: "Cant update type of tv show: %{error}",
+        },
+        list: {
+          success: 'Type of tv show "%{name}" was successfully updated',
+          error: "Cant update type of tv show: %{error}",
+        },
+      },
+    },
     "media_content/attributes/languages": {
       name: "Languages",
       titles: {
@@ -151,6 +173,20 @@ export const en: TranslationMessages = {
         create: "New Radio station",
         edit: "Edit Radio station",
         list: "Radio",
+      },
+      mutations: {
+        create: {
+          success: 'New radio station "%{name}" was created',
+          error: "Cant create radio station: %{error}",
+        },
+        edit: {
+          success: "Radio station was updated",
+          error: "Cant update radio station: %{error}",
+        },
+        list: {
+          success: 'Radio station "%{name}" was successfully updated',
+          error: "Cant update Radio station: %{error}",
+        },
       },
     },
     "media_content/radio/radio_live_streams": {

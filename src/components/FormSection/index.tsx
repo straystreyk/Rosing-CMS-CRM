@@ -1,6 +1,7 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core";
 import cn from "classnames";
+import { ArrowFilterIcon } from "../CustomFilters/constants";
 
 interface SectionProps {
   text: string | any[];
@@ -21,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     cursor: "pointer",
     marginBottom: 4,
-    "& svg": {
+    "& span": {
       marginLeft: 11,
-      verticalAlign: "middle",
+      display: "inline-block",
     },
   },
   TitleSection: {
@@ -65,21 +66,9 @@ export const ShowDescriptionButton: React.FC<{
   return (
     <button className={classes.DescriptionButton} onClick={descHandler}>
       {showDescription ? "Hide description" : "Show description"}
-      <svg
-        className={cn(!showDescription && classes.ActiveSvg)}
-        width="8"
-        height="5"
-        viewBox="0 0 8 5"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M6.61621 0.691425L3.99992 3.30772L1.38379 0.691406"
-          stroke="#005AA3"
-          strokeWidth="1.3"
-          strokeLinecap="round"
-        />
-      </svg>
+      <span className={cn(!showDescription && classes.ActiveSvg)}>
+        <ArrowFilterIcon color="#005AA3" />
+      </span>
     </button>
   );
 };

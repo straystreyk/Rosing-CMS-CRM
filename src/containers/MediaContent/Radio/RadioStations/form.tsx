@@ -21,6 +21,7 @@ import { StandardButton } from "../../../../components/UI/Buttons/standard-butto
 import { PlusIcon } from "../../../../constants/icons";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
+import { ImageUploaderV2 } from "../../../../components/ImageUploader";
 
 const INPUT_ITEMS_PER_PAGE = 25;
 const FIXED_TAB_LABELS = ["Attributes", "Images", "Source", "Terms of publication"];
@@ -31,6 +32,8 @@ const useStyles = makeStyles({
     justifyContent: "flex-end",
   },
 });
+
+const IMAGE_REQUEST_VARS = { fieldName: "RadioStation" };
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const history = useHistory();
@@ -97,13 +100,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           inputType={type}
           helperText="The serial number in the general list of films. Can be entered manually when creating or editing, the positions of the remaining films will be updated accordingly. If the field is left empty, the last sequential number will be assigned to the movie."
         />
-        <NumberInput
-          source="number"
-          label="Number"
-          resource={resource}
-          inputType={type}
-          helperText="The serial number in the general list of films. Can be entered manually when creating or editing, the positions of the remaining films will be updated accordingly. If the field is left empty, the last sequential number will be assigned to the movie."
-        />
+        <NumberInput source="number" label="Number" resource={resource} inputType={type} />
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
@@ -116,6 +113,20 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           groupInputs
           switchable
           fullWidth
+        />
+      </FormSection>
+      <FormSection
+        text="The images are used as a background or cover for the visual representation of the movie in the application and help the user make a choice. To make the background or cover look attractive, upload an image with an aspect ratio and a minimum resolution according to the selected type. If the image does not match the selected type, the receiver will process the image itself, which may cause visual appeal to be lost."
+        title="Images"
+        formType={type}
+        id="Images"
+      >
+        <ImageUploaderV2
+          inputType={type}
+          requestVariables={IMAGE_REQUEST_VARS}
+          resource={resource}
+          sourceIds="imageIds"
+          source="images"
         />
       </FormSection>
       <FormSection

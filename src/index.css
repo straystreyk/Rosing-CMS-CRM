@@ -1,6 +1,8 @@
 :root {
     --accent-color: #00A991;
     --accent-color-hover: #00D6B5;
+    --accent-color-select: #F2FDFB;
+    --additional-red-default: #D21C1C;
     --secondary-color-main: #0F1F26;
     --secondary-color-default: #9FA5A8;
     --secondary-color-disable: #E7E9E9;

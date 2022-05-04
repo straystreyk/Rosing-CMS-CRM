@@ -218,7 +218,6 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
     id,
     index,
     requestVariables,
-    source,
     setShowSlider,
     size,
     serverImages,
@@ -250,15 +249,12 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
       setImageSize,
     });
 
-    React.useEffect(() => setImageName(name), [name]);
-    React.useEffect(() => setImageType(kind), [kind]);
-
     React.useEffect(
       () =>
         setServerImages((p: ImageProps[]) =>
           p.map((el) => (el.kind === kind ? { ...el, size: imageSize } : { ...el }))
         ),
-      [imageSize]
+      [setServerImages, kind, imageSize]
     );
 
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -396,7 +392,7 @@ export const ImageUploaderV2: React.FC<{
     const classes = useStyles();
     const notify = useNotify();
     const form = useForm();
-    const [mutate, { loading, error }] = useMutation();
+    const [mutate, { loading, error, data }] = useMutation();
     const [edit, setEdit] = React.useState(inputType !== "show");
     const [showSlider, setShowSlider] = React.useState(false);
     const [initialValue] = React.useState(values[source]);
@@ -427,8 +423,6 @@ export const ImageUploaderV2: React.FC<{
         resource: resource,
         payload: { id: values.id, data: { ...values, [sourceIds]: values[sourceIds] } },
       });
-
-      setEdit(false);
     }, [resource, sourceIds, mutate, values]);
 
     const size = serverImages.length
@@ -472,7 +466,11 @@ export const ImageUploaderV2: React.FC<{
         notify(error.message, { type: "error" });
         setEdit(true);
       }
-    }, [error]);
+      if (data) {
+        notify("success", { type: "success" });
+        setEdit(false);
+      }
+    }, [data, notify, error]);
 
     return (
       <>

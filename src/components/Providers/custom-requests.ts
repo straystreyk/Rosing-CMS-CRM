@@ -72,6 +72,24 @@ export const GET_ONE_GENRE = gql`
   }
 `;
 
+export const GET_ONE_PERSON = gql`
+  query Person($id: ID!) {
+    item: Person(id: $id) {
+      id
+      fullName
+    }
+  }
+`;
+
+export const GET_ONE_PROGRAM_TYPE = gql`
+  query ProgramType($id: ID!) {
+    item: ProgramType(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const STATIC_PARAM = gql`
   query StaticParam($name: String!) {
     items: StaticParam(name: $name) {

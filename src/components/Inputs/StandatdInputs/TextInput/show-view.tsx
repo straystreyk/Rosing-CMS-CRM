@@ -78,12 +78,6 @@ const ShowView: React.FC<InputProps> = (props) => {
     setActiveText(true);
   };
 
-  React.useEffect(() => {
-    if (ref.current && ref.current.scrollHeight > 120) {
-      setIsBigText(true);
-    }
-  }, [ref]);
-
   const getValue = (source: string) => {
     switch (source) {
       case "duration":
@@ -94,12 +88,18 @@ const ShowView: React.FC<InputProps> = (props) => {
         );
       default:
         return values[props.source] ? (
-          <div dangerouslySetInnerHTML={{ __html: values[props.source] }} />
+          <span dangerouslySetInnerHTML={{ __html: values[props.source] }} />
         ) : (
           <span className="empty">Not filled in</span>
         );
     }
   };
+
+  React.useEffect(() => {
+    if (ref.current && ref.current.scrollHeight > 120) {
+      setIsBigText(true);
+    }
+  }, [ref, getValue]);
 
   return (
     <div className={classes.TextInputStyles}>
