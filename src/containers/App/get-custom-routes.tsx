@@ -22,6 +22,8 @@ export const getRoutes: (token: string | null) => ReactElement[] = (token) => {
         from="/media_content/attributes/providers"
         to="/media_content/attributes/providers/content_providers"
       />,
+      <Redirect exact from="/media_content/tv" to="/media_content/tv/channels/channels" />,
+      <Redirect exact from="/media_content/tv/channels" to="/media_content/tv/channels/channels" />,
     ];
   }
 

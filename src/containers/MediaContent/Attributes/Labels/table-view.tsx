@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FunctionField, TextField } from "react-admin";
+import { FunctionField } from "react-admin";
 import { Record as RecordRA } from "ra-core/esm/types";
 import { Link } from "react-router-dom";
 
@@ -33,14 +33,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         )}
       />
       <FunctionField
-        label="Position"
-        source="position"
-        render={(record?: RecordRA) => record?.position ?? "Not filled in"}
-      />
-      <TextField label="Slug" source="slug" />
-      <FunctionField
         label=""
-        className={classes.MoreActions}
         render={(record?: RecordRA) => (
           <MoreActionsButton>
             <EditButton color="secondary" record={record} basePath={props.basePath} />

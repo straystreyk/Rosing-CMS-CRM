@@ -14,6 +14,10 @@ export const attributesTabs: ListTabProps[] = [
     link: "/media_content/attributes/languages",
   },
   {
+    name: "Labels",
+    link: "/media_content/attributes/labels",
+  },
+  {
     name: "Persons",
     link: "/media_content/attributes/people",
   },

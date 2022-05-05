@@ -16,7 +16,6 @@ import { PUBLISHED_CHOICES_FORM } from "../../../../constants/forms-constants";
 import { MetaData } from "../../../../components/Models/Metadata";
 import { FormProps } from "../../../../types";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
-import { log } from "util";
 
 const useStyles = makeStyles({
   ArrayInputItemStyles,

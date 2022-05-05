@@ -23,6 +23,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       listText="A list of pages available for publication on clients. The client has the ability to display an individual list of pages in the menu in accordance with the rule associated with it. Select a client from the list to see its list of pages."
       empty={<EmptyTablePage />}
       optimized
+      draggable
     >
       <FunctionField
         label="Name"
@@ -41,6 +42,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <TextField emptyText="Not filled in" label="UID" source="uid" />
       <FunctionField
         label=""
+        className={classes.MoreActions}
         render={(record?: RecordRA) => (
           <MoreActionsButton>
             <EditButton color="secondary" record={record} basePath={props.basePath} />

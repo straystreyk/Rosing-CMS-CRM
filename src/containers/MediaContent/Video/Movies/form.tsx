@@ -42,7 +42,6 @@ import { CheckBoxGroup } from "../../../../components/UI/MaterialUI/check-box-gr
 import { SwitchInput } from "../../../../components/Inputs/SwitchInput";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
-import { ColorPickerInput } from "../../../../components/Inputs/color-picker-input";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -167,7 +166,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         </ReferenceArrayInput>
         <ReferenceArrayInput
           label="Production countries"
-          source="productionCountriesIds"
+          source="productionCountryIds"
           reference="production_countries"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
@@ -333,10 +332,10 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           reference="media_content/video/video_files"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
+          validate={requiredValidate}
         >
           <AutocompleteArrayInput
             optionText="name"
-            validate={requiredValidate}
             inputType={type}
             helperText="You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
           />

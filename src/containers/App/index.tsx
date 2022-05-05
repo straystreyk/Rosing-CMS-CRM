@@ -13,7 +13,7 @@ import { VideoFilesVariables as videoFiles } from "../MediaContent/Video/VideoFi
 import { RightHoldersVariables as rightHolders } from "../MediaContent/Attributes/Providers/RightHolders";
 import { MoviesVariables as movies } from "../MediaContent/Video/Movies";
 import { SeriesVariables as series } from "../MediaContent/Video/Series";
-import { ChannelsVariables as channels } from "../Channels";
+import { ChannelsVariables as channels } from "../MediaContent/TV/Channels/Channels";
 import { SeasonsVariables as seasons } from "../MediaContent/Video/Seasons";
 import { EpisodesVariables as episodes } from "../MediaContent/Video/Episodes";
 import { GenresVariables as genres } from "../MediaContent/Attributes/Genres";
@@ -29,6 +29,7 @@ import { StudiosVariables as studios } from "../MediaContent/Attributes/Provider
 import { LanguagesVariables as languages } from "../MediaContent/Attributes/Languages";
 import { PeopleVariables as people } from "../MediaContent/Attributes/People";
 import { ProgramsTypesVariables as programsTypes } from "../MediaContent/Attributes/ProgramsTypes";
+import { LabelsVariables as labels } from "../MediaContent/Attributes/Labels";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -57,7 +58,7 @@ export const App = () => {
     >
       <Resource name="admin_users" {...users} />
       <Resource name="channel_versions" {...channelVersions} />
-      <Resource name="channels" {...channels} />
+      <Resource name="media_content/tv/channels/channels" {...channels} />
       <Resource name="datacenters" {...datacenters} />
       <Resource name="media_content/video/movies" {...movies} />
       <Resource name="media_content/video/video_files" {...videoFiles} />
@@ -75,6 +76,7 @@ export const App = () => {
       <Resource name="media_content/attributes/languages" {...languages} />
       <Resource name="media_content/attributes/people" {...people} />
       <Resource name="media_content/attributes/programs_types" {...programsTypes} />
+      <Resource name="media_content/attributes/labels" {...labels} />
       <Resource name="questions" {...questions} />
       <Resource name="media_content/news" {...news} />
       <Resource name="castMembers" />

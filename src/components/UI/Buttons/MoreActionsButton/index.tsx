@@ -3,18 +3,19 @@ import { Menu } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { IconProps } from "../../../../constants/icons";
+import cn from "classnames";
 
 const useStyles = makeStyles({
   MoreActionsButton: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
     borderRadius: "50%",
     cursor: "pointer",
     width: 16,
     height: 16,
     backgroundColor: "var(--primary-bg)",
     transition: "0.35s all ease",
+    "& svg": {
+      verticalAlign: "middle",
+    },
   },
   MoreActionButtonChild: {
     marginBottom: 5,
@@ -50,19 +51,19 @@ export const MoreActionsButton: React.FC = ({ children }) => {
   };
 
   return (
-    <div className="MoreActionsButtonWrapper">
+    <>
       <button
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
+        id="basic-button-more-actions"
+        aria-controls={open ? "basic-menu-more-actions" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        className={classes.MoreActionsButton}
+        className={cn(classes.MoreActionsButton, "MoreActionsButton")}
       >
         <MoreActionsButtonIcon color="var(--primary-button-default)" />
       </button>
       <Menu
-        id="basic-menu"
+        id="basic-menu-more-actions"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -75,7 +76,7 @@ export const MoreActionsButton: React.FC = ({ children }) => {
           horizontal: "right",
         }}
         MenuListProps={{
-          "aria-labelledby": "basic-button",
+          "aria-labelledby": "basic-button-more-actions",
         }}
       >
         {React.Children.map(children, (child) => {
@@ -86,6 +87,6 @@ export const MoreActionsButton: React.FC = ({ children }) => {
           );
         })}
       </Menu>
-    </div>
+    </>
   );
 };

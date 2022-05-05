@@ -40,6 +40,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <TextField emptyText="Not filled in" label="ISO2 Code" source="iso2" />
       <FunctionField
         label=""
+        className={classes.MoreActions}
         render={(record?: RecordRA) => (
           <MoreActionsButton>
             <EditButton color="secondary" record={record} basePath={props.basePath} />

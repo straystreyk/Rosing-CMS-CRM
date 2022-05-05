@@ -23,36 +23,22 @@ const getGqlResource = (resource: string) => {
   switch (resource) {
     case "admin_users":
       return "AdminUser";
-    case "media_content/video/movies":
-      return "Movie";
     case "datacenters":
       return "Datacenter";
     case "streams":
       return "Stream";
-    case "media_content/video/video_files":
-      return "VideoFile";
     case "channel_versions":
       return "ChannelVersion";
-    case "media_content/video/seasons/:seasonId/episodes":
-      return "Episode";
-    case "media_content/video/series/:seriesId/seasons":
-      return "Season";
-    case "media_content/video/series":
-      return "Series";
-    case "media_content/audio/audio_shows/:audioShowId/parts":
-      return "Part";
-    case "media_content/audio/audio_shows":
-      return "AudioShow";
-    case "channels":
+    case "media_content/tv/channels/channels":
       return "Channel";
+    case "media_content/video/video_files":
+      return "VideoFile";
+    case "media_content/video/movies":
+      return "Movie";
     case "media_content/attributes/providers/studios":
       return "Studio";
     case "media_content/attributes/languages":
       return "Language";
-    case "episodes":
-      return "Episode";
-    case "api_clients":
-      return "ApiClient";
     case "media_content/attributes/providers/content_providers":
       return "ExternalCatalog";
     case "media_content/attributes/providers/right_holders":
@@ -63,10 +49,26 @@ const getGqlResource = (resource: string) => {
       return "Person";
     case "media_content/attributes/programs_types":
       return "ProgramType";
+    case "media_content/attributes/labels":
+      return "Label";
     case "media_content/radio/radio_stations":
       return "RadioStation";
     case "media_content/radio/radio_live_streams":
       return "RadioLiveStream";
+    case "media_content/video/seasons/:seasonId/episodes":
+      return "Episode";
+    case "media_content/video/series/:seriesId/seasons":
+      return "Season";
+    case "media_content/video/series":
+      return "Series";
+    case "media_content/audio/audio_shows/:audioShowId/parts":
+      return "Part";
+    case "media_content/audio/audio_shows":
+      return "AudioShow";
+    case "episodes":
+      return "Episode";
+    case "api_clients":
+      return "ApiClient";
     case "questions":
       return "Question";
     case "images":

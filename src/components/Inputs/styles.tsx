@@ -11,3 +11,11 @@ export const labelStyles: any = {
   fontFamily: "Gilroy, sans-serif",
   color: "var(--secondary-color-main) !important",
 };
+
+export const formHelperText = {
+  margin: 0,
+  marginTop: 5,
+  fontSize: 12,
+  fontFamily: "Gilroy, sans-serif",
+  color: "var(--secondary-color-default)",
+};

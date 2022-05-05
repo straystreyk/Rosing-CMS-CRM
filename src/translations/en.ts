@@ -150,6 +150,28 @@ export const en: TranslationMessages = {
         },
       },
     },
+    "media_content/attributes/labels": {
+      name: "Labels",
+      titles: {
+        create: "New label",
+        edit: "Edit label",
+        list: "Attributes",
+      },
+      mutations: {
+        create: {
+          success: 'New label "%{name}" was created',
+          error: "Cant create label: %{error}",
+        },
+        edit: {
+          success: "Type of TV show was updated",
+          error: "Cant update label: %{error}",
+        },
+        list: {
+          success: 'Label "%{name}" was successfully updated',
+          error: "Cant update label: %{error}",
+        },
+      },
+    },
     "media_content/attributes/languages": {
       name: "Languages",
       titles: {
@@ -387,16 +409,13 @@ export const en: TranslationMessages = {
         },
       },
     },
-    channels: {
-      name: "Channels",
+    "media_content/tv/channels/channels": {
+      name: "TV channels",
+      menu_name: "Television",
       titles: {
-        create: "New Channel",
-        edit: "Edit Channel",
-        list: "Channels",
-      },
-      filtersLabels: {
-        published: "published",
-        markers: "markers",
+        create: "New TV channel",
+        edit: "Edit TV channel",
+        list: "Television",
       },
     },
     "media_content/attributes/providers/right_holders": {

@@ -176,7 +176,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         </ReferenceArrayInput>
         <ReferenceArrayInput
           label="Production countries"
-          source="productionCountriesIds"
+          source="productionCountryIds"
           reference="production_countries"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}

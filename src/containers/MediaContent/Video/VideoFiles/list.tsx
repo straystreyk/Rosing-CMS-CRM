@@ -51,7 +51,7 @@ export const List: React.FC<{ basePath?: string; resource: string }> = (props) =
         label=""
         render={(record?: RecordRA) => {
           return (
-            <div className={classes.MoreInfo}>
+            <div className={classes.MoreActions}>
               <MoreActionsButton>
                 <EditButton color="secondary" record={record} basePath={props.basePath} />
                 <DeleteButton record={record} basePath={props.basePath} />

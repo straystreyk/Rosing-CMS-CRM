@@ -18,7 +18,7 @@ const useStyles = makeStyles({
       backgroundColor: "transparent",
     },
     "& .MuiSelect-root": {
-      padding: "8px 12px",
+      padding: "7px 12px",
       color: "var(--primary-text-default)",
       fontFamily: "Gilroy, sans-serif",
       border: "1px solid var(--secondary-color-default)",

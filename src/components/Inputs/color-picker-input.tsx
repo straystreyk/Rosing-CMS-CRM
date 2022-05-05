@@ -4,8 +4,14 @@ import { TextInput } from "./StandatdInputs/TextInput/text-input";
 import { labelStyles } from "./styles";
 import { useForm, useFormState } from "react-final-form";
 import { Validator } from "react-admin";
+import { StandardButton } from "../UI/Buttons/standard-button";
+import { PlusIcon } from "../../constants/icons";
 
 const useStyles = makeStyles({
+  ColorPickerInput: {
+    margin: "8px 0",
+    display: "inline-block",
+  },
   PaletteButton: {
     width: 36,
     height: 36,
@@ -26,13 +32,15 @@ export const ColorPickerInput: React.FC<{
   source: string;
   label?: string;
   errorSource?: string;
-}> = ({ source, label, errorSource }) => {
+  inputType: "create" | "edit" | "show";
+}> = ({ source, label, errorSource, inputType }) => {
   const classes = useStyles();
   const form = useForm();
   const { values } = useFormState();
   const ref = React.useRef(null);
   const [target, setTarget] = React.useState<HTMLInputElement | null>(null);
-  const [value, setValue] = React.useState(values[source] ?? "#000000");
+  const [value, setValue] = React.useState(values[source] ?? "");
+  const [active, setActive] = React.useState(!!values[source]);
   let timeout: ReturnType<typeof setTimeout>;
 
   const validateColor = React.useCallback(
@@ -59,7 +67,7 @@ export const ColorPickerInput: React.FC<{
     if (ref.current) {
       setTarget(ref.current);
     }
-  }, [ref]);
+  }, [active, ref]);
 
   const changeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timeout);
@@ -70,36 +78,46 @@ export const ColorPickerInput: React.FC<{
     }, 200);
   };
 
-  const changeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearTimeout(timeout);
-  };
-
   return (
     <div>
-      <span className={classes.Label}>{label}</span>
-      <div className={classes.PaletteWrapper}>
-        <button
-          style={{ backgroundColor: value }}
-          className={classes.PaletteButton}
-          onClick={showPalette}
-        />
-        <input
-          onChange={changeColor}
-          value={value}
-          type="color"
-          ref={ref}
-          style={{ width: 0, height: 0, opacity: 0 }}
-        />
-        <TextInput
-          helperText={false}
-          onChange={changeTextInput}
-          source={source}
-          resettable={false}
-          disabled={true}
-          validate={validator as Validator}
-          initialValue={value}
-          label=""
-        />
+      <div className={classes.ColorPickerInput}>
+        {active ? (
+          <>
+            <span className={classes.Label}>{label}</span>
+            <div className={classes.PaletteWrapper}>
+              <button
+                style={{ backgroundColor: value }}
+                className={classes.PaletteButton}
+                onClick={showPalette}
+              />
+              <input
+                onChange={changeColor}
+                value={value}
+                type="color"
+                ref={ref}
+                style={{ width: 0, height: 0, opacity: 0 }}
+              />
+              <TextInput
+                helperText={false}
+                source={source}
+                resettable={false}
+                disabled={true}
+                validate={validator as Validator}
+                initialValue={value}
+                label=""
+              />
+            </div>
+          </>
+        ) : (
+          <StandardButton
+            startIcon={<PlusIcon color="var(--primary-button-default)" />}
+            color="secondary"
+            variant="text"
+            onClick={() => setActive(true)}
+          >
+            Add {label}
+          </StandardButton>
+        )}
       </div>
     </div>
   );
