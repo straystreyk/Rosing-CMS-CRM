@@ -90,6 +90,15 @@ export const GET_ONE_PROGRAM_TYPE = gql`
   }
 `;
 
+export const GET_ONE_LABEL = gql`
+  query Label($id: ID!) {
+    item: Label(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const STATIC_PARAM = gql`
   query StaticParam($name: String!) {
     items: StaticParam(name: $name) {

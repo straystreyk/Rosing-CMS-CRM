@@ -10,6 +10,7 @@ import { GET_ONE_NEWS_NAME } from "../../containers/MediaContent/News/requests";
 import {
   GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_GENRE,
+  GET_ONE_LABEL,
   GET_ONE_PERSON,
   GET_ONE_PROGRAM_TYPE,
   GET_ONE_RIGHT_HOLDER,
@@ -44,6 +45,14 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
   {
     name: "Providers",
     href: "/media_content/attributes/providers",
+  },
+  {
+    name: "Television",
+    href: "/media_content/tv",
+  },
+  {
+    name: "Channels",
+    href: "/media_content/tv/channels",
   },
   //Movie
   {
@@ -269,6 +278,21 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     name: "",
     href: "/media_content/attributes/programs_types/:id",
     query: GET_ONE_PROGRAM_TYPE,
+    dynamicParam: "id",
+  },
+  //Labels
+  {
+    name: "Labels",
+    href: "/media_content/attributes/labels",
+  },
+  {
+    name: "New label",
+    href: "/media_content/attributes/labels/create",
+  },
+  {
+    name: "",
+    href: "/media_content/attributes/labels/:id",
+    query: GET_ONE_LABEL,
     dynamicParam: "id",
   },
 ];

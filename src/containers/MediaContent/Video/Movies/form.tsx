@@ -391,7 +391,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           inputType={type}
           labelPlacement="start"
         />
-        {formState.values["downloadable"] && (
+        {formState.values.downloadable && (
           <GroupInputsOrigin inputType={type}>
             <NumberInput
               label="Storage time"
@@ -424,9 +424,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          helperText={
-            "The age rating of the film in accordance with the legislation of the country in which the application is used"
-          }
+          helperText="The age rating of the film in accordance with the legislation of the country in which the application is used"
           source="certificationRatings"
           label="Age rating"
           ChildComponent={RatingSystems}

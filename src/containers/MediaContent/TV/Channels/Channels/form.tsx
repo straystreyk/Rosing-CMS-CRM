@@ -7,12 +7,17 @@ import {
   ArrayInputNoDrag,
   AutocompleteArrayInput,
   NumberInput,
+  ReferenceInput,
   requiredValidate,
   RichTextInput,
   SelectInput,
   TextInput,
 } from "../../../../../components/Inputs";
-import { SELECT_MARKERS } from "../../../../../constants/forms-constants";
+import {
+  PUBLISHED_CHOICES_FORM,
+  SELECT_DISTRIBUTION,
+  SELECT_MARKERS,
+} from "../../../../../constants/forms-constants";
 import { ReferenceArrayInput } from "../../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { GroupInputsOrigin } from "../../../../../components/GroupInputs";
 import { MetaData } from "../../../../../components/Models/Metadata";
@@ -21,6 +26,13 @@ import { ImageUploaderV2 } from "../../../../../components/ImageUploader";
 import { FormTabs } from "../../../../../components/Tabs/form-tabs";
 import { formHelperText } from "../../../../../components/Inputs/styles";
 import { ScrollTopButton } from "../../../../../components/UI/Buttons/scroll-top-button";
+import { useFormState } from "react-final-form";
+import { SwitchInput } from "../../../../../components/Inputs/SwitchInput";
+import { RadioButtonGroupInput } from "../../../../../components/Inputs/RadioButtonGroupInput";
+import { RatingSystems } from "../../../../../components/Models/RatingSytems";
+import { CheckBoxGroup } from "../../../../../components/UI/MaterialUI/check-box-group";
+import { ReferenceCustomInput } from "../../../../../components/Inputs/ReferenceInputs/reference-custom-input";
+import { ALL_COUNTRIES } from "../../../../../components/Providers/custom-requests";
 
 const useStyles = makeStyles({
   formHelperText: { ...formHelperText, marginTop: -16, marginBottom: 8 },
@@ -28,7 +40,7 @@ const useStyles = makeStyles({
 
 const INPUT_ITEMS_PER_PAGE = 25;
 const IMAGE_REQUEST_VARS = { fieldName: "Channel" };
-const FIXED_TAB_LABELS = ["Attributes", "Images", "Viewing Parameters"];
+const FIXED_TAB_LABELS = ["Attributes", "Images", "Viewing Parameters", "Terms of publication"];
 const SHIFT_CHOICES = [
   {
     id: "minutes",
@@ -54,6 +66,9 @@ const SHIFT_CHOICES = [
 
 export const Form: React.FC<FormProps> = ({ resource, type }) => {
   const classes = useStyles();
+  const { values } = useFormState();
+
+  console.log(values);
 
   return (
     <>
@@ -269,6 +284,159 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           inputType={type}
           helperText="The amount of time in seconds by which it is necessary to shift the start of the broadcast at the ketch-up to ensure an accurate hit at the beginning of the recorded telecast. The time shift can be adjusted both forward and backward."
         />
+        <SwitchInput
+          label="Mediascope config"
+          source="mediascopeConfig.enabled"
+          inputType={type}
+          labelPlacement="start"
+        />
+        {values.mediascopeConfig && values.mediascopeConfig.enabled && (
+          <GroupInputsOrigin>
+            <NumberInput
+              validate={requiredValidate}
+              inputType={type}
+              source="mediascopeConfig.catId"
+              helperText="ID of the local video content directory in integer format"
+              label="Cat ID"
+            />
+            <NumberInput
+              validate={requiredValidate}
+              inputType={type}
+              source="mediascopeConfig.vcId"
+              helperText="ID of the video content within the local directory in integer format"
+              label="Vc ID"
+            />
+            <TextInput
+              resource={resource}
+              validate={requiredValidate}
+              inputType={type}
+              label="Account Name"
+              source="mediascopeConfig.accountName"
+              helperText="The name of the account in the Web-Index project in text format up to 50 characters"
+              fullWidth
+            />
+            <TextInput
+              resource={resource}
+              validate={requiredValidate}
+              inputType={type}
+              label="Tmsec Name"
+              source="mediascopeConfig.tmsecName"
+              helperText="Name Project / sections V proekte Web-Index in the Format Text up to 50 symbols"
+              fullWidth
+            />
+          </GroupInputsOrigin>
+        )}
+        <SwitchInput
+          label="Vitrina TV config"
+          source="vitrinaTvConfig.enabled"
+          inputType={type}
+          labelPlacement="start"
+        />
+        {values.vitrinaTvConfig && values.vitrinaTvConfig.enabled && (
+          <GroupInputsOrigin>
+            <TextInput
+              resource={resource}
+              validate={requiredValidate}
+              inputType={type}
+              label="Url"
+              source="vitrinaTvConfig.url"
+              helperText="Link to the parameters template for statistics"
+              fullWidth
+            />
+          </GroupInputsOrigin>
+        )}
+        <GroupInputsOrigin
+          label="Preroll"
+          inputType={type}
+          groupHelperText="Block of commercials at the beginning of the video, let's say one block"
+        >
+          <NumberInput inputType={type} source="preRollCount" label="Number of commercials" />
+        </GroupInputsOrigin>
+      </FormSection>
+      <FormSection
+        id="Terms of publication"
+        text="Configuration of the rule for publishing a movie. The rule will be automatically generated by the publishing system within one hour after saving. The generated rule will appear on the movie page in the current section."
+        title="Terms of publication"
+        formType={type}
+      >
+        <RadioButtonGroupInput
+          source="published"
+          label="Publishing"
+          initialValue={false}
+          inputType={type}
+          choices={PUBLISHED_CHOICES_FORM}
+        />
+        <RadioButtonGroupInput
+          source="cmsDistribution"
+          label="Distribution"
+          inputType={type}
+          choices={SELECT_DISTRIBUTION}
+        />
+        <ArrayInputNoDrag
+          resource={resource}
+          inputType={type}
+          helperText="The age rating of the film in accordance with the legislation of the country in which the application is used"
+          source="certificationRatings"
+          label="Age rating"
+          ChildComponent={RatingSystems}
+          groupInputs
+          switchable
+          fullWidth
+        />
+        <CheckBoxGroup initialSourceState="allowedCountries">
+          <ReferenceCustomInput
+            component={AutocompleteArrayInput}
+            inputType={type}
+            query={ALL_COUNTRIES}
+            resource={resource}
+            source="allowedCountries"
+            checkBoxLabel="Allowed Countries"
+            helperText="The list of countries in which the film is available, access is prohibited for other countries. Leave the field empty if access is allowed for all countries."
+            label=""
+            idName="alpha2"
+          />
+          <ReferenceCustomInput
+            component={AutocompleteArrayInput}
+            inputType={type}
+            query={ALL_COUNTRIES}
+            resource={resource}
+            checkBoxLabel="Disallowed countries"
+            helperText="List of countries where the film is not available"
+            label=""
+            source="disallowedCountries"
+            idName="alpha2"
+          />
+        </CheckBoxGroup>
+        <CheckBoxGroup initialSourceState="allowedApiClients">
+          <ReferenceInput
+            label=""
+            source="allowedApiClients"
+            reference="api_clients"
+            checkBoxLabel="Allowed api clients"
+            resource={resource}
+            perPage={INPUT_ITEMS_PER_PAGE}
+          >
+            <AutocompleteArrayInput
+              optionText="name"
+              inputType={type}
+              helperText="The list of API clients for which access to the series is allowed, access is denied for other API clients. Leave the field empty if access is allowed for all API clients."
+            />
+          </ReferenceInput>
+          <ReferenceInput
+            label=""
+            source="forbiddenApiClients"
+            reference="api_clients"
+            checkBoxLabel="Forbidden api clients"
+            resource={resource}
+            perPage={INPUT_ITEMS_PER_PAGE}
+          >
+            <AutocompleteArrayInput
+              optionText="name"
+              inputType={type}
+              helperText="List of API clients for which access to the series is prohibited"
+            />
+          </ReferenceInput>
+        </CheckBoxGroup>
       </FormSection>
       <ScrollTopButton />
     </>

@@ -4,7 +4,7 @@ import { useFormState } from "react-final-form";
 
 import { FormProps } from "../../../../types";
 import { requiredValidate, TextInput } from "../../../../components/Inputs";
-import { ColorPickerInput } from "../../../../components/Inputs/color-picker-input";
+import { ColorPickerInput } from "../../../../components/Inputs/ColorPickerInput/color-picker-input";
 
 const useStyles = makeStyles({
   LabelExample: {
@@ -46,12 +46,14 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
       />
       <ColorPickerInput
         inputType={type}
+        resource={resource}
         label="Text color"
         source="textColor"
         errorSource="bgColor"
       />
       <ColorPickerInput
         inputType={type}
+        resource={resource}
         label="Background color"
         source="bgColor"
         errorSource="textColor"

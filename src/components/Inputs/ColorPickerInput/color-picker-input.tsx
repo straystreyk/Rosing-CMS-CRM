@@ -1,39 +1,29 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core";
-import { TextInput } from "./StandatdInputs/TextInput/text-input";
-import { labelStyles } from "./styles";
+import { TextInput } from "../StandatdInputs/TextInput/text-input";
+import { labelStyles } from "../styles";
 import { useForm, useFormState } from "react-final-form";
 import { Validator } from "react-admin";
-import { StandardButton } from "../UI/Buttons/standard-button";
-import { PlusIcon } from "../../constants/icons";
+import { StandardButton } from "../../UI/Buttons/standard-button";
+import { PlusIcon } from "../../../constants/icons";
+import { ColorPickerShow } from "./show-view";
+import { ColorPickerStyles } from "./styles";
 
-const useStyles = makeStyles({
-  ColorPickerInput: {
-    margin: "8px 0",
-    display: "inline-block",
-  },
-  PaletteButton: {
-    width: 36,
-    height: 36,
-    borderRadius: "50%",
-    border: "1px solid var(--secondary-color-disable)",
-  },
-  PaletteWrapper: {
-    display: "flex",
-    alignItems: "flex-start",
-    "& .MuiFormControl-root": {
-      margin: 0,
-    },
-  },
-  Label: { ...labelStyles, marginBottom: 4, display: "inline-block" },
-});
+const useStyles = makeStyles(ColorPickerStyles);
 
-export const ColorPickerInput: React.FC<{
+export interface ColorPickerInputProps {
   source: string;
+  resource: string;
   label?: string;
   errorSource?: string;
   inputType: "create" | "edit" | "show";
-}> = ({ source, label, errorSource, inputType }) => {
+}
+
+export const ColorPickerInputOrigin: React.FC<ColorPickerInputProps> = ({
+  source,
+  label,
+  errorSource,
+}) => {
   const classes = useStyles();
   const form = useForm();
   const { values } = useFormState();
@@ -120,5 +110,13 @@ export const ColorPickerInput: React.FC<{
         )}
       </div>
     </div>
+  );
+};
+
+export const ColorPickerInput: React.FC<ColorPickerInputProps> = ({ inputType, ...rest }) => {
+  return inputType === "show" ? (
+    <ColorPickerShow inputType={inputType} {...rest} />
+  ) : (
+    <ColorPickerInputOrigin inputType={inputType} {...rest} />
   );
 };

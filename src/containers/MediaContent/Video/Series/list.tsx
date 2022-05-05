@@ -42,6 +42,7 @@ export const List: React.FC<ShowProps> = (props) => {
       <TextField source="slug" label="Slug" />
       <FunctionField
         label="Seasons"
+        source="seasons"
         render={(record?: Record) => (
           <>
             <StandardButton
@@ -54,6 +55,7 @@ export const List: React.FC<ShowProps> = (props) => {
               }
               variant="text"
               customColor="var(--accent-color)"
+              style={{ padding: 0 }}
               onClick={() =>
                 history.push(
                   record?.seasons.length
@@ -69,6 +71,7 @@ export const List: React.FC<ShowProps> = (props) => {
       />
       <FunctionField
         label=""
+        className={classes.MoreActions}
         render={(record?: Record) => (
           <MoreActionsButton>
             <EditButton color="secondary" record={record} basePath={props.basePath} />
