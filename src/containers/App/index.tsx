@@ -17,7 +17,7 @@ import { ChannelsVariables as channels } from "../MediaContent/TV/Channels/Chann
 import { SeasonsVariables as seasons } from "../MediaContent/Video/Seasons";
 import { EpisodesVariables as episodes } from "../MediaContent/Video/Episodes";
 import { GenresVariables as genres } from "../MediaContent/Attributes/Genres";
-import { ChannelVersions as channelVersions } from "../ChannelVersions";
+import { ChannelVersions as channelVersions } from "../MediaContent/TV/Channels/ChannelVersions";
 import { RadioStationsVariables as radioStations } from "../MediaContent/Radio/RadioStations";
 import { RadioLiveStreamsVariables as radioLiveStreams } from "../MediaContent/Radio/RadioLiveStreams";
 import { AudioShowsVariables as audioShows } from "../MediaContent/Audio/AudioShows";
@@ -57,7 +57,10 @@ export const App = () => {
       i18nProvider={i18nProvider}
     >
       <Resource name="admin_users" {...users} />
-      <Resource name="channel_versions" {...channelVersions} />
+      <Resource
+        name="media_content/tv/channels/channels/:channelId/channel_versions"
+        {...channelVersions}
+      />
       <Resource name="media_content/tv/channels/channels" {...channels} />
       <Resource name="datacenters" {...datacenters} />
       <Resource name="media_content/video/movies" {...movies} />

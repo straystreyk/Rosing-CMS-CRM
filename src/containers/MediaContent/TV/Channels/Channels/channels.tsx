@@ -10,6 +10,7 @@ import { Form } from "./form";
 import { TableView } from "./table-view";
 import { TVTabs } from "../../constants";
 import { TVChannelsSubTubs } from "../constants";
+import { RedirectButtonIcon } from "../../../../../constants/icons";
 
 const resource = "media_content/tv/channels/channels";
 
@@ -29,7 +30,12 @@ export const Show: React.FC = (props) => (
   </ResourceShow>
 );
 export const Create: React.FC = (props) => (
-  <ResourceCreate {...props} resource={resource}>
+  <ResourceCreate
+    {...props}
+    resource={resource}
+    redirectButtonIcon={<RedirectButtonIcon color="#fff" />}
+    redirectButtonLabel="Save and add channel versions"
+  >
     <Form {...props} resource={resource} type="create" />
   </ResourceCreate>
 );

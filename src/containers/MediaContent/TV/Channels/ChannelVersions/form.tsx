@@ -1,8 +1,13 @@
 import * as React from "react";
 import { BooleanInput, ReferenceInput } from "ra-ui-materialui";
 
-import { requiredValidate, TextInput, SelectInput, NumberInput } from "../../components/Inputs";
-import { FormProps } from "../../types";
+import {
+  requiredValidate,
+  TextInput,
+  SelectInput,
+  NumberInput,
+} from "../../../../../components/Inputs";
+import { FormProps } from "../../../../../types";
 
 export const Form: React.FC<FormProps> = (props) => {
   return (

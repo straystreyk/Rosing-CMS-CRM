@@ -62,10 +62,8 @@ export const ResourceCreate: React.FC<CreateProps> = ({
         type: "error",
         messageArgs: { error: error.message },
       });
-      redirect("list", props.basePath);
-      refresh();
     },
-    [notify, props.basePath, props.resource, refresh, redirect]
+    [notify, props.resource]
   );
 
   return (

@@ -295,4 +295,13 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     query: GET_ONE_LABEL,
     dynamicParam: "id",
   },
+  //Labels
+  {
+    name: "Channels",
+    href: "/media_content/tv/channels/channels",
+  },
+  {
+    name: "New channel",
+    href: "/media_content/tv/channels/channels/create",
+  },
 ];

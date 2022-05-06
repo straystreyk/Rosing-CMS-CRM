@@ -18,6 +18,7 @@ import { GET_ONE_NEWS } from "../../containers/MediaContent/News/requests";
 import { GET_EDIT_EXTERNAL_CATALOG } from "../../containers/MediaContent/Attributes/Providers/ContentProviders/requests";
 import { GET_EDIT_STUDIO } from "../../containers/MediaContent/Attributes/Providers/Studios/requests";
 import { GET_ONE_PERSON } from "../../containers/MediaContent/Attributes/People/requests";
+import { GET_ONE_CHANNEL_EDIT } from "../../containers/MediaContent/TV/Channels/Channels/requests";
 
 const getGqlResource = (resource: string) => {
   switch (resource) {
@@ -27,7 +28,7 @@ const getGqlResource = (resource: string) => {
       return "Datacenter";
     case "streams":
       return "Stream";
-    case "channel_versions":
+    case "media_content/tv/channels/channels/:channelId/channel_versions":
       return "ChannelVersion";
     case "media_content/tv/channels/channels":
       return "Channel";
@@ -93,6 +94,9 @@ const customBuildQuery =
 
     if (fetchType === "GET_ONE" && resource === "Movie") {
       return { ...builtQuery, query: GET_ONE_MOVIE };
+    }
+    if (fetchType === "GET_ONE" && resource === "Channel") {
+      return { ...builtQuery, query: GET_ONE_CHANNEL_EDIT };
     }
     if (fetchType === "GET_LIST" && resource === "Movie") {
       return { ...builtQuery, query: GET_ALL_MOVIE };

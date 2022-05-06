@@ -457,7 +457,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
           />
         </CheckBoxGroup>
         <CheckBoxGroup initialSourceState="allowedApiClients">
-          <ReferenceInput
+          <ReferenceArrayInput
             label=""
             source="allowedApiClients"
             reference="api_clients"
@@ -470,7 +470,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
               inputType={type}
               helperText="The list of API clients for which access to the series is allowed, access is denied for other API clients. Leave the field empty if access is allowed for all API clients."
             />
-          </ReferenceInput>
+          </ReferenceArrayInput>
           <ReferenceInput
             label=""
             source="forbiddenApiClients"

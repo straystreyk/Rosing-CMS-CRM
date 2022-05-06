@@ -33,6 +33,7 @@ import { RatingSystems } from "../../../../../components/Models/RatingSytems";
 import { CheckBoxGroup } from "../../../../../components/UI/MaterialUI/check-box-group";
 import { ReferenceCustomInput } from "../../../../../components/Inputs/ReferenceInputs/reference-custom-input";
 import { ALL_COUNTRIES } from "../../../../../components/Providers/custom-requests";
+import { AutocompleteInput } from "../../../../../components/Inputs/AutocompleteInput";
 
 const useStyles = makeStyles({
   formHelperText: { ...formHelperText, marginTop: -16, marginBottom: 8 },
@@ -67,8 +68,6 @@ const SHIFT_CHOICES = [
 export const Form: React.FC<FormProps> = ({ resource, type }) => {
   const classes = useStyles();
   const { values } = useFormState();
-
-  console.log(values);
 
   return (
     <>
@@ -108,21 +107,22 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           label="Description"
           source="description"
         />
-        <ReferenceArrayInput
-          label="Languages"
-          source="languagesIds"
+        <ReferenceInput
+          label="Language"
+          source="languageId"
           reference="media_content/attributes/languages"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >
-          <AutocompleteArrayInput
+          <AutocompleteInput
             optionText="name"
             optionValue="id"
             resource={resource}
             inputType={type}
+            fullWidth
             helperText="The language of the sound track of the TV channel. You can select multiple languages from the list."
           />
-        </ReferenceArrayInput>
+        </ReferenceInput>
         <ReferenceArrayInput
           label="Genres"
           source="genreIds"
@@ -408,7 +408,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           />
         </CheckBoxGroup>
         <CheckBoxGroup initialSourceState="allowedApiClients">
-          <ReferenceInput
+          <ReferenceArrayInput
             label=""
             source="allowedApiClients"
             reference="api_clients"
@@ -421,8 +421,8 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
               inputType={type}
               helperText="The list of API clients for which access to the series is allowed, access is denied for other API clients. Leave the field empty if access is allowed for all API clients."
             />
-          </ReferenceInput>
-          <ReferenceInput
+          </ReferenceArrayInput>
+          <ReferenceArrayInput
             label=""
             source="forbiddenApiClients"
             reference="api_clients"
@@ -435,7 +435,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
               inputType={type}
               helperText="List of API clients for which access to the series is prohibited"
             />
-          </ReferenceInput>
+          </ReferenceArrayInput>
         </CheckBoxGroup>
       </FormSection>
       <ScrollTopButton />

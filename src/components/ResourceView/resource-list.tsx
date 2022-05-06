@@ -1,14 +1,11 @@
 import * as React from "react";
 import { List } from "react-admin";
 import { makeStyles } from "@material-ui/core";
-import { useTranslate } from "ra-core";
 import { Box } from "@material-ui/core";
 
 import { ResourceTitle } from "./resource-title";
-import { CreateButton } from "../UI/RA/create-button";
 import { ListPageTabs } from "../Tabs/list-page-tabs";
 import { EditForm } from "./FormWithRedirect";
-import { PlusIcon } from "../../constants/icons";
 import { Pagination } from "../Pagination";
 import { ResourcesListProps } from "./resources-types";
 import { ReactElement } from "react";

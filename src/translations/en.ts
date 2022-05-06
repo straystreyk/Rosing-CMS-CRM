@@ -417,6 +417,20 @@ export const en: TranslationMessages = {
         edit: "Edit TV channel",
         list: "Television",
       },
+      mutations: {
+        create: {
+          success: 'New channel "%{name}" was created',
+          error: "Cant create channel: %{error}",
+        },
+        edit: {
+          success: "Channel was updated",
+          error: "Cant update channel: %{error}",
+        },
+        list: {
+          success: 'Channel "%{name}" was successfully updated',
+          error: "Cant update channel: %{error}",
+        },
+      },
     },
     "media_content/attributes/providers/right_holders": {
       name: "Right Holders",

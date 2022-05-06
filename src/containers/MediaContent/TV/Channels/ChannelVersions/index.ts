@@ -1,8 +1,7 @@
-import { List, Edit, Create, Icon } from "./channel-versions";
+import { List, Edit, Create } from "./channel-versions";
 
 export const ChannelVersions = {
   list: List,
   edit: Edit,
   create: Create,
-  icon: Icon,
 };
