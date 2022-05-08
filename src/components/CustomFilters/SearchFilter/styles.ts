@@ -11,7 +11,7 @@ export const SearchFilterStyles: any = {
     borderLeft: "none",
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     fontSize: 14,
     padding: "8px 30px 8px 12px",
     "&::placeholder": {
@@ -26,7 +26,7 @@ export const SearchFilterStyles: any = {
     "& .MuiInputBase-root": {
       fontSize: 14,
       height: "100%",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
       color: "var(--secondary-color-default)",
 
       "&::before": {

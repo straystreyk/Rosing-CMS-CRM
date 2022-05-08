@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     textTransform: "none",
     "& .text-custom-btn": {
       lineHeight: "20px",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
     },
     "& .MuiButton-label > .MuiButton-startIcon": {
       marginRight: 6,

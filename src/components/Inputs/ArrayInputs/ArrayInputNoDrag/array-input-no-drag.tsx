@@ -22,7 +22,7 @@ export interface ArrayInputProps extends Omit<ArrayInputPropsRA, "children"> {
 const useStyles = makeStyles((theme) => ({
   GroupInputsLabel: {
     fontSize: 14,
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     fontWeight: 500,
     lineHeight: "20px",
     display: "inline-block",
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   GroupHelperText: {
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     fontSize: 12,
     marginBottom: 8,
     color: "var(--secondary-color-default)",
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     "& button": {
       textTransform: "unset",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
       display: "flex",
       alignItems: "center",
       marginRight: 10,

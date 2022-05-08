@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     "& .MuiSelect-root": {
       padding: "7px 12px",
       color: "var(--primary-text-default)",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
       border: "1px solid var(--secondary-color-default)",
       borderRadius: 4,
       fontSize: 14,
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
       margin: 0,
       fontSize: 12,
       marginTop: 5,
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
     },
     "& > p.MuiFormHelperText-root.Mui-error": {
       color: "#f44336",

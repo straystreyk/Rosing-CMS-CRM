@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     "& button": {
       color: "var(--primary-button-default)",
       textTransform: "unset",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
     },
   },
   FilterButtonText: {

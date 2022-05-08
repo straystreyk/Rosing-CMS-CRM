@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       textTransform: "unset",
       outline: "none",
       border: "none",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
     },
   },
   ImageItem: {

@@ -22,7 +22,7 @@ const useStyles = makeStyles({
       color: "var(--secondary-color-default)",
       fontSize: 12,
       marginTop: 2,
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
     },
   },
 });

@@ -31,7 +31,7 @@ export const AutoCompleteInputStyles = {
     margin: 0,
     marginTop: 5,
     fontSize: 12,
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     color: "var(--secondary-color-default)",
   },
   "& > p.MuiFormHelperText-root.Mui-error": {

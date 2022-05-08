@@ -24,6 +24,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
     >
       <FunctionField
         label="Name"
+        source="name"
         render={(record?: RecordRA) => (
           <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
             {record?.name}
@@ -33,6 +34,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <TextField label="Slug" source="slug" />
       <FunctionField
         label="Image"
+        source="images"
         render={(record?: RecordRA) =>
           record?.images.length ? (
             <span>Has images ({record?.images.length})</span>

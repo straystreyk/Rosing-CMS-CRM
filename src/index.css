@@ -12,6 +12,7 @@
     --primary-bg: #F0F8FF;
     --primary-bg-1: #CCE8FF;
     --primary-bg-3: #FAFDFF;
+    --font-family: 'Gilroy', sans-serif;
 }
 
 input {
@@ -22,7 +23,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 16px;
-    font-family: 'Gilroy', sans-serif;
+    font-family: var(--font-family);
     color: var(--secondary-color-main);
 }
 

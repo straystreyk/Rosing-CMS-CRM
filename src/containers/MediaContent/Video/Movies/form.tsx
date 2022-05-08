@@ -42,6 +42,7 @@ import { CheckBoxGroup } from "../../../../components/UI/MaterialUI/check-box-gr
 import { SwitchInput } from "../../../../components/Inputs/SwitchInput";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
+import { AutocompleteInput } from "../../../../components/Inputs/AutocompleteInput";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -200,7 +201,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >
-          <SelectInput
+          <AutocompleteInput
             resource={resource}
             inputType={type}
             helperText="The company - the copyright holder of the film"
@@ -226,7 +227,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           reference="media_content/attributes/providers/content_providers"
           resource={resource}
         >
-          <SelectInput
+          <AutocompleteInput
             optionText="name"
             resource={resource}
             inputType={type}
@@ -471,7 +472,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
               helperText="The list of API clients for which access to the series is allowed, access is denied for other API clients. Leave the field empty if access is allowed for all API clients."
             />
           </ReferenceArrayInput>
-          <ReferenceInput
+          <ReferenceArrayInput
             label=""
             source="forbiddenApiClients"
             reference="api_clients"
@@ -484,7 +485,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
               inputType={type}
               helperText="List of API clients for which access to the series is prohibited"
             />
-          </ReferenceInput>
+          </ReferenceArrayInput>
         </CheckBoxGroup>
       </FormSection>
       <ScrollTopButton />

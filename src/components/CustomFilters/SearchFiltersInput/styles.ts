@@ -8,7 +8,7 @@ export const SearchFiltersInputStyles: any = {
   SearchFilterInput: {
     width: "100%",
     border: "1px solid var(--secondary-color-default)",
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     fontSize: 14,
     borderRadius: 4,
     padding: "8px 30px 8px 12px",

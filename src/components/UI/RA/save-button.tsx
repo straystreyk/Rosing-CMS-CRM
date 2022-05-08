@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   SaveButton: {
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     "& svg": {
       marginLeft: 0,
       marginRight: 6,

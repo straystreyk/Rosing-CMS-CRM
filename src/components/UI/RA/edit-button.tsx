@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     "& .MuiButton-label": {
       textTransform: "none",
       justifyContent: "flex-start",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
     },
     "&:focus": {
       outline: "2px solid #7FC5FF",

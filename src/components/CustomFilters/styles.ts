@@ -11,6 +11,9 @@ export const CustomFiltersWrapperStyles: any = {
     gap: "15px 8px",
     "& .filterButton": {
       padding: 0,
+      "&.deleteButton": {
+        marginLeft: 15,
+      },
     },
   },
 };

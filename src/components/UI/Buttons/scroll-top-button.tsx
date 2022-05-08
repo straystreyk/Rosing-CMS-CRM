@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     fontWeight: 500,
     lineHeight: "20px",
     textTransform: "none",
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     transition: "0.35s opacity ease",
     minWidth: "auto",
     "& .MuiButton-label": {

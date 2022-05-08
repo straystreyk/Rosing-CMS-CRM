@@ -44,7 +44,7 @@ const useStyles = makeStyles({
       fontSize: 14,
       marginBottom: 5,
       lineHeight: "20px",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
       color: "var(--secondary-color-main) !important",
     },
     "& div": {

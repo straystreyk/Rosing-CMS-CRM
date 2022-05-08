@@ -9,11 +9,11 @@ import { NumberInputShow } from "./show-view";
 const useStyles = makeStyles({
   custom: {
     backgroundColor: "none !important",
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     "& input": {
       color: "var(--primary-text-default)",
       padding: "8px 12px",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
       lineHeight: "20px",
       fontSize: 14,
       border: "1px solid var(--secondary-color-default)",
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
       margin: 0,
       marginTop: 5,
       fontSize: 12,
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
       color: "var(--secondary-color-default)",
     },
     "& > p.MuiFormHelperText-root.Mui-error": {
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
       position: "static",
       transform: "none !important",
       fontSize: 14,
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
       fontWeight: 500,
       marginBottom: 5,
       lineHeight: "20px",

@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     transition: "0.35s color ease, 0.35s border ease",
     "& .text-custom-btn": {
       lineHeight: "20px",
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
     },
     "& .MuiButton-startIcon svg circle": {
       transition: "0.35s all ease",

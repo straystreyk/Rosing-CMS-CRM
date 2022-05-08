@@ -12,7 +12,7 @@ const useStyles = makeStyles({
       "& span": {
         paddingLeft: 0,
         textTransform: "none",
-        fontFamily: "Gilroy, sans-serif",
+        fontFamily: "var(--font-family)",
       },
     },
     "&:focus": {

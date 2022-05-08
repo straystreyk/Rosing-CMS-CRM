@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         height: "unset",
       },
       "& span.MuiTypography-root": {
-        fontFamily: "Gilroy, sans-serif",
+        fontFamily: "var(--font-family)",
         fontSize: 14,
         lineHeight: "20px",
         color: "var(--primary-text-default)",
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
       color: "var(--secondary-color-default)",
       fontSize: 12,
       marginTop: 5,
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
     },
   },
 });

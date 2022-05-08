@@ -57,7 +57,7 @@ export const RaRichTextInputStyles: any = {
       margin: 0,
       fontSize: 12,
       marginTop: 5,
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
       "&.Mui-error": {
         color: "#D21C1C",
       },

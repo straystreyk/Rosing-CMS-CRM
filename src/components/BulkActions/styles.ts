@@ -23,4 +23,7 @@ export const BulkActionsStyles: any = {
     padding: 0,
     marginRight: 15,
   },
+  BulkActions: {
+    marginLeft: 15,
+  },
 };

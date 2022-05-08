@@ -37,7 +37,7 @@ export interface ArrayInputProps {
 const useStyles = makeStyles((theme) => ({
   GroupInputsLabel: {
     fontSize: 14,
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     fontWeight: 500,
     lineHeight: "20px",
     display: "inline-block",
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   GroupHelperText: {
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     fontSize: 12,
     color: "var(--secondary-color-default)",
     lineHeight: "16px",

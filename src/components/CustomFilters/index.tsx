@@ -132,7 +132,7 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
                 variant="text"
                 startIcon={<DeleteIcon color="var(--additional-red-default)" />}
                 customColor="var(--additional-red-default)"
-                className="filterButton"
+                className="filterButton deleteButton"
                 onClick={deleteAllFilters}
               >
                 Delete ({allActiveFiltersWithValue.length})

@@ -97,11 +97,17 @@ export const UPDATE_MOVIE = gql`
     $originalName: String
     $description: String
     $altDescription: String
+    $productionYear: Int
+    $releaseDate: Date
     $languageIds: [ID!]
     $genreIds: [ID!]
     $productionCountryIds: [ID!]
     $duration: Int
+    $rightHolderId: ID
     $studioIds: [String!]
+    $externalCatalogId: ID
+    $imdbId: Int
+    $kinopoiskId: Int
     $markers: [String!]
     $position: Int
     $metadata: [JSON!]
@@ -110,6 +116,7 @@ export const UPDATE_MOVIE = gql`
     $streamSourceIds: [ID!]
     $extraVideos: [ExtraVideoInput!]
     $published: Boolean
+    $cmsDistribution: String
     $downloadable: Boolean
     $storageTime: Int
     $certificationRatings: [CertificationRatingInput!]
@@ -117,6 +124,7 @@ export const UPDATE_MOVIE = gql`
     $forbiddenApiClientIds: [String!]
     $allowedCountries: [String!]
     $disallowedCountries: [String!]
+    $preRollCount: Int
     $midRollCount: Int
     $firstMidRollOffset: Int
     $nthMidRollOffset: Int
@@ -128,11 +136,17 @@ export const UPDATE_MOVIE = gql`
       originalName: $originalName
       description: $description
       altDescription: $altDescription
+      productionYear: $productionYear
+      releaseDate: $releaseDate
       languageIds: $languageIds
       genreIds: $genreIds
       productionCountryIds: $productionCountryIds
       duration: $duration
+      rightHolderId: $rightHolderId
       studioIds: $studioIds
+      externalCatalogId: $externalCatalogId
+      imdbId: $imdbId
+      kinopoiskId: $kinopoiskId
       markers: $markers
       position: $position
       metadata: $metadata
@@ -141,6 +155,7 @@ export const UPDATE_MOVIE = gql`
       streamSourceIds: $streamSourceIds
       extraVideos: $extraVideos
       published: $published
+      cmsDistribution: $cmsDistribution
       downloadable: $downloadable
       storageTime: $storageTime
       certificationRatings: $certificationRatings
@@ -148,6 +163,7 @@ export const UPDATE_MOVIE = gql`
       forbiddenApiClientIds: $forbiddenApiClientIds
       allowedCountries: $allowedCountries
       disallowedCountries: $disallowedCountries
+      preRollCount: $preRollCount
       midRollCount: $midRollCount
       firstMidRollOffset: $firstMidRollOffset
       nthMidRollOffset: $nthMidRollOffset

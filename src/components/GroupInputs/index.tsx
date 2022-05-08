@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
   GroupInputsLabelWrapper: {
     fontSize: 14,
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     fontWeight: 500,
     marginTop: 8,
     lineHeight: "20px",
@@ -44,7 +44,7 @@ const useStyles = makeStyles({
     },
   },
   GroupHelperText: {
-    fontFamily: "Gilroy, sans-serif",
+    fontFamily: "var(--font-family)",
     fontSize: 12,
     color: "var(--secondary-color-default)",
     lineHeight: "16px",

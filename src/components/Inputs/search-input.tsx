@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     "& .MuiInputBase-input": {
       padding: 0,
       fontSize: 14,
-      fontFamily: "Gilroy, sans-serif",
+      fontFamily: "var(--font-family)",
     },
     "& div": {
       backgroundColor: "inherit",
