@@ -10,6 +10,8 @@ import { ShowProps } from "../../../types";
 import { MoreActionsButton } from "../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../components/UI/RA/delete-button";
+import { PublishedIcons, UnPublishedIcons } from "../../../constants/icons";
+import { newsFilters } from "./news-filters";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -19,6 +21,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
     <DatagridList
       listText="A list of pages available for publication on clients. The client has the ability to display an individual list of pages in the menu in accordance with the rule associated with it. Select a client from the list to see its list of pages."
       empty={<EmptyTablePage />}
+      filters={newsFilters}
       {...props}
       optimized
     >
@@ -46,10 +49,21 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <FunctionField
         label=""
         render={(record?: Record) => (
-          <MoreActionsButton>
-            <EditButton color="secondary" record={record} basePath={props.basePath} />
-            <DeleteButton record={record} basePath={props.basePath} />
-          </MoreActionsButton>
+          <div className={classes.MoreActions}>
+            {record?.published ? (
+              <button>
+                <PublishedIcons />
+              </button>
+            ) : (
+              <button>
+                <UnPublishedIcons />
+              </button>
+            )}
+            <MoreActionsButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          </div>
         )}
       />
     </DatagridList>

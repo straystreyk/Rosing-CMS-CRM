@@ -290,6 +290,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           source="mediascopeConfig.enabled"
           inputType={type}
           labelPlacement="start"
+          resource={resource}
         />
         {values.mediascopeConfig && values.mediascopeConfig.enabled && (
           <GroupInputsOrigin>
@@ -335,6 +336,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           </GroupInputsOrigin>
         )}
         <SwitchInput
+          resource={resource}
           label="Vitrina TV config"
           source="vitrinaTvConfig.enabled"
           inputType={type}

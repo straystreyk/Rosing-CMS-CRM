@@ -31,6 +31,8 @@ interface ShowProps {
   total?: number;
 }
 
+const useTableActions = () => {};
+
 export const List: React.FC<ShowProps> = (props) => {
   const classes = useStyles();
   const [mutate, { data, error, loading }] = useMutation();
@@ -38,17 +40,13 @@ export const List: React.FC<ShowProps> = (props) => {
   const notify = useNotify();
 
   const approve = React.useCallback(
-    async (
-      id?: Identifier,
-      updateOpts?: Record<string, string | boolean | number | string[]>,
-      required?: Record<string, string | boolean>
-    ) => {
-      if (!id || !updateOpts || !required) return;
+    async (id?: Identifier, updateOpts?: Record<string, string | boolean | number | string[]>) => {
+      if (!id || !updateOpts) return;
 
       await mutate({
         type: "update",
         resource: props.resource,
-        payload: { id, data: { ...required, ...updateOpts } },
+        payload: { id, data: { ...updateOpts } },
       });
     },
     [mutate, props.resource]
@@ -119,14 +117,10 @@ export const List: React.FC<ShowProps> = (props) => {
               <MoreActionsButton>
                 <StandardButton
                   onClick={() =>
-                    approve(
-                      record?.id,
-                      {
-                        ...record,
-                        published: true,
-                      },
-                      { name: record?.name }
-                    )
+                    approve(record?.id, {
+                      ...record,
+                      published: true,
+                    })
                   }
                   disabled={loading}
                   color="secondary"
@@ -136,9 +130,7 @@ export const List: React.FC<ShowProps> = (props) => {
                   Publish
                 </StandardButton>
                 <StandardButton
-                  onClick={() =>
-                    approve(record?.id, { ...record, published: false }, { name: record?.name })
-                  }
+                  onClick={() => approve(record?.id, { ...record, published: false })}
                   disabled={loading}
                   color="secondary"
                   variant="textWithBg"
@@ -147,9 +139,7 @@ export const List: React.FC<ShowProps> = (props) => {
                   Unpublish
                 </StandardButton>
                 <StandardButton
-                  onClick={() =>
-                    approve(record?.id, { ...record, downloadable: true }, { name: record?.name })
-                  }
+                  onClick={() => approve(record?.id, { ...record, downloadable: true })}
                   disabled={loading}
                   color="secondary"
                   variant="textWithBg"
@@ -158,9 +148,7 @@ export const List: React.FC<ShowProps> = (props) => {
                   Allow downloading
                 </StandardButton>
                 <StandardButton
-                  onClick={() =>
-                    approve(record?.id, { ...record, downloadable: false }, { name: record?.name })
-                  }
+                  onClick={() => approve(record?.id, { ...record, downloadable: false })}
                   disabled={loading}
                   color="secondary"
                   variant="textWithBg"
@@ -169,9 +157,7 @@ export const List: React.FC<ShowProps> = (props) => {
                   Prohibit downloading
                 </StandardButton>
                 <StandardButton
-                  onClick={() =>
-                    approve(record?.id, { ...record, position: 1 }, { name: record?.name })
-                  }
+                  onClick={() => approve(record?.id, { ...record, position: 1 })}
                   disabled={loading}
                   color="secondary"
                   variant="textWithBg"
@@ -180,13 +166,7 @@ export const List: React.FC<ShowProps> = (props) => {
                   To the top of the list
                 </StandardButton>
                 <StandardButton
-                  onClick={() =>
-                    approve(
-                      record?.id,
-                      { ...record, position: props.total ?? 0 },
-                      { name: record?.name }
-                    )
-                  }
+                  onClick={() => approve(record?.id, { ...record, position: props.total ?? 0 })}
                   startIcon={<ArrowIconDown />}
                   disabled={loading}
                   variant="textWithBg"

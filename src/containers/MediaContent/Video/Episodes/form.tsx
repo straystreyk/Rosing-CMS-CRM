@@ -259,6 +259,7 @@ const Episode: React.FC<{
           <>
             <SwitchInput
               label="Downloadable"
+              resource={resource}
               source={
                 parentSourceWithIndex ? `${parentSourceWithIndex}.downloadable` : "downloadable"
               }
@@ -283,6 +284,7 @@ const Episode: React.FC<{
               label="Downloadable"
               source="downloadable"
               inputType={inputType}
+              resource={resource}
               labelPlacement="start"
             />
             {formState.values.downloadable && (

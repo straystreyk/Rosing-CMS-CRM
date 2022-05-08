@@ -60,6 +60,8 @@ export const EditInputComponent: React.FC<any> = ({
   const notify = useNotify();
   const classes = useStyles();
 
+  console.log(props.source, props.resource);
+
   React.useEffect(() => {
     if (data) {
       form.change(props.source, data[props.source]);

@@ -16,6 +16,7 @@ import { FormSection } from "../../../../components/FormSection";
 import {
   EXTRA_VIDEO_TYPES,
   INPUT_LABEL_PROPS,
+  PUBLISHED_CHOICES_FORM,
   SELECT_MARKERS,
 } from "../../../../constants/forms-constants";
 import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input";
@@ -201,6 +202,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <AutocompleteArrayInput
           source="markers"
           label="Label"
+          resource={resource}
           inputType={type}
           choices={SELECT_MARKERS}
           helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
@@ -208,15 +210,16 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <NumberInput
           source="position"
           label="Position"
-          resource={resource}
           inputType={type}
           helperText="The serial number in the general list of films. Can be entered manually when creating or editing, the positions of the remaining films will be updated accordingly. If the field is left empty, the last sequential number will be assigned to the movie."
+          resource={resource}
         />
         <Checkbox
           source="hasSeason"
           label="Number of seasons"
           checkboxLabel="More than one season"
           initialValue={false}
+          resource={resource}
           inputType={type}
           helperText="
 On the series page, users will see a menu with the numbering of seasons, the season number in the episode preview card and in the title on the player. If the series has only one season or it is a multi-part movie, you can deactivate the checkbox so that the application does not display information about the seasons."
@@ -284,7 +287,8 @@ On the series page, users will see a menu with the numbering of seasons, the sea
           label="Publishing"
           initialValue={false}
           inputType={type}
-          choices={PUBLISHED_CHOICES}
+          choices={PUBLISHED_CHOICES_FORM}
+          resource={resource}
         />
         <ArrayInputNoDrag
           resource={resource}

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { EditInputComponent } from "../edit-input-component";
-import { RadioButtonGroupInput } from "./index";
+import { RadioButtonGroupInput, RadioButtonGroupInputOrigin } from "./index";
 import { makeStyles } from "@material-ui/core/styles";
 import { labelStyles } from "../styles";
 import { useFormState } from "react-final-form";
@@ -8,6 +8,7 @@ import { useFormState } from "react-final-form";
 interface ShowProps {
   label: string;
   source: string;
+  inputType: string;
 }
 
 const useStyles = makeStyles({
@@ -62,9 +63,10 @@ const ShowView: React.FC<ShowProps> = (props) => {
 };
 
 export const RadioButtonGroupInputShow: React.FC<ShowProps> = (props) => {
+  console.log(props);
   return (
     <EditInputComponent
-      ComponentInput={RadioButtonGroupInput}
+      ComponentInput={RadioButtonGroupInputOrigin}
       ComponentShow={ShowView}
       {...props}
     />

@@ -32,25 +32,41 @@ interface RadioButtonGroupInputProps extends Omit<RadioButtonGroupInputPropsRA, 
   source: string;
 }
 
-export const RadioButtonGroupInput: React.FC<RadioButtonGroupInputProps> = ({
+export const RadioButtonGroupInputOrigin: React.FC<RadioButtonGroupInputProps> = ({
   label,
-  inputType,
   ...props
 }) => {
   const classes = useStyles();
+
+  return (
+    <div className={classes.RadioButtonGroupInput}>
+      <RadioButtonGroupInputRA
+        size="small"
+        helperText={props.helperText ?? false}
+        label={label}
+        {...props}
+      />
+    </div>
+  );
+};
+
+export const RadioButtonGroupInput: React.FC<RadioButtonGroupInputProps> = ({
+  label,
+  inputType,
+  source,
+  ...props
+}) => {
   return (
     <>
       {inputType === "show" ? (
-        <RadioButtonGroupInputShow label={label} {...props} />
+        <RadioButtonGroupInputShow source={source} inputType={inputType} label={label} {...props} />
       ) : (
-        <div className={classes.RadioButtonGroupInput}>
-          <RadioButtonGroupInputRA
-            size="small"
-            helperText={props.helperText ?? false}
-            label={label}
-            {...props}
-          />
-        </div>
+        <RadioButtonGroupInputOrigin
+          source={source}
+          inputType={inputType}
+          label={label}
+          {...props}
+        />
       )}
     </>
   );

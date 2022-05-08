@@ -42,6 +42,7 @@ export interface CheckboxProps {
   label?: string;
   initialValue?: boolean;
   inputType?: string;
+  resource: string;
 }
 
 export const CheckboxOrigin: React.FC<CheckboxProps> = ({

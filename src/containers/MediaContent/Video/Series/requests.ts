@@ -133,6 +133,7 @@ export const UPDATE_SERIES = gql`
     $description: String
     $slogan: String
     $published: Boolean
+    $markers: [String!]
     $hasSeason: Boolean
     $genreIds: [String!]
     $certificationRatings: [CertificationRatingInput!]
@@ -148,6 +149,7 @@ export const UPDATE_SERIES = gql`
       description: $description
       slogan: $slogan
       published: $published
+      markers: $markers
       hasSeason: $hasSeason
       genreIds: $genreIds
       certificationRatings: $certificationRatings

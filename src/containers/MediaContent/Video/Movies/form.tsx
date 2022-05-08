@@ -391,6 +391,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           helperText="Download and play the movie offline, available in the app for Android and iOS"
           inputType={type}
           labelPlacement="start"
+          resource={resource}
         />
         {formState.values.downloadable && (
           <GroupInputsOrigin inputType={type}>
@@ -415,12 +416,14 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           initialValue={false}
           inputType={type}
           choices={PUBLISHED_CHOICES_FORM}
+          resource={resource}
         />
         <RadioButtonGroupInput
           source="cmsDistribution"
           label="Distribution"
           inputType={type}
           choices={SELECT_DISTRIBUTION}
+          resource={resource}
         />
         <ArrayInputNoDrag
           resource={resource}
