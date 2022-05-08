@@ -295,12 +295,17 @@ const MyDatagridBody = (props: any) => {
 
   return <DatagridBody {...props} row={<MyDatagridRow ids={props.ids} />} />;
 };
-export const DatagridList: React.FC<CustomDatagridProps> = ({ listText, ...props }) => (
+export const DatagridList: React.FC<CustomDatagridProps> = ({
+  listText,
+  offDescription,
+  toolbar,
+  ...props
+}) => (
   <DatagridWrapper
-    toolbar={props.toolbar}
+    toolbar={toolbar}
     resource={props.resource}
     basePath={props.basePath}
-    offDescription={props.offDescription}
+    offDescription={offDescription}
     filters={props.filters}
     listText={listText}
   >

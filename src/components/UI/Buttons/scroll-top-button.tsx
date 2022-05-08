@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     padding: 10,
     position: "fixed",
     zIndex: 11,
-    bottom: 100,
+    bottom: "5vh",
     right: 24,
     background: "linear-gradient(90.33deg, #00FFD9 2.27%, #00C0FF 68.93%, #008DFF 99.69%)",
     boxShadow: "0px 3px 12px -1px rgba(28, 52, 84, 0.1), 0px 2px 4px -1px rgba(28, 55, 90, 0.05)",

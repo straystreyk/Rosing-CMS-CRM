@@ -22,7 +22,11 @@ interface AutocompleteInputProps extends AutocompleteInputPropsRA {
   inputType: "create" | "edit" | "show";
 }
 
-export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({ inputType, ...rest }) => {
+export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
+  inputType,
+  helperText,
+  ...rest
+}) => {
   const classes = useStyles();
   return inputType === "show" ? (
     <AutocompleteShow {...rest} />
@@ -30,6 +34,7 @@ export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({ inputType,
     <AutocompleteInputWithOpts
       fullWidth
       options={{ className: classes.AutocompleteInput }}
+      helperText={helperText ?? false}
       {...rest}
     />
   );

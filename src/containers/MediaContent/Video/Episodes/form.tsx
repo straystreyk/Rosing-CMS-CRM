@@ -4,6 +4,8 @@ import { useFormState } from "react-final-form";
 import { FormProps } from "../../../../types";
 import {
   ArrayInput,
+  ArrayInputNoDrag,
+  AutocompleteArrayInput,
   formatTimeInput,
   NumberInput,
   parseTimeInput,
@@ -13,10 +15,21 @@ import {
 } from "../../../../components/Inputs";
 import { alwaysEmptyString, sanitizeId, scrollToErrorInput } from "../../../../helpers/form";
 import { useParams } from "react-router-dom";
-import { INPUT_LABEL_PROPS } from "../../../../constants/forms-constants";
+import {
+  INPUT_LABEL_PROPS,
+  PUBLISHED_CHOICES_FORM,
+  SELECT_DISTRIBUTION,
+  SELECT_MARKERS,
+} from "../../../../constants/forms-constants";
 import { makeStyles } from "@material-ui/core/styles";
 import { ArrayInputStyles as ArrayInputItemStyles } from "../../../../components/Models/CastMembers/styles";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
+import { MetaData } from "../../../../components/Models/Metadata";
+import { ImageUploaderV2 } from "../../../../components/ImageUploader";
+import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
+import { GroupInputsOrigin } from "../../../../components/GroupInputs";
+import { SwitchInput } from "../../../../components/Inputs/SwitchInput";
+import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 
 const FIXED_HEADER_OFFSET = 80;
 const useStyles = makeStyles({
@@ -24,7 +37,22 @@ const useStyles = makeStyles({
   ArrayInputWrapper: {
     marginTop: 15,
   },
+  EpisodeImage: {
+    display: "block",
+    "& .ImageItemWrapper": {
+      marginBottom: 16,
+      "&:last-child": {
+        marginBottom: 0,
+      },
+    },
+    "& .ImageItem": {
+      borderStyle: "solid",
+    },
+  },
 });
+
+const IMAGE_REQUEST_VARS = { fieldName: "Episode" };
+const INPUT_ITEMS_PER_PAGE = 25;
 
 const Episode: React.FC<{
   parentSourceWithIndex?: string;
@@ -32,15 +60,23 @@ const Episode: React.FC<{
   index?: string;
   show?: boolean;
   resource: string;
-  inputType: string;
+  inputType: "create" | "edit" | "show";
 }> = ({ parentSourceWithIndex, resource, parentSource, index, show, inputType, ...props }) => {
   const { seasonId } = useParams<{ seasonId: string }>();
+  const formState = useFormState();
+  const classes = useStyles();
 
   const [showResource, setShowResource] = React.useState(show);
 
   React.useEffect(() => {
     setShowResource(show);
   }, [show]);
+
+  React.useEffect(() => {
+    if (formState.submitFailed) {
+      scrollToErrorInput(FIXED_HEADER_OFFSET);
+    }
+  }, [formState.submitFailed]);
 
   return (
     <>
@@ -55,9 +91,18 @@ const Episode: React.FC<{
           resource={resource}
           inputType={inputType}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.seasonId` : "seasonId"}
-          label="Series id"
+          label="Season id"
           initialValue={sanitizeId(seasonId)}
           style={{ display: "none" }}
+          fullWidth
+        />
+        <NumberInput
+          resource={resource}
+          inputType={inputType}
+          label="Number of episode"
+          helperText="Chronological episode number"
+          validate={requiredValidate}
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.number` : "number"}
           fullWidth
         />
         <TextInput
@@ -67,9 +112,7 @@ const Episode: React.FC<{
           label="Name"
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.name` : "name"}
           fullWidth
-          helperText={
-            "The name of the episode that users will see in any sections of the application"
-          }
+          helperText="The name of the episode that users will see in any sections of the application"
         />
         <TextInput
           resource={resource}
@@ -87,13 +130,6 @@ const Episode: React.FC<{
           helperText={
             "The original non-localized title of the movie, which users will see only in the description"
           }
-          fullWidth
-        />
-        <NumberInput
-          resource={resource}
-          inputType={inputType}
-          label="Number"
-          source={parentSourceWithIndex ? `${parentSourceWithIndex}.number` : "number"}
           fullWidth
         />
         <RichTextInput
@@ -115,20 +151,174 @@ const Episode: React.FC<{
           type="time"
           fullWidth
         />
+        <TextInput
+          InputLabelProps={INPUT_LABEL_PROPS}
+          resource={resource}
+          inputType={inputType}
+          resettable={false}
+          helperText="Release date in the country where the application is used. If the release is upcoming, then the date is mandatory."
+          label="Release date"
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.releaseDate` : "releaseDate"}
+          type="date"
+          fullWidth
+        />
+        <AutocompleteArrayInput
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.markers` : "markers"}
+          label="Label"
+          inputType={inputType}
+          choices={SELECT_MARKERS}
+          helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
+        />
+        <ArrayInputNoDrag
+          resource={resource}
+          inputType={inputType}
+          helperText="A pair of custom fields that can be used for filtering. You can add multiple pairs."
+          ChildComponent={MetaData}
+          parentSource={parentSource}
+          index={index}
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.metadata` : "metadata"}
+          standardSource="metadata"
+          label="Metadata"
+          groupInputs
+          switchable
+          fullWidth
+        />
+        <ImageUploaderV2
+          wrapperClassName={classes.EpisodeImage}
+          requestVariables={IMAGE_REQUEST_VARS}
+          sourceIds={`${parentSourceWithIndex}.person.imageIds`}
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.images` : "images"}
+          index={index}
+          resource={resource}
+          inputType={inputType}
+          offInfo
+        />
+        <ReferenceArrayInput
+          label="Video file"
+          source={
+            parentSourceWithIndex ? `${parentSourceWithIndex}.streamSourceIds` : "streamSourceIds"
+          }
+          reference="media_content/video/video_files"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+          validate={requiredValidate}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            inputType={inputType}
+            helperText="You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
+          />
+        </ReferenceArrayInput>
+        <GroupInputsOrigin
+          label="Preroll"
+          inputType={inputType}
+          groupHelperText="Block of commercials at the beginning of the video, let's say one block"
+        >
+          <NumberInput
+            inputType={inputType}
+            source={
+              parentSourceWithIndex ? `${parentSourceWithIndex}.preRollCount` : "preRollCount"
+            }
+            label="Number of commercials"
+          />
+        </GroupInputsOrigin>
+        <GroupInputsOrigin
+          label="Midroll"
+          inputType={inputType}
+          groupHelperText="A block of commercials in the middle of the video, several blocks are allowed. The number of blocks depends on the offset time of their display and the duration of the video."
+        >
+          <NumberInput
+            inputType={inputType}
+            source={
+              parentSourceWithIndex ? `${parentSourceWithIndex}.midRollCount` : "midRollCount"
+            }
+            label="Number of commercials"
+          />
+          <NumberInput
+            inputType={inputType}
+            source={
+              parentSourceWithIndex
+                ? `${parentSourceWithIndex}.firstMidRollOffset`
+                : "firstMidRollOffset"
+            }
+            label="Showing the first midroll"
+            helperText="Shift time of the first midroll in seconds from the beginning of the video"
+          />
+          <NumberInput
+            inputType={inputType}
+            source={
+              parentSourceWithIndex
+                ? `${parentSourceWithIndex}.nthMidRollOffset`
+                : "nthMidRollOffset"
+            }
+            label="Show subsequent midrolls"
+            helperText="Time to shift the display of subsequent midrolls in seconds from the start of displaying the first midroll"
+          />
+        </GroupInputsOrigin>
+        {parentSourceWithIndex && parentSource && index && (
+          <>
+            <SwitchInput
+              label="Downloadable"
+              source={
+                parentSourceWithIndex ? `${parentSourceWithIndex}.downloadable` : "downloadable"
+              }
+              inputType={inputType}
+              labelPlacement="start"
+            />
+            {formState.values[parentSource][index] && (
+              <GroupInputsOrigin inputType={inputType}>
+                <NumberInput
+                  label="Storage time"
+                  helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
+                  source="storageTime"
+                  inputType={inputType}
+                />
+              </GroupInputsOrigin>
+            )}
+          </>
+        )}
+        {!parentSourceWithIndex && (
+          <>
+            <SwitchInput
+              label="Downloadable"
+              source="downloadable"
+              inputType={inputType}
+              labelPlacement="start"
+            />
+            {formState.values.downloadable && (
+              <GroupInputsOrigin inputType={inputType}>
+                <NumberInput
+                  label="Storage time"
+                  helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
+                  source="storageTime"
+                  inputType={inputType}
+                />
+              </GroupInputsOrigin>
+            )}
+          </>
+        )}
+        <RadioButtonGroupInput
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.published` : "published"}
+          label="Publishing"
+          initialValue={false}
+          inputType={inputType}
+          choices={PUBLISHED_CHOICES_FORM}
+        />
+        <RadioButtonGroupInput
+          source={
+            parentSourceWithIndex ? `${parentSourceWithIndex}.cmsDistribution` : "cmsDistribution"
+          }
+          label="Distribution"
+          inputType={inputType}
+          choices={SELECT_DISTRIBUTION}
+        />
       </div>
     </>
   );
 };
 
 export const Form: React.FC<FormProps> = ({ resource, type }) => {
-  const formState = useFormState();
   const classes = useStyles();
-
-  React.useEffect(() => {
-    if (formState.submitFailed) {
-      scrollToErrorInput(FIXED_HEADER_OFFSET);
-    }
-  }, [formState.submitFailed]);
 
   return (
     <>

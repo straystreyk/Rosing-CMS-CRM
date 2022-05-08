@@ -56,7 +56,7 @@ export const ExpandMenu = ({
 
   const currentExists = !!expand.current;
 
-  const scrollHeight: any = useCallback(() => {
+  const scrollHeight = useCallback(() => {
     if (expand.current && active) {
       return expand.current.scrollHeight;
     }

@@ -65,7 +65,7 @@ const SHIFT_CHOICES = [
   },
 ];
 
-export const Form: React.FC<FormProps> = ({ resource, type }) => {
+export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   const classes = useStyles();
   const { values } = useFormState();
 
@@ -85,11 +85,8 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           inputType={type}
           label="Name"
           source="name"
-          placeholder="name"
           fullWidth
-          helperText={
-            "The name of the TV channel that users will see in any sections of the application"
-          }
+          helperText="The name of the TV channel that users will see in any sections of the application"
         />
         <TextInput
           resource={resource}
@@ -249,10 +246,12 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
             />
           </Grid>
         </Grid>
-        <FormHelperText className={classes.formHelperText}>
-          The amount of time back from the current one, by which you can rewind the live broadcast
-          in the player back
-        </FormHelperText>
+        {type !== "show" && (
+          <FormHelperText className={classes.formHelperText}>
+            The amount of time back from the current one, by which you can rewind the live broadcast
+            in the player back
+          </FormHelperText>
+        )}
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <NumberInput
@@ -272,11 +271,13 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
             />
           </Grid>
         </Grid>
-        <FormHelperText className={classes.formHelperText}>
-          The amount of time back from the current one, during which recordings of past TV shows are
-          available. In the application, in the section with the schedule, such TV shows will be
-          marked with the corresponding icon.
-        </FormHelperText>
+        {type !== "show" && (
+          <FormHelperText className={classes.formHelperText}>
+            The amount of time back from the current one, during which recordings of past TV shows
+            are available. In the application, in the section with the schedule, such TV shows will
+            be marked with the corresponding icon.
+          </FormHelperText>
+        )}
         <NumberInput
           source="catchupOffset"
           label="Catch offset"
@@ -292,6 +293,13 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
         />
         {values.mediascopeConfig && values.mediascopeConfig.enabled && (
           <GroupInputsOrigin>
+            <TextInput
+              resource={resource}
+              inputType={type}
+              source="mediascopeConfig.id"
+              style={{ display: "none" }}
+              fullWidth
+            />
             <NumberInput
               validate={requiredValidate}
               inputType={type}

@@ -1,12 +1,14 @@
 import * as React from "react";
-import { ShowProps } from "../../../../../types";
-import { DatagridList } from "../../../../../components/DatagridList";
 import { FunctionField, TextField } from "react-admin";
-import { makeStyles } from "@material-ui/core";
 import { Record as RecordRA } from "ra-core/esm/types";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
+
 import { TableFieldsStyles } from "../../../../../components/TableFields/styles";
 import { EmptyTablePage } from "../../../../../components/EmptyTablePage";
+import { DatagridList } from "../../../../../components/DatagridList";
+import { ShowProps } from "../../../../../types";
+import { ReferenceField } from "../../../../../components/TableFields/reference-field";
 import { MoreActionsButton } from "../../../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../../components/UI/RA/delete-button";
@@ -22,7 +24,6 @@ export const TableView: React.FC<ShowProps> = (props) => {
       empty={<EmptyTablePage />}
       {...props}
       optimized
-      draggable
     >
       <FunctionField
         label="Name"
@@ -34,33 +35,27 @@ export const TableView: React.FC<ShowProps> = (props) => {
         )}
       />
       <FunctionField
-        label="Position"
-        source="position"
-        render={(record?: RecordRA) => record?.position ?? "Not filled in"}
-      />
-      <FunctionField
-        label="Catch-up"
-        source="catchupAvailabilityValue"
+        label="Name"
+        source="name"
         render={(record?: RecordRA) =>
-          record?.catchupAvailabilityValue ? (
-            <span>
-              {record?.catchupAvailabilityValue} {record?.catchupAvailabilityUnit}
-            </span>
-          ) : (
-            "Not filled in"
-          )
+          record?.streamingUid ? record?.streamingUid : <span className={classes.Empty}>Empty</span>
         }
       />
+      <ReferenceField
+        label="Datacenter"
+        source="datacenterId"
+        emptyText={<span className={classes.Empty}>Empty</span>}
+        reference="datacenters"
+      >
+        <TextField source="name" fullWidth />
+      </ReferenceField>
       <FunctionField
-        label="Time-shift"
-        source="timeshiftAvailabilityValue"
+        label="DRM encryption"
         render={(record?: RecordRA) =>
-          record?.timeshiftAvailabilityValue ? (
-            <span>
-              {record?.timeshiftAvailabilityValue} {record?.timeshiftAvailabilityUnit}
-            </span>
+          record?.allowedDrms ? (
+            record?.allowedDrms.join(", ")
           ) : (
-            "Not filled in"
+            <span className={classes.Empty}>Empty</span>
           )
         }
       />

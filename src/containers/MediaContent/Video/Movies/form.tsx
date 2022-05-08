@@ -63,7 +63,7 @@ const FIXED_TAB_LABELS = [
   "Terms of publication",
 ];
 
-export const Form: React.FC<FormProps> = React.memo(({ type, resource }) => {
+export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }) => {
   const classes = useStyles();
   const formState = useFormState();
 

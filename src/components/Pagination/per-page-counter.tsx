@@ -33,7 +33,7 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[] }> = ({
   showBy = [15, 25, 50, 100],
 }) => {
   const location = useLocation();
-  const history = useHistory();
+  // const history = useHistory();
   const { total, perPage, setPerPage } = useListContext();
   const queryParams = new URLSearchParams(location.search);
   const classes = useStyles();
@@ -47,7 +47,7 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[] }> = ({
       // queryParams.delete("perPage");
       // history.push(`${location.pathname}?${queryParams}`);
     },
-    [history, queryParams, setPerPage, location.pathname]
+    [setPerPage]
   );
 
   return (

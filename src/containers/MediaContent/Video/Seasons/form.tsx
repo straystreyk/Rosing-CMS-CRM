@@ -89,6 +89,7 @@ const Season: React.FC<{
               ? `${parentSourceWithIndex}.reversedEpisodesOrder`
               : "reversedEpisodesOrder"
           }
+          inputType={props.type}
           label="Distribution"
           initialValue={false}
           choices={REVERSED_EPISODES_ORDER}
@@ -96,9 +97,7 @@ const Season: React.FC<{
         <ArrayInputNoDrag
           resource={resource}
           inputType={props.type}
-          helperText={
-            "A pair of custom fields that can be used for filtering. You can add multiple pairs."
-          }
+          helperText="A pair of custom fields that can be used for filtering. You can add multiple pairs."
           ChildComponent={MetaData}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.metadata` : "metadata"}
           parentSource={parentSource}

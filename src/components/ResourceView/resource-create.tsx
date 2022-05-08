@@ -25,6 +25,7 @@ const SCROLL_TO_OPTS: ScrollToOptions = {
 export const ResourceCreate: React.FC<CreateProps> = ({
   onSuccessWithRedirect,
   offRedirectButton,
+  messageArgs,
   ...props
 }) => {
   const notify = useNotify();
@@ -35,25 +36,25 @@ export const ResourceCreate: React.FC<CreateProps> = ({
     ({ data }) => {
       notify(`resources.${props.resource}.mutations.create.success`, {
         type: "info",
-        messageArgs: { name: data.name },
+        messageArgs: messageArgs ?? { name: data.name },
       });
       redirect("list", `${props.basePath}/create`, data.id, data);
       window.scrollTo(SCROLL_TO_OPTS);
       refresh();
     },
-    [notify, props.basePath, props.resource, redirect, refresh]
+    [messageArgs, notify, props.basePath, props.resource, redirect, refresh]
   );
 
   const onSuccess: (data: any) => void = React.useCallback(
     ({ data }) => {
       notify(`resources.${props.resource}.mutations.create.success`, {
         type: "info",
-        messageArgs: { name: data.name },
+        messageArgs: messageArgs ?? { name: data.name },
       });
       redirect("list", props.basePath, data.id, data);
       refresh();
     },
-    [notify, props.basePath, props.resource, redirect, refresh]
+    [messageArgs, notify, props.basePath, props.resource, redirect, refresh]
   );
 
   const onFailure = React.useCallback(

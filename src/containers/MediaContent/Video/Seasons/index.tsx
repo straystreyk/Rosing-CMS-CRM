@@ -1,8 +1,8 @@
-import { Icon, List, Edit, Create } from "./seasons";
+import { List, Edit, Create, Show } from "./seasons";
 
 export const SeasonsVariables = {
   list: List,
   edit: Edit,
   create: Create,
-  icon: Icon,
+  show: Show,
 };

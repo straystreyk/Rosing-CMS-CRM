@@ -30,6 +30,9 @@ import { LanguagesVariables as languages } from "../MediaContent/Attributes/Lang
 import { PeopleVariables as people } from "../MediaContent/Attributes/People";
 import { ProgramsTypesVariables as programsTypes } from "../MediaContent/Attributes/ProgramsTypes";
 import { LabelsVariables as labels } from "../MediaContent/Attributes/Labels";
+import { TVStreamsVariables as tvStreams } from "../MediaContent/TV/Channels/TV streams";
+import { ChannelPositionOverridesVariables as channelPositionOverrides } from "../MediaContent/TV/Channels/ChannelPositionOverrides";
+import { BlackoutsVariables as blackouts } from "../MediaContent/TV/Channels/Blackouts";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -62,6 +65,13 @@ export const App = () => {
         {...channelVersions}
       />
       <Resource name="media_content/tv/channels/channels" {...channels} />
+      <Resource name="media_content/tv/channels/live_streams" {...tvStreams} />
+      <Resource
+        name="media_content/tv/channels/channel_positions_overrides"
+        {...channelPositionOverrides}
+      />
+      <Resource name="media_content/tv/channels/blackouts" {...blackouts} />
+      <Resource name="media_content/tv/tv_shows/epg_sources" />
       <Resource name="datacenters" {...datacenters} />
       <Resource name="media_content/video/movies" {...movies} />
       <Resource name="media_content/video/video_files" {...videoFiles} />
@@ -85,6 +95,7 @@ export const App = () => {
       <Resource name="castMembers" />
       <Resource name="countries" />
       <Resource name="production_countries" />
+      <Resource name="regions" />
       <Resource name="api_clients" />
       <Resource name="images" />
     </Admin>

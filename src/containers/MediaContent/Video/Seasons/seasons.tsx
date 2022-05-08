@@ -1,17 +1,23 @@
 import React from "react";
-import { CreateProps, EditProps, ListProps } from "ra-ui-materialui";
-import Icon from "@material-ui/icons/ImageAspectRatioOutlined";
+import { CreateProps, EditProps, ListProps, ShowProps } from "ra-ui-materialui";
 import { useParams } from "react-router-dom";
 
-import { ResourceList, ResourceCreate, ResourceEdit } from "../../../../components/ResourceView";
-import { Show } from "./show";
+import {
+  ResourceList,
+  ResourceCreate,
+  ResourceEdit,
+  ResourceShow,
+} from "../../../../components/ResourceView";
+import { TableView } from "./table-view";
 import { Form } from "./form";
 import { sanitizeId } from "../../../../helpers/form";
 
 export const resource = "media_content/video/series/:seriesId/seasons";
 
+type Params = { seriesId: string };
+
 export const List: React.FC<ListProps> = (props) => {
-  const { seriesId } = useParams<{ seriesId: string }>();
+  const { seriesId } = useParams<Params>();
 
   return (
     <ResourceList
@@ -21,12 +27,12 @@ export const List: React.FC<ListProps> = (props) => {
       resource={resource}
       breadCrumbsOn
     >
-      <Show resource={resource} basePath={props.basePath} />
+      <TableView resource={resource} basePath={props.basePath} {...props} />
     </ResourceList>
   );
 };
 export const Create: React.FC<CreateProps> = (props) => {
-  const { seriesId } = useParams<{ seriesId: string }>();
+  const { seriesId } = useParams<Params>();
 
   return (
     <ResourceCreate
@@ -40,7 +46,7 @@ export const Create: React.FC<CreateProps> = (props) => {
   );
 };
 export const Edit: React.FC<EditProps> = (props) => {
-  const { seriesId } = useParams<{ seriesId: string }>();
+  const { seriesId } = useParams<Params>();
 
   return (
     <ResourceEdit
@@ -48,9 +54,21 @@ export const Edit: React.FC<EditProps> = (props) => {
       resource={resource}
       basePath={sanitizeId(props.basePath!, /:seriesId/g, seriesId)}
     >
-      <Form resource={resource} type="edit" />
+      <Form resource={resource} type="edit" {...props} />
     </ResourceEdit>
   );
 };
 
-export { Icon };
+export const Show: React.FC<ShowProps> = (props) => {
+  const { seriesId } = useParams<Params>();
+
+  return (
+    <ResourceShow
+      {...props}
+      resource={resource}
+      basePath={sanitizeId(props.basePath!, /:seriesId/g, seriesId)}
+    >
+      <Form resource={resource} type="show" {...props} />
+    </ResourceShow>
+  );
+};

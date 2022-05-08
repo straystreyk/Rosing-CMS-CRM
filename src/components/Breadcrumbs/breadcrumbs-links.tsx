@@ -8,6 +8,7 @@ import { GET_ONE_PART_NAME } from "../../containers/MediaContent/Audio/Parts/req
 import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Video/Episodes/requests";
 import { GET_ONE_NEWS_NAME } from "../../containers/MediaContent/News/requests";
 import {
+  GET_ONE_CHANNEL,
   GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_GENRE,
   GET_ONE_LABEL,
@@ -17,15 +18,18 @@ import {
   GET_ONE_STUDIO,
 } from "../Providers/custom-requests";
 
-interface breadcrumbsLinkInterface {
+export type Breadcrumb = {
   name: string;
   href: string;
+  alternativeHref?: string;
+  alternativeParam?: string;
+  breadcrumbName?: string;
   query?: DocumentNode;
   dynamicParam?: string;
   secondDynamicParam?: string;
-}
+};
 
-export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
+export const breadcrumbsLinks: Breadcrumb[] = [
   {
     name: "Media content",
     href: "/media_content",
@@ -51,7 +55,7 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     href: "/media_content/tv",
   },
   {
-    name: "Channels",
+    name: "TV Channels",
     href: "/media_content/tv/channels",
   },
   //Movie
@@ -144,7 +148,19 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
   },
   {
     name: "",
+    href: "/media_content/video/series/:seriesId",
+    query: GET_ONE_SERIES_NAME,
+    dynamicParam: "seriesId",
+  },
+  {
+    name: "Seasons",
     href: "/media_content/video/series/:seriesId/seasons",
+    query: GET_ONE_SERIES_NAME,
+    dynamicParam: "seriesId",
+  },
+  {
+    name: "New season",
+    href: "/media_content/video/series/:seriesId/seasons/create",
     query: GET_ONE_SERIES_NAME,
     dynamicParam: "seriesId",
   },
@@ -158,10 +174,31 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
   {
     name: "Seasons",
     href: "/media_content/video/seasons",
+    alternativeHref: "/media_content/video/series/:seriesId/seasons",
+    alternativeParam: "series",
+    query: GET_ONE_SEASON_NAME,
+    dynamicParam: "seasonId",
+    secondDynamicParam: "seriesId",
   },
   {
     name: "",
     href: "/media_content/video/seasons/:seasonId",
+    alternativeHref: "/media_content/video/series/:seriesId/seasons/:seasonId",
+    alternativeParam: "series",
+    query: GET_ONE_SEASON_NAME,
+    dynamicParam: "seasonId",
+    secondDynamicParam: "seriesId",
+    breadcrumbName: "name",
+  },
+  {
+    name: "Episodes",
+    href: "/media_content/video/seasons/:seasonId/episodes",
+    query: GET_ONE_SEASON_NAME,
+    dynamicParam: "seasonId",
+  },
+  {
+    name: "New episode",
+    href: "/media_content/video/seasons/:seasonId/episodes/create",
     query: GET_ONE_SEASON_NAME,
     dynamicParam: "seasonId",
   },
@@ -264,6 +301,7 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     href: "/media_content/attributes/people/:id",
     query: GET_ONE_PERSON,
     dynamicParam: "id",
+    breadcrumbName: "fullName",
   },
   //Types of TV show
   {
@@ -295,13 +333,19 @@ export const breadcrumbsLinks: breadcrumbsLinkInterface[] = [
     query: GET_ONE_LABEL,
     dynamicParam: "id",
   },
-  //Labels
+  //TV Channels
   {
-    name: "Channels",
+    name: "TV Channels",
     href: "/media_content/tv/channels/channels",
   },
   {
     name: "New channel",
     href: "/media_content/tv/channels/channels/create",
+  },
+  {
+    name: "",
+    href: "/media_content/tv/channels/channels/:id",
+    query: GET_ONE_CHANNEL,
+    dynamicParam: "id",
   },
 ];

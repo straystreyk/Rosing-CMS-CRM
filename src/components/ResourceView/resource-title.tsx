@@ -13,7 +13,6 @@ export type TitleProps = {
   id?: string;
   record?: any;
   breadCrumbsOn?: boolean;
-  filter?: {};
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +68,6 @@ export const ResourceTitle: React.FC<TitleProps> = ({
   name,
   form,
   breadCrumbsOn,
-  filter,
   children,
   ...props
 }) => {

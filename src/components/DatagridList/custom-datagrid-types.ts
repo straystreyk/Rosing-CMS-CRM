@@ -4,7 +4,7 @@ import { FilterTemplate } from "../CustomFilters/custom-filters-types";
 
 export interface ToolbarProps {
   basePath: string;
-  buttonLabel: string;
+  resource: string;
 }
 
 export interface CustomDatagridProps extends DatagridProps {

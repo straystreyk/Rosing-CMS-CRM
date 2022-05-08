@@ -99,6 +99,15 @@ export const GET_ONE_LABEL = gql`
   }
 `;
 
+export const GET_ONE_CHANNEL = gql`
+  query Channel($id: ID!) {
+    item: Channel(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const STATIC_PARAM = gql`
   query StaticParam($name: String!) {
     items: StaticParam(name: $name) {

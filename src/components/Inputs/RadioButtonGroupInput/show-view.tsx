@@ -28,6 +28,16 @@ const ShowView: React.FC<ShowProps> = (props) => {
 
   const getValue = (source: string) => {
     switch (source) {
+      case "reversedEpisodesOrder":
+        return values[props.source] !== undefined || values[props.source] !== null ? (
+          values[props.source] === true ? (
+            "Reversed"
+          ) : (
+            "Straight"
+          )
+        ) : (
+          <span className="empty">Not filled in</span>
+        );
       case "cmsDistribution":
         return values[props.source] ? (
           values[props.source]

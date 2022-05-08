@@ -44,11 +44,6 @@ export const SELECT_MARKERS = [
   { id: "featured", name: "featured" },
 ];
 
-export const SELECT_PLATFORMS = [
-  { id: "ios", name: "IOS" },
-  { id: "android", name: "Android" },
-];
-
 export const SELECT_DISTRIBUTION = [
   { id: "free", name: "Free" },
   { id: "paid", name: "Paid" },

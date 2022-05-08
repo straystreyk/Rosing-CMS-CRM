@@ -1,56 +1,51 @@
 import React from "react";
-import { TextField, FunctionField, Record } from "react-admin";
-import { useHistory } from "react-router-dom";
+import { FunctionField, Record, TextField } from "react-admin";
+import { Link, useHistory } from "react-router-dom";
+import { Record as RecordRA } from "ra-core/esm/types";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { EmptyTablePage } from "../../../../components/EmptyTablePage";
 import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
 import {
-  ExportButtonIcon,
+  PublishedIcons,
   ResourceAddIcon,
   ResourceCountEpisodesIcon,
+  UnPublishedIcons,
 } from "../../../../constants/icons";
 import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActionsButton";
-import { ToolbarProps } from "../../../../components/DatagridList/custom-datagrid-types";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DatagridList } from "../../../../components/DatagridList";
 import { ShowProps } from "../../../../types";
-import { CreateButton } from "../../../../components/UI/RA/create-button";
-import { ExportButton } from "../../../../components/UI/RA/export-button";
-import { FilterButton } from "../../../../components/UI/RA/filter-button";
+import { TableFieldsStyles } from "../../../../components/TableFields/styles";
+import { Toolbar } from "./toolbar";
 
-export const Toolbar: React.FC<ToolbarProps> = ({ basePath, buttonLabel }) => {
-  return (
-    <>
-      <CreateButton
-        label={buttonLabel}
-        variant="text"
-        customColor="var(--accent-color)"
-        to={basePath + "/create"}
-        icon={<ResourceAddIcon color="var(--accent-color)" />}
-      />
-      <ExportButton
-        icon={<ExportButtonIcon color="var(--primary-button-default)" />}
-        variant="text"
-        color="secondary"
-        label="Download"
-      />
-    </>
-  );
-};
-export const Show: React.FC<ShowProps> = (props) => {
+const useStyles = makeStyles(TableFieldsStyles);
+
+export const TableView: React.FC<ShowProps> = (props) => {
   const history = useHistory();
+  const classes = useStyles();
 
   return (
     <DatagridList
       toolbar={Toolbar}
-      className="popaConasd"
       offDescription
+      basePath={props.basePath}
       empty={<EmptyTablePage />}
-      {...props}
       optimized
+      resource={props.resource}
     >
-      <TextField source="name" label="Name" />
+      <FunctionField
+        label="Name"
+        source="name"
+        render={(record?: RecordRA) => (
+          <Link className={classes.NameField} to={`${props.basePath}/${record?.id}/show`}>
+            {record?.name}
+          </Link>
+        )}
+      />
+      <TextField label="Slug" source="slug" emptyText="Empty" />
+      <TextField label="Number of season" source="number" emptyText="Empty" />
       <FunctionField
         label="Episodes"
         render={(record?: Record) => (
@@ -63,6 +58,7 @@ export const Show: React.FC<ShowProps> = (props) => {
                   <ResourceAddIcon color="var(--accent-color)" />
                 )
               }
+              style={{ paddingLeft: 0, paddingRight: 0 }}
               variant="text"
               customColor="var(--accent-color)"
               onClick={() =>
@@ -81,10 +77,21 @@ export const Show: React.FC<ShowProps> = (props) => {
       <FunctionField
         label=""
         render={(record?: Record) => (
-          <MoreActionsButton>
-            <EditButton color="secondary" record={record} basePath={props.basePath} />
-            <DeleteButton record={record} basePath={props.basePath} />
-          </MoreActionsButton>
+          <div className={classes.MoreActions}>
+            {record?.published ? (
+              <button>
+                <PublishedIcons />
+              </button>
+            ) : (
+              <button>
+                <UnPublishedIcons />
+              </button>
+            )}
+            <MoreActionsButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          </div>
         )}
       />
     </DatagridList>

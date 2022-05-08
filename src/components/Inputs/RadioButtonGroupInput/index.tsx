@@ -4,7 +4,7 @@ import {
   RadioButtonGroupInputProps as RadioButtonGroupInputPropsRA,
 } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
-import { labelStyles } from "../styles";
+import { formHelperText, labelStyles } from "../styles";
 import { RadioButtonGroupInputShow } from "./show-view";
 
 const useStyles = makeStyles({
@@ -23,6 +23,7 @@ const useStyles = makeStyles({
       ...labelStyles,
       marginBottom: "unset",
     },
+    "& .MuiFormHelperText-root": formHelperText,
     "& legend": labelStyles,
   },
 });

@@ -130,16 +130,12 @@ export const CastMembers: React.FC<{
           <NumberInput
             source={`${parentSourceWithIndex}.person.kinopoiskId`}
             label="Kinopoisk ID"
-            helperText={
-              "A digital identifier in the Kinopoisk system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
-            }
+            helperText="A digital identifier in the Kinopoisk system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
           />
           <NumberInput
             source={`${parentSourceWithIndex}.person.imdbId`}
             label="IMDB ID"
-            helperText={
-              "A digital identifier in the IMDB system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
-            }
+            helperText="A digital identifier in the IMDB system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
           />
         </GroupInputsOrigin>
         <TextInputOrigin

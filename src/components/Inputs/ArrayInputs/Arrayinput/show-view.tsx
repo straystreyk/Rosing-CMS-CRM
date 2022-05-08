@@ -86,8 +86,8 @@ export const EmptyShow: React.FC = () => {
     <div className={classes.EmptyShow}>
       <h4>This section is not filled in yet</h4>
       <p>
-        You can switch to media content editing mode or click the quick edit button in the current
-        section to fill it in.
+        You can switch to editing mode or click the quick edit button in the current section to fill
+        it in.
       </p>
     </div>
   );

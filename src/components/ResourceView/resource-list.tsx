@@ -37,7 +37,6 @@ export const ResourceList: React.FC<ResourcesListProps> = ({
         <EditForm form={form} offToolbar offTitle resource={props.resource}>
           <ResourceTitle
             breadCrumbsOn={breadCrumbsOn}
-            filter={filter}
             name={props.resource}
             form={form ?? "list"}
           />

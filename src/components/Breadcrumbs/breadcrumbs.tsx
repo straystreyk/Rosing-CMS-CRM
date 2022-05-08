@@ -7,35 +7,27 @@ import { useNotify } from "ra-core";
 import { breadcrumbsLinks } from "./breadcrumbs-links";
 import { sanitizeId } from "../../helpers/form";
 import { authClient } from "../Providers";
-import { BreadcrumbsStyles } from "./syles";
+import { BreadCrumbsStyles } from "./syles";
+import { breadCrumbNameBuilder, breadCrumbsLinksMatcher } from "./breadcrumbs-helpers";
+import { MainLoader } from "../MainLoader";
 
-interface BreadcrumbsProps {
+interface BreadCrumbsProps {
   className?: string;
   resource: string;
 }
 
-const useStyles = makeStyles(BreadcrumbsStyles);
+const LOADER_SIZE = 10;
+
+const useStyles = makeStyles(BreadCrumbsStyles);
 
 const useBreadcrumbs = () => {
   const {
     location: { pathname },
   } = useHistory();
   const notify = useNotify();
-  const params = useParams<{ [id: string]: string }>();
+  const params = useParams<{ [p: string]: string }>();
   const [matched, setMatched] = React.useState(
-    breadcrumbsLinks.filter((el) => {
-      let href = el.href;
-
-      if (el.dynamicParam && href.includes(`:${el.dynamicParam}`)) {
-        href = href.replace(`:${el.dynamicParam}`, params[el.dynamicParam]);
-      }
-
-      if (el.secondDynamicParam && href.includes(`:${el.secondDynamicParam}`)) {
-        href = href.replace(`:${el.secondDynamicParam}`, params[el.secondDynamicParam]);
-      }
-
-      return pathname.includes(href);
-    })
+    breadCrumbsLinksMatcher(breadcrumbsLinks, pathname, params)
   );
 
   React.useEffect(() => {
@@ -48,15 +40,25 @@ const useBreadcrumbs = () => {
               query: el.query,
               variables: { id: sanitizeId(params[el.dynamicParam]) },
             });
-            const { name, fullName } = res.data.item;
+            const data = res.data.item;
+            const name = breadCrumbNameBuilder(el, data);
 
             if (!unmounted) {
               setMatched((prevState) =>
                 prevState.map((item) => {
                   if (item === el && el.dynamicParam && el.secondDynamicParam) {
+                    if (el.alternativeHref && el.alternativeParam) {
+                      return {
+                        ...item,
+                        name,
+                        href: el.alternativeHref
+                          .replace(`:${el.dynamicParam}`, params[el.dynamicParam])
+                          .replace(`:${el.secondDynamicParam}`, data[el.alternativeParam].id),
+                      };
+                    }
                     return {
                       ...item,
-                      name: name || fullName,
+                      name,
                       href: el.href
                         .replace(`:${el.dynamicParam}`, params[el.dynamicParam])
                         .replace(`:${el.secondDynamicParam}`, params[el.secondDynamicParam]),
@@ -66,7 +68,7 @@ const useBreadcrumbs = () => {
                   if (item === el && el.dynamicParam) {
                     return {
                       ...item,
-                      name: name || fullName,
+                      name,
                       href: el.href.replace(`:${el.dynamicParam}`, params[el.dynamicParam]),
                     };
                   }
@@ -92,7 +94,7 @@ const useBreadcrumbs = () => {
   return { matched };
 };
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = React.memo(({ resource }) => {
+export const Breadcrumbs: React.FC<BreadCrumbsProps> = React.memo(({ resource }) => {
   const classes = useStyles();
   const { matched } = useBreadcrumbs();
 
@@ -106,7 +108,11 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = React.memo(({ resource })
               className={cn(classes.crumbLink, index === matched.length - 1 && classes.lastCrumb)}
               to={el.href}
             >
-              {el.name}
+              {!!el.name ? (
+                el.name
+              ) : (
+                <MainLoader component="span" display="inline-block" size={LOADER_SIZE} />
+              )}
             </Link>
           </span>
         );

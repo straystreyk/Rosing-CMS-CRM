@@ -1,4 +1,4 @@
-export const BreadcrumbsStyles = {
+export const BreadCrumbsStyles = {
   breadcrumbs: {
     marginTop: "5px",
   },

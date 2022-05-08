@@ -432,6 +432,66 @@ export const en: TranslationMessages = {
         },
       },
     },
+    "media_content/tv/channels/channels/:channelId/channel_versions": {
+      name: "Channel versions",
+      titles: {
+        create: "New channel version",
+        edit: "Edit channel version",
+        list: "Channel versions",
+      },
+      mutations: {
+        create: {
+          success: 'New channel version "%{name}" was created',
+          error: "Cant create channel version: %{error}",
+        },
+        edit: {
+          success: "Channel version was updated",
+          error: "Cant update channel version: %{error}",
+        },
+        list: {
+          success: 'Channel version "%{name}" was successfully updated',
+          error: "Cant update channel version: %{error}",
+        },
+      },
+    },
+    "media_content/tv/channels/live_streams": {
+      name: "TV streams",
+      titles: {
+        create: "New TV stream",
+        edit: "Edit TV stream",
+        list: "Television",
+      },
+      mutations: {
+        create: {
+          success: 'New TV stream "%{name}" was created',
+          error: "Cant create TV stream: %{error}",
+        },
+        edit: {
+          success: "TV stream was updated",
+          error: "Cant update TV stream: %{error}",
+        },
+        list: {
+          success: 'TV stream "%{name}" was successfully updated',
+          error: "Cant update TV stream: %{error}",
+        },
+      },
+    },
+    "media_content/tv/channels/blackouts": {
+      name: "Blackouts",
+      titles: {
+        create: "New blackout",
+        edit: "Edit blackout",
+        list: "Television",
+      },
+    },
+    "media_content/tv/channels/channel_positions_overrides": {
+      name: "Overrides",
+      titles: {
+        create: "New override",
+        edit: "Edit override",
+        list: "Television",
+      },
+    },
     "media_content/attributes/providers/right_holders": {
       name: "Right Holders",
       titles: {

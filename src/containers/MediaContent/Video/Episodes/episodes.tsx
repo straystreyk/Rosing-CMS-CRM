@@ -1,8 +1,13 @@
 import * as React from "react";
 import Icon from "@material-ui/icons/VideoCallRounded";
 
-import { ResourceList, ResourceCreate, ResourceEdit } from "../../../../components/ResourceView";
-import { Show } from "./show";
+import {
+  ResourceList,
+  ResourceCreate,
+  ResourceEdit,
+  ResourceShow,
+} from "../../../../components/ResourceView";
+import { TableView } from "./table-view";
 import { Form } from "./form";
 import { useParams } from "react-router-dom";
 import { sanitizeId } from "../../../../helpers/form";
@@ -22,7 +27,10 @@ export const List: React.FC<ResourceComponentProps<{}, StaticContext, unknown>> 
       resource={resource}
       breadCrumbsOn
     >
-      <Show resource={resource} basePath={sanitizeId(props.basePath!, /:seasonId/g, seasonId)} />
+      <TableView
+        resource={resource}
+        basePath={sanitizeId(props.basePath!, /:seasonId/g, seasonId)}
+      />
     </ResourceList>
   );
 };
@@ -51,6 +59,20 @@ export const Edit: React.FC<EditProps> = (props) => {
     >
       <Form resource={resource} type="edit" />
     </ResourceEdit>
+  );
+};
+
+export const Show: React.FC<EditProps> = (props) => {
+  const { seasonId } = useParams<{ seasonId: string }>();
+
+  return (
+    <ResourceShow
+      {...props}
+      resource={resource}
+      basePath={sanitizeId(props.basePath!, /:seasonId/g, seasonId)}
+    >
+      <Form resource={resource} type="show" />
+    </ResourceShow>
   );
 };
 

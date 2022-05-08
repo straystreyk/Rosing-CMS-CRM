@@ -11,6 +11,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       listText="A list of pages available for publication on clients. The client has the ability to display an individual list of pages in the menu in accordance with the rule associated with it. Select a client from the list to see its list of pages."
       empty={<EmptyTablePage />}
       {...props}
+      draggable
       optimized
     >
       <TextField source="Name" />

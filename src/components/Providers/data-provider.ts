@@ -28,10 +28,20 @@ const getGqlResource = (resource: string) => {
       return "Datacenter";
     case "streams":
       return "Stream";
+    case "region":
+      return "Region";
     case "media_content/tv/channels/channels/:channelId/channel_versions":
       return "ChannelVersion";
     case "media_content/tv/channels/channels":
       return "Channel";
+    case "media_content/tv/channels/live_streams":
+      return "LiveStream";
+    case "media_content/tv/channels/channel_positions_overrides":
+      return "ChannelPositionOverride";
+    case "media_content/tv/channels/blackouts":
+      return "Blackout";
+    case "media_content/tv/tv_shows/epg_sources":
+      return "EpgSource";
     case "media_content/video/video_files":
       return "VideoFile";
     case "media_content/video/movies":

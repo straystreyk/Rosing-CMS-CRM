@@ -75,26 +75,28 @@ const ToolBar: React.FC<{
 
   return (
     <>
-      <div className={classes.TopToolBar}>
-        {Toolbar ? (
-          <Toolbar
-            basePath={basePath ?? ""}
-            buttonLabel={"Create " + translate(`resources.${resource}.name`)}
-          />
-        ) : (
+      {Toolbar ? (
+        <Toolbar basePath={basePath ?? ""} resource={resource} />
+      ) : (
+        <div className={classes.TopToolBar}>
           <CreateButton
             icon={<PlusIcon color="#fff" />}
-            label={"Create " + translate(`resources.${resource}.name`)}
+            label={"Create " + translate(`resources.${resource}.name`).toLowerCase()}
             basePath={basePath}
             to={basePath + "/create"}
           />
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };
 
-export const DatagridWrapper: React.FC<CustomDatagridProps> = ({ children, filters, ...props }) => {
+export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
+  children,
+  filters,
+  offDescription,
+  ...props
+}) => {
   const classes = useStyles();
   const translate = useTranslate();
   const loading = useLoading();
@@ -102,7 +104,7 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({ children, filte
 
   return (
     <>
-      {!props.offDescription ? (
+      {!offDescription ? (
         <div className={classes.TopToolBarWrapper}>
           <div className={classes.TopToolBarName}>
             <div>

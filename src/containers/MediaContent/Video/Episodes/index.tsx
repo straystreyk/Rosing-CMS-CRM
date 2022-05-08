@@ -1,8 +1,8 @@
-import { List, Edit, Create, Icon } from "./episodes";
+import { List, Edit, Create, Show } from "./episodes";
 
 export const EpisodesVariables = {
   list: List,
   edit: Edit,
   create: Create,
-  icon: Icon,
+  show: Show,
 };

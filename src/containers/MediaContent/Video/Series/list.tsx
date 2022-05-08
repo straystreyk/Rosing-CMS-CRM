@@ -27,6 +27,7 @@ export const List: React.FC<ShowProps> = (props) => {
       rowClick="edit"
       empty={<EmptyTablePage />}
       optimized
+      draggable
       {...props}
     >
       <FunctionField
@@ -55,7 +56,7 @@ export const List: React.FC<ShowProps> = (props) => {
               }
               variant="text"
               customColor="var(--accent-color)"
-              style={{ padding: 0 }}
+              style={{ paddingLeft: 0, paddingRight: 0 }}
               onClick={() =>
                 history.push(
                   record?.seasons.length
