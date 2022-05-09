@@ -352,6 +352,14 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           <GroupInputsOrigin>
             <TextInput
               resource={resource}
+              inputType={type}
+              source="vitrinaTvConfig.id"
+              initialValue={null}
+              style={{ display: "none" }}
+              fullWidth
+            />
+            <TextInput
+              resource={resource}
               validate={requiredValidate}
               inputType={type}
               label="Url"
