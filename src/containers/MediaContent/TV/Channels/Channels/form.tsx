@@ -68,7 +68,6 @@ const SHIFT_CHOICES = [
 export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   const classes = useStyles();
   const { values } = useFormState();
-  console.log(values);
 
   return (
     <>
@@ -434,7 +433,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         <CheckBoxGroup initialSourceState="allowedApiClients">
           <ReferenceArrayInput
             label=""
-            source="allowedApiClients"
+            source="allowedApiClientIds"
             reference="api_clients"
             checkBoxLabel="Allowed api clients"
             resource={resource}
@@ -448,7 +447,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           </ReferenceArrayInput>
           <ReferenceArrayInput
             label=""
-            source="forbiddenApiClients"
+            source="allowedApiClientIds"
             reference="api_clients"
             checkBoxLabel="Forbidden api clients"
             resource={resource}
