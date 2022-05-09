@@ -430,7 +430,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
             idName="alpha2"
           />
         </CheckBoxGroup>
-        <CheckBoxGroup initialSourceState="allowedApiClients">
+        <CheckBoxGroup initialSourceState="allowedApiClientIds">
           <ReferenceArrayInput
             label=""
             source="allowedApiClientIds"
@@ -447,7 +447,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           </ReferenceArrayInput>
           <ReferenceArrayInput
             label=""
-            source="allowedApiClientIds"
+            source="forbiddenApiClientIds"
             reference="api_clients"
             checkBoxLabel="Forbidden api clients"
             resource={resource}
