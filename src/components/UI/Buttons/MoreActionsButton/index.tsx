@@ -27,6 +27,9 @@ const useStyles = makeStyles({
     "&:last-child": {
       marginBottom: 0,
     },
+    "& .DeleteButton": {
+      marginTop: 10,
+    },
   },
 });
 

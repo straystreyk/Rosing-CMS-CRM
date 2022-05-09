@@ -45,6 +45,7 @@ export const GET_ONE_CHANNEL_EDIT = gql`
         enabled
         tmsecName
         vcId
+        id
         __typename
       }
       metadata

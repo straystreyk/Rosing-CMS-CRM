@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FunctionField, TextField, useMutation, useRefresh } from "react-admin";
+import { FunctionField, TextField } from "react-admin";
 import { EmptyTablePage } from "../../../../components/EmptyTablePage";
 import {
   AllowDownload,
@@ -16,57 +16,20 @@ import { makeStyles } from "@material-ui/core";
 import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
-import { Identifier, Record as RecordRA, useNotify } from "ra-core";
+import { Record as RecordRA } from "ra-core";
 import { DatagridList } from "../../../../components/DatagridList";
 import { movieFilters } from "./movie-filters";
 import { ReferenceField } from "../../../../components/TableFields/reference-field";
 import { Link } from "react-router-dom";
 import { TableFieldsStyles } from "../../../../components/TableFields/styles";
+import { useTableActions } from "../../../../custom-hooks/use-table-actions";
+import { ShowProps } from "../../../../types";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
-interface ShowProps {
-  resource: string;
-  basePath?: string;
-  total?: number;
-}
-
-const useTableActions = () => {};
-
 export const List: React.FC<ShowProps> = (props) => {
   const classes = useStyles();
-  const [mutate, { data, error, loading }] = useMutation();
-  const refresh = useRefresh();
-  const notify = useNotify();
-
-  const approve = React.useCallback(
-    async (id?: Identifier, updateOpts?: Record<string, string | boolean | number | string[]>) => {
-      if (!id || !updateOpts) return;
-
-      await mutate({
-        type: "update",
-        resource: props.resource,
-        payload: { id, data: { ...updateOpts } },
-      });
-    },
-    [mutate, props.resource]
-  );
-
-  React.useEffect(() => {
-    if (data && !error) {
-      notify(`resources.${props.resource}.mutations.list.success`, {
-        type: "success",
-        messageArgs: { name: data.name },
-      });
-      refresh();
-    }
-    if (error) {
-      notify(`resources.${props.resource}.mutations.list.error`, {
-        type: "error",
-        messageArgs: { error },
-      });
-    }
-  }, [notify, props.resource, refresh, data, error]);
+  const { loading, approve } = useTableActions(props);
 
   return (
     <DatagridList
@@ -119,24 +82,15 @@ export const List: React.FC<ShowProps> = (props) => {
                   onClick={() =>
                     approve(record?.id, {
                       ...record,
-                      published: true,
+                      published: !record?.published,
                     })
                   }
                   disabled={loading}
                   color="secondary"
                   variant="textWithBg"
-                  startIcon={<PublishIcon />}
+                  startIcon={record?.published ? <UnPublishIcon /> : <PublishIcon />}
                 >
-                  Publish
-                </StandardButton>
-                <StandardButton
-                  onClick={() => approve(record?.id, { ...record, published: false })}
-                  disabled={loading}
-                  color="secondary"
-                  variant="textWithBg"
-                  startIcon={<UnPublishIcon />}
-                >
-                  Unpublish
+                  {record?.published ? <>Unpublish</> : <>Publish</>}
                 </StandardButton>
                 <StandardButton
                   onClick={() => approve(record?.id, { ...record, downloadable: true })}

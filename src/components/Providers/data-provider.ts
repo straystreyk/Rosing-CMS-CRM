@@ -10,11 +10,11 @@ import {
 import {
   GET_ALL_SERIES,
   GET_ONE_SERIES,
-  UPDATE_SERIES,
+  // UPDATE_SERIES,
 } from "../../containers/MediaContent/Video/Series/requests";
 import { GET_ALL_VIDEO_FILES } from "../../containers/MediaContent/Video/VideoFiles/custom-requests";
 import { GET_ONE_AUDIO_SHOW } from "../../containers/MediaContent/Audio/AudioShows/requests";
-import { GET_ONE_NEWS } from "../../containers/MediaContent/News/requests";
+import { GET_ONE_NEWS, UPDATE_NEWS } from "../../containers/MediaContent/News/requests";
 import { GET_EDIT_EXTERNAL_CATALOG } from "../../containers/MediaContent/Attributes/Providers/ContentProviders/requests";
 import { GET_EDIT_STUDIO } from "../../containers/MediaContent/Attributes/Providers/Studios/requests";
 import { GET_ONE_PERSON } from "../../containers/MediaContent/Attributes/People/requests";
@@ -117,9 +117,9 @@ const customBuildQuery =
     if (fetchType === "GET_LIST" && resource === "Series") {
       return { ...builtQuery, query: GET_ALL_SERIES };
     }
-    if (fetchType === "UPDATE" && resource === "Series") {
-      return { ...builtQuery, query: UPDATE_SERIES };
-    }
+    // if (fetchType === "UPDATE" && resource === "Series") {
+    //   return { ...builtQuery, query: UPDATE_SERIES };
+    // }
     if (fetchType === "GET_LIST" && resource === "VideoFile") {
       return { ...builtQuery, query: GET_ALL_VIDEO_FILES };
     }
@@ -129,8 +129,12 @@ const customBuildQuery =
     if (fetchType === "GET_ONE" && resource === "AudioShow") {
       return { ...builtQuery, query: GET_ONE_AUDIO_SHOW };
     }
+    // News
     if (fetchType === "GET_ONE" && resource === "News") {
       return { ...builtQuery, query: GET_ONE_NEWS };
+    }
+    if (fetchType === "UPDATE" && resource === "News") {
+      return { ...builtQuery, query: UPDATE_NEWS };
     }
     if (fetchType === "GET_ONE" && resource === "ExternalCatalog") {
       return { ...builtQuery, query: GET_EDIT_EXTERNAL_CATALOG };

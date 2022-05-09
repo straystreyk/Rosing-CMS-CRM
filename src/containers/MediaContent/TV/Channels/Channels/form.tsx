@@ -68,6 +68,7 @@ const SHIFT_CHOICES = [
 export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   const classes = useStyles();
   const { values } = useFormState();
+  console.log(values);
 
   return (
     <>
@@ -110,6 +111,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           reference="media_content/attributes/languages"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
+          allowEmpty
         >
           <AutocompleteInput
             optionText="name"
@@ -126,6 +128,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           reference="media_content/attributes/genres"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
+          allowEmpty
         >
           <AutocompleteArrayInput
             optionText="name"
@@ -141,6 +144,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           reference="production_countries"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
+          allowEmpty
         >
           <AutocompleteArrayInput
             optionText="name"
@@ -163,6 +167,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           inputType={type}
           choices={SELECT_MARKERS}
           helperText="The element that is displayed on top of the TV channel card in the application"
+          allowEmpty
         />
         <TextInput
           resource={resource}
@@ -298,6 +303,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
               resource={resource}
               inputType={type}
               source="mediascopeConfig.id"
+              initialValue={null}
               style={{ display: "none" }}
               fullWidth
             />

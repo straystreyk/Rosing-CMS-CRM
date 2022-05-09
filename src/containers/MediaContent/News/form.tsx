@@ -6,11 +6,16 @@ import {
   ReferenceInput,
   requiredValidate,
   RichTextInput,
+  SelectInput,
   TextInput,
 } from "../../../components/Inputs";
 import { FormTabs } from "../../../components/Tabs/form-tabs";
 import { FormSection } from "../../../components/FormSection";
-import { PUBLISHED_CHOICES_FORM, SELECT_MARKERS } from "../../../constants/forms-constants";
+import {
+  PUBLISHED_CHOICES_FORM,
+  SELECT_DISTRIBUTION,
+  SELECT_MARKERS,
+} from "../../../constants/forms-constants";
 import { GroupInputsOrigin } from "../../../components/GroupInputs";
 import { MetaData } from "../../../components/Models/Metadata";
 import { ImageUploaderV2 } from "../../../components/ImageUploader";
@@ -78,6 +83,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           reference="media_content/video/video_files"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
+          allowEmpty
         >
           <AutocompleteInput
             optionText="name"
@@ -85,11 +91,29 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
             helperText="You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
           />
         </ReferenceInput>
+        <ReferenceInput
+          label="External catalog"
+          source="externalCatalogId"
+          reference="media_content/attributes/providers/content_providers"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+          allowEmpty
+        >
+          <AutocompleteInput
+            optionText="name"
+            optionValue="id"
+            resource={resource}
+            inputType={type}
+            fullWidth
+            helperText="The partner directory from which the movie is imported. The logo of the external catalog will be displayed when previewing the movie in the app."
+          />
+        </ReferenceInput>
         <AutocompleteArrayInput
           source="markers"
           label="Label"
           inputType={type}
           choices={SELECT_MARKERS}
+          allowEmpty
           helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
         />
         <GroupInputsOrigin switchable inputType={type} label="Seo">
@@ -155,6 +179,13 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           initialValue={false}
           inputType={type}
           choices={PUBLISHED_CHOICES_FORM}
+        />
+        <RadioButtonGroupInput
+          source="cmsDistribution"
+          label="Distribution"
+          inputType={type}
+          choices={SELECT_DISTRIBUTION}
+          resource={resource}
         />
       </FormSection>
       <ScrollTopButton />

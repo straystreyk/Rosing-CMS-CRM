@@ -22,6 +22,7 @@ export interface FormProps {
 export interface ShowProps {
   resource: string;
   basePath?: string;
+  total?: number;
 }
 
 export type ThemeName = string;

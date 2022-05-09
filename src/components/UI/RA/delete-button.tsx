@@ -2,6 +2,7 @@ import * as React from "react";
 import { DeleteButton as DeleteButtonRA, DeleteButtonProps } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
 import { DeleteIcon } from "../../../constants/icons";
+import cn from "classnames";
 
 const useStyles = makeStyles({
   DeleteButton: {
@@ -35,7 +36,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({ icon, basePath, ...p
     <DeleteButtonRA
       icon={<DeleteIcon color="#D21C1C" />}
       basePath={basePath}
-      className={classes.DeleteButton}
+      className={cn(classes.DeleteButton, "DeleteButton")}
       {...props}
     />
   );

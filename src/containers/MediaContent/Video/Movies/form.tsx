@@ -463,7 +463,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
         <CheckBoxGroup initialSourceState="allowedApiClients">
           <ReferenceArrayInput
             label=""
-            source="allowedApiClients"
+            source="allowedApiClientIds"
             reference="api_clients"
             checkBoxLabel="Allowed api clients"
             resource={resource}
@@ -477,7 +477,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           </ReferenceArrayInput>
           <ReferenceArrayInput
             label=""
-            source="forbiddenApiClients"
+            source="forbiddenApiClientIds"
             reference="api_clients"
             checkBoxLabel="Forbidden api clients"
             resource={resource}

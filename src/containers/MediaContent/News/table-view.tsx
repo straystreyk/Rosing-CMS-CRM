@@ -10,13 +10,21 @@ import { ShowProps } from "../../../types";
 import { MoreActionsButton } from "../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../components/UI/RA/delete-button";
-import { PublishedIcons, UnPublishedIcons } from "../../../constants/icons";
+import {
+  PublishedIcons,
+  PublishIcon,
+  UnPublishedIcons,
+  UnPublishIcon,
+} from "../../../constants/icons";
 import { newsFilters } from "./news-filters";
+import { StandardButton } from "../../../components/UI/Buttons/standard-button";
+import { useTableActions } from "../../../custom-hooks/use-table-actions";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
 export const TableView: React.FC<ShowProps> = (props) => {
   const classes = useStyles();
+  const { loading, approve } = useTableActions(props);
   return (
     <DatagridList
       listText="A list of pages available for publication on clients. The client has the ability to display an individual list of pages in the menu in accordance with the rule associated with it. Select a client from the list to see its list of pages."
@@ -60,8 +68,27 @@ export const TableView: React.FC<ShowProps> = (props) => {
               </button>
             )}
             <MoreActionsButton>
-              <EditButton color="secondary" record={record} basePath={props.basePath} />
-              <DeleteButton record={record} basePath={props.basePath} />
+              <StandardButton
+                onClick={() =>
+                  approve(record?.id, {
+                    ...record,
+                    published: !record?.published,
+                  })
+                }
+                disabled={loading}
+                color="secondary"
+                variant="textWithBg"
+                startIcon={record?.published ? <UnPublishIcon /> : <PublishIcon />}
+              >
+                {record?.published ? <>Unpublish</> : <>Publish</>}
+              </StandardButton>
+              <EditButton
+                disabled={loading}
+                color="secondary"
+                record={record}
+                basePath={props.basePath}
+              />
+              <DeleteButton disabled={loading} record={record} basePath={props.basePath} />
             </MoreActionsButton>
           </div>
         )}
