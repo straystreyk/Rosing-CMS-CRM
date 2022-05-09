@@ -36,7 +36,9 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <FunctionField
         label="Position"
         source="position"
-        render={(record?: RecordRA) => record?.position ?? "Not filled in"}
+        render={(record?: RecordRA) =>
+          record?.position ?? <span className={classes.Empty}>Empty</span>
+        }
       />
       <FunctionField
         label="Catch-up"
@@ -47,7 +49,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
               {record?.catchupAvailabilityValue} {record?.catchupAvailabilityUnit}
             </span>
           ) : (
-            "Not filled in"
+            <span className={classes.Empty}>Empty</span>
           )
         }
       />
@@ -60,7 +62,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
               {record?.timeshiftAvailabilityValue} {record?.timeshiftAvailabilityUnit}
             </span>
           ) : (
-            "Not filled in"
+            <span className={classes.Empty}>Empty</span>
           )
         }
       />

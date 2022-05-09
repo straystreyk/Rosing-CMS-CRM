@@ -67,6 +67,7 @@ export const GET_ONE_CHANNEL_EDIT = gql`
       vitrinaTvConfig {
         enabled
         url
+        id
         __typename
       }
       __typename
