@@ -80,20 +80,23 @@ const ShowView: React.FC<InputProps> = (props) => {
     setActiveText(true);
   };
 
-  const getValue = (source: string) => {
-    switch (source) {
-      case "searchKeywords":
-        return values[props.source].length ? values[props.source].join(", ") : <Empty />;
-      case "duration":
-        return values[props.source] ? formatTimeInput(values[props.source]) : <Empty />;
-      default:
-        return values[props.source] ? (
-          <span dangerouslySetInnerHTML={{ __html: values[props.source] }} />
-        ) : (
-          <Empty />
-        );
-    }
-  };
+  const getValue: (source: string) => JSX.Element = React.useCallback(
+    (source) => {
+      switch (source) {
+        case "searchKeywords":
+          return values[props.source].length ? values[props.source].join(", ") : <Empty />;
+        case "duration":
+          return values[props.source] ? formatTimeInput(values[props.source]) : <Empty />;
+        default:
+          return values[props.source] ? (
+            <span dangerouslySetInnerHTML={{ __html: values[props.source] }} />
+          ) : (
+            <Empty />
+          );
+      }
+    },
+    [values, props.source]
+  );
 
   React.useEffect(() => {
     if (ref.current && ref.current.scrollHeight > 120) {

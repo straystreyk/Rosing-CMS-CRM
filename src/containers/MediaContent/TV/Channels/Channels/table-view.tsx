@@ -89,12 +89,12 @@ export const TableView: React.FC<ShowProps> = (props) => {
           <>
             <StandardButton
               onClick={() =>
-                record?.channelVersions.length
+                record?.channelVersions && record?.channelVersions.length
                   ? history.push(`/${props.resource}/${record?.id}/channel_versions`)
                   : history.push(`/${props.resource}/${record?.id}/channel_versions/create`)
               }
               startIcon={
-                record?.channelVersions.length ? (
+                record?.channelVersions && record?.channelVersions.length ? (
                   <ResourceCountEpisodesIcon color="var(--accent-color)" />
                 ) : (
                   <ResourceAddIcon color="var(--accent-color)" />
@@ -104,8 +104,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
               customColor="var(--accent-color)"
               style={{ paddingLeft: 0, paddingRight: 0 }}
             >
-              {record?.channelVersions.length
-                ? `Seasons (${record?.seasons.length})`
+              {record?.channelVersions && record?.channelVersions.length
+                ? `Versions (${record?.channelVersions.length})`
                 : "Add versions"}
             </StandardButton>
           </>
