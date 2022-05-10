@@ -6,7 +6,9 @@ import { FormProps } from "../../../../../types";
 import {
   ArrayInputNoDrag,
   AutocompleteArrayInput,
+  formatFromArrayOfString,
   NumberInput,
+  parseToArrayOfString,
   ReferenceInput,
   requiredValidate,
   RichTextInput,
@@ -171,6 +173,8 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         <TextInput
           resource={resource}
           inputType={type}
+          format={formatFromArrayOfString}
+          parse={parseToArrayOfString}
           label="Search keywords"
           source="searchKeywords"
           helperText="Allow you to effectively search for a TV channel in the application. You can select several words from the list or add a new one."
