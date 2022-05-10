@@ -140,22 +140,22 @@ const ChannelVersion: React.FC<{
             Add new EPG source
           </StandardButton>
         </div>
-        <ReferenceInput
-          label="Broadcast region"
-          source={parentSourceWithIndex ? `${parentSourceWithIndex}.regionId` : "regionId"}
-          reference="region"
-          resource={resource}
-          perPage={INPUT_ITEMS_PER_PAGE}
-        >
-          <AutocompleteInput
-            optionText="name"
-            optionValue="id"
-            resource={resource}
-            inputType={type}
-            fullWidth
-            helperText="The geographical region in which the customized version of the TV channel will be broadcast. You can add multiple regions from the list."
-          />
-        </ReferenceInput>
+        {/*<ReferenceInput*/}
+        {/*  label="Broadcast region"*/}
+        {/*  source={parentSourceWithIndex ? `${parentSourceWithIndex}.regionId` : "regionId"}*/}
+        {/*  reference="region"*/}
+        {/*  resource={resource}*/}
+        {/*  perPage={INPUT_ITEMS_PER_PAGE}*/}
+        {/*>*/}
+        {/*  <AutocompleteInput*/}
+        {/*    optionText="name"*/}
+        {/*    optionValue="id"*/}
+        {/*    resource={resource}*/}
+        {/*    inputType={type}*/}
+        {/*    fullWidth*/}
+        {/*    helperText="The geographical region in which the customized version of the TV channel will be broadcast. You can add multiple regions from the list."*/}
+        {/*  />*/}
+        {/*</ReferenceInput>*/}
         <RadioButtonGroupInput
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.published` : "published"}
           label="Publishing"

@@ -9,6 +9,7 @@ import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Video/Episod
 import { GET_ONE_NEWS_NAME } from "../../containers/MediaContent/News/requests";
 import {
   GET_ONE_CHANNEL,
+  GET_ONE_CHANNEL_VERSION,
   GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_GENRE,
   GET_ONE_LABEL,
@@ -347,5 +348,31 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     href: "/media_content/tv/channels/channels/:id",
     query: GET_ONE_CHANNEL,
     dynamicParam: "id",
+  },
+  {
+    name: "",
+    href: "/media_content/tv/channels/channels/:channelId",
+    query: GET_ONE_CHANNEL,
+    dynamicParam: "channelId",
+  },
+  //Channel versions
+  {
+    name: "Channel versions",
+    href: "/media_content/tv/channels/channels/:channelId/channel_versions",
+    query: GET_ONE_CHANNEL,
+    dynamicParam: "channelId",
+  },
+  {
+    name: "New channel version",
+    href: "/media_content/tv/channels/channels/:channelId/channel_versions/create",
+    query: GET_ONE_CHANNEL,
+    dynamicParam: "channelId",
+  },
+  {
+    name: "New channel version",
+    href: "/media_content/tv/channels/channels/:channelId/channel_versions/:id",
+    query: GET_ONE_CHANNEL_VERSION,
+    dynamicParam: "id",
+    secondDynamicParam: "channelId",
   },
 ];

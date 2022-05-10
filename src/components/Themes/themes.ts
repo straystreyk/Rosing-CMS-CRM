@@ -1,4 +1,4 @@
-import { outlineStyles } from "./main-styles";
+import { outlineStyles, scrollBarStyles } from "./main-styles";
 
 export const darkTheme = {
   palette: {
@@ -276,19 +276,7 @@ export const lightTheme = {
       root: {
         boxShadow:
           "0px 3px 12px -1px rgba(28, 52, 84, 0.1), 0px 2px 4px -1px rgba(28, 55, 90, 0.05)",
-        "&::-webkit-scrollbar": {
-          width: 15,
-        },
-        "&::-webkit-scrollbar-track": {
-          background: "transparent",
-          borderRadius: 7,
-        },
-        "&::-webkit-scrollbar-thumb": {
-          background: "#E7E9E9",
-          backgroundClip: "padding-box",
-          borderRadius: 20,
-          border: "4px solid transparent",
-        },
+        ...scrollBarStyles,
       },
     },
     RaSidebar: {

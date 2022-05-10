@@ -66,6 +66,8 @@ const useStyles = makeStyles({
   },
 });
 
+const Empty = () => <span className="empty">Not filled in</span>;
+
 const ShowView: React.FC<InputProps> = (props) => {
   const { values } = useFormState();
   const [isBigText, setIsBigText] = React.useState(false);
@@ -80,17 +82,15 @@ const ShowView: React.FC<InputProps> = (props) => {
 
   const getValue = (source: string) => {
     switch (source) {
+      case "searchKeywords":
+        return values[props.source].length ? values[props.source].join(", ") : <Empty />;
       case "duration":
-        return values[props.source] ? (
-          formatTimeInput(values[props.source])
-        ) : (
-          <span className="empty">Not filled in</span>
-        );
+        return values[props.source] ? formatTimeInput(values[props.source]) : <Empty />;
       default:
         return values[props.source] ? (
           <span dangerouslySetInnerHTML={{ __html: values[props.source] }} />
         ) : (
-          <span className="empty">Not filled in</span>
+          <Empty />
         );
     }
   };

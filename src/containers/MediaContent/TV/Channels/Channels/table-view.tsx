@@ -4,7 +4,7 @@ import { DatagridList } from "../../../../../components/DatagridList";
 import { FunctionField, Record, TextField } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { Record as RecordRA } from "ra-core/esm/types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { TableFieldsStyles } from "../../../../../components/TableFields/styles";
 import { EmptyTablePage } from "../../../../../components/EmptyTablePage";
 import { MoreActionsButton } from "../../../../../components/UI/Buttons/MoreActionsButton";
@@ -28,6 +28,7 @@ const useStyles = makeStyles(TableFieldsStyles);
 
 export const TableView: React.FC<ShowProps> = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   const { loading, approve } = useTableActions(props);
 
   return (
@@ -87,6 +88,11 @@ export const TableView: React.FC<ShowProps> = (props) => {
         render={(record?: Record) => (
           <>
             <StandardButton
+              onClick={() =>
+                record?.channelVersions.length
+                  ? history.push(`/${props.resource}/${record?.id}/channel_versions`)
+                  : history.push(`/${props.resource}/${record?.id}/channel_versions/create`)
+              }
               startIcon={
                 record?.channelVersions.length ? (
                   <ResourceCountEpisodesIcon color="var(--accent-color)" />

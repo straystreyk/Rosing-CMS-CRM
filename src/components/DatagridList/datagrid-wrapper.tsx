@@ -10,12 +10,31 @@ import { useTranslate } from "ra-core";
 import { CreateButton } from "../UI/RA/create-button";
 import { PlusIcon } from "../../constants/icons";
 import { ShowDescriptionButton } from "../FormSection";
+import { scrollBarStyles } from "../Themes/main-styles";
+import { useSelector } from "react-redux";
+import { AppState } from "../../types";
+import cn from "classnames";
 
 const useStyles = makeStyles({
   DataGridWrapper: {
     position: "relative",
+    width: "calc(100vw - 55px)",
+    overflowX: "scroll",
+    transition: "0.3s width ease",
+    ...scrollBarStyles,
     "& tbody": {
       userSelect: "unset",
+    },
+    "& table": {
+      minWidth: 1100,
+    },
+    "@media (max-width: 599px)": {
+      width: "100vw",
+    },
+    "@media (min-width: 600px)": {
+      "&.active": {
+        width: "calc(100vw - 240px)",
+      },
     },
   },
   LoaderWrapper: {
@@ -101,6 +120,7 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
   const translate = useTranslate();
   const loading = useLoading();
   const [showDescription, setShowDescription] = React.useState<boolean>(true);
+  const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
 
   return (
     <>
@@ -127,7 +147,7 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
       )}
       <Filters filters={filters} />
       <PerPageCounter />
-      <div className={classes.DataGridWrapper}>{children}</div>
+      <div className={cn(classes.DataGridWrapper, open && "active")}>{children}</div>
       {loading && (
         <div className={classes.LoaderWrapper}>
           <MainLoader flex size={LOADER_SIZE} centered />

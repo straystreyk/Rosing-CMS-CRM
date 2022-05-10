@@ -117,6 +117,15 @@ export const GET_ONE_CHANNEL = gql`
   }
 `;
 
+export const GET_ONE_CHANNEL_VERSION = gql`
+  query ChannelVersion($id: ID!) {
+    item: ChannelVersion(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const STATIC_PARAM = gql`
   query StaticParam($name: String!) {
     items: StaticParam(name: $name) {
