@@ -10,7 +10,7 @@ export const TableFieldsStyles = {
     justifyContent: "flex-end",
     alignItems: "center",
     "& button": {
-      marginLeft: 10,
+      marginLeft: 15,
       "&:first-child": {
         marginLeft: 0,
       },

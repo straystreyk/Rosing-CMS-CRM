@@ -6,7 +6,7 @@ import { useFormState } from "react-final-form";
 import { InputProps } from "ra-core";
 import { makeStyles } from "@material-ui/core";
 import { labelStyles } from "../styles";
-import { GET_ONE_VIDEO_FILE } from "../../Providers/custom-requests";
+import { GET_ONE_LANGUAGE, GET_ONE_VIDEO_FILE } from "../../Providers/custom-requests";
 import { Resource } from "../StandatdInputs/SelectInput/show-view";
 
 const useStyles = makeStyles({
@@ -28,6 +28,12 @@ const ShowView: React.FC<InputProps> = (props: InputProps) => {
 
   const getValue = (source: string) => {
     switch (source) {
+      case "languageId":
+        return values[props.source] ? (
+          <Resource query={GET_ONE_LANGUAGE} resourceId={values[props.source]} />
+        ) : (
+          <div className="empty">Not filled in</div>
+        );
       case "streamSourceId":
         return values[props.source] ? (
           <Resource query={GET_ONE_VIDEO_FILE} resourceId={values[props.source]} />

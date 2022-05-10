@@ -6,7 +6,6 @@ import {
   ReferenceInput,
   requiredValidate,
   RichTextInput,
-  SelectInput,
   TextInput,
 } from "../../../components/Inputs";
 import { FormTabs } from "../../../components/Tabs/form-tabs";

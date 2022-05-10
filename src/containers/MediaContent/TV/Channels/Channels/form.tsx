@@ -69,7 +69,7 @@ const SHIFT_CHOICES = [
 
 export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   const classes = useStyles();
-  const { values } = useFormState();
+  const formState = useFormState();
 
   return (
     <>
@@ -129,7 +129,6 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           reference="media_content/attributes/genres"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
-          allowEmpty
         >
           <AutocompleteArrayInput
             optionText="name"
@@ -145,7 +144,6 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           reference="production_countries"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
-          allowEmpty
         >
           <AutocompleteArrayInput
             optionText="name"
@@ -168,7 +166,6 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           inputType={type}
           choices={SELECT_MARKERS}
           helperText="The element that is displayed on top of the TV channel card in the application"
-          allowEmpty
         />
         <TextInput
           resource={resource}
@@ -300,7 +297,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           labelPlacement="start"
           resource={resource}
         />
-        {values.mediascopeConfig && values.mediascopeConfig.enabled && (
+        {formState.values.mediascopeConfig && formState.values.mediascopeConfig.enabled && (
           <GroupInputsOrigin>
             <TextInput
               resource={resource}
@@ -351,7 +348,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           inputType={type}
           labelPlacement="start"
         />
-        {values.vitrinaTvConfig && values.vitrinaTvConfig.enabled && (
+        {formState.values.vitrinaTvConfig && formState.values.vitrinaTvConfig.enabled && (
           <GroupInputsOrigin>
             <TextInput
               resource={resource}

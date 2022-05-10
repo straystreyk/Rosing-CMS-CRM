@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IMAGE_REQUEST_VARS = { fieldName: "Movie" };
-const FIXED_HEADER_OFFSET = 130;
 const INPUT_ITEMS_PER_PAGE = 25;
 const FIXED_TAB_LABELS = [
   "Attributes",
@@ -63,6 +62,8 @@ const FIXED_TAB_LABELS = [
   "Advertisement",
   "Terms of publication",
 ];
+
+const FIXED_HEADER_OFFSET = 130;
 
 export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }) => {
   const classes = useStyles();

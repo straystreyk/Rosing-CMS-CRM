@@ -54,6 +54,15 @@ export const GET_ONE_VIDEO_FILE = gql`
   }
 `;
 
+export const GET_ONE_LANGUAGE = gql`
+  query Language($id: ID!) {
+    item: Language(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const GET_ONE_DATA_CENTER = gql`
   query Datacenter($id: ID!) {
     item: Datacenter(id: $id) {

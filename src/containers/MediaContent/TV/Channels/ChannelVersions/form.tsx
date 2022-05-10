@@ -18,6 +18,7 @@ import { AutocompleteInput } from "../../../../../components/Inputs/Autocomplete
 import { ReferenceArrayInput } from "../../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
 import { PlusIcon } from "../../../../../constants/icons";
+import { useFormState } from "react-final-form";
 
 const INPUT_ITEMS_PER_PAGE = 25;
 
@@ -44,6 +45,7 @@ const ChannelVersion: React.FC<{
   const [showResource, setShowResource] = React.useState(show);
   const history = useHistory();
   const classes = useStyles();
+  console.log(useFormState().values);
 
   const goToResource = React.useCallback(
     (resource: string) => {
@@ -86,7 +88,9 @@ const ChannelVersion: React.FC<{
         <ReferenceArrayInput
           label="TV streams"
           validate={requiredValidate}
-          source="streamSourceIds"
+          source={
+            parentSourceWithIndex ? `${parentSourceWithIndex}.streamSourceIds` : "streamSourceIds"
+          }
           reference="media_content/tv/channels/live_streams"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
@@ -112,7 +116,7 @@ const ChannelVersion: React.FC<{
         </div>
         <ReferenceInput
           label="EPG source"
-          source="epgSourceId"
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.epgSourceId` : "epgSourceId"}
           reference="media_content/tv/tv_shows/epg_sources"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
@@ -138,7 +142,7 @@ const ChannelVersion: React.FC<{
         </div>
         <ReferenceInput
           label="Broadcast region"
-          source="regionId"
+          source={parentSourceWithIndex ? `${parentSourceWithIndex}.regionId` : "regionId"}
           reference="region"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
@@ -171,7 +175,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
       {type !== "create" && <ChannelVersion resource={resource} type={type} />}
       {type === "create" && (
         <ArrayInput
-          source="seasons"
+          source="channelVersions"
           getItemLabel={alwaysEmptyString}
           ChildComponent={ChannelVersion}
           resource={resource}
