@@ -39,6 +39,12 @@ const useStyles = makeStyles({
     position: "relative",
   },
   DraggableTableRow: {
+    "& .DNDIcon": {
+      height: 30,
+      "& svg": {
+        height: "100%",
+      },
+    },
     "&:hover .DNDIcon": {
       opacity: 1,
       pointerEvents: "all",
@@ -48,7 +54,7 @@ const useStyles = makeStyles({
     position: "absolute",
     left: 8,
     top: "50%",
-    transform: "translateY(-42%)",
+    transform: "translateY(-50%)",
     zIndex: 1,
     opacity: 0,
     pointerEvents: "none",

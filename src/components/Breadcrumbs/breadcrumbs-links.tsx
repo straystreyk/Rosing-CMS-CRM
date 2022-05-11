@@ -17,6 +17,7 @@ import {
   GET_ONE_PROGRAM_TYPE,
   GET_ONE_RIGHT_HOLDER,
   GET_ONE_STUDIO,
+  GET_ONE_TV_STREAM,
 } from "../Providers/custom-requests";
 
 export type Breadcrumb = {
@@ -354,6 +355,21 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     href: "/media_content/tv/channels/channels/:channelId",
     query: GET_ONE_CHANNEL,
     dynamicParam: "channelId",
+  },
+  //TV Streams
+  {
+    name: "TV streams",
+    href: "/media_content/tv/channels/live_streams",
+  },
+  {
+    name: "New TV stream",
+    href: "/media_content/tv/channels/live_streams/create",
+  },
+  {
+    name: "",
+    href: "/media_content/tv/channels/live_streams/:id",
+    query: GET_ONE_TV_STREAM,
+    dynamicParam: "id",
   },
   //Channel versions
   {

@@ -17,8 +17,8 @@ import { RadioButtonGroupInput } from "../../../../../components/Inputs/RadioBut
 import { AutocompleteInput } from "../../../../../components/Inputs/AutocompleteInput";
 import { ReferenceArrayInput } from "../../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
-import { PlusIcon } from "../../../../../constants/icons";
-import { useFormState } from "react-final-form";
+import { ArrayInputItemArrow, PlusIcon } from "../../../../../constants/icons";
+import { ModelFormStyles } from "../../../../../components/ResourceView/FormWithRedirect/styles";
 
 const INPUT_ITEMS_PER_PAGE = 25;
 
@@ -31,6 +31,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "flex-end",
   },
+  ...ModelFormStyles,
 });
 
 const ChannelVersion: React.FC<{
@@ -45,7 +46,6 @@ const ChannelVersion: React.FC<{
   const [showResource, setShowResource] = React.useState(show);
   const history = useHistory();
   const classes = useStyles();
-  console.log(useFormState().values);
 
   const goToResource = React.useCallback(
     (resource: string) => {
@@ -54,13 +54,22 @@ const ChannelVersion: React.FC<{
     [history]
   );
 
+  const showArrayInputItem = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setShowResource((p) => !p);
+  };
+
   React.useEffect(() => {
     setShowResource(show);
   }, [show]);
 
   return (
     <>
-      {index && !["edit", "show"].includes(type) && <div>New channel version {+index + 1}</div>}
+      {index && !["edit", "show"].includes(type) && (
+        <div className={classes.ArrayInputItemName} onClick={showArrayInputItem}>
+          New channel version {+index + 1} <ArrayInputItemArrow />
+        </div>
+      )}
       <div
         style={{
           height: !showResource && !["edit", "show"].includes(type) ? 0 : "auto",

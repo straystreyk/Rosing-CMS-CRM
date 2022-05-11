@@ -7,6 +7,7 @@ import { GroupInputsOrigin } from "../../GroupInputs";
 import { ImageUploaderV2 } from "../../ImageUploader";
 import { TextInputOrigin } from "../../Inputs/StandatdInputs/TextInput/text-input";
 import { NumberInputOrigin } from "../../Inputs/StandatdInputs/NumberInput/numdber-input";
+import { ArrayInputItemArrow } from "../../../constants/icons";
 
 const useStyles = makeStyles({
   CastMemberImagesWrapper: {
@@ -66,20 +67,7 @@ export const CastMembers: React.FC<{
       <div className={classes.CastMemberName} onClick={showCastMember}>
         {name}
         <button>
-          <svg
-            width="8"
-            height="5"
-            viewBox="0 0 8 5"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6.61524 0.691913L3.99894 3.30821L1.38281 0.691895"
-              stroke="var(--secondary-color-main)"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-            />
-          </svg>
+          <ArrayInputItemArrow />
         </button>
       </div>
       <div

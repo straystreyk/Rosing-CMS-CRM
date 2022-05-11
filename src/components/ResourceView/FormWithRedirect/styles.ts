@@ -37,3 +37,15 @@ export const EditFormStyles = {
     },
   },
 };
+
+export const ModelFormStyles = {
+  ArrayInputItemName: {
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "space-between",
+    fontSize: 16,
+    lineHeight: "22px",
+    fontWeight: 600,
+    cursor: "pointer",
+  },
+};

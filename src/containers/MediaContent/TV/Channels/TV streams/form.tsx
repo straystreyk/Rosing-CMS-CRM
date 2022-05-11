@@ -147,7 +147,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
       <TextInput
         resource={resource}
         inputType={type}
-        label="Provider Images"
+        label="Images provider"
         helperText="Link to the image storage for preview of the TV stream, which is processed in the provider's datacenter"
         source="previewBucket"
         fullWidth

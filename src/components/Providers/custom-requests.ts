@@ -117,6 +117,15 @@ export const GET_ONE_CHANNEL = gql`
   }
 `;
 
+export const GET_ONE_TV_STREAM = gql`
+  query LiveStream($id: ID!) {
+    item: LiveStream(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const GET_ONE_CHANNEL_VERSION = gql`
   query ChannelVersion($id: ID!) {
     item: ChannelVersion(id: $id) {
