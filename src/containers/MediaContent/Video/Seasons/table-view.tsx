@@ -32,8 +32,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
       offDescription
       basePath={props.basePath}
       empty={<EmptyTablePage />}
-      optimized
       resource={props.resource}
+      optimized
     >
       <FunctionField
         label="Name"

@@ -29,6 +29,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
     >
       <FunctionField
         label="Name"
+        source="name"
         render={(record?: RecordRA) => (
           <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
             {record?.name}
@@ -46,12 +47,14 @@ export const TableView: React.FC<ShowProps> = (props) => {
         source="media_content/attributes/providers/content_providers"
         emptyText={<span className={classes.Empty}>Empty</span>}
         reference="datacenters"
+        offSort
       >
         <TextField source="name" fullWidth />
       </ReferenceField>
       <FunctionField
         label="Parts"
         source="parts"
+        offSort
         render={(record?: Record) => (
           <>
             <StandardButton

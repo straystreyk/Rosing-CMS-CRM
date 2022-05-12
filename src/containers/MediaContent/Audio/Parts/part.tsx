@@ -1,7 +1,12 @@
 import * as React from "react";
-import { CreateProps, EditProps } from "ra-ui-materialui";
+import { CreateProps, EditProps, ShowProps } from "ra-ui-materialui";
 import { useParams } from "react-router-dom";
-import { ResourceCreate, ResourceEdit, ResourceList } from "../../../../components/ResourceView";
+import {
+  ResourceCreate,
+  ResourceEdit,
+  ResourceList,
+  ResourceShow,
+} from "../../../../components/ResourceView";
 import { sanitizeId } from "../../../../helpers/form";
 import { Form } from "./form";
 import { ResourceComponentProps } from "react-admin";
@@ -54,5 +59,19 @@ export const Edit: React.FC<EditProps> = (props) => {
     >
       <Form resource={resource} type="edit" />
     </ResourceEdit>
+  );
+};
+
+export const Show: React.FC<ShowProps> = (props) => {
+  const { channelId } = useParams<{ channelId: string }>();
+
+  return (
+    <ResourceShow
+      {...props}
+      resource={resource}
+      basePath={sanitizeId(props.basePath!, /:channelId/g, channelId)}
+    >
+      <Form resource={resource} type="show" />
+    </ResourceShow>
   );
 };

@@ -11,6 +11,7 @@ import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 import { TableFieldsStyles } from "../../../../components/TableFields/styles";
 import { ShowProps } from "../../../../types";
 import { Link } from "react-router-dom";
+import { Toolbar } from "../../Video/Seasons/toolbar";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -19,11 +20,17 @@ export const TableView: React.FC<ShowProps> = (props) => {
 
   return (
     <>
-      <DatagridList offDescription {...props} optimized empty={<EmptyTablePage />}>
+      <DatagridList
+        offDescription
+        {...props}
+        toolbar={Toolbar}
+        optimized
+        empty={<EmptyTablePage />}
+      >
         <FunctionField
           label="Name"
           render={(record?: RecordRA) => (
-            <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
+            <Link className={classes.NameField} to={`${props.basePath}/${record?.id}/show`}>
               {record?.name}
             </Link>
           )}

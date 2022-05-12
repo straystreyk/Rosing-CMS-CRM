@@ -50,6 +50,7 @@ const Part: React.FC<{
         inputType={inputType}
         source={parentSourceWithIndex ? `${parentSourceWithIndex}.audioShowId` : "audioShowId"}
         initialValue={sanitizeId(audioShowId)}
+        label="Audio show ID"
         style={{ display: "none" }}
         fullWidth
       />

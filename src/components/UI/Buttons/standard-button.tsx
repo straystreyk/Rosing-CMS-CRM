@@ -6,6 +6,8 @@ import cn from "classnames";
 interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
   customColor?: string;
   variant?: "text" | "outlined" | "contained" | "textWithBg" | undefined;
+  component?: any;
+  to?: string;
 }
 
 const useStyles = makeStyles({

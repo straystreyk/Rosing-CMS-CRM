@@ -52,7 +52,9 @@ export const List: React.FC<ShowProps> = (props) => {
       <FunctionField
         label="Position"
         source="position"
-        render={(record?: RecordRA) => record?.position ?? "Not filled in"}
+        render={(record?: RecordRA) =>
+          record?.position ?? <span className={classes.Empty}>Empty</span>
+        }
       />
       <TextField label="Slug" source="slug" />
       <ReferenceField

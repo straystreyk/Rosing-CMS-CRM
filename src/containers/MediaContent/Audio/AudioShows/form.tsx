@@ -36,7 +36,7 @@ import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-bu
 import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
 import { ResourceCountIcon } from "../../../../constants/icons";
 import { useFormState } from "react-final-form";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
 
 const useStyles = makeStyles({
@@ -49,11 +49,6 @@ const INPUT_ITEMS_PER_PAGE = 25;
 export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
   const classes = useStyles();
   const formState = useFormState();
-  const history = useHistory();
-
-  const goToParts = React.useCallback(() => {
-    history.push(`/media_content/audio/audio_shows/${formState.values.id}/parts`);
-  }, [history, formState]);
 
   return (
     <>
@@ -61,7 +56,8 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         {type !== "create" && (
           <StandardButton
             startIcon={<ResourceCountIcon color="var(--accent-color)" />}
-            onClick={goToParts}
+            component={Link}
+            to={`/${resource}/${formState.values.id}/parts`}
             variant="text"
             customColor="var(--accent-color)"
           >
@@ -202,7 +198,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
             helperText="The company - the copyright holder of the film"
           />
         </ReferenceInput>
-        <ReferenceInput
+        <ReferenceArrayInput
           label="Studios"
           source="studioIds"
           reference="media_content/attributes/providers/studios"
@@ -215,7 +211,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
             resource={resource}
             helperText="A film production or rental company. You can select several studios from the list."
           />
-        </ReferenceInput>
+        </ReferenceArrayInput>
         <ReferenceInput
           label="External catalog"
           source="externalCatalogId"
@@ -330,7 +326,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           />
         </CheckBoxGroup>
         <CheckBoxGroup initialSourceState="allowedApiClients">
-          <ReferenceInput
+          <ReferenceArrayInput
             label=""
             source="allowedApiClients"
             reference="api_clients"
@@ -343,8 +339,8 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
               inputType={type}
               helperText="The list of API clients for which access to the series is allowed, access is denied for other API clients. Leave the field empty if access is allowed for all API clients."
             />
-          </ReferenceInput>
-          <ReferenceInput
+          </ReferenceArrayInput>
+          <ReferenceArrayInput
             label=""
             source="forbiddenApiClients"
             reference="api_clients"
@@ -357,7 +353,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
               inputType={type}
               helperText="List of API clients for which access to the series is prohibited"
             />
-          </ReferenceInput>
+          </ReferenceArrayInput>
         </CheckBoxGroup>
       </FormSection>
       <ScrollTopButton />

@@ -12,7 +12,6 @@ import { AppState } from "../../types";
 
 import { UserVariables as users } from "../../containers/Users";
 import { DatacentersVariables as datacenters } from "../../containers/Datacenters";
-import { RightHoldersVariables as rightHolders } from "../../containers/MediaContent/Attributes/Providers/RightHolders";
 import { QuestionsVariables as questions } from "../../containers/Questions";
 import { LineCloseStyles, LineStyles, MenuItemLinkStyles, MenuItemLinkCloseStyles } from "./styles";
 import {

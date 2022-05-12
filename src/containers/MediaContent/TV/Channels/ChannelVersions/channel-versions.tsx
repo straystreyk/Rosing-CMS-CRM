@@ -52,7 +52,7 @@ export const Show: React.FC<ShowProps> = (props) => {
       resource={resource}
       basePath={sanitizeId(props.basePath!, /:channelId/g, channelId)}
     >
-      <Form resource={resource} type="edit" />
+      <Form resource={resource} type="show" />
     </ResourceShow>
   );
 };

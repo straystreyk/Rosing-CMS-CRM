@@ -92,6 +92,12 @@ export const breadcrumbsLinks: Breadcrumb[] = [
   },
   {
     name: "",
+    href: "/media_content/audio/audio_shows/:audioShowId",
+    dynamicParam: "audioShowId",
+    query: GET_ONE_AUDIO_SHOW_NAME,
+  },
+  {
+    name: "Parts",
     href: "/media_content/audio/audio_shows/:audioShowId/parts",
     dynamicParam: "audioShowId",
     query: GET_ONE_AUDIO_SHOW_NAME,

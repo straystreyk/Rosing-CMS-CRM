@@ -36,6 +36,9 @@ import { CheckBoxGroup } from "../../../../../components/UI/MaterialUI/check-box
 import { ReferenceCustomInput } from "../../../../../components/Inputs/ReferenceInputs/reference-custom-input";
 import { ALL_COUNTRIES } from "../../../../../components/Providers/custom-requests";
 import { AutocompleteInput } from "../../../../../components/Inputs/AutocompleteInput";
+import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
+import { ResourceCountIcon } from "../../../../../constants/icons";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   formHelperText: { ...formHelperText, marginTop: -16, marginBottom: 8 },
@@ -73,7 +76,19 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
 
   return (
     <>
-      <FormTabs labels={FIXED_TAB_LABELS} />
+      <FormTabs labels={FIXED_TAB_LABELS}>
+        {type !== "create" && (
+          <StandardButton
+            component={Link}
+            to={`/${resource}/${formState.values.id}/channel_versions`}
+            startIcon={<ResourceCountIcon color="var(--accent-color)" />}
+            variant="text"
+            customColor="var(--accent-color)"
+          >
+            Channel versions ({formState.values.channelVersions.length})
+          </StandardButton>
+        )}
+      </FormTabs>
       <FormSection
         text="Attributes are used to visually represent the movie in the app and help the user make a choice.
           The more detailed the section is, the higher the probability of the movie getting into the search results and filtering in the application."

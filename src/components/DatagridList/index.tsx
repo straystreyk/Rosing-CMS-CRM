@@ -112,20 +112,22 @@ export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
             key={child.props.source}
           >
             {child.props.label && (
-              <button onClick={() => sort(child.props.source)}>
+              <button onClick={() => !child.props.offSort && sort(child.props.source)}>
                 {child.props.label}&nbsp;
-                <span
-                  style={{
-                    verticalAlign: "middle",
-                    display: "inline-block",
-                    transform:
-                      child.props.source === currentSort.field && currentSort.order === "DESC"
-                        ? "rotate(180deg) translateY(3px)"
-                        : "",
-                  }}
-                >
-                  {child.props.source !== currentSort.field ? <SortIcon /> : <ActiveSortIcon />}
-                </span>
+                {!child.props.offSort && (
+                  <span
+                    style={{
+                      verticalAlign: "middle",
+                      display: "inline-block",
+                      transform:
+                        child.props.source === currentSort.field && currentSort.order === "DESC"
+                          ? "rotate(180deg) translateY(3px)"
+                          : "",
+                    }}
+                  >
+                    {child.props.source !== currentSort.field ? <SortIcon /> : <ActiveSortIcon />}
+                  </span>
+                )}
               </button>
             )}
           </TableCell>
