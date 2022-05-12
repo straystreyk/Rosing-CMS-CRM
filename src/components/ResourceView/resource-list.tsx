@@ -26,6 +26,7 @@ export const ResourceList: React.FC<ResourcesListProps> = ({
   form = "list",
   filters = null,
   children,
+  sort,
   ...props
 }) => {
   const [filter, setFilter] = React.useState<Record<string, any>>(permanentFilter ?? {});
@@ -54,6 +55,7 @@ export const ResourceList: React.FC<ResourcesListProps> = ({
         pagination={<Pagination />}
         basePath={props.basePath}
         actions={false}
+        sort={sort}
       >
         {children}
       </List>

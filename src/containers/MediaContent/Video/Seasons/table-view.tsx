@@ -8,9 +8,11 @@ import { EmptyTablePage } from "../../../../components/EmptyTablePage";
 import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
 import {
   PublishedIcons,
+  PublishIcon,
   ResourceAddIcon,
   ResourceCountEpisodesIcon,
   UnPublishedIcons,
+  UnPublishIcon,
 } from "../../../../constants/icons";
 import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActionsButton";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
@@ -19,12 +21,14 @@ import { DatagridList } from "../../../../components/DatagridList";
 import { ShowProps } from "../../../../types";
 import { TableFieldsStyles } from "../../../../components/TableFields/styles";
 import { Toolbar } from "./toolbar";
+import { useTableActions } from "../../../../custom-hooks/use-table-actions";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
 export const TableView: React.FC<ShowProps> = (props) => {
   const history = useHistory();
   const classes = useStyles();
+  const { loading, approve } = useTableActions(props);
 
   return (
     <DatagridList
@@ -88,6 +92,20 @@ export const TableView: React.FC<ShowProps> = (props) => {
               </button>
             )}
             <MoreActionsButton>
+              <StandardButton
+                onClick={() =>
+                  approve(record?.id, {
+                    ...record,
+                    published: !record?.published,
+                  })
+                }
+                disabled={loading}
+                color="secondary"
+                variant="textWithBg"
+                startIcon={record?.published ? <UnPublishIcon /> : <PublishIcon />}
+              >
+                {record?.published ? <>Unpublish</> : <>Publish</>}
+              </StandardButton>
               <EditButton color="secondary" record={record} basePath={props.basePath} />
               <DeleteButton record={record} basePath={props.basePath} />
             </MoreActionsButton>

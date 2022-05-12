@@ -1,6 +1,7 @@
 import { ListProps } from "ra-ui-materialui";
 import { ListTabProps } from "../Tabs/list-page-tabs";
 import { JSXElementConstructor, ReactElement } from "react";
+import { SortPayload } from "react-admin";
 
 export interface ResourcesListProps extends Omit<ListProps, "resource"> {
   resource: string;
@@ -11,4 +12,5 @@ export interface ResourcesListProps extends Omit<ListProps, "resource"> {
   breadCrumbsOn?: boolean;
   form?: "create" | "edit" | "show" | "list";
   children: ReactElement<any, string | JSXElementConstructor<any>>;
+  sort?: SortPayload;
 }

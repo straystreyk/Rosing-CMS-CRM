@@ -12,13 +12,25 @@ import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 import { ReferenceField } from "../../../../components/TableFields/reference-field";
 import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
-import { ResourceAddIcon, ResourceCountEpisodesIcon } from "../../../../constants/icons";
+import {
+  ArrowIconDown,
+  ArrowIconUp,
+  PublishedIcons,
+  PublishIcon,
+  ResourceAddIcon,
+  ResourceCountEpisodesIcon,
+  UnPublishedIcons,
+  UnPublishIcon,
+} from "../../../../constants/icons";
+import { useTableActions } from "../../../../custom-hooks/use-table-actions";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
 export const TableView: React.FC<ShowProps> = (props) => {
   const classes = useStyles();
   const history = useHistory();
+  const { loading, approve } = useTableActions(props);
+
   return (
     <DatagridList
       listText="A list of pages available for publication on clients. The client has the ability to display an individual list of pages in the menu in accordance with the rule associated with it. Select a client from the list to see its list of pages."
@@ -39,7 +51,9 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <FunctionField
         label="Position"
         source="position"
-        render={(record?: RecordRA) => record?.position ?? "Not filled in"}
+        render={(record?: RecordRA) =>
+          record?.position ?? <span className={classes.Empty}>Empty</span>
+        }
       />
       <TextField label="Slug" source="slug" />
       <ReferenceField
@@ -47,14 +61,14 @@ export const TableView: React.FC<ShowProps> = (props) => {
         source="media_content/attributes/providers/content_providers"
         emptyText={<span className={classes.Empty}>Empty</span>}
         reference="datacenters"
-        offSort
+        offsort
       >
         <TextField source="name" fullWidth />
       </ReferenceField>
       <FunctionField
         label="Parts"
         source="parts"
-        offSort
+        offsort
         render={(record?: Record) => (
           <>
             <StandardButton
@@ -85,10 +99,53 @@ export const TableView: React.FC<ShowProps> = (props) => {
         label=""
         className={classes.MoreActions}
         render={(record?: RecordRA) => (
-          <MoreActionsButton>
-            <EditButton color="secondary" record={record} basePath={props.basePath} />
-            <DeleteButton record={record} basePath={props.basePath} />
-          </MoreActionsButton>
+          <div>
+            {record?.published ? (
+              <button>
+                <PublishedIcons />
+              </button>
+            ) : (
+              <button>
+                <UnPublishedIcons />
+              </button>
+            )}
+            <MoreActionsButton>
+              <StandardButton
+                onClick={() =>
+                  approve(record?.id, {
+                    ...record,
+                    published: !record?.published,
+                  })
+                }
+                disabled={loading}
+                color="secondary"
+                variant="textWithBg"
+                startIcon={record?.published ? <UnPublishIcon /> : <PublishIcon />}
+              >
+                {record?.published ? <>Unpublish</> : <>Publish</>}
+              </StandardButton>
+              <StandardButton
+                onClick={() => approve(record?.id, { ...record, position: 1 })}
+                disabled={loading}
+                color="secondary"
+                variant="textWithBg"
+                startIcon={<ArrowIconUp />}
+              >
+                To the top of the list
+              </StandardButton>
+              <StandardButton
+                onClick={() => approve(record?.id, { ...record, position: props.total ?? 0 })}
+                startIcon={<ArrowIconDown />}
+                disabled={loading}
+                variant="textWithBg"
+                color="secondary"
+              >
+                To the bottom of the list
+              </StandardButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          </div>
         )}
       />
     </DatagridList>

@@ -14,6 +14,7 @@ import { ListProps } from "ra-ui-materialui";
 import { videoTabs } from "../constants";
 
 const resource = "media_content/video/video_files";
+const initialSort = { field: "name", order: "ASC" };
 
 export const Edit: FC = (props) => (
   <ResourceEdit {...props} redirect="list" resource={resource}>
@@ -27,7 +28,7 @@ export const Create: FC = (props) => (
 );
 export const List: FC<ListProps> = (props) => {
   return (
-    <ResourceList {...props} listTabs={videoTabs} resource={resource}>
+    <ResourceList sort={initialSort} {...props} listTabs={videoTabs} resource={resource}>
       <DataGridList resource={resource} basePath={props.basePath} />
     </ResourceList>
   );

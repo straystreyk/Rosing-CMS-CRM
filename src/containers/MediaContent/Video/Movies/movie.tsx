@@ -14,6 +14,7 @@ import { GET_ONE_MOVIE_NAME } from "./custom-requests";
 import { videoTabs } from "../constants";
 
 const resource = "media_content/video/movies";
+const initialSort = { field: "position", order: "ASC" };
 
 export const Create: React.FC<CreateProps> = (props) => {
   return (
@@ -29,7 +30,7 @@ export const Edit: React.FC = (props) => (
 );
 export const List: React.FC<ListProps> = (props) => {
   return (
-    <ResourceList {...props} listTabs={videoTabs} resource={resource}>
+    <ResourceList sort={initialSort} {...props} listTabs={videoTabs} resource={resource}>
       <DataGridList resource={resource} basePath={props.basePath} />
     </ResourceList>
   );

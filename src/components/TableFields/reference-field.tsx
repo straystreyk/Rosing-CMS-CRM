@@ -4,6 +4,6 @@ import React, { ReactNode } from "react";
 export const ReferenceField = ReferenceFieldOrigin as React.ComponentType<
   Omit<React.ComponentProps<typeof ReferenceFieldOrigin>, "emptyText"> & {
     emptyText?: ReactNode;
-    offSort?: boolean;
+    offsort?: boolean;
   }
 >;

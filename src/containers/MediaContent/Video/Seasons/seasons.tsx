@@ -12,7 +12,8 @@ import { TableView } from "./table-view";
 import { Form } from "./form";
 import { sanitizeId } from "../../../../helpers/form";
 
-export const resource = "media_content/video/series/:seriesId/seasons";
+const resource = "media_content/video/series/:seriesId/seasons";
+const initialSort = { field: "name", order: "ASC" };
 
 type Params = { seriesId: string };
 
@@ -25,6 +26,7 @@ export const List: React.FC<ListProps> = (props) => {
       basePath={sanitizeId(props.basePath!, /:seriesId/g, seriesId)}
       permanentFilter={{ seriesId: sanitizeId(seriesId) }}
       resource={resource}
+      sort={initialSort}
       breadCrumbsOn
     >
       <TableView resource={resource} basePath={props.basePath} {...props} />

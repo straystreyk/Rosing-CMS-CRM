@@ -15,6 +15,7 @@ import {
   GET_ONE_LABEL,
   GET_ONE_PERSON,
   GET_ONE_PROGRAM_TYPE,
+  GET_ONE_RADIO_STATION,
   GET_ONE_RIGHT_HOLDER,
   GET_ONE_STUDIO,
   GET_ONE_TV_STREAM,
@@ -128,6 +129,7 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     name: "Radio",
     href: "/media_content/radio",
   },
+  //Radio stations
   {
     name: "Radio stations",
     href: "/media_content/radio/radio_stations",
@@ -136,6 +138,13 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     name: "New radio station",
     href: "/media_content/radio/radio_stations/create",
   },
+  {
+    name: "",
+    href: "/media_content/radio/radio_stations/:id",
+    dynamicParam: "id",
+    query: GET_ONE_RADIO_STATION,
+  },
+  //Radio live streams
   {
     name: "Radio live streams",
     href: "/media_content/radio/radio_live_streams",

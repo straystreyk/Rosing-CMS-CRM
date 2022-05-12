@@ -81,6 +81,15 @@ export const GET_ONE_GENRE = gql`
   }
 `;
 
+export const GET_ONE_RADIO_STATION = gql`
+  query RadioStation($id: ID!) {
+    item: RadioStation(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const GET_ONE_PERSON = gql`
   query Person($id: ID!) {
     item: Person(id: $id) {

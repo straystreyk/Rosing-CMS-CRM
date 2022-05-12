@@ -4,17 +4,22 @@ import { useNotify } from "ra-core";
 import { useRedirect, useRefresh } from "react-admin";
 import { List as DataTable } from "./list";
 import { Form } from "./form";
-import { ResourceShow } from "../../../../components/ResourceView/resource-show";
-import { ResourceList, ResourceCreate, ResourceEdit } from "../../../../components/ResourceView";
+import {
+  ResourceList,
+  ResourceCreate,
+  ResourceEdit,
+  ResourceShow,
+} from "../../../../components/ResourceView";
 import { CreateProps } from "ra-ui-materialui";
 import { RedirectButtonIcon } from "../../../../constants/icons";
 import { videoTabs } from "../constants";
 
 const resource = "media_content/video/series";
+const initialSort = { field: "position", order: "ASC" };
 
 export const List: React.FC = (props) => {
   return (
-    <ResourceList {...props} listTabs={videoTabs} resource={resource}>
+    <ResourceList sort={initialSort} {...props} listTabs={videoTabs} resource={resource}>
       <DataTable resource={resource} />
     </ResourceList>
   );

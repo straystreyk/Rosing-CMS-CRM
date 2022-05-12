@@ -112,9 +112,9 @@ export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
             key={child.props.source}
           >
             {child.props.label && (
-              <button onClick={() => !child.props.offSort && sort(child.props.source)}>
+              <button onClick={() => !child.props.offsort && sort(child.props.source)}>
                 {child.props.label}&nbsp;
-                {!child.props.offSort && (
+                {!child.props.offsort && (
                   <span
                     style={{
                       verticalAlign: "middle",
