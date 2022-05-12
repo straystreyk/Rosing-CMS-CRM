@@ -52,6 +52,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <TextField label="Number of season" source="number" emptyText="Empty" />
       <FunctionField
         label="Episodes"
+        offsort
         render={(record?: Record) => (
           <>
             <StandardButton
