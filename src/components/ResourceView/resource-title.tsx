@@ -133,7 +133,7 @@ export const ResourceTitle: React.FC<TitleProps> = ({
               </>
             ) : (
               <>
-                {title && title}
+                {title ? title : translate(["resources", name, "titles", form].join("."))}
                 {form === "show" && (
                   <div className={classes.ButtonsShow}>
                     <EditButton record={props.record} color="secondary" />

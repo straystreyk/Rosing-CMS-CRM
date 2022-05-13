@@ -31,7 +31,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
           </Link>
         )}
       />
-      <TextField style={{ wordBreak: "break-all" }} source="id" label="ID" />
+      <TextField className={classes.IDField} source="id" label="ID" />
       <FunctionField
         label="Image"
         render={(record?: RecordRA) =>

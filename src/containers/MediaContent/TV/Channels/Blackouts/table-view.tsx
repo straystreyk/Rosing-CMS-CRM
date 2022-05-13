@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextField } from "react-admin";
+import { FunctionField, TextField } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
 import { ShowProps } from "../../../../../types";
@@ -7,6 +7,12 @@ import { DatagridList } from "../../../../../components/DatagridList";
 import { EmptyTablePage } from "../../../../../components/EmptyTablePage";
 import { ReferenceField } from "../../../../../components/TableFields/reference-field";
 import { TableFieldsStyles } from "../../../../../components/TableFields/styles";
+import { EditButton } from "../../../../../components/UI/RA/edit-button";
+import { DeleteButton } from "../../../../../components/UI/RA/delete-button";
+import { MoreActionsButton } from "../../../../../components/UI/Buttons/MoreActionsButton";
+import { Record as RecordRA } from "ra-core/esm/types";
+import { Link } from "react-router-dom";
+import cn from "classnames";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -19,6 +25,18 @@ export const TableView: React.FC<ShowProps> = (props) => {
       optimized
       {...props}
     >
+      <FunctionField
+        label="Name"
+        source="id"
+        render={(record?: RecordRA) => (
+          <Link
+            className={cn(classes.NameField, classes.IDField)}
+            to={`/${props.resource}/${record?.id}/show`}
+          >
+            {record?.id}
+          </Link>
+        )}
+      />
       <ReferenceField
         label="Channel version"
         source="channelVersionId"
@@ -27,7 +45,17 @@ export const TableView: React.FC<ShowProps> = (props) => {
       >
         <TextField source="name" fullWidth />
       </ReferenceField>
-      <TextField source="id" />
+      <FunctionField
+        label=""
+        render={(record?: RecordRA) => (
+          <div className={classes.MoreActions}>
+            <MoreActionsButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          </div>
+        )}
+      />
     </DatagridList>
   );
 };

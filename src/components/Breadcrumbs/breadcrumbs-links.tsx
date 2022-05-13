@@ -402,6 +402,34 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     query: GET_ONE_TV_STREAM,
     dynamicParam: "id",
   },
+  //Blackouts
+  {
+    name: "Blackouts",
+    href: "/media_content/tv/channels/blackouts",
+  },
+  {
+    name: "New blackout",
+    href: "/media_content/tv/channels/blackouts/create",
+  },
+  {
+    name: "Edit blackout",
+    href: "/media_content/tv/channels/blackouts/:id",
+    dynamicParam: "id",
+  },
+  //overrides
+  {
+    name: "Overrides",
+    href: "/media_content/tv/channels/channel_positions_overrides",
+  },
+  {
+    name: "New override",
+    href: "/media_content/tv/channels/channel_positions_overrides/create",
+  },
+  {
+    name: "Edit override",
+    href: "/media_content/tv/channels/channel_positions_overrides/:id",
+    dynamicParam: "id",
+  },
   //Channel versions
   {
     name: "Channel versions",

@@ -1,4 +1,4 @@
-export const TableFieldsStyles = {
+export const TableFieldsStyles: any = {
   NameField: {
     textDecoration: "underline",
     fontSize: 14,
@@ -22,4 +22,5 @@ export const TableFieldsStyles = {
   Empty: {
     color: "var(--secondary-color-default)",
   },
+  IDField: { wordBreak: "break-all" },
 };

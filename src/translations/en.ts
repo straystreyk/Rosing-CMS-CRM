@@ -482,6 +482,7 @@ export const en: TranslationMessages = {
         create: "New blackout",
         edit: "Edit blackout",
         list: "Television",
+        show: "Blackout",
       },
     },
     "media_content/tv/channels/channel_positions_overrides": {

@@ -1,7 +1,13 @@
 import * as React from "react";
 
 import { FormProps } from "../../../../types";
-import { NumberInput, requiredValidate, TextInput } from "../../../../components/Inputs";
+import {
+  formatFromArrayOfString,
+  NumberInput,
+  parseToArrayOfString,
+  requiredValidate,
+  TextInput,
+} from "../../../../components/Inputs";
 import { GroupInputsOrigin } from "../../../../components/GroupInputs";
 import { ImageUploaderV2 } from "../../../../components/ImageUploader";
 
@@ -17,13 +23,20 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         label="Name"
         source="fullName"
         fullWidth
-        helperText={"The name of the genre that users will see in any sections of the application"}
+      />
+      <TextInput
+        resource={resource}
+        inputType={type}
+        label="Additional name"
+        parse={parseToArrayOfString}
+        format={formatFromArrayOfString}
+        source="subNames"
+        fullWidth
       />
       <GroupInputsOrigin inputType={type} label="ID in the cinema database">
         <NumberInput
           resource={resource}
           inputType={type}
-          validate={requiredValidate}
           helperText="A digital identifier in the Kinopoisk system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
           source="kinopoiskId"
           label="Kinopoisk ID"
@@ -31,7 +44,6 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <NumberInput
           resource={resource}
           inputType={type}
-          validate={requiredValidate}
           helperText="A digital identifier in the IMDB system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
           source="imdbId"
           label="IMDB ID"

@@ -10,7 +10,7 @@ import { TableView } from "./table-view";
 import { Form } from "./form";
 
 const resource = "media_content/attributes/people";
-const initialSort = { field: "name", order: "ASC" };
+const initialSort = { field: "fullName", order: "ASC" };
 
 export const Create: React.FC = (props) => (
   <ResourceCreate {...props} resource={resource}>

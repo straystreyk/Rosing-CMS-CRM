@@ -2,8 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 
-import { NumberInput, ReferenceInput, SelectInput, TextInput } from "../../Inputs";
-import { GroupInputsOrigin } from "../../GroupInputs";
+import { ReferenceInput, SelectInput, TextInput } from "../../Inputs";
 import { ImageUploaderV2 } from "../../ImageUploader";
 import { TextInputOrigin } from "../../Inputs/StandatdInputs/TextInput/text-input";
 import { NumberInputOrigin } from "../../Inputs/StandatdInputs/NumberInput/numdber-input";
@@ -114,18 +113,6 @@ export const CastMembers: React.FC<{
           style={{ display: "none" }}
           source={`${parentSourceWithIndex}.person.images`}
         />
-        <GroupInputsOrigin inputType="create" label="ID in the cinema database">
-          <NumberInput
-            source={`${parentSourceWithIndex}.person.kinopoiskId`}
-            label="Kinopoisk ID"
-            helperText="A digital identifier in the Kinopoisk system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
-          />
-          <NumberInput
-            source={`${parentSourceWithIndex}.person.imdbId`}
-            label="IMDB ID"
-            helperText="A digital identifier in the IMDB system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
-          />
-        </GroupInputsOrigin>
         <TextInputOrigin
           source={`${parentSourceWithIndex}.position`}
           style={{ display: "none" }}

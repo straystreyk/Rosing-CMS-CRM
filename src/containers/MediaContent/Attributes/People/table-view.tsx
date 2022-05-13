@@ -26,7 +26,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
     >
       <FunctionField
         label="Name"
-        source="name"
+        source="fullName"
         render={(record?: RecordRA) => (
           <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
             {record?.fullName}
