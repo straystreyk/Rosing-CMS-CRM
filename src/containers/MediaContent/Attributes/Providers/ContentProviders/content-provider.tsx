@@ -11,11 +11,13 @@ import { attributesTabs } from "../../constants";
 import { providersSubTabs } from "../constants";
 
 const resource = "media_content/attributes/providers/content_providers";
+const initialSort = { field: "name", order: "ASC" };
 
 export const List: React.FC = (props) => (
   <ResourceList
     listSubTabs={providersSubTabs}
     listTabs={attributesTabs}
+    sort={initialSort}
     {...props}
     resource={resource}
   >

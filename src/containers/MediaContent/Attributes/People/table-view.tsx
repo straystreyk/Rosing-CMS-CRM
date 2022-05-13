@@ -26,14 +26,18 @@ export const TableView: React.FC<ShowProps> = (props) => {
     >
       <FunctionField
         label="Name"
+        source="name"
         render={(record?: RecordRA) => (
           <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
             {record?.fullName}
           </Link>
         )}
       />
+      <TextField source="kinopoiskId" label="Kinopoisk ID" />
+      <TextField source="imdbId" label="IMDB ID" />
       <FunctionField
         label="Image"
+        offsort
         render={(record?: RecordRA) =>
           record?.images.length ? (
             <span>Has avatar</span>
@@ -45,10 +49,12 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <FunctionField
         label=""
         render={(record?: RecordRA) => (
-          <MoreActionsButton>
-            <EditButton color="secondary" record={record} basePath={props.basePath} />
-            <DeleteButton record={record} basePath={props.basePath} />
-          </MoreActionsButton>
+          <div className={classes.MoreActions}>
+            <MoreActionsButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          </div>
         )}
       />
     </DatagridList>

@@ -33,6 +33,7 @@ export const DateTimeInput: React.FC<InputProps> = ({
   resource,
   helperText,
   inputType,
+  fullWidth,
   ...props
 }) => {
   const classes = useStyles();
@@ -40,6 +41,12 @@ export const DateTimeInput: React.FC<InputProps> = ({
   return inputType === "show" ? (
     <DateTimeInputShow source={source} resource={resource} helperText={helperText} {...props} />
   ) : (
-    <DateTimeInputOrigin source={source} resource={resource} helperText={helperText} {...props} />
+    <DateTimeInputOrigin
+      fullWidth={fullWidth ?? true}
+      source={source}
+      resource={resource}
+      helperText={helperText ?? false}
+      {...props}
+    />
   );
 };

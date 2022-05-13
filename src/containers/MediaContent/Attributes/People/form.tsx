@@ -23,6 +23,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <NumberInput
           resource={resource}
           inputType={type}
+          validate={requiredValidate}
           helperText="A digital identifier in the Kinopoisk system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
           source="kinopoiskId"
           label="Kinopoisk ID"
@@ -30,6 +31,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <NumberInput
           resource={resource}
           inputType={type}
+          validate={requiredValidate}
           helperText="A digital identifier in the IMDB system, which is contained in a link in the address bar, for example, https://www.imdb.com/title/tt6920084/"
           source="imdbId"
           label="IMDB ID"

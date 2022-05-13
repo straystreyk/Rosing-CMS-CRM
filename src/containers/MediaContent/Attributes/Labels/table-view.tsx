@@ -12,7 +12,18 @@ import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActions
 import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 
-const useStyles = makeStyles(TableFieldsStyles);
+const useStyles = makeStyles({
+  ...TableFieldsStyles,
+  LabelColor: {
+    display: "inline-block",
+    width: 16,
+    height: 16,
+    verticalAlign: "middle",
+    border: "1px solid var(--secondary-color-disable)",
+    borderRadius: "50%",
+    marginRight: 10,
+  },
+});
 
 export const TableView: React.FC<ShowProps> = (props) => {
   const classes = useStyles();
@@ -26,6 +37,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
     >
       <FunctionField
         label="Name"
+        source="name"
         render={(record?: RecordRA) => (
           <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
             {record?.name}
@@ -33,12 +45,42 @@ export const TableView: React.FC<ShowProps> = (props) => {
         )}
       />
       <FunctionField
+        label="Text color"
+        source="textColor"
+        render={(record?: RecordRA) =>
+          record?.textColor ? (
+            <span>
+              <span style={{ backgroundColor: record?.textColor }} className={classes.LabelColor} />
+              {record?.textColor}
+            </span>
+          ) : (
+            <span className={classes.Empty}>Default</span>
+          )
+        }
+      />
+      <FunctionField
+        label="Background color"
+        source="bgColor"
+        render={(record?: RecordRA) =>
+          record?.bgColor ? (
+            <span>
+              <span style={{ backgroundColor: record?.bgColor }} className={classes.LabelColor} />
+              {record?.bgColor}
+            </span>
+          ) : (
+            <span className={classes.Empty}>Default</span>
+          )
+        }
+      />
+      <FunctionField
         label=""
         render={(record?: RecordRA) => (
-          <MoreActionsButton>
-            <EditButton color="secondary" record={record} basePath={props.basePath} />
-            <DeleteButton record={record} basePath={props.basePath} />
-          </MoreActionsButton>
+          <div className={classes.MoreActions}>
+            <MoreActionsButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          </div>
         )}
       />
     </DatagridList>

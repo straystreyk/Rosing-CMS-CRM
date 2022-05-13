@@ -11,9 +11,16 @@ import { TVChannelsSubTubs } from "../constants";
 import { Form } from "./form";
 
 const resource = "media_content/tv/channels/live_streams";
+const initialSort = { field: "name", order: "ASC" };
 
 export const List: React.FC = (props) => (
-  <ResourceList listTabs={TVTabs} listSubTabs={TVChannelsSubTubs} {...props} resource={resource}>
+  <ResourceList
+    sort={initialSort}
+    listTabs={TVTabs}
+    listSubTabs={TVChannelsSubTubs}
+    {...props}
+    resource={resource}
+  >
     <TableView resource={resource} />
   </ResourceList>
 );

@@ -38,6 +38,7 @@ import { ResourceCountIcon } from "../../../../constants/icons";
 import { useFormState } from "react-final-form";
 import { Link } from "react-router-dom";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
+import { AutocompleteInput } from "../../../../components/Inputs/AutocompleteInput";
 
 const useStyles = makeStyles({
   ArrayInputStyles,
@@ -192,9 +193,10 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >
-          <SelectInput
+          <AutocompleteInput
             resource={resource}
             inputType={type}
+            fullWidth
             helperText="The company - the copyright holder of the film"
           />
         </ReferenceInput>

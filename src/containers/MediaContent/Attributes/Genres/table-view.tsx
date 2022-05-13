@@ -26,6 +26,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
     >
       <FunctionField
         label="Name"
+        source="name"
         render={(record?: RecordRA) => (
           <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
             {record?.name}
@@ -40,12 +41,13 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <TextField label="Slug" source="slug" />
       <FunctionField
         label=""
-        className={classes.MoreActions}
         render={(record?: RecordRA) => (
-          <MoreActionsButton>
-            <EditButton color="secondary" record={record} basePath={props.basePath} />
-            <DeleteButton record={record} basePath={props.basePath} />
-          </MoreActionsButton>
+          <div className={classes.MoreActions}>
+            <MoreActionsButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          </div>
         )}
       />
     </DatagridList>

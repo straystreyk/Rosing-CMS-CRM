@@ -16,6 +16,7 @@ import { ResourceComponentProps } from "react-admin";
 import { StaticContext } from "react-router";
 
 const resource = "media_content/video/seasons/:seasonId/episodes";
+const initialSort = { field: "name", order: "ASC" };
 
 export const List: React.FC<ResourceComponentProps<{}, StaticContext, unknown>> = (props) => {
   const { seasonId } = useParams<{ seasonId: string }>();
@@ -24,6 +25,7 @@ export const List: React.FC<ResourceComponentProps<{}, StaticContext, unknown>> 
     <ResourceList
       basePath={sanitizeId(props.basePath!, /:seasonId/g, seasonId)}
       permanentFilter={{ seasonId: sanitizeId(seasonId) }}
+      sort={initialSort}
       resource={resource}
       breadCrumbsOn
     >

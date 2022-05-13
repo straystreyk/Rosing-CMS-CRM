@@ -10,6 +10,7 @@ import { Form } from "./form";
 import { attributesTabs } from "../constants";
 
 const resource = "media_content/attributes/labels";
+const initialSort = { field: "name", order: "ASC" };
 
 export const Edit: React.FC = (props) => (
   <ResourceEdit {...props} resource={resource}>
@@ -27,7 +28,7 @@ export const Show: React.FC = (props) => (
   </ResourceShow>
 );
 export const List: React.FC = (props) => (
-  <ResourceList listTabs={attributesTabs} {...props} resource={resource}>
+  <ResourceList sort={initialSort} listTabs={attributesTabs} {...props} resource={resource}>
     <TableView resource={resource} />
   </ResourceList>
 );

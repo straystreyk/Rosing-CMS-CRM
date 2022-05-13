@@ -13,6 +13,7 @@ import {
   GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_GENRE,
   GET_ONE_LABEL,
+  GET_ONE_LANGUAGE,
   GET_ONE_PERSON,
   GET_ONE_PROGRAM_TYPE,
   GET_ONE_RADIO_STATION,
@@ -304,6 +305,21 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     query: GET_ONE_GENRE,
     dynamicParam: "id",
   },
+  //Languages
+  {
+    name: "Languages",
+    href: "/media_content/attributes/languages",
+  },
+  {
+    name: "New language",
+    href: "/media_content/attributes/languages/create",
+  },
+  {
+    name: "",
+    href: "/media_content/attributes/languages/:id",
+    query: GET_ONE_LANGUAGE,
+    dynamicParam: "id",
+  },
   //Person
   {
     name: "Persons",
@@ -400,7 +416,7 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     dynamicParam: "channelId",
   },
   {
-    name: "New channel version",
+    name: "",
     href: "/media_content/tv/channels/channels/:channelId/channel_versions/:id",
     query: GET_ONE_CHANNEL_VERSION,
     dynamicParam: "id",

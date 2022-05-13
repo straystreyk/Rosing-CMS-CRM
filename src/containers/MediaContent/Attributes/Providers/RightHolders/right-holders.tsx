@@ -13,6 +13,7 @@ import { providersSubTabs } from "../constants";
 import { attributesTabs } from "../../constants";
 
 const resource = "media_content/attributes/providers/right_holders";
+const initialSort = { field: "name", order: "ASC" };
 
 export const Create: React.FC = (props) => (
   <ResourceCreate {...props} resource={resource}>
@@ -33,6 +34,7 @@ export const List: React.FC = (props) => (
   <ResourceList
     listSubTabs={providersSubTabs}
     listTabs={attributesTabs}
+    sort={initialSort}
     {...props}
     resource={resource}
   >

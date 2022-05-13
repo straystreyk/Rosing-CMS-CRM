@@ -35,8 +35,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
         )}
       />
       <FunctionField
-        label="Name"
-        source="name"
+        label="Streaming UID"
+        source="streamingUid"
         render={(record?: RecordRA) =>
           record?.streamingUid ? record?.streamingUid : <span className={classes.Empty}>Empty</span>
         }

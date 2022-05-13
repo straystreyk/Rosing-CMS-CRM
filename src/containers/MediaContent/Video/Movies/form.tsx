@@ -112,9 +112,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           inputType={type}
           source="originalName"
           label="Original name"
-          helperText={
-            "The original non-localized title of the movie, which users will see only in the description"
-          }
+          helperText="The original non-localized title of the movie, which users will see only in the description"
           fullWidth
         />
         <RichTextInput
@@ -128,9 +126,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           resource={resource}
           inputType={type}
           resettable={false}
-          helperText={
-            "Release date in the country where the application is used. If the release is upcoming, then the date is mandatory."
-          }
+          helperText="Release date in the country where the application is used. If the release is upcoming, then the date is mandatory."
           label="Release date"
           source="releaseDate"
           type="date"

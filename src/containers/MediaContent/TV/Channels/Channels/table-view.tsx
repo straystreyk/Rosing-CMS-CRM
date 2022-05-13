@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ShowProps } from "../../../../../types";
 import { DatagridList } from "../../../../../components/DatagridList";
-import { FunctionField, Record, TextField } from "react-admin";
+import { FunctionField, Record } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { Record as RecordRA } from "ra-core/esm/types";
 import { Link, useHistory } from "react-router-dom";

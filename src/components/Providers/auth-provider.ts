@@ -42,7 +42,7 @@ export const authProvider: AuthProvider = {
     });
 
     localStorage.setItem("token", result.data.login.token);
-    // window.location.reload();
+    window.location.reload();
 
     return Promise.resolve();
   },

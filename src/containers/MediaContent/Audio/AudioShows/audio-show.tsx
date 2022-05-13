@@ -15,9 +15,10 @@ import { CreateProps } from "ra-ui-materialui";
 import { RedirectButtonIcon } from "../../../../constants/icons";
 
 const resource = "media_content/audio/audio_shows";
+const initialSort = { field: "position", order: "ASC" };
 
 export const List: React.FC = (props) => (
-  <ResourceList {...props} listTabs={audioTabs} resource={resource}>
+  <ResourceList sort={initialSort} {...props} listTabs={audioTabs} resource={resource}>
     <TableView resource={resource} />
   </ResourceList>
 );

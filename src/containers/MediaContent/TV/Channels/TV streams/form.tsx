@@ -16,7 +16,6 @@ import { ReferenceCustomInput } from "../../../../../components/Inputs/Reference
 import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
 import { PlusIcon } from "../../../../../constants/icons";
 import { makeStyles } from "@material-ui/core/styles";
-import { useFormState } from "react-final-form";
 import { CheckBoxGroup } from "../../../../../components/UI/MaterialUI/check-box-group";
 import { SPBTVPlayer } from "../../../../../components/SPBTVPlayer";
 

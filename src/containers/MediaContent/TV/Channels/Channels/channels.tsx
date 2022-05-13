@@ -16,9 +16,16 @@ import { useRedirect, useRefresh } from "react-admin";
 import { CreateProps } from "ra-ui-materialui";
 
 const resource = "media_content/tv/channels/channels";
+const initialSort = { field: "position", order: "ASC" };
 
 export const List: React.FC = (props) => (
-  <ResourceList listTabs={TVTabs} listSubTabs={TVChannelsSubTubs} {...props} resource={resource}>
+  <ResourceList
+    sort={initialSort}
+    listTabs={TVTabs}
+    listSubTabs={TVChannelsSubTubs}
+    {...props}
+    resource={resource}
+  >
     <TableView resource={resource} />
   </ResourceList>
 );

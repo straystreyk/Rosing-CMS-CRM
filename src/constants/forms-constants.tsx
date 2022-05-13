@@ -59,3 +59,13 @@ export const PUBLISHED_CHOICES_FORM = [
   { name: "Not published", id: false },
   { name: "Published", id: true },
 ];
+
+export const CATCHUP_AVAILABLE = [
+  { name: "Unavailable", id: false },
+  { name: "Available", id: true },
+];
+
+export const LIVE_AVAILABLE = [
+  { name: "Unavailable", id: false },
+  { name: "Available", id: true },
+];

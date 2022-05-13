@@ -13,6 +13,7 @@ import { attributesTabs } from "../../constants";
 import { TableView } from "./table-view";
 
 const resource = "media_content/attributes/providers/studios";
+const initialSort = { field: "name", order: "ASC" };
 
 export const Edit: React.FC = (props) => (
   <ResourceEdit {...props} resource={resource}>
@@ -33,6 +34,7 @@ export const List: React.FC = (props) => (
   <ResourceList
     listSubTabs={providersSubTabs}
     listTabs={attributesTabs}
+    sort={initialSort}
     {...props}
     resource={resource}
   >
