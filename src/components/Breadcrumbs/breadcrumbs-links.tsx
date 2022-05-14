@@ -1,26 +1,29 @@
 import { DocumentNode } from "graphql";
-import { GET_ONE_MOVIE_NAME } from "../../containers/MediaContent/Video/Movies/custom-requests";
 import { GET_ONE_VIDEO_FILE } from "../../containers/MediaContent/Video/VideoFiles/custom-requests";
-import { GET_ONE_SERIES_NAME } from "../../containers/MediaContent/Video/Series/requests";
 import { GET_ONE_SEASON_NAME } from "../../containers/MediaContent/Video/Seasons/requests";
-import { GET_ONE_AUDIO_SHOW_NAME } from "../../containers/MediaContent/Audio/AudioShows/requests";
-import { GET_ONE_PART_NAME } from "../../containers/MediaContent/Audio/Parts/requests";
 import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Video/Episodes/requests";
-import { GET_ONE_NEWS_NAME } from "../../containers/MediaContent/News/requests";
 import {
   GET_ONE_CHANNEL,
-  GET_ONE_CHANNEL_VERSION,
   GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_GENRE,
-  GET_ONE_LABEL,
   GET_ONE_LANGUAGE,
-  GET_ONE_PERSON,
-  GET_ONE_PROGRAM_TYPE,
-  GET_ONE_RADIO_STATION,
   GET_ONE_RIGHT_HOLDER,
   GET_ONE_STUDIO,
   GET_ONE_TV_STREAM,
 } from "../Providers/custom-requests";
+import { personsLinks } from "../../containers/MediaContent/Attributes/People/people-links";
+import { programTypesLinks } from "../../containers/MediaContent/Attributes/ProgramsTypes/programs-types-links";
+import { moviesLinks } from "../../containers/MediaContent/Video/Movies/movies-links";
+import { audioShowsLinks } from "../../containers/MediaContent/Audio/AudioShows/audio-shows-links";
+import { newsLinks } from "../../containers/MediaContent/News/news-links";
+import { radioStationsLinks } from "../../containers/MediaContent/Radio/RadioStations/radio-stations-links";
+import { radioLiveStreamsLinks } from "../../containers/MediaContent/Radio/RadioLiveStreams/radio-live-streams-links";
+import { seriesLinks } from "../../containers/MediaContent/Video/Series/series-links";
+import { seasonsLinks } from "../../containers/MediaContent/Video/Seasons/seasons-links";
+import { channelVersionsLinks } from "../../containers/MediaContent/TV/Channels/ChannelVersions/channel-versions-links";
+import { labelsLinks } from "../../containers/MediaContent/Attributes/Labels/labels-links";
+import { episodesLinks } from "../../containers/MediaContent/Video/Episodes/episodes-links";
+import { videoFilesLinks } from "../../containers/MediaContent/Video/VideoFiles/video-files-links";
 
 export type Breadcrumb = {
   name: string;
@@ -47,6 +50,10 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     href: "/media_content/audio",
   },
   {
+    name: "Radio",
+    href: "/media_content/radio",
+  },
+  {
     name: "Attributes",
     href: "/media_content/attributes",
   },
@@ -62,190 +69,38 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     name: "TV Channels",
     href: "/media_content/tv/channels",
   },
+
   //Movie
-  {
-    name: "Movies",
-    href: "/media_content/video/movies",
-  },
-  {
-    name: "New movie",
-    href: "/media_content/video/movies/create",
-  },
-  {
-    name: "",
-    href: "/media_content/video/movies/:id",
-    query: GET_ONE_MOVIE_NAME,
-    dynamicParam: "id",
-  },
+  ...moviesLinks,
+
   //Audio show
-  {
-    name: "Audio shows",
-    href: "/media_content/audio/audio_shows",
-  },
-  {
-    name: "New audio show",
-    href: "/media_content/audio/audio_shows/create",
-  },
-  {
-    name: "",
-    href: "/media_content/audio/audio_shows/:id",
-    dynamicParam: "id",
-    query: GET_ONE_AUDIO_SHOW_NAME,
-  },
-  {
-    name: "",
-    href: "/media_content/audio/audio_shows/:audioShowId",
-    dynamicParam: "audioShowId",
-    query: GET_ONE_AUDIO_SHOW_NAME,
-  },
-  {
-    name: "Parts",
-    href: "/media_content/audio/audio_shows/:audioShowId/parts",
-    dynamicParam: "audioShowId",
-    query: GET_ONE_AUDIO_SHOW_NAME,
-  },
-  {
-    name: "",
-    href: "/media_content/audio/audio_shows/:audioShowId/parts/:id",
-    dynamicParam: "id",
-    secondDynamicParam: "audioShowId",
-    query: GET_ONE_PART_NAME,
-  },
+  ...audioShowsLinks,
+
   // News
-  {
-    name: "News",
-    href: "/media_content/news",
-  },
-  {
-    name: "New News",
-    href: "/media_content/news/create",
-  },
-  {
-    name: "",
-    href: "/media_content/news/:id",
-    dynamicParam: "id",
-    query: GET_ONE_NEWS_NAME,
-  },
-  {
-    name: "Radio",
-    href: "/media_content/radio",
-  },
+  ...newsLinks,
+
   //Radio stations
-  {
-    name: "Radio stations",
-    href: "/media_content/radio/radio_stations",
-  },
-  {
-    name: "New radio station",
-    href: "/media_content/radio/radio_stations/create",
-  },
-  {
-    name: "",
-    href: "/media_content/radio/radio_stations/:id",
-    dynamicParam: "id",
-    query: GET_ONE_RADIO_STATION,
-  },
+  ...radioStationsLinks,
+
   //Radio live streams
-  {
-    name: "Radio live streams",
-    href: "/media_content/radio/radio_live_streams",
-  },
-  {
-    name: "New radio live stream",
-    href: "/media_content/radio/radio_live_streams/create",
-  },
-  {
-    name: "Series",
-    href: "/media_content/video/series",
-  },
-  {
-    name: "",
-    href: "/media_content/video/series/:id",
-    query: GET_ONE_SERIES_NAME,
-    dynamicParam: "id",
-  },
-  {
-    name: "",
-    href: "/media_content/video/series/:seriesId",
-    query: GET_ONE_SERIES_NAME,
-    dynamicParam: "seriesId",
-  },
-  {
-    name: "Seasons",
-    href: "/media_content/video/series/:seriesId/seasons",
-    query: GET_ONE_SERIES_NAME,
-    dynamicParam: "seriesId",
-  },
-  {
-    name: "New season",
-    href: "/media_content/video/series/:seriesId/seasons/create",
-    query: GET_ONE_SERIES_NAME,
-    dynamicParam: "seriesId",
-  },
-  {
-    name: "",
-    href: "/media_content/video/series/:seriesId/seasons/:id",
-    query: GET_ONE_SEASON_NAME,
-    dynamicParam: "id",
-    secondDynamicParam: "seriesId",
-  },
-  {
-    name: "Seasons",
-    href: "/media_content/video/seasons",
-    alternativeHref: "/media_content/video/series/:seriesId/seasons",
-    alternativeParam: "series",
-    query: GET_ONE_SEASON_NAME,
-    dynamicParam: "seasonId",
-    secondDynamicParam: "seriesId",
-  },
-  {
-    name: "",
-    href: "/media_content/video/seasons/:seasonId",
-    alternativeHref: "/media_content/video/series/:seriesId/seasons/:seasonId",
-    alternativeParam: "series",
-    query: GET_ONE_SEASON_NAME,
-    dynamicParam: "seasonId",
-    secondDynamicParam: "seriesId",
-    breadcrumbName: "name",
-  },
-  {
-    name: "Episodes",
-    href: "/media_content/video/seasons/:seasonId/episodes",
-    query: GET_ONE_SEASON_NAME,
-    dynamicParam: "seasonId",
-  },
-  {
-    name: "New episode",
-    href: "/media_content/video/seasons/:seasonId/episodes/create",
-    query: GET_ONE_SEASON_NAME,
-    dynamicParam: "seasonId",
-  },
-  {
-    name: "",
-    href: "/media_content/video/seasons/:seasonId/episodes/:id",
-    query: GET_ONE_EPISODE_NAME,
-    secondDynamicParam: "seasonId",
-    dynamicParam: "id",
-  },
-  {
-    name: "New series",
-    href: "/media_content/video/series/create",
-  },
-  {
-    name: "Video files",
-    href: "/media_content/video/video_files",
-  },
-  {
-    name: "New video file",
-    href: "/media_content/video/video_files/create",
-  },
-  {
-    name: "",
-    href: "/media_content/video/video_files/:id",
-    query: GET_ONE_VIDEO_FILE,
-    dynamicParam: "id",
-  },
-  //content_providers (External catalog)
+  ...radioLiveStreamsLinks,
+
+  //Series
+  ...seriesLinks,
+
+  //Seasons
+  ...seasonsLinks,
+
+  //Channel versions
+  ...channelVersionsLinks,
+
+  //Episodes
+  ...episodesLinks,
+
+  //Video files
+  ...videoFilesLinks,
+
+  //Content Providers (External catalog)
   {
     name: "Content providers",
     href: "/media_content/attributes/providers/content_providers",
@@ -321,51 +176,11 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     dynamicParam: "id",
   },
   //Person
-  {
-    name: "Persons",
-    href: "/media_content/attributes/people",
-  },
-  {
-    name: "New person",
-    href: "/media_content/attributes/people/create",
-  },
-  {
-    name: "",
-    href: "/media_content/attributes/people/:id",
-    query: GET_ONE_PERSON,
-    dynamicParam: "id",
-    breadcrumbName: "fullName",
-  },
+  ...personsLinks,
   //Types of TV show
-  {
-    name: "Types of TV shows",
-    href: "/media_content/attributes/programs_types",
-  },
-  {
-    name: "New type of TV show",
-    href: "/media_content/attributes/programs_types/create",
-  },
-  {
-    name: "",
-    href: "/media_content/attributes/programs_types/:id",
-    query: GET_ONE_PROGRAM_TYPE,
-    dynamicParam: "id",
-  },
+  ...programTypesLinks,
   //Labels
-  {
-    name: "Labels",
-    href: "/media_content/attributes/labels",
-  },
-  {
-    name: "New label",
-    href: "/media_content/attributes/labels/create",
-  },
-  {
-    name: "",
-    href: "/media_content/attributes/labels/:id",
-    query: GET_ONE_LABEL,
-    dynamicParam: "id",
-  },
+  ...labelsLinks,
   //TV Channels
   {
     name: "TV Channels",
@@ -429,25 +244,5 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     name: "Edit override",
     href: "/media_content/tv/channels/channel_positions_overrides/:id",
     dynamicParam: "id",
-  },
-  //Channel versions
-  {
-    name: "Channel versions",
-    href: "/media_content/tv/channels/channels/:channelId/channel_versions",
-    query: GET_ONE_CHANNEL,
-    dynamicParam: "channelId",
-  },
-  {
-    name: "New channel version",
-    href: "/media_content/tv/channels/channels/:channelId/channel_versions/create",
-    query: GET_ONE_CHANNEL,
-    dynamicParam: "channelId",
-  },
-  {
-    name: "",
-    href: "/media_content/tv/channels/channels/:channelId/channel_versions/:id",
-    query: GET_ONE_CHANNEL_VERSION,
-    dynamicParam: "id",
-    secondDynamicParam: "channelId",
   },
 ];

@@ -10,7 +10,7 @@ import { Form } from "./form";
 import { attributesTabs } from "../constants";
 
 const resource = "media_content/attributes/genres";
-const initialSort = { field: "name", order: "ASC" };
+const initialSort = { field: "position", order: "ASC" };
 
 export const List: React.FC = (props) => (
   <ResourceList sort={initialSort} listTabs={attributesTabs} {...props} resource={resource}>

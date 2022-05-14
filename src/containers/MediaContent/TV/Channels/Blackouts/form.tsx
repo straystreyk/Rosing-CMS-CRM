@@ -5,6 +5,7 @@ import { AutocompleteInput } from "../../../../../components/Inputs/Autocomplete
 import {
   DateTimeInput,
   ReferenceInput,
+  requiredValidate,
   RichTextInput,
   TextInput,
 } from "../../../../../components/Inputs";
@@ -22,6 +23,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         source="channelVersionId"
         reference="media_content/tv/channels/channels/:channelId/channel_versions"
         resource={resource}
+        validate={requiredValidate}
         perPage={INPUT_ITEMS_PER_PAGE}
       >
         <AutocompleteInput
@@ -36,28 +38,36 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
       <DateTimeInput
         source="startAt"
         label="Starting"
+        resource={resource}
+        validate={requiredValidate}
         inputType={type}
         helperText="Date and time of the start of the restriction"
       />
       <DateTimeInput
         source="endAt"
         label="End at"
+        resource={resource}
+        validate={requiredValidate}
         inputType={type}
         helperText="DDate and time of the end of the current restriction"
       />
       <RadioButtonGroupInput
         source="catchupAvailable"
         label="Catchup available"
-        helperText="Ketch-up is not available during the restriction period"
+        helperText="Catchup is not available during the restriction period"
         choices={CATCHUP_AVAILABLE}
+        validate={requiredValidate}
         inputType={type}
+        resource={resource}
       />
       <RadioButtonGroupInput
         source="liveAvailable"
         label="Live available"
         helperText="During the period of the restriction, live streaming is not available"
         choices={LIVE_AVAILABLE}
+        validate={requiredValidate}
         inputType={type}
+        resource={resource}
       />
       <RichTextInput resource={resource} inputType={type} label="Message" source="message" />
       <ScrollTopButton />

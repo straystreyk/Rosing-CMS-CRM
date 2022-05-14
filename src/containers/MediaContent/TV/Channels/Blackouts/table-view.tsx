@@ -26,7 +26,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       {...props}
     >
       <FunctionField
-        label="Name"
+        label="id"
         source="id"
         render={(record?: RecordRA) => (
           <Link
@@ -42,6 +42,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         source="channelVersionId"
         emptyText={<span className={classes.Empty}>Empty</span>}
         reference="media_content/tv/channels/channels/:channelId/channel_versions"
+        linkType={false}
       >
         <TextField source="name" fullWidth />
       </ReferenceField>

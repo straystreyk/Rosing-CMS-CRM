@@ -1,5 +1,6 @@
 import * as React from "react";
-import { FunctionField, TextField } from "react-admin";
+import { FunctionField, SingleFieldList, TextField } from "react-admin";
+import { Link } from "react-router-dom";
 
 import { ShowProps } from "../../../../../types";
 import { DatagridList } from "../../../../../components/DatagridList";
@@ -11,7 +12,7 @@ import { Record as RecordRA } from "ra-core/esm/types";
 import { MoreActionsButton } from "../../../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../../components/UI/RA/delete-button";
-import { Link } from "react-router-dom";
+import { ReferenceArrayField } from "../../../../../components/TableFields/reference-array-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -34,14 +35,17 @@ export const TableView: React.FC<ShowProps> = (props) => {
           </Link>
         )}
       />
-      <ReferenceField
+      <ReferenceArrayField
         label="TV streams"
         source="streamSourceIds"
         reference="media_content/tv/channels/live_streams"
         emptyText={<span className={classes.Empty}>Empty</span>}
+        offsort
       >
-        <TextField source="name" fullWidth />
-      </ReferenceField>
+        <SingleFieldList linkType={false} component="span">
+          <TextField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
       <ReferenceField
         label="EPG source"
         source="epgSourceId"

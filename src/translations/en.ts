@@ -484,6 +484,20 @@ export const en: TranslationMessages = {
         list: "Television",
         show: "Blackout",
       },
+      mutations: {
+        create: {
+          success: "New blackout was created",
+          error: "Cant create blackout: %{error}",
+        },
+        edit: {
+          success: "Blackout was updated",
+          error: "Cant update blackout: %{error}",
+        },
+        list: {
+          success: "Blackout was successfully updated",
+          error: "Cant update blackout: %{error}",
+        },
+      },
     },
     "media_content/tv/channels/channel_positions_overrides": {
       name: "Overrides",

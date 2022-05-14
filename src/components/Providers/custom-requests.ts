@@ -208,6 +208,15 @@ export const GET_ONE_EXTERNAL_CATALOG = gql`
   }
 `;
 
+export const GET_ONE_RADIO_LIVE_STREAM = gql`
+  query RadioLiveStream($id: ID!) {
+    item: RadioLiveStream(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 export const ALL_DATACENTERS = gql`
   query {
     items: allDatacenters {

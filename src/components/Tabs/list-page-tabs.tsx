@@ -3,6 +3,7 @@ import { Box, makeStyles } from "@material-ui/core";
 import { Link } from "ra-ui-materialui";
 import cn from "classnames";
 import { useHistory } from "react-router-dom";
+import { scrollBarStyles } from "../Themes/main-styles";
 
 export interface ListTabProps {
   link: string;
@@ -20,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 24,
     paddingRight: 20,
     display: "flex",
+    overflow: "auto",
+    ...scrollBarStyles,
   },
   TabListLink: {
     paddingBottom: 10,
@@ -27,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     marginRight: 24,
     transition: "0.35s all ease",
+    flexShrink: 0,
     "&:hover": {
       color: "var(--accent-color-hover)",
       borderColor: "var(--accent-color-hover)",
@@ -53,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     marginRight: 12,
     paddingBottom: 4,
+    flexShrink: 0,
   },
   SubTabListLinkActive: {
     color: "var(--secondary-color-main)",

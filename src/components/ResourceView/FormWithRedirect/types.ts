@@ -16,6 +16,7 @@ export interface EditFormProps {
   offRedirectButton?: boolean;
   form: "create" | "edit" | "show" | "list";
   offTitle?: boolean;
+  basePath?: string;
 }
 
 export interface FormWithRedirectProps extends FormWithRedirectRenderPropsRA {

@@ -2,10 +2,12 @@ import React from "react";
 import { useTranslate } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
-import { TimeIcon } from "../../constants/icons";
+import { EditIcon, TimeIcon } from "../../constants/icons";
 import { Breadcrumbs } from "../Breadcrumbs/breadcrumbs";
 import { EditButton } from "../UI/RA/edit-button";
 import { DeleteButton } from "../UI/RA/delete-button";
+import { StandardButton } from "../UI/Buttons/standard-button";
+import { Link } from "react-router-dom";
 
 export type TitleProps = {
   name: string;
@@ -13,6 +15,7 @@ export type TitleProps = {
   id?: string;
   record?: any;
   breadCrumbsOn?: boolean;
+  basePath?: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -136,8 +139,16 @@ export const ResourceTitle: React.FC<TitleProps> = ({
                 {title ? title : translate(["resources", name, "titles", form].join("."))}
                 {form === "show" && (
                   <div className={classes.ButtonsShow}>
-                    <EditButton record={props.record} color="secondary" />
-                    <DeleteButton record={props.record} />
+                    <StandardButton
+                      variant="textWithBg"
+                      component={Link}
+                      customColor="var(--primary-button-default)"
+                      startIcon={<EditIcon color="var(--primary-button-default)" />}
+                      to={props.basePath + `/${props.record.id}`}
+                    >
+                      Edit
+                    </StandardButton>
+                    <DeleteButton redirect={props.basePath} record={props.record} />
                   </div>
                 )}
               </>
