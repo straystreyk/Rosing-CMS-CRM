@@ -505,6 +505,21 @@ export const en: TranslationMessages = {
         create: "New override",
         edit: "Edit override",
         list: "Television",
+        show: "Override",
+      },
+      mutations: {
+        create: {
+          success: "New override was created",
+          error: "Cant create override: %{error}",
+        },
+        edit: {
+          success: "Override was updated",
+          error: "Cant update override: %{error}",
+        },
+        list: {
+          success: "Override was successfully updated",
+          error: "Cant update override: %{error}",
+        },
       },
     },
     "media_content/attributes/providers/right_holders": {

@@ -44,8 +44,10 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
       <AutocompleteInput
         helperText="The geographical region in which the TV channel will be displayed in the general list of TV channels at the specified position"
         inputType={type}
+        label="Region"
         source="regionUid"
         choices={REGION_CHOICES}
+        resource={resource}
       />
       <NumberInput
         source="position"

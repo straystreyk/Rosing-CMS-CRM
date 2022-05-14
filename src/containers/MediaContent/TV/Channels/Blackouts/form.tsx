@@ -30,6 +30,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           optionText="name"
           optionValue="id"
           resource={resource}
+          source="channelVersionId"
           inputType={type}
           fullWidth
           helperText="The language of the sound track of the TV channel. You can select multiple languages from the list."
