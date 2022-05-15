@@ -33,6 +33,7 @@ import { LabelsVariables as labels } from "../MediaContent/Attributes/Labels";
 import { TVStreamsVariables as tvStreams } from "../MediaContent/TV/Channels/TV streams";
 import { ChannelPositionOverridesVariables as channelPositionOverrides } from "../MediaContent/TV/Channels/ChannelPositionOverrides";
 import { BlackoutsVariables as blackouts } from "../MediaContent/TV/Channels/Blackouts";
+import { EPGSourcesVariables as epgSources } from "../MediaContent/TV/TVShows/EPGSources";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -71,7 +72,18 @@ export const App = () => {
         {...channelPositionOverrides}
       />
       <Resource name="media_content/tv/channels/blackouts" {...blackouts} />
-      <Resource name="media_content/tv/tv_shows/epg_sources" />
+      <Resource
+        name="media_content/tv/tv_shows/epg_sources/epg_service"
+        {...epgSources.epgService}
+      />
+      <Resource
+        name="media_content/tv/tv_shows/epg_sources/spbtv_internal"
+        {...epgSources.spbtvInternal}
+      />
+      <Resource name="media_content/tv/tv_shows/epg_sources/xmltv_url" {...epgSources.xmltvUrl} />
+      <Resource name="media_content/tv/tv_shows/epg_sources/stv" {...epgSources.stv} />
+      <Resource name="media_content/tv/tv_shows/epg_sources/spb" {...epgSources.spb} />
+      <Resource name="media_content/tv/tv_shows/epg_sources" {...epgSources.initial} />
       <Resource name="datacenters" {...datacenters} />
       <Resource name="media_content/video/movies" {...movies} />
       <Resource name="media_content/video/video_files" {...videoFiles} />

@@ -168,6 +168,15 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           dense={dense}
         />
         <MenuItemLink
+          to={`/media_content/tv`}
+          primaryText={translate(`resources.media_content/tv/channels/channels.menu_name`, {
+            smart_count: 2,
+          })}
+          onClick={onMenuClick}
+          sidebarIsOpen={open}
+          dense={dense}
+        />
+        <MenuItemLink
           to={`/media_content/audio`}
           primaryText={translate("resources.media_content/audio/audio_shows.menu_name", {
             smart_count: 2,
@@ -190,15 +199,6 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         <MenuItemLink
           to={`/media_content/radio`}
           primaryText={translate(`resources.media_content/radio/radio_stations.menu_name`, {
-            smart_count: 2,
-          })}
-          onClick={onMenuClick}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/media_content/tv`}
-          primaryText={translate(`resources.media_content/tv/channels/channels.menu_name`, {
             smart_count: 2,
           })}
           onClick={onMenuClick}

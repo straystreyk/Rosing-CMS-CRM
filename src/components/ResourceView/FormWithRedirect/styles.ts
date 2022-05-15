@@ -47,5 +47,6 @@ export const ModelFormStyles = {
     lineHeight: "22px",
     fontWeight: 600,
     cursor: "pointer",
+    margin: "5px 0",
   },
 };

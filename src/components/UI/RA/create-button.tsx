@@ -8,6 +8,7 @@ import cn from "classnames";
 
 const useStyles = makeStyles({
   CreateButton: {
+    padding: "6px 20px",
     "& .MuiButton-label": {
       "& svg": {
         marginRight: 6,

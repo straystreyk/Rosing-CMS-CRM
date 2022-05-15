@@ -1,7 +1,4 @@
 import { DocumentNode } from "graphql";
-import { GET_ONE_VIDEO_FILE } from "../../containers/MediaContent/Video/VideoFiles/custom-requests";
-import { GET_ONE_SEASON_NAME } from "../../containers/MediaContent/Video/Seasons/requests";
-import { GET_ONE_EPISODE_NAME } from "../../containers/MediaContent/Video/Episodes/requests";
 import {
   GET_ONE_CHANNEL,
   GET_ONE_EXTERNAL_CATALOG,
@@ -24,6 +21,7 @@ import { channelVersionsLinks } from "../../containers/MediaContent/TV/Channels/
 import { labelsLinks } from "../../containers/MediaContent/Attributes/Labels/labels-links";
 import { episodesLinks } from "../../containers/MediaContent/Video/Episodes/episodes-links";
 import { videoFilesLinks } from "../../containers/MediaContent/Video/VideoFiles/video-files-links";
+import { epgSourceLinks } from "../../containers/MediaContent/TV/TVShows/EPGSources/epg-source-links";
 
 export type Breadcrumb = {
   name: string;
@@ -66,8 +64,12 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     href: "/media_content/tv",
   },
   {
-    name: "TV Channels",
+    name: "TV channels",
     href: "/media_content/tv/channels",
+  },
+  {
+    name: "TV shows",
+    href: "/media_content/tv/tv_shows",
   },
 
   //Movie
@@ -99,6 +101,9 @@ export const breadcrumbsLinks: Breadcrumb[] = [
 
   //Video files
   ...videoFilesLinks,
+
+  //EPG sources
+  ...epgSourceLinks,
 
   //Content Providers (External catalog)
   {

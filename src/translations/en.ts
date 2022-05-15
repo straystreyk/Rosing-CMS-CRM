@@ -522,6 +522,14 @@ export const en: TranslationMessages = {
         },
       },
     },
+    "media_content/tv/tv_shows/epg_sources": {
+      name: "EPG Sources",
+      titles: {
+        create: "New EPG source",
+        edit: "Edit EPG source",
+        list: "TV shows",
+      },
+    },
     "media_content/attributes/providers/right_holders": {
       name: "Right Holders",
       titles: {

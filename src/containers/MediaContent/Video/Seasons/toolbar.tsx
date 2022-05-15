@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource }) => {
+export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource, ...rest }) => {
   const { total } = useListContext();
   const history = useHistory();
   const classes = useStyles();
@@ -41,7 +41,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource }) => {
   return (
     <div className={classes.ToolBarWrapper}>
       <div className={classes.Title}>
-        <button onClick={() => history.goBack()}>
+        <button onClick={() => history.push("/" + resource.split("/:")[0])}>
           <BackArrowTitle color="var(--primary-text-default)" />
         </button>
         {translate(`resources.${resource}.name`)} (

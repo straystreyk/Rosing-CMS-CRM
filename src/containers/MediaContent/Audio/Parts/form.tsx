@@ -130,7 +130,7 @@ const Part: React.FC<{
         />
         <SwitchInput
           resource={resource}
-          label="Downloading a movie"
+          label="Downloading"
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.downloadable` : "downloadable"}
           helperText="Download and play the movie offline, available in the app for Android and iOS"
           inputType={inputType}

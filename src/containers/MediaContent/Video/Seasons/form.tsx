@@ -16,12 +16,14 @@ import { PUBLISHED_CHOICES_FORM } from "../../../../constants/forms-constants";
 import { MetaData } from "../../../../components/Models/Metadata";
 import { FormProps } from "../../../../types";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
+import { ModelFormStyles } from "../../../../components/ResourceView/FormWithRedirect/styles";
 
 const useStyles = makeStyles({
   ArrayInputItemStyles,
   ArrayInputWrapper: {
     marginTop: 15,
   },
+  ...ModelFormStyles,
 });
 
 const REVERSED_EPISODES_ORDER = [
@@ -40,6 +42,7 @@ const Season: React.FC<{
 }> = ({ parentSourceWithIndex, resource, parentSource, index, show, ...props }) => {
   const { seriesId } = useParams<{ seriesId: string }>();
   const [showResource, setShowResource] = React.useState(show);
+  const classes = useStyles();
 
   React.useEffect(() => {
     setShowResource(show);
@@ -47,7 +50,9 @@ const Season: React.FC<{
 
   return (
     <>
-      {index && !["edit", "show"].includes(props.type) && <div>New season number {+index + 1}</div>}
+      {index && !["edit", "show"].includes(props.type) && (
+        <div className={classes.ArrayInputItemName}>New season number {+index + 1}</div>
+      )}
       <div
         style={{
           height: !showResource && !["edit", "show"].includes(props.type) ? 0 : "auto",

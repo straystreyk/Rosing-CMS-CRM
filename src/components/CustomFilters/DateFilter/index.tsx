@@ -102,7 +102,7 @@ export const DateFilter: React.FC<StandardCustomFilterProps> = ({
         label={label}
       />
       <Menu
-        id="filter-menu"
+        id="date-filter-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
