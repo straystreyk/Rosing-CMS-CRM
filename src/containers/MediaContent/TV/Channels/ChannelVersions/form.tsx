@@ -67,7 +67,8 @@ const ChannelVersion: React.FC<{
     <>
       {index && !["edit", "show"].includes(type) && (
         <div className={classes.ArrayInputItemName} onClick={showArrayInputItem}>
-          New channel version {+index + 1} <ArrayInputItemArrow />
+          New channel version {+index + 1}{" "}
+          <ArrayInputItemArrow color="var(--secondary-color-main)" />
         </div>
       )}
       <div

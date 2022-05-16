@@ -171,6 +171,19 @@ export const Pagination = () => {
 
   return (
     <>
+      {/*<div>*/}
+      {/*  Displayed {ids.length} from {total}*/}
+      {/*  <div style={{ width: 200, backgroundColor: "red", height: 2, borderRadius: 5 }}>*/}
+      {/*    <div*/}
+      {/*      style={{*/}
+      {/*        height: 2,*/}
+      {/*        borderRadius: 5,*/}
+      {/*        backgroundColor: "green",*/}
+      {/*        width: (ids.length / total) * 200,*/}
+      {/*      }}*/}
+      {/*    ></div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       {nbPages > 1 && (
         <>
           <div className={classes.PaginationWrapper}>

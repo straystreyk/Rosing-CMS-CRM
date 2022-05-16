@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const ALL_COUNTRIES = gql`
-  query {
+  query allCountries {
     items: allCountries {
       alpha2
       name
@@ -10,7 +10,7 @@ export const ALL_COUNTRIES = gql`
 `;
 
 export const ALL_PRODUCTION_COUNTRIES = gql`
-  query {
+  query allProductionCountries {
     items: allProductionCountries {
       id
       name
@@ -19,7 +19,7 @@ export const ALL_PRODUCTION_COUNTRIES = gql`
 `;
 
 export const ALL_GENRES = gql`
-  query {
+  query allGenres {
     items: allGenres {
       id
       name
@@ -28,7 +28,7 @@ export const ALL_GENRES = gql`
 `;
 
 export const ALL_GENRES_FILTER = gql`
-  query {
+  query allGenres {
     items: allGenres {
       value
       name
@@ -37,7 +37,7 @@ export const ALL_GENRES_FILTER = gql`
 `;
 
 export const ALL_RATING_SYSTEMS = gql`
-  query {
+  query allRatingSystems {
     items: allRatingSystems {
       system
       tags
@@ -154,7 +154,7 @@ export const STATIC_PARAM = gql`
 `;
 
 export const ALL_ROLES = gql`
-  query {
+  query allRoles {
     items: allRoles {
       roleName
     }
@@ -162,7 +162,7 @@ export const ALL_ROLES = gql`
 `;
 
 export const ALL_PEOPLE = gql`
-  query {
+  query allPeople {
     items: allPeople {
       fullName
       kinopoiskId
@@ -173,7 +173,7 @@ export const ALL_PEOPLE = gql`
 `;
 
 export const ALL_RIGHT_HOLDERS = gql`
-  query {
+  query allRightHolders {
     items: allRightHolders {
       id
       name
@@ -218,7 +218,7 @@ export const GET_ONE_RADIO_LIVE_STREAM = gql`
 `;
 
 export const ALL_DATACENTERS = gql`
-  query {
+  query allDatacenters {
     items: allDatacenters {
       id
       name
@@ -228,7 +228,7 @@ export const ALL_DATACENTERS = gql`
 `;
 
 export const ALL_ALLOWED_DRMS = gql`
-  query {
+  query allDrms {
     items: allDrms {
       name
       id

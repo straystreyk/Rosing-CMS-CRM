@@ -1437,11 +1437,11 @@ export const DNDIcon = () => (
   </svg>
 );
 
-export const ArrayInputItemArrow = () => (
+export const ArrayInputItemArrow = ({ color }: IconProps) => (
   <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M6.61524 0.691913L3.99894 3.30821L1.38281 0.691895"
-      stroke="var(--secondary-color-main)"
+      stroke={color}
       strokeWidth="1.3"
       strokeLinecap="round"
     />

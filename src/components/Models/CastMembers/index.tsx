@@ -2,11 +2,12 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 
-import { ReferenceInput, SelectInput, TextInput } from "../../Inputs";
+import { ReferenceInput, TextInput } from "../../Inputs";
 import { ImageUploaderV2 } from "../../ImageUploader";
 import { TextInputOrigin } from "../../Inputs/StandatdInputs/TextInput/text-input";
 import { NumberInputOrigin } from "../../Inputs/StandatdInputs/NumberInput/numdber-input";
 import { ArrayInputItemArrow } from "../../../constants/icons";
+import { AutocompleteInput } from "../../Inputs/AutocompleteInput";
 
 const useStyles = makeStyles({
   CastMemberImagesWrapper: {
@@ -66,7 +67,7 @@ export const CastMembers: React.FC<{
       <div className={classes.CastMemberName} onClick={showCastMember}>
         {name}
         <button>
-          <ArrayInputItemArrow />
+          <ArrayInputItemArrow color="var(--secondary-color-main)" />
         </button>
       </div>
       <div
@@ -88,9 +89,9 @@ export const CastMembers: React.FC<{
           reference="media_content/attributes/people"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
+          allowEmpty
         >
-          <SelectInput
-            onChange={() => console.log("sads")}
+          <AutocompleteInput
             resource={resource}
             optionText="fullName"
             inputType="create"

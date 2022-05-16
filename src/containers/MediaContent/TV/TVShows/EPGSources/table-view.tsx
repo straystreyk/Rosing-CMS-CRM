@@ -10,7 +10,7 @@ import { DatagridList } from "../../../../../components/DatagridList";
 import { EmptyTablePage } from "../../../../../components/EmptyTablePage";
 import { TableFieldsStyles } from "../../../../../components/TableFields/styles";
 import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
-import { PlusIcon } from "../../../../../constants/icons";
+import { ArrayInputItemArrow, PlusIcon } from "../../../../../constants/icons";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -35,6 +35,10 @@ const EPG_SOURCE_LINKS = [
     name: "XMLTV URL",
     href: "/media_content/tv/tv_shows/epg_sources/xmltv_url/create",
   },
+  {
+    name: "Pixellot",
+    href: "/media_content/tv/tv_shows/epg_sources/pixellot/create",
+  },
 ];
 
 const Toolbar = () => {
@@ -56,6 +60,7 @@ const Toolbar = () => {
         color="primary"
         onClick={handleClick}
         startIcon={<PlusIcon color="#fff" />}
+        endIcon={<ArrayInputItemArrow color="#fff" />}
       >
         Create EPG source
       </StandardButton>

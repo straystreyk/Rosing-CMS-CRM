@@ -91,7 +91,8 @@ const Episode: React.FC<{
       <>
         {index && !["edit", "show"].includes(inputType) && (
           <div className={classes.ArrayInputItemName} onClick={showArrayInputItem}>
-            New episode number {+index + 1} <ArrayInputItemArrow />
+            New episode number {+index + 1}
+            <ArrayInputItemArrow color="var(--secondary-color-main)" />
           </div>
         )}
         <div
