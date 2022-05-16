@@ -7,13 +7,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   return (
     <>
       {type !== "create" && <TextInput label="ID" source="id" inputType={type} fullWidth />}
-      <TextInput
-        initialValue="spbtvInternal"
-        label="Type"
-        source="type"
-        inputType={type}
-        fullWidth
-      />
+      <TextInput initialValue="Spbtv" label="Type" source="type" inputType={type} fullWidth />
       <ScrollTopButton />
     </>
   );

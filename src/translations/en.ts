@@ -529,6 +529,20 @@ export const en: TranslationMessages = {
         edit: "Edit EPG source",
         list: "TV shows",
       },
+      mutations: {
+        create: {
+          success: 'New EPG source "%{name}" was created',
+          error: "Cant create EPG source: %{error}",
+        },
+        edit: {
+          success: "EPG source was updated",
+          error: "Cant update EPG source: %{error}",
+        },
+        list: {
+          success: 'EPG source "%{name}" was successfully updated',
+          error: "Cant update EPG source: %{error}",
+        },
+      },
     },
     "media_content/attributes/providers/right_holders": {
       name: "Right Holders",

@@ -9,7 +9,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
       {type !== "create" && <TextInput label="ID" source="id" inputType={type} fullWidth />}
       <TextInput
         style={{ display: "none" }}
-        initialValue="STV"
+        initialValue="Stv"
         label="Type"
         source="type"
         inputType={type}
