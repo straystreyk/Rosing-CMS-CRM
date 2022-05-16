@@ -64,6 +64,7 @@ const useStyles = makeStyles({
     "& button": {
       color: "var(--primary-text-default)",
       fontWeight: 600,
+      textAlign: "left",
       fontSize: 14,
     },
     "&.active button": {
@@ -307,6 +308,7 @@ export const DatagridList: React.FC<CustomDatagridProps> = ({
   listText,
   offDescription,
   toolbar,
+  datagridWrapperClassName,
   ...props
 }) => (
   <DatagridWrapper
@@ -316,6 +318,7 @@ export const DatagridList: React.FC<CustomDatagridProps> = ({
     offDescription={offDescription}
     filters={props.filters}
     listText={listText}
+    datagridWrapperClassName={datagridWrapperClassName}
   >
     <BulkActions />
     <Datagrid

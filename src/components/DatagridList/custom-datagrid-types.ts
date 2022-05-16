@@ -15,4 +15,5 @@ export interface CustomDatagridProps extends DatagridProps {
   toolbar?: FC<ToolbarProps>;
   listText?: string;
   offDescription?: boolean;
+  datagridWrapperClassName?: string;
 }

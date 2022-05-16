@@ -141,7 +141,7 @@ export const EditInputComponent: React.FC<any> = ({
         </div>
       ) : (
         <>
-          {props.source !== "slug" && (
+          {props.source !== "slug" && !props.offFastEdit ? (
             <Tooltip title="Fast edit" placement="left" arrow>
               <div
                 className={cn(classes.ShowEditButton, "ShowEditButton")}
@@ -150,7 +150,7 @@ export const EditInputComponent: React.FC<any> = ({
                 <EditIcon color="var(--secondary-color-default)" />
               </div>
             </Tooltip>
-          )}
+          ) : null}
         </>
       )}
     </div>

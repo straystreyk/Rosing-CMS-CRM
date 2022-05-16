@@ -80,6 +80,8 @@ export const App = () => {
         name="media_content/tv/tv_shows/epg_sources/spbtv_internal"
         {...epgSources.spbtvInternal}
       />
+      <Resource name="media_content/tv/tv_shows/epg_sources/pixellot" {...epgSources.pixellot} />
+      <Resource name="media_content/tv/tv_shows/epg_sources/epg_local" {...epgSources.epgLocal} />
       <Resource name="media_content/tv/tv_shows/epg_sources/xmltv_url" {...epgSources.xmltvUrl} />
       <Resource name="media_content/tv/tv_shows/epg_sources/stv" {...epgSources.stv} />
       <Resource name="media_content/tv/tv_shows/epg_sources/spb" {...epgSources.spb} />

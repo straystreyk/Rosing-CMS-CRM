@@ -7,6 +7,10 @@ import { TextInputStyles } from "./styles";
 
 const useStyles = makeStyles({ TextInputStyles });
 
+interface TextInputProps extends InputProps {
+  offFastEdit?: boolean;
+}
+
 export const TextInputOrigin: React.FC<InputProps> = ({ inputType, ...props }) => {
   const classes = useStyles();
 
@@ -24,10 +28,12 @@ export const TextInputOrigin: React.FC<InputProps> = ({ inputType, ...props }) =
   );
 };
 
-export const TextInput: React.FC<InputProps> = React.memo(({ inputType, ...rest }) => {
-  return inputType === "show" ? (
-    <TextInputShow {...rest} />
-  ) : (
-    <TextInputOrigin inputType={inputType} {...rest} />
-  );
-});
+export const TextInput: React.FC<TextInputProps> = React.memo(
+  ({ inputType, offFastEdit, ...rest }) => {
+    return inputType === "show" ? (
+      <TextInputShow offFastEdit={offFastEdit} {...rest} />
+    ) : (
+      <TextInputOrigin inputType={inputType} {...rest} />
+    );
+  }
+);

@@ -2,6 +2,16 @@ import { List } from "./epg-sources";
 import { Create as STVCreate, Show as STVShow, Edit as STVEdit } from "./STV/stv";
 import { Create as SPBCreate, Show as SPBShow, Edit as SPBEdit } from "./SPB/spb";
 import {
+  Create as EpgLocalCreate,
+  Show as EpgLocalShow,
+  Edit as EpgLocalEdit,
+} from "./EPGLocal/epg-local";
+import {
+  Create as PixellotCreate,
+  Show as PixellotShow,
+  Edit as PixellotEdit,
+} from "./Pixellot/pixellot";
+import {
   Create as EPGServiceCreate,
   Show as EPGServiceShow,
   Edit as EPGServiceEdit,
@@ -45,5 +55,15 @@ export const EPGSourcesVariables = {
     create: XMLTVUrlCreate,
     show: XMLTVUrlShow,
     edit: XMLTVUrlEdit,
+  },
+  pixellot: {
+    create: PixellotCreate,
+    show: PixellotShow,
+    edit: PixellotEdit,
+  },
+  epgLocal: {
+    create: EpgLocalCreate,
+    show: EpgLocalShow,
+    edit: EpgLocalEdit,
   },
 };

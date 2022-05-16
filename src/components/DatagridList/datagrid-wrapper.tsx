@@ -114,6 +114,7 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
   children,
   filters,
   offDescription,
+  datagridWrapperClassName,
   ...props
 }) => {
   const classes = useStyles();
@@ -147,7 +148,9 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
       )}
       <Filters filters={filters} />
       <PerPageCounter />
-      <div className={cn(classes.DataGridWrapper, open && "active")}>{children}</div>
+      <div className={cn(classes.DataGridWrapper, datagridWrapperClassName, open && "active")}>
+        {children}
+      </div>
       {loading && (
         <div className={classes.LoaderWrapper}>
           <MainLoader flex size={LOADER_SIZE} centered />

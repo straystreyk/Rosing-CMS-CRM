@@ -2,11 +2,14 @@ import * as React from "react";
 import { FormProps } from "../../../../../../types";
 import { ScrollTopButton } from "../../../../../../components/UI/Buttons/scroll-top-button";
 import { NumberInput, requiredValidate, TextInput } from "../../../../../../components/Inputs";
+import { ShowEpgInfo } from "../show-epg-info";
 
 export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   return (
     <>
-      {type !== "create" && <TextInput label="ID" source="id" inputType={type} fullWidth />}
+      {type !== "create" && (
+        <TextInput offFastEdit label="ID" source="id" inputType={type} fullWidth />
+      )}
       <TextInput
         style={{ display: "none" }}
         initialValue="Stv"
@@ -14,6 +17,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         source="type"
         inputType={type}
         fullWidth
+        offFastEdit
       />
       <TextInput
         resource={resource}
@@ -38,6 +42,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         inputType={type}
         helperText="EPG source import frequency in minutes. Min value 15 minutes max 1200 minutes. E.g. if value selected 15 that's means EPG source will be importing every 15 minutes"
       />
+      {type === "show" && <ShowEpgInfo inputType={type} />}
       <ScrollTopButton />
     </>
   );
