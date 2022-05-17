@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Create, useRedirect, useRefresh } from "react-admin";
+import { Create, useRedirect, useRefresh, Edit } from "react-admin";
 import { useNotify } from "ra-core";
 import { Box } from "@material-ui/core";
 import { EditForm } from "./FormWithRedirect";
@@ -15,6 +15,10 @@ interface CreateProps {
   redirectButtonIcon?: React.ReactElement;
   messageArgs?: Record<string, string>;
   offRedirectButton?: boolean;
+  hasCreate?: boolean;
+  hasEdit?: boolean;
+  hasShow?: boolean;
+  hasList?: boolean;
 }
 
 const SCROLL_TO_OPTS: ScrollToOptions = {
@@ -26,6 +30,10 @@ export const ResourceCreate: React.FC<CreateProps> = ({
   onSuccessWithRedirect,
   offRedirectButton,
   messageArgs,
+  hasCreate,
+  hasEdit,
+  hasShow,
+  hasList,
   ...props
 }) => {
   const notify = useNotify();

@@ -34,6 +34,7 @@ import { TVStreamsVariables as tvStreams } from "../MediaContent/TV/Channels/TV 
 import { ChannelPositionOverridesVariables as channelPositionOverrides } from "../MediaContent/TV/Channels/ChannelPositionOverrides";
 import { BlackoutsVariables as blackouts } from "../MediaContent/TV/Channels/Blackouts";
 import { EPGSourcesVariables as epgSources } from "../MediaContent/TV/TVShows/EPGSources";
+import { EPGLocalEventsVariables as epgLocalEvents } from "../MediaContent/TV/TVShows/EPGLocalEvents";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -61,6 +62,7 @@ export const App = () => {
       i18nProvider={i18nProvider}
     >
       <Resource name="admin_users" {...users} />
+      <Resource name="media_content/tv/tv_shows/epg_local_events" {...epgLocalEvents} />
       <Resource
         name="media_content/tv/channels/channels/:channelId/channel_versions"
         {...channelVersions}

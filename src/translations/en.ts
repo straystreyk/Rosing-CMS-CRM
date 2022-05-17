@@ -544,6 +544,28 @@ export const en: TranslationMessages = {
         },
       },
     },
+    "media_content/tv/tv_shows/epg_local_events": {
+      name: "TV show",
+      titles: {
+        create: "New TV show",
+        edit: "Edit TV show",
+        list: "TV shows",
+      },
+      mutations: {
+        create: {
+          success: 'New TV show "%{name}" was created',
+          error: "Cant create TV show: %{error}",
+        },
+        edit: {
+          success: "TV show was updated",
+          error: "Cant update TV show: %{error}",
+        },
+        list: {
+          success: 'TV show "%{name}" was successfully updated',
+          error: "Cant update TV show: %{error}",
+        },
+      },
+    },
     "media_content/attributes/providers/right_holders": {
       name: "Right Holders",
       titles: {

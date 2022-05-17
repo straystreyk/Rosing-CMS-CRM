@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Tab, Tabs, Theme, useMediaQuery } from "@material-ui/core";
+import { Box, Tab, Tabs } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import cn from "classnames";
 
@@ -19,6 +19,9 @@ const useStyles = makeStyles({
     paddingRight: 0,
     marginRight: 16,
     textTransform: "none",
+    "&:last-child": {
+      marginRight: 0,
+    },
   },
   FormTabWrapper: {
     borderBottom: "1px solid #E7E9E9",
@@ -39,7 +42,7 @@ const useFormTabs = ({
 }: {
   tabRef: React.RefObject<HTMLDivElement>;
   fixed: boolean;
-  setFixed: React.SetStateAction<any>;
+  setFixed: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const scrollToSection = (label: string) => {
     const element = document.getElementById(label);
@@ -99,13 +102,14 @@ export const FormTabs: React.FC<FormTabProps> = React.memo(({ labels, children }
   }, [tabRef, checkTabPosition]);
 
   return (
-    <div ref={tabRef} style={{ height: tabRef?.current?.offsetHeight }}>
+    <div ref={tabRef} style={{ height: tabRef?.current?.offsetHeight, flexGrow: 1 }}>
       <Box className={cn(fixed && classes.FixedTabsActive)}>
         <Tabs
           value={value}
           onChange={(e, newValue: number) => setValue(newValue)}
-          scrollButtons="auto"
           className={classes.FormTabWrapper}
+          variant="scrollable"
+          scrollButtons="auto"
         >
           {labels.map((label: string, index: number) => {
             return (
