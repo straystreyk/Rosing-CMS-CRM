@@ -3,12 +3,16 @@ import { makeStyles } from "@material-ui/core";
 
 import { Record as RecordRA } from "ra-core/esm/types";
 import { Link } from "react-router-dom";
-import { FunctionField } from "react-admin";
+import { FunctionField, TextField, DateField } from "react-admin";
 
 import { ShowProps } from "../../../../../types";
 import { DatagridList } from "../../../../../components/DatagridList";
 import { EmptyTablePage } from "../../../../../components/EmptyTablePage";
 import { TableFieldsStyles } from "../../../../../components/TableFields/styles";
+import { ReferenceField } from "../../../../../components/TableFields/reference-field";
+import { MoreActionsButton } from "../../../../../components/UI/Buttons/MoreActionsButton";
+import { EditButton } from "../../../../../components/UI/RA/edit-button";
+import { DeleteButton } from "../../../../../components/UI/RA/delete-button";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -29,6 +33,27 @@ export const TableView: React.FC<ShowProps> = (props) => {
           <Link className={classes.NameField} to={`${props.basePath}/${record?.id}/show`}>
             {record?.name}
           </Link>
+        )}
+      />
+      <ReferenceField
+        label="EPG source"
+        source="epgSourceId"
+        reference="media_content/tv/tv_shows/epg_sources"
+        emptyText={<span className={classes.Empty}>Empty</span>}
+      >
+        <TextField source="name" fullWidth />
+      </ReferenceField>
+      <DateField label="Start at" source="startAt" emptyText="Empty" />
+      <DateField label="End at" source="endAt" emptyText="Empty" />
+      <FunctionField
+        label=""
+        render={(record?: RecordRA) => (
+          <div className={classes.MoreActions}>
+            <MoreActionsButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          </div>
         )}
       />
     </DatagridList>

@@ -22,6 +22,7 @@ import { labelsLinks } from "../../containers/MediaContent/Attributes/Labels/lab
 import { episodesLinks } from "../../containers/MediaContent/Video/Episodes/episodes-links";
 import { videoFilesLinks } from "../../containers/MediaContent/Video/VideoFiles/video-files-links";
 import { epgSourceLinks } from "../../containers/MediaContent/TV/TVShows/EPGSources/epg-source-links";
+import { epgLocalEventsLinks } from "../../containers/MediaContent/TV/TVShows/EPGLocalEvents/epg-local-events-links";
 
 export type Breadcrumb = {
   name: string;
@@ -104,6 +105,9 @@ export const breadcrumbsLinks: Breadcrumb[] = [
 
   //EPG sources
   ...epgSourceLinks,
+
+  //EPG Local Source Links
+  ...epgLocalEventsLinks,
 
   //Content Providers (External catalog)
   {

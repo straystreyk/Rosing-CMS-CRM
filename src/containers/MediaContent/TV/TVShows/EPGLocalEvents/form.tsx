@@ -19,6 +19,17 @@ const IMAGE_REQUEST_VARS = { fieldName: "EpgLocalEvent" };
 export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   return (
     <>
+      {type === "show" && (
+        <TextInput
+          resource={resource}
+          validate={requiredValidate}
+          inputType={type}
+          label="ID"
+          source="id"
+          offFastEdit
+          fullWidth
+        />
+      )}
       <TextInput
         resource={resource}
         validate={requiredValidate}

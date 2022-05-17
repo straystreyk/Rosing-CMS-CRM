@@ -16,6 +16,7 @@ import { GET_ONE_NEWS, UPDATE_NEWS } from "../../../containers/MediaContent/News
 import { GET_EDIT_EXTERNAL_CATALOG } from "../../../containers/MediaContent/Attributes/Providers/ContentProviders/requests";
 import { GET_EDIT_STUDIO } from "../../../containers/MediaContent/Attributes/Providers/Studios/requests";
 import { GET_ONE_PERSON } from "../../../containers/MediaContent/Attributes/People/requests";
+import { GET_ONE_EPG_LOCAL_EVENT } from "../../../containers/MediaContent/TV/TVShows/EPGLocalEvents/request";
 
 export const customBuildQuery =
   (introspection: any) => (fetchType: string, resource: string, params: unknown) => {
@@ -64,6 +65,9 @@ export const customBuildQuery =
     }
     if (fetchType === "GET_ONE" && resource === "Person") {
       return { ...builtQuery, query: GET_ONE_PERSON };
+    }
+    if (fetchType === "GET_ONE" && resource === "EpgLocalEvent") {
+      return { ...builtQuery, query: GET_ONE_EPG_LOCAL_EVENT };
     }
 
     return builtQuery;
