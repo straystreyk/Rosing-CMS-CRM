@@ -20,12 +20,7 @@ import {
   PUBLISHED_CHOICES_FORM,
   SELECT_MARKERS,
 } from "../../../../constants/forms-constants";
-import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input";
-import {
-  ALL_GENRES,
-  ALL_PRODUCTION_COUNTRIES,
-  ALL_ROLES,
-} from "../../../../components/Providers/custom-requests";
+import { ALL_ROLES } from "../../../../components/Providers/custom-requests";
 import { GroupInputsOrigin } from "../../../../components/GroupInputs";
 import { MetaData } from "../../../../components/Models/Metadata";
 import { CastMembers } from "../../../../components/Models/CastMembers";

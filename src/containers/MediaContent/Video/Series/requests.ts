@@ -3,7 +3,9 @@ import { gql } from "@apollo/client";
 export const GET_ONE_SERIES = gql`
   query Series($id: ID!) {
     data: Series(id: $id) {
-      published
+      allowedApiClientIds
+      allowedCountries
+      announced
       castMembers {
         characterName
         createdAt
@@ -37,12 +39,18 @@ export const GET_ONE_SERIES = gql`
         tag
         __typename
       }
+      createdAt
       description
+      disallowedCountries
+      externalCatalogId
       extraVideos {
-        id
-        __typename
+        name
+        streamSourceId
+        kind
       }
+      forbiddenApiClientIds
       genreIds
+      hasSeason
       id
       imageIds
       images {
@@ -57,23 +65,21 @@ export const GET_ONE_SERIES = gql`
         width
         __typename
       }
+      imdbId
+      kinopoiskId
+      languageIds
       markers
-      createdAt
-      updatedAt
+      metadata
       name
       originalName
-      productionYear
+      position
       productionCountryIds
+      productionYear
+      published
       releaseDate
-      hasSeason
       rightHolder {
         id
         __typename
-      }
-      extraVideos {
-        name
-        streamSourceId
-        kind
       }
       rightHolderId
       seasons {
@@ -82,6 +88,8 @@ export const GET_ONE_SERIES = gql`
       }
       slogan
       slug
+      studioIds
+      updatedAt
       __typename
     }
   }
@@ -125,124 +133,156 @@ export const GET_ONE_SERIES_NAME = gql`
   }
 `;
 
-// export const UPDATE_SERIES = gql`
-//   mutation updateSeries(
-//     $name: String!
-//     $slug: String
-//     $originalName: String
-//     $description: String
-//     $slogan: String
-//     $published: Boolean
-//     $markers: [String!]
-//     $hasSeason: Boolean
-//     $genreIds: [String!]
-//     $certificationRatings: [CertificationRatingInput!]
-//     $imageIds: [ID!]
-//     $castMembers: [CastMemberInput!]
-//     $extraVideos: [ExtraVideoInput!]
-//     $id: ID!
-//   ) {
-//     data: updateSeries(
-//       name: $name
-//       slug: $slug
-//       originalName: $originalName
-//       description: $description
-//       slogan: $slogan
-//       published: $published
-//       markers: $markers
-//       hasSeason: $hasSeason
-//       genreIds: $genreIds
-//       certificationRatings: $certificationRatings
-//       imageIds: $imageIds
-//       castMembers: $castMembers
-//       extraVideos: $extraVideos
-//       id: $id
-//     ) {
-//       allowedApiClientIds
-//       allowedCountries
-//       castMembers {
-//         characterName
-//         createdAt
-//         id
-//         person {
-//           id
-//           fullName
-//           kinopoiskId
-//           imdbId
-//           images {
-//             createdAt
-//             file
-//             height
-//             id
-//             kind
-//             originalUrl
-//             updatedAt
-//             width
-//             __typename
-//           }
-//           __typename
-//         }
-//         position
-//         role
-//         updatedAt
-//         __typename
-//       }
-//       certificationRatings {
-//         id
-//         system
-//         tag
-//         __typename
-//       }
-//       createdAt
-//       description
-//       disallowedCountries
-//       externalCatalogId
-//       extraVideos {
-//         id
-//         __typename
-//       }
-//       forbiddenApiClientIds
-//       genreIds
-//       hasSeason
-//       id
-//       imageIds
-//       images {
-//         createdAt
-//         file
-//         height
-//         id
-//         kind
-//         originalUrl
-//         size
-//         updatedAt
-//         width
-//         __typename
-//       }
-//       imdbId
-//       kinopoiskId
-//       languageIds
-//       markers
-//       name
-//       originalName
-//       position
-//       productionCountryIds
-//       productionYear
-//       published
-//       releaseDate
-//       rightHolder {
-//         id
-//         __typename
-//       }
-//       rightHolderId
-//       seasons {
-//         id
-//         __typename
-//       }
-//       slogan
-//       slug
-//       studioIds
-//       updatedAt
-//       __typename
-//     }
-//   }
-// `;
+export const UPDATE_SERIES = gql`
+  mutation updateSeries(
+    $name: String!
+    $slug: String
+    $originalName: String
+    $description: String
+    $slogan: String
+    $position: Int
+    $published: Boolean
+    $announced: Boolean
+    $productionYear: Int
+    $markers: [String!]
+    $studioIds: [String!]
+    $languageIds: [ID!]
+    $hasSeason: Boolean
+    $imdbId: Int
+    $kinopoiskId: Int
+    $productionCountryIds: [ID!]
+    $genreIds: [String!]
+    $rightHolderId: ID
+    $releaseDate: DateTime
+    $certificationRatings: [CertificationRatingInput!]
+    $imageIds: [ID!]
+    $allowedCountries: [String!]
+    $disallowedCountries: [String!]
+    $allowedApiClientIds: [String!]
+    $forbiddenApiClientIds: [String!]
+    $metadata: [JSON!]
+    $castMembers: [CastMemberInput!]
+    $extraVideos: [ExtraVideoInput!]
+    $id: ID!
+  ) {
+    data: updateSeries(
+      name: $name
+      slug: $slug
+      originalName: $originalName
+      description: $description
+      slogan: $slogan
+      position: $position
+      published: $published
+      announced: $announced
+      productionYear: $productionYear
+      markers: $markers
+      studioIds: $studioIds
+      languageIds: $languageIds
+      hasSeason: $hasSeason
+      imdbId: $imdbId
+      kinopoiskId: $kinopoiskId
+      productionCountryIds: $productionCountryIds
+      genreIds: $genreIds
+      rightHolderId: $rightHolderId
+      releaseDate: $releaseDate
+      certificationRatings: $certificationRatings
+      imageIds: $imageIds
+      allowedCountries: $allowedCountries
+      disallowedCountries: $disallowedCountries
+      allowedApiClientIds: $allowedApiClientIds
+      forbiddenApiClientIds: $forbiddenApiClientIds
+      metadata: $metadata
+      castMembers: $castMembers
+      extraVideos: $extraVideos
+      id: $id
+    ) {
+      allowedApiClientIds
+      allowedCountries
+      announced
+      castMembers {
+        characterName
+        createdAt
+        id
+        person {
+          id
+          fullName
+          kinopoiskId
+          imdbId
+          images {
+            createdAt
+            file
+            height
+            id
+            kind
+            originalUrl
+            updatedAt
+            width
+            __typename
+          }
+          __typename
+        }
+        position
+        role
+        updatedAt
+        __typename
+      }
+      certificationRatings {
+        id
+        system
+        tag
+        __typename
+      }
+      createdAt
+      description
+      disallowedCountries
+      externalCatalogId
+      extraVideos {
+        name
+        streamSourceId
+        kind
+      }
+      forbiddenApiClientIds
+      genreIds
+      hasSeason
+      id
+      imageIds
+      images {
+        createdAt
+        file
+        height
+        id
+        kind
+        originalUrl
+        updatedAt
+        width
+        __typename
+      }
+      imdbId
+      kinopoiskId
+      languageIds
+      markers
+      metadata
+      name
+      originalName
+      position
+      productionCountryIds
+      productionYear
+      published
+      releaseDate
+      rightHolder {
+        id
+        __typename
+      }
+      rightHolderId
+      seasons {
+        id
+        __typename
+      }
+      slogan
+      slug
+      studioIds
+      updatedAt
+      __typename
+    }
+  }
+`;

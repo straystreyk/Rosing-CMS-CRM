@@ -187,6 +187,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           helperText="Specified in hours and minutes. If you leave the field empty, the duration will be filled in automatically after saving, provided that the video file is specified."
           label="Duration"
           source="duration"
+          initialValue={0}
           step="1"
           type="time"
           fullWidth

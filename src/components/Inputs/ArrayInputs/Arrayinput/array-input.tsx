@@ -59,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputTopButtons: {
     display: "flex",
     justifyContent: "flex-end",
+    "& + div": {
+      width: "100%",
+    },
   },
   ArrayInputButtonsWrapper: {
     display: "flex",

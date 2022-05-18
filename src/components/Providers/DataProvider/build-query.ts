@@ -9,6 +9,7 @@ import { GET_ONE_CHANNEL_EDIT } from "../../../containers/MediaContent/TV/Channe
 import {
   GET_ALL_SERIES,
   GET_ONE_SERIES,
+  UPDATE_SERIES,
 } from "../../../containers/MediaContent/Video/Series/requests";
 import { GET_ALL_VIDEO_FILES } from "../../../containers/MediaContent/Video/VideoFiles/custom-requests";
 import { GET_ONE_AUDIO_SHOW } from "../../../containers/MediaContent/Audio/AudioShows/requests";
@@ -44,9 +45,9 @@ export const customBuildQuery =
     if (fetchType === "GET_LIST" && resource === "VideoFile") {
       return { ...builtQuery, query: GET_ALL_VIDEO_FILES };
     }
-    // if (fetchType === "GET_ONE" && resource === "Series") {
-    //   return { ...builtQuery, query: GET_ONE_SERIES };
-    // }
+    if (fetchType === "GET_ONE" && resource === "Series") {
+      return { ...builtQuery, query: GET_ONE_SERIES };
+    }
     if (fetchType === "GET_ONE" && resource === "AudioShow") {
       return { ...builtQuery, query: GET_ONE_AUDIO_SHOW };
     }

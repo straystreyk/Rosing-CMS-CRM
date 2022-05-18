@@ -9,6 +9,7 @@ import { labelStyles } from "../styles";
 import {
   GET_ONE_CHANNEL_VERSION,
   GET_ONE_LANGUAGE,
+  GET_ONE_RIGHT_HOLDER,
   GET_ONE_VIDEO_FILE,
 } from "../../Providers/custom-requests";
 import { Resource } from "../StandatdInputs/SelectInput/show-view";
@@ -47,6 +48,12 @@ const ShowView: React.FC<InputProps> = (props: InputProps) => {
       case "channelVersionId":
         return values[props.source] ? (
           <Resource query={GET_ONE_CHANNEL_VERSION} resourceId={values[props.source]} />
+        ) : (
+          <div className="empty">Not filled in</div>
+        );
+      case "rightHolderId":
+        return values[props.source] ? (
+          <Resource query={GET_ONE_RIGHT_HOLDER} resourceId={values[props.source]} />
         ) : (
           <div className="empty">Not filled in</div>
         );
