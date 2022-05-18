@@ -2,6 +2,8 @@ import * as React from "react";
 import { SelectInputOrigin } from "../../Inputs/StandatdInputs/SelectInput/select-input";
 import { TextInputOrigin } from "../../Inputs/StandatdInputs/TextInput/text-input";
 import { AutocompleteArrayInput, ReferenceInput, requiredValidate } from "../../Inputs";
+import { ReferenceArrayInput } from "../../Inputs/ReferenceInputs/reference-array-input";
+import { AutocompleteInput } from "../../Inputs/AutocompleteInput";
 
 const INPUT_ITEMS_PER_PAGE = 25;
 
@@ -29,12 +31,13 @@ export const ExtraVideos: React.FC<{
       />
       <ReferenceInput
         label="Video file"
-        source={`${parentSourceWithIndex}.streamSourceIds`}
+        source={`${parentSourceWithIndex}.streamSourceId`}
         reference="media_content/video/video_files"
         resource={resource}
         perPage={INPUT_ITEMS_PER_PAGE}
+        allowEmpty
       >
-        <AutocompleteArrayInput
+        <AutocompleteInput
           optionText="name"
           validate={requiredValidate}
           inputType={inputType}

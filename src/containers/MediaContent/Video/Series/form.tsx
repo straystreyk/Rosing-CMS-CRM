@@ -7,6 +7,7 @@ import {
   AutocompleteArrayInput,
   getYearsChoices,
   NumberInput,
+  ReferenceInput,
   requiredValidate,
   RichTextInput,
   SelectInput,
@@ -23,7 +24,6 @@ import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInp
 import {
   ALL_GENRES,
   ALL_PRODUCTION_COUNTRIES,
-  ALL_RIGHT_HOLDERS,
   ALL_ROLES,
 } from "../../../../components/Providers/custom-requests";
 import { GroupInputsOrigin } from "../../../../components/GroupInputs";
@@ -43,7 +43,8 @@ import { ResourceCountIcon } from "../../../../constants/icons";
 import { useHistory } from "react-router-dom";
 import { Checkbox } from "../../../../components/Inputs/Checkbox";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
-import { PUBLISHED_CHOICES } from "../../../../components/CustomFilters/constants";
+import { AutocompleteInput } from "../../../../components/Inputs/AutocompleteInput";
+import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FIXED_HEADER_OFFSET = 130;
 const IMAGE_REQUEST_VARS = { fieldName: "Series" };
+const INPUT_ITEMS_PER_PAGE = 25;
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const classes = useStyles();
@@ -151,36 +153,51 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           type="date"
           fullWidth
         />
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
-          inputType={type}
-          resource={resource}
-          query={ALL_GENRES}
-          helperText="You can select several genres from the list"
-          source="genreIds"
+        <ReferenceArrayInput
           label="Genres"
-          idName="id"
-        />
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
-          inputType={type}
-          query={ALL_PRODUCTION_COUNTRIES}
+          source="genreIds"
+          reference="media_content/attributes/genres"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            optionValue="id"
+            resource={resource}
+            inputType={type}
+            helperText="You can select several genres from the list"
+          />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput
           label="Production countries"
           source="productionCountryIds"
-          helperText="You can select several countries from the list"
+          reference="production_countries"
           resource={resource}
-          idName="id"
-        />
-        <ReferenceCustomInput
-          component={SelectInput}
-          query={ALL_RIGHT_HOLDERS}
-          inputType={type}
-          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            optionValue="id"
+            resource={resource}
+            inputType={type}
+            helperText="You can select several countries from the list"
+          />
+        </ReferenceArrayInput>
+        <ReferenceInput
           label="Right Holder"
           source="rightHolderId"
-          idName="id"
-          helperText="The company - the copyright holder of the film"
-        />
+          reference="media_content/attributes/providers/right_holders"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+          allowEmpty
+        >
+          <AutocompleteInput
+            resource={resource}
+            inputType={type}
+            fullWidth
+            helperText="The company - the copyright holder of the film"
+          />
+        </ReferenceInput>
         <GroupInputsOrigin inputType={type} label="ID in the cinema database">
           <NumberInput
             resource={resource}

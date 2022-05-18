@@ -41,6 +41,7 @@ export const GET_ONE_MOVIE = gql`
       genreIds
       externalCatalogId
       id
+      imageIds
       images {
         createdAt
         file

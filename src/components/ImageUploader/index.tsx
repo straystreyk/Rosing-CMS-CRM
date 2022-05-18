@@ -206,6 +206,7 @@ interface ImageItemProps extends ImageProps {
   source: string;
   serverImages: ImageProps[];
   requestVariables: Record<string, string>;
+  sourceIds: string;
 }
 
 const ImageItem: React.FC<ImageItemProps> = React.memo(
@@ -222,6 +223,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
     size,
     serverImages,
     edit,
+    sourceIds,
   }) => {
     const classes = useStyles();
     const [imageType, setImageType] = React.useState(kind);
@@ -247,6 +249,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
       setImageIds,
       setServerImages,
       setImageSize,
+      sourceIds,
     });
 
     React.useEffect(
@@ -289,6 +292,9 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
       e.preventDefault();
       setShowSlider(true);
     };
+
+    console.log(id, "id");
+    console.log(imageId, "imageId");
 
     return (
       <div className={cn(classes.ImageItemWrapper, "ImageItemWrapper")}>
@@ -395,7 +401,7 @@ export const ImageUploaderV2: React.FC<{
     const [mutate, { loading, error, data }] = useMutation();
     const [edit, setEdit] = React.useState(inputType !== "show");
     const [showSlider, setShowSlider] = React.useState(false);
-    const [initialValue] = React.useState(values[source]);
+    const [initialValue, setInitialValue] = React.useState(values[source]);
 
     let allImages: ImageProps[] | [];
     const getAllImages = React.useCallback(() => {
@@ -413,6 +419,7 @@ export const ImageUploaderV2: React.FC<{
     const [serverImages, setServerImages] = React.useState<ImageProps[] | []>(
       allImages && allImages.length ? allImages : []
     );
+
     const [imageIds, setImageIds] = React.useState<string[] | []>(
       allImages && allImages.filter(Boolean).length ? allImages.map((el: ImageProps) => el.id) : []
     );
@@ -425,9 +432,10 @@ export const ImageUploaderV2: React.FC<{
       });
     }, [resource, sourceIds, mutate, values]);
 
-    const size = serverImages.length
-      ? (_.sumBy(serverImages, (image) => (image.size ? image.size : 0)) / 1024 / 1024).toFixed(2)
-      : "0.00";
+    const size =
+      serverImages && serverImages.length
+        ? (_.sumBy(serverImages, (image) => (image.size ? image.size : 0)) / 1024 / 1024).toFixed(2)
+        : "0.00";
 
     const pushResource = React.useCallback(
       (kind: string, prettyName: string) => {
@@ -436,7 +444,7 @@ export const ImageUploaderV2: React.FC<{
           { name: prettyName, kind: kind, index: serverImages.length },
         ]);
       },
-      [serverImages.length, setServerImages]
+      [serverImages, setServerImages]
     );
 
     const cancel = React.useCallback(() => {
@@ -445,8 +453,10 @@ export const ImageUploaderV2: React.FC<{
     }, [initialValue]);
 
     React.useEffect(() => {
-      form.change(sourceIds, imageIds);
-    }, [form, imageIds, sourceIds]);
+      if (initialValue !== values[source]) {
+        setInitialValue(values[source]);
+      }
+    }, [values, initialValue, source]);
 
     React.useEffect(() => {
       if (allImages && allImages.length) {
@@ -454,6 +464,12 @@ export const ImageUploaderV2: React.FC<{
         setServerImages(allImages);
       }
     }, [values[source]]);
+
+    React.useEffect(() => {
+      if (allImages) {
+        setImageIds(allImages.map((el: ImageProps) => el.id));
+      }
+    }, [allImages]);
 
     React.useEffect(() => {
       setServerImages((p: ImageProps[]) =>
@@ -535,6 +551,7 @@ export const ImageUploaderV2: React.FC<{
                     source={source}
                     inputType={inputType}
                     index={index}
+                    sourceIds={sourceIds}
                     key={index}
                     edit={edit}
                     requestVariables={requestVariables}

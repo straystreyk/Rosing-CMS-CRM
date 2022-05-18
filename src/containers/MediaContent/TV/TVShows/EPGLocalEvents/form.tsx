@@ -44,6 +44,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         reference="media_content/tv/tv_shows/epg_sources"
         resource={resource}
         perPage={INPUT_ITEMS_PER_PAGE}
+        validate={requiredValidate}
         allowEmpty
       >
         <AutocompleteInput
@@ -51,7 +52,6 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           optionValue="id"
           resource={resource}
           inputType={type}
-          validate={requiredValidate}
           fullWidth
           helperText="If the EPG source is not in the list, you can add it manually in the EPG Sources section or by clicking the button below. It is necessary to know in advance the UID of the TV channel provided by the EPG provider."
         />

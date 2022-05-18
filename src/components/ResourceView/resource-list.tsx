@@ -6,7 +6,6 @@ import { Box } from "@material-ui/core";
 import { ResourceTitle } from "./resource-title";
 import { ListPageTabs } from "../Tabs/list-page-tabs";
 import { EditForm } from "./FormWithRedirect";
-import { Pagination } from "../Pagination";
 import { ResourcesListProps } from "./resources-types";
 import { ReactElement } from "react";
 

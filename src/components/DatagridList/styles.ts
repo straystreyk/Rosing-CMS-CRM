@@ -1,6 +1,7 @@
 import { Styles } from "@material-ui/core/styles/withStyles";
 import { scrollBarStyles } from "../Themes/main-styles";
 import { Theme } from "@material-ui/core";
+import { TopToolBar } from "../../constants/style-constants";
 
 export const DatagridStyles: Styles<Theme, {}, string> = {
   List: {
@@ -64,24 +65,5 @@ export const DatagridStyles: Styles<Theme, {}, string> = {
       fontWeight: 600,
     },
   },
-  TopToolBar: {
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "flex-end",
-    "& button": {
-      marginLeft: 10,
-    },
-    "@media (max-width: 599px)": {
-      position: "fixed",
-      bottom: 0,
-      right: 0,
-      left: 0,
-      display: "flex",
-      justifyContent: "center",
-      padding: 10,
-      backgroundColor: "#fff",
-      boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.1)",
-      zIndex: 1,
-    },
-  },
+  TopToolBar,
 };

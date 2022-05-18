@@ -6,12 +6,17 @@ import { ArrayInputItemArrow, PlusIcon } from "../../../../../constants/icons";
 import { Menu, MenuItem } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { MainLoader } from "../../../../../components/MainLoader";
+import { TopToolBar } from "../../../../../constants/style-constants";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({ TopToolBar });
 
 export const EPGSourceToolbar = React.memo(() => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [data, setData] = React.useState<{ href: string; type: string; name: string }[] | null>(
     null
   );
+  const classes = useStyles();
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -47,7 +52,7 @@ export const EPGSourceToolbar = React.memo(() => {
   }, []);
 
   return (
-    <div>
+    <div className={classes.TopToolBar}>
       <StandardButton
         variant="contained"
         color="primary"

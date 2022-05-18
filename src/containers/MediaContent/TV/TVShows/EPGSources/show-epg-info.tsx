@@ -3,6 +3,7 @@ import { useFormState } from "react-final-form";
 import { makeStyles } from "@material-ui/core";
 import { GroupInputsOrigin } from "../../../../../components/GroupInputs";
 import { labelStyles } from "../../../../../components/Inputs/styles";
+import { ReactNode } from "react";
 
 const useStyles = makeStyles({
   Label: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ShowInput: React.FC<{ label: string; value: string }> = ({ label, value }) => {
+const ShowInput: React.FC<{ label: string; value: string | ReactNode }> = ({ label, value }) => {
   const classes = useStyles();
 
   return (
@@ -37,14 +38,16 @@ const ShowInput: React.FC<{ label: string; value: string }> = ({ label, value })
 
 export const ShowEpgInfo: React.FC<{ inputType: "create" | "edit" | "show" }> = ({ inputType }) => {
   const { values } = useFormState();
-  const classes = useStyles();
 
   if (inputType !== "show") return null;
 
   return (
     <>
       <GroupInputsOrigin label="Result of the last import" inputType="show">
-        <ShowInput label="Import status" value={values.importStatus} />
+        <ShowInput
+          label="Import status"
+          value={values.importStatus ?? <span>Not filled in</span>}
+        />
         <ShowInput
           label="Events in the TV program"
           value={`For the week: ${values.countCurrentWeekProgramEvents}/ Total: 

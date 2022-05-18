@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useForm } from "react-final-form";
 
 export const useImageItem = ({
   imageType,
@@ -7,6 +8,7 @@ export const useImageItem = ({
   setImageIds,
   setServerImages,
   setImageSize,
+  sourceIds,
 }: {
   imageType: string;
   id: string;
@@ -14,7 +16,9 @@ export const useImageItem = ({
   setImageIds: any;
   setServerImages: any;
   setImageSize: any;
+  sourceIds: string;
 }) => {
+  const form = useForm();
   const [isLoading, setIsLoading] = React.useState(false);
   const [imageId, setImageId] = React.useState(id ?? "");
   const [url, setUrl] = React.useState(file ?? "");
@@ -22,6 +26,10 @@ export const useImageItem = ({
   React.useEffect(() => {
     setUrl(file);
   }, [file]);
+
+  React.useEffect(() => {
+    setImageId(id);
+  }, [id]);
 
   const onDrop = React.useCallback(
     async (file) => {
@@ -45,7 +53,10 @@ export const useImageItem = ({
           });
           const { imageId } = await res.json();
           setImageId(imageId);
-          setImageIds((p: any) => [...p, imageId]);
+          setImageIds((p: any) => {
+            form.change(sourceIds, [...p, imageId]);
+            return [...p, imageId];
+          });
         } catch (e) {
           if (e instanceof Error) {
             console.log(e.message);
@@ -55,13 +66,14 @@ export const useImageItem = ({
         }
       }
     },
-    [setImageSize, setImageIds, imageType]
+    [form, sourceIds, setImageSize, setImageIds, imageType]
   );
 
   const deleteImage = React.useCallback(
     async (e: React.MouseEvent) => {
       e.preventDefault();
       if (!imageId) return;
+
       try {
         if (imageId) {
           setIsLoading(true);
@@ -70,8 +82,15 @@ export const useImageItem = ({
           });
           const message = await res.json();
           if (message) {
-            setImageIds((p: string[]) => p.filter((el: string) => el !== imageId));
+            setImageIds((p: string[]) => {
+              form.change(
+                sourceIds,
+                p.filter((el: string) => el !== imageId)
+              );
+              return p.filter((el: string) => el !== imageId);
+            });
             setServerImages((p: any) => p.filter((el: any) => el.id !== imageId));
+            setImageId("");
             setUrl("");
           }
         }

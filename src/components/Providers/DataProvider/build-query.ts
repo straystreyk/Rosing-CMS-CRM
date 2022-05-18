@@ -44,9 +44,9 @@ export const customBuildQuery =
     if (fetchType === "GET_LIST" && resource === "VideoFile") {
       return { ...builtQuery, query: GET_ALL_VIDEO_FILES };
     }
-    if (fetchType === "GET_ONE" && resource === "Series") {
-      return { ...builtQuery, query: GET_ONE_SERIES };
-    }
+    // if (fetchType === "GET_ONE" && resource === "Series") {
+    //   return { ...builtQuery, query: GET_ONE_SERIES };
+    // }
     if (fetchType === "GET_ONE" && resource === "AudioShow") {
       return { ...builtQuery, query: GET_ONE_AUDIO_SHOW };
     }
