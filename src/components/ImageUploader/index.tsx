@@ -28,6 +28,7 @@ import { useMutation } from "react-admin";
 import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
 import { EmptyShow } from "../Inputs/ArrayInputs/Arrayinput/show-view";
+import { ModalMUI } from "../Modal";
 
 const useStyles = makeStyles((theme) => ({
   ImagesWrapper: {
@@ -44,6 +45,19 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: "var(--font-family)",
     },
   },
+  PaperOverride: {
+    width: "80vw",
+    height: "80vh",
+    maxHeight: "80vh",
+    display: "flex",
+    position: "relative",
+    "& img": {
+      width: "100%",
+      height: "100%",
+      objectFit: "contain",
+    },
+  },
+  ModalOverride: {},
   ImageItem: {
     marginTop: 8,
     border: "1px dashed var(--secondary-color-default)",
@@ -293,9 +307,6 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
       setShowSlider(true);
     };
 
-    console.log(id, "id");
-    console.log(imageId, "imageId");
-
     return (
       <div className={cn(classes.ImageItemWrapper, "ImageItemWrapper")}>
         <div className={classes.ImageTitle}>
@@ -490,7 +501,16 @@ export const ImageUploaderV2: React.FC<{
 
     return (
       <>
-        <Slider showSlider={showSlider} setShowSlider={setShowSlider} images={serverImages} />
+        <ModalMUI
+          classNamesOverrides={{
+            PaperOverride: classes.PaperOverride,
+            ModalOverride: classes.ModalOverride,
+          }}
+          open={showSlider}
+          handleClose={() => setShowSlider(false)}
+        >
+          <Slider images={serverImages} />
+        </ModalMUI>
         {!offInfo && inputType !== "show" && (
           <div className={classes.ImagesInfo}>
             <span>

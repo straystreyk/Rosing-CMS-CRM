@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useLoading } from "react-admin";
 import { PerPageCounter } from "../Pagination/per-page-counter";
-import { makeStyles } from "@material-ui/core";
+import { Backdrop, makeStyles } from "@material-ui/core";
 
 import { MainLoader } from "../MainLoader";
 import { Filters } from "../CustomFilters";
@@ -93,9 +93,9 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
       </div>
       <Pagination />
       {loading && (
-        <div className={classes.LoaderWrapper}>
+        <Backdrop style={{ zIndex: 5000 }} open={loading}>
           <MainLoader flex size={LOADER_SIZE} centered />
-        </div>
+        </Backdrop>
       )}
     </div>
   );
