@@ -81,7 +81,7 @@ const ChannelVersion: React.FC<{
           resource={resource}
           inputType={type}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.channelId` : "channelId"}
-          label="Series id"
+          label="Channel ID"
           initialValue={sanitizeId(channelId)}
           style={{ display: "none" }}
           fullWidth

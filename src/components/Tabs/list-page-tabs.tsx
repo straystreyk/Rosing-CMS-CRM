@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
 export const ListPageTabs: React.FC<ListPageTabsProps> = ({ tabs, isSubTabs }) => {
   const history = useHistory();
   const classes = useStyles();
+
   return (
     <Box sx={{ maxWidth: "100%" }} className={!isSubTabs ? classes.TabsList : classes.SubTabsList}>
       {tabs.map(({ link, name }: ListTabProps) => (

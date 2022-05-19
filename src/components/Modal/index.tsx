@@ -11,11 +11,23 @@ interface ModalMuiProps {
   handleClose: () => void;
   title?: string | React.ReactNode | React.ReactElement;
   description?: string | React.ReactNode | React.ReactElement;
+  offExitIcon?: boolean;
   classNamesOverrides?: {
     ModalOverride?: string;
     PaperOverride?: string;
   };
 }
+
+const ExitIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M15.1884 4.81518L4.79395 15.2096M15.2067 15.1835L4.81221 4.78906"
+      stroke="#0F1F26"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+    />
+  </svg>
+);
 
 export const ModalMUI: React.FC<ModalMuiProps> = ({
   children,
@@ -24,6 +36,7 @@ export const ModalMUI: React.FC<ModalMuiProps> = ({
   title,
   description,
   classNamesOverrides,
+  offExitIcon,
 }) => {
   const classes = useStyles();
 
@@ -55,8 +68,17 @@ export const ModalMUI: React.FC<ModalMuiProps> = ({
                 classNamesOverrides.PaperOverride
             )}
           >
-            {title && <div>{title}</div>}
-            {description && <div>{description}</div>}
+            {!offExitIcon && (
+              <button className={classes.ExitIcon} onClick={handleClose}>
+                <ExitIcon />
+              </button>
+            )}
+            {title && (
+              <div className={classes.ModalTitleWrapper}>
+                <div className={classes.ModalTitle}>{title}</div>
+                {description && <div className={classes.ModalDescription}>{description}</div>}
+              </div>
+            )}
             {children}
           </div>
         </Fade>

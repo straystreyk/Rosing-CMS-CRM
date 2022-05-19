@@ -502,6 +502,7 @@ export const ImageUploaderV2: React.FC<{
     return (
       <>
         <ModalMUI
+          offExitIcon
           classNamesOverrides={{
             PaperOverride: classes.PaperOverride,
             ModalOverride: classes.ModalOverride,
