@@ -9,6 +9,6 @@ export const TVShowsSubTabs = [
   },
   {
     name: "TV programs",
-    link: "/media_content/tv/tv_shows/epg_programs",
+    link: "/media_content/tv/tv_shows/tv_programs",
   },
 ];

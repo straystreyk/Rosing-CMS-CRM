@@ -20,7 +20,7 @@ export const getGqlResource = (resource: string) => {
       return "Blackout";
     case "media_content/tv/tv_shows/epg_sources":
       return "EpgSource";
-    case "media_content/tv/tv_shows/epg_programs":
+    case "media_content/tv/tv_shows/tv_programs":
       return "Epg";
     case "media_content/tv/tv_shows/epg_local_events":
       return "EpgLocalEvent";

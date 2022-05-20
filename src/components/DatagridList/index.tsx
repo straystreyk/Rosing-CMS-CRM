@@ -73,7 +73,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
+export const DatagridHeader: React.FC<any> = ({ children, offActions, ...props }) => {
   const { currentSort, setSort, onSelect, ids, selectedIds, onUnselectItems } = useListContext();
   const classes = useStyles();
 
@@ -92,17 +92,19 @@ export const DatagridHeader: React.FC<any> = ({ children, ...props }) => {
   return (
     <TableHead>
       <TableRow>
-        <TableCell
-          className={cn(classes.TableCheckbox, classes.TableCellHeader)}
-          padding="checkbox"
-        >
-          <Checkbox
-            checkedIcon={<CheckedIcon />}
-            color="primary"
-            checked={selectedIds === ids}
-            onClick={checkedAll}
-          />
-        </TableCell>
+        {!offActions && (
+          <TableCell
+            className={cn(classes.TableCheckbox, classes.TableCellHeader)}
+            padding="checkbox"
+          >
+            <Checkbox
+              checkedIcon={<CheckedIcon />}
+              color="primary"
+              checked={selectedIds === ids}
+              onClick={checkedAll}
+            />
+          </TableCell>
+        )}
         {React.Children.map(children, (child: any) => (
           <TableCell
             className={cn(
@@ -146,18 +148,21 @@ const MyDatagridRow: React.FC<any> = ({
   children,
   selected,
   basePath,
+  offActions,
 }) => {
   const classes = useStyles();
 
   return (
     <TableRow key={id} hover>
-      <TableCell className={classes.TableCheckbox} size="small" padding="checkbox">
-        <Checkbox
-          color="primary"
-          checked={selected}
-          onClick={(event) => id && onToggleItem(id, event)}
-        />
-      </TableCell>
+      {!offActions && (
+        <TableCell className={classes.TableCheckbox} size="small" padding="checkbox">
+          <Checkbox
+            color="primary"
+            checked={selected}
+            onClick={(event) => id && onToggleItem(id, event)}
+          />
+        </TableCell>
+      )}
       {React.Children.map(children, (field, index) => {
         return (
           <TableCell component="th" scope="row" size="small" key={`${id}-${field.props.source}`}>
@@ -227,7 +232,7 @@ const MyDatagridRowWithDnd: React.FC<any> = ({
   );
 };
 
-const MyDatagridBody = (props: any) => {
+const MyDatagridBody = ({ offActions, ...props }: any) => {
   const notify = useNotify();
   const refresh = useRefresh();
   const { perPage, page } = useListContext();
@@ -302,13 +307,16 @@ const MyDatagridBody = (props: any) => {
     );
   }
 
-  return <DatagridBody {...props} row={<MyDatagridRow ids={props.ids} />} />;
+  return (
+    <DatagridBody {...props} row={<MyDatagridRow offActions={offActions} ids={props.ids} />} />
+  );
 };
 export const DatagridList: React.FC<CustomDatagridProps> = ({
   listText,
   offDescription,
   toolbar,
   datagridWrapperClassName,
+  offActions,
   ...props
 }) => (
   <DatagridWrapper
@@ -322,9 +330,9 @@ export const DatagridList: React.FC<CustomDatagridProps> = ({
   >
     <BulkActions />
     <Datagrid
-      header={props.header ?? <DatagridHeader />}
+      header={props.header ?? <DatagridHeader offActions={offActions} />}
       {...props}
-      body={<MyDatagridBody draggable={props.draggable} />}
+      body={<MyDatagridBody offActions={offActions} draggable={props.draggable} />}
     />
   </DatagridWrapper>
 );

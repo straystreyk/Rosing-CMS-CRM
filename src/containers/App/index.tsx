@@ -89,7 +89,7 @@ export const App = () => {
       <Resource name="media_content/tv/tv_shows/epg_sources/stv" {...epgSources.stv} />
       <Resource name="media_content/tv/tv_shows/epg_sources/spb" {...epgSources.spb} />
       <Resource name="media_content/tv/tv_shows/epg_sources" {...epgSources.initial} />
-      <Resource name="media_content/tv/tv_shows/epg_programs" {...epg} />
+      <Resource name="media_content/tv/tv_shows/tv_programs" {...epg} />
       <Resource name="datacenters" {...datacenters} />
       <Resource name="media_content/video/movies" {...movies} />
       <Resource name="media_content/video/video_files" {...videoFiles} />

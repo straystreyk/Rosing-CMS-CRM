@@ -10,8 +10,8 @@ export const GET_ALL_CHANNEL_VERSIONS = gql`
 `;
 
 export const GET_ALL_TV_PROGRAMS = gql`
-  query allEpgs($channelVersionId: ID!) {
-    data: allEpgs(filter: { channelVersionId: $channelVersionId }) {
+  query allTvPrograms($channelVersionId: ID!) {
+    data: allTvPrograms(filter: { channelVersionId: $channelVersionId }) {
       day
       countAll
     }

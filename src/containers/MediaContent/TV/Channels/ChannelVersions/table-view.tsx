@@ -90,7 +90,14 @@ export const TableView: React.FC<ShowProps> = (props) => {
           )}
         />
       </DatagridList>
-      <ModalTVPrograms open={open} handleClose={handleClose} loading={loading} data={data} />
+      <ModalTVPrograms
+        title="TV Programs"
+        description="List of dates with available events"
+        open={open}
+        handleClose={handleClose}
+        loading={loading}
+        data={data}
+      />
     </>
   );
 };

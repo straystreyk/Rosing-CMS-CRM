@@ -48,10 +48,19 @@ const useStyles = makeStyles({
 
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-interface EPG {
+type EPG = {
   id: Identifier;
   day: string;
   countAll: number;
+};
+
+interface ModalTVProgramsProps {
+  loading: boolean;
+  open: boolean;
+  handleClose: () => void;
+  data: EPG[] | null;
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
 }
 
 export const useTVPrograms: () => {
@@ -64,21 +73,23 @@ export const useTVPrograms: () => {
   const notify = useNotify();
 
   const getData = async (channelVersionId: Identifier | undefined) => {
-    try {
-      setLoading(true);
-      const res = await authClient.query({
-        query: GET_ALL_TV_PROGRAMS,
-        variables: { channelVersionId },
-      });
+    if (channelVersionId) {
+      try {
+        setLoading(true);
+        const res = await authClient.query({
+          query: GET_ALL_TV_PROGRAMS,
+          variables: { channelVersionId },
+        });
 
-      const tvPrograms = res.data.data;
-      setData(tvPrograms);
-    } catch (e) {
-      if (e instanceof Error) {
-        notify(e.message, { type: "error" });
+        const tvPrograms = res.data.data;
+        setData(tvPrograms);
+      } catch (e) {
+        if (e instanceof Error) {
+          notify(e.message, { type: "error" });
+        }
+      } finally {
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -108,20 +119,17 @@ const TVProgramItem: React.FC<{ program: EPG }> = ({ program }) => {
   );
 };
 
-export const ModalTVPrograms: React.FC<{
-  loading: boolean;
-  open: boolean;
-  handleClose: () => void;
-  data: EPG[] | null;
-}> = ({ loading, open, handleClose, data }) => {
+export const ModalTVPrograms: React.FC<ModalTVProgramsProps> = ({
+  loading,
+  open,
+  handleClose,
+  data,
+  title,
+  description,
+}) => {
   const classes = useStyles();
   return (
-    <ModalMUI
-      title="TV programs"
-      description="List of dates with available events"
-      open={open}
-      handleClose={handleClose}
-    >
+    <ModalMUI title={title} description={description} open={open} handleClose={handleClose}>
       {loading && (
         <div style={{ display: "flex" }}>
           <MainLoader centered size={50} />

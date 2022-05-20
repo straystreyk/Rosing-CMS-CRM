@@ -16,4 +16,5 @@ export interface CustomDatagridProps extends DatagridProps {
   listText?: string;
   offDescription?: boolean;
   datagridWrapperClassName?: string;
+  offActions?: boolean;
 }

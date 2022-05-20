@@ -43,8 +43,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
       >
         <TextField source="name" fullWidth />
       </ReferenceField>
-      <DateField label="Start at" source="startAt" emptyText="Empty" />
-      <DateField label="End at" source="endAt" emptyText="Empty" />
+      <DateField showTime label="Start at" source="startAt" emptyText="Empty" />
+      <DateField showTime label="End at" source="endAt" emptyText="Empty" />
       <FunctionField
         label=""
         render={(record?: RecordRA) => (
