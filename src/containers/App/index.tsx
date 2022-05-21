@@ -36,6 +36,7 @@ import { BlackoutsVariables as blackouts } from "../MediaContent/TV/Channels/Bla
 import { EPGSourcesVariables as epgSources } from "../MediaContent/TV/TVShows/EPGSources";
 import { EPGLocalEventsVariables as epgLocalEvents } from "../MediaContent/TV/TVShows/EPGLocalEvents";
 import { EPGVariables as epg } from "../MediaContent/TV/TVShows/EPG";
+import { ProgramEventsVariables as programEvents } from "../MediaContent/TV/Channels/ProgramEvents";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -64,6 +65,10 @@ export const App = () => {
     >
       <Resource name="admin_users" {...users} />
       <Resource name="media_content/tv/tv_shows/epg_local_events" {...epgLocalEvents} />
+      <Resource
+        name="media_content/tv/channels/channel_versions/:channelVersionId/:epgSourceId/:startAt/program_events"
+        {...programEvents}
+      />
       <Resource
         name="media_content/tv/channels/channels/:channelId/channel_versions"
         {...channelVersions}

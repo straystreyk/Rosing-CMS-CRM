@@ -14,6 +14,8 @@ export const GET_ALL_TV_PROGRAMS = gql`
     data: allTvPrograms(filter: { channelVersionId: $channelVersionId }) {
       day
       countAll
+      epgSourceId
+      channelVersionId
     }
   }
 `;

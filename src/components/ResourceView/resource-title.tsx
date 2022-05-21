@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "16px 24px",
   },
   ButtonsShow: {
+    flexShrink: 0,
     "& button": {
       marginLeft: 10,
     },

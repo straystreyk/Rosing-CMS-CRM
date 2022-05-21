@@ -69,6 +69,10 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     href: "/media_content/tv/channels",
   },
   {
+    name: "TV Channels",
+    href: "/media_content/tv/channels/channels",
+  },
+  {
     name: "TV shows",
     href: "/media_content/tv/tv_shows",
   },
@@ -191,10 +195,6 @@ export const breadcrumbsLinks: Breadcrumb[] = [
   //Labels
   ...labelsLinks,
   //TV Channels
-  {
-    name: "TV Channels",
-    href: "/media_content/tv/channels/channels",
-  },
   {
     name: "New channel",
     href: "/media_content/tv/channels/channels/create",

@@ -38,7 +38,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
       </ReferenceInput>
       <DateTimeInput
         source="startAt"
-        label="Starting"
+        label="Start at"
         resource={resource}
         validate={requiredValidate}
         inputType={type}

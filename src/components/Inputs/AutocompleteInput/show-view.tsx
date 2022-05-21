@@ -8,11 +8,13 @@ import { makeStyles } from "@material-ui/core";
 import { labelStyles } from "../styles";
 import {
   GET_ONE_CHANNEL_VERSION,
+  GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_LANGUAGE,
   GET_ONE_RIGHT_HOLDER,
   GET_ONE_VIDEO_FILE,
 } from "../../Providers/custom-requests";
 import { Resource } from "../StandatdInputs/SelectInput/show-view";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   label: labelStyles,
@@ -41,7 +43,18 @@ const ShowView: React.FC<InputProps> = (props: InputProps) => {
         );
       case "streamSourceId":
         return values[props.source] ? (
-          <Resource query={GET_ONE_VIDEO_FILE} resourceId={values[props.source]} />
+          <Resource
+            query={GET_ONE_VIDEO_FILE}
+            component={Link}
+            to={`/media_content/video/video_files/${values[props.source]}/show`}
+            resourceId={values[props.source]}
+          />
+        ) : (
+          <div className="empty">Not filled in</div>
+        );
+      case "externalCatalogId":
+        return values[props.source] ? (
+          <Resource query={GET_ONE_EXTERNAL_CATALOG} resourceId={values[props.source]} />
         ) : (
           <div className="empty">Not filled in</div>
         );

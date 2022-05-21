@@ -13,6 +13,7 @@ import {
 } from "../../../Providers/custom-requests";
 import { authClient } from "../../../Providers";
 import { MainLoader } from "../../../MainLoader";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   label: labelStyles,
@@ -31,7 +32,9 @@ export const Resource: React.FC<{
   resourceId: string;
   query: any;
   loaderOptions?: { size?: number; flex: boolean };
-}> = ({ resourceId, query, loaderOptions }) => {
+  component?: React.ElementType;
+  to?: string;
+}> = ({ resourceId, query, loaderOptions, component: Component = "span", to }) => {
   const { loading, data, error } = useQuery(query, {
     client: authClient,
     variables: { id: resourceId },
@@ -40,7 +43,11 @@ export const Resource: React.FC<{
   if (loading) return <MainLoader size={20} {...(loaderOptions && loaderOptions)} />;
   if (error) return <span>error</span>;
 
-  return <>{data.item.name}</>;
+  return (
+    <Component style={{ color: "var(--primary-text-default)" }} to={to}>
+      {data.item.name}
+    </Component>
+  );
 };
 
 const ShowView: React.FC<InputProps> = (props) => {

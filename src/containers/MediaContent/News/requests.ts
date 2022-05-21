@@ -45,8 +45,12 @@ export const UPDATE_NEWS = gql`
     $slug: String
     $published: Boolean
     $bodyTemplate: String
+    $seoTitle: String
+    $seoKeywords: String
+    $seoDescription: String
     $markers: [String!]
     $streamSourceId: ID
+    $cmsDistribution: String
     $externalCatalogId: ID
     $bodyText: String
     $imageIds: [ID!]
@@ -57,8 +61,12 @@ export const UPDATE_NEWS = gql`
       slug: $slug
       published: $published
       bodyTemplate: $bodyTemplate
+      seoTitle: $seoTitle
+      seoKeywords: $seoKeywords
+      seoDescription: $seoDescription
       markers: $markers
       streamSourceId: $streamSourceId
+      cmsDistribution: $cmsDistribution
       externalCatalogId: $externalCatalogId
       bodyText: $bodyText
       imageIds: $imageIds
@@ -74,15 +82,7 @@ export const UPDATE_NEWS = gql`
       imageIds
       images {
         id
-        createdAt
-        file
-        height
-        id
-        kind
-        originalUrl
-        updatedAt
-        width
-        size
+        __typename
       }
       markers
       name

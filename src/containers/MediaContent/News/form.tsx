@@ -103,8 +103,9 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
             optionValue="id"
             resource={resource}
             inputType={type}
-            fullWidth
             helperText="The partner directory from which the movie is imported. The logo of the external catalog will be displayed when previewing the movie in the app."
+            fullWidth
+            resettable
           />
         </ReferenceInput>
         <AutocompleteArrayInput
@@ -141,9 +142,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          helperText={
-            "A pair of custom fields that can be used for filtering. You can add multiple pairs."
-          }
+          helperText="A pair of custom fields that can be used for filtering. You can add multiple pairs."
           ChildComponent={MetaData}
           source="metadata"
           label="Metadata"

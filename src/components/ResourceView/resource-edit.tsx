@@ -24,9 +24,9 @@ export const ResourceEdit: FC<EditProps> = (props) => {
   const onSuccess: () => void = React.useCallback(() => {
     notify(`resources.${props.resource}.mutations.edit.success`, {
       type: "info",
-      undoable: true,
+      undoable: false,
     });
-    redirect("list", props.basePath);
+    redirect(`${props.basePath as string}/${props!.id}/show`, props.basePath);
     refresh();
   }, [notify, props.basePath, props.resource, redirect, refresh]);
 
@@ -50,6 +50,7 @@ export const ResourceEdit: FC<EditProps> = (props) => {
         onFailure={onFailure}
         component="div"
         title={""}
+        undoable={false}
         {...props}
       >
         <EditForm form="edit" redirect={props.redirect} resource={props.resource}>

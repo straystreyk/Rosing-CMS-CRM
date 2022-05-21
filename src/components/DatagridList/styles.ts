@@ -11,7 +11,7 @@ export const DatagridStyles: Styles<Theme, {}, string> = {
   },
   DataGridWrapper: {
     position: "relative",
-    width: "calc(100vw - 79px)",
+    width: "calc(100vw - 72px)",
     overflowX: "scroll",
     transition: "0.3s width ease",
     ...scrollBarStyles,
@@ -26,7 +26,7 @@ export const DatagridStyles: Styles<Theme, {}, string> = {
     },
     "@media (min-width: 600px)": {
       "&.active": {
-        width: "calc(100vw - 264px)",
+        width: "calc(100vw - 260px)",
       },
     },
   },

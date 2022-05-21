@@ -13,11 +13,13 @@ import { Identifier } from "ra-core";
 import { Record as RecordRA } from "ra-core/esm/types";
 import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
 import { TVProgramsIcon } from "../../../../../constants/icons";
-import { MoreActionsButton } from "../../../../../components/UI/Buttons/MoreActionsButton";
-import { EditButton } from "../../../../../components/UI/RA/edit-button";
-import { DeleteButton } from "../../../../../components/UI/RA/delete-button";
 
-const useStyles = makeStyles(TableFieldsStyles);
+const useStyles = makeStyles({
+  ...TableFieldsStyles,
+  DatagridTVPrograms: {},
+});
+
+const Empty = () => <></>;
 
 export const TableView: React.FC<ShowProps> = (props) => {
   const { getData, data, loading } = useTVPrograms();
@@ -37,8 +39,10 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <DatagridList
         listText="A list of pages available for publication on clients. The client has the ability to display an individual list of pages in the menu in accordance with the rule associated with it. Select a client from the list to see its list of pages."
         empty={<EmptyTablePage />}
+        toolbar={Empty}
         offActions
         optimized
+        datagridWrapperClassName={classes.DatagridTVPrograms}
         {...props}
       >
         <TextField label="Channel name" source="channelName" fullWidth />

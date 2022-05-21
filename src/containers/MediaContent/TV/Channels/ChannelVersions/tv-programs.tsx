@@ -7,6 +7,7 @@ import { TVProgramsIcon } from "../../../../../constants/icons";
 import { ModalMUI } from "../../../../../components/Modal";
 import { MainLoader } from "../../../../../components/MainLoader";
 import { makeStyles } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   TVProgram: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     "& .Counter": {
       width: "30px",
-      textAlign: "right",
+      textAlign: "left",
       marginLeft: 5,
       display: "inline-block",
     },
@@ -52,6 +53,8 @@ type EPG = {
   id: Identifier;
   day: string;
   countAll: number;
+  epgSourceId: Identifier;
+  channelVersionId: Identifier;
 };
 
 interface ModalTVProgramsProps {
@@ -102,6 +105,7 @@ export const useTVPrograms: () => {
 
 const TVProgramItem: React.FC<{ program: EPG }> = ({ program }) => {
   const classes = useStyles();
+
   return (
     <div className={classes.TVProgram}>
       <div className={classes.Date}>
@@ -112,6 +116,8 @@ const TVProgramItem: React.FC<{ program: EPG }> = ({ program }) => {
         startIcon={<TVProgramsIcon color="var(--accent-color)" />}
         variant="text"
         customColor="var(--accent-color)"
+        component={Link}
+        to={`/media_content/tv/channels/channel_versions/${program.channelVersionId}/${program.epgSourceId}/${program.day}/program_events`}
       >
         TV program events <span className="Counter">({program.countAll})</span>
       </StandardButton>
