@@ -6,7 +6,6 @@ import {
 import { makeStyles } from "@material-ui/core";
 import { TextInputStyles } from "../StandatdInputs/TextInput/styles";
 import { AutocompleteShow } from "./show-view";
-import { SyntheticEvent } from "react";
 
 export const AutocompleteInputWithOpts = AutocompleteInputRA as React.ComponentType<
   Omit<React.ComponentProps<typeof AutocompleteInputRA>, "emptyText"> & {
@@ -41,7 +40,7 @@ export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
 }) => {
   const classes = useStyles();
   return inputType === "show" ? (
-    <AutocompleteShow {...rest} />
+    <AutocompleteShow {...rest} resettable={resettable ?? true} />
   ) : (
     <AutocompleteInputWithOpts
       fullWidth
