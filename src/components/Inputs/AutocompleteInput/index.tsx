@@ -25,9 +25,7 @@ interface AutocompleteInputProps extends AutocompleteInputPropsRA {
 
 const resetOnBackspace = (e: React.KeyboardEvent) => {
   if (e.code === "Backspace" || e.code === "Escape") {
-    const resetButton = (e.target as any).parentElement.querySelector(
-      "[class*=RaAutocompleteInput-clearButton]"
-    );
+    const resetButton = (e.target as any).parentElement.querySelector("button.MuiButtonBase-root");
 
     if (resetButton) {
       (resetButton as HTMLButtonElement).click();

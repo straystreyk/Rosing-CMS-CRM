@@ -1,6 +1,5 @@
 import * as React from "react";
 import { CreateProps } from "ra-ui-materialui";
-import Icon from "@material-ui/icons/Announcement";
 
 import {
   ResourceCreate,
@@ -37,5 +36,3 @@ export const List: React.FC = (props) => (
     <TableView resource={resource} />
   </ResourceList>
 );
-
-export { Icon };

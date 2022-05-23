@@ -1,7 +1,8 @@
 import * as React from "react";
+import cn from "classnames";
+
 import { Switch } from "../UI/MaterialUI/switch";
 import { makeStyles } from "@material-ui/core";
-import cn from "classnames";
 import { GroupInputsShow } from "./show-view";
 
 const useStyles = makeStyles({

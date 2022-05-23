@@ -5,6 +5,11 @@ export const EXTRA_VIDEO_CHOICES = [
   { name: "Without extra videos", value: false },
 ];
 
+export const IMAGES_EXIST_CHOICES = [
+  { name: "Without images", value: false },
+  { name: "With images", value: true },
+];
+
 export const DOWNLOADABLE_CHOICES = [
   { name: "Downloadable", value: true },
   { name: "Undownloadable", value: false },

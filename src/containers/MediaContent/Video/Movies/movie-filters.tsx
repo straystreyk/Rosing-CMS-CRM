@@ -2,6 +2,7 @@ import { ChoicesFilter } from "../../../../components/CustomFilters/ChoicesFilte
 import {
   DOWNLOADABLE_CHOICES,
   EXTRA_VIDEO_CHOICES,
+  IMAGES_EXIST_CHOICES,
   MARKERS_CHOICES,
   PUBLISHED_CHOICES,
 } from "../../../../components/CustomFilters/constants";
@@ -29,6 +30,12 @@ export const movieFilters: FilterTemplate[] = [
     choices: EXTRA_VIDEO_CHOICES,
     label: "Extra videos",
     source: "extraVideosExist",
+  },
+  {
+    component: ChoicesFilter,
+    choices: IMAGES_EXIST_CHOICES,
+    label: "Images",
+    source: "imagesExist",
   },
   {
     component: MultipleFiltersList,
