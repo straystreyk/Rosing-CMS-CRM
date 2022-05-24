@@ -8,8 +8,6 @@ import { EmptyTablePage } from "../../../../../components/EmptyTablePage";
 import { TableFieldsStyles } from "../../../../../components/TableFields/styles";
 import { makeStyles } from "@material-ui/core";
 import { Record as RecordRA } from "ra-core/esm/types";
-import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
-import { TVProgramsIcon } from "../../../../../constants/icons";
 import { MoreActionsButton } from "../../../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../../components/UI/RA/delete-button";

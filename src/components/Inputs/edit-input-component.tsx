@@ -56,7 +56,7 @@ export const EditInputComponent: React.FC<any> = ({
   const form = useForm();
   const [mutate, { loading, error, data }] = useMutation();
   const [showInput, setShowInput] = React.useState(false);
-  const [initialValue] = React.useState(values[props.source]);
+  const [initialValue, setInitialValue] = React.useState(values[props.source]);
   const notify = useNotify();
   const classes = useStyles();
 
@@ -67,6 +67,7 @@ export const EditInputComponent: React.FC<any> = ({
         type: "success",
         messageArgs: { name: data.name },
       });
+      setInitialValue(data[props.source]);
     }
 
     if (error) {

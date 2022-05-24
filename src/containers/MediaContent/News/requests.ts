@@ -82,7 +82,15 @@ export const UPDATE_NEWS = gql`
       imageIds
       images {
         id
-        __typename
+        createdAt
+        file
+        height
+        id
+        kind
+        originalUrl
+        updatedAt
+        width
+        size
       }
       markers
       name

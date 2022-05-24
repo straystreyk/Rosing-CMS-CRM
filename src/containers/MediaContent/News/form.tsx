@@ -114,6 +114,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           label="Label"
           inputType={type}
           choices={SELECT_MARKERS}
+          resource={resource}
           allowEmpty
           helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
         />
