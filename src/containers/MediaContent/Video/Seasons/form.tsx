@@ -67,6 +67,7 @@ const Season: React.FC<{
           initialValue={sanitizeId(seriesId)}
           style={{ display: "none" }}
           fullWidth
+          offFastEdit
         />
         <TextInput
           resource={resource}
@@ -89,6 +90,7 @@ const Season: React.FC<{
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.description` : "description"}
         />
         <RadioButtonGroupInput
+          resource={resource}
           source={
             parentSourceWithIndex
               ? `${parentSourceWithIndex}.reversedEpisodesOrder`

@@ -389,6 +389,10 @@ export const en: TranslationMessages = {
           success: "Season was updated",
           error: "Cant update season: %{error}",
         },
+        list: {
+          success: 'Season "%{name}" was successfully updated',
+          error: "Cant update season: %{error}",
+        },
       },
     },
     "media_content/video/seasons/:seasonId/episodes": {
@@ -409,6 +413,15 @@ export const en: TranslationMessages = {
         },
       },
     },
+    "media_content/tv/channels/channel_versions/:channelVersionId/:epgSourceId/:startAt/program_events":
+      {
+        name: "Program events",
+        titles: {
+          create: "New program event",
+          edit: "Edit Program event",
+          list: "Program events",
+        },
+      },
     "media_content/tv/channels/channels": {
       name: "TV channels",
       menu_name: "Television",

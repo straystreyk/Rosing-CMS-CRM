@@ -2,10 +2,9 @@ import React from "react";
 import { useListContext, useTranslate } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { ToolbarProps } from "../../../../components/DatagridList/custom-datagrid-types";
-import { BackArrowTitle, ExportButtonIcon, ResourceAddIcon } from "../../../../constants/icons";
+import { BackArrowTitle, ResourceAddIcon } from "../../../../constants/icons";
 import { MainLoader } from "../../../../components/MainLoader";
 import { CreateButton } from "../../../../components/UI/RA/create-button";
-import { ExportButton } from "../../../../components/UI/RA/export-button";
 import { useHistory } from "react-router-dom";
 
 const LOADER_SIZE = 15;
@@ -61,12 +60,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource, ...rest })
           customColor="var(--accent-color)"
           to={basePath + "/create"}
           icon={<ResourceAddIcon color="var(--accent-color)" />}
-        />
-        <ExportButton
-          icon={<ExportButtonIcon color="var(--primary-button-default)" />}
-          variant="text"
-          color="secondary"
-          label="Download"
         />
       </div>
     </div>

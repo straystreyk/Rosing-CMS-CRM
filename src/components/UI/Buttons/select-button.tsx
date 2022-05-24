@@ -120,12 +120,12 @@ export const SelectButton: React.FC<{
           {label}
         </ButtonPrimary>
         <Menu
-          id="basic-menu"
+          id="select-basic-menu"
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            "aria-labelledby": "basic-button",
+            "aria-labelledby": "select-basic-button",
           }}
         >
           {resource.map((el: any, index) => (

@@ -1,12 +1,15 @@
 import React from "react";
 
-type useModalType = (handleOpenFunc?: () => void) => {
+type useModalType = (
+  handleOpenFunc?: () => void,
+  handleCloseFunc?: () => void
+) => {
   handleOpen: () => void;
   handleClose: () => void;
   open: boolean;
 };
 
-export const useModalMUI: useModalType = (handleOpenFunc) => {
+export const useModalMUI: useModalType = (handleOpenFunc, handleCloseFunc) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -18,6 +21,9 @@ export const useModalMUI: useModalType = (handleOpenFunc) => {
 
   const handleClose = () => {
     setOpen(false);
+    if (handleCloseFunc) {
+      handleCloseFunc();
+    }
   };
 
   return {

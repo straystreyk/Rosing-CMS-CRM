@@ -1,3 +1,5 @@
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../../constants/style-constants";
+
 export const SearchFilterStyles: any = {
   SearchFilterWrapper: {
     display: "flex",
@@ -40,6 +42,12 @@ export const SearchFilterStyles: any = {
       },
       "&::after": {
         display: "none",
+      },
+    },
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
+      width: 30,
+      "& .MuiInputBase-root": {
+        color: "transparent",
       },
     },
   },

@@ -1,9 +1,12 @@
 import * as React from "react";
+import cn from "classnames";
+
 import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
-import cn from "classnames";
 import { Skeleton } from "@material-ui/lab";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { ExportResourceButton } from "../UI/Buttons/ExportResourceButton";
+import { RefreshButton } from "../UI/Buttons/RefreshButton";
 
 const useStyles = makeStyles({
   Sort: {
@@ -11,7 +14,6 @@ const useStyles = makeStyles({
     lineHeight: "20px",
     margin: "8px 0",
     color: "var(--secondary-color-default)",
-    padding: "0 24px",
     userSelect: "none",
     "& .sortButton": {
       display: "inline-block",
@@ -23,6 +25,18 @@ const useStyles = makeStyles({
         color: "var(--secondary-color-main)",
       },
     },
+  },
+  SortActions: {
+    "& button": {
+      marginLeft: 0,
+    },
+  },
+  SortWrapper: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "0 20px 0 24px",
+    alignItems: "center",
+    flexWrap: "wrap",
   },
 });
 
@@ -51,29 +65,35 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[] }> = ({
   );
 
   return (
-    <div className={classes.Sort}>
-      Total&nbsp;
-      {total ?? (
-        <Skeleton
-          style={{ display: "inline-block" }}
-          width={SKELETON_WIDTH}
-          height={SKELETON_HEIGHT}
-        />
-      )}
-      , show by:&nbsp;
-      {showBy?.map((el, index) => (
-        <button
-          className={cn(
-            "sortButton",
-            queryParams.has("perPage") && perPage === el && "active",
-            !queryParams.has("perPage") && typeof el === "string" && "active"
-          )}
-          key={el}
-          onClick={() => changePerPage(el)}
-        >
-          {el}
-        </button>
-      ))}
+    <div className={classes.SortWrapper}>
+      <div className={classes.Sort}>
+        Total&nbsp;
+        {total ?? (
+          <Skeleton
+            style={{ display: "inline-block" }}
+            width={SKELETON_WIDTH}
+            height={SKELETON_HEIGHT}
+          />
+        )}
+        , show by:&nbsp;
+        {showBy?.map((number, index) => (
+          <button
+            className={cn(
+              "sortButton",
+              queryParams.has("perPage") && perPage === number && "active",
+              !queryParams.has("perPage") && typeof number === "string" && "active"
+            )}
+            key={number}
+            onClick={() => changePerPage(number)}
+          >
+            {number}
+          </button>
+        ))}
+      </div>
+      <div className={classes.SortActions}>
+        <ExportResourceButton />
+        <RefreshButton />
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { Record as RaRecord } from "ra-core/esm/types";
 
 export interface EditFormProps {
   resource: string;
+  record?: Partial<RaRecord>;
   redirect?: string;
   offToolbar?: boolean;
   onSuccess?: (data: any) => void;

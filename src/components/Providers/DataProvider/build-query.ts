@@ -9,7 +9,6 @@ import { GET_ONE_CHANNEL_EDIT } from "../../../containers/MediaContent/TV/Channe
 import {
   GET_ALL_SERIES,
   GET_ONE_SERIES,
-  UPDATE_SERIES,
 } from "../../../containers/MediaContent/Video/Series/requests";
 import { GET_ALL_VIDEO_FILES } from "../../../containers/MediaContent/Video/VideoFiles/custom-requests";
 import { GET_ONE_AUDIO_SHOW } from "../../../containers/MediaContent/Audio/AudioShows/requests";
@@ -18,6 +17,10 @@ import { GET_EDIT_EXTERNAL_CATALOG } from "../../../containers/MediaContent/Attr
 import { GET_EDIT_STUDIO } from "../../../containers/MediaContent/Attributes/Providers/Studios/requests";
 import { GET_ONE_PERSON } from "../../../containers/MediaContent/Attributes/People/requests";
 import { GET_ONE_EPG_LOCAL_EVENT } from "../../../containers/MediaContent/TV/TVShows/EPGLocalEvents/request";
+import {
+  GET_ALL_EPISODES,
+  GET_ONE_EPISODE,
+} from "../../../containers/MediaContent/Video/Episodes/requests";
 
 export const customBuildQuery =
   (introspection: any) => (fetchType: string, resource: string, params: unknown) => {
@@ -39,11 +42,14 @@ export const customBuildQuery =
     if (fetchType === "GET_LIST" && resource === "Series") {
       return { ...builtQuery, query: GET_ALL_SERIES };
     }
-    // if (fetchType === "UPDATE" && resource === "Series") {
-    //   return { ...builtQuery, query: UPDATE_SERIES };
-    // }
     if (fetchType === "GET_LIST" && resource === "VideoFile") {
       return { ...builtQuery, query: GET_ALL_VIDEO_FILES };
+    }
+    if (fetchType === "GET_LIST" && resource === "Episode") {
+      return { ...builtQuery, query: GET_ALL_EPISODES };
+    }
+    if (fetchType === "GET_ONE" && resource === "Episode") {
+      return { ...builtQuery, query: GET_ONE_EPISODE };
     }
     if (fetchType === "GET_ONE" && resource === "Series") {
       return { ...builtQuery, query: GET_ONE_SERIES };
@@ -51,6 +57,7 @@ export const customBuildQuery =
     if (fetchType === "GET_ONE" && resource === "AudioShow") {
       return { ...builtQuery, query: GET_ONE_AUDIO_SHOW };
     }
+
     // News
     if (fetchType === "GET_ONE" && resource === "News") {
       return { ...builtQuery, query: GET_ONE_NEWS };
@@ -58,6 +65,7 @@ export const customBuildQuery =
     if (fetchType === "UPDATE" && resource === "News") {
       return { ...builtQuery, query: UPDATE_NEWS };
     }
+
     if (fetchType === "GET_ONE" && resource === "ExternalCatalog") {
       return { ...builtQuery, query: GET_EDIT_EXTERNAL_CATALOG };
     }

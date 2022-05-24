@@ -10,7 +10,7 @@ export const TableFieldsStyles: any = {
     justifyContent: "flex-end",
     alignItems: "center",
     "& button": {
-      marginLeft: 15,
+      marginLeft: 25,
       "&:first-child": {
         marginLeft: 0,
       },
@@ -23,4 +23,13 @@ export const TableFieldsStyles: any = {
     color: "var(--secondary-color-default)",
   },
   IDField: { wordBreak: "break-all" },
+  DatagridWrapperWithoutScroll: {
+    width: "unset",
+    "&.active": {
+      width: "unset",
+    },
+    "& table": {
+      minWidth: "unset",
+    },
+  },
 };

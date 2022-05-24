@@ -70,6 +70,7 @@ export const useTVPrograms: () => {
   loading: boolean;
   data: EPG[] | null;
   getData: (channelVersionId: Identifier | undefined) => void;
+  setData: React.Dispatch<React.SetStateAction<EPG[] | null>>;
 } = () => {
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState<EPG[] | null>(null);
@@ -97,6 +98,7 @@ export const useTVPrograms: () => {
   };
 
   return {
+    setData,
     getData,
     data,
     loading,

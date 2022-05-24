@@ -1,5 +1,5 @@
-//CastMembers problem (React admin create a field like [source].id,
-// but it didn't make sense (maybe) )
+//CastMembers problem (React admin create a field with name like "[source].id",
+// but it didn't make sense )
 export const customParseResponse = (fetchType: string) => {
   return function f(response: any) {
     const data = response.data;

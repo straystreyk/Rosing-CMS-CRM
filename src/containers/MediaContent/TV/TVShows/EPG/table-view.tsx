@@ -22,9 +22,14 @@ const useStyles = makeStyles({
 const Empty = () => <></>;
 
 export const TableView: React.FC<ShowProps> = (props) => {
-  const { getData, data, loading } = useTVPrograms();
-  const { handleOpen, open, handleClose } = useModalMUI();
+  const { getData, data, loading, setData } = useTVPrograms();
   const classes = useStyles();
+
+  const closeModal = () => {
+    setTimeout(() => setData(null), 350);
+  };
+
+  const { handleOpen, open, handleClose } = useModalMUI(undefined, closeModal);
 
   const openTVPrograms = React.useCallback(
     (channelVersionId: Identifier | undefined) => {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FunctionField, Record, Record as RecordRA, TextField } from "react-admin";
+import { FunctionField, Record, Record as RecordRA } from "react-admin";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 
@@ -12,8 +12,18 @@ import { ShowProps } from "../../../../types";
 import { TableFieldsStyles } from "../../../../components/TableFields/styles";
 import { Toolbar } from "../Seasons/toolbar";
 import { PublishedIcons, UnPublishedIcons } from "../../../../constants/icons";
+import { ExpandWrapper } from "../../../../components/DatagridList/expand-wrapper";
+import { Form } from "./form";
 
 const useStyles = makeStyles(TableFieldsStyles);
+
+const EpisodesExpand: React.FC<{ resource: string }> = ({ resource, ...props }) => {
+  return (
+    <ExpandWrapper>
+      <Form resource={resource} type="show" />
+    </ExpandWrapper>
+  );
+};
 
 export const TableView: React.FC<ShowProps> = (props) => {
   const classes = useStyles();
@@ -24,9 +34,12 @@ export const TableView: React.FC<ShowProps> = (props) => {
         {...props}
         optimized
         toolbar={Toolbar}
-        offDescription
         basePath={props.basePath}
+        expand={<EpisodesExpand resource={props.resource} />}
         empty={<EmptyTablePage />}
+        datagridWrapperClassName={classes.DatagridWrapperWithoutScroll}
+        isDependentModel
+        offDescription
       >
         <FunctionField
           label="Name"
@@ -37,8 +50,6 @@ export const TableView: React.FC<ShowProps> = (props) => {
             </Link>
           )}
         />
-        <TextField label="Slug" source="slug" emptyText="Empty" />
-        <TextField source="number" label="Number of episode" />
         <FunctionField
           label=""
           render={(record?: Record) => (

@@ -1,37 +1,13 @@
 import * as React from "react";
+import cn from "classnames";
+
 import { Menu } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { IconProps } from "../../../../constants/icons";
-import cn from "classnames";
+import { MoreActionsButtonStyles } from "./styles";
 
-const useStyles = makeStyles({
-  MoreActionsButton: {
-    borderRadius: "50%",
-    cursor: "pointer",
-    width: 16,
-    height: 16,
-    backgroundColor: "var(--primary-bg)",
-    transition: "0.35s all ease",
-    "& svg": {
-      verticalAlign: "middle",
-    },
-  },
-  MoreActionButtonChild: {
-    marginBottom: 5,
-    "& > a, & > button ": {
-      width: "100%",
-      padding: "4px 6px",
-      justifyContent: "flex-start",
-    },
-    "&:last-child": {
-      marginBottom: 0,
-    },
-    "& .DeleteButton": {
-      marginTop: 10,
-    },
-  },
-});
+const useStyles = makeStyles(MoreActionsButtonStyles);
 
 const MoreActionsButtonIcon = ({ color }: IconProps) => (
   <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">

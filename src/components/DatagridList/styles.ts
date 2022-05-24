@@ -67,3 +67,55 @@ export const DatagridStyles: Styles<Theme, {}, string> = {
   },
   TopToolBar,
 };
+
+export const TableStyles: Styles<Theme, {}, string> = {
+  TableCheckbox: {
+    "&.MuiTableCell-paddingCheckbox": {
+      padding: "0 12px 0 24px",
+    },
+    position: "relative",
+  },
+  TableCell: {
+    border: "none",
+  },
+  TableRow: {
+    borderBottom: "1px solid var(--secondary-color-disable)",
+  },
+  DraggableTableRow: {
+    "& .DNDIcon": {
+      height: 30,
+      "& svg": {
+        height: "100%",
+      },
+    },
+    "&:hover .DNDIcon": {
+      opacity: 1,
+      pointerEvents: "all",
+    },
+  },
+  DNDIcon: {
+    position: "absolute",
+    left: 8,
+    top: "50%",
+    transform: "translateY(-50%)",
+    zIndex: 1,
+    opacity: 0,
+    pointerEvents: "none",
+    transition: "0.35s all ease",
+  },
+  TableCellHeader: {
+    "& button": {
+      color: "var(--primary-text-default)",
+      fontWeight: 500,
+      textAlign: "left",
+      fontSize: 14,
+    },
+    "&.active button": {
+      color: "var(--primary-focus)",
+    },
+  },
+  ExpandIcon: {
+    marginLeft: 5,
+    padding: "5px 10px",
+  },
+};

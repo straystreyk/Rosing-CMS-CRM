@@ -63,7 +63,6 @@ const ShowView: React.FC<ShowProps> = (props) => {
 };
 
 export const RadioButtonGroupInputShow: React.FC<ShowProps> = (props) => {
-  console.log(props);
   return (
     <EditInputComponent
       ComponentInput={RadioButtonGroupInputOrigin}

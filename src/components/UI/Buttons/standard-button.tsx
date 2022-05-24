@@ -5,7 +5,7 @@ import cn from "classnames";
 
 interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
   customColor?: string;
-  variant?: "text" | "outlined" | "contained" | "textWithBg" | undefined;
+  variant?: "text" | "outlined" | "contained" | "textWithBg" | "icon" | undefined;
   component?: any;
   to?: string;
 }
@@ -41,6 +41,10 @@ const useStyles = makeStyles({
   TextWithBG: {
     padding: "4px 6px",
   },
+  IconStyle: {
+    padding: "4px 6px",
+    minWidth: "unset",
+  },
 });
 
 export const StandardButton: React.FC<StandardButtonProps> = ({
@@ -69,6 +73,7 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
         "StandardButton",
         variant === "text" && classes.TextButton,
         variant === "textWithBg" && classes.TextWithBG,
+        variant === "icon" && classes.IconStyle,
         className && className
       )}
       {...props}

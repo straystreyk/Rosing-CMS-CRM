@@ -1,5 +1,5 @@
 import React from "react";
-import { FunctionField, Record, TextField } from "react-admin";
+import { FunctionField, Record } from "react-admin";
 import { Link, useHistory } from "react-router-dom";
 import { Record as RecordRA } from "ra-core/esm/types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,10 +20,20 @@ import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DatagridList } from "../../../../components/DatagridList";
 import { ShowProps } from "../../../../types";
 import { TableFieldsStyles } from "../../../../components/TableFields/styles";
-import { Toolbar } from "./toolbar";
 import { useTableActions } from "../../../../custom-hooks/use-table-actions";
+import { ExpandWrapper } from "../../../../components/DatagridList/expand-wrapper";
+import { Toolbar } from "./toolbar";
+import { Form } from "./form";
 
 const useStyles = makeStyles(TableFieldsStyles);
+
+const SeasonExpand: React.FC<{ resource: string }> = ({ resource, ...props }) => {
+  return (
+    <ExpandWrapper>
+      <Form resource={resource} type="show" />
+    </ExpandWrapper>
+  );
+};
 
 export const TableView: React.FC<ShowProps> = (props) => {
   const history = useHistory();
@@ -33,11 +43,14 @@ export const TableView: React.FC<ShowProps> = (props) => {
   return (
     <DatagridList
       toolbar={Toolbar}
-      offDescription
       basePath={props.basePath}
       empty={<EmptyTablePage />}
       resource={props.resource}
+      expand={<SeasonExpand {...props} />}
+      datagridWrapperClassName={classes.DatagridWrapperWithoutScroll}
       optimized
+      offDescription
+      isDependentModel
     >
       <FunctionField
         label="Name"
@@ -48,13 +61,10 @@ export const TableView: React.FC<ShowProps> = (props) => {
           </Link>
         )}
       />
-      <TextField label="Slug" source="slug" emptyText="Empty" />
-      <TextField label="Number of season" source="number" emptyText="Empty" />
       <FunctionField
-        label="Episodes"
-        offsort
+        label=""
         render={(record?: Record) => (
-          <>
+          <div className={classes.MoreActions}>
             <StandardButton
               startIcon={
                 record?.episodes.length ? (
@@ -76,13 +86,6 @@ export const TableView: React.FC<ShowProps> = (props) => {
             >
               {record?.episodes.length ? `Episodes (${record?.episodes.length})` : "Add episodes"}
             </StandardButton>
-          </>
-        )}
-      />
-      <FunctionField
-        label=""
-        render={(record?: Record) => (
-          <div className={classes.MoreActions}>
             {record?.published ? (
               <button>
                 <PublishedIcons />

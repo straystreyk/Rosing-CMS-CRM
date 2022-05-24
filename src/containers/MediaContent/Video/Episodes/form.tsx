@@ -108,6 +108,7 @@ const Episode: React.FC<{
             label="Season id"
             initialValue={sanitizeId(seasonId)}
             style={{ display: "none" }}
+            offFastEdit
             fullWidth
           />
           <NumberInput

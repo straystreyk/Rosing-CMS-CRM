@@ -17,4 +17,5 @@ export interface CustomDatagridProps extends DatagridProps {
   offDescription?: boolean;
   datagridWrapperClassName?: string;
   offActions?: boolean;
+  isDependentModel?: boolean;
 }
