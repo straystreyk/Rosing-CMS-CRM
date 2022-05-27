@@ -61,9 +61,8 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
             to={`/${resource}/${formState.values.id}/parts`}
             variant="text"
             customColor="var(--accent-color)"
-          >
-            Parts ({formState.values.parts.length})
-          </StandardButton>
+            text={`Parts (${formState.values.parts.length})`}
+          />
         )}
       </FormTabs>
       <FormSection

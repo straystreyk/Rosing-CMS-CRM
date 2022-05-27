@@ -1,6 +1,6 @@
 export const MEDIA_QUERIES_BREAKPOINTS = {
   xs: "599px",
-  sm: "768px",
+  sm: "820px",
   md: "1024px",
   lg: "1200px",
   xl: "1400px",

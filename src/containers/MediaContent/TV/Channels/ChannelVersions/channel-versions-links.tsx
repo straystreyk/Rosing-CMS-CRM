@@ -2,8 +2,9 @@ import {
   GET_ONE_CHANNEL,
   GET_ONE_CHANNEL_VERSION,
 } from "../../../../../components/Providers/custom-requests";
+import { Breadcrumb } from "../../../../../components/Breadcrumbs/breadcrumbs-links";
 
-export const channelVersionsLinks = [
+export const channelVersionsLinks: Breadcrumb[] = [
   {
     name: "Channel versions",
     href: "/media_content/tv/channels/channels/:channelId/channel_versions",

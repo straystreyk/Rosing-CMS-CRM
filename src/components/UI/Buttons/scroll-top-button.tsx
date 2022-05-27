@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Button } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
+import { StandardButton } from "./standard-button";
 
 const MIN_PX_TO_SHOW = 150;
 
@@ -73,17 +73,18 @@ export const ScrollTopButton: React.FC = () => {
   React.useEffect(() => {
     window.addEventListener("scroll", checkButton);
 
-    return function cleanup() {
+    return () => {
       window.removeEventListener("scroll", checkButton);
     };
-  });
+  }, [checkButton]);
 
   return (
-    <Button
+    <StandardButton
       style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? "all" : "none" }}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       className={classes.ScrollButton}
-      startIcon={<ScrollTopIcon />}
-    />
+    >
+      <ScrollTopIcon />
+    </StandardButton>
   );
 };

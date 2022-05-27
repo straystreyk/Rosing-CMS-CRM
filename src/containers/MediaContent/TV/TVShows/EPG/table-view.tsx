@@ -16,7 +16,14 @@ import { TVProgramsIcon } from "../../../../../constants/icons";
 
 const useStyles = makeStyles({
   ...TableFieldsStyles,
-  DatagridTVPrograms: {},
+  DatagridTVPrograms: {
+    "& tbody tr th:first-child": {
+      paddingLeft: 24,
+    },
+    "& thead tr th:first-child": {
+      paddingLeft: 24,
+    },
+  },
 });
 
 const Empty = () => <></>;
@@ -50,9 +57,9 @@ export const TableView: React.FC<ShowProps> = (props) => {
         datagridWrapperClassName={classes.DatagridTVPrograms}
         {...props}
       >
-        <TextField label="Channel name" source="channelName" fullWidth />
-        <TextField label="Сhannel version" source="channelVersionName" fullWidth />
-        <TextField label="EPG source" source="epgSourceName" fullWidth />
+        <TextField label="Сhannel name" source="channelName" />
+        <TextField label="Сhannel version" source="channelVersionName" />
+        <TextField label="EPG source" source="epgSourceName" />
         <FunctionField
           label=""
           render={(record?: RecordRA) => (

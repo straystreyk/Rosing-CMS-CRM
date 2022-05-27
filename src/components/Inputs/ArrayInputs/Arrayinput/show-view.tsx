@@ -5,6 +5,7 @@ import { EditInputComponent } from "../../edit-input-component";
 import { useFormState } from "react-final-form";
 import { IMDBIcon, KinopoiskIcon } from "../../../../constants/icons";
 import avatar from "../../../../images/avatar_empty.jpg";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../../../constants/style-constants";
 
 const useStyles = makeStyles({
   CastMembersShowWrapper: {
@@ -76,6 +77,12 @@ const useStyles = makeStyles({
         objectFit: "cover",
         height: "100%",
       },
+    },
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.lg})`]: {
+      width: "calc(50% - 60px)",
+    },
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`]: {
+      width: "100%",
     },
   },
 });

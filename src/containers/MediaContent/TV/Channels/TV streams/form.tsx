@@ -71,9 +71,8 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           startIcon={<PlusIcon color="var(--accent-color)" />}
           variant="text"
           customColor="var(--accent-color)"
-        >
-          Add new Datacenter
-        </StandardButton>
+          text="Add new Datacenter"
+        />
       </div>
       <TextInput
         resource={resource}
@@ -131,9 +130,8 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           startIcon={<PlusIcon color="var(--accent-color)" />}
           variant="text"
           customColor="var(--accent-color)"
-        >
-          Add new Datacenter
-        </StandardButton>
+          text="Add new Datacenter"
+        />
       </div>
       <TextInput
         resource={resource}

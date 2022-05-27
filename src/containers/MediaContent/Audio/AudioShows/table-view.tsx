@@ -82,6 +82,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
               variant="text"
               customColor="var(--accent-color)"
               style={{ paddingLeft: 0, paddingRight: 0 }}
+              text={record?.parts.length ? `Parts (${record?.parts.length})` : "Add parts"}
               onClick={() =>
                 history.push(
                   record?.parts.length
@@ -89,9 +90,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
                     : `/media_content/audio/audio_shows/${record?.id}/parts/create`
                 )
               }
-            >
-              {record?.parts.length ? `Parts (${record?.parts.length})` : "Add parts"}
-            </StandardButton>
+            />
           </>
         )}
       />
@@ -120,28 +119,25 @@ export const TableView: React.FC<ShowProps> = (props) => {
                 disabled={loading}
                 color="secondary"
                 variant="textWithBg"
+                text={record?.published ? "Unpublish" : "Publish"}
                 startIcon={record?.published ? <UnPublishIcon /> : <PublishIcon />}
-              >
-                {record?.published ? <>Unpublish</> : <>Publish</>}
-              </StandardButton>
+              />
               <StandardButton
                 onClick={() => approve(record?.id, { ...record, position: 1 })}
                 disabled={loading}
                 color="secondary"
                 variant="textWithBg"
                 startIcon={<ArrowIconUp />}
-              >
-                To the top of the list
-              </StandardButton>
+                text="To the top of the list"
+              />
               <StandardButton
                 onClick={() => approve(record?.id, { ...record, position: props.total ?? 0 })}
                 startIcon={<ArrowIconDown />}
                 disabled={loading}
                 variant="textWithBg"
                 color="secondary"
-              >
-                To the bottom of the list
-              </StandardButton>
+                text="To the bottom of the list"
+              />
               <EditButton color="secondary" record={record} basePath={props.basePath} />
               <DeleteButton record={record} basePath={props.basePath} />
             </MoreActionsButton>

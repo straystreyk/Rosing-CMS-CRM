@@ -29,6 +29,7 @@ import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
 import { EmptyShow } from "../Inputs/ArrayInputs/Arrayinput/show-view";
 import { ModalMUI } from "../Modal";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
 
 const useStyles = makeStyles((theme) => ({
   ImagesWrapper: {
@@ -36,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
     gridTemplateColumns: "repeat(2, 1fr)",
     gap: "25px",
     marginBottom: 16,
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`]: {
+      gridTemplateColumns: "repeat(1, 1fr)",
+    },
   },
   ImageItemWrapper: {
     "& button": {
@@ -335,9 +339,8 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
                 startIcon={<UploadIcon color="#005AA3" />}
                 color="secondary"
                 variant="text"
-              >
-                Upload file
-              </StandardButton>
+                text="Upload file"
+              />
             </div>
           ) : (
             <>
@@ -358,9 +361,8 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
               startIcon={<DeleteIcon color={"#D21C1C"} />}
               type="button"
               variant="text"
-            >
-              Delete
-            </StandardButton>
+              text="Delete"
+            />
             <SelectButton
               buttonClassName={classes.ImageItemChangeButton}
               label="Change type"
@@ -535,18 +537,16 @@ export const ImageUploaderV2: React.FC<{
                 customColor="var(--accent-color)"
                 variant="text"
                 onClick={approve}
-              >
-                Save
-              </StandardButton>
+                text="Save"
+              />
               <StandardButton
                 type="button"
                 color="secondary"
                 variant="text"
                 startIcon={<CancelFilterIcon color="#005AA3" />}
                 onClick={cancel}
-              >
-                Cancel
-              </StandardButton>
+                text="Cancel"
+              />
             </div>
           )}
           {inputType === "show" && !edit && (

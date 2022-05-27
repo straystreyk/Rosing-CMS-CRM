@@ -79,9 +79,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
                 startIcon={<TVProgramsIcon color="var(--accent-color)" />}
                 onClick={() => openTVPrograms(record?.id)}
                 variant="text"
-              >
-                TV programs
-              </StandardButton>
+                text="TV programs"
+              />
               <MoreActionsButton>
                 <EditButton color="secondary" record={record} basePath={props.basePath} />
                 <DeleteButton record={record} basePath={props.basePath} />

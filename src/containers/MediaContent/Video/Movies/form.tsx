@@ -85,6 +85,16 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
         id="Attributes"
         formType={type}
       >
+        {type === "show" && (
+          <TextInput
+            resource={resource}
+            inputType={type}
+            label="ID"
+            source="id"
+            fullWidth
+            offFastEdit
+          />
+        )}
         <TextInput
           resource={resource}
           validate={requiredValidate}
@@ -458,7 +468,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
             idName="alpha2"
           />
         </CheckBoxGroup>
-        <CheckBoxGroup initialSourceState="allowedApiClients">
+        <CheckBoxGroup initialSourceState="allowedApiClientIds">
           <ReferenceArrayInput
             label=""
             source="allowedApiClientIds"
@@ -470,6 +480,8 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
             <AutocompleteArrayInput
               optionText="name"
               inputType={type}
+              resource={resource}
+              source="allowedApiClientIds"
               helperText="The list of API clients for which access to the series is allowed, access is denied for other API clients. Leave the field empty if access is allowed for all API clients."
             />
           </ReferenceArrayInput>
@@ -484,6 +496,8 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
             <AutocompleteArrayInput
               optionText="name"
               inputType={type}
+              resource={resource}
+              source="forbiddenApiClientIds"
               helperText="List of API clients for which access to the series is prohibited"
             />
           </ReferenceArrayInput>

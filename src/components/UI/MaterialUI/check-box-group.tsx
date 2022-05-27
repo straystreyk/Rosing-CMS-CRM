@@ -2,6 +2,7 @@ import * as React from "react";
 import { FormControlLabel, Radio } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { labelStyles } from "../../Inputs/styles";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../../constants/style-constants";
 
 const useStyles = makeStyles({
   CheckBoxGroup: {
@@ -15,6 +16,9 @@ const useStyles = makeStyles({
       marginRight: 5,
     },
     "& span.MuiTypography-root": { ...labelStyles, marginBottom: "unset" },
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
+      marginBottom: 5,
+    },
   },
 });
 

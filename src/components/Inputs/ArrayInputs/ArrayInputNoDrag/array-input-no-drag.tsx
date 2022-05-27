@@ -136,18 +136,16 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                               variant="text"
                               onClick={() => fieldProps.fields.remove(index)}
                               customColor="#D21C1C"
-                            >
-                              Delete
-                            </StandardButton>
+                              text="Delete"
+                            />
                             <StandardButton
                               type="button"
                               variant="text"
                               startIcon={<CreateIcon color="#005AA3" />}
                               onClick={() => fieldProps.fields.push(undefined)}
                               color="secondary"
-                            >
-                              Add another one
-                            </StandardButton>
+                              text="Add another one"
+                            />
                           </div>
                         </React.Fragment>
                       );
@@ -162,9 +160,8 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                           startIcon={<CreateIcon color="#005AA3" />}
                           onClick={() => fieldProps.fields.push(initialPushObject ?? undefined)}
                           color="secondary"
-                        >
-                          Add another one
-                        </StandardButton>
+                          text="Add another one"
+                        />
                       </div>
                     ) : null}
                   </>

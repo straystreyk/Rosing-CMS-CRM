@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 import { EditIcon, TimeIcon } from "../../constants/icons";
 import { Breadcrumbs } from "../Breadcrumbs/breadcrumbs";
-import { EditButton } from "../UI/RA/edit-button";
 import { DeleteButton } from "../UI/RA/delete-button";
 import { StandardButton } from "../UI/Buttons/standard-button";
 import { Link } from "react-router-dom";
@@ -146,9 +145,8 @@ export const ResourceTitle: React.FC<TitleProps> = ({
                       customColor="var(--primary-button-default)"
                       startIcon={<EditIcon color="var(--primary-button-default)" />}
                       to={props.basePath + `/${props.record.id}`}
-                    >
-                      Edit
-                    </StandardButton>
+                      text="Edit"
+                    />
                     <DeleteButton redirect={props.basePath} record={props.record} />
                   </div>
                 )}

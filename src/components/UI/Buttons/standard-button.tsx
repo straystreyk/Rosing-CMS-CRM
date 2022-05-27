@@ -1,13 +1,15 @@
 import * as React from "react";
-import { Button, ButtonProps } from "@material-ui/core";
+import { Button, ButtonProps, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import cn from "classnames";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../../constants/style-constants";
 
 interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
   customColor?: string;
   variant?: "text" | "outlined" | "contained" | "textWithBg" | "icon" | undefined;
   component?: any;
   to?: string;
+  text?: string;
 }
 
 const useStyles = makeStyles({
@@ -57,9 +59,11 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
   endIcon,
   className,
   style,
+  text,
   ...props
 }) => {
   const classes = useStyles();
+  // const matches = useMediaQuery(`(max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`);
 
   return (
     <Button
@@ -78,6 +82,7 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
       )}
       {...props}
     >
+      {text}
       {children}
     </Button>
   );

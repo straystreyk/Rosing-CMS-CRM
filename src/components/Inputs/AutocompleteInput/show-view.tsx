@@ -15,6 +15,7 @@ import {
 } from "../../Providers/custom-requests";
 import { Resource } from "../StandatdInputs/SelectInput/show-view";
 import { Link } from "react-router-dom";
+import { GET_ONE_EPG_SOURCE } from "../../../containers/MediaContent/TV/TVShows/EPGSources/requests";
 
 const useStyles = makeStyles({
   label: labelStyles,
@@ -55,6 +56,12 @@ const ShowView: React.FC<InputProps> = (props: InputProps) => {
       case "externalCatalogId":
         return values[props.source] ? (
           <Resource query={GET_ONE_EXTERNAL_CATALOG} resourceId={values[props.source]} />
+        ) : (
+          <div className="empty">Not filled in</div>
+        );
+      case "epgSourceId":
+        return values[props.source] ? (
+          <Resource query={GET_ONE_EPG_SOURCE} resourceId={values[props.source]} />
         ) : (
           <div className="empty">Not filled in</div>
         );

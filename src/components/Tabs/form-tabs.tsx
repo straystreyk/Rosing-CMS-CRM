@@ -2,6 +2,7 @@ import * as React from "react";
 import { Box, Tab, Tabs } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import cn from "classnames";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
 
 interface FormTabProps {
   labels: string[];
@@ -13,6 +14,10 @@ const useStyles = makeStyles({
     top: 48,
     zIndex: 10,
     width: "100%",
+    backgroundColor: "#fff",
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.md})`]: {
+      maxWidth: "calc(100vw - 48px)",
+    },
   },
   FormTab: {
     paddingLeft: 0,
@@ -28,9 +33,13 @@ const useStyles = makeStyles({
     margin: "0 -20px",
     padding: "0 20px",
     backgroundColor: "#fff",
+    height: 48,
     "& .MuiTabs-flexContainer": {
-      overflow: "auto",
+      overflow: "visible",
       alignItems: "center",
+    },
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.md})`]: {
+      maxWidth: "calc(100vw - 48px)",
     },
   },
 });
@@ -102,13 +111,11 @@ export const FormTabs: React.FC<FormTabProps> = React.memo(({ labels, children }
   }, [tabRef, checkTabPosition]);
 
   return (
-    <div ref={tabRef} style={{ height: tabRef?.current?.offsetHeight, flexGrow: 1 }}>
+    <div ref={tabRef} className={classes.FormTabWrapper}>
       <Box className={cn(fixed && classes.FixedTabsActive)}>
         <Tabs
           value={value}
           onChange={(e, newValue: number) => setValue(newValue)}
-          className={classes.FormTabWrapper}
-          variant="scrollable"
           scrollButtons="auto"
         >
           {labels.map((label: string, index: number) => {

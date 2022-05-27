@@ -32,6 +32,8 @@ const REVERSED_EPISODES_ORDER = [
 ];
 const FIXED_HEADER_OFFSET = 130;
 
+const initialPushObject = { metadata: [] };
+
 const Season: React.FC<{
   parentSourceWithIndex?: string;
   parentSource?: string;
@@ -137,6 +139,8 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
     }
   }, [formState.submitFailed]);
 
+  console.log(formState.values);
+
   return (
     <>
       {type !== "create" && <Season resource={resource} type={type} />}
@@ -146,7 +150,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           getItemLabel={alwaysEmptyString}
           ChildComponent={Season}
           resource={resource}
-          initialPushObject={{ metadata: [] }}
+          initialPushObject={initialPushObject}
           itemClass={classes.ArrayInputItemStyles}
           inputClass={classes.ArrayInputWrapper}
           inputType={type}

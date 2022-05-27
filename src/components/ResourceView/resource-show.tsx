@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Box } from "@material-ui/core";
-import { Edit, ShowProps as ShowPropsRA } from "react-admin";
+import { Backdrop, Box } from "@material-ui/core";
+import { Edit, ShowProps as ShowPropsRA, useLoading } from "react-admin";
 import { EditForm } from "./FormWithRedirect";
+import { MainLoader } from "../MainLoader";
 
 const EmptyToolbar = () => <></>;
 
@@ -11,7 +12,10 @@ interface ShowProps extends ShowPropsRA {
   basePath?: string;
 }
 
+const LOADER_SIZE = 50;
+
 export const ResourceShow: React.FC<ShowProps> = (props) => {
+  const loading = useLoading();
   return (
     <>
       <Edit actions={<EmptyToolbar />} component="div" title={""} {...props}>
@@ -27,6 +31,11 @@ export const ResourceShow: React.FC<ShowProps> = (props) => {
           </Box>
         </EditForm>
       </Edit>
+      {loading && (
+        <Backdrop style={{ zIndex: 5000 }} open={loading}>
+          <MainLoader flex size={LOADER_SIZE} centered />
+        </Backdrop>
+      )}
     </>
   );
 };

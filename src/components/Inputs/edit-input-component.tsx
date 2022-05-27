@@ -7,6 +7,7 @@ import { AcceptFilterIcon, CancelFilterIcon, EditIcon } from "../../constants/ic
 import { makeStyles, Tooltip } from "@material-ui/core";
 import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
 
 const useStyles = makeStyles((theme) => ({
   ShowWrapper: {
@@ -19,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
     "&:hover .ShowEditButton": {
       opacity: 1,
       pointerEvents: "all",
+    },
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`]: {
+      "& .ShowEditButton": {
+        opacity: 1,
+        pointerEvents: "all",
+      },
     },
   },
   ShowEditButtonsWrapper: {
@@ -52,8 +59,8 @@ export const EditInputComponent: React.FC<any> = ({
   borderOff,
   ...props
 }) => {
-  const { values } = useFormState();
   const form = useForm();
+  const { values } = useFormState();
   const [mutate, { loading, error, data }] = useMutation();
   const [showInput, setShowInput] = React.useState(false);
   const [initialValue, setInitialValue] = React.useState(values[props.source]);
@@ -80,7 +87,7 @@ export const EditInputComponent: React.FC<any> = ({
     await mutate({
       type: "update",
       resource: props.resource,
-      payload: { id: values.id, data: { ...values, [props.source]: values[props.source] } },
+      payload: { id: values.id, data: { ...values, [props.source]: values[props.source] ?? null } },
     });
 
     setShowInput(false);
@@ -127,18 +134,16 @@ export const EditInputComponent: React.FC<any> = ({
             customColor="var(--accent-color)"
             variant="text"
             onClick={approve}
-          >
-            Save
-          </StandardButton>
+            text="Save"
+          />
           <StandardButton
             type="button"
             color="secondary"
             variant="text"
             startIcon={<CancelFilterIcon color="#005AA3" />}
             onClick={cancelEdit}
-          >
-            Cancel
-          </StandardButton>
+            text="Cancel"
+          />
         </div>
       ) : (
         <>

@@ -33,6 +33,11 @@ const useStyles = makeStyles({
       width: "100%",
     },
   },
+  IDField: {
+    "& p": {
+      wordBreak: "break-all",
+    },
+  },
   ShowMoreButton: {
     position: "absolute",
     bottom: 1,
@@ -107,7 +112,13 @@ const ShowView: React.FC<InputProps> = (props) => {
   return (
     <div className={classes.TextInputStyles}>
       <label>{props.label}</label>
-      <div className={cn(classes.TextInputShowValue, activeText && "active")}>
+      <div
+        className={cn(
+          classes.TextInputShowValue,
+          props.source.includes("Id") || props.source === "id" ? classes.IDField : "",
+          activeText && "active"
+        )}
+      >
         <p ref={ref}>{getValue(props.source)}</p>
         {isBigText && !activeText && (
           <button onClick={showText} className={classes.ShowMoreButton}>
