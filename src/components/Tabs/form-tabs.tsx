@@ -15,8 +15,13 @@ const useStyles = makeStyles({
     zIndex: 10,
     width: "100%",
     backgroundColor: "#fff",
-    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.md})`]: {
-      maxWidth: "calc(100vw - 48px)",
+    padding: "0 24px",
+    margin: "0 -24px",
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
+      left: 0,
+      "& .MuiTabs-root": {
+        padding: "0 24px",
+      },
     },
   },
   FormTab: {
@@ -38,7 +43,7 @@ const useStyles = makeStyles({
       overflow: "visible",
       alignItems: "center",
     },
-    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.md})`]: {
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
       maxWidth: "calc(100vw - 48px)",
     },
   },
@@ -116,7 +121,8 @@ export const FormTabs: React.FC<FormTabProps> = React.memo(({ labels, children }
         <Tabs
           value={value}
           onChange={(e, newValue: number) => setValue(newValue)}
-          scrollButtons="auto"
+          variant="scrollable"
+          scrollButtons="off"
         >
           {labels.map((label: string, index: number) => {
             return (

@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "80vh",
     display: "flex",
     position: "relative",
+    overflow: "visible",
     "& img": {
       width: "100%",
       height: "100%",
@@ -410,8 +411,7 @@ export const ImageUploaderV2: React.FC<{
     const { values } = useFormState();
     const classes = useStyles();
     const notify = useNotify();
-    const form = useForm();
-    const [mutate, { loading, error, data }] = useMutation();
+    const [mutate, { error, data }] = useMutation();
     const [edit, setEdit] = React.useState(inputType !== "show");
     const [showSlider, setShowSlider] = React.useState(false);
     const [initialValue, setInitialValue] = React.useState(values[source]);

@@ -79,7 +79,7 @@ export const ModalMUI: React.FC<ModalMuiProps> = ({
                 {description && <div className={classes.ModalDescription}>{description}</div>}
               </div>
             )}
-            {children}
+            <div className={classes.PaperContent}>{children}</div>
           </div>
         </Fade>
       </Modal>

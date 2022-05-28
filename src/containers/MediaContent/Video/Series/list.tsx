@@ -57,6 +57,7 @@ export const List: React.FC<ShowProps> = (props) => {
               variant="text"
               customColor="var(--accent-color)"
               style={{ paddingLeft: 0, paddingRight: 0 }}
+              text={record?.seasons.length ? `Seasons (${record?.seasons.length})` : "Add seasons"}
               onClick={() =>
                 history.push(
                   record?.seasons.length
@@ -64,9 +65,7 @@ export const List: React.FC<ShowProps> = (props) => {
                     : `/media_content/video/series/${record?.id}/seasons/create`
                 )
               }
-            >
-              {record?.seasons.length ? `Seasons (${record?.seasons.length})` : "Add seasons"}
-            </StandardButton>
+            ></StandardButton>
           </>
         )}
       />

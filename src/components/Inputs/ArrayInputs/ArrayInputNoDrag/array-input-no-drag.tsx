@@ -131,7 +131,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                           )}
                           <div className={classes.ArrayInputButtonsWrapper}>
                             <StandardButton
-                              startIcon={<DeleteIcon color={"#D21C1C"} />}
+                              startIcon={<DeleteIcon color="#D21C1C" />}
                               type="button"
                               variant="text"
                               onClick={() => fieldProps.fields.remove(index)}

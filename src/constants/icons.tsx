@@ -29,14 +29,14 @@ export const CancelFilterIcon = ({ color }: IconProps) => (
 );
 
 export const AcceptFilterIcon = ({ color }: IconProps) => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      d="M4.7373 7.94844L7.15432 10.3655M11.6032 5.91357L7.15339 10.3634"
+      d="M6.73755 9.94844L9.15457 12.3655M13.6035 7.91357L9.15364 12.3634"
       stroke={color}
       strokeWidth="1.3"
       strokeLinecap="round"
     />
-    <circle cx="8" cy="8" r="7.35" stroke={color} strokeWidth="1.3" />
+    <circle cx="10" cy="10" r="7.35" stroke={color} strokeWidth="1.3" />
   </svg>
 );
 

@@ -163,6 +163,8 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           reference="media_content/attributes/genres"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
+          suggestionLimit={1}
+          limitChoicesToValue={1}
         >
           <AutocompleteArrayInput
             optionText="name"

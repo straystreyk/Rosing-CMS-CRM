@@ -76,6 +76,9 @@ export const TableView: React.FC<ShowProps> = (props) => {
               style={{ paddingLeft: 0, paddingRight: 0 }}
               variant="text"
               customColor="var(--accent-color)"
+              text={
+                record?.episodes.length ? `Episodes (${record?.episodes.length})` : "Add episodes"
+              }
               onClick={() =>
                 history.push(
                   record?.episodes.length
@@ -83,9 +86,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
                     : `/media_content/video/seasons/${record?.id}/episodes/create`
                 )
               }
-            >
-              {record?.episodes.length ? `Episodes (${record?.episodes.length})` : "Add episodes"}
-            </StandardButton>
+            ></StandardButton>
             {record?.published ? (
               <button>
                 <PublishedIcons />

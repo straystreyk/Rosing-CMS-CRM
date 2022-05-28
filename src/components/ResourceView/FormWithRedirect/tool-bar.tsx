@@ -8,8 +8,10 @@ import cn from "classnames";
 import { SecondaryButton } from "../../UI/Buttons";
 import { AcceptFilterIcon, CancelFilterIcon, PlusIcon } from "../../../constants/icons";
 import { SaveButton } from "../../UI/RA/save-button";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 import { FormToolBarStyles } from "./styles";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../../constants/style-constants";
+import { StandardButton } from "../../UI/Buttons/standard-button";
 
 const useStyles = makeStyles(FormToolBarStyles);
 
@@ -57,10 +59,14 @@ export const Toolbar = (props: ToolbarProps) => {
           mounted && classes.Transition
         )}
       >
-        <SecondaryButton
+        <StandardButton
           startIcon={<CancelFilterIcon color="var(--primary-button-default)" />}
+          variant="outlined"
           text="Cancel"
           onClick={cancel}
+          color="secondary"
+          customColor="var(--primary-button-default)"
+          onMobileView
         />
         <SaveButton
           icon={<AcceptFilterIcon color="#fff" />}

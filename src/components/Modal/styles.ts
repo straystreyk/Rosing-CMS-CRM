@@ -23,9 +23,12 @@ export const ModalStyles: Styles<Theme, {}, string> = {
     ...scrollBarStyles,
     [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
       width: "100vw",
-      height: "calc(100vh - 48px)",
-      maxHeight: "unset",
+      maxHeight: "100vh",
     },
+  },
+  PaperContent: {
+    display: "flex",
+    flexDirection: "column",
   },
   ExitIcon: {
     position: "absolute",

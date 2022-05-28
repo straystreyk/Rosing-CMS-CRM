@@ -1,7 +1,7 @@
 import { Styles } from "@material-ui/core/styles/withStyles";
 import { scrollBarStyles } from "../Themes/main-styles";
 import { Theme } from "@material-ui/core";
-import { TopToolBar } from "../../constants/style-constants";
+import { MEDIA_QUERIES_BREAKPOINTS, TopToolBar } from "../../constants/style-constants";
 
 export const DatagridStyles: Styles<Theme, {}, string> = {
   List: {
@@ -77,6 +77,7 @@ export const TableStyles: Styles<Theme, {}, string> = {
   },
   TableCell: {
     border: "none",
+    position: "relative",
   },
   TableRow: {
     borderBottom: "1px solid var(--secondary-color-disable)",
@@ -117,5 +118,11 @@ export const TableStyles: Styles<Theme, {}, string> = {
   ExpandIcon: {
     marginLeft: 5,
     padding: "5px 10px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    position: "absolute",
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
+      right: 0,
+    },
   },
 };

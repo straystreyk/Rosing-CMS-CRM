@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Button, ButtonProps, useMediaQuery } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import cn from "classnames";
+
+import { Button, ButtonProps, useMediaQuery } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../../constants/style-constants";
 
 interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
@@ -10,11 +12,12 @@ interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
   component?: any;
   to?: string;
   text?: string;
+  onMobileView?: boolean;
 }
 
 const useStyles = makeStyles({
   StandardButton: {
-    padding: "8px 20px",
+    padding: "6px 16px",
     position: "relative",
     fontSize: "14px",
     textTransform: "none",
@@ -47,6 +50,14 @@ const useStyles = makeStyles({
     padding: "4px 6px",
     minWidth: "unset",
   },
+  MobileView: {
+    "& .MuiButton-label > .MuiButton-startIcon": {
+      margin: 0,
+    },
+  },
+  OutlineStyle: {
+    padding: "5px 16px",
+  },
 });
 
 export const StandardButton: React.FC<StandardButtonProps> = ({
@@ -60,10 +71,11 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
   className,
   style,
   text,
+  onMobileView,
   ...props
 }) => {
   const classes = useStyles();
-  // const matches = useMediaQuery(`(max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`);
+  const isMobile = useMediaQuery(`(max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`);
 
   return (
     <Button
@@ -71,18 +83,24 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
       onClick={onClick}
       startIcon={startIcon}
       endIcon={endIcon}
-      style={{ color: customColor ? customColor : "", ...style }}
+      style={{
+        color: customColor ? customColor : "",
+        border: variant === "outlined" ? `1px solid ${customColor}` : "",
+        ...style,
+      }}
       className={cn(
         classes.StandardButton,
         "StandardButton",
         variant === "text" && classes.TextButton,
         variant === "textWithBg" && classes.TextWithBG,
         variant === "icon" && classes.IconStyle,
+        variant === "outlined" && classes.OutlineStyle,
+        isMobile && onMobileView && classes.MobileView,
         className && className
       )}
       {...props}
     >
-      {text}
+      {isMobile && onMobileView ? null : text}
       {children}
     </Button>
   );

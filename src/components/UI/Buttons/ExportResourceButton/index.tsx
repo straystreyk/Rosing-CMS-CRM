@@ -36,7 +36,27 @@ const ExportIcon = () => (
 
 export const ExportResourceButton = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  // const [socket, setSocket] = React.useState<WebSocket | null>(null);
   const open = Boolean(anchorEl);
+
+  // React.useEffect(() => {
+  //   const newSocket = new WebSocket("ws://192.168.34.0:3000/cable");
+  //   setSocket(newSocket);
+  // }, []);
+  //
+  // React.useEffect(() => {
+  //   if (socket) {
+  //     socket.onopen = () => {
+  //       socket.send(
+  //         JSON.stringify({ command: "subscribe", identifier: '{"channel":"ExportChannel"}' })
+  //       );
+  //     };
+  //
+  //     socket.onmessage = (msg) => {
+  //       console.log(JSON.parse(msg.data).message);
+  //     };
+  //   }
+  // }, [socket]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
