@@ -4,8 +4,9 @@ import { makeStyles } from "@material-ui/core";
 import { ToolbarProps } from "../../../../components/DatagridList/custom-datagrid-types";
 import { BackArrowTitle, ResourceAddIcon } from "../../../../constants/icons";
 import { MainLoader } from "../../../../components/MainLoader";
-import { CreateButton } from "../../../../components/UI/RA/create-button";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { TopToolBar } from "../../../../constants/style-constants";
 
 const LOADER_SIZE = 15;
 const useStyles = makeStyles({
@@ -29,6 +30,7 @@ const useStyles = makeStyles({
       "&:first-child": {},
     },
   },
+  TopToolBar,
 });
 
 export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource, ...rest }) => {
@@ -40,7 +42,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource, ...rest })
   return (
     <div className={classes.ToolBarWrapper}>
       <div className={classes.Title}>
-        <button onClick={() => history.push("/" + resource.split("/:")[0])}>
+        <button onClick={() => history.goBack()}>
           <BackArrowTitle color="var(--primary-text-default)" />
         </button>
         {translate(`resources.${resource}.name`)} (
@@ -53,13 +55,14 @@ export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource, ...rest })
         )}
         )
       </div>
-      <div className={classes.ActionsButtons}>
-        <CreateButton
-          label={"Create " + translate(`resources.${resource}.name`).toLowerCase()}
+      <div className={classes.TopToolBar}>
+        <StandardButton
+          startIcon={<ResourceAddIcon color="var(--accent-color)" />}
+          text={"Create " + translate(`resources.${resource}.name`).toLowerCase()}
           variant="text"
           customColor="var(--accent-color)"
           to={basePath + "/create"}
-          icon={<ResourceAddIcon color="var(--accent-color)" />}
+          component={Link}
         />
       </div>
     </div>

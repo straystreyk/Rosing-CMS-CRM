@@ -62,8 +62,8 @@ interface ModalTVProgramsProps {
   open: boolean;
   handleClose: () => void;
   data: EPG[] | null;
-  title?: string | React.ReactNode;
-  description?: string | React.ReactNode;
+  title?: string | React.ReactElement;
+  description?: string | React.ReactElement;
 }
 
 export const useTVPrograms: () => {

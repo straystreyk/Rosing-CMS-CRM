@@ -24,10 +24,7 @@ export const TableFieldsStyles: any = {
   },
   IDField: { wordBreak: "break-all" },
   DatagridWrapperWithoutScroll: {
-    width: "unset",
-    "&.active": {
-      width: "unset",
-    },
+    "&.active": {},
     "& table": {
       minWidth: "unset",
     },

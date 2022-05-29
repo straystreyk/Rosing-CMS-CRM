@@ -83,6 +83,7 @@ const Season: React.FC<{
           label="Slug"
           inputType={props.type}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.slug` : "slug"}
+          offFastEdit
           fullWidth
         />
         <RichTextInput
@@ -118,6 +119,7 @@ const Season: React.FC<{
           fullWidth
         />
         <RadioButtonGroupInput
+          resource={resource}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.published` : "published"}
           label="Publishing"
           initialValue={false}
@@ -138,8 +140,6 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
       scrollToErrorInput(FIXED_HEADER_OFFSET);
     }
   }, [formState.submitFailed]);
-
-  console.log(formState.values);
 
   return (
     <>

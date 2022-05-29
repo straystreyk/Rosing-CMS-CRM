@@ -1,6 +1,6 @@
 import * as React from "react";
 import { MainLoader } from "../MainLoader";
-import { loadPlayerAssets, gePlayerAssetsLoaded } from "../../helpers";
+import { loadPlayerAssets, getPlayerAssetsLoaded } from "../../helpers";
 import { makeStyles } from "@material-ui/core";
 import { useQuery } from "@apollo/client";
 import { authClient } from "../Providers";
@@ -10,6 +10,9 @@ const useStyles = makeStyles({
   Player: {
     marginTop: 30,
     marginBottom: 30,
+  },
+  LoaderWrapper: {
+    display: "flex",
   },
 });
 
@@ -145,7 +148,8 @@ const UnsafeSPBTVPlayer: React.FC<{ streamUrl: string }> = ({ streamUrl }) => {
 };
 
 export const SPBTVPlayer: React.FC<{ streamSourceId: string }> = ({ streamSourceId }) => {
-  const [loaded, updateLoaded] = React.useState(gePlayerAssetsLoaded);
+  const [loaded, updateLoaded] = React.useState(getPlayerAssetsLoaded);
+  const classes = useStyles();
 
   const { loading, error, data } = useQuery(GET_STREAM, {
     client: authClient,
@@ -166,7 +170,9 @@ export const SPBTVPlayer: React.FC<{ streamSourceId: string }> = ({ streamSource
   if (error) return <>error</>;
 
   return !loaded || loading ? (
-    <MainLoader size={50} flex centered />
+    <div className={classes.LoaderWrapper}>
+      <MainLoader size={50} centered />
+    </div>
   ) : (
     <UnsafeSPBTVPlayer streamUrl={data.stream.url} />
   );

@@ -36,7 +36,6 @@ const SeasonExpand: React.FC<{ resource: string }> = ({ resource, ...props }) =>
 };
 
 export const TableView: React.FC<ShowProps> = (props) => {
-  const history = useHistory();
   const classes = useStyles();
   const { loading, approve } = useTableActions(props);
 
@@ -48,9 +47,9 @@ export const TableView: React.FC<ShowProps> = (props) => {
       resource={props.resource}
       expand={<SeasonExpand {...props} />}
       datagridWrapperClassName={classes.DatagridWrapperWithoutScroll}
-      optimized
-      offDescription
       isDependentModel
+      offDescription
+      optimized
     >
       <FunctionField
         label="Name"
@@ -79,14 +78,14 @@ export const TableView: React.FC<ShowProps> = (props) => {
               text={
                 record?.episodes.length ? `Episodes (${record?.episodes.length})` : "Add episodes"
               }
-              onClick={() =>
-                history.push(
-                  record?.episodes.length
-                    ? `/media_content/video/seasons/${record?.id}/episodes`
-                    : `/media_content/video/seasons/${record?.id}/episodes/create`
-                )
+              to={
+                record?.episodes.length
+                  ? `/media_content/video/seasons/${record?.id}/episodes`
+                  : `/media_content/video/seasons/${record?.id}/episodes/create`
               }
-            ></StandardButton>
+              component={Link}
+              onMobileView
+            />
             {record?.published ? (
               <button>
                 <PublishedIcons />

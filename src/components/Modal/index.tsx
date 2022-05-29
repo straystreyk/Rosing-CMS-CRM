@@ -9,8 +9,8 @@ const useStyles = makeStyles(ModalStyles);
 interface ModalMuiProps {
   open: boolean;
   handleClose: () => void;
-  title?: string | React.ReactNode | React.ReactElement;
-  description?: string | React.ReactNode | React.ReactElement;
+  title?: string | React.ReactElement;
+  description?: string | React.ReactElement;
   offExitIcon?: boolean;
   classNamesOverrides?: {
     ModalOverride?: string;

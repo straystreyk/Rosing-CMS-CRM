@@ -51,6 +51,7 @@ const useStyles = makeStyles({
     minWidth: "unset",
   },
   MobileView: {
+    minWidth: "unset",
     "& .MuiButton-label > .MuiButton-startIcon": {
       margin: 0,
     },

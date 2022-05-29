@@ -31,5 +31,5 @@ const scriptPaths = ["/dash.all.min.js", "/hls.min.js", "/player.all.js", "/play
 const basePath = "https://ru.spbtv.com/spbtvplayer/latest";
 
 export const loadPlayerAssets = () => loadScripts(basePath, scriptPaths);
-export const gePlayerAssetsLoaded = (): boolean =>
+export const getPlayerAssetsLoaded = (): boolean =>
   scriptPaths.every((scriptPath) => !!cache[basePath + scriptPath]);
