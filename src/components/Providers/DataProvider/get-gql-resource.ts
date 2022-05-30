@@ -8,6 +8,8 @@ export const getGqlResource = (resource: string) => {
       return "Stream";
     case "region":
       return "Region";
+    case "images":
+      return "Image";
     case "media_content/tv/channels/channels/:channelId/channel_versions":
       return "ChannelVersion";
     case "media_content/tv/channels/channel_versions/:channelVersionId/:epgSourceId/:startAt/program_events":

@@ -9,24 +9,6 @@ export const ALL_COUNTRIES = gql`
   }
 `;
 
-export const ALL_PRODUCTION_COUNTRIES = gql`
-  query allProductionCountries {
-    items: allProductionCountries {
-      id
-      name
-    }
-  }
-`;
-
-export const ALL_GENRES = gql`
-  query allGenres {
-    items: allGenres {
-      id
-      name
-    }
-  }
-`;
-
 export const ALL_GENRES_FILTER = gql`
   query allGenres {
     items: allGenres {
@@ -157,26 +139,6 @@ export const ALL_ROLES = gql`
   query allRoles {
     items: allRoles {
       roleName
-    }
-  }
-`;
-
-export const ALL_PEOPLE = gql`
-  query allPeople {
-    items: allPeople {
-      fullName
-      kinopoiskId
-      imdbId
-      id
-    }
-  }
-`;
-
-export const ALL_RIGHT_HOLDERS = gql`
-  query allRightHolders {
-    items: allRightHolders {
-      id
-      name
     }
   }
 `;

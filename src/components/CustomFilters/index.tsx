@@ -93,6 +93,8 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
     activeFilters,
   });
 
+  console.log(activeFilters);
+
   const open = Boolean(anchorEl);
   const allActiveFiltersWithValue = Object.keys(filterValues).filter((el) => {
     if (el !== "q" && el !== "searchRule") {
@@ -107,7 +109,7 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
   return (
     <div className={classes.CustomFiltersWrapper}>
       <SearchFilters />
-      {initialFilters.length ? (
+      {initialFilters.length || activeFilters.length ? (
         <div className={classes.RoundedFiltersWrapper}>
           <FilterContext.Provider value={{ setActiveFilters, setInitialFilters, filters }}>
             {activeFilters.length
@@ -118,15 +120,17 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
           </FilterContext.Provider>
 
           <>
-            <StandardButton
-              variant="text"
-              color="secondary"
-              startIcon={<PlusIcon color="var(--primary-button-default)" />}
-              className="filterButton"
-              onClick={handleClick}
-            >
-              Add Filter
-            </StandardButton>
+            {initialFilters && initialFilters.length ? (
+              <StandardButton
+                variant="text"
+                color="secondary"
+                startIcon={<PlusIcon color="var(--primary-button-default)" />}
+                className="filterButton"
+                onClick={handleClick}
+              >
+                Add Filter
+              </StandardButton>
+            ) : null}
             {allActiveFiltersWithValue.length !== 0 && (
               <StandardButton
                 variant="text"

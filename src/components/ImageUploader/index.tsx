@@ -15,7 +15,7 @@ import {
   LoopIcon,
   UploadIcon,
 } from "../../constants/icons";
-import { TextInput } from "../Inputs";
+import { AutocompleteArrayInput, TextInput } from "../Inputs";
 import { SelectButton } from "../UI/Buttons/select-button";
 import { InfoComponent } from "../UI/Info/info-component";
 import { MainLoader } from "../MainLoader";
@@ -24,12 +24,13 @@ import { Slider } from "../Slider";
 import { GET_IMAGES_TYPES } from "./requests";
 import { STATIC_PARAM } from "../Providers/custom-requests";
 import { StaticParam } from "../StaticParam";
-import { useMutation } from "react-admin";
+import { ReferenceArrayInput, ReferenceInput, useMutation } from "react-admin";
 import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
 import { EmptyShow } from "../Inputs/ArrayInputs/Arrayinput/show-view";
 import { ModalMUI } from "../Modal";
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
+import { AutocompleteInput } from "../Inputs/AutocompleteInput";
 
 const useStyles = makeStyles((theme) => ({
   ImagesWrapper: {

@@ -101,19 +101,6 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           helperText="The serial number in the general list of films. Can be entered manually when creating or editing, the positions of the remaining films will be updated accordingly. If the field is left empty, the last sequential number will be assigned to the movie."
         />
         <NumberInput source="number" label="Number" resource={resource} inputType={type} />
-        <ArrayInputNoDrag
-          resource={resource}
-          inputType={type}
-          helperText={
-            "A pair of custom fields that can be used for filtering. You can add multiple pairs."
-          }
-          ChildComponent={MetaData}
-          source="metadata"
-          label="Metadata"
-          groupInputs
-          switchable
-          fullWidth
-        />
       </FormSection>
       <FormSection
         text="The images are used as a background or cover for the visual representation of the movie in the application and help the user make a choice. To make the background or cover look attractive, upload an image with an aspect ratio and a minimum resolution according to the selected type. If the image does not match the selected type, the receiver will process the image itself, which may cause visual appeal to be lost."

@@ -7,6 +7,7 @@ import {
 } from "../../../../components/CustomFilters/constants";
 import { MultipleFiltersList } from "../../../../components/CustomFilters/MultipleFiltersList";
 import { ALL_GENRES_FILTER } from "../../../../components/Providers/custom-requests";
+import { DateFilter } from "../../../../components/CustomFilters/DateFilter";
 
 export const seriesFilters: FilterTemplate[] = [
   {
@@ -14,7 +15,6 @@ export const seriesFilters: FilterTemplate[] = [
     choices: PUBLISHED_CHOICES,
     label: "Publish",
     source: "published",
-    defaultActive: true,
   },
   {
     component: ChoicesFilter,
@@ -33,5 +33,17 @@ export const seriesFilters: FilterTemplate[] = [
     choices: MARKERS_CHOICES,
     label: "Labels",
     source: "markers",
+  },
+  {
+    component: DateFilter,
+    label: "Created At",
+    source: "createdAt",
+    defaultActive: true,
+  },
+  {
+    component: DateFilter,
+    label: "Updated At",
+    source: "updatedAt",
+    defaultActive: true,
   },
 ];
