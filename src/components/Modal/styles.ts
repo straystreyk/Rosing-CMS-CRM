@@ -29,6 +29,7 @@ export const ModalStyles: Styles<Theme, {}, string> = {
   PaperContent: {
     display: "flex",
     flexDirection: "column",
+    width: "100%",
   },
   ExitIcon: {
     position: "absolute",

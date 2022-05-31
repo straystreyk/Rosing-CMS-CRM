@@ -203,7 +203,7 @@ const Episode: React.FC<{
           <ImageUploaderV2
             wrapperClassName={classes.EpisodeImage}
             requestVariables={IMAGE_REQUEST_VARS}
-            sourceIds={`${parentSourceWithIndex}.imageIds`}
+            sourceIds={parentSourceWithIndex ? `${parentSourceWithIndex}.imageIds` : "imageIds"}
             source={parentSourceWithIndex ? `${parentSourceWithIndex}.images` : "images"}
             index={index}
             resource={resource}

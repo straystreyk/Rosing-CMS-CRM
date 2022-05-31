@@ -2,6 +2,8 @@ import * as React from "react";
 import { StandardButton } from "../standard-button";
 import { ArrayInputItemArrow } from "../../../../constants/icons";
 import { Menu, MenuItem } from "@material-ui/core";
+import { authClient } from "../../../Providers";
+import { gql } from "@apollo/client";
 
 const ExportIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,27 +38,8 @@ const ExportIcon = () => (
 
 export const ExportResourceButton = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  // const [socket, setSocket] = React.useState<WebSocket | null>(null);
+  const [socket, setSocket] = React.useState<WebSocket | null>(null);
   const open = Boolean(anchorEl);
-
-  // React.useEffect(() => {
-  //   const newSocket = new WebSocket("ws://192.168.34.0:3000/cable");
-  //   setSocket(newSocket);
-  // }, []);
-  //
-  // React.useEffect(() => {
-  //   if (socket) {
-  //     socket.onopen = () => {
-  //       socket.send(
-  //         JSON.stringify({ command: "subscribe", identifier: '{"channel":"ExportChannel"}' })
-  //       );
-  //     };
-  //
-  //     socket.onmessage = (msg) => {
-  //       console.log(JSON.parse(msg.data).message);
-  //     };
-  //   }
-  // }, [socket]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -65,6 +48,23 @@ export const ExportResourceButton = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleItem = React.useCallback(async () => {
+    const mutation = gql`
+      mutation exportMovie($huy: Int) {
+        exportMovie(huy: $huy) {
+          __typename
+        }
+      }
+    `;
+
+    const result = await authClient.mutate({
+      mutation,
+      variables: { huy: 5 },
+    });
+
+    handleClose();
+  }, []);
 
   return (
     <>
@@ -85,7 +85,7 @@ export const ExportResourceButton = () => {
           "aria-labelledby": "download-basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>It will be soon (づ ◕‿◕ )づ</MenuItem>
+        <MenuItem onClick={handleItem}>It will be soon (づ ◕‿◕ )づ</MenuItem>
       </Menu>
     </>
   );

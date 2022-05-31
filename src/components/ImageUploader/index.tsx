@@ -1,7 +1,7 @@
 import * as React from "react";
 import _ from "lodash";
 import cn from "classnames";
-import { useForm, useFormState } from "react-final-form";
+import { useFormState } from "react-final-form";
 import { Button, Tooltip } from "@material-ui/core";
 import { useDropzone } from "react-dropzone";
 import { makeStyles } from "@material-ui/core";
@@ -15,7 +15,7 @@ import {
   LoopIcon,
   UploadIcon,
 } from "../../constants/icons";
-import { AutocompleteArrayInput, TextInput } from "../Inputs";
+import { TextInput } from "../Inputs";
 import { SelectButton } from "../UI/Buttons/select-button";
 import { InfoComponent } from "../UI/Info/info-component";
 import { MainLoader } from "../MainLoader";
@@ -24,13 +24,12 @@ import { Slider } from "../Slider";
 import { GET_IMAGES_TYPES } from "./requests";
 import { STATIC_PARAM } from "../Providers/custom-requests";
 import { StaticParam } from "../StaticParam";
-import { ReferenceArrayInput, ReferenceInput, useMutation } from "react-admin";
+import { useMutation } from "react-admin";
 import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
 import { EmptyShow } from "../Inputs/ArrayInputs/Arrayinput/show-view";
 import { ModalMUI } from "../Modal";
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
-import { AutocompleteInput } from "../Inputs/AutocompleteInput";
 
 const useStyles = makeStyles((theme) => ({
   ImagesWrapper: {
@@ -360,7 +359,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
             <StandardButton
               customColor="#D21C1C"
               onClick={id || imageId ? deleteImage : removeImageField}
-              startIcon={<DeleteIcon color={"#D21C1C"} />}
+              startIcon={<DeleteIcon color="#D21C1C" />}
               type="button"
               variant="text"
               text="Delete"

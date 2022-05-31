@@ -93,8 +93,6 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
     activeFilters,
   });
 
-  console.log(activeFilters);
-
   const open = Boolean(anchorEl);
   const allActiveFiltersWithValue = Object.keys(filterValues).filter((el) => {
     if (el !== "q" && el !== "searchRule") {

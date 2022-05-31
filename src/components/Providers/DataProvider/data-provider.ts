@@ -6,7 +6,7 @@ import { customBuildQuery } from "./build-query";
 
 export const dataProvider = async () => {
   const dataProvider = await buildGraphQLProvider({
-    client: authClient,
+    client: authClient as any,
     buildQuery: customBuildQuery,
   });
 

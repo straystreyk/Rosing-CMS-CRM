@@ -1,7 +1,8 @@
 import { Admin, Resource } from "react-admin";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { gql, useSubscription } from "@apollo/client";
 
-import { authProvider, i18nProvider } from "../../components/Providers";
+import { authClient, authProvider, i18nProvider } from "../../components/Providers";
 import { Layouts } from "../../components/Layout";
 import { getRoutes } from "./get-custom-routes";
 import { useApp } from "../../custom-hooks/app-component";
@@ -42,8 +43,22 @@ import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
 const { Login, Layout } = Layouts;
 
+const ExportSubs = gql`
+  subscription exportTask {
+    exportTask {
+      progress
+    }
+  }
+`;
+
 export const App = () => {
   const { dataProvider } = useApp();
+  const { data, loading } = useSubscription(ExportSubs, {
+    client: authClient,
+    variables: {},
+  });
+  console.log(loading);
+  console.log(data);
 
   if (!dataProvider) {
     return (
