@@ -43,22 +43,8 @@ import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
 const { Login, Layout } = Layouts;
 
-const ExportSubs = gql`
-  subscription exportTask {
-    exportTask {
-      progress
-    }
-  }
-`;
-
 export const App = () => {
   const { dataProvider } = useApp();
-  const { data, loading } = useSubscription(ExportSubs, {
-    client: authClient,
-    variables: {},
-  });
-  console.log(loading);
-  console.log(data);
 
   if (!dataProvider) {
     return (

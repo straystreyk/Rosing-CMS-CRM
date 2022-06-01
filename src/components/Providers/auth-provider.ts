@@ -1,23 +1,16 @@
-import { AuthProvider } from "ra-core";
+import ActionCable from "actioncable";
+import ActionCableLink from "graphql-ruby-client/subscriptions/ActionCableLink";
 
+import { AuthProvider } from "ra-core";
 import { ApolloClient, InMemoryCache, gql, createHttpLink, split } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
-import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
-import { getGraphQlEndpoint } from "./get-graph-ql-endpoint";
+import { getGraphQlEndpoints } from "./get-graph-ql-endpoint";
 import { setContext } from "@apollo/client/link/context";
-import { createClient } from "graphql-ws";
 
-const wsLink = new GraphQLWsLink(
-  createClient({
-    url: "ws://192.168.34.0:3000/cable",
-    connectionParams: {
-      authToken: localStorage.getItem("token"),
-    },
-  })
-);
+const wsLINK = new ActionCableLink({ cable: ActionCable.createConsumer(getGraphQlEndpoints().ws) });
 
 const httpLink = createHttpLink({
-  uri: getGraphQlEndpoint(),
+  uri: getGraphQlEndpoints().http,
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -36,7 +29,7 @@ const splitLinks = split(
     const definition = getMainDefinition(query);
     return definition.kind === "OperationDefinition" && definition.operation === "subscription";
   },
-  wsLink,
+  wsLINK,
   httpLink
 );
 

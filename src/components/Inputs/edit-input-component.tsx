@@ -56,6 +56,7 @@ export const EditInputComponent: React.FC<any> = ({
   componentClassName,
   ComponentShow,
   ComponentInput,
+  ChildComponent,
   borderOff,
   ...props
 }) => {
@@ -98,6 +99,12 @@ export const EditInputComponent: React.FC<any> = ({
     setShowInput(false);
   }, [props.source, form, initialValue]);
 
+  const showEditInput = React.useCallback(() => {
+    setInitialValue(values[props.source]);
+
+    setShowInput(true);
+  }, [values[props.source]]);
+
   return (
     <div
       style={{
@@ -113,7 +120,7 @@ export const EditInputComponent: React.FC<any> = ({
           fullWidth={props.fullWidth ?? false}
           helperText={props.helperText && showInput ? props.helperText : false}
           resettable={props.resettable && showInput ? props.resettable : false}
-          ChildComponent={props.ChildComponent ?? false}
+          ChildComponent={ChildComponent ?? false}
           draggable={props.draggable ?? false}
         />
       )}
@@ -149,10 +156,7 @@ export const EditInputComponent: React.FC<any> = ({
         <>
           {props.source !== "slug" && !props.offFastEdit ? (
             <Tooltip title="Fast edit" placement="left" arrow>
-              <div
-                className={cn(classes.ShowEditButton, "ShowEditButton")}
-                onClick={() => setShowInput(true)}
-              >
+              <div className={cn(classes.ShowEditButton, "ShowEditButton")} onClick={showEditInput}>
                 <EditIcon color="var(--secondary-color-default)" />
               </div>
             </Tooltip>

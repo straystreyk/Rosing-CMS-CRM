@@ -236,6 +236,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           source="externalCatalogId"
           reference="media_content/attributes/providers/content_providers"
           resource={resource}
+          fullWidth
         >
           <AutocompleteInput
             optionText="name"

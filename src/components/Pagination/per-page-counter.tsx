@@ -43,8 +43,9 @@ const useStyles = makeStyles({
 const SKELETON_WIDTH = 15;
 const SKELETON_HEIGHT = 17;
 
-export const PerPageCounter: React.FC<{ showBy?: (number | string)[] }> = ({
+export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: string }> = ({
   showBy = [15, 25, 50, 100],
+  resource,
 }) => {
   const location = useLocation();
   // const history = useHistory();
@@ -91,7 +92,7 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[] }> = ({
         ))}
       </div>
       <div className={classes.SortActions}>
-        <ExportResourceButton />
+        <ExportResourceButton resource={resource} />
         <RefreshButton />
       </div>
     </div>

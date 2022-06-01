@@ -1,9 +1,20 @@
 import * as React from "react";
 import { StandardButton } from "../standard-button";
 import { ArrayInputItemArrow } from "../../../../constants/icons";
-import { Menu, MenuItem } from "@material-ui/core";
+import { Box, CircularProgress, Menu, MenuItem, Typography } from "@material-ui/core";
 import { authClient } from "../../../Providers";
-import { gql } from "@apollo/client";
+import { gql, useSubscription } from "@apollo/client";
+
+const SUBSCRIBE_TO_EXPORT = gql`
+  subscription {
+    data: exportTaskAdded {
+      exportTask {
+        progress
+        file
+      }
+    }
+  }
+`;
 
 const ExportIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,10 +47,17 @@ const ExportIcon = () => (
   </svg>
 );
 
-export const ExportResourceButton = () => {
+export const ExportResourceButton: React.FC<{ resource: string }> = ({ resource }) => {
+  const { data } = useSubscription(SUBSCRIBE_TO_EXPORT, {
+    client: authClient,
+    variables: {},
+  });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [socket, setSocket] = React.useState<WebSocket | null>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
   const open = Boolean(anchorEl);
+
+  console.log(data);
+  console.log(isLoading);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -49,21 +67,36 @@ export const ExportResourceButton = () => {
     setAnchorEl(null);
   };
 
+  React.useEffect(() => {
+    if (data && data.data.exportTask.progress === 100) {
+      setIsLoading(false);
+    }
+    if (data && data.data.exportTask.progress !== 100) {
+      setIsLoading(true);
+    }
+  }, [data]);
+
   const handleItem = React.useCallback(async () => {
     const mutation = gql`
-      mutation exportMovie($huy: Int) {
-        exportMovie(huy: $huy) {
+      mutation exportMovie {
+        exportMovie {
           __typename
         }
       }
     `;
 
-    const result = await authClient.mutate({
-      mutation,
-      variables: { huy: 5 },
-    });
-
-    handleClose();
+    try {
+      setIsLoading(true);
+      await authClient.mutate({
+        mutation,
+        variables: {},
+      });
+    } catch (e) {
+      if (e instanceof Error) {
+        console.log(e.message);
+      }
+      setIsLoading(false);
+    }
   }, []);
 
   return (
@@ -85,7 +118,33 @@ export const ExportResourceButton = () => {
           "aria-labelledby": "download-basic-button",
         }}
       >
-        <MenuItem onClick={handleItem}>It will be soon (づ ◕‿◕ )づ</MenuItem>
+        <MenuItem disabled={isLoading} onClick={handleItem}>
+          {data && data.data.exportTask.progress !== 100 ? (
+            <Box position="relative" display="inline-flex">
+              <CircularProgress variant="determinate" value={data.data.exportTask.progress} />
+              <Box
+                top={0}
+                left={0}
+                bottom={0}
+                right={0}
+                position="absolute"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Typography variant="caption" component="div" color="textSecondary">
+                  {data.data.exportTask.progress}%
+                </Typography>
+              </Box>
+            </Box>
+          ) : null}
+          {data && data.data.exportTask.progress === 100 ? (
+            <a target="_blank" href={data.data.exportTask.file}>
+              Download file
+            </a>
+          ) : null}
+          {!data ? "Take the data (づ ◕‿◕ )づ" : null}
+        </MenuItem>
       </Menu>
     </>
   );

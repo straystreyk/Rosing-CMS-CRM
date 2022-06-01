@@ -87,7 +87,7 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
         </div>
       )}
       <Filters filters={filters} />
-      <PerPageCounter />
+      <PerPageCounter resource={props.resource} />
       <div className={cn(classes.DataGridWrapper, datagridWrapperClassName, open && "active")}>
         {children}
       </div>
