@@ -236,6 +236,7 @@ const Episode: React.FC<{
               source={
                 parentSourceWithIndex ? `${parentSourceWithIndex}.preRollCount` : "preRollCount"
               }
+              resource={resource}
               label="Number of commercials"
             />
           </GroupInputsOrigin>
@@ -246,6 +247,7 @@ const Episode: React.FC<{
           >
             <NumberInput
               inputType={inputType}
+              resource={resource}
               source={
                 parentSourceWithIndex ? `${parentSourceWithIndex}.midRollCount` : "midRollCount"
               }
@@ -253,6 +255,7 @@ const Episode: React.FC<{
             />
             <NumberInput
               inputType={inputType}
+              resource={resource}
               source={
                 parentSourceWithIndex
                   ? `${parentSourceWithIndex}.firstMidRollOffset`
@@ -263,6 +266,7 @@ const Episode: React.FC<{
             />
             <NumberInput
               inputType={inputType}
+              resource={resource}
               source={
                 parentSourceWithIndex
                   ? `${parentSourceWithIndex}.nthMidRollOffset`
@@ -283,16 +287,19 @@ const Episode: React.FC<{
                 inputType={inputType}
                 labelPlacement="start"
               />
-              {formState.values[parentSource][index] && (
-                <GroupInputsOrigin inputType={inputType}>
-                  <NumberInput
-                    label="Storage time"
-                    helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
-                    source="storageTime"
-                    inputType={inputType}
-                  />
-                </GroupInputsOrigin>
-              )}
+              {index &&
+                formState.values.episodes[index] &&
+                formState.values.episodes[index]["downloadable"] && (
+                  <GroupInputsOrigin inputType={inputType}>
+                    <NumberInput
+                      resource={resource}
+                      label="Storage time"
+                      helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
+                      source="storageTime"
+                      inputType={inputType}
+                    />
+                  </GroupInputsOrigin>
+                )}
             </>
           )}
           {!parentSourceWithIndex && (
@@ -311,6 +318,7 @@ const Episode: React.FC<{
                     helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
                     source="storageTime"
                     inputType={inputType}
+                    resource={resource}
                   />
                 </GroupInputsOrigin>
               )}

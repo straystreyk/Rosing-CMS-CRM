@@ -1,10 +1,8 @@
 import * as React from "react";
 import { NumberInput as NumberInputInner } from "react-admin";
-import { InputProps } from "ra-core";
 import { makeStyles } from "@material-ui/core";
-import { TextInputShow } from "../TextInput/show-view";
-import { TextInputOrigin } from "../TextInput/text-input";
 import { NumberInputShow } from "./show-view";
+import { InputProps } from "../../input-types";
 
 const useStyles = makeStyles({
   custom: {
@@ -82,5 +80,9 @@ export const NumberInputOrigin: React.FC<InputProps> = (props) => {
 };
 
 export const NumberInput: React.FC<InputProps> = ({ inputType, ...rest }) => {
-  return inputType === "show" ? <NumberInputShow {...rest} /> : <NumberInputOrigin {...rest} />;
+  return inputType === "show" ? (
+    <NumberInputShow {...rest} />
+  ) : (
+    <NumberInputOrigin inputType={inputType} {...rest} />
+  );
 };

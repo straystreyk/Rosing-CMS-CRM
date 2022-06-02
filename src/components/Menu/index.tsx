@@ -213,160 +213,170 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
           dense={dense}
         />
       </ExpandMenu>
-      <MenuItemLink
-        to={`/streaming`}
-        primaryText={"Streaming"}
-        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-        leftIcon={<StreamingIcon color="#fff" />}
-        onClick={React.useCallback(
-          () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_stream_params_rules"),
-          []
-        )}
-        tooltipProps={tooltipProps("Streaming")}
-        sidebarIsOpen={open}
-        dense={dense}
-      />
+      {/*<MenuItemLink*/}
+      {/*  to={`/streaming`}*/}
+      {/*  primaryText={"Streaming"}*/}
+      {/*  className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*  leftIcon={<StreamingIcon color="#fff" />}*/}
+      {/*  onClick={React.useCallback(*/}
+      {/*    () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_stream_params_rules"),*/}
+      {/*    []*/}
+      {/*  )}*/}
+      {/*  tooltipProps={tooltipProps("Streaming")}*/}
+      {/*  sidebarIsOpen={open}*/}
+      {/*  dense={dense}*/}
+      {/*/>*/}
       <Line />
-      <ExpandMenu
-        links={[
-          "/api_clients",
-          "/api_clients_configs",
-          "/content_platforms",
-          "/email_templates",
-          "/geo_rewrites",
-          "/internet_service_providers",
-          "/iptv_networks",
-        ]}
-        title={"Environment settings"}
-        icon={<SettingsMenuIcon color={"#fff"} />}
-      >
-        <MenuItemLink
-          to={`/api_clients`}
-          primaryText={"Api clients"}
-          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={React.useCallback(
-            () =>
-              redirectAdmin(
-                "https://dev-admin.spbtv.com/admin/api_client_authentication_api_client_active_records"
-              ),
-            []
-          )}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/api_clients_configs`}
-          primaryText={"Api clients configs"}
-          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={React.useCallback(
-            () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_client_configs"),
-            []
-          )}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/content_platforms`}
-          primaryText={"Content platforms"}
-          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={React.useCallback(
-            () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_platforms"),
-            []
-          )}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/email_templates`}
-          primaryText={"Email templates"}
-          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={React.useCallback(
-            () => redirectAdmin("https://dev-admin.spbtv.com/admin/email_templates"),
-            []
-          )}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/geo_rewrites`}
-          primaryText={"Geo rewrites"}
-          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={React.useCallback(
-            () => redirectAdmin("https://dev-admin.spbtv.com/admin/geo_rewrites"),
-            []
-          )}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/internet_service_providers`}
-          primaryText={"Internet service providers"}
-          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={React.useCallback(
-            () => redirectAdmin("https://dev-admin.spbtv.com/admin/isp_internet_service_providers"),
-            []
-          )}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/iptv_networks`}
-          primaryText={"IPTV Networks"}
-          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={React.useCallback(
-            () => redirectAdmin("https://dev-admin.spbtv.com/admin/iptv_networks"),
-            []
-          )}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/publishing_rules`}
-          primaryText={"Publishing rules"}
-          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={React.useCallback(
-            () => redirectAdmin("https://dev-admin.spbtv.com/admin/publishing_rules"),
-            []
-          )}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/stopwords`}
-          primaryText={"Stopwords"}
-          className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-          onClick={React.useCallback(
-            () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_stopwords"),
-            []
-          )}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-      </ExpandMenu>
       <MenuItemLink
-        to={`/questions`}
-        primaryText={translate(`resources.questions.name`, {
-          smart_count: 2,
-        })}
+        to={`/media_content/environment_settings`}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-        leftIcon={<questions.icon />}
-        tooltipProps={tooltipProps(translate("resources.questions.name"))}
+        primaryText="Environment settings"
+        leftIcon={<SettingsMenuIcon color="#fff" />}
+        tooltipProps={tooltipProps("Environment settings")}
         onClick={onMenuClick}
         sidebarIsOpen={open}
         dense={dense}
       />
-      <MenuItemLink
-        to={`/datacenters`}
-        className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
-        primaryText={translate(`resources.datacenters.name`, {
-          smart_count: 2,
-        })}
-        leftIcon={<datacenters.icon />}
-        tooltipProps={tooltipProps(translate("resources.datacenters.name"))}
-        onClick={onMenuClick}
-        sidebarIsOpen={open}
-        dense={dense}
-      />
+      {/*<ExpandMenu*/}
+      {/*  links={[*/}
+      {/*    "/api_clients",*/}
+      {/*    "/api_clients_configs",*/}
+      {/*    "/content_platforms",*/}
+      {/*    "/email_templates",*/}
+      {/*    "/geo_rewrites",*/}
+      {/*    "/internet_service_providers",*/}
+      {/*    "/iptv_networks",*/}
+      {/*  ]}*/}
+      {/*  title={"Environment settings"}*/}
+      {/*  icon={<SettingsMenuIcon color={"#fff"} />}*/}
+      {/*>*/}
+      {/*  <MenuItemLink*/}
+      {/*    to={`/api_clients`}*/}
+      {/*    primaryText={"Api clients"}*/}
+      {/*    className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*    onClick={React.useCallback(*/}
+      {/*      () =>*/}
+      {/*        redirectAdmin(*/}
+      {/*          "https://dev-admin.spbtv.com/admin/api_client_authentication_api_client_active_records"*/}
+      {/*        ),*/}
+      {/*      []*/}
+      {/*    )}*/}
+      {/*    sidebarIsOpen={open}*/}
+      {/*    dense={dense}*/}
+      {/*  />*/}
+      {/*  <MenuItemLink*/}
+      {/*    to={`/api_clients_configs`}*/}
+      {/*    primaryText={"Api clients configs"}*/}
+      {/*    className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*    onClick={React.useCallback(*/}
+      {/*      () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_client_configs"),*/}
+      {/*      []*/}
+      {/*    )}*/}
+      {/*    sidebarIsOpen={open}*/}
+      {/*    dense={dense}*/}
+      {/*  />*/}
+      {/*  <MenuItemLink*/}
+      {/*    to={`/content_platforms`}*/}
+      {/*    primaryText={"Content platforms"}*/}
+      {/*    className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*    onClick={React.useCallback(*/}
+      {/*      () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_platforms"),*/}
+      {/*      []*/}
+      {/*    )}*/}
+      {/*    sidebarIsOpen={open}*/}
+      {/*    dense={dense}*/}
+      {/*  />*/}
+      {/*  <MenuItemLink*/}
+      {/*    to={`/email_templates`}*/}
+      {/*    primaryText={"Email templates"}*/}
+      {/*    className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*    onClick={React.useCallback(*/}
+      {/*      () => redirectAdmin("https://dev-admin.spbtv.com/admin/email_templates"),*/}
+      {/*      []*/}
+      {/*    )}*/}
+      {/*    sidebarIsOpen={open}*/}
+      {/*    dense={dense}*/}
+      {/*  />*/}
+      {/*  <MenuItemLink*/}
+      {/*    to={`/geo_rewrites`}*/}
+      {/*    primaryText={"Geo rewrites"}*/}
+      {/*    className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*    onClick={React.useCallback(*/}
+      {/*      () => redirectAdmin("https://dev-admin.spbtv.com/admin/geo_rewrites"),*/}
+      {/*      []*/}
+      {/*    )}*/}
+      {/*    sidebarIsOpen={open}*/}
+      {/*    dense={dense}*/}
+      {/*  />*/}
+      {/*  <MenuItemLink*/}
+      {/*    to={`/internet_service_providers`}*/}
+      {/*    primaryText={"Internet service providers"}*/}
+      {/*    className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*    onClick={React.useCallback(*/}
+      {/*      () => redirectAdmin("https://dev-admin.spbtv.com/admin/isp_internet_service_providers"),*/}
+      {/*      []*/}
+      {/*    )}*/}
+      {/*    sidebarIsOpen={open}*/}
+      {/*    dense={dense}*/}
+      {/*  />*/}
+      {/*  <MenuItemLink*/}
+      {/*    to={`/iptv_networks`}*/}
+      {/*    primaryText={"IPTV Networks"}*/}
+      {/*    className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*    onClick={React.useCallback(*/}
+      {/*      () => redirectAdmin("https://dev-admin.spbtv.com/admin/iptv_networks"),*/}
+      {/*      []*/}
+      {/*    )}*/}
+      {/*    sidebarIsOpen={open}*/}
+      {/*    dense={dense}*/}
+      {/*  />*/}
+      {/*  <MenuItemLink*/}
+      {/*    to={`/publishing_rules`}*/}
+      {/*    primaryText={"Publishing rules"}*/}
+      {/*    className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*    onClick={React.useCallback(*/}
+      {/*      () => redirectAdmin("https://dev-admin.spbtv.com/admin/publishing_rules"),*/}
+      {/*      []*/}
+      {/*    )}*/}
+      {/*    sidebarIsOpen={open}*/}
+      {/*    dense={dense}*/}
+      {/*  />*/}
+      {/*  <MenuItemLink*/}
+      {/*    to={`/stopwords`}*/}
+      {/*    primaryText={"Stopwords"}*/}
+      {/*    className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*    onClick={React.useCallback(*/}
+      {/*      () => redirectAdmin("https://dev-admin.spbtv.com/admin/content_stopwords"),*/}
+      {/*      []*/}
+      {/*    )}*/}
+      {/*    sidebarIsOpen={open}*/}
+      {/*    dense={dense}*/}
+      {/*  />*/}
+      {/*</ExpandMenu>*/}
+      {/*<MenuItemLink*/}
+      {/*  to={`/questions`}*/}
+      {/*  primaryText={translate(`resources.questions.name`, {*/}
+      {/*    smart_count: 2,*/}
+      {/*  })}*/}
+      {/*  className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*  leftIcon={<questions.icon />}*/}
+      {/*  tooltipProps={tooltipProps(translate("resources.questions.name"))}*/}
+      {/*  onClick={onMenuClick}*/}
+      {/*  sidebarIsOpen={open}*/}
+      {/*  dense={dense}*/}
+      {/*/>*/}
+      {/*<MenuItemLink*/}
+      {/*  to={`/datacenters`}*/}
+      {/*  className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}*/}
+      {/*  primaryText={translate(`resources.datacenters.name`, {*/}
+      {/*    smart_count: 2,*/}
+      {/*  })}*/}
+      {/*  leftIcon={<datacenters.icon />}*/}
+      {/*  tooltipProps={tooltipProps(translate("resources.datacenters.name"))}*/}
+      {/*  onClick={onMenuClick}*/}
+      {/*  sidebarIsOpen={open}*/}
+      {/*  dense={dense}*/}
+      {/*/>*/}
       {isXSmall && (
         <MenuItemLink
           to="/configuration"

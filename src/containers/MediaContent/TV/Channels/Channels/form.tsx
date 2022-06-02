@@ -325,6 +325,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
             <NumberInput
               validate={requiredValidate}
               inputType={type}
+              resource={resource}
               source="mediascopeConfig.catId"
               helperText="ID of the local video content directory in integer format"
               label="Cat ID"
@@ -332,6 +333,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
             <NumberInput
               validate={requiredValidate}
               inputType={type}
+              resource={resource}
               source="mediascopeConfig.vcId"
               helperText="ID of the video content within the local directory in integer format"
               label="Vc ID"
@@ -389,7 +391,12 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           inputType={type}
           groupHelperText="Block of commercials at the beginning of the video, let's say one block"
         >
-          <NumberInput inputType={type} source="preRollCount" label="Number of commercials" />
+          <NumberInput
+            resource={resource}
+            inputType={type}
+            source="preRollCount"
+            label="Number of commercials"
+          />
         </GroupInputsOrigin>
       </FormSection>
       <FormSection

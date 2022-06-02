@@ -2,7 +2,7 @@ import * as React from "react";
 import { StandardButton } from "../standard-button";
 import { ArrayInputItemArrow } from "../../../../constants/icons";
 import { Box, CircularProgress, Menu, MenuItem, Typography } from "@material-ui/core";
-import { authClient } from "../../../Providers";
+import { authClient } from "../../../Providers/AuthProvider/client";
 import { gql, useSubscription } from "@apollo/client";
 
 const SUBSCRIBE_TO_EXPORT = gql`
@@ -55,9 +55,6 @@ export const ExportResourceButton: React.FC<{ resource: string }> = ({ resource 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const open = Boolean(anchorEl);
-
-  console.log(data);
-  console.log(isLoading);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);

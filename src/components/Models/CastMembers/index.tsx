@@ -122,6 +122,8 @@ export const CastMembers: React.FC<{
         />
         <NumberInputOrigin
           source={`${parentSourceWithIndex}.role`}
+          resource={resource}
+          inputType="create"
           style={{ display: "none" }}
           label="Role"
           fullWidth

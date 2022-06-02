@@ -139,6 +139,7 @@ const Part: React.FC<{
         {index && formState.values.parts[index] && formState.values.parts[index]["downloadable"] && (
           <GroupInputsOrigin inputType={inputType}>
             <NumberInput
+              resource={resource}
               label="Storage time"
               helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
               source={

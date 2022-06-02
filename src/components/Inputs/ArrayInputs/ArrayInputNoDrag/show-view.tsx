@@ -6,7 +6,7 @@ import { EditInputComponent } from "../../edit-input-component";
 import { ArrayInputNoDragOrigin } from "./array-input-no-drag";
 import { labelStyles } from "../../styles";
 import { useQuery } from "@apollo/client";
-import { authClient } from "../../../Providers";
+import { authClient } from "../../../Providers/AuthProvider/client";
 import { GET_ONE_VIDEO_FILE } from "../../../Providers/custom-requests";
 import { MainLoader } from "../../../MainLoader";
 import { ArrayInputProps } from "../Arrayinput/array-input";
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: "none",
     },
     "&:nth-child(2) .name": {
-      paddingTop: 8,
+      paddingTop: 0,
     },
   },
 }));

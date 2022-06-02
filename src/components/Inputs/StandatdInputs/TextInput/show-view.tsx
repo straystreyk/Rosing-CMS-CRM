@@ -8,18 +8,12 @@ import { EditInputComponent } from "../../edit-input-component";
 import { TextInputStyles } from "./styles";
 import { TextInputOrigin } from "./text-input";
 import { formatTimeInput } from "../../index";
+import { EmptyInput, TextInputShowValue } from "../../styles";
 
 const useStyles = makeStyles({
   TextInputStyles,
   TextInputShowValue: {
-    marginTop: 4,
-    position: "relative",
-    fontSize: 14,
-    lineHeight: "20px",
-    color: "var(--primary-text-default)",
-    "& span.empty": {
-      color: "var(--secondary-color-default)",
-    },
+    ...TextInputShowValue,
     "& > p": {
       display: "-webkit-box",
       "-webkit-box-orient": "vertical",
@@ -71,8 +65,6 @@ const useStyles = makeStyles({
   },
 });
 
-const Empty = () => <span className="empty">Not filled in</span>;
-
 const ShowView: React.FC<InputProps> = (props) => {
   const { values } = useFormState();
   const [isBigText, setIsBigText] = React.useState(false);
@@ -89,14 +81,22 @@ const ShowView: React.FC<InputProps> = (props) => {
     (source) => {
       switch (source) {
         case "searchKeywords":
-          return values[props.source].length ? values[props.source].join(", ") : <Empty />;
+          return values[props.source].length ? (
+            values[props.source].join(", ")
+          ) : (
+            <EmptyInput emptyText="Empty" />
+          );
         case "duration":
-          return values[props.source] ? formatTimeInput(values[props.source]) : <Empty />;
+          return values[props.source] ? (
+            formatTimeInput(values[props.source])
+          ) : (
+            <EmptyInput emptyText="Empty" />
+          );
         default:
           return values[props.source] ? (
             <span dangerouslySetInnerHTML={{ __html: values[props.source] }} />
           ) : (
-            <Empty />
+            <EmptyInput emptyText="Empty" />
           );
       }
     },

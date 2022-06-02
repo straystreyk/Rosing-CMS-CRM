@@ -5,7 +5,7 @@ import { TypedDocumentNode } from "@apollo/client";
 
 import { ChoicesItem } from "../custom-filters-types";
 import { useListContext } from "react-admin";
-import { authClient } from "../../Providers";
+import { authClient } from "../../Providers/AuthProvider/client";
 
 interface UseMultipleFiltersListProps {
   setChoices: React.Dispatch<React.SetStateAction<ChoicesItem[]>>;

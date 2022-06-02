@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
-import { dataProvider as dataProviderFactory } from '../components/Providers';
+import { useEffect, useState } from "react";
+import { Providers } from "../components/Providers";
+
+const { dataProvider: dataProviderFactory } = Providers;
 
 export const useApp = () => {
   const [dataProvider, setDataProvider] = useState<any>(null);
@@ -11,9 +13,7 @@ export const useApp = () => {
         const dataProviderInstance = await dataProviderFactory();
         block = false;
         if (!block && dataProviderInstance) {
-          setDataProvider(
-            () => dataProviderInstance,
-          );
+          setDataProvider(() => dataProviderInstance);
         }
       } catch (error) {
         if (error instanceof Error) {

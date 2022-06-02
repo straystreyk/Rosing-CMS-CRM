@@ -1,8 +1,6 @@
 import { Admin, Resource } from "react-admin";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { gql, useSubscription } from "@apollo/client";
-
-import { authClient, authProvider, i18nProvider } from "../../components/Providers";
+import { Providers } from "../../components/Providers";
 import { Layouts } from "../../components/Layout";
 import { getRoutes } from "./get-custom-routes";
 import { useApp } from "../../custom-hooks/app-component";
@@ -42,6 +40,7 @@ import { ProgramEventsVariables as programEvents } from "../MediaContent/TV/Chan
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
 const { Login, Layout } = Layouts;
+const { authProvider, i18nProvider } = Providers;
 
 export const App = () => {
   const { dataProvider } = useApp();
@@ -49,7 +48,7 @@ export const App = () => {
   if (!dataProvider) {
     return (
       <div className="loader-container">
-        <CircularProgress color="inherit" />
+        <CircularProgress color="primary" />
       </div>
     );
   }
@@ -60,9 +59,9 @@ export const App = () => {
       customReducers={customReducers}
       customRoutes={getRoutes(localStorage.getItem("token"))}
       authProvider={authProvider}
+      i18nProvider={i18nProvider}
       loginPage={Login}
       layout={Layout}
-      i18nProvider={i18nProvider}
     >
       <Resource name="admin_users" {...users} />
       <Resource name="media_content/tv/tv_shows/epg_local_events" {...epgLocalEvents} />

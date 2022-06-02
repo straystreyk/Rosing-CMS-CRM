@@ -3,28 +3,24 @@ import { useNotify } from "ra-core";
 import { DatagridBody, useListContext, useMutation, useRefresh } from "react-admin";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { MyDatagridRow, MyDatagridRowWithDnd } from "./datagrid-row";
+import { DatagridBodyProps } from "./custom-datagrid-types";
 
-export const MyDatagridBody: React.FC<any> = ({
-  offActions,
-  expandElement,
-  isDependentModel,
-  ...props
-}) => {
+const useDatagridBody = (resource: string, tableData?: { [p: string]: { [s: string]: any } }) => {
   const notify = useNotify();
   const refresh = useRefresh();
-  const { perPage, page } = useListContext();
   const [mutate, { error, data }] = useMutation();
+  const { perPage, page } = useListContext();
 
   React.useEffect(() => {
     if (data && !error) {
-      notify(`resources.${props.resource}.mutations.list.success`, {
+      notify(`resources.${resource}.mutations.list.success`, {
         type: "success",
         messageArgs: { name: data.name },
       });
       refresh();
     }
     if (error) {
-      notify(`resources.${props.resource}.mutations.list.error`, {
+      notify(`resources.${resource}.mutations.list.error`, {
         type: "error",
         messageArgs: { error },
       });
@@ -37,8 +33,8 @@ export const MyDatagridBody: React.FC<any> = ({
       try {
         mutate({
           type: "update",
-          resource: props.resource,
-          payload: payload,
+          resource,
+          payload,
         });
       } catch (e) {
         if (e instanceof Error) {
@@ -46,25 +42,39 @@ export const MyDatagridBody: React.FC<any> = ({
         }
       }
     },
-    [props.resource, mutate]
+    [resource, mutate]
   );
 
   const onDragEnd = React.useCallback(
     (result) => {
-      if (result.destination) {
+      if (result.destination && tableData) {
         const skip = !!((page - 1) * perPage) ? (page - 1) * perPage : 0;
         const destination = result.destination.index + 1 + skip;
         const id = result.draggableId;
-        const data = props.data[id];
+        const data = tableData[id];
         const payload = { id, data: { ...data, position: destination } };
 
         approve(payload);
       }
     },
-    [perPage, page, props.data, approve]
+    [perPage, page, tableData, approve]
   );
 
-  if (props.draggable) {
+  return {
+    onDragEnd,
+  };
+};
+
+export const MyDatagridBody: React.FC<DatagridBodyProps> = ({
+  offActions,
+  expandElement,
+  resource,
+  draggable,
+  ...props
+}) => {
+  const { onDragEnd } = useDatagridBody(resource, props.data);
+
+  if (draggable) {
     return (
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={`droppable-${props.basePath}`} type={props.basePath}>
@@ -74,8 +84,11 @@ export const MyDatagridBody: React.FC<any> = ({
                 {...props}
                 row={
                   <MyDatagridRowWithDnd
-                    isDependentModel={isDependentModel}
+                    onToggleItem={props.onToggleItem}
+                    resource={resource}
+                    basePath={props.basePath}
                     expandElement={expandElement}
+                    offActions={offActions}
                     ids={props.ids}
                   />
                 }
@@ -95,7 +108,8 @@ export const MyDatagridBody: React.FC<any> = ({
       {...props}
       row={
         <MyDatagridRow
-          isDependentModel={isDependentModel}
+          resource={resource}
+          onToggleItem={props.onToggleItem}
           expandElement={expandElement}
           offActions={offActions}
           ids={props.ids}

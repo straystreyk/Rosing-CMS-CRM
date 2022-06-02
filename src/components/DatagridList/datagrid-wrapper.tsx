@@ -38,7 +38,7 @@ const ToolBar: React.FC<{
           <StandardButton
             component={Link}
             startIcon={<PlusIcon color="#fff" />}
-            to={basePath + "/create"}
+            to={`${basePath}/create`}
             variant="contained"
             color="primary"
           >

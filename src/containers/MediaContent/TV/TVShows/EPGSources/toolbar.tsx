@@ -1,5 +1,5 @@
 import * as React from "react";
-import { authClient } from "../../../../../components/Providers";
+import { authClient } from "../../../../../components/Providers/AuthProvider/client";
 import { GET_EPG_SOURCES_TYPES } from "./requests";
 import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
 import { ArrayInputItemArrow, PlusIcon } from "../../../../../constants/icons";

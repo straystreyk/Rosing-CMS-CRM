@@ -5,6 +5,8 @@ import { CheckboxProps } from "../Checkbox";
 import { Switch } from "../../UI/MaterialUI/switch";
 import { makeStyles } from "@material-ui/core/styles";
 import { labelStyles } from "../styles";
+import { InputProps } from "../input-types";
+import { SwitchInputShow } from "./show-view";
 
 interface SwitchProps extends CheckboxProps {
   labelPlacement?: "start" | "end" | "top" | "bottom" | undefined;
@@ -27,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const SwitchInput: React.FC<SwitchProps> = ({
+export const SwitchInputOrigin: React.FC<SwitchProps> = ({
   source,
   initialValue,
   helperText,
@@ -55,3 +57,13 @@ export const SwitchInput: React.FC<SwitchProps> = ({
     </div>
   );
 };
+
+export const SwitchInput: React.FC<InputProps> = React.memo(
+  ({ inputType, offFastEdit, ...rest }) => {
+    return inputType === "show" ? (
+      <SwitchInputShow {...rest} />
+    ) : (
+      <SwitchInputOrigin inputType={inputType} {...rest} />
+    );
+  }
+);

@@ -19,3 +19,18 @@ export const formHelperText = {
   fontFamily: "var(--font-family)",
   color: "var(--secondary-color-default)",
 };
+
+export const TextInputShowValue: any = {
+  marginTop: 4,
+  fontSize: 14,
+  lineHeight: "20px",
+  position: "relative",
+  color: "var(--primary-text-default)",
+  "& span.empty": {
+    color: "var(--secondary-color-default)",
+  },
+};
+
+export const EmptyInput: React.FC<{ emptyText: string | React.ReactElement }> = ({ emptyText }) => (
+  <span className="empty">{emptyText}</span>
+);

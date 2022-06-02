@@ -33,7 +33,7 @@ export const Form: FC<FormProps> = (props) => {
         multiline
       />
       <TextInput source="section" resource={props.resource} fullWidth />
-      <NumberInput source="position" />
+      <NumberInput inputType={props.type} source="position" resource={props.resource} />
       <TextInput
         source="tags"
         resource={props.resource}

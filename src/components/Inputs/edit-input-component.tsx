@@ -124,9 +124,7 @@ export const EditInputComponent: React.FC<any> = ({
           draggable={props.draggable ?? false}
         />
       )}
-      {ComponentShow && !showInput && (
-        <ComponentShow newData={data && data[props.source]} {...props} label={props.label} />
-      )}
+      {ComponentShow && !showInput && <ComponentShow {...props} label={props.label} />}
       {showInput ? (
         <div className={classes.ShowEditButtonsWrapper}>
           <StandardButton
@@ -147,7 +145,7 @@ export const EditInputComponent: React.FC<any> = ({
             type="button"
             color="secondary"
             variant="text"
-            startIcon={<CancelFilterIcon color="#005AA3" />}
+            startIcon={<CancelFilterIcon color="var(--primary-button-default)" />}
             onClick={cancelEdit}
             text="Cancel"
           />

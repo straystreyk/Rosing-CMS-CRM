@@ -6,6 +6,9 @@ const getGlobals = () => {
   if (process.env.REACT_APP_GRAPH_QL_ENDPOINT)
     processConfig.REACT_APP_GRAPH_QL_ENDPOINT = process.env.REACT_APP_GRAPH_QL_ENDPOINT;
 
+  if (process.env.REACT_APP_GRAPH_QL_WS_ENDPOINT)
+    processConfig.REACT_APP_GRAPH_QL_WS_ENDPOINT = process.env.REACT_APP_GRAPH_QL_WS_ENDPOINT;
+
   if (process.env.REACT_APP_IMAGE_ENDPOINT)
     processConfig.REACT_APP_IMAGE_ENDPOINT = process.env.REACT_APP_IMAGE_ENDPOINT;
 

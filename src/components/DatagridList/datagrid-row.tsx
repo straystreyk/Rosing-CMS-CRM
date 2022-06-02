@@ -1,13 +1,13 @@
 import * as React from "react";
 import cn from "classnames";
 import { Draggable } from "react-beautiful-dnd";
-import TableRow from "@material-ui/core/TableRow";
-import Checkbox from "@material-ui/core/Checkbox";
-import TableCell from "@material-ui/core/TableCell";
-import { ArrayInputItemArrow, DNDIcon } from "../../constants/icons";
-import { Collapse, makeStyles } from "@material-ui/core";
-import { TableStyles } from "./styles";
+import { TableRow, Checkbox, TableCell, Collapse, makeStyles } from "@material-ui/core";
+
 import { EditForm } from "../ResourceView/FormWithRedirect";
+import { DatagridRowProps } from "./custom-datagrid-types";
+import { ArrayInputItemArrow, DNDIcon } from "../../constants/icons";
+
+import { TableStyles } from "./styles";
 
 const useStyles = makeStyles(TableStyles);
 
@@ -33,7 +33,7 @@ const ExpandRow: React.FC<any> = ({ open, record, resource, expandElement }) => 
   );
 };
 
-export const MyDatagridRow: React.FC<any> = ({
+export const MyDatagridRow: React.FC<DatagridRowProps> = ({
   record,
   resource,
   id,
@@ -59,7 +59,7 @@ export const MyDatagridRow: React.FC<any> = ({
             <Checkbox
               color="primary"
               checked={selected}
-              onClick={(event) => id && onToggleItem(id, event)}
+              onClick={(event) => id && onToggleItem && onToggleItem(id, event)}
             />
           </TableCell>
         )}
@@ -70,10 +70,10 @@ export const MyDatagridRow: React.FC<any> = ({
                 component="th"
                 scope="row"
                 size="small"
-                key={`${id}-${field.props.source}`}
+                key={`${id}-${(field as any).props.source}`}
                 className={classes.TableCell}
               >
-                {React.cloneElement(field, {
+                {React.cloneElement(field as any, {
                   record,
                   basePath,
                   resource,
@@ -95,7 +95,7 @@ export const MyDatagridRow: React.FC<any> = ({
   );
 };
 
-export const MyDatagridRowWithDnd: React.FC<any> = ({
+export const MyDatagridRowWithDnd: React.FC<DatagridRowProps> = ({
   record,
   resource,
   id,
@@ -108,14 +108,14 @@ export const MyDatagridRowWithDnd: React.FC<any> = ({
   const classes = useStyles();
 
   return (
-    <Draggable key={id} draggableId={id} index={ids.indexOf(id)}>
+    <Draggable key={id} draggableId={id!.toString()} index={ids!.indexOf(id as string)}>
       {(provided, snapshot) => (
         <TableRow
           className={classes.DraggableTableRow}
           key={id}
-          hover
           ref={provided.innerRef}
           {...provided.draggableProps}
+          hover
         >
           <TableCell className={classes.TableCheckbox} padding="checkbox">
             <div className={cn(classes.DNDIcon, "DNDIcon")} {...provided.dragHandleProps}>
@@ -124,7 +124,7 @@ export const MyDatagridRowWithDnd: React.FC<any> = ({
             <Checkbox
               color="primary"
               checked={selected}
-              onClick={(event) => id && onToggleItem(id, event)}
+              onClick={(event) => id && onToggleItem && onToggleItem(id, event)}
             />
           </TableCell>
           {React.Children.map(children, (field, index) => {
@@ -133,9 +133,9 @@ export const MyDatagridRowWithDnd: React.FC<any> = ({
                 component="th"
                 scope="row"
                 size="small"
-                key={`${id}-${field.props.source}`}
+                key={`${id}-${(field as any).props.source}`}
               >
-                {React.cloneElement(field, {
+                {React.cloneElement(field as any, {
                   record,
                   basePath,
                   resource,

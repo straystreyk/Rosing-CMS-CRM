@@ -3,7 +3,7 @@ import { InputProps } from "ra-core";
 import { EditInputComponent } from "../../edit-input-component";
 import { SelectInputOrigin, SelectInputProps } from "./select-input";
 import { makeStyles } from "@material-ui/core";
-import { labelStyles } from "../../styles";
+import { EmptyInput, labelStyles } from "../../styles";
 import { useFormState } from "react-final-form";
 import { useQuery } from "@apollo/client";
 import {
@@ -11,9 +11,8 @@ import {
   GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_RIGHT_HOLDER,
 } from "../../../Providers/custom-requests";
-import { authClient } from "../../../Providers";
+import { authClient } from "../../../Providers/AuthProvider/client";
 import { MainLoader } from "../../../MainLoader";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   label: labelStyles,
@@ -60,32 +59,28 @@ const ShowView: React.FC<InputProps> = (props) => {
         return values[props.source] ? (
           <Resource query={GET_ONE_DATA_CENTER} resourceId={values[props.source]} />
         ) : (
-          <div className="empty">Not filled in</div>
+          <EmptyInput emptyText="Empty" />
         );
       case "rightHolderId":
         return values[props.source] ? (
           <Resource query={GET_ONE_RIGHT_HOLDER} resourceId={values[props.source]} />
         ) : (
-          <div className="empty">Not filled in</div>
+          <EmptyInput emptyText="Empty" />
         );
       case "externalCatalogId":
         return values[props.source] ? (
           <Resource query={GET_ONE_EXTERNAL_CATALOG} resourceId={values[props.source]} />
         ) : (
-          <div className="empty">Not filled in</div>
+          <EmptyInput emptyText="Empty" />
         );
       case "productionYear":
         return values[props.source] ? (
           values[props.source] + " year"
         ) : (
-          <div className="empty">Not filled in</div>
+          <EmptyInput emptyText="Empty" />
         );
       default:
-        return values[props.source] ? (
-          values[props.source]
-        ) : (
-          <div className="empty">Not filled in</div>
-        );
+        return values[props.source] ? values[props.source] : <EmptyInput emptyText="Empty" />;
     }
   };
 

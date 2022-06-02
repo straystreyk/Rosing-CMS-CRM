@@ -8,7 +8,7 @@ import { VariableSizeList, ListChildComponentProps } from "react-window";
 import { CircularProgress } from "@material-ui/core";
 import { AutoCompleteInputStyles } from "./AutoCompliteArrayInput/styles";
 import { DocumentNode } from "graphql";
-import { authClient } from "../../Providers";
+import { authClient } from "../../Providers/AuthProvider/client";
 
 const LISTBOX_PADDING = 8; // px
 

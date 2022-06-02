@@ -5,18 +5,11 @@ import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 import { TextInputStyles } from "../TextInput/styles";
 import { NumberInputOrigin } from "./numdber-input";
+import { EmptyInput, TextInputShowValue } from "../../styles";
 
 const useStyles = makeStyles({
   TextInputStyles,
-  TextInputShowValue: {
-    marginTop: 4,
-    fontSize: 14,
-    lineHeight: "20px",
-    color: "var(--primary-text-default)",
-    "& span.empty": {
-      color: "var(--secondary-color-default)",
-    },
-  },
+  TextInputShowValue,
 });
 
 const ShowView: React.FC<InputProps> = (props) => {
@@ -29,14 +22,10 @@ const ShowView: React.FC<InputProps> = (props) => {
         return values[props.source] ? (
           values[props.source] + " days"
         ) : (
-          <span className="empty">Not filled in</span>
+          <EmptyInput emptyText="Empty" />
         );
       default:
-        return values[props.source] ? (
-          values[props.source]
-        ) : (
-          <span className="empty">Not filled in</span>
-        );
+        return values[props.source] ? values[props.source] : <EmptyInput emptyText="Empty" />;
     }
   };
 

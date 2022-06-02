@@ -6,7 +6,7 @@ import { useNotify } from "ra-core";
 
 import { breadcrumbsLinks } from "./breadcrumbs-links";
 import { sanitizeId } from "../../helpers/form";
-import { authClient } from "../Providers";
+import { authClient } from "../Providers/AuthProvider/client";
 import { BreadCrumbsStyles } from "./syles";
 import { breadCrumbNameBuilder, breadCrumbsLinksMatcher } from "./breadcrumbs-helpers";
 import { MainLoader } from "../MainLoader";

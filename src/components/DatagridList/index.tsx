@@ -16,12 +16,13 @@ export const DatagridList: React.FC<CustomDatagridProps> = ({
   expand,
   isDependentModel,
   header,
+  resource,
   ...props
 }) => {
   return (
     <DatagridWrapper
       toolbar={toolbar}
-      resource={props.resource}
+      resource={resource}
       basePath={props.basePath}
       offDescription={offDescription}
       filters={props.filters}
@@ -31,13 +32,15 @@ export const DatagridList: React.FC<CustomDatagridProps> = ({
       <BulkActions />
       <Datagrid
         {...props}
+        resource={resource}
         header={
           header ?? <DatagridHeader isDependentModel={isDependentModel} offActions={offActions} />
         }
         body={
           <MyDatagridBody
+            data={props.data}
+            resource={resource}
             expandElement={expand}
-            isDependentModel={isDependentModel}
             offActions={offActions}
             draggable={props.draggable}
           />

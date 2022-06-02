@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useQuery } from "@apollo/client";
-import { authClient } from "../../Providers";
+import { authClient } from "../../Providers/AuthProvider/client";
 import { MainLoader } from "../../MainLoader";
 import { useFormState } from "react-final-form";
 

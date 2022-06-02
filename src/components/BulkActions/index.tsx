@@ -8,7 +8,7 @@ import { DeleteIcon } from "../../constants/icons";
 
 const useStyles = makeStyles(BulkActionsStyles);
 
-export const BulkActions = () => {
+export const BulkActions: React.FC = () => {
   const { selectedIds } = useListContext();
   const classes = useStyles();
 

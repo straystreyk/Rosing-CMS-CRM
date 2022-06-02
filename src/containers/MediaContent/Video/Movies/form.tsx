@@ -375,22 +375,34 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           inputType={type}
           groupHelperText="Block of commercials at the beginning of the video, let's say one block"
         >
-          <NumberInput inputType={type} source="preRollCount" label="Number of commercials" />
+          <NumberInput
+            resource={resource}
+            inputType={type}
+            source="preRollCount"
+            label="Number of commercials"
+          />
         </GroupInputsOrigin>
         <GroupInputsOrigin
           label="Midroll"
           inputType={type}
           groupHelperText="A block of commercials in the middle of the video, several blocks are allowed. The number of blocks depends on the offset time of their display and the duration of the video."
         >
-          <NumberInput inputType={type} source="midRollCount" label="Number of commercials" />
           <NumberInput
             inputType={type}
+            resource={resource}
+            source="midRollCount"
+            label="Number of commercials"
+          />
+          <NumberInput
+            inputType={type}
+            resource={resource}
             source="firstMidRollOffset"
             label="Showing the first midroll"
             helperText="Shift time of the first midroll in seconds from the beginning of the video"
           />
           <NumberInput
             inputType={type}
+            resource={resource}
             source="nthMidRollOffset"
             label="Show subsequent midrolls"
             helperText="Time to shift the display of subsequent midrolls in seconds from the start of displaying the first midroll"
@@ -408,6 +420,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           <GroupInputsOrigin inputType={type}>
             <NumberInput
               label="Storage time"
+              resource={resource}
               helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days."
               source="storageTime"
               inputType={type}

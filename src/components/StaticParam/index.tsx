@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useQuery } from "@apollo/client";
-import { authClient } from "../Providers";
+import { authClient } from "../Providers/AuthProvider/client";
 import { MainLoader } from "../MainLoader";
 
 export const StaticParam: React.FC<{ query: any; variables: {} }> = ({ query, variables }) => {

@@ -3,7 +3,7 @@ import { MainLoader } from "../MainLoader";
 import { loadPlayerAssets, getPlayerAssetsLoaded } from "../../helpers";
 import { makeStyles } from "@material-ui/core";
 import { useQuery } from "@apollo/client";
-import { authClient } from "../Providers";
+import { authClient } from "../Providers/AuthProvider/client";
 import { GET_STREAM } from "./requests";
 
 const useStyles = makeStyles({

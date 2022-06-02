@@ -1,6 +1,6 @@
 import buildGraphQLProvider from "ra-data-graphql-simple";
 
-import { authClient } from "../auth-provider";
+import { authClient } from "../AuthProvider/client";
 import { getGqlResource } from "./get-gql-resource";
 import { customBuildQuery } from "./build-query";
 

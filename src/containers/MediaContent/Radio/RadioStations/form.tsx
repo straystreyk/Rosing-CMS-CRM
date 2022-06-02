@@ -149,6 +149,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         </div>
         <NumberInput
           inputType={type}
+          resource={resource}
           source="bitrate"
           label="Bitrate"
           helperText="The sound quality determined by the data transfer rate over a certain time (Kbit/s). The higher the speed, the better the quality."
