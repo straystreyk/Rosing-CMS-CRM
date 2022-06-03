@@ -17,26 +17,37 @@ interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
 
 const useStyles = makeStyles({
   StandardButton: {
-    padding: "6px 16px",
+    padding: "8px 16px",
     position: "relative",
     fontSize: "14px",
     textTransform: "none",
     fontFamily: "var(--font-family)",
     lineHeight: "20px",
-    "& .MuiButton-label > .MuiButton-startIcon": {
-      marginRight: 6,
-      marginLeft: 0,
-      display: "flex",
-      width: 20,
-      height: 20,
-      alignItems: "center",
-      "& svg": {
-        width: "100%",
+    "&.MuiButton-textPrimary": {
+      "&:hover": {
+        backgroundColor: "var(--accent-color-hover)",
       },
     },
-    "&:focus": {
-      outline: "2px solid #7FC5FF",
-      outlineOffset: "2px",
+    "& .MuiButton-label": {
+      fontWeight: 500,
+      "& > .MuiButton-startIcon": {
+        marginRight: 6,
+        marginLeft: 0,
+        display: "flex",
+        width: 20,
+        height: 20,
+        alignItems: "center",
+        "& svg": {
+          width: "100%",
+        },
+      },
+      "&:focus": {
+        outline: "2px solid #7FC5FF",
+        outlineOffset: "2px",
+      },
+      "& > .MuiButton-endIcon": {
+        marginRight: 0,
+      },
     },
   },
   TextButton: {

@@ -1,20 +1,10 @@
 import * as React from "react";
-import { StandardButton } from "../standard-button";
-import { ArrayInputItemArrow } from "../../../../constants/icons";
+import { StandardButton } from "../../UI/Buttons/standard-button";
+import { ArrayInputItemArrow } from "../../../constants/icons";
 import { Box, CircularProgress, Menu, MenuItem, Typography } from "@material-ui/core";
-import { authClient } from "../../../Providers/AuthProvider/client";
+import { authClient } from "../../Providers/AuthProvider/client";
 import { gql, useSubscription } from "@apollo/client";
-
-const SUBSCRIBE_TO_EXPORT = gql`
-  subscription {
-    data: exportTaskAdded {
-      exportTask {
-        progress
-        file
-      }
-    }
-  }
-`;
+import { SUBSCRIBE_TO_EXPORT } from "../requests";
 
 const ExportIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,6 +42,7 @@ export const ExportResourceButton: React.FC<{ resource: string }> = ({ resource 
     client: authClient,
     variables: {},
   });
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const open = Boolean(anchorEl);

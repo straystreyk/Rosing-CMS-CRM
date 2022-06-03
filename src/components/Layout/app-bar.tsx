@@ -3,10 +3,11 @@ import { AppBar, UserMenu, MenuItemLink, useTranslate } from "react-admin";
 import { AppBarProps, UserMenuProps as UserMenuPropsMUI } from "ra-ui-materialui";
 import Typography from "@material-ui/core/Typography";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 
 import { Logo } from "./logo";
 import { GlobalSearch } from "../GlobalSearch/global-search";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
 
 interface UserMenuProps extends UserMenuPropsMUI {
   onClick?: () => void;
@@ -56,10 +57,9 @@ const CustomUserMenu: FC<UserMenuProps> = (props) => {
   );
 };
 
-const Menu = () => <span>asd</span>;
-
 export const CustomAppBar: FC<AppBarProps> = (props) => {
   const classes = useStyles();
+  const isMobile = useMediaQuery(`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`);
   return (
     <AppBar
       className={classes.AppBar}
@@ -68,9 +68,7 @@ export const CustomAppBar: FC<AppBarProps> = (props) => {
       {...props}
     >
       <Logo />
-      <Typography className={classes.title} component="span">
-        SPB TV Russia
-      </Typography>
+      {!isMobile && <span className={classes.title}>SPB TV Russia</span>}
       <span className={classes.spacer} />
       <GlobalSearch />
     </AppBar>

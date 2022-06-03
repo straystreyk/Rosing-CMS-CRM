@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CircularProgress, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 interface MainLoaderProps {
   size: number | string;
@@ -12,17 +12,12 @@ interface MainLoaderProps {
 const useStyles = makeStyles({
   TopCircleAnimate: {
     animation: `$myEffect 2000ms linear  infinite`,
+    borderRadius: 20,
   },
   TopCircleSvgAnimate: {
     animation: `$rotate 1200ms linear infinite`,
     display: "block",
-  },
-  BottomCircle: {
-    stroke: "var(--secondary-color-default)",
-    position: "absolute",
-    left: 0,
-    top: 0,
-    zIndex: -1,
+    borderRadius: 20,
   },
   "@keyframes myEffect": {
     "0%": {
@@ -68,10 +63,9 @@ const Loader = ({ size = 22 }: { size?: number }) => {
           r="20"
           fill="none"
           strokeWidth="4"
+          radius={5}
+          strokeLinecap="round"
         ></circle>
-      </svg>
-      <svg viewBox="22 22 44 44" className={classes.BottomCircle}>
-        <circle cx="44" cy="44" r="20" fill="none" strokeWidth="4"></circle>
       </svg>
     </div>
   );
@@ -86,9 +80,7 @@ export const MainLoader: React.FC<MainLoaderProps> = ({
 }) => {
   return (
     <>
-      <Component
-        style={{ display: flex ? "flex" : display, margin: centered ? "0 auto" : "5px 0px" }}
-      >
+      <Component style={{ display: flex ? "flex" : display, margin: centered ? "0 auto" : "0px" }}>
         <Loader size={+size} />
       </Component>
     </>

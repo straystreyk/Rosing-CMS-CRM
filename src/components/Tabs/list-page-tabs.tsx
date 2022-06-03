@@ -17,7 +17,6 @@ interface ListPageTabsProps {
 
 const useStyles = makeStyles((theme) => ({
   TabsList: {
-    paddingTop: 14,
     paddingLeft: 24,
     paddingRight: 20,
     display: "flex",
@@ -49,15 +48,23 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 20,
     marginTop: 13,
     borderBottom: `1px solid var(--secondary-color-disable)`,
+    ...scrollBarStyles,
   },
   SubTabListLink: {
     color: "var(--secondary-color-default)",
+    transition: "0.35s all ease",
     fontSize: 14,
     lineHeight: "20px",
     fontWeight: 500,
     marginRight: 12,
     paddingBottom: 4,
     flexShrink: 0,
+    "&:hover": {
+      color: "var(--secondary-color-main)",
+    },
+    "&:last-child": {
+      marginRight: 0,
+    },
   },
   SubTabListLinkActive: {
     color: "var(--secondary-color-main)",

@@ -1,12 +1,6 @@
 import * as React from "react";
 import * as Redux from "react-redux";
-import {
-  Layout as LayoutRA,
-  Sidebar,
-  Notification,
-  LayoutProps,
-  NotificationProps,
-} from "react-admin";
+import { Layout as LayoutRA, Sidebar, Notification, LayoutProps } from "react-admin";
 
 import { CustomAppBar } from "./app-bar";
 import { Menu } from "../Menu";

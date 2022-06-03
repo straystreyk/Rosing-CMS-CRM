@@ -41,9 +41,8 @@ const ToolBar: React.FC<{
             to={`${basePath}/create`}
             variant="contained"
             color="primary"
-          >
-            Create {translate(`resources.${resource}.name`).toLowerCase()}
-          </StandardButton>
+            text={`Create ${translate(`resources.${resource}.name`).toLowerCase()}`}
+          />
         </div>
       )}
     </>

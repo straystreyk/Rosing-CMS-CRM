@@ -62,40 +62,41 @@ export const ExpandMenu = ({
   }, [currentExists, open, founded.length, active]);
 
   return (
-    <div
-      className={cn(
-        active && styles.activeExpand,
-        styles.expandWrapper,
-        className,
-        !open && styles.sidebarClose
-      )}
+    <Tooltip
+      disableHoverListener={open}
+      disableFocusListener={open}
+      title={title}
+      placement="right"
+      arrow
     >
-      {/*<Tooltip title={!open ? title : ""} placement="right" arrow>*/}
-      <button className={styles.expandTitleWrapper} onClick={toggleClick}>
-        <span
-          className={cn(
-            styles.icon,
-            !!founded.length && !open && styles.iconActive,
-            !open && styles.iconClose
-          )}
-        >
-          {icon}
-        </span>
-        <span className={styles.iconWrapper}>
-          <span>{title}</span>
-          {open ? <ArrowIcon /> : ""}
-        </span>
-        {!open && !isMobile && (
-          <Fade in={true}>
-            <div className={cn(styles.expandSubMenu, styles.expandSubMenuHover)}>{children}</div>
-          </Fade>
+      <button
+        className={cn(
+          active && styles.activeExpand,
+          styles.expandWrapper,
+          className,
+          !open && styles.sidebarClose
         )}
-      </button>
-      {/*</Tooltip>*/}
+      >
+        <button className={styles.expandTitleWrapper} onClick={toggleClick}>
+          <span
+            className={cn(
+              styles.icon,
+              !!founded.length && !open && styles.iconActive,
+              !open && styles.iconClose
+            )}
+          >
+            {icon}
+          </span>
+          <span className={styles.iconWrapper}>
+            <span>{title}</span>
+            {open ? <ArrowIcon /> : ""}
+          </span>
+        </button>
 
-      <Collapse className={styles.expandSubMenu} in={active} unmountOnExit>
-        {children}
-      </Collapse>
-    </div>
+        <Collapse className={styles.expandSubMenu} in={active} unmountOnExit>
+          {children}
+        </Collapse>
+      </button>
+    </Tooltip>
   );
 };

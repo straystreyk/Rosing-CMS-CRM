@@ -5,7 +5,7 @@ import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { useLocation } from "react-router-dom";
-import { ExportResourceButton } from "../UI/Buttons/ExportResourceButton";
+import { ExportResourceButton } from "../Export/ExportResourceButton";
 import { RefreshButton } from "../UI/Buttons/RefreshButton";
 
 const useStyles = makeStyles({
