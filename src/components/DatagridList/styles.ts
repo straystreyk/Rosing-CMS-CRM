@@ -58,7 +58,7 @@ export const DatagridStyles: Styles<Theme, {}, string> = {
     flexWrap: "wrap",
     justifyContent: "space-between",
     "& .title": {
-      marginRight: 16,
+      marginRight: 11,
       display: "inline-block",
       fontSize: 18,
       color: "var(--secondary-color-main)",

@@ -22,7 +22,6 @@ import {
   PromocodeIcon,
   PushCopmaniesIcon,
   SettingsMenuIcon,
-  StreamingIcon,
   TariffIcon,
 } from "../../constants/icons";
 

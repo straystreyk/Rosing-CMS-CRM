@@ -7,7 +7,8 @@ import cn from "classnames";
 import styles from "./expand-menu.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../types";
-import { Tooltip } from "@material-ui/core";
+import { Collapse, Fade, Tooltip, useMediaQuery } from "@material-ui/core";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
 
 interface ExpandProps {
   links: string[];
@@ -45,9 +46,9 @@ export const ExpandMenu = ({
   const history = useHistory();
   const dispatch = useDispatch();
   const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
+  const isMobile = useMediaQuery(`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`);
   const expand = useRef<HTMLDivElement>(null);
   const founded = links.filter((el: string) => history.location.pathname.includes(el));
-  const [mounted, setMounted] = useState(false);
   const [active, setActive] = useState(!!founded.length);
   const toggleClick = useCallback(async () => {
     await dispatch(setSidebarVisibility(true));
@@ -56,15 +57,7 @@ export const ExpandMenu = ({
 
   const currentExists = !!expand.current;
 
-  const scrollHeight = useCallback(() => {
-    if (expand.current && active) {
-      return expand.current.scrollHeight;
-    }
-    return 0;
-  }, [expand, active]);
-
   useEffect(() => {
-    if (currentExists) setMounted(true);
     if (!open) setActive(false);
   }, [currentExists, open, founded.length, active]);
 
@@ -77,33 +70,32 @@ export const ExpandMenu = ({
         !open && styles.sidebarClose
       )}
     >
-      <Tooltip title={!open ? title : ""} placement="right" arrow>
-        <div className={styles.expandTitle} onClick={toggleClick}>
-          <div className={styles.iconWrapper}>
-            <div
-              className={cn(
-                styles.icon,
-                !!founded.length && !open && styles.iconActive,
-                !open && styles.iconClose
-              )}
-            >
-              {icon}
-            </div>
-            <span>{title}</span>
-          </div>
+      {/*<Tooltip title={!open ? title : ""} placement="right" arrow>*/}
+      <button className={styles.expandTitleWrapper} onClick={toggleClick}>
+        <span
+          className={cn(
+            styles.icon,
+            !!founded.length && !open && styles.iconActive,
+            !open && styles.iconClose
+          )}
+        >
+          {icon}
+        </span>
+        <span className={styles.iconWrapper}>
+          <span>{title}</span>
           {open ? <ArrowIcon /> : ""}
-        </div>
-      </Tooltip>
-      <div
-        ref={expand}
-        className={cn(mounted && styles.mounted, styles.expandSubMenu)}
-        style={{
-          height: scrollHeight(),
-          opacity: active ? 1 : 0,
-        }}
-      >
+        </span>
+        {!open && !isMobile && (
+          <Fade in={true}>
+            <div className={cn(styles.expandSubMenu, styles.expandSubMenuHover)}>{children}</div>
+          </Fade>
+        )}
+      </button>
+      {/*</Tooltip>*/}
+
+      <Collapse className={styles.expandSubMenu} in={active} unmountOnExit>
         {children}
-      </div>
+      </Collapse>
     </div>
   );
 };

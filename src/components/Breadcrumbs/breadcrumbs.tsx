@@ -111,7 +111,7 @@ export const Breadcrumbs: React.FC<BreadCrumbsProps> = React.memo(({ resource })
               {!!el.name ? (
                 el.name
               ) : (
-                <MainLoader component="span" display="inline-block" size={LOADER_SIZE} />
+                <MainLoader component="span" centered display="inline-block" size={LOADER_SIZE} />
               )}
             </Link>
           </span>

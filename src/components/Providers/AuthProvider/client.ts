@@ -6,19 +6,23 @@ import { ApolloClient, createHttpLink, InMemoryCache, split } from "@apollo/clie
 import { setContext } from "@apollo/client/link/context";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-const wsLink = new ActionCableLink({ cable: ActionCable.createConsumer(getGraphQlEndpoints().ws) });
+const wsLink = new ActionCableLink({
+  cable: ActionCable.createConsumer(
+    getGraphQlEndpoints().ws + `?token=${localStorage.getItem("token")}`
+  ),
+});
 
 const httpLink = createHttpLink({
   uri: getGraphQlEndpoints().http,
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token") ? `Bearer ${localStorage.getItem("token")}` : "";
 
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token}` : "",
+      token,
     },
   };
 });

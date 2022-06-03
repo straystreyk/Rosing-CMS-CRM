@@ -49,7 +49,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource, ...rest })
         {total ?? (
           <>
             &nbsp;
-            <MainLoader display="inline-block" component="span" size={LOADER_SIZE} />
+            <MainLoader display="inline-block" centered component="span" size={LOADER_SIZE} />
             &nbsp;
           </>
         )}

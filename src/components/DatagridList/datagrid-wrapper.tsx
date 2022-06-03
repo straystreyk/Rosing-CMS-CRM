@@ -3,23 +3,23 @@ import cn from "classnames";
 import { useLoading } from "react-admin";
 import { useTranslate } from "ra-core";
 import { useSelector } from "react-redux";
-import { Backdrop, makeStyles } from "@material-ui/core";
+import { Backdrop, Collapse, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import { MainLoader } from "../MainLoader";
 import { Filters } from "../CustomFilters";
 import { CustomDatagridProps, ToolbarProps } from "./custom-datagrid-types";
 import { PlusIcon } from "../../constants/icons";
-import { ShowDescriptionButton } from "../FormSection";
 import { AppState } from "../../types";
 import { PerPageCounter } from "../Pagination/per-page-counter";
 import { StandardButton } from "../UI/Buttons/standard-button";
 import { Pagination } from "../Pagination";
 import { DatagridStyles } from "./styles";
+import { ArrowFilterIcon } from "../CustomFilters/constants";
 
 const useStyles = makeStyles(DatagridStyles);
 
-const LOADER_SIZE = 50;
+const LOADER_SIZE = 70;
 
 const ToolBar: React.FC<{
   basePath?: string;
@@ -60,8 +60,10 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
   const classes = useStyles();
   const translate = useTranslate();
   const loading = useLoading();
-  const [showDescription, setShowDescription] = React.useState<boolean>(true);
+  const [isShown, setIsShown] = React.useState<boolean>(true);
   const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
+
+  const show = () => setIsShown((p) => !p);
 
   return (
     <div className={classes.List}>
@@ -70,16 +72,15 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
           <div className={classes.TopToolBarName}>
             <div>
               <span className="title">{translate(`resources.${props.resource}.name`)}</span>
-              {props.listText && (
-                <ShowDescriptionButton
-                  showDescription={showDescription}
-                  setShowDescription={setShowDescription}
-                />
-              )}
+              <button onClick={show}>
+                <ArrowFilterIcon color="var(--secondary-color-main)" />
+              </button>
             </div>
             <ToolBar toolbar={props.toolbar} basePath={props.basePath} resource={props.resource} />
           </div>
-          {showDescription && <div className="description">{props.listText}</div>}
+          <Collapse unmountOnExit in={isShown}>
+            <div className="description">{props.listText}</div>
+          </Collapse>
         </div>
       ) : (
         <div className={classes.TopToolBarWrapper}>

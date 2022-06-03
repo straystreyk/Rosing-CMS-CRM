@@ -378,6 +378,12 @@ export const lightTheme = {
         },
       },
     },
+    // for loaders in table
+    RaPlaceholder: {
+      root: {
+        background: "var(--secondary-gradient)",
+      },
+    },
     MuiAppBar: {
       colorSecondary: {
         backgroundColor: "var(--secondary-color-main)",

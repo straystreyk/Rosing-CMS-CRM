@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     whiteSpace: "nowrap",
     overflow: "hidden",
     marginLeft: 10,
-    fontWeight: 800,
+    fontWeight: 600,
     display: "inline",
   },
   spacer: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles({
   },
   AppBar: {
     zIndex: 0,
+    boxShadow: "unset",
   },
   FixedContainer: {
     display: "flex",
@@ -54,6 +55,8 @@ const CustomUserMenu: FC<UserMenuProps> = (props) => {
     </UserMenu>
   );
 };
+
+const Menu = () => <span>asd</span>;
 
 export const CustomAppBar: FC<AppBarProps> = (props) => {
   const classes = useStyles();
