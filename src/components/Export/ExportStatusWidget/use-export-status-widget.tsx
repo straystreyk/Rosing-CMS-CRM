@@ -30,7 +30,6 @@ export const useExportStatusWidget = (
             variables: { type: getGqlResource(resource) },
           });
           const data = res.data.data;
-          console.log(data);
           if (data) {
             setSubscription(data);
           }

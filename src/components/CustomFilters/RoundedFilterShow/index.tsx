@@ -26,7 +26,6 @@ const useRoundedFilter = ({ source, choices }: { source: string; choices?: Choic
   if (source in filterValues && choices) {
     foundedFilter = choices
       ?.map((el) => {
-        console.log(el);
         if (filterValues[source] instanceof Array && filterValues[source].includes(el.value)) {
           return el;
         }
