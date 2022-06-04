@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
-import { SearchFilterStyles } from "./styles";
+import { CrossIcon, SearchFilterStyles } from "./styles";
 import { StandardCustomFilterProps } from "../custom-filters-types";
 import { useTranslate } from "ra-core";
 import { SelectSearchFilter } from "./select-search-filter";
@@ -24,10 +24,14 @@ const useSearchFilters = ({ source }: { source: string }) => {
     }
   }, [filterValues, source]);
 
-  const changeInput = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setInputValue(() => e.target.value);
-      setFilters({ ...filterValues, [source]: e.target.value }, displayedFilters);
+  const changeInput: (
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>,
+    clear?: boolean
+  ) => void = React.useCallback(
+    (e, clear) => {
+      const value = !clear ? (e.target as HTMLInputElement).value : "";
+      setInputValue(value);
+      setFilters({ ...filterValues, [source]: value }, displayedFilters);
     },
     [source, displayedFilters, setFilters, filterValues]
   );
@@ -47,16 +51,23 @@ const SearchInputFilter: React.FC<StandardCustomFilterProps> = ({ source }) => {
   return (
     <>
       <input
-        className={classes.SearchInput}
         type="text"
+        className={classes.SearchInput}
         placeholder={`ID, slug or ${translate(
           ["resources", resource, "name"].join(".")
         ).toLowerCase()} name`}
         value={inputValue}
         onChange={changeInput}
       />
-      <div className={classes.LoopIcon}>
-        <LoopInputIcon color="var(--secondary-color-default)" />
+
+      <div className={classes.Icon}>
+        {!inputValue ? (
+          <LoopInputIcon color="var(--secondary-color-default)" />
+        ) : (
+          <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => changeInput(e, true)}>
+            <CrossIcon />
+          </button>
+        )}
       </div>
     </>
   );

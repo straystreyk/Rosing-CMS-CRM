@@ -36,13 +36,14 @@ export interface DatagridBodyProps extends Omit<DatagridBodyPropsRA, "resource">
   data?: RecordMap<RecordRa>;
   expandElement?: ExpandElementType;
   offActions?: boolean;
+  onToggleItem?: (id: Identifier | undefined, event: TouchEvent | MouseEvent) => void;
 }
 
 export interface DatagridRowProps {
   record?: RecordRa;
   resource: string;
-  id?: string;
-  onToggleItem?: (id: Identifier, event: TouchEvent | MouseEvent) => void;
+  id?: Identifier;
+  onToggleItem?: (id: Identifier | undefined, event: TouchEvent | MouseEvent) => void;
   selected?: boolean;
   basePath?: string;
   offActions?: boolean;

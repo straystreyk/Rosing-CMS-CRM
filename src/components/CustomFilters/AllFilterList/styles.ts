@@ -5,6 +5,7 @@ export const AllFiltersListStyles = {
     padding: "4px 0",
     "& span.label": {
       marginLeft: 10,
+      fontWeight: 400,
     },
   },
   EmptyFilterList: {

@@ -8,8 +8,24 @@ import { DatagridRowProps } from "./custom-datagrid-types";
 import { ArrayInputItemArrow, DNDIcon } from "../../constants/icons";
 
 import { TableStyles } from "./styles";
+import { Identifier } from "ra-core";
+import { MouseEvent, TouchEvent } from "react";
 
 const useStyles = makeStyles(TableStyles);
+
+const useTableRow = (
+  id?: Identifier,
+  onToggleItem?: (id: Identifier | undefined, event: React.TouchEvent | React.MouseEvent) => void
+) => {
+  const onToggleCheckbox = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    id && onToggleItem && onToggleItem(id, event);
+  };
+
+  return {
+    onToggleCheckbox,
+  };
+};
 
 const ExpandRow: React.FC<any> = ({ open, record, resource, expandElement }) => {
   const classes = useStyles();
@@ -46,6 +62,7 @@ export const MyDatagridRow: React.FC<DatagridRowProps> = ({
 }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const { onToggleCheckbox } = useTableRow(id, onToggleItem);
 
   return (
     <>
@@ -55,12 +72,9 @@ export const MyDatagridRow: React.FC<DatagridRowProps> = ({
             className={cn(classes.TableCheckbox, classes.TableCell)}
             size="small"
             padding="checkbox"
+            onClick={onToggleCheckbox}
           >
-            <Checkbox
-              color="primary"
-              checked={selected}
-              onClick={(event) => id && onToggleItem && onToggleItem(id, event)}
-            />
+            <Checkbox color="primary" checked={selected} onClick={onToggleCheckbox} />
           </TableCell>
         )}
         {React.Children.map(children, (field, index) => {
@@ -106,26 +120,24 @@ export const MyDatagridRowWithDnd: React.FC<DatagridRowProps> = ({
   ids,
 }) => {
   const classes = useStyles();
+  const { onToggleCheckbox } = useTableRow(id, onToggleItem);
 
   return (
     <Draggable key={id} draggableId={id!.toString()} index={ids!.indexOf(id as string)}>
       {(provided, snapshot) => (
         <TableRow
           className={classes.DraggableTableRow}
-          key={id}
           ref={provided.innerRef}
           {...provided.draggableProps}
+          onClick={onToggleCheckbox}
+          key={id}
           hover
         >
           <TableCell className={classes.TableCheckbox} padding="checkbox">
             <div className={cn(classes.DNDIcon, "DNDIcon")} {...provided.dragHandleProps}>
               <DNDIcon />
             </div>
-            <Checkbox
-              color="primary"
-              checked={selected}
-              onClick={(event) => id && onToggleItem && onToggleItem(id, event)}
-            />
+            <Checkbox color="primary" checked={selected} onClick={onToggleCheckbox} />
           </TableCell>
           {React.Children.map(children, (field, index) => {
             return (

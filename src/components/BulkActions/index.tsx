@@ -1,5 +1,6 @@
 import * as React from "react";
 import cn from "classnames";
+
 import { BulkDeleteButton } from "ra-ui-materialui";
 import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
@@ -18,6 +19,7 @@ export const BulkActions: React.FC = () => {
       <div className={classes.BulkActions}>
         <BulkDeleteButton
           icon={<DeleteIcon color="var(--additional-red-default)" />}
+          className={cn(classes.Button, "delete")}
           label="Delete"
         />
       </div>

@@ -4,7 +4,7 @@ export const CustomFiltersWrapperStyles: any = {
     marginTop: 20,
   },
   RoundedFiltersWrapper: {
-    marginBottom: 24,
+    marginBottom: 16,
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",

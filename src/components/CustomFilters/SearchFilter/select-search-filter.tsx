@@ -1,8 +1,10 @@
 import { ChoicesCustomFilter, ChoicesItem } from "../custom-filters-types";
 import * as React from "react";
 import { useListContext } from "react-admin";
-import { makeStyles, MenuItem, TextField } from "@material-ui/core";
+import { makeStyles, MenuItem, TextField, InputAdornment } from "@material-ui/core";
 import { SearchFilterStyles } from "./styles";
+import { ExportIcon } from "../../Export/constants";
+import { ArrayInputItemArrow, ArrowIconDown } from "../../../constants/icons";
 
 const useStyles = makeStyles(SearchFilterStyles);
 
@@ -46,8 +48,8 @@ export const SelectSearchFilter: React.FC<SelectProps> = ({ choices, initialValu
 
   return (
     <TextField
-      className={classes.SelectInput}
       select
+      className={classes.SelectInput}
       id="outlined-select-search"
       label=""
       value={value}

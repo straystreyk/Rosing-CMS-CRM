@@ -66,8 +66,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
         <TextField source="name" fullWidth />
       </ReferenceField>
       <FunctionField
-        label="Parts"
-        source="parts"
+        label=""
+        source=""
         offsort
         render={(record?: Record) => (
           <>

@@ -3,7 +3,11 @@ import { authClient } from "../../Providers/AuthProvider/client";
 import { getGqlResource } from "../../Providers/DataProvider/get-gql-resource";
 import { CHECK_SUBSCRIPTION } from "../requests";
 
-type ExportType = { status: "in_progress" | "ready" | "error"; progress: number; file: string };
+export type ExportType = {
+  status: "in_progress" | "ready" | "error";
+  progress: number;
+  file: string;
+};
 
 export const useExportStatusWidget = (
   resource: string,

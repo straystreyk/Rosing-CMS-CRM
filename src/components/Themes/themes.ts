@@ -207,6 +207,7 @@ export const lightTheme = {
         "& .MuiListItem-root": {
           fontSize: 14,
           borderRadius: 4,
+          fontWeight: 400,
           color: "var(--primary-text-default)",
           lineHeight: "20px",
           transition: "0.35s color ease, 0.35s background-color ease",
@@ -358,6 +359,7 @@ export const lightTheme = {
           fontSize: 14,
           borderRadius: 4,
           color: "var(--primary-text-default)",
+          fontWeight: 400,
           lineHeight: "20px",
           transition: "0.35s color ease, 0.35s background-color ease",
           margin: "8px 0",

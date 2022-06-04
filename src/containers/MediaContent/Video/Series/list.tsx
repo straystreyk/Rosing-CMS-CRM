@@ -42,8 +42,8 @@ export const List: React.FC<ShowProps> = (props) => {
       <TextField source="position" label="Position" />
       <TextField source="slug" label="Slug" />
       <FunctionField
-        label="Seasons"
-        source="seasons"
+        label=""
+        source=""
         render={(record?: Record) => (
           <>
             <StandardButton

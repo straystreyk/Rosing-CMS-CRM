@@ -1,7 +1,7 @@
 import * as React from "react";
 import cn from "classnames";
 
-import { useListContext } from "react-admin";
+import { useListContext, useLoading } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { useLocation } from "react-router-dom";
@@ -12,7 +12,6 @@ const useStyles = makeStyles({
   Sort: {
     fontSize: 14,
     lineHeight: "20px",
-    margin: "8px 0",
     color: "var(--secondary-color-default)",
     userSelect: "none",
     "& .sortButton": {
@@ -23,24 +22,28 @@ const useStyles = makeStyles({
       color: "var(--secondary-color-default)",
       "&.active": {
         color: "var(--secondary-color-main)",
+        fontWeight: 500,
       },
     },
   },
-  SortActions: {
+  TableActions: {
     "& button": {
-      marginLeft: 0,
+      marginLeft: 12,
+      "&:first-child": {
+        marginLeft: 0,
+      },
     },
   },
   SortWrapper: {
     display: "flex",
     justifyContent: "space-between",
-    padding: "0 20px 0 24px",
+    padding: "8px 20px 8px 24px",
     alignItems: "center",
     flexWrap: "wrap",
   },
 });
 
-const SKELETON_WIDTH = 15;
+const SKELETON_WIDTH = 150;
 const SKELETON_HEIGHT = 17;
 
 export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: string }> = ({
@@ -48,8 +51,7 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: 
   resource,
 }) => {
   const location = useLocation();
-  // const history = useHistory();
-  const { total, perPage, setPerPage } = useListContext();
+  const { total, perPage, setPerPage, loading } = useListContext();
   const queryParams = new URLSearchParams(location.search);
   const classes = useStyles();
 
@@ -59,39 +61,47 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: 
         setPerPage(item);
         return;
       }
-      // queryParams.delete("perPage");
-      // history.push(`${location.pathname}?${queryParams}`);
     },
     [setPerPage]
   );
 
+  if (loading)
+    return (
+      <div className={classes.SortWrapper}>
+        <Skeleton
+          style={{ background: "var(--secondary-gradient)" }}
+          variant="rect"
+          animation={false}
+          width={SKELETON_WIDTH}
+          height={SKELETON_HEIGHT}
+        />
+      </div>
+    );
+
   return (
     <div className={classes.SortWrapper}>
       <div className={classes.Sort}>
-        Total&nbsp;
-        {total ?? (
-          <Skeleton
-            style={{ display: "inline-block" }}
-            width={SKELETON_WIDTH}
-            height={SKELETON_HEIGHT}
-          />
+        Total&nbsp;{total}
+        {total >= 15 && (
+          <>
+            ,show by:&nbsp;
+            {showBy?.map((number, index) => (
+              <button
+                className={cn(
+                  "sortButton",
+                  queryParams.has("perPage") && perPage === number && "active",
+                  !queryParams.has("perPage") && typeof number === "string" && "active"
+                )}
+                key={number}
+                onClick={() => changePerPage(number)}
+              >
+                {number}
+              </button>
+            ))}
+          </>
         )}
-        , show by:&nbsp;
-        {showBy?.map((number, index) => (
-          <button
-            className={cn(
-              "sortButton",
-              queryParams.has("perPage") && perPage === number && "active",
-              !queryParams.has("perPage") && typeof number === "string" && "active"
-            )}
-            key={number}
-            onClick={() => changePerPage(number)}
-          >
-            {number}
-          </button>
-        ))}
       </div>
-      <div className={classes.SortActions}>
+      <div className={classes.TableActions}>
         <ExportResourceButton resource={resource} />
         <RefreshButton />
       </div>

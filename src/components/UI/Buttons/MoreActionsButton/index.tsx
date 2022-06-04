@@ -23,9 +23,11 @@ export const MoreActionsButton: React.FC = ({ children }) => {
   const classes = useStyles();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setAnchorEl(null);
   };
 

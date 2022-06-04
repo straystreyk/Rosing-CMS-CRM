@@ -42,7 +42,7 @@ const useStyles = makeStyles({
       color: "var(--secondary-color-main)",
     },
     "&.active": {
-      color: "var(--accent-color)",
+      color: "var(--secondary-color-main)",
     },
   },
   SearchPage: {

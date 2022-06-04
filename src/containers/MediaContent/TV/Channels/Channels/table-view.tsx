@@ -83,8 +83,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
         }
       />
       <FunctionField
-        label="Channel versions"
-        source="channelVersions"
+        label=""
+        source=""
         render={(record?: Record) => (
           <>
             <StandardButton

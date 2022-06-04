@@ -7,7 +7,14 @@ import { TableStyles } from "./styles";
 
 const useStyles = makeStyles(TableStyles);
 
-const inverseOrder = (sort: string) => (sort === "ASC" ? "DESC" : "ASC");
+const inverseOrder = (sort: string) => {
+  switch (sort) {
+    case "ASC":
+      return "DESC";
+    case "DESC":
+      return "";
+  }
+};
 
 const CheckedIcon = () => (
   <svg width="21" height="21" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,12 +62,16 @@ const DependentModelHeader: React.FC<any> = ({ offActions, children }) => {
     <TableHead>
       <TableRow>
         {!offActions && (
-          <TableCell className={cn(classes.TableCheckbox)} size="small" padding="checkbox">
+          <TableCell
+            className={cn(classes.TableCheckbox, "DependentModel")}
+            size="small"
+            padding="checkbox"
+          >
             <Checkbox
               checkedIcon={<CheckedIcon />}
-              color="primary"
               checked={selectedIds === ids}
               onClick={checkedAll}
+              color="primary"
             />
           </TableCell>
         )}

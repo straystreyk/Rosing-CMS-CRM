@@ -4,6 +4,10 @@ export const TableFieldsStyles: any = {
     fontSize: 14,
     lineHeight: "20px",
     color: "var(--primary-text-default)",
+    transition: "0.35s all ease",
+    "&:hover": {
+      color: "var(--primary-focus)",
+    },
   },
   MoreActions: {
     display: "flex",

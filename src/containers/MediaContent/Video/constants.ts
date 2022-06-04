@@ -6,11 +6,11 @@ export const videoTabs: ListTabProps[] = [
     link: "/media_content/video/movies",
   },
   {
-    name: "Video files",
-    link: "/media_content/video/video_files",
-  },
-  {
     name: "Series",
     link: "/media_content/video/series",
+  },
+  {
+    name: "Video files",
+    link: "/media_content/video/video_files",
   },
 ];

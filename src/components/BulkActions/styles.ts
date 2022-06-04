@@ -15,7 +15,7 @@ export const BulkActionsStyles: any = {
     },
     "& span.title": {
       fontSize: 14,
-      fontWeight: 600,
+      fontWeight: 500,
       color: "var(--primary-text-default)",
     },
   },
@@ -25,5 +25,21 @@ export const BulkActionsStyles: any = {
   },
   BulkActions: {
     marginLeft: 15,
+  },
+  Button: {
+    fontSize: 14,
+    textTransform: "unset",
+    fontFamily: "var(--font-family)",
+    "& .MuiButton-label": {
+      "& span": {
+        paddingLeft: 4,
+        lineHeight: "20px",
+        verticalAlign: "middle",
+      },
+    },
+    "&.delete": {
+      backgroundColor: "unset",
+      color: "var(--additional-red-default)",
+    },
   },
 };

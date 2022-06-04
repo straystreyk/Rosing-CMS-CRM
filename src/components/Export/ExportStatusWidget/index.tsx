@@ -46,7 +46,7 @@ export const ExportStatusWidget = React.memo(({ resource }: { resource: string }
               </a>
             </>
           )}
-          {subscription.status === "error" && "Error"}
+          {subscription.status === "error" && <>Something went wrong :(</>}
         </span>
         {subscription.status === "in_progress" && (
           <span>

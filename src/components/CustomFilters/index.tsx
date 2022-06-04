@@ -5,7 +5,7 @@ import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
 import { StandardButton } from "../UI/Buttons/standard-button";
-import { DeleteIcon, PlusIcon } from "../../constants/icons";
+import { ArrayInputItemArrow, DeleteIcon, PlusIcon } from "../../constants/icons";
 import { CustomFiltersWrapperStyles } from "./styles";
 import { SearchFilters } from "./SearchFilter";
 import { AllFiltersList } from "./AllFilterList";
@@ -123,6 +123,7 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
                 variant="text"
                 color="secondary"
                 startIcon={<PlusIcon color="var(--primary-button-default)" />}
+                endIcon={<ArrayInputItemArrow color="var(--primary-button-default)" />}
                 className="filterButton"
                 onClick={handleClick}
               >
