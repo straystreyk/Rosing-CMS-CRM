@@ -221,7 +221,7 @@ export interface ImageProps {
 interface ImageItemProps extends ImageProps {
   setImageIds: any;
   setServerImages: any;
-  setShowSlider: any;
+  openSlider: any;
   source: string;
   serverImages: ImageProps[];
   requestVariables: Record<string, string>;
@@ -238,7 +238,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
     id,
     index,
     requestVariables,
-    setShowSlider,
+    openSlider,
     size,
     serverImages,
     edit,
@@ -307,11 +307,6 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
       setServerImages((p: ImageProps[]) => p.filter((el) => el.index !== index));
     };
 
-    const showSlider = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      setShowSlider(true);
-    };
-
     return (
       <div className={cn(classes.ImageItemWrapper, "ImageItemWrapper")}>
         <div className={classes.ImageTitle}>
@@ -346,7 +341,10 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
           ) : (
             <>
               {id && url && (
-                <Button onClick={showSlider} className={cn(classes.PopupButton, "PopupButton")}>
+                <Button
+                  onClick={(e) => openSlider(e, index)}
+                  className={cn(classes.PopupButton, "PopupButton")}
+                >
                   <LoopIcon color="var(--primary-focus)" />
                 </Button>
               )}
@@ -415,6 +413,15 @@ export const ImageUploaderV2: React.FC<{
     const [edit, setEdit] = React.useState(inputType !== "show");
     const [showSlider, setShowSlider] = React.useState(false);
     const [initialValue, setInitialValue] = React.useState(values[source]);
+    const [swiper, setSwiper] = React.useState<any>(null);
+
+    const openSlider = React.useCallback(
+      (e: React.MouseEvent<HTMLButtonElement>, index: number) => {
+        swiper.slideToLoop(index);
+        setShowSlider(true);
+      },
+      [swiper]
+    );
 
     let allImages: ImageProps[] | [];
     const getAllImages = React.useCallback(() => {
@@ -509,10 +516,11 @@ export const ImageUploaderV2: React.FC<{
             PaperOverride: classes.PaperOverride,
             ModalOverride: classes.ModalOverride,
           }}
+          keepMounted={true}
           open={showSlider}
           handleClose={() => setShowSlider(false)}
         >
-          <Slider images={serverImages} />
+          <Slider images={serverImages} setSwiper={setSwiper} />
         </ModalMUI>
         {!offInfo && inputType !== "show" && (
           <div className={classes.ImagesInfo}>
@@ -578,7 +586,7 @@ export const ImageUploaderV2: React.FC<{
                     requestVariables={requestVariables}
                     setImageIds={setImageIds}
                     setServerImages={setServerImages}
-                    setShowSlider={setShowSlider}
+                    openSlider={openSlider}
                     serverImages={serverImages}
                   />
                 );

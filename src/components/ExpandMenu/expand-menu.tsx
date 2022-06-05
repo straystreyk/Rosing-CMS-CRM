@@ -7,7 +7,7 @@ import cn from "classnames";
 import styles from "./expand-menu.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../types";
-import { Collapse, Fade, Tooltip, useMediaQuery } from "@material-ui/core";
+import { Collapse, Tooltip, useMediaQuery } from "@material-ui/core";
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
 
 interface ExpandProps {
@@ -46,9 +46,9 @@ export const ExpandMenu = ({
   const history = useHistory();
   const dispatch = useDispatch();
   const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
-  const isMobile = useMediaQuery(`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`);
-  const expand = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery(`(max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`);
   const founded = links.filter((el: string) => history.location.pathname.includes(el));
+  const expand = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(!!founded.length);
   const toggleClick = useCallback(async () => {
     await dispatch(setSidebarVisibility(true));
@@ -63,9 +63,8 @@ export const ExpandMenu = ({
 
   return (
     <Tooltip
-      disableHoverListener={open}
-      disableFocusListener={open}
       title={title}
+      classes={{ popper: open && styles.hiddenTooltip }}
       placement="right"
       arrow
     >
@@ -94,7 +93,7 @@ export const ExpandMenu = ({
         </button>
 
         <Collapse className={styles.expandSubMenu} in={active} unmountOnExit>
-          {children}
+          {open && children}
         </Collapse>
       </button>
     </Tooltip>

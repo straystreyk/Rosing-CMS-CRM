@@ -182,3 +182,45 @@ export const cardButtonStyles = {
   marginLeft: "auto",
   marginTop: 20,
 };
+
+export const AppBarStyles: any = {
+  title: {
+    flex: 1,
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    marginLeft: 10,
+    fontWeight: 600,
+    display: "inline",
+  },
+  spacer: {
+    flex: 1,
+  },
+  AppBar: {
+    zIndex: 0,
+    boxShadow: "unset",
+    top: 17,
+  },
+  FixedContainer: {
+    display: "flex",
+    position: "fixed",
+    zIndex: 2,
+  },
+  SubHeader: {
+    position: "fixed",
+    top: 0,
+    width: "100%",
+    height: 17,
+    fontSize: 12,
+    fontWeight: 500,
+    display: "flex",
+    alignItems: "center",
+    padding: "0 calc(0.2em + 15.5px)",
+    color: "var(--additional-red-default)",
+    backgroundColor: "var(--secondary-menu-2)",
+    "& .SubLogo": {
+      display: "flex",
+      marginRight: 24,
+    },
+  },
+};

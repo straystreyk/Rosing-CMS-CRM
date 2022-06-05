@@ -57,6 +57,7 @@ export const SearchFilterStyles: any = {
     right: 8,
     top: "50%",
     transform: "translateY(-50%)",
+    display: "flex",
     "& button": { display: "flex" },
   },
 };

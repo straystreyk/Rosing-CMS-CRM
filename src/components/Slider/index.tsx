@@ -14,6 +14,7 @@ import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
 
 interface SliderProps {
   images: ImageProps[];
+  setSwiper: any;
 }
 
 const SliderNav: React.FC<{
@@ -100,8 +101,7 @@ const SliderNav: React.FC<{
   </>
 );
 
-export const Slider: React.FC<SliderProps> = ({ images }) => {
-  const [swiper, setSwiper] = React.useState<any>(null);
+export const Slider: React.FC<SliderProps> = ({ images, setSwiper }) => {
   const isMobile = useMediaQuery(`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`);
   const prev = useRef(null);
   const next = useRef(null);
@@ -121,6 +121,7 @@ export const Slider: React.FC<SliderProps> = ({ images }) => {
         slidesPerView={1}
         style={{ width: "100%", height: "100%" }}
         grabCursor
+        loop
       >
         {images.map((image, index) => {
           return (

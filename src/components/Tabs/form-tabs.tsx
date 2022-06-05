@@ -11,7 +11,7 @@ interface FormTabProps {
 const useStyles = makeStyles({
   FixedTabsActive: {
     position: "fixed",
-    top: 48,
+    top: 65,
     zIndex: 10,
     width: "100%",
     backgroundColor: "#fff",
@@ -70,13 +70,13 @@ const useFormTabs = ({
   const checkTabPosition = React.useCallback(() => {
     if (
       tabRef.current &&
-      tabRef.current.getBoundingClientRect().top < tabRef.current.offsetHeight &&
+      tabRef.current.getBoundingClientRect().top < tabRef.current.offsetHeight + 17 &&
       !fixed
     ) {
       setFixed(true);
     } else if (
       tabRef.current &&
-      tabRef.current.getBoundingClientRect().top >= tabRef.current.offsetHeight &&
+      tabRef.current.getBoundingClientRect().top >= tabRef.current.offsetHeight + 17 &&
       fixed
     ) {
       setFixed(false);

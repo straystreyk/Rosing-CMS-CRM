@@ -266,6 +266,11 @@ export const lightTheme = {
           padding: 0,
         },
       },
+      appFrame: {
+        "@media (min-width: 576px)": {
+          marginTop: 65,
+        },
+      },
       contentWithSidebar: {
         backgroundColor: "var(--secondary-color-main)",
       },

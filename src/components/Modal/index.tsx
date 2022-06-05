@@ -12,6 +12,7 @@ interface ModalMuiProps {
   title?: string | React.ReactElement;
   description?: string | React.ReactElement;
   offExitIcon?: boolean;
+  keepMounted?: boolean;
   classNamesOverrides?: {
     ModalOverride?: string;
     PaperOverride?: string;
@@ -37,6 +38,7 @@ export const ModalMUI: React.FC<ModalMuiProps> = ({
   description,
   classNamesOverrides,
   offExitIcon,
+  keepMounted,
 }) => {
   const classes = useStyles();
 
@@ -45,6 +47,7 @@ export const ModalMUI: React.FC<ModalMuiProps> = ({
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
+        keepMounted={keepMounted}
         className={cn(
           classes.Modal,
           classNamesOverrides &&

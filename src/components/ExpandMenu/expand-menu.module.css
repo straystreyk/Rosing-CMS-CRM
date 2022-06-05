@@ -1,3 +1,10 @@
+.hiddenTooltip {
+    display: none;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
 .expandWrapper {
     color: #fff;
     cursor: pointer;
@@ -133,4 +140,8 @@
 
 .iconActive:hover {
     background-color: var(--accent-color-hover);
+}
+
+.hiddenTooltip {
+
 }

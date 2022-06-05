@@ -9,5 +9,6 @@ export default {
   mounted: string,
   sidebarClose: string,
   iconActive: string,
+  hiddenTooltip: string,
   iconClose: string,
 };
