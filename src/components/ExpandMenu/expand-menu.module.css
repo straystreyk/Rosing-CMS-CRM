@@ -28,7 +28,6 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: 159px;
 }
 
 .iconWrapper span {
@@ -99,6 +98,7 @@
     font-weight: 400;
     margin-bottom: 8px;
     transition: 0.2s background-color ease;
+    min-height: auto;
 }
 
 .expandSubMenu a:first-child{
@@ -107,6 +107,7 @@
 
 .expandSubMenu a[class*="RaMenuItemLink-active"] {
     background-color: var(--accent-color);
+    font-weight: 500;
     border: none;
 }
 
@@ -115,7 +116,7 @@
 }
 
 .sidebarClose {
-    max-width: 44px;
+    max-width: 36px;
 }
 
 .sidebarClose .expandTitleWrapper{

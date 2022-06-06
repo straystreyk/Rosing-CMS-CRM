@@ -1,11 +1,12 @@
 import * as React from "react";
 import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
-import { CrossIcon, SearchFilterStyles } from "./styles";
+import { SearchFilterStyles } from "./styles";
 import { StandardCustomFilterProps } from "../custom-filters-types";
 import { useTranslate } from "ra-core";
 import { SelectSearchFilter } from "./select-search-filter";
 import { LoopInputIcon } from "../constants";
+import { CrossIcon } from "../../../constants/icons";
 
 const useStyles = makeStyles(SearchFilterStyles);
 
@@ -65,7 +66,7 @@ const SearchInputFilter: React.FC<StandardCustomFilterProps> = ({ source }) => {
           <LoopInputIcon color="var(--secondary-color-default)" />
         ) : (
           <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => changeInput(e, true)}>
-            <CrossIcon />
+            <CrossIcon color="var(--secondary-color-default)" />
           </button>
         )}
       </div>

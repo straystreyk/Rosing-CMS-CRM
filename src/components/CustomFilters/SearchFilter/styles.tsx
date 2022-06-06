@@ -61,14 +61,3 @@ export const SearchFilterStyles: any = {
     "& button": { display: "flex" },
   },
 };
-
-export const CrossIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M12.5937 7.40759L7.39648 12.6048M12.6028 12.5918L7.40562 7.39453"
-      stroke="#9FA5A8"
-      strokeWidth="1.3"
-      strokeLinecap="round"
-    />
-  </svg>
-);

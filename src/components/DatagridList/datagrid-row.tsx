@@ -19,6 +19,7 @@ const useTableRow = (
 ) => {
   const onToggleCheckbox = (event: React.MouseEvent) => {
     event.stopPropagation();
+    if ((event.target as HTMLLinkElement).href) return;
     id && onToggleItem && onToggleItem(id, event);
   };
 

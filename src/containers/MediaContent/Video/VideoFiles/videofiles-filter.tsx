@@ -6,12 +6,10 @@ export const videoFilesFilters: FilterTemplate[] = [
     component: DateFilter,
     label: "Created At",
     source: "createdAt",
-    defaultActive: true,
   },
   {
     component: DateFilter,
     label: "Updated At",
     source: "updatedAt",
-    defaultActive: true,
   },
 ];

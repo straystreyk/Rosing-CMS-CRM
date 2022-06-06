@@ -53,7 +53,11 @@ export const RefreshButton: React.FC = () => {
   }, [refresh]);
 
   return (
-    <StandardButton onClick={acceptRefresh} variant="icon">
+    <StandardButton
+      customColor="var(--primary-button-default)"
+      onClick={acceptRefresh}
+      variant="icon"
+    >
       <span className={classes.RefreshIcon}>
         <RefreshIcon />
       </span>

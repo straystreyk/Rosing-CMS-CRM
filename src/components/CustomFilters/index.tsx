@@ -40,7 +40,7 @@ const useFilters = ({
 
   React.useEffect(() => {
     initialFilters.forEach((filter) => {
-      if (filter.source in filterValues || filter.defaultActive) {
+      if (filter.source in filterValues) {
         setActiveFilters((prev) => [...prev, filter]);
         if (filter.defaultActive) {
           setInitialFilters((prev) => prev.filter((initialFilter) => initialFilter !== filter));

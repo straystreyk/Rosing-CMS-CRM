@@ -4,8 +4,9 @@ import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
 import { ChoicesItem } from "../custom-filters-types";
-import { ArrowFilterIcon, DeleteFilterIcon, PinIcon } from "../constants";
+import { ArrowFilterIcon } from "../constants";
 import { DefaultRoundedFilterStyles } from "./styles";
+import { CrossIcon } from "../../../constants/icons";
 
 const useStyles = makeStyles(DefaultRoundedFilterStyles);
 
@@ -44,7 +45,6 @@ export const RoundedFilterShow: React.FC<RoundedFilterShowProps> = ({
   handleClick,
   source,
   deleteFilter,
-  defaultActive,
   label,
   choices,
 }) => {
@@ -53,11 +53,11 @@ export const RoundedFilterShow: React.FC<RoundedFilterShowProps> = ({
 
   return (
     <span className={cn(classes.RoundedFilter, isAlreadyIn && classes.RoundedFilterActive)}>
-      {defaultActive && (
-        <span className="pinIcon">
-          <PinIcon />
-        </span>
-      )}
+      {/*{defaultActive && (*/}
+      {/*  <span className="pinIcon">*/}
+      {/*    <PinIcon />*/}
+      {/*  </span>*/}
+      {/*)}*/}
       <button onClick={handleClick}>
         <span className="label">
           {foundedFilter && foundedFilter.length ? (
@@ -75,7 +75,7 @@ export const RoundedFilterShow: React.FC<RoundedFilterShowProps> = ({
       </button>
       {isAlreadyIn && (
         <button className="deleteButton" onClick={deleteFilter}>
-          <DeleteFilterIcon color="var(--primary-button-default)" />
+          <CrossIcon color="var(--primary-button-default)" />
         </button>
       )}
     </span>

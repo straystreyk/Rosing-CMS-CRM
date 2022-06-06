@@ -23,6 +23,7 @@ import {
 import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
 import { useTableActions } from "../../../../../custom-hooks/use-table-actions";
 import { channelFilter } from "./channel-filter";
+import { ToModelField } from "../../../../../components/TableFields/to-model-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -82,34 +83,11 @@ export const TableView: React.FC<ShowProps> = (props) => {
           )
         }
       />
-      <FunctionField
-        label=""
-        source=""
-        render={(record?: Record) => (
-          <>
-            <StandardButton
-              onClick={() =>
-                record?.channelVersions && record?.channelVersions.length
-                  ? history.push(`/${props.resource}/${record?.id}/channel_versions`)
-                  : history.push(`/${props.resource}/${record?.id}/channel_versions/create`)
-              }
-              startIcon={
-                record?.channelVersions && record?.channelVersions.length ? (
-                  <ResourceCountEpisodesIcon color="var(--accent-color)" />
-                ) : (
-                  <ResourceAddIcon color="var(--accent-color)" />
-                )
-              }
-              variant="text"
-              customColor="var(--accent-color)"
-              style={{ paddingLeft: 0, paddingRight: 0 }}
-            >
-              {record?.channelVersions && record?.channelVersions.length
-                ? `Versions (${record?.channelVersions.length})`
-                : "Add versions"}
-            </StandardButton>
-          </>
-        )}
+      <ToModelField
+        to={`/${props.resource}`}
+        source="channelVersions"
+        label="Channel versions"
+        linkSource="channel_versions"
       />
       <FunctionField
         label=""

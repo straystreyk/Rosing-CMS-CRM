@@ -14,6 +14,13 @@ const useStyles = makeStyles({
     animation: `$myEffect 2000ms linear  infinite`,
     borderRadius: 20,
   },
+  BottomCircle: {
+    stroke: "var(--secondary-color-default)",
+    position: "absolute",
+    left: 0,
+    top: 0,
+    zIndex: -1,
+  },
   TopCircleSvgAnimate: {
     animation: `$rotate 1200ms linear infinite`,
     display: "block",
@@ -66,6 +73,9 @@ const Loader = ({ size = 22 }: { size?: number }) => {
           radius={5}
           strokeLinecap="round"
         ></circle>
+      </svg>
+      <svg viewBox="22 22 44 44" className={classes.BottomCircle}>
+        <circle cx="44" cy="44" r="20" fill="none" strokeWidth="4"></circle>
       </svg>
     </div>
   );

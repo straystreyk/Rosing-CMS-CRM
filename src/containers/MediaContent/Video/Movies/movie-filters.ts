@@ -17,7 +17,6 @@ export const movieFilters: FilterTemplate[] = [
     choices: DOWNLOADABLE_CHOICES,
     label: "Downloadable",
     source: "downloadable",
-    defaultActive: true,
   },
   {
     component: ChoicesFilter,

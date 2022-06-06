@@ -76,6 +76,11 @@ export const lightTheme = {
         },
       },
     },
+    MuiSelect: {
+      icon: {
+        color: "#DDDFDF",
+      },
+    },
     RaList: {
       bulkActionsDisplayed: {
         marginTop: 0,
@@ -120,6 +125,10 @@ export const lightTheme = {
         overflow: "visible",
         "&:hover": {
           background: "#2D3D44",
+        },
+        "&.Mui-focusVisible": {
+          background: "#2D3D44",
+          ...outlineStyles,
         },
       },
       active: {
@@ -267,7 +276,7 @@ export const lightTheme = {
         },
       },
       appFrame: {
-        "@media (min-width: 576px)": {
+        "@media (min-width: 0px)": {
           marginTop: 65,
         },
       },
@@ -292,7 +301,7 @@ export const lightTheme = {
         },
       },
       fixed: {
-        padding: "0 12px",
+        padding: "0 9.5px",
         display: "flex",
         flexDirection: "column",
         width: 216,

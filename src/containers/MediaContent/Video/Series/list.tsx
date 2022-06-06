@@ -6,19 +6,17 @@ import { makeStyles } from "@material-ui/core";
 import { ShowProps } from "../../../../types";
 import { EmptyTablePage } from "../../../../components/EmptyTablePage";
 import { DatagridList } from "../../../../components/DatagridList";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
-import { ResourceAddIcon, ResourceCountEpisodesIcon } from "../../../../constants/icons";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 import { TableFieldsStyles } from "../../../../components/TableFields/styles";
 import { seriesFilters } from "./series-filter";
+import { ToModelField } from "../../../../components/TableFields/to-model-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
 export const List: React.FC<ShowProps> = (props) => {
-  const history = useHistory();
   const classes = useStyles();
   return (
     <DatagridList
@@ -41,34 +39,7 @@ export const List: React.FC<ShowProps> = (props) => {
       />
       <TextField source="position" label="Position" />
       <TextField source="slug" label="Slug" />
-      <FunctionField
-        label=""
-        source=""
-        render={(record?: Record) => (
-          <>
-            <StandardButton
-              startIcon={
-                record?.seasons.length ? (
-                  <ResourceCountEpisodesIcon color="var(--accent-color)" />
-                ) : (
-                  <ResourceAddIcon color="var(--accent-color)" />
-                )
-              }
-              variant="text"
-              customColor="var(--accent-color)"
-              style={{ paddingLeft: 0, paddingRight: 0 }}
-              text={record?.seasons.length ? `Seasons (${record?.seasons.length})` : "Add seasons"}
-              onClick={() =>
-                history.push(
-                  record?.seasons.length
-                    ? `/media_content/video/series/${record?.id}/seasons`
-                    : `/media_content/video/series/${record?.id}/seasons/create`
-                )
-              }
-            ></StandardButton>
-          </>
-        )}
-      />
+      <ToModelField to="/media_content/video/series" source="seasons" label="Seasons" />
       <FunctionField
         label=""
         className={classes.MoreActions}

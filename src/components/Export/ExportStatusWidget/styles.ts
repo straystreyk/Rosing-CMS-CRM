@@ -13,6 +13,9 @@ export const ExportStatusWidgetStyles = {
       fontWeight: 500,
       fontSize: 14,
       lineHeight: "20px",
+      "& a": {
+        marginLeft: 10,
+      },
     },
   },
 };

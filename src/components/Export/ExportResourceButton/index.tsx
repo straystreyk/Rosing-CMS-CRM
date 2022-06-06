@@ -29,7 +29,7 @@ export const ExportResourceButton: React.FC<{ resource: string }> = ({ resource 
       <StandardButton
         onClick={handleClick}
         variant="icon"
-        customColor="var(--primary-text-default)"
+        customColor="var(--primary-button-default)"
         className={classes.ExportButton}
       >
         <ExportIcon />

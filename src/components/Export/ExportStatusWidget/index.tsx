@@ -1,15 +1,17 @@
 import * as React from "react";
+import { useTranslate } from "react-admin";
 import { useSubscription } from "@apollo/client";
 import { makeStyles } from "@material-ui/core/styles";
 import { Fade } from "@material-ui/core";
 
 import { authClient } from "../../Providers/AuthProvider/client";
 import { InformationIcon } from "../../../constants/icons";
-import { useTranslate } from "react-admin";
 import { MainLoader } from "../../MainLoader";
 import { ExportStatusWidgetStyles } from "./styles";
 import { useExportStatusWidget } from "./use-export-status-widget";
 import { SUBSCRIBE_TO_EXPORT } from "../requests";
+import { StandardButton } from "../../UI/Buttons/standard-button";
+import { ExportIcon } from "../constants";
 
 const useStyles = makeStyles(ExportStatusWidgetStyles);
 
@@ -40,10 +42,16 @@ export const ExportStatusWidget = React.memo(({ resource }: { resource: string }
           )}
           {subscription.status === "ready" && (
             <>
-              File is ready -&nbsp;
-              <a target="_blank" rel="noreferrer" href={subscription.file}>
-                download
-              </a>
+              File in the format [format] is ready
+              <StandardButton
+                component="a"
+                target="_blank"
+                href={subscription.file}
+                startIcon={<ExportIcon />}
+                text="Export"
+                variant="text"
+                onMobileView
+              />
             </>
           )}
           {subscription.status === "error" && <>Something went wrong :(</>}

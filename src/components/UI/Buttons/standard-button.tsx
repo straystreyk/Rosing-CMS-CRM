@@ -11,6 +11,7 @@ interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
   variant?: "text" | "outlined" | "contained" | "textWithBg" | "icon" | undefined;
   component?: any;
   to?: string;
+  target?: "_blank" | "_parent" | "_self";
   text?: string;
   onMobileView?: boolean;
 }

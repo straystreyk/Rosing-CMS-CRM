@@ -20,7 +20,6 @@ export const channelFilter: FilterTemplate[] = [
     query: ALL_GENRES_FILTER,
     label: "Genres",
     source: "genreIds",
-    defaultActive: true,
   },
   {
     component: MultipleFiltersList,

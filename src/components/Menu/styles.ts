@@ -6,7 +6,7 @@ export const LineStyles = {
 };
 
 export const LineCloseStyles = {
-  maxWidth: 34,
+  maxWidth: 36,
 };
 
 export const MenuItemLinkStyles = {
@@ -33,7 +33,7 @@ export const MenuItemLinkStyles = {
 
 export const MenuItemLinkCloseStyles = {
   color: "var(--secondary-color-main)",
-  maxWidth: 45,
+  maxWidth: 36,
   "& .MuiTouchRipple-root": {
     display: "none",
   },

@@ -5,12 +5,20 @@ import { MEDIA_QUERIES_BREAKPOINTS, TopToolBar } from "../../constants/style-con
 
 const TableRow = {
   borderBottom: "1px solid var(--secondary-color-disable)",
+  minHeight: 62,
   "&.MuiTableRow-root.MuiTableRow-hover:hover": {
     backgroundColor: "var(--primary-bg)",
     borderColor: "transparent",
   },
   "& .MuiTableCell-root": {
     borderBottom: "none",
+    minWidth: 150,
+    "& .MuiTypography-root, & .MuiTypography-root a": {
+      display: "-webkit-box",
+      overflow: "hidden",
+      "-webkit-box-orient": "vertical",
+      "-webkit-line-clamp": 2,
+    },
   },
 };
 
@@ -28,9 +36,6 @@ export const DatagridStyles: Styles<Theme, {}, string> = {
     ...scrollBarStyles,
     "& tbody": {
       userSelect: "unset",
-    },
-    "& table": {
-      minWidth: 1100,
     },
     "@media (max-width: 599px)": {
       width: "100vw",
@@ -82,6 +87,7 @@ export const DatagridStyles: Styles<Theme, {}, string> = {
 export const TableStyles: Styles<Theme, {}, string> = {
   TableCheckbox: {
     borderBottom: "none",
+    minWidth: "unset !important",
     "&.MuiTableCell-paddingCheckbox": {
       padding: "0 12px 0 24px",
     },

@@ -269,6 +269,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
       setServerImages,
       setImageSize,
       sourceIds,
+      index,
     });
 
     React.useEffect(

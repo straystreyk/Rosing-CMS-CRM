@@ -9,6 +9,7 @@ export const useImageItem = ({
   setServerImages,
   setImageSize,
   sourceIds,
+  index,
 }: {
   imageType: string;
   id: string;
@@ -17,6 +18,7 @@ export const useImageItem = ({
   setServerImages: any;
   setImageSize: any;
   sourceIds: string;
+  index?: number;
 }) => {
   const form = useForm();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -43,6 +45,9 @@ export const useImageItem = ({
         fr.addEventListener("load", () => {
           if (typeof fr.result === "string") {
             setUrl(fr.result);
+            setServerImages((p: any) =>
+              p.map((el: any) => (el.index === index ? { ...el, file: fr.result } : el))
+            );
             setImageSize(file[0].size);
           }
         });
@@ -82,6 +87,8 @@ export const useImageItem = ({
           });
           const message = await res.json();
           if (message) {
+            setUrl("");
+            setImageId("");
             setImageIds((p: string[]) => {
               form.change(
                 sourceIds,
@@ -90,8 +97,6 @@ export const useImageItem = ({
               return p.filter((el: string) => el !== imageId);
             });
             setServerImages((p: any) => p.filter((el: any) => el.id !== imageId));
-            setImageId("");
-            setUrl("");
           }
         }
       } catch (error) {
@@ -102,7 +107,7 @@ export const useImageItem = ({
         setIsLoading(false);
       }
     },
-    [setImageSize, setServerImages, setImageIds, imageId]
+    [setServerImages, setImageIds, imageId, form, sourceIds]
   );
 
   return {

@@ -52,30 +52,6 @@ export const ArrowFilterIcon = ({ color }: IconProps) => (
   </svg>
 );
 
-export const DeleteFilterIcon = ({ color }: IconProps) => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="10" cy="10" r="7.35" stroke="#005AA3" strokeWidth="1.3" />
-    <line
-      x1="7.15459"
-      y1="7.33008"
-      x2="12.67"
-      y2="12.8455"
-      stroke={color}
-      strokeWidth="1.3"
-      strokeLinecap="round"
-    />
-    <line
-      x1="12.7158"
-      y1="7.20049"
-      x2="7.20039"
-      y2="12.7159"
-      stroke={color}
-      strokeWidth="1.3"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
 export const LoopInputIcon = ({ color }: IconProps) => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask

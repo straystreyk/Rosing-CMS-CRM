@@ -44,7 +44,7 @@ const useStyles = makeStyles({
 });
 
 const SKELETON_WIDTH = 150;
-const SKELETON_HEIGHT = 17;
+const SKELETON_HEIGHT = 20;
 
 export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: string }> = ({
   showBy = [15, 25, 50, 100],

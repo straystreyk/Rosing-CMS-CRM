@@ -200,6 +200,9 @@ export const AppBarStyles: any = {
     zIndex: 0,
     boxShadow: "unset",
     top: 17,
+    "& .MuiToolbar-root": {
+      minHeight: 48,
+    },
   },
   FixedContainer: {
     display: "flex",

@@ -68,7 +68,7 @@ export const ExpandMenu = ({
       placement="right"
       arrow
     >
-      <button
+      <div
         className={cn(
           active && styles.activeExpand,
           styles.expandWrapper,
@@ -95,7 +95,7 @@ export const ExpandMenu = ({
         <Collapse className={styles.expandSubMenu} in={active} unmountOnExit>
           {open && children}
         </Collapse>
-      </button>
+      </div>
     </Tooltip>
   );
 };
