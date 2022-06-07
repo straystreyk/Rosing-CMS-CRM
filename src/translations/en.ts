@@ -109,15 +109,26 @@ export const en: TranslationMessages = {
         name: "Name",
       },
     },
-    questions: {
+    "pages_and_attributes/questions": {
       name: "Questions",
       titles: {
         create: "New Question",
         edit: "Edit Question",
-        list: "Questions",
+        list: "Pages and attributes",
       },
-      fields: {
-        name: "Name",
+      mutations: {
+        create: {
+          success: 'New question "%{name}" was created',
+          error: "Cant create question: %{error}",
+        },
+        edit: {
+          success: "Question was updated",
+          error: "Cant update question: %{error}",
+        },
+        list: {
+          success: 'Question "%{name}" was successfully updated',
+          error: "Cant update question: %{error}",
+        },
       },
     },
     "media_content/attributes/genres": {

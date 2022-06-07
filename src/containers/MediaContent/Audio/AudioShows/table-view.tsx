@@ -63,7 +63,11 @@ export const TableView: React.FC<ShowProps> = (props) => {
       >
         <TextField source="name" fullWidth />
       </ReferenceField>
-      <ToModelField to={`/${props.resource}`} source="parts" label="Parts" />
+      <FunctionField
+        render={(record?: RecordRA) => (
+          <ToModelField record={record!} to={`/${props.resource}`} source="parts" label="Parts" />
+        )}
+      />
       <FunctionField
         label=""
         className={classes.MoreActions}

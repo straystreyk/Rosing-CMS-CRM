@@ -122,6 +122,9 @@ export const GET_ONE_CHANNEL_VERSION = gql`
     item: ChannelVersion(id: $id) {
       id
       name
+      channel {
+        id
+      }
     }
   }
 `;

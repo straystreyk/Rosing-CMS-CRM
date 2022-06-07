@@ -8,7 +8,11 @@ import { breadcrumbsLinks } from "./breadcrumbs-links";
 import { sanitizeId } from "../../helpers/form";
 import { authClient } from "../Providers/AuthProvider/client";
 import { BreadCrumbsStyles } from "./syles";
-import { breadCrumbNameBuilder, breadCrumbsLinksMatcher } from "./breadcrumbs-helpers";
+import {
+  breadCrumbLinkBuilder,
+  breadCrumbNameBuilder,
+  breadCrumbsLinksMatcher,
+} from "./breadcrumbs-helpers";
 import { MainLoader } from "../MainLoader";
 
 interface BreadCrumbsProps {
@@ -42,40 +46,10 @@ const useBreadcrumbs = () => {
             });
             const data = res.data.item;
             const name = breadCrumbNameBuilder(el, data);
-
             if (!unmounted) {
-              setMatched((prevState) =>
-                prevState.map((item) => {
-                  if (item === el && el.dynamicParam && el.secondDynamicParam) {
-                    if (el.alternativeHref && el.alternativeParam) {
-                      return {
-                        ...item,
-                        name,
-                        href: el.alternativeHref
-                          .replace(`:${el.dynamicParam}`, params[el.dynamicParam])
-                          .replace(`:${el.secondDynamicParam}`, data[el.alternativeParam].id),
-                      };
-                    }
-                    return {
-                      ...item,
-                      name,
-                      href: el.href
-                        .replace(`:${el.dynamicParam}`, params[el.dynamicParam])
-                        .replace(`:${el.secondDynamicParam}`, params[el.secondDynamicParam]),
-                    };
-                  }
-
-                  if (item === el && el.dynamicParam) {
-                    return {
-                      ...item,
-                      name,
-                      href: el.href.replace(`:${el.dynamicParam}`, params[el.dynamicParam]),
-                    };
-                  }
-
-                  return item;
-                })
-              );
+              setMatched((prevState) => {
+                return prevState.map((item) => breadCrumbLinkBuilder(item, el, params, data, name));
+              });
             }
           } catch (e) {
             if (e instanceof Error) {
@@ -105,7 +79,11 @@ export const Breadcrumbs: React.FC<BreadCrumbsProps> = React.memo(({ resource })
           <span className={classes.breadcrumb} key={el.href + el.name}>
             {index === 0 ? "" : <span> / </span>}
             <Link
-              className={cn(classes.crumbLink, index === matched.length - 1 && classes.lastCrumb)}
+              className={cn(
+                classes.crumbLink,
+                index === matched.length - 1 && classes.lastCrumb,
+                el.offLink && classes.Disabled
+              )}
               to={el.href}
             >
               {!!el.name ? (

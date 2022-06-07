@@ -88,7 +88,7 @@ export const ResourceTitle: React.FC<TitleProps> = ({
       <ExportStatusWidget resource={name} />
       <div className={classes.titleWrapper}>
         <div>
-          {form === "show" && (
+          {form === "show" && date && time && (
             <div className={classes.topTitleWrapper}>
               <span className="time">
                 {(date || time) && <TimeIcon color="#005AA3" />}

@@ -12,7 +12,7 @@ interface ShowProps extends ShowPropsRA {
   basePath?: string;
 }
 
-const LOADER_SIZE = 50;
+const LOADER_SIZE = 70;
 
 export const ResourceShow: React.FC<ShowProps> = (props) => {
   const loading = useLoading();

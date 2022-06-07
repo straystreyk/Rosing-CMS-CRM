@@ -10,6 +10,8 @@ export const getGqlResource = (resource: string) => {
       return "Region";
     case "images":
       return "Image";
+    case "pages_and_attributes/questions":
+      return "Question";
     case "media_content/tv/channels/channels/:channelId/channel_versions":
       return "ChannelVersion";
     case "media_content/tv/channels/channel_versions/:channelVersionId/:epgSourceId/:startAt/program_events":
@@ -66,10 +68,6 @@ export const getGqlResource = (resource: string) => {
       return "Episode";
     case "api_clients":
       return "ApiClient";
-    case "questions":
-      return "Question";
-    case "images":
-      return "Image";
     case "media_content/news":
       return "News";
     case "castMembers":

@@ -83,11 +83,17 @@ export const TableView: React.FC<ShowProps> = (props) => {
           )
         }
       />
-      <ToModelField
-        to={`/${props.resource}`}
-        source="channelVersions"
+      <FunctionField
         label="Channel versions"
-        linkSource="channel_versions"
+        render={(record?: RecordRA) => (
+          <ToModelField
+            record={record!}
+            to={`/${props.resource}`}
+            source="channelVersions"
+            label="channel versions"
+            linkSource="channel_versions"
+          />
+        )}
       />
       <FunctionField
         label=""

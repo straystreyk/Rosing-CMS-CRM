@@ -21,6 +21,7 @@ import { ModalTVPrograms, useTVPrograms } from "./tv-programs";
 import { ExpandWrapper } from "../../../../../components/DatagridList/expand-wrapper";
 import { Form } from "./form";
 import { Toolbar } from "../../../Video/Seasons/toolbar";
+import cn from "classnames";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -62,7 +63,10 @@ export const TableView: React.FC<ShowProps> = (props) => {
           label="Name"
           source="name"
           render={(record?: RecordRA) => (
-            <Link className={classes.NameField} to={`${props.basePath}/${record?.id}/show`}>
+            <Link
+              className={cn(classes.NameField, "Expand")}
+              to={`${props.basePath}/${record?.id}/show`}
+            >
               {record?.name}
             </Link>
           )}

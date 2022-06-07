@@ -1,4 +1,5 @@
 import { outlineStyles, scrollBarStyles } from "./main-styles";
+import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
 
 export const darkTheme = {
   palette: {
@@ -295,6 +296,12 @@ export const lightTheme = {
       },
     },
     RaSidebar: {
+      root: {
+        height: "calc(100vh - 65px)",
+        [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
+          height: "100vh",
+        },
+      },
       drawerPaper: {
         "@media (min-width: 0)": {
           backgroundColor: "var(--secondary-color-main)",

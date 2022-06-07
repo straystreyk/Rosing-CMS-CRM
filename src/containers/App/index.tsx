@@ -20,7 +20,6 @@ import { ChannelVersions as channelVersions } from "../MediaContent/TV/Channels/
 import { RadioStationsVariables as radioStations } from "../MediaContent/Radio/RadioStations";
 import { RadioLiveStreamsVariables as radioLiveStreams } from "../MediaContent/Radio/RadioLiveStreams";
 import { AudioShowsVariables as audioShows } from "../MediaContent/Audio/AudioShows";
-import { QuestionsVariables as questions } from "../Questions";
 import { NewsVariables as news } from "../MediaContent/News";
 import { PartVariables as parts } from "../MediaContent/Audio/Parts";
 import { ContentProvidersVariables as contentProviders } from "../MediaContent/Attributes/Providers/ContentProviders";
@@ -36,6 +35,7 @@ import { EPGSourcesVariables as epgSources } from "../MediaContent/TV/TVShows/EP
 import { EPGLocalEventsVariables as epgLocalEvents } from "../MediaContent/TV/TVShows/EPGLocalEvents";
 import { EPGVariables as epg } from "../MediaContent/TV/TVShows/EPG";
 import { ProgramEventsVariables as programEvents } from "../MediaContent/TV/Channels/ProgramEvents";
+import { QuestionVariables as questions } from "../PagesAndAttributes/Question";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 
@@ -113,8 +113,8 @@ export const App = () => {
       <Resource name="media_content/attributes/people" {...people} />
       <Resource name="media_content/attributes/programs_types" {...programsTypes} />
       <Resource name="media_content/attributes/labels" {...labels} />
-      <Resource name="questions" {...questions} />
       <Resource name="media_content/news" {...news} />
+      <Resource name="pages_and_attributes/questions" {...questions} />
       <Resource name="castMembers" />
       <Resource name="countries" />
       <Resource name="production_countries" />

@@ -31,6 +31,52 @@ export const breadCrumbsLinksMatcher: (
       href = href.replace(`:${el.secondDynamicParam}`, params[el.secondDynamicParam]);
     }
 
+    if (el.thirdDynamicParam && href.includes(`:${el.thirdDynamicParam}`)) {
+      href = href.replace(`:${el.thirdDynamicParam}`, params[el.thirdDynamicParam]);
+    }
+
     return pathname.includes(href);
   });
+};
+
+export const breadCrumbLinkBuilder = (
+  item: Breadcrumb,
+  el: Breadcrumb,
+  params: { [p: string]: string },
+  data: any,
+  name: string
+) => {
+  let breadcrumb = item;
+
+  if (item === el && el.dynamicParam) {
+    breadcrumb = {
+      ...item,
+      name,
+      href: el.href.replace(`:${el.dynamicParam}`, params[el.dynamicParam]),
+    };
+    if (item === el && el.secondDynamicParam) {
+      breadcrumb = {
+        ...item,
+        name,
+        href: breadcrumb.href.replace(`:${el.secondDynamicParam}`, params[el.secondDynamicParam]),
+      };
+    }
+    if (item === el && el.thirdDynamicParam) {
+      breadcrumb = {
+        ...item,
+        name,
+        href: breadcrumb.href.replace(`:${el.thirdDynamicParam}`, params[el.thirdDynamicParam]),
+      };
+    }
+    if (item === el && el.alternativeParam && el.alternativeHref) {
+      breadcrumb = {
+        ...item,
+        name,
+        href: el.alternativeHref
+          .replace(`:${el.dynamicParam}`, params[el.dynamicParam])
+          .replace(`:${el.secondDynamicParam}`, data[el.alternativeParam].id),
+      };
+    }
+  }
+  return breadcrumb;
 };

@@ -67,13 +67,12 @@ export const MyDatagridRow: React.FC<DatagridRowProps> = ({
 
   return (
     <>
-      <TableRow className={classes.TableRow} key={id} hover>
+      <TableRow className={classes.TableRow} key={id} hover onClick={onToggleCheckbox}>
         {!offActions && (
           <TableCell
             className={cn(classes.TableCheckbox, classes.TableCell)}
             size="small"
             padding="checkbox"
-            onClick={onToggleCheckbox}
           >
             <Checkbox color="primary" checked={selected} onClick={onToggleCheckbox} />
           </TableCell>

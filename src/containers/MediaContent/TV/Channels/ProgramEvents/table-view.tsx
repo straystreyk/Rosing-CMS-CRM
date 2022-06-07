@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FunctionField, TextField } from "react-admin";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { ShowProps } from "../../../../../types";
 import { DatagridList } from "../../../../../components/DatagridList";

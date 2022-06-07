@@ -23,16 +23,20 @@ import { episodesLinks } from "../../containers/MediaContent/Video/Episodes/epis
 import { videoFilesLinks } from "../../containers/MediaContent/Video/VideoFiles/video-files-links";
 import { epgSourceLinks } from "../../containers/MediaContent/TV/TVShows/EPGSources/epg-source-links";
 import { epgLocalEventsLinks } from "../../containers/MediaContent/TV/TVShows/EPGLocalEvents/epg-local-events-links";
+import { programEventsLinks } from "../../containers/MediaContent/TV/Channels/ProgramEvents/program-events-links";
 
 export type Breadcrumb = {
   name: string;
   href: string;
   alternativeHref?: string;
   alternativeParam?: string;
+  alternativeDynamicParam?: string;
   breadcrumbName?: string;
   query?: DocumentNode;
   dynamicParam?: string;
   secondDynamicParam?: string;
+  thirdDynamicParam?: string;
+  offLink?: boolean;
 };
 
 export const breadcrumbsLinks: Breadcrumb[] = [
@@ -65,7 +69,7 @@ export const breadcrumbsLinks: Breadcrumb[] = [
     href: "/media_content/tv",
   },
   {
-    name: "TV channels",
+    name: "TV Channels",
     href: "/media_content/tv/channels",
   },
   {
@@ -98,8 +102,29 @@ export const breadcrumbsLinks: Breadcrumb[] = [
   //Seasons
   ...seasonsLinks,
 
+  //TV Channels
+  {
+    name: "New channel",
+    href: "/media_content/tv/channels/channels/create",
+  },
+  {
+    name: "",
+    href: "/media_content/tv/channels/channels/:id",
+    query: GET_ONE_CHANNEL,
+    dynamicParam: "id",
+  },
+  {
+    name: "",
+    href: "/media_content/tv/channels/channels/:channelId",
+    query: GET_ONE_CHANNEL,
+    dynamicParam: "channelId",
+  },
+
   //Channel versions
   ...channelVersionsLinks,
+
+  //ProgramEvents
+  ...programEventsLinks,
 
   //Episodes
   ...episodesLinks,
@@ -194,23 +219,7 @@ export const breadcrumbsLinks: Breadcrumb[] = [
   ...programTypesLinks,
   //Labels
   ...labelsLinks,
-  //TV Channels
-  {
-    name: "New channel",
-    href: "/media_content/tv/channels/channels/create",
-  },
-  {
-    name: "",
-    href: "/media_content/tv/channels/channels/:id",
-    query: GET_ONE_CHANNEL,
-    dynamicParam: "id",
-  },
-  {
-    name: "",
-    href: "/media_content/tv/channels/channels/:channelId",
-    query: GET_ONE_CHANNEL,
-    dynamicParam: "channelId",
-  },
+
   //TV Streams
   {
     name: "TV streams",

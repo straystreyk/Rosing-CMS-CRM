@@ -8,9 +8,12 @@ export const TableFieldsStyles: any = {
     "&:hover": {
       color: "var(--primary-focus)",
     },
+    "&.Expand": {
+      marginLeft: 20,
+    },
   },
   MoreActions: {
-    display: "flex",
+    display: "flex !important",
     justifyContent: "flex-end",
     alignItems: "center",
     "& button": {
@@ -27,10 +30,4 @@ export const TableFieldsStyles: any = {
     color: "var(--secondary-color-default)",
   },
   IDField: { wordBreak: "break-all" },
-  DatagridWrapperWithoutScroll: {
-    "&.active": {},
-    "& table": {
-      minWidth: "unset",
-    },
-  },
 };

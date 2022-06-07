@@ -14,12 +14,17 @@ export const channelVersionsLinks: Breadcrumb[] = [
   {
     name: "Channel versions",
     href: "/media_content/tv/channels/channel_versions",
+    offLink: true,
   },
   {
     name: "",
     href: "/media_content/tv/channels/channel_versions/:channelVersionId",
+    alternativeHref:
+      "/media_content/tv/channels/channels/:channelId/channel_versions/:channelVersionId",
+    alternativeParam: "channel",
     query: GET_ONE_CHANNEL_VERSION,
     dynamicParam: "channelVersionId",
+    secondDynamicParam: "channelId",
   },
   {
     name: "New channel version",

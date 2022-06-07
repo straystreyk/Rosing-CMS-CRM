@@ -16,7 +16,7 @@ interface EditProps {
 }
 
 const EmptyToolbar = () => <></>;
-const LOADER_SIZE = 50;
+const LOADER_SIZE = 70;
 
 export const ResourceEdit: FC<EditProps> = (props) => {
   const notify = useNotify();

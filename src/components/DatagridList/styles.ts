@@ -1,5 +1,5 @@
 import { Styles } from "@material-ui/core/styles/withStyles";
-import { scrollBarStyles } from "../Themes/main-styles";
+import { outlineStyles, scrollBarStyles } from "../Themes/main-styles";
 import { Theme } from "@material-ui/core";
 import { MEDIA_QUERIES_BREAKPOINTS, TopToolBar } from "../../constants/style-constants";
 
@@ -14,10 +14,21 @@ const TableRow = {
     borderBottom: "none",
     minWidth: 150,
     "& .MuiTypography-root, & .MuiTypography-root a": {
-      display: "-webkit-box",
       overflow: "hidden",
       "-webkit-box-orient": "vertical",
       "-webkit-line-clamp": 2,
+    },
+    "& .MuiTypography-root": {
+      display: "-webkit-box",
+      verticalAlign: "middle",
+    },
+    "& .MuiTypography-root a": {
+      display: "-webkit-inline-box",
+      verticalAlign: "middle",
+      "&:focus-visible": {
+        color: "var(--primary-focus)",
+        outline: "none",
+      },
     },
   },
 };
@@ -128,7 +139,7 @@ export const TableStyles: Styles<Theme, {}, string> = {
       fontWeight: 500,
       textAlign: "left",
       fontSize: 14,
-      transition: "0.35s all ease",
+      transition: "0.35s color ease",
       "& svg line": {
         transition: "0.35s all ease",
       },
@@ -147,6 +158,7 @@ export const TableStyles: Styles<Theme, {}, string> = {
     marginLeft: 5,
     padding: "5px 10px",
     top: "50%",
+    left: 0,
     transform: "translateY(-50%)",
     position: "absolute",
     [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {

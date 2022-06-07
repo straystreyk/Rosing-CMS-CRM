@@ -1,7 +1,7 @@
 import React from "react";
 import { FunctionField, Record, TextField } from "react-admin";
 import { Record as RecordRA } from "ra-core";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Tooltip } from "@material-ui/core";
 
 import { ShowProps } from "../../../../types";
 import { EmptyTablePage } from "../../../../components/EmptyTablePage";
@@ -39,7 +39,16 @@ export const List: React.FC<ShowProps> = (props) => {
       />
       <TextField source="position" label="Position" />
       <TextField source="slug" label="Slug" />
-      <ToModelField to="/media_content/video/series" source="seasons" label="Seasons" />
+      <FunctionField
+        render={(record?: RecordRA) => (
+          <ToModelField
+            record={record!}
+            to="/media_content/video/series"
+            source="seasons"
+            label="Seasons"
+          />
+        )}
+      />
       <FunctionField
         label=""
         className={classes.MoreActions}

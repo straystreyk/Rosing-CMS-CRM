@@ -1,4 +1,7 @@
-export const BreadCrumbsStyles = {
+import { Styles } from "@material-ui/core/styles/withStyles";
+import { Theme } from "@material-ui/core";
+
+export const BreadCrumbsStyles: Styles<Theme, {}, string> = {
   breadcrumbs: {
     marginTop: "5px",
   },
@@ -13,5 +16,8 @@ export const BreadCrumbsStyles = {
   },
   lastCrumb: {
     color: "var(--primary-text-default)",
+  },
+  Disabled: {
+    pointerEvents: "none",
   },
 };

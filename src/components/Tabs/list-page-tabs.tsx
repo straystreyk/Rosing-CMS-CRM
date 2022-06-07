@@ -4,6 +4,7 @@ import { Link } from "ra-ui-materialui";
 import cn from "classnames";
 import { useHistory } from "react-router-dom";
 import { scrollBarStyles } from "../Themes/main-styles";
+import { StandardButton } from "../UI/Buttons/standard-button";
 
 export interface ListTabProps {
   link: string;
@@ -24,15 +25,19 @@ const useStyles = makeStyles((theme) => ({
     ...scrollBarStyles,
   },
   TabListLink: {
-    paddingBottom: 10,
+    padding: "0px 0px 10px 0px",
     fontSize: 18,
-    fontWeight: 600,
+    borderRadius: 0,
     marginRight: 24,
     transition: "0.35s all ease",
     flexShrink: 0,
+    borderBottom: `3px solid transparent`,
     "&:hover": {
       color: "var(--accent-color-hover)",
       borderColor: "var(--accent-color-hover)",
+    },
+    "& span.MuiButton-label": {
+      fontWeight: 600,
     },
     "&:last-child": {
       marginRight: 0,
@@ -55,12 +60,17 @@ const useStyles = makeStyles((theme) => ({
     transition: "0.35s all ease",
     fontSize: 14,
     lineHeight: "20px",
-    fontWeight: 500,
+    borderBottom: `3px solid transparent`,
     marginRight: 12,
+    borderRadius: 0,
     paddingBottom: 4,
     flexShrink: 0,
     "&:hover": {
       color: "var(--secondary-color-main)",
+      borderBottom: `3px solid var(--secondary-color-main)`,
+    },
+    "& span": {
+      fontWeight: 500,
     },
     "&:last-child": {
       marginRight: 0,
@@ -79,23 +89,25 @@ export const ListPageTabs: React.FC<ListPageTabsProps> = ({ tabs, isSubTabs }) =
   return (
     <Box sx={{ maxWidth: "100%" }} className={!isSubTabs ? classes.TabsList : classes.SubTabsList}>
       {tabs.map(({ link, name }: ListTabProps) => (
-        <Link
-          key={link + name}
-          className={
-            !isSubTabs
-              ? cn(
-                  classes.TabListLink,
-                  history.location.pathname.includes(link) && classes.TabListLinkActive
-                )
-              : cn(
-                  classes.SubTabListLink,
-                  history.location.pathname.includes(link) && classes.SubTabListLinkActive
-                )
-          }
-          to={link}
-        >
-          {name}
-        </Link>
+        <>
+          <StandardButton
+            component={Link}
+            to={link}
+            variant="text"
+            className={
+              !isSubTabs
+                ? cn(
+                    classes.TabListLink,
+                    history.location.pathname.includes(link) && classes.TabListLinkActive
+                  )
+                : cn(
+                    classes.SubTabListLink,
+                    history.location.pathname.includes(link) && classes.SubTabListLinkActive
+                  )
+            }
+            text={name}
+          />
+        </>
       ))}
     </Box>
   );

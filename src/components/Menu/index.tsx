@@ -11,8 +11,6 @@ import { ExpandMenu } from "../ExpandMenu/expand-menu";
 import { AppState } from "../../types";
 
 import { UserVariables as users } from "../../containers/Users";
-import { DatacentersVariables as datacenters } from "../../containers/Datacenters";
-import { QuestionsVariables as questions } from "../../containers/Questions";
 import { LineCloseStyles, LineStyles, MenuItemLinkStyles, MenuItemLinkCloseStyles } from "./styles";
 import {
   DashboardIcon,

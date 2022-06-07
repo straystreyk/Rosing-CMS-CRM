@@ -24,6 +24,8 @@ import { useTableActions } from "../../../../custom-hooks/use-table-actions";
 import { ExpandWrapper } from "../../../../components/DatagridList/expand-wrapper";
 import { Toolbar } from "./toolbar";
 import { Form } from "./form";
+import { ToModelField } from "../../../../components/TableFields/to-model-field";
+import cn from "classnames";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -46,7 +48,6 @@ export const TableView: React.FC<ShowProps> = (props) => {
       empty={<EmptyTablePage />}
       resource={props.resource}
       expand={<SeasonExpand {...props} />}
-      datagridWrapperClassName={classes.DatagridWrapperWithoutScroll}
       isDependentModel
       offDescription
       optimized
@@ -55,7 +56,10 @@ export const TableView: React.FC<ShowProps> = (props) => {
         label="Name"
         source="name"
         render={(record?: RecordRA) => (
-          <Link className={classes.NameField} to={`${props.basePath}/${record?.id}/show`}>
+          <Link
+            className={cn(classes.NameField, "Expand")}
+            to={`${props.basePath}/${record?.id}/show`}
+          >
             {record?.name}
           </Link>
         )}
@@ -64,27 +68,11 @@ export const TableView: React.FC<ShowProps> = (props) => {
         label=""
         render={(record?: Record) => (
           <div className={classes.MoreActions}>
-            <StandardButton
-              startIcon={
-                record?.episodes.length ? (
-                  <ResourceCountEpisodesIcon color="var(--accent-color)" />
-                ) : (
-                  <ResourceAddIcon color="var(--accent-color)" />
-                )
-              }
-              style={{ paddingLeft: 0, paddingRight: 0 }}
-              variant="text"
-              customColor="var(--accent-color)"
-              text={
-                record?.episodes.length ? `Episodes (${record?.episodes.length})` : "Add episodes"
-              }
-              to={
-                record?.episodes.length
-                  ? `/media_content/video/seasons/${record?.id}/episodes`
-                  : `/media_content/video/seasons/${record?.id}/episodes/create`
-              }
-              component={Link}
-              onMobileView
+            <ToModelField
+              record={record!}
+              to="/media_content/video/seasons"
+              source="episodes"
+              label="Episodes"
             />
             {record?.published ? (
               <button>
