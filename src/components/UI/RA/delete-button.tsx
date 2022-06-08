@@ -7,7 +7,7 @@ import cn from "classnames";
 const useStyles = makeStyles({
   DeleteButton: {
     color: "#D21C1C",
-    padding: "2px 5px",
+    padding: "4px 6px",
     "& svg": {
       marginLeft: 0,
       marginRight: 6,
@@ -27,16 +27,25 @@ const useStyles = makeStyles({
       outlineOffset: "2px",
     },
   },
+  TextButton: {
+    padding: "4px 6px",
+    backgroundColor: "unset !important",
+  },
 });
 
-export const DeleteButton: React.FC<DeleteButtonProps> = ({ icon, basePath, ...props }) => {
+export const DeleteButton: React.FC<DeleteButtonProps> = ({
+  icon,
+  basePath,
+  variant,
+  ...props
+}) => {
   const classes = useStyles();
 
   return (
     <DeleteButtonRA
       icon={<DeleteIcon color="#D21C1C" />}
       basePath={basePath}
-      className={cn(classes.DeleteButton, "DeleteButton")}
+      className={cn(classes.DeleteButton, "DeleteButton", variant === "text" && classes.TextButton)}
       {...props}
     />
   );

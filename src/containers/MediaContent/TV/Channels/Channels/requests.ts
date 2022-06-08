@@ -223,3 +223,34 @@ export const UPDATE_CHANNEL = gql`
     }
   }
 `;
+
+export const GET_ALL_CHANNELS = gql`
+  query allChannels(
+    $page: Int
+    $perPage: Int
+    $sortField: String
+    $sortOrder: String
+    $filter: ChannelFilter
+  ) {
+    items: allChannels(
+      page: $page
+      perPage: $perPage
+      sortField: $sortField
+      sortOrder: $sortOrder
+      filter: $filter
+    ) {
+      channelVersions {
+        id
+      }
+      id
+      name
+      position
+      timeshiftAvailabilityUnit
+      timeshiftAvailabilityValue
+    }
+    total: _allChannelsMeta(page: $page, perPage: $perPage, filter: $filter) {
+      count
+      __typename
+    }
+  }
+`;

@@ -11,7 +11,7 @@ import { EditFormStyles } from "./styles";
 const useStyles = makeStyles(EditFormStyles);
 
 export const EditForm: React.FC<EditFormProps> = React.memo(
-  ({ offToolbar, offTitle, form, offRedirectButton, ...props }) => {
+  ({ offToolbar, offTitle, form, offRedirectButton, actionButtons, ...props }) => {
     const classes = useStyles();
 
     return (
@@ -22,7 +22,14 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
             (formProps: FormWithRedirectProps) => {
               return (
                 <>
-                  {!offTitle && <ResourceTitle {...props} name={props.resource} form={form} />}
+                  {!offTitle && (
+                    <ResourceTitle
+                      {...props}
+                      actionButtons={actionButtons}
+                      name={props.resource}
+                      form={form}
+                    />
+                  )}
                   <Card
                     className={cn(offToolbar && classes.offToolbar)}
                     style={{ overflow: "visible" }}

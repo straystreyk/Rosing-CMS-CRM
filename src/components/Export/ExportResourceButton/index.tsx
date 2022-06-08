@@ -10,7 +10,14 @@ import { useExportButton } from "./use-export-button";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
-  ExportButton: { "& .MuiButton-label svg:first-child": { marginRight: 4 } },
+  ExportButton: {
+    "&:hover": {
+      backgroundColor: "var(--primary-bg)",
+    },
+    "& .MuiButton-label svg:first-child": {
+      marginRight: 4,
+    },
+  },
 });
 
 export const ExportResourceButton: React.FC<{ resource: string }> = ({ resource }) => {

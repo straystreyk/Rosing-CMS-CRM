@@ -17,9 +17,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         source="name"
         placeholder="Enter a value"
         fullWidth
-        helperText={
-          "The name of the video file that users will see in any sections of the application"
-        }
+        helperText="The name of the video file that users will see in any sections of the application"
       />
       <TextInput
         resource={resource}
@@ -36,8 +34,8 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         placeholder="https://"
         label="Stream URL template"
         source="streamUrlTemplate"
-        fullWidth
         helperText="The default template https://{host}{/encoded_session}{/signature}{/bucket*}{/streaming_uid}{+protocol_suffix}{?params*}"
+        fullWidth
       />
       <CheckBoxGroup initialSourceState="allowedCountries">
         <ReferenceCustomInput
@@ -67,7 +65,6 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         component={AutocompleteArrayInput}
         query={ALL_ALLOWED_DRMS}
         inputType={type}
-        validate={requiredValidate}
         resource={resource}
         label="Allowed drms"
         source="allowedDrms"

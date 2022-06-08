@@ -60,6 +60,15 @@
     position: absolute;
     top: 50%;
     cursor: pointer;
+    height: 100%;
+    width: calc(10vw - 15px);
+    background: rgba(0, 0, 0, 0);
+    transition: 0.35s all ease;
+    z-index: -1;
+}
+
+.sliderButton:hover {
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .sliderBullets {
@@ -76,12 +85,12 @@
 }
 
 .sliderButton.sliderPrev {
-    left: -26px;
+    left: 5px;
     transform: translate(-100%, -50%);
 }
 
 .sliderButton.sliderNext {
-    right: -26px;
+    right: 5px;
     transform: translate(100%, -50%);
 }
 

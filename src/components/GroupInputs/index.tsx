@@ -22,14 +22,26 @@ const useStyles = makeStyles({
     },
   },
   GroupInputs: {
-    padding: "5px 24px",
+    padding: "5px 12px",
     marginTop: 8,
     backgroundColor: "var(--primary-bg)",
     borderRadius: 4,
     "&.showView": {
       backgroundColor: "transparent",
+      padding: "5px 0px 0px 12px",
       marginTop: 0,
       paddingRight: 0,
+      borderBottom: "1px solid var(--secondary-color-disable)",
+      borderRadius: 0,
+    },
+    "& .ShowWrapper": {
+      "&:first-child": {
+        paddingTop: 0,
+      },
+      "&:last-child": {
+        borderBottom: "none",
+        marginBottom: 0,
+      },
     },
   },
   GroupInputsLabelWrapper: {

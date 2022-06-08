@@ -4,6 +4,7 @@ export const mainStyles = {
   display: "flex",
   alignItems: "center",
   height: "100vh",
+  backgroundColor: "var(--primary-bg-3)",
   "@media (max-width: 768px)": {
     flexDirection: "column",
   },
@@ -35,13 +36,10 @@ export const logoStyles = {
     width: "100%",
     height: "auto",
   },
-  "@media (max-width: 900px)": {
-    width: 120,
+  "@media (max-width: 959px)": {
+    width: 220,
   },
-  "@media (max-width: 768px)": {
-    width: 240,
-  },
-  "@media (max-width: 576px)": {
+  "@media (max-width: 499px)": {
     width: 120,
   },
 };
@@ -63,6 +61,15 @@ export const annotationWrapperStyles: any = {
   position: "relative",
   "& svg": {
     cursor: "pointer",
+    "& circle, & path": {
+      transition: "0.35s all ease",
+    },
+    "&:hover circle": {
+      stroke: "var(--secondary-menu-2)",
+    },
+    "&:hover path": {
+      fill: "var(--secondary-menu-2)",
+    },
     "&:hover + div": {
       opacity: 1,
       transform: "translate(-100%, -54%)",
@@ -98,7 +105,7 @@ export const annotationStyles: any = {
     transform: "translate(3px, -50%) rotate(45deg)",
     background: "#27353C",
   },
-  "@media(max-width: 576px)": {
+  "@media(max-width: 499px)": {
     width: 200,
     zIndex: 5,
   },
@@ -107,22 +114,24 @@ export const annotationStyles: any = {
 export const formWrapperStyles = {
   width: 500,
   margin: "0 auto",
-  "@media (max-width: 900px)": {
+  backgroundColor: "#fff",
+  borderRadius: 5,
+  "@media (max-width: 959px)": {
     width: 450,
   },
   "@media (max-width: 768px)": {
     margin: "auto",
     width: 500,
   },
-  "@media (max-width: 576px)": {
-    margin: "auto",
-    width: 300,
+  "@media (max-width: 499px)": {
+    width: "100%",
   },
 };
 
 export const formStyles = {
   padding: 24,
   boxShadow: "0px 3px 12px -1px rgba(28, 52, 84, 0.1), 0px 2px 4px -1px rgba(28, 55, 90, 0.05)",
+  borderRadius: 5,
   "& label": {
     fontWeight: 500,
     color: "var(--secondary-color-main)",
@@ -133,22 +142,34 @@ export const actionsWrapperStyles = {
   display: "flex",
   alignItems: "center",
   "& > label": {
-    marginRight: 15,
+    marginRight: 12,
     cursor: "pointer",
     userSelect: "none",
   },
+  "@media (max-width: 499px)": {
+    width: "100%",
+    justifyContent: "space-between",
+    "& .MuiFormGroup-root .MuiFormControlLabel-root": {
+      margin: 0,
+      "& .MuiSwitch-root": {
+        paddingRight: 0,
+        width: 46,
+      },
+    },
+  },
 };
 
-export const actionsStyles = {
+export const actionsStyles: any = {
   padding: 0,
   marginTop: 5,
   fontSize: 14,
   lineHeight: "20px",
   display: "flex",
-  justifyContent: "flex-end",
-  "@media (max-width: 576px)": {
-    flexDirection: "column",
-    alignItems: "flex-start",
+  flexWrap: "wrap",
+  justifyContent: "space-between",
+  alignItems: "center",
+  "@media (max-width: 499px)": {
+    justifyContent: "flex-end",
     "& a": {
       marginLeft: "0 !important",
     },

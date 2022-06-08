@@ -19,11 +19,12 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
       <NumberInput
         resource={resource}
         inputType={type}
-        label="Number of the part"
+        label="Storage time"
         helperText="The storage time of the downloaded movie in offline mode is calculated in days. By default, the storage time is 30 days. The storage time of the content takes priority."
         source="storageTime"
         fullWidth
       />
+      <TextInput resource={resource} inputType={type} label="UID" source="uid" fullWidth />
       <TextInput
         resource={resource}
         inputType={type}

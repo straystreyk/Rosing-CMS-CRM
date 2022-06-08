@@ -245,7 +245,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
             helperText="The partner directory from which the movie is imported. The logo of the external catalog will be displayed when previewing the movie in the app."
           />
         </ReferenceInput>
-        <SelectInput
+        <AutocompleteInput
           resource={resource}
           choices={getYearsChoices()}
           label="Production year"

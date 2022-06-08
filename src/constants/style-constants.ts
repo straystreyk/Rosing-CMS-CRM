@@ -27,3 +27,20 @@ export const TopToolBar = {
     zIndex: 1,
   },
 };
+
+export const ShowEditButton: any = {
+  cursor: "pointer",
+  position: "absolute",
+  opacity: 0,
+  zIndex: 1,
+  top: 8,
+  right: 0,
+  transition: "0.35s all ease",
+  "& svg path": {
+    fill: "var(--primary-button-default)",
+    transition: "0.35s all ease",
+  },
+  "&:hover svg path": {
+    fill: "var(--primary-focus)",
+  },
+};

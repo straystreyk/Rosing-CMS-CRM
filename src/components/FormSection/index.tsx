@@ -1,5 +1,5 @@
 import * as React from "react";
-import { makeStyles } from "@material-ui/core";
+import { Collapse, makeStyles } from "@material-ui/core";
 import cn from "classnames";
 import { ArrowFilterIcon } from "../CustomFilters/constants";
 
@@ -99,22 +99,20 @@ export const FormSection: React.FC<SectionProps> = React.forwardRef(
             />
           </svg>
         </div>
-        {showSection && (
+        <Collapse in={showSection} timeout="auto">
           <ShowDescriptionButton
             setShowDescription={setShowDescription}
             showDescription={showDescription}
           />
-        )}
-        {showSection && showDescription && (
-          <div className={classes.TextSection}>
-            {text && typeof text !== "string"
-              ? text.map((string, index) => <React.Fragment key={index}>{string}</React.Fragment>)
-              : text}
-          </div>
-        )}
-        <div style={{ height: !showSection ? 0 : "auto", overflow: !showSection ? "hidden" : "" }}>
+          <Collapse in={showDescription} timeout="auto">
+            <div className={classes.TextSection}>
+              {text && typeof text !== "string"
+                ? text.map((string, index) => <React.Fragment key={index}>{string}</React.Fragment>)
+                : text}
+            </div>
+          </Collapse>
           {children}
-        </div>
+        </Collapse>
       </div>
     );
   }

@@ -7,7 +7,7 @@ import { AcceptFilterIcon, CancelFilterIcon, EditIcon } from "../../constants/ic
 import { makeStyles, Tooltip } from "@material-ui/core";
 import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
-import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
+import { MEDIA_QUERIES_BREAKPOINTS, ShowEditButton } from "../../constants/style-constants";
 
 const useStyles = makeStyles((theme) => ({
   ShowWrapper: {
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 8,
     paddingTop: 8,
     position: "relative",
+    borderBottom: "1px solid var(--secondary-color-disable)",
     paddingBottom: 8,
     "&:hover .ShowEditButton": {
       opacity: 1,
@@ -35,21 +36,10 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 8,
     },
   },
-  ShowEditButton: {
-    cursor: "pointer",
-    position: "absolute",
-    opacity: 0,
-    zIndex: 1,
-    top: 8,
-    right: 0,
-    transition: "0.35s all ease",
-    "& svg path": {
-      transition: "0.35s all ease",
-    },
-    "&:hover svg path": {
-      fill: "#005AA3",
-    },
+  BorderOff: {
+    border: "none",
   },
+  ShowEditButton,
 }));
 
 export const EditInputComponent: React.FC<any> = ({
@@ -110,9 +100,12 @@ export const EditInputComponent: React.FC<any> = ({
       style={{
         flexDirection: showInput ? "column" : "row",
         alignItems: !showInput ? "center" : "",
-        borderBottom: borderOff && !showInput ? "none" : "1px solid #E7E9E9",
       }}
-      className={classes.ShowWrapper}
+      className={cn(
+        classes.ShowWrapper,
+        "ShowWrapper",
+        cn(borderOff && !showInput && classes.BorderOff)
+      )}
     >
       {showInput && ComponentInput && (
         <ComponentInput

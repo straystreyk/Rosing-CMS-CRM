@@ -106,7 +106,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           label="Description"
           source="description"
         />
-        <SelectInput
+        <AutocompleteInput
           resource={resource}
           choices={getYearsChoices()}
           label="Production year"

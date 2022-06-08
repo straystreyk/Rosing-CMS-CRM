@@ -15,6 +15,7 @@ const useStyles = makeStyles({
     zIndex: 10,
     width: "100%",
     backgroundColor: "#fff",
+    borderBottom: "1px solid var(--secondary-color-disable)",
     padding: "0 24px",
     margin: "0 -24px",
     [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
@@ -29,12 +30,19 @@ const useStyles = makeStyles({
     paddingRight: 0,
     marginRight: 16,
     textTransform: "none",
+    "&.MuiTab-root": {
+      opacity: 1,
+      color: "var(--secondary-color-default)",
+      "&.Mui-selected": {
+        color: "var(--secondary-color-main)",
+      },
+    },
     "&:last-child": {
       marginRight: 0,
     },
   },
   FormTabWrapper: {
-    borderBottom: "1px solid #E7E9E9",
+    borderBottom: "1px solid var(--secondary-color-disable)",
     margin: "0 -20px",
     padding: "0 20px",
     backgroundColor: "#fff",

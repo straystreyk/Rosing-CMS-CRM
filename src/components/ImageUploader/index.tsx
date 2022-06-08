@@ -29,204 +29,10 @@ import { useNotify } from "ra-core";
 import { StandardButton } from "../UI/Buttons/standard-button";
 import { EmptyShow } from "../Inputs/ArrayInputs/Arrayinput/show-view";
 import { ModalMUI } from "../Modal";
-import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
+import { ImageUploaderStyles } from "./styles";
+import { ImageItemProps, ImageProps } from "./types";
 
-const useStyles = makeStyles((theme) => ({
-  ImagesWrapper: {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gap: "25px",
-    marginBottom: 16,
-    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`]: {
-      gridTemplateColumns: "repeat(1, 1fr)",
-    },
-  },
-  ImageItemWrapper: {
-    "& button": {
-      textTransform: "unset",
-      outline: "none",
-      border: "none",
-      fontFamily: "var(--font-family)",
-    },
-  },
-  PaperOverride: {
-    width: "80vw",
-    height: "80vh",
-    maxHeight: "80vh",
-    display: "flex",
-    position: "relative",
-    overflow: "visible",
-    "& img": {
-      width: "100%",
-      height: "100%",
-      objectFit: "contain",
-    },
-  },
-  ModalOverride: {},
-  ImageItem: {
-    marginTop: 8,
-    border: "1px dashed var(--secondary-color-default)",
-    height: 250,
-    textAlign: "center",
-    display: "flex",
-    position: "relative",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 4,
-    color: "var(--secondary-color-default)",
-    fontSize: 14,
-    padding: 15,
-    "& img": {
-      width: "100%",
-      height: "100%",
-      objectFit: "contain",
-    },
-    "&:hover .PopupButton": {
-      opacity: 1,
-      pointerEvents: "all",
-    },
-  },
-  ImageItemChangeButton: {
-    color: theme.palette.secondary.main,
-    transition: "0.35s all ease",
-    "&:hover": {
-      color: theme.palette.secondary.main,
-      backgroundColor: "rgba(0, 0, 0, 0.04)",
-      "& svg path": {
-        fill: theme.palette.secondary.main,
-      },
-    },
-  },
-  UploadWrapper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    "& .StandardButton": {
-      marginTop: 10,
-    },
-  },
-  ButtonsWrapper: {
-    marginTop: 8,
-    display: "flex",
-    alignItems: "center",
-    "& > button:first-child": {
-      color: "#D21C1C",
-    },
-    "& button": {
-      marginRight: 5,
-    },
-  },
-  ImageTitle: {
-    display: "flex",
-    "& > span:first-child": {
-      fontWeight: 500,
-      marginRight: 5,
-    },
-  },
-  ImagesSection: {
-    paddingTop: 16,
-    position: "relative",
-    "&:hover .ShowEditButton": {
-      opacity: 1,
-    },
-  },
-  ImagesInfo: {
-    backgroundColor: "var(--primary-bg)",
-    color: "var(--secondary-color-default)",
-    display: "flex",
-    textAlign: "center",
-    flexDirection: "column",
-    padding: "24px 8px",
-    lineHeight: "20px",
-    "& > span:first-child": {
-      color: "#005AA3",
-      fontWeight: 500,
-      marginBottom: 5,
-    },
-  },
-  LoadingWrapper: {
-    position: "absolute",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "#fff",
-    fontWeight: 500,
-    color: "var(--secondary-color-main)",
-    zIndex: 1,
-    "& > span": {
-      marginLeft: 15,
-      display: "inline-block",
-    },
-  },
-  ImageUploaderShowButtons: {
-    display: "flex",
-    justifyContent: "flex-end",
-    marginBottom: 10,
-    "& button": {
-      marginLeft: 8,
-    },
-  },
-  PopupButton: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 5,
-    transform: "translate(-50%, -50%)",
-    cursor: "pointer",
-    opacity: 0,
-    pointerEvents: "none",
-    transition: "0.35s opacity ease",
-    boxShadow: "0px 3px 12px -1px rgba(28, 52, 84, 0.2), 0px 2px 4px -1px rgba(28, 55, 90, 0.2)",
-    "&:hover": {
-      backgroundColor: "#fff",
-    },
-  },
-  ImageSize: {
-    color: "var(--secondary-color-default)",
-    fontSize: 14,
-  },
-  ShowEditButton: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    cursor: "pointer",
-    opacity: 0,
-    transition: "0.35s all ease",
-    "& svg path": {
-      transition: "0.35s all ease",
-    },
-    "&:hover svg path": {
-      fill: "#005AA3",
-    },
-  },
-}));
-
-export interface ImageProps {
-  file: string;
-  id: string;
-  index?: number;
-  kind: string;
-  size: number;
-  name?: string;
-  inputType: string;
-  edit: boolean;
-}
-
-interface ImageItemProps extends ImageProps {
-  setImageIds: any;
-  setServerImages: any;
-  openSlider: any;
-  source: string;
-  serverImages: ImageProps[];
-  requestVariables: Record<string, string>;
-  sourceIds: string;
-}
+const useStyles = makeStyles(ImageUploaderStyles);
 
 const ImageItem: React.FC<ImageItemProps> = React.memo(
   ({
@@ -342,12 +148,14 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
           ) : (
             <>
               {id && url && (
-                <Button
-                  onClick={(e) => openSlider(e, index)}
-                  className={cn(classes.PopupButton, "PopupButton")}
-                >
-                  <LoopIcon color="var(--primary-focus)" />
-                </Button>
+                <div className={cn(classes.PopupButtonWrapper, "PopupButtonWrapper")}>
+                  <Button
+                    onClick={(e) => openSlider(e, index)}
+                    className={cn(classes.PopupButton, "PopupButton")}
+                  >
+                    <LoopIcon color="var(--primary-focus)" />
+                  </Button>
+                </div>
               )}
               <img src={url} alt="admin panel" />
             </>
@@ -526,7 +334,7 @@ export const ImageUploaderV2: React.FC<{
         {!offInfo && inputType !== "show" && (
           <div className={classes.ImagesInfo}>
             <span>
-              The maximum size of uploaded files is{" "}
+              The maximum size of uploaded files is&nbsp;
               <StaticParam variables={{ name: "max_upload_image_size" }} query={STATIC_PARAM} />
               MB
             </span>

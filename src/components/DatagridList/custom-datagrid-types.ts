@@ -29,6 +29,7 @@ export interface CustomDatagridProps extends DatagridProps {
   datagridWrapperClassName?: string;
   offActions?: boolean;
   isDependentModel?: boolean;
+  offRowToggle?: boolean;
 }
 
 export interface DatagridBodyProps extends Omit<DatagridBodyPropsRA, "resource"> {
@@ -37,6 +38,7 @@ export interface DatagridBodyProps extends Omit<DatagridBodyPropsRA, "resource">
   expandElement?: ExpandElementType;
   offActions?: boolean;
   onToggleItem?: (id: Identifier | undefined, event: TouchEvent | MouseEvent) => void;
+  offRowToggle?: boolean;
 }
 
 export interface DatagridRowProps {
@@ -49,4 +51,5 @@ export interface DatagridRowProps {
   offActions?: boolean;
   expandElement?: ExpandElementType;
   ids?: Identifier[];
+  offRowToggle?: boolean;
 }

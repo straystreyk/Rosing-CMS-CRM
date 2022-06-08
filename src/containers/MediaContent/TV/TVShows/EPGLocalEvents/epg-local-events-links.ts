@@ -2,7 +2,7 @@ import { GET_EPG_LOCAL_EVENT_NAME } from "./request";
 
 export const epgLocalEventsLinks = [
   {
-    name: "TV shows",
+    name: "EPG Local Events",
     href: "/media_content/tv/tv_shows/epg_local_events",
   },
   {

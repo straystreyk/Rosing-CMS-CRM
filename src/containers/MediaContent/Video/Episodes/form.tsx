@@ -32,6 +32,7 @@ import { SwitchInput } from "../../../../components/Inputs/SwitchInput";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 import { ModelFormStyles } from "../../../../components/ResourceView/FormWithRedirect/styles";
 import { ArrayInputItemArrow } from "../../../../constants/icons";
+import { Collapse } from "@material-ui/core";
 
 const FIXED_HEADER_OFFSET = 80;
 const useStyles = makeStyles({
@@ -95,12 +96,7 @@ const Episode: React.FC<{
             <ArrayInputItemArrow color="var(--secondary-color-main)" />
           </div>
         )}
-        <div
-          style={{
-            height: !showResource && !["edit", "show"].includes(inputType) ? 0 : "auto",
-            overflow: !showResource && !["edit", "show"].includes(inputType) ? "hidden" : "unset",
-          }}
-        >
+        <Collapse in={showResource || ["edit", "show"].includes(inputType)} timeout="auto">
           <TextInput
             resource={resource}
             inputType={inputType}
@@ -339,7 +335,7 @@ const Episode: React.FC<{
             inputType={inputType}
             choices={SELECT_DISTRIBUTION}
           />
-        </div>
+        </Collapse>
       </>
     );
   }

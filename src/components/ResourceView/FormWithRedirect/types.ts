@@ -18,6 +18,7 @@ export interface EditFormProps {
   form: "create" | "edit" | "show" | "list";
   offTitle?: boolean;
   basePath?: string;
+  actionButtons?: React.ReactNode;
 }
 
 export interface FormWithRedirectProps extends FormWithRedirectRenderPropsRA {

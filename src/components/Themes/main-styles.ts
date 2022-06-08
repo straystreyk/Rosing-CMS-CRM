@@ -1,6 +1,7 @@
 export const outlineStyles = {
   outline: "2px solid var(--primary-focus-2)",
   outlineOffset: "2px",
+  borderRadius: 2,
 };
 
 export const scrollBarStyles = {

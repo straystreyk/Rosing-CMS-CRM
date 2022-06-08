@@ -60,14 +60,25 @@ export const MyDatagridRow: React.FC<DatagridRowProps> = ({
   basePath,
   offActions,
   expandElement,
+  offRowToggle,
 }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const { onToggleCheckbox } = useTableRow(id, onToggleItem);
 
+  const expand = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setOpen((p) => !p);
+  };
+
   return (
     <>
-      <TableRow className={classes.TableRow} key={id} hover onClick={onToggleCheckbox}>
+      <TableRow
+        className={classes.TableRow}
+        key={id}
+        onClick={!offRowToggle ? onToggleCheckbox : undefined}
+        hover
+      >
         {!offActions && (
           <TableCell
             className={cn(classes.TableCheckbox, classes.TableCell)}
@@ -93,7 +104,7 @@ export const MyDatagridRow: React.FC<DatagridRowProps> = ({
                   resource,
                 })}
                 {index === 0 && expandElement && (
-                  <button className={classes.ExpandIcon} onClick={() => setOpen(!open)}>
+                  <button className={classes.ExpandIcon} onClick={expand}>
                     <ArrayInputItemArrow color="var(--secondary-color-main)" />
                   </button>
                 )}
@@ -117,6 +128,7 @@ export const MyDatagridRowWithDnd: React.FC<DatagridRowProps> = ({
   children,
   selected,
   basePath,
+  offRowToggle,
   ids,
 }) => {
   const classes = useStyles();
@@ -129,7 +141,7 @@ export const MyDatagridRowWithDnd: React.FC<DatagridRowProps> = ({
           className={classes.DraggableTableRow}
           ref={provided.innerRef}
           {...provided.draggableProps}
-          onClick={onToggleCheckbox}
+          onClick={!offRowToggle ? onToggleCheckbox : undefined}
           key={id}
           hover
         >

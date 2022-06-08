@@ -86,13 +86,21 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
             helperText="You can select several genres from the list"
           />
         </ReferenceArrayInput>
-        <AutocompleteArrayInput
-          source="markers"
+        <ReferenceArrayInput
           label="Label"
-          inputType={type}
-          choices={SELECT_MARKERS}
-          helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
-        />
+          source="labelIds"
+          reference="media_content/attributes/labels"
+          resource={resource}
+          perPage={INPUT_ITEMS_PER_PAGE}
+        >
+          <AutocompleteArrayInput
+            optionText="name"
+            optionValue="id"
+            resource={resource}
+            inputType={type}
+            helperText="You can select several labels from the list"
+          />
+        </ReferenceArrayInput>
         <NumberInput
           source="position"
           label="Position"
@@ -124,10 +132,11 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
       >
         <ReferenceInput
           label="Radio stream's"
-          source="streamSourceId"
+          source="radioLiveStreamId"
           reference="media_content/radio/radio_live_streams"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
+          fullWidth
         >
           <AutocompleteInput
             optionText="name"

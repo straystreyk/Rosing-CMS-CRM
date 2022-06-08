@@ -13,6 +13,7 @@ const useStyles = makeStyles({
       marginTop: 4,
       position: "relative",
       display: "inline-block",
+      fontSize: 14,
       "&::after": {
         position: "absolute",
         content: "''",

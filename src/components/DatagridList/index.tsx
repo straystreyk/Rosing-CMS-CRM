@@ -17,6 +17,7 @@ export const DatagridList: React.FC<CustomDatagridProps> = ({
   isDependentModel,
   header,
   resource,
+  offRowToggle,
   ...props
 }) => {
   return (
@@ -43,6 +44,7 @@ export const DatagridList: React.FC<CustomDatagridProps> = ({
             expandElement={expand}
             offActions={offActions}
             draggable={props.draggable}
+            offRowToggle={offRowToggle}
           />
         }
       />

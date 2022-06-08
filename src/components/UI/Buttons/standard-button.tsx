@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     "& .MuiButton-label": {
       fontWeight: 500,
       "& > .MuiButton-startIcon": {
-        marginRight: 6,
+        marginRight: 4,
         marginLeft: 0,
         display: "flex",
         width: 20,
@@ -42,13 +42,14 @@ const useStyles = makeStyles({
           width: "100%",
         },
       },
-      "&:focus": {
-        outline: "2px solid #7FC5FF",
-        outlineOffset: "2px",
-      },
+
       "& > .MuiButton-endIcon": {
         marginRight: 0,
       },
+    },
+    "&:focus": {
+      outline: "2px solid #7FC5FF",
+      outlineOffset: "2px",
     },
   },
   TextButton: {

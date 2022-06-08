@@ -7,10 +7,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./styles.css";
 
-import { ImageProps } from "../ImageUploader";
 import { useRef } from "react";
 import { useMediaQuery } from "@material-ui/core";
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../constants/style-constants";
+import { ImageProps } from "../ImageUploader/types";
 
 interface SliderProps {
   images: ImageProps[];

@@ -11,6 +11,7 @@ const useStyles = makeStyles({
   CastMembersShowWrapper: {
     width: "100%",
     display: "flex",
+    justifyContent: "space-between",
     gap: 20,
     flexWrap: "wrap",
     paddingTop: 20,
@@ -22,9 +23,10 @@ const useStyles = makeStyles({
     padding: "40px 20px",
     flex: 1,
     marginTop: 20,
-    "& h4": {
+    "& span": {
       fontSize: 18,
-      color: "#7FC5FF",
+      fontWeight: 600,
+      color: "var(--primary-focus-2)",
       lineHeight: "22px",
       marginBottom: 4,
     },
@@ -91,10 +93,10 @@ export const EmptyShow: React.FC = () => {
   const classes = useStyles();
   return (
     <div className={classes.EmptyShow}>
-      <h4>This section is not filled in yet</h4>
+      <span>This section is not filled in yet</span>
       <p>
         You can switch to editing mode or click the quick edit button in the current section to fill
-        it in.
+        it in
       </p>
     </div>
   );

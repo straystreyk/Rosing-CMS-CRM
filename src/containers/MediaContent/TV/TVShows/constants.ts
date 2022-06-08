@@ -4,11 +4,11 @@ export const TVShowsSubTabs = [
     link: "/media_content/tv/tv_shows/epg_sources",
   },
   {
-    name: "TV shows",
+    name: "EPG Local Events",
     link: "/media_content/tv/tv_shows/epg_local_events",
   },
   {
-    name: "TV programs",
+    name: "EPG",
     link: "/media_content/tv/tv_shows/tv_programs",
   },
 ];

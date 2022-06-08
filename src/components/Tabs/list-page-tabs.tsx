@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
       color: "var(--accent-color-hover)",
       borderColor: "var(--accent-color-hover)",
     },
+    "&:focus": {
+      outline: "none",
+    },
     "& span.MuiButton-label": {
       fontWeight: 600,
     },
@@ -69,6 +72,9 @@ const useStyles = makeStyles((theme) => ({
       color: "var(--secondary-color-main)",
       borderBottom: `3px solid var(--secondary-color-main)`,
     },
+    "&:focus": {
+      outline: "none",
+    },
     "& span": {
       fontWeight: 500,
     },
@@ -91,6 +97,7 @@ export const ListPageTabs: React.FC<ListPageTabsProps> = ({ tabs, isSubTabs }) =
       {tabs.map(({ link, name }: ListTabProps) => (
         <>
           <StandardButton
+            key={link + name}
             component={Link}
             to={link}
             variant="text"

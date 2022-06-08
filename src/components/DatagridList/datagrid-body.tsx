@@ -70,6 +70,7 @@ export const MyDatagridBody: React.FC<DatagridBodyProps> = ({
   expandElement,
   resource,
   draggable,
+  offRowToggle,
   ...props
 }) => {
   const { onDragEnd } = useDatagridBody(resource, props.data);
@@ -90,6 +91,7 @@ export const MyDatagridBody: React.FC<DatagridBodyProps> = ({
                     expandElement={expandElement}
                     offActions={offActions}
                     ids={props.ids}
+                    offRowToggle={offRowToggle}
                   />
                 }
                 ref={provided.innerRef}
@@ -112,6 +114,7 @@ export const MyDatagridBody: React.FC<DatagridBodyProps> = ({
           onToggleItem={props.onToggleItem}
           expandElement={expandElement}
           offActions={offActions}
+          offRowToggle={offRowToggle}
           ids={props.ids}
         />
       }

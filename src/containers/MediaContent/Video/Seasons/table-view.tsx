@@ -73,6 +73,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
               to="/media_content/video/seasons"
               source="episodes"
               label="Episodes"
+              alwaysButton
             />
             {record?.published ? (
               <button>

@@ -127,11 +127,10 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           label="Description"
           source="description"
         />
-        <SelectInput
+        <AutocompleteInput
           resource={resource}
           choices={getYearsChoices()}
           label="Production year"
-          placeholder="гггг"
           inputType={type}
           source="productionYear"
         />
@@ -140,9 +139,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           resource={resource}
           inputType={type}
           resettable={false}
-          helperText={
-            "Release date in the country where the application is used. If the release is upcoming, then the date is mandatory."
-          }
+          helperText="Release date in the country where the application is used. If the release is upcoming, then the date is mandatory."
           label="Release date"
           source="releaseDate"
           type="date"

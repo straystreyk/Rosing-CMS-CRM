@@ -16,6 +16,7 @@ export type TitleProps = {
   record?: any;
   breadCrumbsOn?: boolean;
   basePath?: string;
+  actionButtons?: React.ReactNode;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -73,6 +74,7 @@ export const ResourceTitle: React.FC<TitleProps> = ({
   form,
   breadCrumbsOn,
   children,
+  actionButtons,
   ...props
 }) => {
   const { values } = useFormState();
@@ -142,15 +144,20 @@ export const ResourceTitle: React.FC<TitleProps> = ({
                   {title ? title : translate(["resources", name, "titles", form].join("."))}
                   {form === "show" && (
                     <div className={classes.ButtonsShow}>
+                      {actionButtons}
                       <StandardButton
-                        variant="textWithBg"
+                        variant="text"
                         component={Link}
                         customColor="var(--primary-button-default)"
                         startIcon={<EditIcon color="var(--primary-button-default)" />}
                         to={props.basePath + `/${props.record.id}`}
                         text="Edit"
                       />
-                      <DeleteButton redirect={props.basePath} record={props.record} />
+                      <DeleteButton
+                        variant="text"
+                        redirect={props.basePath}
+                        record={props.record}
+                      />
                     </div>
                   )}
                 </>

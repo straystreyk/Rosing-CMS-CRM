@@ -5,6 +5,7 @@ import {
   UPDATE_MOVIE,
 } from "../../../containers/MediaContent/Video/Movies/custom-requests";
 import {
+  GET_ALL_CHANNELS,
   GET_ONE_CHANNEL_EDIT,
   UPDATE_CHANNEL,
 } from "../../../containers/MediaContent/TV/Channels/Channels/requests";
@@ -28,7 +29,10 @@ import { GET_ALL_VIDEO_FILES } from "../../../containers/MediaContent/Video/Vide
 import { GET_ONE_AUDIO_SHOW } from "../../../containers/MediaContent/Audio/AudioShows/requests";
 import { GET_EDIT_EXTERNAL_CATALOG } from "../../../containers/MediaContent/Attributes/Providers/ContentProviders/requests";
 import { GET_ONE_EPG_LOCAL_EVENT } from "../../../containers/MediaContent/TV/TVShows/EPGLocalEvents/request";
-import { GET_ONE_RADIO_STATION } from "../../../containers/MediaContent/Radio/RadioStations/requests";
+import {
+  GET_ONE_RADIO_STATION,
+  UPDATE_RADIO_LIVE_STREAM,
+} from "../../../containers/MediaContent/Radio/RadioStations/requests";
 
 type ModelRequestOverride = {
   resource: string;
@@ -57,6 +61,7 @@ export const MODELS_WITH_CUSTOM_REQUESTS: ModelRequestOverride[] = [
     queries: {
       GET_ONE: GET_ONE_CHANNEL_EDIT,
       UPDATE: UPDATE_CHANNEL,
+      GET_LIST: GET_ALL_CHANNELS,
     },
   },
   {
@@ -112,6 +117,7 @@ export const MODELS_WITH_CUSTOM_REQUESTS: ModelRequestOverride[] = [
     resource: "RadioStation",
     queries: {
       GET_ONE: GET_ONE_RADIO_STATION,
+      UPDATE: UPDATE_RADIO_LIVE_STREAM,
     },
   },
   {

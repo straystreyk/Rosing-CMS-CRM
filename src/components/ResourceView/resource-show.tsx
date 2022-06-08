@@ -10,6 +10,7 @@ interface ShowProps extends ShowPropsRA {
   redirect?: "show" | "create" | "edit";
   resource: string;
   basePath?: string;
+  actionButtons?: React.ReactNode;
 }
 
 const LOADER_SIZE = 70;
@@ -24,6 +25,7 @@ export const ResourceShow: React.FC<ShowProps> = (props) => {
           form="show"
           redirect={props.redirect}
           resource={props.resource}
+          actionButtons={props.actionButtons}
           offToolbar
         >
           <Box style={{ position: "relative" }} p={{ xs: "0px 24px 100px 24px" }}>

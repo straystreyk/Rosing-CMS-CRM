@@ -17,6 +17,7 @@ const useStyles = makeStyles({
       border: "1px solid var(--secondary-color-default)",
       borderRadius: 4,
       transition: "0.35s border ease, 0.35s color ease",
+      // boxShadow: "inset 20px 20px 0px 20px #f3f2eb",
       "&:placeholder": {
         opacity: 1,
         color: "red",
@@ -34,6 +35,7 @@ const useStyles = makeStyles({
       margin: 0,
       marginTop: 2,
       color: "var(--primary-text-default)",
+      fontFamily: "var(--font-family)",
     },
     "& > p.MuiFormHelperText-root.Mui-error": {
       color: "#D21C1C",

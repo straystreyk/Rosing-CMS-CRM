@@ -10,6 +10,7 @@ import {
   GET_ONE_CHANNEL_VERSION,
   GET_ONE_EXTERNAL_CATALOG,
   GET_ONE_LANGUAGE,
+  GET_ONE_RADIO_LIVE_STREAM,
   GET_ONE_RIGHT_HOLDER,
   GET_ONE_VIDEO_FILE,
 } from "../../Providers/custom-requests";
@@ -48,6 +49,17 @@ const ShowView: React.FC<InputProps> = (props: InputProps) => {
             query={GET_ONE_VIDEO_FILE}
             component={Link}
             to={`/media_content/video/video_files/${values[props.source]}/show`}
+            resourceId={values[props.source]}
+          />
+        ) : (
+          <div className="empty">Not filled in</div>
+        );
+      case "radioLiveStreamId":
+        return values[props.source] ? (
+          <Resource
+            query={GET_ONE_RADIO_LIVE_STREAM}
+            component={Link}
+            to={`/media_content/radio/radio_live_streams/${values[props.source]}/show`}
             resourceId={values[props.source]}
           />
         ) : (

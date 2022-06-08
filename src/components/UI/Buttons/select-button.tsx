@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import { ButtonPrimary } from "./primary-button";
 import { CreateIcon } from "../../../constants/forms-constants";
 import { MainLoader } from "../../MainLoader";
-import { ImageProps } from "../../ImageUploader";
+import { ImageProps } from "../../ImageUploader/types";
 
 const useStyles = makeStyles((theme) => ({
   SelectButtonWrapper: {

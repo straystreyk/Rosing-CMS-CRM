@@ -25,6 +25,9 @@ const TableRow = {
     "& .MuiTypography-root a": {
       display: "-webkit-inline-box",
       verticalAlign: "middle",
+      "&.MuiButtonBase-root": {
+        display: "inline-flex",
+      },
       "&:focus-visible": {
         color: "var(--primary-focus)",
         outline: "none",
@@ -33,7 +36,7 @@ const TableRow = {
   },
 };
 
-export const DatagridStyles: Styles<Theme, {}, string> = {
+export const DatagridStyles: any = {
   List: {
     "@media (max-width: 599px)": {
       paddingBottom: 50,

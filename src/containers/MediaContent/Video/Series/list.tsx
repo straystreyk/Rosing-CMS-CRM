@@ -40,6 +40,7 @@ export const List: React.FC<ShowProps> = (props) => {
       <TextField source="position" label="Position" />
       <TextField source="slug" label="Slug" />
       <FunctionField
+        label="Seasons"
         render={(record?: RecordRA) => (
           <ToModelField
             record={record!}

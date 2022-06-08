@@ -551,7 +551,7 @@ export const en: TranslationMessages = {
       titles: {
         create: "New EPG source",
         edit: "Edit EPG source",
-        list: "TV shows",
+        list: "Television",
       },
       mutations: {
         create: {
@@ -569,46 +569,46 @@ export const en: TranslationMessages = {
       },
     },
     "media_content/tv/tv_shows/tv_programs": {
-      name: "TV programs",
+      name: "EPG",
       titles: {
-        create: "New TV program",
-        edit: "Edit TV program",
-        list: "TV shows",
+        create: "New EPG",
+        edit: "Edit EPG",
+        list: "EPG",
       },
       mutations: {
         create: {
-          success: 'New TV program "%{name}" was created',
-          error: "Cant create TV program: %{error}",
+          success: 'New EPG "%{name}" was created',
+          error: "Cant create EPG: %{error}",
         },
         edit: {
-          success: "TV program was updated",
-          error: "Cant update TV program: %{error}",
+          success: "EPG was updated",
+          error: "Cant update EPG: %{error}",
         },
         list: {
-          success: 'TV program "%{name}" was successfully updated',
-          error: "Cant update TV program: %{error}",
+          success: 'EPG "%{name}" was successfully updated',
+          error: "Cant update EPG: %{error}",
         },
       },
     },
     "media_content/tv/tv_shows/epg_local_events": {
-      name: "TV show",
+      name: "EPG Local Events",
       titles: {
-        create: "New TV show",
-        edit: "Edit TV show",
-        list: "TV shows",
+        create: "New EPG Local Event",
+        edit: "Edit EPG Local Event",
+        list: "EPG Local Events",
       },
       mutations: {
         create: {
-          success: 'New TV show "%{name}" was created',
-          error: "Cant create TV show: %{error}",
+          success: 'New EPG Local Event "%{name}" was created',
+          error: "Cant create EPG Local Event: %{error}",
         },
         edit: {
-          success: "TV show was updated",
-          error: "Cant update TV show: %{error}",
+          success: "EPG Local Event was updated",
+          error: "Cant update EPG Local Event: %{error}",
         },
         list: {
-          success: 'TV show "%{name}" was successfully updated',
-          error: "Cant update TV show: %{error}",
+          success: 'EPG Local Event "%{name}" was successfully updated',
+          error: "Cant update EPG Local Event: %{error}",
         },
       },
     },

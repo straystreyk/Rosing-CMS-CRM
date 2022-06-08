@@ -11,6 +11,7 @@ import {
 import { TableView } from "./table-view";
 import { Form } from "./form";
 import { sanitizeId } from "../../../../helpers/form";
+import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
 
 const resource = "media_content/video/series/:seriesId/seasons";
 const initialSort = { field: "number", order: "ASC" };

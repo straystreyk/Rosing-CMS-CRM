@@ -34,12 +34,15 @@ const CheckedIcon = () => (
 const useDatagridHeader = () => {
   const { currentSort, setSort, onSelect, ids, selectedIds, onUnselectItems } = useListContext();
 
-  const sort = (source: string) => {
-    setSort(source, source === currentSort.field ? inverseOrder(currentSort.order) : "ASC");
-  };
+  const sort = React.useCallback(
+    (source: string) => {
+      setSort(source, source === currentSort.field ? inverseOrder(currentSort.order) : "ASC");
+    },
+    [currentSort, setSort]
+  );
 
   const checkedAll = React.useCallback(() => {
-    if (selectedIds !== ids) {
+    if (selectedIds.length !== ids.length) {
       onSelect(ids);
     } else {
       onUnselectItems();
@@ -69,7 +72,7 @@ const DependentModelHeader: React.FC<any> = ({ offActions, children }) => {
           >
             <Checkbox
               checkedIcon={<CheckedIcon />}
-              checked={selectedIds === ids}
+              checked={selectedIds.length === ids.length}
               onClick={checkedAll}
               color="primary"
             />
@@ -109,7 +112,7 @@ export const DatagridHeader: React.FC<any> = ({
             <Checkbox
               checkedIcon={<CheckedIcon />}
               color="primary"
-              checked={selectedIds === ids}
+              checked={selectedIds.length === ids.length}
               onClick={checkedAll}
             />
           </TableCell>

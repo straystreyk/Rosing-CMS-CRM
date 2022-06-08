@@ -65,40 +65,39 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: 
     [setPerPage]
   );
 
-  if (loading)
-    return (
-      <div className={classes.SortWrapper}>
-        <Skeleton
-          style={{ background: "var(--secondary-gradient)" }}
-          variant="rect"
-          animation={false}
-          width={SKELETON_WIDTH}
-          height={SKELETON_HEIGHT}
-        />
-      </div>
-    );
-
   return (
     <div className={classes.SortWrapper}>
       <div className={classes.Sort}>
-        Total&nbsp;{total}
-        {total >= 15 && (
+        {total ? (
           <>
-            ,show by:&nbsp;
-            {showBy?.map((number, index) => (
-              <button
-                className={cn(
-                  "sortButton",
-                  queryParams.has("perPage") && perPage === number && "active",
-                  !queryParams.has("perPage") && typeof number === "string" && "active"
-                )}
-                key={number}
-                onClick={() => changePerPage(number)}
-              >
-                {number}
-              </button>
-            ))}
+            Total&nbsp;{total}
+            {total >= 15 && (
+              <>
+                ,show by:&nbsp;
+                {showBy?.map((number, index) => (
+                  <button
+                    className={cn(
+                      "sortButton",
+                      queryParams.has("perPage") && perPage === number && "active",
+                      !queryParams.has("perPage") && typeof number === "string" && "active"
+                    )}
+                    key={number}
+                    onClick={() => changePerPage(number)}
+                  >
+                    {number}
+                  </button>
+                ))}
+              </>
+            )}
           </>
+        ) : (
+          <Skeleton
+            style={{ background: "var(--secondary-gradient)" }}
+            variant="rect"
+            animation={false}
+            width={SKELETON_WIDTH}
+            height={SKELETON_HEIGHT}
+          />
         )}
       </div>
       <div className={classes.TableActions}>

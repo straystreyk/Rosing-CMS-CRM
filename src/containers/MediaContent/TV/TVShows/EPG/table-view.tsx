@@ -54,6 +54,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         toolbar={Empty}
         offActions
         optimized
+        offRowToggle
         datagridWrapperClassName={classes.DatagridTVPrograms}
         {...props}
       >

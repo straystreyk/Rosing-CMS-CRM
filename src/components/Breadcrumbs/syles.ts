@@ -16,6 +16,7 @@ export const BreadCrumbsStyles: Styles<Theme, {}, string> = {
   },
   lastCrumb: {
     color: "var(--primary-text-default)",
+    pointerEvents: "none",
   },
   Disabled: {
     pointerEvents: "none",

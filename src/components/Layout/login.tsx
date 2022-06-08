@@ -38,6 +38,8 @@ import {
   RosingLogo,
 } from "../../constants/icons";
 import { PasswordInput } from "../Inputs/StandatdInputs/password-input";
+import { ArrowLeftIcon } from "@material-ui/pickers/_shared/icons/ArrowLeftIcon";
+import { StandardButton } from "../UI/Buttons/standard-button";
 
 const useStyles = makeStyles((theme) => ({
   mainStyles,
@@ -50,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   formWrapperStyles,
   formStyles,
   actionsWrapperStyles,
-  actions: { ...actionsStyles, justifyContent: "space-between" },
+  actionsStyles,
   linkStyles,
   linkHelpStyles,
   cardButton: { ...cardButtonStyles, marginTop: 15 },
@@ -127,7 +129,7 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
                   <div className={classes.titleStyles}>
                     {!isResetPage ? "Авторизация" : "Восстановление пароля"}
                     <div className={classes.annotationWrapperStyles}>
-                      <InformationIcon color="var(--secondary-color-main)" />
+                      <InformationIcon color="var(--secondary-color-default)" />
                       <div className={classes.annotationStyles}>
                         В целях безопасности используемый для авторизации email должен быть
                         добавлен админом в список пользователей. Если система не узнает email,
@@ -139,35 +141,34 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
                     fullWidth
                     label="Email"
                     source="email"
-                    required
                     placeholder="example@example.com"
                   />
-                  {!isResetPage && <PasswordInput source="password" required fullWidth />}
-                  <CardActions className={classes.actions}>
+                  {!isResetPage && <PasswordInput source="password" fullWidth />}
+                  <CardActions className={classes.actionsStyles}>
                     {!isResetPage ? (
                       <>
                         <div className={classes.actionsWrapperStyles}>
                           <label htmlFor="remember">Stay logged in</label>
-                          <BooleanInput source="remember" label={""} />
+                          <BooleanInput helperText="" source="remember" label="" />
                         </div>
                         <Link className={classes.linkStyles} to={"/login/reset"}>
-                          <AnnotationIcon color="#005AA3" />
+                          <AnnotationIcon color="var(--primary-button-default)" />
                           Forgot password
                         </Link>
                       </>
                     ) : (
                       <Link className={classes.linkStyles} to={"/login"}>
-                        <BackIcon color="#005AA3" />I remember the password
+                        <BackIcon color="var(--primary-button-default)" />I remember the password
                       </Link>
                     )}
                   </CardActions>
-                  <ButtonPrimary
+                  <StandardButton
+                    type="submit"
+                    color="primary"
                     className={classes.cardButton}
                     startIcon={
                       !isResetPage ? <LoginIcon color="#ffffff" /> : <ResetIcon color="#ffffff" />
                     }
-                    disabled={loading}
-                    type="submit"
                     text={translate(!isResetPage ? "actions.login" : "actions.reset")}
                   />
                 </Card>
@@ -175,10 +176,6 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
               </form>
             )}
           />
-          {/*<a href="#" className={classes.linkHelp}>*/}
-          {/*  <AlertIcon color="#005AA3" />*/}
-          {/*  Написать в поддержку*/}
-          {/*</a>*/}
         </div>
       </div>
     </>

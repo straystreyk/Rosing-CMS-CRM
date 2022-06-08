@@ -16,8 +16,14 @@ import { StandardButton } from "../UI/Buttons/standard-button";
 import { Pagination } from "../Pagination";
 import { DatagridStyles } from "./styles";
 import { ArrowFilterIcon } from "../CustomFilters/constants";
+import { outlineStyles } from "../Themes/main-styles";
 
-const useStyles = makeStyles(DatagridStyles);
+const useStyles = makeStyles({
+  ...DatagridStyles,
+  Outline: {
+    "&:focus-visible": outlineStyles,
+  },
+});
 
 const LOADER_SIZE = 70;
 
@@ -69,12 +75,10 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
       {!offDescription ? (
         <div className={classes.TopToolBarWrapper}>
           <div className={classes.TopToolBarName}>
-            <div>
+            <button className={classes.Outline} onClick={show}>
               <span className="title">{translate(`resources.${props.resource}.name`)}</span>
-              <button onClick={show}>
-                <ArrowFilterIcon color="var(--secondary-color-main)" />
-              </button>
-            </div>
+              <ArrowFilterIcon color="var(--secondary-color-main)" />
+            </button>
             <ToolBar toolbar={props.toolbar} basePath={props.basePath} resource={props.resource} />
           </div>
           <Collapse unmountOnExit in={isShown}>

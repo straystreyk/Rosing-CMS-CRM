@@ -265,11 +265,11 @@ export const InformationIcon = ({ color }: { color: string }) => (
   </svg>
 );
 
-export const AnnotationIcon = ({ color }: { color: string }) => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="8.00012" cy="8" r="7.35" stroke={color} strokeWidth="1.3" />
-    <rect x="7.25024" y="3.44995" width="1.5" height="6.12762" rx="0.75" fill={color} />
-    <rect x="6.94263" y="10.3669" width="2.11501" height="2.16" rx="1.05751" fill={color} />
+export const AnnotationIcon = ({ color }: IconProps) => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="10" cy="10" r="7.35" stroke={color} strokeWidth="1.3" />
+    <rect x="9.25" y="5.4502" width="1.5" height="6.12762" rx="0.75" fill={color} />
+    <rect x="8.94238" y="12.3672" width="2.11501" height="2.16" rx="1.05751" fill={color} />
   </svg>
 );
 
@@ -351,20 +351,20 @@ export const ResetIcon = ({ color }: IconProps) => (
 );
 
 export const BackIcon = ({ color }: IconProps) => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle
       cx="10"
-      cy="10"
+      cy="10.5"
       r="7.35"
-      transform="rotate(-180 10 10)"
+      transform="rotate(90 10 10.5)"
       stroke={color}
       strokeWidth="1.3"
     />
     <line
-      x1="9.15352"
-      y1="12.6163"
-      x2="6.53722"
-      y2="10"
+      x1="10.4665"
+      y1="13.1162"
+      x2="7.85022"
+      y2="10.4999"
       stroke={color}
       strokeWidth="1.3"
       strokeLinecap="round"
@@ -374,13 +374,7 @@ export const BackIcon = ({ color }: IconProps) => (
       y1="-0.65"
       x2="4.35"
       y2="-0.65"
-      transform="matrix(-0.707107 0.707107 0.707107 0.707107 10.0728 7.38391)"
-      stroke={color}
-      strokeWidth="1.3"
-      strokeLinecap="round"
-    />
-    <path
-      d="M13.5471 10.0002L6.54712 10.0002"
+      transform="matrix(-0.707107 0.707107 0.707107 0.707107 11.3858 7.88379)"
       stroke={color}
       strokeWidth="1.3"
       strokeLinecap="round"

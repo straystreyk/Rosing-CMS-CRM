@@ -6,12 +6,15 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles({
   RefreshIcon: {
     display: "inline-block",
-    transition: "0.3s all ease",
     "&:hover": {
-      transform: "rotate(360deg)",
+      backgroundColor: "var(--primary-bg)",
+      "& svg": {
+        transform: "rotate(360deg)",
+      },
     },
     "& svg": {
       verticalAlign: "middle",
+      transition: "0.3s all ease",
     },
   },
 });
@@ -57,10 +60,9 @@ export const RefreshButton: React.FC = () => {
       customColor="var(--primary-button-default)"
       onClick={acceptRefresh}
       variant="icon"
+      className={classes.RefreshIcon}
     >
-      <span className={classes.RefreshIcon}>
-        <RefreshIcon />
-      </span>
+      <RefreshIcon />
     </StandardButton>
   );
 };
