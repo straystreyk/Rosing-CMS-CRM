@@ -1,7 +1,6 @@
 import React from "react";
 import { CreateProps, EditProps, ListProps, ShowProps } from "ra-ui-materialui";
 import { useParams } from "react-router-dom";
-
 import {
   ResourceList,
   ResourceCreate,
@@ -11,7 +10,7 @@ import {
 import { TableView } from "./table-view";
 import { Form } from "./form";
 import { sanitizeId } from "../../../../helpers/form";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { ShowTitleActionButtons } from "./show-title-action-buttons";
 
 const resource = "media_content/video/series/:seriesId/seasons";
 const initialSort = { field: "number", order: "ASC" };
@@ -69,6 +68,7 @@ export const Show: React.FC<ShowProps> = (props) => {
     <ResourceShow
       {...props}
       resource={resource}
+      actionButtons={ShowTitleActionButtons}
       basePath={sanitizeId(props.basePath!, /:seriesId/g, seriesId)}
     >
       <Form resource={resource} type="show" {...props} />

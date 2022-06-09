@@ -73,7 +73,7 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: 
             Total&nbsp;{total}
             {total >= 15 && (
               <>
-                ,show by:&nbsp;
+                ,&nbsp;show by:&nbsp;
                 {showBy?.map((number, index) => (
                   <button
                     className={cn(

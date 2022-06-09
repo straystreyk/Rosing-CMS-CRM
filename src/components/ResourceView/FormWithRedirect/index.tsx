@@ -1,7 +1,7 @@
 import * as React from "react";
 import cn from "classnames";
 import { FormWithRedirect } from "react-admin";
-import { ResourceTitle } from "../resource-title";
+import { ResourceTitle } from "../ResourceTitle";
 import { Box, Card, CardContent } from "@material-ui/core";
 import { Toolbar } from "./tool-bar";
 import { makeStyles } from "@material-ui/core";

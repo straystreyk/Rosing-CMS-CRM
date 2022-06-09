@@ -7,10 +7,12 @@ import { ShowProps } from "../../../../../types";
 import { DatagridList } from "../../../../../components/DatagridList";
 import { EmptyTablePage } from "../../../../../components/EmptyTablePage";
 import { TableFieldsStyles } from "../../../../../components/TableFields/styles";
-import { ModalTVPrograms, useTVPrograms } from "../../Channels/ChannelVersions/tv-programs";
-import { useModalMUI } from "../../../../../components/Modal/use-modal";
-import { Identifier } from "ra-core";
 import { Record as RecordRA } from "ra-core/esm/types";
+import { UrlField } from "../../../../../components/TableFields/url-field";
+import { Identifier } from "ra-core";
+import { ModalTVPrograms } from "../../Channels/ChannelVersions/tv-programs";
+import { useTVPrograms } from "../../Channels/ChannelVersions/tv-programs";
+import { useModalMUI } from "../../../../../components/Modal/use-modal";
 import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
 import { TVProgramsIcon } from "../../../../../constants/icons";
 
@@ -29,8 +31,8 @@ const useStyles = makeStyles({
 const Empty = () => <></>;
 
 export const TableView: React.FC<ShowProps> = (props) => {
-  const { getData, data, loading, setData } = useTVPrograms();
   const classes = useStyles();
+  const { getData, data, loading, setData } = useTVPrograms();
 
   const closeModal = () => {
     setTimeout(() => setData(null), 350);
@@ -58,8 +60,26 @@ export const TableView: React.FC<ShowProps> = (props) => {
         datagridWrapperClassName={classes.DatagridTVPrograms}
         {...props}
       >
-        <TextField label="Сhannel name" source="channelName" />
-        <TextField label="Сhannel version" source="channelVersionName" />
+        <FunctionField
+          label="Channel name"
+          render={(record?: RecordRA) => {
+            return (
+              <UrlField
+                name={record?.channelName}
+                to={`/media_content/tv/channels/channels/${record?.channelId}/show`}
+              />
+            );
+          }}
+        />
+        <FunctionField
+          label="Channel version name"
+          render={(record?: RecordRA) => (
+            <UrlField
+              name={record?.channelVersionName}
+              to={`/media_content/tv/channels/channels/${record?.channelId}/channel_versions/${record?.channelVersionId}/show`}
+            />
+          )}
+        />
         <TextField label="EPG source" source="epgSourceName" />
         <FunctionField
           label=""
@@ -70,9 +90,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
                 startIcon={<TVProgramsIcon color="var(--accent-color)" />}
                 onClick={() => openTVPrograms(record?.id)}
                 variant="text"
-              >
-                TV programs
-              </StandardButton>
+                text="TV programs"
+              />
             </div>
           )}
         />

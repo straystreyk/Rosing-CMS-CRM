@@ -42,7 +42,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         source="channelVersionId"
         emptyText={<span className={classes.Empty}>Empty</span>}
         reference="media_content/tv/channels/channels/:channelId/channel_versions"
-        linkType={false}
+        link={false}
       >
         <TextField source="name" fullWidth />
       </ReferenceField>

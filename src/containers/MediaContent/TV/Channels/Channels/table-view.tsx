@@ -1,10 +1,9 @@
 import * as React from "react";
 import { ShowProps } from "../../../../../types";
 import { DatagridList } from "../../../../../components/DatagridList";
-import { FunctionField, Record } from "react-admin";
+import { FunctionField } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { Record as RecordRA } from "ra-core/esm/types";
-import { Link, useHistory } from "react-router-dom";
 import { TableFieldsStyles } from "../../../../../components/TableFields/styles";
 import { EmptyTablePage } from "../../../../../components/EmptyTablePage";
 import { MoreActionsButton } from "../../../../../components/UI/Buttons/MoreActionsButton";
@@ -15,8 +14,6 @@ import {
   ArrowIconUp,
   PublishedIcons,
   PublishIcon,
-  ResourceAddIcon,
-  ResourceCountEpisodesIcon,
   UnPublishedIcons,
   UnPublishIcon,
 } from "../../../../../constants/icons";
@@ -24,12 +21,12 @@ import { StandardButton } from "../../../../../components/UI/Buttons/standard-bu
 import { useTableActions } from "../../../../../custom-hooks/use-table-actions";
 import { channelFilter } from "./channel-filter";
 import { ToModelField } from "../../../../../components/TableFields/to-model-field";
+import { UrlField } from "../../../../../components/TableFields/url-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
 export const TableView: React.FC<ShowProps> = (props) => {
   const classes = useStyles();
-  const history = useHistory();
   const { loading, approve } = useTableActions(props);
 
   return (
@@ -45,9 +42,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         label="Name"
         source="name"
         render={(record?: RecordRA) => (
-          <Link className={classes.NameField} to={`/${props.resource}/${record?.id}/show`}>
-            {record?.name}
-          </Link>
+          <UrlField name={record?.name} to={`/${props.resource}/${record?.id}/show`} />
         )}
       />
       <FunctionField

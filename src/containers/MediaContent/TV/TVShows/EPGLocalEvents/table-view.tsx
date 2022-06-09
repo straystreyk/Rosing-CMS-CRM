@@ -40,6 +40,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         source="epgSourceId"
         reference="media_content/tv/tv_shows/epg_sources"
         emptyText={<span className={classes.Empty}>Empty</span>}
+        link={false}
       >
         <TextField source="name" fullWidth />
       </ReferenceField>

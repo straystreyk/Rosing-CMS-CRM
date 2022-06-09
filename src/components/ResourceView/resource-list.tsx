@@ -3,7 +3,7 @@ import { List } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 
-import { ResourceTitle } from "./resource-title";
+import { ResourceTitle } from "./ResourceTitle";
 import { ListPageTabs } from "../Tabs/list-page-tabs";
 import { EditForm } from "./FormWithRedirect";
 import { ResourcesListProps } from "./resources-types";

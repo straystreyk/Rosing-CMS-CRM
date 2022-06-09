@@ -95,9 +95,8 @@ export const ListPageTabs: React.FC<ListPageTabsProps> = ({ tabs, isSubTabs }) =
   return (
     <Box sx={{ maxWidth: "100%" }} className={!isSubTabs ? classes.TabsList : classes.SubTabsList}>
       {tabs.map(({ link, name }: ListTabProps) => (
-        <>
+        <React.Fragment key={link + name}>
           <StandardButton
-            key={link + name}
             component={Link}
             to={link}
             variant="text"
@@ -114,7 +113,7 @@ export const ListPageTabs: React.FC<ListPageTabsProps> = ({ tabs, isSubTabs }) =
             }
             text={name}
           />
-        </>
+        </React.Fragment>
       ))}
     </Box>
   );

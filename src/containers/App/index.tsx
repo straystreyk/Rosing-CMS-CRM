@@ -38,6 +38,7 @@ import { ProgramEventsVariables as programEvents } from "../MediaContent/TV/Chan
 import { QuestionVariables as questions } from "../PagesAndAttributes/Question";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
+import { MainLoader } from "../../components/MainLoader";
 
 const { Login, Layout } = Layouts;
 const { authProvider, i18nProvider } = Providers;
@@ -47,8 +48,16 @@ export const App = () => {
 
   if (!dataProvider) {
     return (
-      <div className="loader-container">
-        <CircularProgress color="primary" />
+      <div
+        style={{
+          display: "flex",
+          width: "100vw",
+          height: "100vh",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <MainLoader size={70} />
       </div>
     );
   }

@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core";
 
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../../constants/style-constants";
 
-interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
+export interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
   customColor?: string;
   variant?: "text" | "outlined" | "contained" | "textWithBg" | "icon" | undefined;
   component?: any;

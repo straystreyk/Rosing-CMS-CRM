@@ -2,7 +2,7 @@ import * as React from "react";
 import cn from "classnames";
 import { makeStyles, Menu, MenuItem } from "@material-ui/core";
 import { authClient } from "../../Providers/AuthProvider/client";
-import { useQuery } from "@apollo/client";
+import { DocumentNode, useQuery } from "@apollo/client";
 import { ButtonPrimary } from "./primary-button";
 import { CreateIcon } from "../../../constants/forms-constants";
 import { MainLoader } from "../../MainLoader";
@@ -40,7 +40,7 @@ export interface ImageTypesProps {
 }
 
 export const SelectButton: React.FC<{
-  query: any;
+  query: DocumentNode;
   pushResource: (kind: string, prettyName: string) => void;
   label: string;
   icon?: React.ReactElement;

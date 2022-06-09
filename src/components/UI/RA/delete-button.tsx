@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     padding: "4px 6px",
     "& svg": {
       marginLeft: 0,
-      marginRight: 6,
+      marginRight: 4,
     },
     "& span": {
       fontSize: 14,

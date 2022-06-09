@@ -12,7 +12,6 @@ import { Link } from "ra-ui-materialui";
 
 import { lightTheme } from "../Themes";
 import { BooleanInput, TextInput, isEmail } from "../Inputs";
-import { ButtonPrimary } from "../UI/Buttons";
 import {
   actionsStyles,
   actionsWrapperStyles,

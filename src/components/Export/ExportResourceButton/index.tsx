@@ -1,24 +1,17 @@
 import * as React from "react";
+import { Menu, MenuItem } from "@material-ui/core";
+import { useSubscription } from "@apollo/client";
+import { makeStyles } from "@material-ui/core/styles";
+
 import { StandardButton } from "../../UI/Buttons/standard-button";
 import { ArrayInputItemArrow } from "../../../constants/icons";
-import { Menu, MenuItem } from "@material-ui/core";
 import { authClient } from "../../Providers/AuthProvider/client";
-import { useSubscription } from "@apollo/client";
 import { SUBSCRIBE_TO_EXPORT } from "../requests";
 import { ExportIcon } from "../constants";
 import { useExportButton } from "./use-export-button";
-import { makeStyles } from "@material-ui/core/styles";
+import { ExportButtonStyles } from "./styles";
 
-const useStyles = makeStyles({
-  ExportButton: {
-    "&:hover": {
-      backgroundColor: "var(--primary-bg)",
-    },
-    "& .MuiButton-label svg:first-child": {
-      marginRight: 4,
-    },
-  },
-});
+const useStyles = makeStyles(ExportButtonStyles);
 
 export const ExportResourceButton: React.FC<{ resource: string }> = ({ resource }) => {
   const classes = useStyles();
@@ -52,7 +45,7 @@ export const ExportResourceButton: React.FC<{ resource: string }> = ({ resource 
         }}
       >
         <MenuItem disabled={isLoading} onClick={handleItem}>
-          Take the data (づ ◕‿◕ )づ
+          XLSX
         </MenuItem>
       </Menu>
     </>

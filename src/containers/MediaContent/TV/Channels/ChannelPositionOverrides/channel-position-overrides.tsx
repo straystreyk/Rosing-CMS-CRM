@@ -11,10 +11,17 @@ import {
 } from "../../../../../components/ResourceView";
 import { Form } from "./form";
 
+const initialSort = { field: "position", order: "ASC" };
 const resource = "media_content/tv/channels/channel_positions_overrides";
 
 export const List: React.FC = (props) => (
-  <ResourceList listTabs={TVTabs} listSubTabs={TVChannelsSubTubs} {...props} resource={resource}>
+  <ResourceList
+    sort={initialSort}
+    listTabs={TVTabs}
+    listSubTabs={TVChannelsSubTubs}
+    {...props}
+    resource={resource}
+  >
     <TableView resource={resource} />
   </ResourceList>
 );

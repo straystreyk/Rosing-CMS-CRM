@@ -290,7 +290,6 @@ export const GET_ALL_MOVIE = gql`
       filter: $filter
     ) {
       id
-      streamSourceIds
       position
       externalCatalogId
       name

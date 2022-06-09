@@ -11,7 +11,7 @@ interface MainLoaderProps {
 
 const useStyles = makeStyles({
   TopCircleAnimate: {
-    animation: `$myEffect 2000ms linear  infinite`,
+    animation: `$myEffect 1600ms linear  infinite`,
     borderRadius: 20,
   },
   BottomCircle: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     zIndex: -1,
   },
   TopCircleSvgAnimate: {
-    animation: `$rotate 1200ms linear infinite`,
+    animation: `$rotate 1400ms linear infinite`,
     display: "block",
     borderRadius: 20,
   },

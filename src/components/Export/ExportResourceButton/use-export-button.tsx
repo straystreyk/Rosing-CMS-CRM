@@ -64,6 +64,8 @@ export const useExportButton = (resource: string, data: { data: { exportTask: Ex
         notify(e.message, { type: "error" });
       }
       setIsLoading(false);
+    } finally {
+      handleClose();
     }
   }, [currentSort, filterValues, notify, resource]);
 

@@ -2,6 +2,7 @@ import * as React from "react";
 import { FormWithRedirectRenderProps as FormWithRedirectRenderPropsRA } from "ra-core/esm/form/FormWithRedirect";
 import { ToolbarProps as ToolbarPropsRA } from "ra-ui-materialui/lib/form/Toolbar";
 import { Record as RaRecord } from "ra-core/esm/types";
+import { TitleActionButtonsType } from "../ResourceTitle/types";
 
 export interface EditFormProps {
   resource: string;
@@ -18,7 +19,7 @@ export interface EditFormProps {
   form: "create" | "edit" | "show" | "list";
   offTitle?: boolean;
   basePath?: string;
-  actionButtons?: React.ReactNode;
+  actionButtons?: TitleActionButtonsType;
 }
 
 export interface FormWithRedirectProps extends FormWithRedirectRenderPropsRA {

@@ -5,7 +5,7 @@ import { MEDIA_QUERIES_BREAKPOINTS, TopToolBar } from "../../constants/style-con
 
 const TableRow = {
   borderBottom: "1px solid var(--secondary-color-disable)",
-  minHeight: 62,
+  height: 62,
   "&.MuiTableRow-root.MuiTableRow-hover:hover": {
     backgroundColor: "var(--primary-bg)",
     borderColor: "transparent",

@@ -81,7 +81,7 @@ const ShowView: React.FC<InputProps> = (props) => {
     (source) => {
       switch (source) {
         case "searchKeywords":
-          return values[props.source].length ? (
+          return values[props.source] && values[props.source].length ? (
             values[props.source].join(", ")
           ) : (
             <EmptyInput emptyText="Empty" />

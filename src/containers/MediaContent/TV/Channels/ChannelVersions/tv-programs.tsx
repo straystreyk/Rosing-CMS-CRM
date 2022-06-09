@@ -49,7 +49,7 @@ const useStyles = makeStyles({
 
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-type EPG = {
+export type EPG = {
   id: Identifier;
   day: string;
   countAll: number;

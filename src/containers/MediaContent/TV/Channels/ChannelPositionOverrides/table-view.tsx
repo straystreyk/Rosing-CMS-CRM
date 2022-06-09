@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FunctionField, TextField } from "react-admin";
+import { FunctionField, NumberField, TextField } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
 import { ShowProps } from "../../../../../types";
@@ -38,14 +38,15 @@ export const TableView: React.FC<ShowProps> = (props) => {
           </Link>
         )}
       />
+      <NumberField label="Position" source="position" />
       <ReferenceField
         label="Channel"
         source="channelId"
         emptyText={<span className={classes.Empty}>Empty</span>}
         reference="media_content/tv/channels/channels"
-        linkType={false}
+        link={false}
       >
-        <TextField source="name" fullWidth />
+        <TextField source="name" />
       </ReferenceField>
       <FunctionField
         label=""

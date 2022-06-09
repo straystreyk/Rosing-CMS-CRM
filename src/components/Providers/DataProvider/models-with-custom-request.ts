@@ -62,6 +62,7 @@ export const MODELS_WITH_CUSTOM_REQUESTS: ModelRequestOverride[] = [
       GET_ONE: GET_ONE_CHANNEL_EDIT,
       UPDATE: UPDATE_CHANNEL,
       GET_LIST: GET_ALL_CHANNELS,
+      GET_MANY: GET_ALL_CHANNELS,
     },
   },
   {

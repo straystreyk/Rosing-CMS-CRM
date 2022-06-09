@@ -7,7 +7,6 @@ import {
   NumberInput,
   ArrayInput,
   AutocompleteArrayInput,
-  SelectInput,
   ArrayInputNoDrag,
   parseTimeInput,
   formatTimeInput,
