@@ -8,57 +8,35 @@ import { FunctionField, TextField } from "react-admin";
 import { ShowProps } from "../../../../../types";
 import { DatagridList } from "../../../../../components/DatagridList";
 import { EmptyTablePage } from "../../../../../components/EmptyTablePage";
-import { TableFieldsStyles } from "../../../../../components/TableFields/styles";
 import { Record as RecordRA } from "ra-core/esm/types";
 import { UrlField } from "../../../../../components/TableFields/url-field";
-import { Identifier } from "ra-core";
-import { EPG, ModalTVPrograms } from "../../Channels/ChannelVersions/tv-programs";
-// import { useTVPrograms } from "../../Channels/ChannelVersions/tv-programs";
-// import { useModalMUI } from "../../../../../components/Modal/use-modal";
-// import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
-// import { TVProgramsIcon } from "../../../../../constants/icons";
+import { EPG } from "../../Channels/ChannelVersions/tv-programs";
+import { EPGTableStyles } from "./styles";
 
-const useStyles = makeStyles({
-  ...TableFieldsStyles,
-  DatagridTVPrograms: {
-    "& tbody tr th:first-child": {
-      paddingLeft: 24,
-    },
-    "& thead tr th:first-child": {
-      paddingLeft: 24,
-    },
-  },
-});
+const useStyles = makeStyles(EPGTableStyles);
 
 const Empty = () => <></>;
 
-// const { getData, data, loading, setData } = useTVPrograms();
-//
-// const closeModal = () => {
-//   setTimeout(() => setData(null), 350);
-// };
-//
-// const { handleOpen, open, handleClose } = useModalMUI(undefined, closeModal);
-//
-// const openTVPrograms = React.useCallback(
-//   (channelVersionId: Identifier | undefined) => {
-//     handleOpen();
-//     getData(channelVersionId);
-//   },
-//   [getData, handleOpen]
-// );
+let data: EPG[] = [];
 
-export const TableView: React.FC<ShowProps> = (props) => {
-  const classes = useStyles();
-  const [data, setData] = React.useState<EPG[]>([]);
+const useTableTvDates = () => {
   const [sortedData, setSortedData] = React.useState<Record<string, EPG[]>>({});
 
   React.useEffect(() => {
     if (data.length) {
-      const s = [].concat(...(data as []));
-      setSortedData(_.groupBy(s, "day"));
+      const allDates = [].concat(...(data as []));
+      setSortedData(_.groupBy(allDates, "day"));
     }
   }, [data]);
+
+  return {
+    sortedData,
+  };
+};
+
+export const TableView: React.FC<ShowProps> = (props) => {
+  const classes = useStyles();
+  const { sortedData } = useTableTvDates();
 
   return (
     <>
@@ -73,9 +51,9 @@ export const TableView: React.FC<ShowProps> = (props) => {
         {...props}
       >
         <FunctionField
-          label="Channel name"
+          label="Channel"
           render={(record?: RecordRA) => {
-            if (!data.includes(record?.tvPrograms)) setData((p) => [...p, record?.tvPrograms]);
+            if (!data.includes(record?.tvPrograms)) data = [...data, record?.tvPrograms];
             return (
               <UrlField
                 name={record?.channelName}
@@ -85,7 +63,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
           }}
         />
         <FunctionField
-          label="Channel version name"
+          label="Channel version"
           render={(record?: RecordRA) => (
             <UrlField
               name={record?.channelVersionName}
@@ -94,30 +72,38 @@ export const TableView: React.FC<ShowProps> = (props) => {
           )}
         />
         <TextField label="EPG source" source="epgSourceName" />
-        {sortedData &&
+        {sortedData && sortedData.length ? (
           Object.keys(sortedData).map((date) => {
             return (
               <FunctionField
                 label={new Date(date).toLocaleDateString()}
+                key={date}
                 offsort
                 render={(record?: RecordRA) => {
                   const current = sortedData[date].filter(
                     (el) => el.channelVersionId === record?.channelVersionId
                   )[0];
-                  return <span>{!!current ? current.countAll : 0}</span>;
+                  return (
+                    <>
+                      {!!current ? (
+                        <UrlField
+                          name={current.countAll}
+                          className={classes.TvProgramExist}
+                          to={`/media_content/tv/channels/channel_versions/${current.channelVersionId}/${current.epgSourceId}/${current.day}/program_events`}
+                        />
+                      ) : (
+                        <span className={classes.EmptyTvProgram}>0</span>
+                      )}
+                    </>
+                  );
                 }}
               />
             );
-          })}
+          })
+        ) : (
+          <></>
+        )}
       </DatagridList>
-      {/*<ModalTVPrograms*/}
-      {/*  title="TV Programs"*/}
-      {/*  description="List of dates with available events"*/}
-      {/*  open={open}*/}
-      {/*  handleClose={handleClose}*/}
-      {/*  loading={loading}*/}
-      {/*  data={data}*/}
-      {/*/>*/}
     </>
   );
 };

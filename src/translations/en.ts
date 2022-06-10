@@ -115,10 +115,11 @@ export const en: TranslationMessages = {
         create: "New Question",
         edit: "Edit Question",
         list: "Pages and attributes",
+        show: "Question",
       },
       mutations: {
         create: {
-          success: 'New question "%{name}" was created',
+          success: "New question was created",
           error: "Cant create question: %{error}",
         },
         edit: {
@@ -126,7 +127,7 @@ export const en: TranslationMessages = {
           error: "Cant update question: %{error}",
         },
         list: {
-          success: 'Question "%{name}" was successfully updated',
+          success: "Question was successfully updated",
           error: "Cant update question: %{error}",
         },
       },

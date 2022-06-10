@@ -10,6 +10,8 @@ export const getGqlResource = (resource: string) => {
       return "Region";
     case "images":
       return "Image";
+    case "static_data":
+      return "StaticData";
     case "pages_and_attributes/questions":
       return "Question";
     case "media_content/tv/channels/channels/:channelId/channel_versions":

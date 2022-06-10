@@ -68,7 +68,7 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: 
   return (
     <div className={classes.SortWrapper}>
       <div className={classes.Sort}>
-        {total ? (
+        {total || total === 0 ? (
           <>
             Total&nbsp;{total}
             {total >= 15 && (

@@ -149,9 +149,9 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         >
           <AutocompleteArrayInput
             optionText="name"
-            resource={resource}
             optionValue="id"
             inputType={type}
+            resource={resource}
             helperText="The language of the movie's audio track. You can select multiple languages from the list."
           />
         </ReferenceArrayInput>

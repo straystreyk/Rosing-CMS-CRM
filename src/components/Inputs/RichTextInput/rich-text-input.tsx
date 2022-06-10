@@ -1,9 +1,9 @@
 import * as React from "react";
+import Quill from "quill";
 import { default as RichTextInputDefault } from "ra-input-rich-text";
 import { makeStyles } from "@material-ui/core";
 import { InputProps } from "ra-core";
 import { TextInputShow } from "../StandatdInputs/TextInput/show-view";
-import Quill from "quill";
 import { icons } from "./icons";
 import { RaRichTextInputStyles } from "./styles";
 

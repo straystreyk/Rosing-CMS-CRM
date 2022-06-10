@@ -3,7 +3,6 @@ import { FormProps } from "../../../../types";
 import { FormSection } from "../../../../components/FormSection";
 import { FormTabs } from "../../../../components/Tabs/form-tabs";
 import {
-  ArrayInputNoDrag,
   AutocompleteArrayInput,
   NumberInput,
   ReferenceInput,
@@ -11,8 +10,7 @@ import {
   RichTextInput,
   TextInput,
 } from "../../../../components/Inputs";
-import { MetaData } from "../../../../components/Models/Metadata";
-import { PUBLISHED_CHOICES_FORM, SELECT_MARKERS } from "../../../../constants/forms-constants";
+import { PUBLISHED_CHOICES_FORM } from "../../../../constants/forms-constants";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";

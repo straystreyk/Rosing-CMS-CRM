@@ -26,7 +26,9 @@ export const ResourceTitle: React.FC<TitleProps> = ({
   const { values } = useFormState();
   const date = values.updatedAt ? new Date(values.updatedAt).toLocaleDateString() : "";
   const time = values.updatedAt ? new Date(values.updatedAt).toLocaleTimeString() : "";
-  const [title] = React.useState<string>((values.name || values.fullName) ?? "");
+  const [title] = React.useState<string>(
+    (values.name || values.fullName || values.questionTemplate) ?? ""
+  );
 
   return (
     <>
@@ -58,7 +60,7 @@ export const ResourceTitle: React.FC<TitleProps> = ({
                 </>
               ) : (
                 <>
-                  {title ? title : translate(["resources", name, "titles", form].join("."))}
+                  {title ?? translate(["resources", name, "titles", form].join("."))}
                   {form === "show" && (
                     <div className={classes.ButtonsShow}>
                       {ActionButtons && <ActionButtons />}

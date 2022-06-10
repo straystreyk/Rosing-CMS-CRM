@@ -46,10 +46,10 @@ const useDatagridBody = (resource: string, tableData?: { [p: string]: { [s: stri
   );
 
   const onDragEnd = React.useCallback(
-    (result) => {
+    (result, a) => {
       if (result.destination && tableData) {
         const skip = !!((page - 1) * perPage) ? (page - 1) * perPage : 0;
-        const destination = result.destination.index + 1 + skip;
+        const destination = result.destination.index + skip + 1;
         const id = result.draggableId;
         const data = tableData[id];
         const payload = { id, data: { ...data, position: destination } };

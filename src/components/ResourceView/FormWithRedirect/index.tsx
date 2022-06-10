@@ -19,12 +19,21 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
         <FormWithRedirect
           {...props}
           render={React.useCallback(
-            (formProps: FormWithRedirectProps) => {
+            ({
+              handleSubmitWithRedirect,
+              handleSubmit,
+              invalid,
+              basePath,
+              record,
+              ...formProps
+            }: FormWithRedirectProps) => {
               return (
                 <>
                   {!offTitle && (
                     <ResourceTitle
                       {...props}
+                      record={record}
+                      basePath={basePath}
                       actionButtons={actionButtons}
                       name={props.resource}
                       form={form}
@@ -42,11 +51,11 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
                       </CardContent>
                       {!offToolbar && (
                         <Toolbar
-                          record={formProps.record}
-                          basePath={formProps.basePath}
-                          invalid={formProps.invalid}
-                          handleSubmit={formProps.handleSubmit}
-                          handleSubmitWithRedirect={formProps.handleSubmitWithRedirect}
+                          record={record}
+                          basePath={basePath}
+                          invalid={invalid}
+                          handleSubmit={handleSubmit}
+                          handleSubmitWithRedirect={handleSubmitWithRedirect}
                           onSuccessWithRedirect={props.onSuccessWithRedirect}
                           redirectButtonIcon={props.redirectButtonIcon}
                           redirectButtonLabel={props.redirectButtonLabel}
