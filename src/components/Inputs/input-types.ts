@@ -5,9 +5,16 @@ export interface InputProps extends InputPropsRA {
   inputType: "create" | "edit" | "show";
   source: string;
   offFastEdit?: boolean;
+  label: string;
+}
+
+export interface ArrayInput extends InputProps {
+  choices?: ChoiceInputType[];
 }
 
 export interface ShowInputViewProps {
   label: string;
   source: string;
 }
+
+export type ChoiceInputType = { id: string; name: string };

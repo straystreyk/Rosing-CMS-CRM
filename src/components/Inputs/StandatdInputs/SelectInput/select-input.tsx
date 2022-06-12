@@ -6,7 +6,7 @@ import {
   SelectInputProps as SelectInputPropsRA,
 } from "react-admin";
 import { SelectInputShow } from "./show-view";
-import { labelStyles } from "../../styles";
+import { formHelperText, labelStyles } from "../../styles";
 
 export interface SelectInputProps extends SelectInputPropsRA {
   inputType: "create" | "edit" | "show";
@@ -25,16 +25,7 @@ const useStyles = makeStyles({
       borderRadius: 4,
       fontSize: 14,
     },
-    "& > p.MuiFormHelperText-root": {
-      color: "var(--secondary-color-default)",
-      margin: 0,
-      fontSize: 12,
-      marginTop: 5,
-      fontFamily: "var(--font-family)",
-    },
-    "& > p.MuiFormHelperText-root.Mui-error": {
-      color: "#f44336",
-    },
+    "& > p.MuiFormHelperText-root": formHelperText,
     "& label": labelStyles,
     "& div": {
       backgroundColor: "inherit",

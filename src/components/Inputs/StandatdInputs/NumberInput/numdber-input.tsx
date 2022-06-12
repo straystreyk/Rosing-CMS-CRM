@@ -3,6 +3,7 @@ import { NumberInput as NumberInputInner } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { NumberInputShow } from "./show-view";
 import { InputProps } from "../../input-types";
+import { formHelperText } from "../../styles";
 
 const useStyles = makeStyles({
   custom: {
@@ -22,16 +23,7 @@ const useStyles = makeStyles({
         outlineOffset: "2px",
       },
     },
-    "& > p.MuiFormHelperText-root": {
-      margin: 0,
-      marginTop: 5,
-      fontSize: 12,
-      fontFamily: "var(--font-family)",
-      color: "var(--secondary-color-default)",
-    },
-    "& > p.MuiFormHelperText-root.Mui-error": {
-      color: "#f44336",
-    },
+    "& > p.MuiFormHelperText-root": formHelperText,
     "& label": {
       position: "static",
       transform: "none !important",

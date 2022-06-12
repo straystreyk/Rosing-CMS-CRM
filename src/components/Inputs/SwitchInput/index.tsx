@@ -4,7 +4,7 @@ import { Field } from "react-final-form";
 import { CheckboxProps } from "../Checkbox";
 import { Switch } from "../../UI/MaterialUI/switch";
 import { makeStyles } from "@material-ui/core/styles";
-import { labelStyles } from "../styles";
+import { formHelperText, labelStyles } from "../styles";
 import { InputProps } from "../input-types";
 import { SwitchInputShow } from "./show-view";
 
@@ -20,12 +20,7 @@ const useStyles = makeStyles({
       margin: 0,
       "& span.MuiTypography-root": { ...labelStyles, marginBottom: 0, marginRight: 8 },
     },
-    "& p.MuiFormHelperText-root": {
-      color: "var(--secondary-color-default)",
-      fontSize: 12,
-      marginTop: 2,
-      fontFamily: "var(--font-family)",
-    },
+    "& p.MuiFormHelperText-root": formHelperText,
   },
 });
 

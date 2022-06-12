@@ -1,6 +1,7 @@
 import * as React from "react";
 import { PasswordInput as PasswordInputRA } from "react-admin";
 import { makeStyles } from "@material-ui/core";
+import { formHelperText } from "../styles";
 
 const useStyles = makeStyles({
   PasswordInput: {
@@ -31,15 +32,7 @@ const useStyles = makeStyles({
         outlineOffset: "2px",
       },
     },
-    "& > p.MuiFormHelperText-root": {
-      margin: 0,
-      marginTop: 2,
-      color: "var(--primary-text-default)",
-      fontFamily: "var(--font-family)",
-    },
-    "& > p.MuiFormHelperText-root.Mui-error": {
-      color: "#D21C1C",
-    },
+    "& > p.MuiFormHelperText-root": formHelperText,
     "& label": {
       position: "static",
       transform: "none !important",

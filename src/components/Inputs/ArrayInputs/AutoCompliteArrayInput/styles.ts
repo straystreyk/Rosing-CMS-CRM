@@ -1,4 +1,5 @@
-import { labelStyles } from "../../styles";
+import { formHelperText, labelStyles } from "../../styles";
+import { ChipStyles } from "../styles";
 
 export const AutoCompleteInputStyles = {
   "& .MuiInputBase-root": {
@@ -9,34 +10,17 @@ export const AutoCompleteInputStyles = {
       margin: 0,
     },
     "&.Mui-error": {
-      borderColor: "#D21C1C",
-    },
-    "& .MuiChip-root": {
-      background: "#F2FDFB",
-      border: "1px solid var(--accent-color)",
-      fontWeight: 500,
-      fontSize: 14,
-      lineHeight: "20px",
-      color: "var(--accent-color)",
-      borderRadius: 4,
+      borderColor: "var(--accent-color)",
     },
     "& .MuiSvgIcon-root path": {
       color: "var(--accent-color)",
     },
+    "& .MuiChip-root": ChipStyles,
   },
   "& input": {
     padding: "8px 12px",
   },
-  "& > p.MuiFormHelperText-root": {
-    margin: 0,
-    marginTop: 5,
-    fontSize: 12,
-    fontFamily: "var(--font-family)",
-    color: "var(--secondary-color-default)",
-  },
-  "& > p.MuiFormHelperText-root.Mui-error": {
-    color: "#D21C1C",
-  },
+  "& > p.MuiFormHelperText-root": formHelperText,
   "& label": labelStyles,
   "& div": {
     backgroundColor: "#fff !important",

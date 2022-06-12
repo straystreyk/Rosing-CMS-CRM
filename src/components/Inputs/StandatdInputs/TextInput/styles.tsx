@@ -1,4 +1,4 @@
-import { labelStyles } from "../../styles";
+import { formHelperText, labelStyles } from "../../styles";
 
 export const TextInputStyles = {
   backgroundColor: "none !important",
@@ -47,16 +47,7 @@ export const TextInputStyles = {
       outlineOffset: "2px",
     },
   },
-  "& > p.MuiFormHelperText-root": {
-    margin: 0,
-    marginTop: 5,
-    fontSize: 12,
-    fontFamily: "var(--font-family)",
-    color: "var(--secondary-color-default)",
-  },
-  "& > p.MuiFormHelperText-root.Mui-error": {
-    color: "#D21C1C",
-  },
+  "& > p.MuiFormHelperText-root": formHelperText,
   "& label": labelStyles,
   "& div": {
     backgroundColor: "inherit",

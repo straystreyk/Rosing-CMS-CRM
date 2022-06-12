@@ -18,6 +18,9 @@ export const formHelperText = {
   fontSize: 12,
   fontFamily: "var(--font-family)",
   color: "var(--secondary-color-default)",
+  "&.Mui-error": {
+    color: "var(--additional-red-default)",
+  },
 };
 
 export const TextInputShowValue: any = {

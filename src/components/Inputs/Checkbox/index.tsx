@@ -2,7 +2,7 @@ import * as React from "react";
 import { Checkbox as CheckboxMUI, FormControlLabel, FormHelperText } from "@material-ui/core";
 import { Field } from "react-final-form";
 import { makeStyles } from "@material-ui/core/styles";
-import { labelStyles } from "../styles";
+import { formHelperText, labelStyles } from "../styles";
 import { CheckboxShow } from "./show-view";
 
 const useStyles = makeStyles({
@@ -26,12 +26,7 @@ const useStyles = makeStyles({
         marginLeft: 6,
       },
     },
-    "& p.MuiFormHelperText-root": {
-      color: "var(--secondary-color-default)",
-      fontSize: 12,
-      marginTop: 5,
-      fontFamily: "var(--font-family)",
-    },
+    "& p.MuiFormHelperText-root": formHelperText,
   },
 });
 

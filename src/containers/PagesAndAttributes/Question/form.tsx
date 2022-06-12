@@ -1,9 +1,15 @@
 import * as React from "react";
 import { ScrollTopButton } from "../../../components/UI/Buttons/scroll-top-button";
 import { FormProps } from "../../../types";
-import { NumberInput, requiredValidate, RichTextInput } from "../../../components/Inputs";
+import {
+  NumberInput,
+  requiredValidate,
+  RichTextInput,
+  TextInput,
+} from "../../../components/Inputs";
 import { RadioButtonGroupInput } from "../../../components/Inputs/RadioButtonGroupInput";
 import { PUBLISHED_CHOICES_FORM } from "../../../constants/forms-constants";
+import { AutocompleteArrayFreeSolo } from "../../../components/Inputs/ArrayInputs/AutocompleteFreeSolo";
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   return (
@@ -36,6 +42,8 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         inputType={type}
         choices={PUBLISHED_CHOICES_FORM}
       />
+      <TextInput source="section" resource={resource} inputType={type} label="Section" fullWidth />
+      <AutocompleteArrayFreeSolo source="tags" resource={resource} inputType={type} label="Tags" />
       <ScrollTopButton />
     </>
   );

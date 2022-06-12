@@ -7,18 +7,8 @@ import { FunctionField } from "ra-ui-materialui";
 import { Record as RecordRA } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { TableFieldsStyles } from "../../../components/TableFields/styles";
-import {
-  AllowDownload,
-  ArrowIconDown,
-  ArrowIconUp,
-  ProhibitDownload,
-  PublishedIcons,
-  PublishIcon,
-  UnPublishedIcons,
-  UnPublishIcon,
-} from "../../../constants/icons";
+import { PublishedIcons, UnPublishedIcons } from "../../../constants/icons";
 import { MoreActionsButton } from "../../../components/UI/Buttons/MoreActionsButton";
-import { StandardButton } from "../../../components/UI/Buttons/standard-button";
 import { EditButton } from "../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../components/UI/RA/delete-button";
 
@@ -49,10 +39,10 @@ export const TableView: React.FC<ShowProps> = (props) => {
         }
       />
       <FunctionField
-        label="Position"
-        source="position"
+        label="Platforms"
+        source="platforms"
         render={(record?: RecordRA) =>
-          record?.platforms ? (
+          record?.platforms.length ? (
             <span>{record?.platforms.join(", ")}</span>
           ) : (
             <span className={classes.Empty}>Empty</span>
