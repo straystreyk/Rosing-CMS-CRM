@@ -17,6 +17,8 @@ import { MetaData } from "../../../../components/Models/Metadata";
 import { FormProps } from "../../../../types";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
 import { ModelFormStyles } from "../../../../components/ResourceView/FormWithRedirect/styles";
+import { Collapse } from "@material-ui/core";
+import { FormSection } from "../../../../components/FormSection";
 
 const useStyles = makeStyles({
   ArrayInputItemStyles,
@@ -32,7 +34,7 @@ const REVERSED_EPISODES_ORDER = [
 ];
 const FIXED_HEADER_OFFSET = 130;
 
-const initialPushObject = { metadata: [] };
+const INITIAL_PUSH_OBJECT = { metadata: [] };
 
 const Season: React.FC<{
   parentSourceWithIndex?: string;
@@ -41,7 +43,7 @@ const Season: React.FC<{
   show?: boolean;
   resource: string;
   type: "show" | "create" | "edit";
-}> = ({ parentSourceWithIndex, resource, parentSource, index, show, ...props }) => {
+}> = ({ parentSourceWithIndex, resource, parentSource, index, show, type, ...props }) => {
   const { seriesId } = useParams<{ seriesId: string }>();
   const [showResource, setShowResource] = React.useState(show);
   const classes = useStyles();
@@ -52,18 +54,15 @@ const Season: React.FC<{
 
   return (
     <>
-      {index && !["edit", "show"].includes(props.type) && (
-        <div className={classes.ArrayInputItemName}>New season number {+index + 1}</div>
+      {index && !["edit", "show"].includes(type) && (
+        <div onClick={() => setShowResource((p) => !p)} className={classes.ArrayInputItemName}>
+          New season number {+index + 1}
+        </div>
       )}
-      <div
-        style={{
-          height: !showResource && !["edit", "show"].includes(props.type) ? 0 : "auto",
-          overflow: !showResource && !["edit", "show"].includes(props.type) ? "hidden" : "unset",
-        }}
-      >
+      <Collapse in={showResource || ["edit", "show"].includes(type)} timeout="auto">
         <TextInput
           resource={resource}
-          inputType={props.type}
+          inputType={type}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.seriesId` : "seriesId"}
           label="Series id"
           initialValue={sanitizeId(seriesId)}
@@ -74,21 +73,21 @@ const Season: React.FC<{
         <TextInput
           resource={resource}
           label="Name"
-          inputType={props.type}
+          inputType={type}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.name` : "name"}
           fullWidth
         />
         <TextInput
           resource={resource}
           label="Slug"
-          inputType={props.type}
+          inputType={type}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.slug` : "slug"}
           offFastEdit
           fullWidth
         />
         <RichTextInput
           resource={resource}
-          inputType={props.type}
+          inputType={type}
           label="Description"
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.description` : "description"}
         />
@@ -99,14 +98,14 @@ const Season: React.FC<{
               ? `${parentSourceWithIndex}.reversedEpisodesOrder`
               : "reversedEpisodesOrder"
           }
-          inputType={props.type}
+          inputType={type}
           label="Distribution"
           initialValue={false}
           choices={REVERSED_EPISODES_ORDER}
         />
         <ArrayInputNoDrag
           resource={resource}
-          inputType={props.type}
+          inputType={type}
           helperText="A pair of custom fields that can be used for filtering. You can add multiple pairs."
           ChildComponent={MetaData}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.metadata` : "metadata"}
@@ -123,10 +122,10 @@ const Season: React.FC<{
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.published` : "published"}
           label="Publishing"
           initialValue={false}
-          inputType={props.type}
+          inputType={type}
           choices={PUBLISHED_CHOICES_FORM}
         />
-      </div>
+      </Collapse>
     </>
   );
 };
@@ -143,14 +142,18 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
 
   return (
     <>
-      {type !== "create" && <Season resource={resource} type={type} />}
+      {type !== "create" && (
+        <FormSection text="" title="" formType={type} id="">
+          <Season resource={resource} type={type} />
+        </FormSection>
+      )}
       {type === "create" && (
         <ArrayInput
           source="seasons"
           getItemLabel={alwaysEmptyString}
           ChildComponent={Season}
           resource={resource}
-          initialPushObject={initialPushObject}
+          initialPushObject={INITIAL_PUSH_OBJECT}
           itemClass={classes.ArrayInputItemStyles}
           inputClass={classes.ArrayInputWrapper}
           inputType={type}

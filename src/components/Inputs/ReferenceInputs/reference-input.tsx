@@ -8,6 +8,7 @@ export const ReferenceInput: React.FC<ReferenceInputProps> = (props) => {
       label={props.label}
       source={props.source}
       reference={props.reference}
+      fullWidth
     >
       {props.children}
     </ReferenceInputAdmin>

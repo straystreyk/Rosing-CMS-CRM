@@ -4,12 +4,13 @@ import { requiredValidate, TextInput } from "../../../../../components/Inputs";
 import { ScrollTopButton } from "../../../../../components/UI/Buttons/scroll-top-button";
 import { ImageUploaderV2 } from "../../../../../components/ImageUploader";
 import { JsonInput } from "../../../../../components/Inputs/JsonInput";
+import { FormSection } from "../../../../../components/FormSection";
 
 const IMAGE_REQUEST_VARS = { fieldName: "ExternalCatalog" };
 
 export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
   return (
-    <>
+    <FormSection text="" title="" formType={type} id="">
       <TextInput
         resource={resource}
         validate={requiredValidate}
@@ -45,6 +46,6 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         offInfo
       />
       <ScrollTopButton />
-    </>
+    </FormSection>
   );
 };

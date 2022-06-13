@@ -6,9 +6,10 @@ export const labelStyles: any = {
   transition: "none",
   fontSize: 14,
   fontWeight: 500,
-  marginBottom: 5,
+  marginBottom: 4,
   lineHeight: "20px",
   fontFamily: "var(--font-family)",
+  display: "inline-block",
   color: "var(--secondary-color-main) !important",
 };
 
@@ -24,7 +25,6 @@ export const formHelperText = {
 };
 
 export const TextInputShowValue: any = {
-  marginTop: 4,
   fontSize: 14,
   lineHeight: "20px",
   position: "relative",
@@ -34,6 +34,7 @@ export const TextInputShowValue: any = {
   },
 };
 
-export const EmptyInput: React.FC<{ emptyText: string | React.ReactElement }> = ({ emptyText }) => (
-  <span className="empty">{emptyText}</span>
-);
+export const EmptyInput: React.FC<{
+  emptyText: string | React.ReactElement;
+  tag?: keyof JSX.IntrinsicElements;
+}> = ({ emptyText, tag: Tag = "span" }) => <Tag className="empty">{emptyText}</Tag>;

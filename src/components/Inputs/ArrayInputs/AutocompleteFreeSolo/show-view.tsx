@@ -5,7 +5,7 @@ import { useFormState } from "react-final-form";
 
 import { EditInputComponent } from "../../edit-input-component";
 import { AutocompleteArrayFreeSoloOrigin } from "./index";
-import { ArrayInput } from "../../input-types";
+import { AutocompleteInput } from "../../input-types";
 import { EmptyInput, TextInputShowValue } from "../../styles";
 import { TextInputStyles } from "../../StandatdInputs/TextInput/styles";
 
@@ -21,7 +21,7 @@ const ShowView: React.FC<InputProps> = (props) => {
   const getValue = (source: string) => {
     switch (source) {
       default:
-        return values[props.source].length ? (
+        return values[props.source] && values[props.source].length ? (
           values[props.source].join(", ")
         ) : (
           <EmptyInput emptyText="Empty" />
@@ -37,7 +37,7 @@ const ShowView: React.FC<InputProps> = (props) => {
   );
 };
 
-export const AutocompleteArrayFreeSoloShow: React.FC<ArrayInput> = (props) => {
+export const AutocompleteArrayFreeSoloShow: React.FC<AutocompleteInput> = (props) => {
   return (
     <EditInputComponent
       ComponentInput={AutocompleteArrayFreeSoloOrigin}

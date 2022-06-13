@@ -58,6 +58,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         perPage={INPUT_ITEMS_PER_PAGE}
       >
         <AutocompleteInput
+          source="datacenterId"
           optionText="name"
           optionValue="id"
           resource={resource}
@@ -117,6 +118,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         perPage={INPUT_ITEMS_PER_PAGE}
       >
         <AutocompleteInput
+          source="iptvDatacenterId"
           optionText="name"
           optionValue="id"
           resource={resource}

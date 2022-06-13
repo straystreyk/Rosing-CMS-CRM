@@ -2,10 +2,10 @@ import * as React from "react";
 import { Autocomplete, createFilterOptions } from "@material-ui/lab";
 import { Chip, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Field, useFormState } from "react-final-form";
+import { Field } from "react-final-form";
 import { AutoCompleteInputStyles } from "../AutoCompliteArrayInput/styles";
 import { ChipStyles } from "../styles";
-import { ArrayInput, ChoiceInputType } from "../../input-types";
+import { AutocompleteInput, ChoiceInputType } from "../../input-types";
 import { AutocompleteArrayFreeSoloShow } from "./show-view";
 
 const useStyles = makeStyles({
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 
 const filter = createFilterOptions<ChoiceInputType>();
 
-export const AutocompleteArrayFreeSoloOrigin: React.FC<Omit<ArrayInput, "inputType">> = ({
+export const AutocompleteArrayFreeSoloOrigin: React.FC<Omit<AutocompleteInput, "inputType">> = ({
   source,
   choices,
   label,
@@ -56,7 +56,6 @@ export const AutocompleteArrayFreeSoloOrigin: React.FC<Omit<ArrayInput, "inputTy
               }}
               filterOptions={(options, params) => {
                 const filtered = filter(options, params);
-                // Suggest the creation of a new value
                 if (params.inputValue !== "") {
                   filtered.push({
                     id: params.inputValue,
@@ -66,7 +65,7 @@ export const AutocompleteArrayFreeSoloOrigin: React.FC<Omit<ArrayInput, "inputTy
 
                 return filtered;
               }}
-              value={value}
+              value={value || []}
               getOptionLabel={(option) => option.name}
               options={choices || []}
               renderTags={(value: any, getTagProps) => {
@@ -88,7 +87,7 @@ export const AutocompleteArrayFreeSoloOrigin: React.FC<Omit<ArrayInput, "inputTy
   );
 };
 
-export const AutocompleteArrayFreeSolo: React.FC<ArrayInput> = ({ inputType, ...rest }) => {
+export const AutocompleteArrayFreeSolo: React.FC<AutocompleteInput> = ({ inputType, ...rest }) => {
   return inputType === "show" ? (
     <AutocompleteArrayFreeSoloShow inputType={inputType} {...rest} />
   ) : (

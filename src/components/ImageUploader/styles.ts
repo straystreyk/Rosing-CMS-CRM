@@ -89,6 +89,7 @@ export const ImageUploaderStyles: any = {
     display: "flex",
     "& > span:first-child": {
       fontWeight: 500,
+      fontSize: 14,
       marginRight: 5,
     },
   },

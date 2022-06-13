@@ -33,6 +33,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         validate={requiredValidate}
       >
         <AutocompleteInput
+          source="channelId"
           optionText="name"
           optionValue="id"
           resource={resource}

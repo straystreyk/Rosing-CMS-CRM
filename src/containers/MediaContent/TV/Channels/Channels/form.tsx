@@ -6,9 +6,7 @@ import { FormProps } from "../../../../../types";
 import {
   ArrayInputNoDrag,
   AutocompleteArrayInput,
-  formatFromArrayOfString,
   NumberInput,
-  parseToArrayOfString,
   ReferenceInput,
   requiredValidate,
   RichTextInput,
@@ -39,6 +37,7 @@ import { AutocompleteInput } from "../../../../../components/Inputs/Autocomplete
 import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
 import { ResourceCountIcon } from "../../../../../constants/icons";
 import { Link } from "react-router-dom";
+import { AutocompleteArrayFreeSolo } from "../../../../../components/Inputs/ArrayInputs/AutocompleteFreeSolo";
 
 const useStyles = makeStyles({
   formHelperText: { ...formHelperText, marginTop: -16, marginBottom: 8 },
@@ -132,6 +131,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           <AutocompleteInput
             optionText="name"
             optionValue="id"
+            source="languageId"
             resource={resource}
             inputType={type}
             fullWidth
@@ -182,15 +182,11 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           choices={SELECT_MARKERS}
           helperText="The element that is displayed on top of the TV channel card in the application"
         />
-        <TextInput
+        <AutocompleteArrayFreeSolo
+          source="searchKeywords"
           resource={resource}
           inputType={type}
-          format={formatFromArrayOfString}
-          parse={parseToArrayOfString}
           label="Search keywords"
-          source="searchKeywords"
-          helperText="Allow you to effectively search for a TV channel in the application. You can select several words from the list or add a new one."
-          fullWidth
         />
         <GroupInputsOrigin switchable inputType={type} label="Seo">
           <RichTextInput

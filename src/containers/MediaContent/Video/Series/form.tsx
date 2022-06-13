@@ -34,7 +34,7 @@ import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-bu
 import { useFormState } from "react-final-form";
 import { alwaysEmptyString, scrollToErrorInput } from "../../../../helpers/form";
 import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
-import { ResourceCountIcon } from "../../../../constants/icons";
+import { ResourceAddIcon, ResourceCountIcon } from "../../../../constants/icons";
 import { useHistory } from "react-router-dom";
 import { Checkbox } from "../../../../components/Inputs/Checkbox";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
@@ -56,13 +56,6 @@ const INPUT_ITEMS_PER_PAGE = 25;
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const classes = useStyles();
   const formState = useFormState();
-  const history = useHistory();
-
-  const goToSeasons = React.useCallback(() => {
-    if (formState.values && formState.values.id) {
-      history.push(`/media_content/video/series/${formState.values.id}/seasons`);
-    }
-  }, [formState, history]);
 
   React.useEffect(() => {
     if (formState.submitFailed) {
@@ -75,13 +68,27 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
       <FormTabs labels={["Attributes", "Actors and creative team", "Images", "Source"]}>
         {type !== "create" && (
           <StandardButton
-            onClick={goToSeasons}
-            startIcon={<ResourceCountIcon color="var(--accent-color)" />}
+            component={Link}
+            to={
+              formState.values.seasons.length
+                ? `/media_content/video/series/${formState.values.id}/seasons`
+                : `/media_content/video/series/${formState.values.id}/seasons/create`
+            }
+            startIcon={
+              formState.values.seasons.length ? (
+                <ResourceCountIcon color="var(--accent-color)" />
+              ) : (
+                <ResourceAddIcon color="var(--accent-color)" />
+              )
+            }
             variant="text"
             customColor="var(--accent-color)"
-          >
-            Seasons ({formState.values.seasons.length})
-          </StandardButton>
+            text={
+              formState.values.seasons.length
+                ? `Seasons (${formState.values.seasons.length})`
+                : "Add seasons"
+            }
+          />
         )}
       </FormTabs>
       <FormSection
@@ -187,6 +194,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
             resource={resource}
             inputType={type}
             fullWidth
+            source="rightHolderId"
             helperText="The company - the copyright holder of the film"
           />
         </ReferenceInput>

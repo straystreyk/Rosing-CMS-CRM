@@ -93,6 +93,7 @@ export const CastMembers: React.FC<{
         >
           <AutocompleteInput
             resource={resource}
+            source={`${parentSourceWithIndex}.person.id`}
             optionText="fullName"
             inputType="create"
             fullWidth

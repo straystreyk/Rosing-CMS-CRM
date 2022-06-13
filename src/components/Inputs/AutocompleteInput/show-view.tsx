@@ -1,27 +1,15 @@
 import * as React from "react";
 import { EditInputComponent } from "../edit-input-component";
-import { AutocompleteInputProps as AutocompleteInputPropsRA } from "ra-ui-materialui/lib/input/AutocompleteInput";
-import { AutocompleteInput } from "./index";
 import { useFormState } from "react-final-form";
-import { InputProps } from "ra-core";
 import { makeStyles } from "@material-ui/core";
-import { labelStyles } from "../styles";
-import {
-  GET_ONE_CHANNEL_VERSION,
-  GET_ONE_EXTERNAL_CATALOG,
-  GET_ONE_LANGUAGE,
-  GET_ONE_RADIO_LIVE_STREAM,
-  GET_ONE_RIGHT_HOLDER,
-  GET_ONE_VIDEO_FILE,
-} from "../../Providers/custom-requests";
-import { Resource } from "../StandatdInputs/SelectInput/show-view";
-import { Link } from "react-router-dom";
-import { GET_ONE_EPG_SOURCE } from "../../../containers/MediaContent/TV/TVShows/EPGSources/requests";
+import { EmptyInput, labelStyles } from "../styles";
+import { AutocompleteInput as AutocompleteInputProps } from "../input-types";
+import { UrlField } from "../../TableFields/url-field";
+import { AutocompleteInputOrigin } from "./index";
 
 const useStyles = makeStyles({
   label: labelStyles,
   AutoCompleteShowValue: {
-    marginTop: 4,
     fontSize: 14,
     lineHeight: "20px",
     color: "var(--primary-text-default)",
@@ -31,83 +19,55 @@ const useStyles = makeStyles({
   },
 });
 
-const ShowView: React.FC<InputProps> = (props: InputProps) => {
+const getLink = (source: string) => {
+  let link: string;
+  switch (source) {
+    case "rightHolderId":
+      link = "/media_content/attributes/providers/right_holders";
+      break;
+    case "externalCatalogId":
+      link = "/media_content/attributes/providers/content_providers";
+      break;
+    default:
+      link = "";
+  }
+
+  return link;
+};
+
+const ShowView: React.FC<AutocompleteInputProps> = (props) => {
   const { values } = useFormState();
   const classes = useStyles();
+  const current =
+    values[props.source] && props.choices && props.choices.length
+      ? props.choices.filter((choice) =>
+          choice && choice.id ? values[props.source].toString() === choice.id.toString() : []
+        )[0]
+      : "";
 
-  const getValue = (source: string) => {
-    switch (source) {
-      case "languageId":
-        return values[props.source] ? (
-          <Resource query={GET_ONE_LANGUAGE} resourceId={values[props.source]} />
-        ) : (
-          <div className="empty">Not filled in</div>
-        );
-      case "streamSourceId":
-        return values[props.source] ? (
-          <Resource
-            query={GET_ONE_VIDEO_FILE}
-            component={Link}
-            to={`/media_content/video/video_files/${values[props.source]}/show`}
-            resourceId={values[props.source]}
-          />
-        ) : (
-          <div className="empty">Not filled in</div>
-        );
-      case "radioLiveStreamId":
-        return values[props.source] ? (
-          <Resource
-            query={GET_ONE_RADIO_LIVE_STREAM}
-            component={Link}
-            to={`/media_content/radio/radio_live_streams/${values[props.source]}/show`}
-            resourceId={values[props.source]}
-          />
-        ) : (
-          <div className="empty">Not filled in</div>
-        );
-      case "externalCatalogId":
-        return values[props.source] ? (
-          <Resource query={GET_ONE_EXTERNAL_CATALOG} resourceId={values[props.source]} />
-        ) : (
-          <div className="empty">Not filled in</div>
-        );
-      case "epgSourceId":
-        return values[props.source] ? (
-          <Resource query={GET_ONE_EPG_SOURCE} resourceId={values[props.source]} />
-        ) : (
-          <div className="empty">Not filled in</div>
-        );
-      case "channelVersionId":
-        return values[props.source] ? (
-          <Resource query={GET_ONE_CHANNEL_VERSION} resourceId={values[props.source]} />
-        ) : (
-          <div className="empty">Not filled in</div>
-        );
-      case "rightHolderId":
-        return values[props.source] ? (
-          <Resource query={GET_ONE_RIGHT_HOLDER} resourceId={values[props.source]} />
-        ) : (
-          <div className="empty">Not filled in</div>
-        );
-      default:
-        return values[props.source] ? (
-          values[props.source]
-        ) : (
-          <div className="empty">Not filled in</div>
-        );
-    }
-  };
+  const link = getLink(props.source);
 
   return (
     <div>
       <label className={classes.label}>{props.label}</label>
-      <div className={classes.AutoCompleteShowValue}>{getValue(props.source)}</div>
+      <div className={classes.AutoCompleteShowValue}>
+        {!!current && current.name && link && (
+          <UrlField to={`${link}/${current.id}/show`} name={current.name} />
+        )}
+        {!!current && current.name && !link && current.name}
+        {!!current && !current.name && current.toString()}
+        {!current && <EmptyInput emptyText="Empty" />}
+      </div>
     </div>
   );
 };
 
-export const AutocompleteShow: React.FC<AutocompleteInputPropsRA> = (props) => {
+export const AutocompleteShow: React.FC<AutocompleteInputProps> = (props) => {
   return (
-    <EditInputComponent ComponentInput={AutocompleteInput} ComponentShow={ShowView} {...props} />
+    <EditInputComponent
+      ComponentInput={AutocompleteInputOrigin}
+      ComponentShow={ShowView}
+      {...props}
+    />
   );
 };

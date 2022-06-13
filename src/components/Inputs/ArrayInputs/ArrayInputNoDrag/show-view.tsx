@@ -1,15 +1,13 @@
 import * as React from "react";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Tooltip } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 
 import { EditInputComponent } from "../../edit-input-component";
 import { ArrayInputNoDragOrigin } from "./array-input-no-drag";
-import { labelStyles } from "../../styles";
-import { useQuery } from "@apollo/client";
-import { authClient } from "../../../Providers/AuthProvider/client";
-import { GET_ONE_VIDEO_FILE } from "../../../Providers/custom-requests";
-import { MainLoader } from "../../../MainLoader";
+import { EmptyInput, labelStyles } from "../../styles";
 import { ArrayInputProps } from "../Arrayinput/array-input";
+import { ExtraVideos, ExtraVideoType, MetadataShow, MetadataType } from "./views/metadata";
+import { AgeRating, RatingShow } from "./views/rating";
 
 interface ArrayInputShowProps {
   system?: string;
@@ -22,7 +20,7 @@ interface ArrayInputShowProps {
 }
 
 const useStyles = makeStyles((theme) => ({
-  RatingShowWrapper: {
+  ArrayInputShowWrapper: {
     width: "100%",
     fontSize: 14,
     "& label": { ...labelStyles, marginBottom: 8, display: "inline-block" },
@@ -32,84 +30,7 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: 8,
     },
   },
-  MetadataItem: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "8px 0",
-    marginBottom: 8,
-    marginLeft: "24px",
-    borderBottom: "1px solid #E7E9E9",
-    flexWrap: "wrap",
-    "& .metadataField": {
-      width: "50%",
-      color: "var(--primary-text-default)",
-      "&.field": {
-        width: "100%",
-      },
-      "& .title": {
-        fontSize: 14,
-        fontWeight: 500,
-        lineHeight: "20px",
-        marginBottom: 4,
-        color: "var(--secondary-color-main)",
-      },
-    },
-  },
-  RatingItem: {
-    "& .name": {
-      borderBottom: "1px solid #E7E9E9",
-      color: "var(--primary-text-default)",
-      paddingBottom: 10,
-      paddingTop: 10,
-    },
-    "& .value": {
-      borderBottom: "1px solid #E7E9E9",
-      color: "var(--primary-text-default)",
-      paddingBottom: 10,
-      paddingTop: 10,
-    },
-    "&:last-child .value": {
-      borderBottom: "none",
-    },
-    "&:nth-child(2) .name": {
-      paddingTop: 0,
-    },
-  },
 }));
-
-const ExtraVideos: React.FC<ArrayInputShowProps> = ({ kind, name, streamSourceId }) => {
-  const classes = useStyles();
-  const { loading, data, error } = useQuery(GET_ONE_VIDEO_FILE, {
-    client: authClient,
-    variables: { id: streamSourceId },
-  });
-
-  if (loading) return <MainLoader size={20} />;
-  if (error) return <span>error</span>;
-
-  return (
-    <>
-      <div className={classes.MetadataItem}>
-        <div className="metadataField">
-          <div className="title">Kind</div>
-          {kind}
-        </div>
-      </div>
-      <div className={classes.MetadataItem}>
-        <div className="metadataField">
-          <div className="title">Name</div>
-          {name}
-        </div>
-      </div>
-      <div className={classes.MetadataItem}>
-        <div className="metadataField">
-          <div className="title">Video file</div>
-          {data.item.name}
-        </div>
-      </div>
-    </>
-  );
-};
 
 const ShowView: React.FC<ArrayInputProps> = ({ source, label, ...props }) => {
   const { values } = useFormState();
@@ -119,53 +40,40 @@ const ShowView: React.FC<ArrayInputProps> = ({ source, label, ...props }) => {
     switch (source) {
       case "extraVideos":
         return values[source] && values[source].length ? (
-          values[source].map((el: ArrayInputShowProps, index: number) => {
+          values[source].map((el: ExtraVideoType, index: number) => {
             return (
-              <React.Fragment key={index}>
-                <ExtraVideos kind={el.kind} streamSourceId={el.streamSourceId} name={el.name} />
-              </React.Fragment>
+              <ExtraVideos
+                kind={el.kind}
+                streamSourceId={el.streamSourceId}
+                name={el.name}
+                key={index.toString()}
+              />
             );
           })
         ) : (
-          <div className="empty">Not filled in</div>
+          <EmptyInput emptyText="Empty" />
         );
       case "metadata":
         return values[source] && values[source].length ? (
-          values[source].map((el: ArrayInputShowProps, index: number) => {
-            return (
-              <div className={classes.MetadataItem} key={index}>
-                <div className="metadataField">
-                  <div className="title">Key</div>
-                  {el.key}
-                </div>
-                <div className="metadataField">
-                  <div className="title">Value</div>
-                  {el.value}
-                </div>
-              </div>
-            );
-          })
+          values[source].map((el: MetadataType, index: number) => (
+            <MetadataShow metaKey={el.key} value={el.value} key={index.toString()} />
+          ))
         ) : (
-          <div className="empty">Not filled in</div>
+          <EmptyInput tag="div" emptyText="Empty" />
         );
       default:
         return values[source] && values[source].length ? (
-          values[source].map((el: ArrayInputShowProps, index: number) => {
-            return (
-              <div className={classes.RatingItem} key={index}>
-                <div className="name">{el.system}</div>
-                <div className="value">{el.tag}</div>
-              </div>
-            );
+          values[source].map((el: AgeRating, index: number) => {
+            return <RatingShow system={el.system} tag={el.tag} key={index.toString()} />;
           })
         ) : (
-          <div className="empty">Not filled in</div>
+          <EmptyInput emptyText="Empty" />
         );
     }
   };
 
   return (
-    <div className={classes.RatingShowWrapper}>
+    <div className={classes.ArrayInputShowWrapper}>
       <label>{label}</label>
       {getValue(source)}
     </div>

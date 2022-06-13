@@ -48,6 +48,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         allowEmpty
       >
         <AutocompleteInput
+          source="epgSourceId"
           optionText="name"
           optionValue="id"
           resource={resource}

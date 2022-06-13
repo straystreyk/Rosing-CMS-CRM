@@ -85,8 +85,10 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           allowEmpty
         >
           <AutocompleteInput
-            optionText="name"
             fullWidth
+            optionText="name"
+            source="externalCatalogId"
+            resource={resource}
             inputType={type}
             helperText="You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
           />
@@ -102,6 +104,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           <AutocompleteInput
             optionText="name"
             optionValue="id"
+            source="externalCatalogId"
             resource={resource}
             inputType={type}
             helperText="The partner directory from which the movie is imported. The logo of the external catalog will be displayed when previewing the movie in the app."

@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     "& > p": {
       display: "-webkit-box",
       "-webkit-box-orient": "vertical",
-      "-webkit-line-clamp": 6,
+      "-webkit-line-clamp": 3,
       overflow: "hidden",
     },
     "&.active > p": {
@@ -104,7 +104,7 @@ const ShowView: React.FC<InputProps> = (props) => {
   );
 
   React.useEffect(() => {
-    if (ref.current && ref.current.scrollHeight > 120) {
+    if (ref.current && ref.current.scrollHeight >= 60) {
       setIsBigText(true);
     }
   }, [ref, getValue]);

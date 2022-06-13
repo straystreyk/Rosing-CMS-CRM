@@ -139,6 +139,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           <AutocompleteInput
             optionText="name"
             optionValue="id"
+            source="radioLiveStreamId"
             resource={resource}
             inputType={type}
             helperText="If the radio stream is not in the list, you can add it manually in the Radio Streams section or by clicking the button below. It is necessary to know the UID of the stream in advance."

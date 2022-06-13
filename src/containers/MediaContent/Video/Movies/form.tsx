@@ -143,7 +143,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
         />
         <ReferenceArrayInput
           label="Languages"
-          source="languagesIds"
+          source="languageIds"
           reference="media_content/attributes/languages"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
@@ -210,6 +210,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
         >
           <AutocompleteInput
             resource={resource}
+            source="rightHolderId"
             inputType={type}
             helperText="The company - the copyright holder of the film"
           />
@@ -238,6 +239,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           <AutocompleteInput
             optionText="name"
             resource={resource}
+            source="externalCatalogId"
             inputType={type}
             helperText="The partner directory from which the movie is imported. The logo of the external catalog will be displayed when previewing the movie in the app."
           />

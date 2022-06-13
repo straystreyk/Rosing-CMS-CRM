@@ -132,6 +132,7 @@ const ChannelVersion: React.FC<{
           perPage={INPUT_ITEMS_PER_PAGE}
         >
           <AutocompleteInput
+            source={parentSourceWithIndex ? `${parentSourceWithIndex}.epgSourceId` : "epgSourceId"}
             optionText="name"
             optionValue="id"
             resource={resource}

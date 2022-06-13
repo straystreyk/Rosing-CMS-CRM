@@ -30,37 +30,37 @@ const useStyles = makeStyles({
   },
 });
 
-const ShowView: React.FC<React.ComponentProps<typeof JsonInputRA>> = ({ source }) => {
+const ShowView: React.FC<React.ComponentProps<typeof JsonInputRA>> = ({ source, label }) => {
   const { values } = useFormState();
   const [active, setActive] = React.useState(true);
   const classes = useStyles();
 
   const handleShow = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setActive((p) => !p);
   };
 
-  if (!Object.keys(values[source]).length) {
-    return <div>Not filled in</div>;
-  }
-
   return (
-    <div className={classes.JsonInputShow}>
-      <button onClick={handleShow}>
-        <ArrowFilterIcon color="#005AA3" />
-      </button>
-      <div>&#123; {!active && <>... &#125;</>}</div>
-      {active && (
-        <>
-          {Object.keys(values[source]).map((el) => {
-            return (
-              <p>
-                "{el}": "{values[source][el]}"
-              </p>
-            );
-          })}
-          <div>&#125;</div>
-        </>
-      )}
+    <div className={classes.JsonInput}>
+      <label>{label}</label>
+      <div className={classes.JsonInputShow}>
+        <button onClick={handleShow}>
+          <ArrowFilterIcon color="#005AA3" />
+        </button>
+        <div>&#123; {!active && <>... &#125;</>}</div>
+        {active && (
+          <>
+            {Object.keys(values[source]).map((el) => {
+              return (
+                <p>
+                  "{el}": "{values[source][el]}"
+                </p>
+              );
+            })}
+            <div>&#125;</div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

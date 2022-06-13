@@ -1,11 +1,9 @@
 import * as React from "react";
-import {
-  AutocompleteInput as AutocompleteInputRA,
-  AutocompleteInputProps as AutocompleteInputPropsRA,
-} from "react-admin";
+import { AutocompleteInput as AutocompleteInputRA } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { TextInputStyles } from "../StandatdInputs/TextInput/styles";
 import { AutocompleteShow } from "./show-view";
+import { AutocompleteInput as AutocompleteInputProps } from "../input-types";
 
 export const AutocompleteInputWithOpts = AutocompleteInputRA as React.ComponentType<
   Omit<React.ComponentProps<typeof AutocompleteInputRA>, "emptyText"> & {
@@ -18,9 +16,25 @@ const useStyles = makeStyles({
   },
 });
 
-interface AutocompleteInputProps extends AutocompleteInputPropsRA {
-  inputType: "create" | "edit" | "show";
-}
+export const AutocompleteInputOrigin: React.FC<Omit<AutocompleteInputProps, "inputType">> = ({
+  helperText,
+  resettable,
+  ...rest
+}) => {
+  const classes = useStyles();
+  return (
+    <AutocompleteInputWithOpts
+      fullWidth
+      options={{
+        className: classes.AutocompleteInput,
+        onKeyDown: resetOnBackspace,
+      }}
+      helperText={helperText ?? false}
+      resettable={resettable ?? true}
+      {...rest}
+    />
+  );
+};
 
 const resetOnBackspace = (e: React.KeyboardEvent) => {
   if (e.code === "Backspace" || e.code === "Escape") {
@@ -38,19 +52,9 @@ export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
   resettable,
   ...rest
 }) => {
-  const classes = useStyles();
   return inputType === "show" ? (
-    <AutocompleteShow {...rest} resettable={resettable ?? true} />
+    <AutocompleteShow {...rest} inputType={inputType} resettable={resettable ?? true} />
   ) : (
-    <AutocompleteInputWithOpts
-      fullWidth
-      options={{
-        className: classes.AutocompleteInput,
-        onKeyDown: resetOnBackspace,
-      }}
-      helperText={helperText ?? false}
-      resettable={resettable ?? true}
-      {...rest}
-    />
+    <AutocompleteInputOrigin resettable={resettable} helperText={helperText} {...rest} />
   );
 };

@@ -17,9 +17,7 @@ export const GET_EDIT_EXTERNAL_CATALOG = gql`
         size
       }
       name
-      ownershipRemark
       platformsPackageId
-      productId
       uid
       __typename
     }

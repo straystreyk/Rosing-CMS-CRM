@@ -81,29 +81,33 @@ export const FormSection: React.FC<SectionProps> = React.forwardRef(
 
     return (
       <div className={classes.Section} id={id}>
-        <div className={classes.TitleSection} onClick={() => setShowSection((p) => !p)}>
-          {title}
-          <svg
-            className={cn(!showSection && classes.ActiveSvg)}
-            width="8"
-            height="5"
-            viewBox="0 0 8 5"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6.61621 0.691425L3.99992 3.30772L1.38379 0.691406"
-              stroke="#005AA3"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-            />
-          </svg>
-        </div>
+        {title && (
+          <div className={classes.TitleSection} onClick={() => setShowSection((p) => !p)}>
+            {title}
+            <svg
+              className={cn(!showSection && classes.ActiveSvg)}
+              width="8"
+              height="5"
+              viewBox="0 0 8 5"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.61621 0.691425L3.99992 3.30772L1.38379 0.691406"
+                stroke="#005AA3"
+                strokeWidth="1.3"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+        )}
         <Collapse in={showSection} timeout="auto">
-          <ShowDescriptionButton
-            setShowDescription={setShowDescription}
-            showDescription={showDescription}
-          />
+          {text && (
+            <ShowDescriptionButton
+              setShowDescription={setShowDescription}
+              showDescription={showDescription}
+            />
+          )}
           <Collapse in={showDescription} timeout="auto">
             <div className={classes.TextSection}>
               {text && typeof text !== "string"

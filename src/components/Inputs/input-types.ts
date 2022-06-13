@@ -5,10 +5,10 @@ export interface InputProps extends InputPropsRA {
   inputType: "create" | "edit" | "show";
   source: string;
   offFastEdit?: boolean;
-  label: string;
+  label?: string;
 }
 
-export interface ArrayInput extends InputProps {
+export interface AutocompleteInput extends InputProps {
   choices?: ChoiceInputType[];
 }
 

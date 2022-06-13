@@ -195,6 +195,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           <AutocompleteInput
             resource={resource}
             inputType={type}
+            source="rightHolderId"
             fullWidth
             helperText="The company - the copyright holder of the film"
           />
