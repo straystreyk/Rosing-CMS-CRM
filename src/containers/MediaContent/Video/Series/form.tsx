@@ -11,6 +11,7 @@ import {
   requiredValidate,
   RichTextInput,
   SelectInput,
+  slugValidate,
   TextInput,
 } from "../../../../components/Inputs";
 import { FormSection } from "../../../../components/FormSection";
@@ -113,6 +114,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           inputType={type}
           label="Slug"
           source="slug"
+          validate={slugValidate}
           helperText={
             "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
           }

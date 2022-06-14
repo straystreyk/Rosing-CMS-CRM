@@ -19,9 +19,10 @@ export const ImageUploaderStyles: any = {
     },
   },
   PaperOverride: {
-    width: "80vw",
-    height: "80vh",
+    width: "auto",
+    height: "auto",
     maxHeight: "80vh",
+    maxWidth: "80vw",
     display: "flex",
     position: "relative",
     overflow: "visible",
@@ -87,6 +88,7 @@ export const ImageUploaderStyles: any = {
   },
   ImageTitle: {
     display: "flex",
+    alignItems: "center",
     "& > span:first-child": {
       fontWeight: 500,
       fontSize: 14,
@@ -148,6 +150,15 @@ export const ImageUploaderStyles: any = {
     borderRadius: 5,
     transform: "translate(-50%, -50%)",
     cursor: "pointer",
+    "& svg path": {
+      transition: "0.35s all ease",
+    },
+    "&:hover": {
+      "& svg path": {
+        stroke: "var(--primary-focus)",
+        fill: "var(--primary-focus)",
+      },
+    },
   },
   ImageSize: {
     color: "var(--secondary-color-default)",

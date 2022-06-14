@@ -22,6 +22,7 @@ import { useTableActions } from "../../../../../custom-hooks/use-table-actions";
 import { channelFilter } from "./channel-filter";
 import { ToModelField } from "../../../../../components/TableFields/to-model-field";
 import { UrlField } from "../../../../../components/TableFields/url-field";
+import { PublishedField } from "../../../../../components/TableFields/published-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -94,15 +95,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         label=""
         render={(record?: RecordRA) => (
           <div className={classes.MoreActions}>
-            {record?.published ? (
-              <button>
-                <PublishedIcons />
-              </button>
-            ) : (
-              <button>
-                <UnPublishedIcons />
-              </button>
-            )}
+            <PublishedField published={record?.published} />
             <MoreActionsButton>
               <StandardButton
                 onClick={() =>

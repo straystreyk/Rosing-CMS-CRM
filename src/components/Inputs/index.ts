@@ -1,4 +1,4 @@
-import { required, email } from "react-admin";
+import { required, email, Validator } from "react-admin";
 import { range } from "lodash";
 
 import { ReferenceInput } from "./ReferenceInputs/reference-input";
@@ -26,6 +26,15 @@ export {
   DateTimeInput,
   ArrayInputNoDrag,
 };
+
+const slugValidateFunc = (a: string, b: Record<string, any>) => {
+  const isNotValid = /[^a-z\d\-_]/.test(a);
+
+  if (a && isNotValid) {
+    return "Invalid Symbol";
+  }
+};
+export const slugValidate = [slugValidateFunc];
 
 export const requiredValidate = [required("validation.form.empty")];
 export const emailValidate = [email("Email is not valid")];

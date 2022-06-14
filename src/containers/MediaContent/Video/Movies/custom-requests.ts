@@ -70,6 +70,7 @@ export const GET_ONE_MOVIE = gql`
       published
       releaseDate
       extraVideos {
+        id
         name
         streamSourceId
         kind
@@ -215,6 +216,9 @@ export const UPDATE_MOVIE = gql`
       externalCatalogId
       extraVideos {
         id
+        name
+        kind
+        streamSourceId
         __typename
       }
       firstMidRollOffset

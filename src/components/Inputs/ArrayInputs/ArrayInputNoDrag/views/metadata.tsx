@@ -1,9 +1,8 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core";
-import { useQuery } from "@apollo/client";
 import { GET_ONE_VIDEO_FILE } from "../../../../Providers/custom-requests";
 import { authClient } from "../../../../Providers/AuthProvider/client";
-import { MainLoader } from "../../../../MainLoader";
+import { UrlField } from "../../../../TableFields/url-field";
 
 export type MetadataType = {
   key: string;
@@ -16,7 +15,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     padding: "8px 0",
     marginBottom: 8,
-    marginLeft: "24px",
+    marginLeft: "12px",
     borderBottom: "1px solid #E7E9E9",
     flexWrap: "wrap",
     "& .metadataField": {
@@ -60,13 +59,34 @@ export type ExtraVideoType = {
 
 export const ExtraVideos: React.FC<ExtraVideoType> = ({ kind, name, streamSourceId }) => {
   const classes = useStyles();
-  const { loading, data, error } = useQuery(GET_ONE_VIDEO_FILE, {
-    client: authClient,
-    variables: { id: streamSourceId },
-  });
+  const [videoFiles, setVideoFiles] = React.useState<{ id: string; name: string }>();
 
-  if (loading) return <MainLoader size={20} />;
-  if (error) return <div>error</div>;
+  React.useEffect(() => {
+    let unmounted = false;
+
+    if (!unmounted && streamSourceId) {
+      const getData = async () => {
+        try {
+          const res = await authClient.query({
+            query: GET_ONE_VIDEO_FILE,
+            variables: { id: streamSourceId },
+          });
+          const data = res.data.item;
+          setVideoFiles(data);
+        } catch (e) {
+          if (e instanceof Error) {
+            console.log(e.message);
+          }
+        }
+      };
+
+      getData();
+    }
+
+    return () => {
+      unmounted = true;
+    };
+  }, []);
 
   return (
     <>
@@ -85,7 +105,10 @@ export const ExtraVideos: React.FC<ExtraVideoType> = ({ kind, name, streamSource
       <div className={classes.MetadataItem}>
         <div className="metadataField">
           <div className="title">Video file</div>
-          {data.item.name}
+          <UrlField
+            to={`/media_content/video/video_files/${videoFiles && videoFiles.id}/show`}
+            name={videoFiles && videoFiles.name}
+          />
         </div>
       </div>
     </>

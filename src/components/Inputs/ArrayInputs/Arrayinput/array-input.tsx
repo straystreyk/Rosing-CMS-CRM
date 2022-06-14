@@ -155,23 +155,22 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
     ...props
   }) => {
     const classes = useStyles();
-    const { values } = useFormState();
     const [show, setShow] = React.useState(inputType === "create");
     const form = useForm();
 
     const onDragEnd = React.useCallback(
       (result: any, provided: unknown) => {
-        const item = values[source][result.source.index];
-        const newArray = values[source].filter(
-          (el: unknown, index: number) => index !== result.source.index
-        );
+        const item = form.getState().values[source][result.source.index];
+        const newArray = form
+          .getState()
+          .values[source].filter((el: unknown, index: number) => index !== result.source.index);
         newArray.splice(result.destination.index, 0, item);
         form.change(
           source,
           newArray.map((el: { position: number }, index: number) => ({ ...el, position: index }))
         );
       },
-      [form, source, values]
+      [form, source]
     );
 
     const reorder = React.useCallback(
@@ -203,7 +202,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
           </span>
         )}
         {helperText && <p className={classes.GroupHelperText}>{helperText}</p>}
-        {values[source] && values[source].length ? (
+        {form.getState().values[source] && form.getState().values[source].length ? (
           <div className={classes.ArrayInputTopButtons}>
             <StandardButton
               type="button"
@@ -222,7 +221,12 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                 const initial = initialPushObject ?? undefined;
                 fieldProps.fields.push(
                   addReorder || draggable
-                    ? { position: values[source] ? values[source].length : 0, role: value }
+                    ? {
+                        position: form.getState().values[source]
+                          ? form.getState().values[source].length
+                          : 0,
+                        role: value,
+                      }
                     : initial
                 );
               };
@@ -322,7 +326,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
   }
 );
 
-export const ArrayInput: React.FC<ArrayInputProps> = ({ inputType, ...props }) => {
+export const ArrayInput: React.FC<ArrayInputProps> = React.memo(({ inputType, ...props }) => {
   return inputType === "show" ? (
     <ArrayInputShow
       source={props.source}
@@ -336,4 +340,4 @@ export const ArrayInput: React.FC<ArrayInputProps> = ({ inputType, ...props }) =
   ) : (
     <ArrayInputOrigin inputType={inputType} {...props} />
   );
-};
+});

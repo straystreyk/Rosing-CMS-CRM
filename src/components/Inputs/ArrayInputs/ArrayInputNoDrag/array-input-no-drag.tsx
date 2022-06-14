@@ -2,7 +2,7 @@ import * as React from "react";
 import cn from "classnames";
 import { ArrayInput as ArrayInputRA, ArrayInputProps as ArrayInputPropsRA } from "react-admin";
 import { makeStyles } from "@material-ui/core";
-import { useFormState } from "react-final-form";
+import { useForm, useFormState } from "react-final-form";
 import { FieldArray } from "react-final-form-arrays";
 
 import { ArrayInputNoDragShow } from "./show-view";
@@ -76,6 +76,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
     const [show, setShow] = React.useState(!switchable || ["edit", "show"].includes(inputType));
     const classes = useStyles();
     const { values } = useFormState();
+    const form = useForm();
     const { ChildComponent, ...rest } = props;
     const current = props.parentSource
       ? values[props.parentSource][props.index][props.standardSource]
@@ -142,7 +143,10 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                               type="button"
                               variant="text"
                               startIcon={<CreateIcon color="#005AA3" />}
-                              onClick={() => fieldProps.fields.push(undefined)}
+                              onClick={() => {
+                                fieldProps.fields.push(undefined);
+                                console.log(fieldProps, index);
+                              }}
                               color="secondary"
                               text="Add another one"
                             />

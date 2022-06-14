@@ -1,5 +1,5 @@
 import * as React from "react";
-import { makeStyles, Tooltip } from "@material-ui/core";
+import { Collapse, makeStyles, Tooltip } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 
 import { EditInputComponent } from "../../edit-input-component";
@@ -8,6 +8,7 @@ import { EmptyInput, labelStyles } from "../../styles";
 import { ArrayInputProps } from "../Arrayinput/array-input";
 import { ExtraVideos, ExtraVideoType, MetadataShow, MetadataType } from "./views/metadata";
 import { AgeRating, RatingShow } from "./views/rating";
+import { ArrayInputItemArrow } from "../../../../constants/icons";
 
 interface ArrayInputShowProps {
   system?: string;
@@ -23,7 +24,14 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputShowWrapper: {
     width: "100%",
     fontSize: 14,
-    "& label": { ...labelStyles, marginBottom: 8, display: "inline-block" },
+    "& label": {
+      ...labelStyles,
+      marginBottom: 8,
+      cursor: "pointer",
+      "& svg": {
+        marginLeft: 4,
+      },
+    },
     "& .empty": {
       color: "var(--secondary-color-default)",
       borderBottom: "1px solid #E7E9E9",
@@ -34,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ShowView: React.FC<ArrayInputProps> = ({ source, label, ...props }) => {
   const { values } = useFormState();
+  const [open, setOpen] = React.useState(true);
   const classes = useStyles();
 
   const getValue = (source: string) => {
@@ -51,7 +60,7 @@ const ShowView: React.FC<ArrayInputProps> = ({ source, label, ...props }) => {
             );
           })
         ) : (
-          <EmptyInput emptyText="Empty" />
+          <EmptyInput emptyText="Empty" tag="div" />
         );
       case "metadata":
         return values[source] && values[source].length ? (
@@ -74,8 +83,12 @@ const ShowView: React.FC<ArrayInputProps> = ({ source, label, ...props }) => {
 
   return (
     <div className={classes.ArrayInputShowWrapper}>
-      <label>{label}</label>
-      {getValue(source)}
+      <label onClick={() => setOpen((p) => !p)}>
+        {label} <ArrayInputItemArrow color="var(--secondary-color-main)" />
+      </label>
+      <Collapse in={open} timeout="auto">
+        {getValue(source)}
+      </Collapse>
     </div>
   );
 };

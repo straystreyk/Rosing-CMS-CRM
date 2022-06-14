@@ -30,13 +30,14 @@ export const authProvider: AuthProvider = {
     return Promise.resolve();
   },
   checkError: (error) => {
-    if (error.status === 401 || error.status === 403) {
+    if (error instanceof Error && error.message.includes("401")) {
       localStorage.removeItem("token");
       return Promise.reject();
     }
+
     return Promise.resolve();
   },
-  checkAuth: () => {
+  checkAuth: (params) => {
     if (localStorage.getItem("token")) {
       return Promise.resolve();
     }

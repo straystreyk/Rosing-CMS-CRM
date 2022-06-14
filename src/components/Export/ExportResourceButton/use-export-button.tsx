@@ -30,44 +30,49 @@ export const useExportButton = (resource: string, data: { data: { exportTask: Ex
     }
   }, [data]);
 
-  const handleItem = React.useCallback(async () => {
-    const currentResource = getGqlResource(resource);
-
-    const query = gql`
-      query export${currentResource}( 
-        $filter: ${currentResource}Filter
-        $sortField: String 
-        $sortOrder: String
-      ) {
-        export${currentResource}(
-          filter: $filter 
-          sortField: $sortField
-          sortOrder: $sortOrder
+  const handleItem = React.useCallback(
+    async (e: React.MouseEvent) => {
+      const currentResource = getGqlResource(resource);
+      const query = gql`
+        query export${currentResource}(
+          $filter: ${currentResource}Filter
+          $sortField: String
+          $sortOrder: String
+          $format: String
         ) {
-            __typename
+          export${currentResource}(
+            filter: $filter
+            sortField: $sortField
+            sortOrder: $sortOrder
+            format: $format
+          ) {
+              __typename
+          }
         }
-      }
-    `;
+      `;
 
-    try {
-      setIsLoading(true);
-      await authClient.query({
-        query,
-        variables: {
-          filter: filterValues,
-          sortField: currentSort.field,
-          sortOrder: currentSort.order,
-        },
-      });
-    } catch (e) {
-      if (e instanceof Error) {
-        notify(e.message, { type: "error" });
+      try {
+        setIsLoading(true);
+        await authClient.query({
+          query,
+          variables: {
+            filter: filterValues,
+            sortField: currentSort.field,
+            sortOrder: currentSort.order,
+            format: e.currentTarget.getAttribute("value"),
+          },
+        });
+      } catch (e) {
+        if (e instanceof Error) {
+          notify(e.message, { type: "error" });
+        }
+        setIsLoading(false);
+      } finally {
+        handleClose();
       }
-      setIsLoading(false);
-    } finally {
-      handleClose();
-    }
-  }, [currentSort, filterValues, notify, resource]);
+    },
+    [currentSort, filterValues, notify, resource]
+  );
 
   return {
     handleClick,

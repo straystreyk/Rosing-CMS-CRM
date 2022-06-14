@@ -102,19 +102,26 @@ export const FormSection: React.FC<SectionProps> = React.forwardRef(
           </div>
         )}
         <Collapse in={showSection} timeout="auto">
-          {text && (
-            <ShowDescriptionButton
-              setShowDescription={setShowDescription}
-              showDescription={showDescription}
-            />
+          {["create", "edit"].includes(formType) && (
+            <>
+              {text && (
+                <ShowDescriptionButton
+                  setShowDescription={setShowDescription}
+                  showDescription={showDescription}
+                />
+              )}
+
+              <Collapse in={showDescription} timeout="auto">
+                <div className={classes.TextSection}>
+                  {text && typeof text !== "string"
+                    ? text.map((string, index) => (
+                        <React.Fragment key={index}>{string}</React.Fragment>
+                      ))
+                    : text}
+                </div>
+              </Collapse>
+            </>
           )}
-          <Collapse in={showDescription} timeout="auto">
-            <div className={classes.TextSection}>
-              {text && typeof text !== "string"
-                ? text.map((string, index) => <React.Fragment key={index}>{string}</React.Fragment>)
-                : text}
-            </div>
-          </Collapse>
           {children}
         </Collapse>
       </div>

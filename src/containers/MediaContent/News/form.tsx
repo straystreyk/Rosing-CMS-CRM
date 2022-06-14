@@ -6,6 +6,7 @@ import {
   ReferenceInput,
   requiredValidate,
   RichTextInput,
+  slugValidate,
   TextInput,
 } from "../../../components/Inputs";
 import { FormTabs } from "../../../components/Tabs/form-tabs";
@@ -61,6 +62,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
         <TextInput
           resource={resource}
           inputType={type}
+          validate={slugValidate}
           label="Slug"
           source="slug"
           helperText={

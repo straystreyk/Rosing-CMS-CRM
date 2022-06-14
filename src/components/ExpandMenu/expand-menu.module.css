@@ -105,12 +105,6 @@
     margin-top: 8px;
 }
 
-.expandSubMenu a[class*="RaMenuItemLink-active"] {
-    background-color: var(--accent-color);
-    font-weight: 500;
-    border: none;
-}
-
 .expandSubMenu a:hover {
     background-color: var(--accent-color-hover);
 }

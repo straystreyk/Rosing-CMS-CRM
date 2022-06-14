@@ -75,7 +75,7 @@ const ShowView: React.FC<{
 
   return (
     <div className={classes.AutoCompleteInputStyles}>
-      <label>{props.label}</label>
+      {props.label && <label>{props.label}</label>}
       <div className={cn(classes.AutoCompleteShow, "AutoCompleteShow")}>
         {current && current.length ? (
           current.map((el, index) => {

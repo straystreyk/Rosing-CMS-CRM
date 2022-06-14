@@ -100,7 +100,7 @@ export const GroupInputsOrigin: React.FC<GroupInputsProps> = ({
               onClick={() => setShow((p) => (inputType !== "show" ? !p : p))}
               className={classes.GroupInputsLabelWrapper}
             >
-              <span>{label && label} </span>
+              <span>{label && label}</span>
               {switchable && inputType !== "show" && <Switch checked={show} />}
             </span>
             {groupHelperText && inputType !== "show" && (

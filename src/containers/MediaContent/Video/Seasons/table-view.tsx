@@ -26,6 +26,8 @@ import { Toolbar } from "./toolbar";
 import { Form } from "./form";
 import { ToModelField } from "../../../../components/TableFields/to-model-field";
 import cn from "classnames";
+import { UrlField } from "../../../../components/TableFields/url-field";
+import { PublishedField } from "../../../../components/TableFields/published-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -56,12 +58,11 @@ export const TableView: React.FC<ShowProps> = (props) => {
         label="Name"
         source="name"
         render={(record?: RecordRA) => (
-          <Link
-            className={cn(classes.NameField, "Expand")}
+          <UrlField
+            className="Expand"
             to={`${props.basePath}/${record?.id}/show`}
-          >
-            {record?.name}
-          </Link>
+            name={record?.name}
+          />
         )}
       />
       <FunctionField
@@ -75,15 +76,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
               label="Episodes"
               alwaysButton
             />
-            {record?.published ? (
-              <button>
-                <PublishedIcons />
-              </button>
-            ) : (
-              <button>
-                <UnPublishedIcons />
-              </button>
-            )}
+            <PublishedField published={record?.published} />
             <MoreActionsButton>
               <StandardButton
                 onClick={() =>

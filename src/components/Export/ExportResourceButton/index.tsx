@@ -13,6 +13,11 @@ import { ExportButtonStyles } from "./styles";
 
 const useStyles = makeStyles(ExportButtonStyles);
 
+const FORMATS_OF_EXPORT: { [p: string]: string } = {
+  xlsx: "XLSX",
+  csv: "CSV",
+};
+
 export const ExportResourceButton: React.FC<{ resource: string }> = ({ resource }) => {
   const classes = useStyles();
   const { data } = useSubscription(SUBSCRIBE_TO_EXPORT, {
@@ -44,9 +49,13 @@ export const ExportResourceButton: React.FC<{ resource: string }> = ({ resource 
           "aria-labelledby": "download-basic-button",
         }}
       >
-        <MenuItem disabled={isLoading} onClick={handleItem}>
-          XLSX
-        </MenuItem>
+        {Object.keys(FORMATS_OF_EXPORT).map((format) => {
+          return (
+            <MenuItem disabled={isLoading} onClick={handleItem} value={format}>
+              {FORMATS_OF_EXPORT[format]}
+            </MenuItem>
+          );
+        })}
       </Menu>
     </>
   );

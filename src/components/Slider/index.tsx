@@ -131,7 +131,9 @@ export const Slider: React.FC<SliderProps> = ({ images, setSwiper }) => {
           );
         })}
       </Swiper>
-      {!isMobile && <SliderNav prev={prev} bullets={bullets} next={next} />}
+      {isMobile || images.length === 1 ? null : (
+        <SliderNav prev={prev} bullets={bullets} next={next} />
+      )}
     </>
   );
 };

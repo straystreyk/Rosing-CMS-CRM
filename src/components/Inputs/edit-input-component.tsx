@@ -43,11 +43,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const EditInputComponent: React.FC<any> = ({
-  componentClassName,
   ComponentShow,
   ComponentInput,
   ChildComponent,
   borderOff,
+  showWrapperClassName,
   ...props
 }) => {
   const form = useForm();
@@ -65,6 +65,7 @@ export const EditInputComponent: React.FC<any> = ({
         type: "success",
         messageArgs: { name: data.name },
       });
+
       setInitialValue(data[props.source]);
     }
 
@@ -104,7 +105,8 @@ export const EditInputComponent: React.FC<any> = ({
       className={cn(
         classes.ShowWrapper,
         "ShowWrapper",
-        cn(borderOff && !showInput && classes.BorderOff)
+        borderOff && !showInput && classes.BorderOff,
+        showWrapperClassName && showWrapperClassName
       )}
     >
       {showInput && ComponentInput && (

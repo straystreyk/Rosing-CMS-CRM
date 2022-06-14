@@ -2,7 +2,7 @@ import * as React from "react";
 import _ from "lodash";
 import cn from "classnames";
 import { useFormState } from "react-final-form";
-import { Button, Tooltip } from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 import { useDropzone } from "react-dropzone";
 import { makeStyles } from "@material-ui/core";
 
@@ -141,7 +141,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
                 type="button"
                 startIcon={<UploadIcon color="#005AA3" />}
                 color="secondary"
-                variant="text"
+                variant="icon"
                 text="Upload file"
               />
             </div>
@@ -149,12 +149,12 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
             <>
               {id && url && (
                 <div className={cn(classes.PopupButtonWrapper, "PopupButtonWrapper")}>
-                  <Button
+                  <StandardButton
                     onClick={(e) => openSlider(e, index)}
                     className={cn(classes.PopupButton, "PopupButton")}
                   >
-                    <LoopIcon color="var(--primary-focus)" />
-                  </Button>
+                    <LoopIcon color="var(--primary-button-default)" />
+                  </StandardButton>
                 </div>
               )}
               <img src={url} alt="admin panel" />

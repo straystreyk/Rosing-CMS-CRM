@@ -71,10 +71,10 @@ export const NumberInputOrigin: React.FC<InputProps> = (props) => {
   );
 };
 
-export const NumberInput: React.FC<InputProps> = ({ inputType, ...rest }) => {
+export const NumberInput: React.FC<InputProps> = React.memo(({ inputType, ...rest }) => {
   return inputType === "show" ? (
     <NumberInputShow {...rest} />
   ) : (
     <NumberInputOrigin inputType={inputType} {...rest} />
   );
-};
+});

@@ -23,9 +23,6 @@ const useStyles = makeStyles({
     "&:last-child .value": {
       borderBottom: "none",
     },
-    "&:nth-child(2) .value": {
-      paddingTop: 0,
-    },
   },
   InformationButton: {
     display: "flex",

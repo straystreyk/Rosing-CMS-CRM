@@ -1,32 +1,15 @@
 import * as React from "react";
-import cn from "classnames";
 import { InputProps } from "ra-core";
 import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 
 import { EditInputComponent } from "../../edit-input-component";
-import { TextInputStyles } from "./styles";
 import { TextInputOrigin } from "./text-input";
 import { formatTimeInput } from "../../index";
-import { EmptyInput, TextInputShowValue } from "../../styles";
+import { EmptyInput } from "../../styles";
+import { StandardInputShowView } from "../standard-input-show-view";
 
 const useStyles = makeStyles({
-  TextInputStyles,
-  TextInputShowValue: {
-    ...TextInputShowValue,
-    "& > p": {
-      display: "-webkit-box",
-      "-webkit-box-orient": "vertical",
-      "-webkit-line-clamp": 3,
-      overflow: "hidden",
-    },
-    "&.active > p": {
-      display: "block",
-    },
-    "& img": {
-      width: "100%",
-    },
-  },
   IDField: {
     "& p": {
       wordBreak: "break-all",
@@ -104,29 +87,20 @@ const ShowView: React.FC<InputProps> = (props) => {
   );
 
   React.useEffect(() => {
-    if (ref.current && ref.current.scrollHeight >= 60) {
+    if (ref.current && ref.current.scrollHeight > 60) {
       setIsBigText(true);
     }
   }, [ref, getValue]);
 
   return (
-    <div className={classes.TextInputStyles}>
-      <label>{props.label}</label>
-      <div
-        className={cn(
-          classes.TextInputShowValue,
-          props.source.includes("Id") || props.source === "id" ? classes.IDField : "",
-          activeText && "active"
-        )}
-      >
-        <p ref={ref}>{getValue(props.source)}</p>
-        {isBigText && !activeText && (
-          <button onClick={showText} className={classes.ShowMoreButton}>
-            Show more
-          </button>
-        )}
-      </div>
-    </div>
+    <StandardInputShowView label={props.label}>
+      <p ref={ref}>{getValue(props.source)}</p>
+      {isBigText && !activeText && (
+        <button onClick={showText} className={classes.ShowMoreButton}>
+          Show more
+        </button>
+      )}
+    </StandardInputShowView>
   );
 };
 

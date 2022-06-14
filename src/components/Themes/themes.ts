@@ -136,6 +136,7 @@ export const lightTheme = {
         color: "#fff",
         backgroundColor: "var(--accent-color)",
         position: "relative",
+        fontWeight: 500,
         "&:focus": {
           ...outlineStyles,
         },

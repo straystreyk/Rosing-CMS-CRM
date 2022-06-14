@@ -11,6 +11,7 @@ import {
   requiredValidate,
   RichTextInput,
   SelectInput,
+  slugValidate,
   TextInput,
 } from "../../../../../components/Inputs";
 import {
@@ -107,6 +108,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         <TextInput
           resource={resource}
           inputType={type}
+          validate={slugValidate}
           label="Slug"
           source="slug"
           fullWidth

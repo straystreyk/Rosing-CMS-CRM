@@ -37,7 +37,7 @@ const useTableTvDates = () => {
 export const TableView: React.FC<ShowProps> = (props) => {
   const classes = useStyles();
   const { sortedData } = useTableTvDates();
-
+  console.log(sortedData);
   return (
     <>
       <DatagridList
@@ -72,7 +72,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
           )}
         />
         <TextField label="EPG source" source="epgSourceName" />
-        {sortedData && sortedData.length ? (
+        {sortedData ? (
           Object.keys(sortedData).map((date) => {
             return (
               <FunctionField

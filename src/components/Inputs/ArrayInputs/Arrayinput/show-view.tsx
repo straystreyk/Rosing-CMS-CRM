@@ -14,7 +14,6 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     gap: 20,
     flexWrap: "wrap",
-    paddingTop: 20,
   },
   EmptyShow: {
     color: "var(--secondary-color-default)",
@@ -85,6 +84,12 @@ const useStyles = makeStyles({
     },
     [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`]: {
       width: "100%",
+    },
+  },
+  ShowWrapper: {
+    paddingTop: 32,
+    "& .ShowEditButton": {
+      top: -4,
     },
   },
 });
@@ -165,10 +170,12 @@ const ShowView: React.FC<ShowViewProps> = ({ source }) => {
 };
 
 export const ArrayInputShow: React.FC<ArrayInputProps> = React.memo((props) => {
+  const classes = useStyles();
   return (
     <EditInputComponent
       ComponentInput={ArrayInputOrigin}
       ComponentShow={ShowView}
+      showWrapperClassName={classes.ShowWrapper}
       borderOff
       {...props}
     />

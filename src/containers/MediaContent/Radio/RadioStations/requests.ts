@@ -81,7 +81,7 @@ export const UPDATE_RADIO_LIVE_STREAM = gql`
       number
       position
       published
-      streamSourceId
+      radioLiveStreamId
       updatedAt
       __typename
     }

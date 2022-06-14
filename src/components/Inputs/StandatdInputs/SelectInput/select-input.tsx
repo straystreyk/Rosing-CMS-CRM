@@ -66,10 +66,10 @@ export const SelectInputOrigin: React.FC<SelectInputProps> = ({
   );
 };
 
-export const SelectInput: React.FC<SelectInputProps> = ({ inputType, ...rest }) => {
+export const SelectInput: React.FC<SelectInputProps> = React.memo(({ inputType, ...rest }) => {
   return inputType === "show" ? (
     <SelectInputShow inputType={inputType} {...rest} />
   ) : (
     <SelectInputOrigin inputType={inputType} {...rest} />
   );
-};
+});

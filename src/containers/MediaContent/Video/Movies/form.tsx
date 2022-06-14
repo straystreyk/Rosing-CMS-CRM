@@ -13,6 +13,7 @@ import {
   getYearsChoices,
   ReferenceInput,
   RichTextInput,
+  slugValidate,
 } from "../../../../components/Inputs";
 
 import { FormProps } from "../../../../types";
@@ -36,7 +37,6 @@ import { ArrayInputStyles } from "../../../../components/Models/CastMembers/styl
 import { MetaData } from "../../../../components/Models/Metadata";
 import { ExtraVideos } from "../../../../components/Models/ExtraVideos";
 import { RatingSystems } from "../../../../components/Models/RatingSytems";
-import { scrollToErrorInput } from "../../../../helpers/form";
 import { CheckBoxGroup } from "../../../../components/UI/MaterialUI/check-box-group";
 import { SwitchInput } from "../../../../components/Inputs/SwitchInput";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
@@ -62,17 +62,9 @@ const FIXED_TAB_LABELS = [
   "Terms of publication",
 ];
 
-const FIXED_HEADER_OFFSET = 130;
-
 export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }) => {
   const classes = useStyles();
   const formState = useFormState();
-
-  React.useEffect(() => {
-    if (formState.submitFailed) {
-      scrollToErrorInput(FIXED_HEADER_OFFSET);
-    }
-  }, [formState.submitFailed]);
 
   return (
     <>
@@ -102,18 +94,15 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           source="name"
           placeholder="name"
           fullWidth
-          helperText={
-            "The name of the movie that users will see in any sections of the application"
-          }
+          helperText="The name of the movie that users will see in any sections of the application"
         />
         <TextInput
           resource={resource}
           inputType={type}
+          validate={slugValidate}
           label="Slug"
           source="slug"
-          helperText={
-            "It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
-          }
+          helperText="It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."
           fullWidth
         />
         <TextInput

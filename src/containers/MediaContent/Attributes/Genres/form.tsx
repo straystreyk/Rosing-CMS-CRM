@@ -1,7 +1,12 @@
 import * as React from "react";
 
 import { FormProps } from "../../../../types";
-import { NumberInput, requiredValidate, TextInput } from "../../../../components/Inputs";
+import {
+  NumberInput,
+  requiredValidate,
+  slugValidate,
+  TextInput,
+} from "../../../../components/Inputs";
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   return (
@@ -18,6 +23,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
       <TextInput
         resource={resource}
         inputType={type}
+        validate={slugValidate}
         label="Slug"
         source="slug"
         helperText="It is used as a human-readable identifier in the address bar and deep link. Available for modification is not saved yet, it can contain only numbers, Latin letters, a hyphen (-) and an underscore (_). If you leave the field empty, the slug will be filled in automatically."

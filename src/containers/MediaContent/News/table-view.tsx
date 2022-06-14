@@ -19,6 +19,7 @@ import {
 import { newsFilters } from "./news-filters";
 import { StandardButton } from "../../../components/UI/Buttons/standard-button";
 import { useTableActions } from "../../../custom-hooks/use-table-actions";
+import { PublishedField } from "../../../components/TableFields/published-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -58,15 +59,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         label=""
         render={(record?: Record) => (
           <div className={classes.MoreActions}>
-            {record?.published ? (
-              <button>
-                <PublishedIcons />
-              </button>
-            ) : (
-              <button>
-                <UnPublishedIcons />
-              </button>
-            )}
+            <PublishedField published={record?.published} />
             <MoreActionsButton>
               <StandardButton
                 onClick={() =>

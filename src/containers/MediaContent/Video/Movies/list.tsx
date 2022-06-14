@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 import { TableFieldsStyles } from "../../../../components/TableFields/styles";
 import { useTableActions } from "../../../../custom-hooks/use-table-actions";
 import { ShowProps } from "../../../../types";
+import { PublishedField } from "../../../../components/TableFields/published-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -71,15 +72,7 @@ export const List: React.FC<ShowProps> = (props) => {
         render={(record?: RecordRA) => {
           return (
             <div className={classes.MoreActions}>
-              {record?.published ? (
-                <button>
-                  <PublishedIcons />
-                </button>
-              ) : (
-                <button>
-                  <UnPublishedIcons />
-                </button>
-              )}
+              <PublishedField published={record?.published} />
               <MoreActionsButton>
                 <StandardButton
                   onClick={() =>
