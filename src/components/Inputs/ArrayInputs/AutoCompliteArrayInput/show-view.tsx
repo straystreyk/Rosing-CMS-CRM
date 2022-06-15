@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core";
 import { AutoCompleteInputStyles } from "./styles";
 import { AutocompleteArrayInputOrigin } from "./autocomplite-array-input";
 import { ChoiceInputType } from "../../input-types";
-import { Link } from "react-router-dom";
 import { UrlField } from "../../../TableFields/url-field";
 import { EmptyInput } from "../../styles";
 

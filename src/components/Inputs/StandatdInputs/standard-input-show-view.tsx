@@ -15,25 +15,34 @@ const useStyles = makeStyles({
       "-webkit-line-clamp": 3,
       overflow: "hidden",
     },
-    "&.active > p": {
-      display: "block",
-    },
     "& img": {
       width: "100%",
     },
   },
 });
 
-export const StandardInputShowView: React.FC<{ label: string; className?: string }> = ({
-  label,
-  className,
-  children,
-}) => {
+type StandardInputShowViewType = {
+  label?: {
+    onClick?: () => void;
+    icon?: React.ReactNode;
+    className?: string;
+  };
+};
+
+export const StandardInputShowView: React.FC<{
+  label?: string;
+  className?: string;
+  options?: StandardInputShowViewType;
+}> = ({ label, className, options, children }) => {
   const classes = useStyles();
   return (
-    <div className={classes.StandardShowWrapper}>
-      <label>{label}</label>
-      <div className={cn(classes.TextInputShowValue, className && className)}>{children}</div>
+    <div className={cn(classes.StandardShowWrapper, "StandardShowWrapper")}>
+      <label className={options?.label?.className} onClick={options?.label?.onClick}>
+        {label} {options?.label?.icon}
+      </label>
+      <div className={cn(classes.TextInputShowValue, "TextInputShowValue", className && className)}>
+        {children}
+      </div>
     </div>
   );
 };

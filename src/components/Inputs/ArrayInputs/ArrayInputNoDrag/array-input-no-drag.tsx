@@ -2,15 +2,16 @@ import * as React from "react";
 import cn from "classnames";
 import { ArrayInput as ArrayInputRA, ArrayInputProps as ArrayInputPropsRA } from "react-admin";
 import { makeStyles } from "@material-ui/core";
-import { useForm, useFormState } from "react-final-form";
+import { useFormState } from "react-final-form";
 import { FieldArray } from "react-final-form-arrays";
 
 import { ArrayInputNoDragShow } from "./show-view";
-import { GroupInputsOrigin } from "../../../GroupInputs";
+import { GroupInputs } from "../../../GroupInputs";
 import { Switch } from "../../../UI/MaterialUI/switch";
-import { DeleteIcon } from "../../../../constants/icons";
+import { DeleteIcon, PlusIcon } from "../../../../constants/icons";
 import { CreateIcon } from "../../../../constants/forms-constants";
 import { StandardButton } from "../../../UI/Buttons/standard-button";
+import { formHelperText } from "../../styles";
 
 export interface ArrayInputProps extends Omit<ArrayInputPropsRA, "children"> {
   inputType: "create" | "edit" | "show";
@@ -26,19 +27,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     lineHeight: "20px",
     display: "inline-block",
-    marginBottom: 5,
+    marginBottom: 4,
     marginTop: 8,
     "& > span": {
       marginRight: 8,
     },
   },
-  GroupHelperText: {
-    fontFamily: "var(--font-family)",
-    fontSize: 12,
-    marginBottom: 8,
-    color: "var(--secondary-color-default)",
-    lineHeight: "16px",
-  },
+  GroupHelperText: { ...formHelperText, marginTop: 0 },
   ArrayInputWrapper: {
     paddingBottom: 8,
     "& .MuiFormControl-marginNormal": {
@@ -48,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputButtonsWrapper: {
     display: "flex",
     alignItems: "center",
+    paddingLeft: 18,
     "& button": {
       textTransform: "unset",
       fontFamily: "var(--font-family)",
@@ -56,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
       marginRight: 10,
       marginTop: 5,
     },
+  },
+  DeleteButton: {
+    marginTop: 5,
+    padding: 0,
   },
 }));
 
@@ -76,7 +76,6 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
     const [show, setShow] = React.useState(!switchable || ["edit", "show"].includes(inputType));
     const classes = useStyles();
     const { values } = useFormState();
-    const form = useForm();
     const { ChildComponent, ...rest } = props;
     const current = props.parentSource
       ? values[props.parentSource][props.index][props.standardSource]
@@ -103,11 +102,13 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                       return (
                         <React.Fragment key={item + index}>
                           {groupInputs ? (
-                            <GroupInputsOrigin
+                            <GroupInputs
                               resource={resource}
                               source={source}
                               key={index}
+                              inputType={inputType}
                               index={index.toString()}
+                              onlyCreateView
                             >
                               <props.ChildComponent
                                 resource={resource}
@@ -117,7 +118,16 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                                 parentSourceWithIndex={`${source}[${index}]`}
                                 choices={props.choices ?? undefined}
                               />
-                            </GroupInputsOrigin>
+                              <StandardButton
+                                startIcon={<DeleteIcon color="var(--additional-red-default)" />}
+                                type="button"
+                                variant="text"
+                                className={classes.DeleteButton}
+                                onClick={() => fieldProps.fields.remove(index)}
+                                customColor="var(--additional-red-default)"
+                                text="Delete"
+                              />
+                            </GroupInputs>
                           ) : (
                             <>
                               <props.ChildComponent
@@ -130,38 +140,27 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                               />
                             </>
                           )}
-                          <div className={classes.ArrayInputButtonsWrapper}>
-                            <StandardButton
-                              startIcon={<DeleteIcon color="#D21C1C" />}
-                              type="button"
-                              variant="text"
-                              onClick={() => fieldProps.fields.remove(index)}
-                              customColor="#D21C1C"
-                              text="Delete"
-                            />
-                            <StandardButton
-                              type="button"
-                              variant="text"
-                              startIcon={<CreateIcon color="#005AA3" />}
-                              onClick={() => {
-                                fieldProps.fields.push(undefined);
-                                console.log(fieldProps, index);
-                              }}
-                              color="secondary"
-                              text="Add another one"
-                            />
-                          </div>
+                          {fieldProps.fields.length === index + 1 && (
+                            <div className={classes.ArrayInputButtonsWrapper}>
+                              <StandardButton
+                                type="button"
+                                variant="text"
+                                startIcon={<PlusIcon color="var(--primary-button-default)" />}
+                                onClick={() => fieldProps.fields.push(undefined)}
+                                color="secondary"
+                                text="Add another one"
+                              />
+                            </div>
+                          )}
                         </React.Fragment>
                       );
                     })}
                     {!current || current.length === 0 ? (
-                      <div
-                        className={cn(classes.ArrayInputButtonsWrapper, "ArrayInputFirstButton")}
-                      >
+                      <div className={classes.ArrayInputButtonsWrapper}>
                         <StandardButton
                           type="button"
                           variant="text"
-                          startIcon={<CreateIcon color="#005AA3" />}
+                          startIcon={<PlusIcon color="#005AA3" />}
                           onClick={() => fieldProps.fields.push(initialPushObject ?? undefined)}
                           color="secondary"
                           text="Add another one"

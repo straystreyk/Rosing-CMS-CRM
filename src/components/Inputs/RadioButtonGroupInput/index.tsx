@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-interface RadioButtonGroupInputProps extends Omit<RadioButtonGroupInputPropsRA, "source"> {
+export interface RadioButtonGroupInputProps extends Omit<RadioButtonGroupInputPropsRA, "source"> {
   source: string;
 }
 

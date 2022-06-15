@@ -1,19 +1,39 @@
 import * as React from "react";
 import { authClient } from "../../Providers/AuthProvider/client";
 import { getGqlResource } from "../../Providers/DataProvider/get-gql-resource";
-import { CHECK_SUBSCRIPTION } from "../requests";
+import { CHECK_SUBSCRIPTION, SET_REPORT_DOWNLOADED } from "../requests";
+import { useNotify } from "ra-core";
 
 export type ExportType = {
   status: "in_progress" | "ready" | "error";
   progress: number;
   file: string;
+  exportType: string;
+  format: string;
+  id: string;
 };
 
 export const useExportStatusWidget = (
   resource: string,
   data: { data: { exportTask: ExportType } }
 ) => {
-  const [subscription, setSubscription] = React.useState<ExportType>();
+  const notify = useNotify();
+  const [subscription, setSubscription] = React.useState<ExportType | null>(null);
+
+  const setReport = React.useCallback(async () => {
+    if (subscription) {
+      try {
+        await authClient.mutate({
+          mutation: SET_REPORT_DOWNLOADED,
+          variables: { id: subscription.id },
+        });
+      } catch (e) {
+        if (e instanceof Error) {
+          notify(e.message, { type: "error" });
+        }
+      }
+    }
+  }, [notify, subscription]);
 
   React.useEffect(() => {
     if (data) setSubscription(data.data.exportTask);
@@ -50,5 +70,6 @@ export const useExportStatusWidget = (
 
   return {
     subscription,
+    setReport,
   };
 };

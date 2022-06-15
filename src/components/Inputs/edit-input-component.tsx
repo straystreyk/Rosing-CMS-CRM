@@ -13,11 +13,11 @@ const useStyles = makeStyles((theme) => ({
   ShowWrapper: {
     display: "flex",
     justifyContent: "space-between",
-    marginBottom: 8,
-    paddingTop: 8,
     position: "relative",
+    paddingTop: 6,
+    marginBottom: 6,
     borderBottom: "1px solid var(--secondary-color-disable)",
-    paddingBottom: 8,
+    paddingBottom: 12,
     "&:hover .ShowEditButton": {
       opacity: 1,
       pointerEvents: "all",
@@ -105,6 +105,7 @@ export const EditInputComponent: React.FC<any> = ({
       className={cn(
         classes.ShowWrapper,
         "ShowWrapper",
+        showInput && "active",
         borderOff && !showInput && classes.BorderOff,
         showWrapperClassName && showWrapperClassName
       )}

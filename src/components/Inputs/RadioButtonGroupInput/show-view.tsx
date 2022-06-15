@@ -1,68 +1,25 @@
 import * as React from "react";
 import { EditInputComponent } from "../edit-input-component";
-import { RadioButtonGroupInput, RadioButtonGroupInputOrigin } from "./index";
-import { makeStyles } from "@material-ui/core/styles";
-import { labelStyles } from "../styles";
+import { RadioButtonGroupInputOrigin, RadioButtonGroupInputProps } from "./index";
+import { EmptyInput } from "../styles";
 import { useFormState } from "react-final-form";
+import { StandardInputShowView } from "../StandatdInputs/standard-input-show-view";
 
-interface ShowProps {
-  label: string;
-  source: string;
-  inputType: string;
-}
-
-const useStyles = makeStyles({
-  Show: {
-    fontSize: 14,
-    lineHeight: "20px",
-    color: "var(--primary-text-default)",
-    "& span.empty": {
-      color: "var(--secondary-color-default)",
-    },
-    "& label": { ...labelStyles, marginBottom: 4, display: "inline-block" },
-  },
-});
-
-const ShowView: React.FC<ShowProps> = (props) => {
+const ShowView: React.FC<RadioButtonGroupInputProps> = (props) => {
   const { values } = useFormState();
-  const classes = useStyles();
 
-  const getValue = (source: string) => {
-    switch (source) {
-      case "reversedEpisodesOrder":
-        return values[props.source] !== undefined || values[props.source] !== null ? (
-          values[props.source] === true ? (
-            "Reversed"
-          ) : (
-            "Straight"
-          )
-        ) : (
-          <span className="empty">Not filled in</span>
-        );
-      case "cmsDistribution":
-        return values[props.source] ? (
-          values[props.source]
-        ) : (
-          <span className="empty">Not filled in</span>
-        );
-      default:
-        return values[props.source] !== undefined || values[props.source] !== null ? (
-          <>{values[props.source] === true ? "Published" : "Not published"}</>
-        ) : (
-          <span className="empty">Not filled in</span>
-        );
-    }
-  };
+  const current = props.choices.filter(
+    (el: { id: string; name: string }) => el.id === values[props.source]
+  )[0];
 
   return (
-    <div className={classes.Show}>
-      <label>{props.label}</label>
-      <div>{getValue(props.source)}</div>
-    </div>
+    <StandardInputShowView label={props.label}>
+      {!!current ? current.name : <EmptyInput emptyText="Empty" />}
+    </StandardInputShowView>
   );
 };
 
-export const RadioButtonGroupInputShow: React.FC<ShowProps> = (props) => {
+export const RadioButtonGroupInputShow: React.FC<RadioButtonGroupInputProps> = (props) => {
   return (
     <EditInputComponent
       ComponentInput={RadioButtonGroupInputOrigin}

@@ -29,7 +29,6 @@ import {
   SELECT_MARKERS,
 } from "../../../../constants/forms-constants";
 import { FormSection } from "../../../../components/FormSection";
-import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input";
 import { ALL_COUNTRIES, ALL_ROLES } from "../../../../components/Providers/custom-requests";
 import { CastMembers } from "../../../../components/Models/CastMembers";
 import { Link } from "ra-ui-materialui";
@@ -42,6 +41,7 @@ import { SwitchInput } from "../../../../components/Inputs/SwitchInput";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { AutocompleteInput } from "../../../../components/Inputs/AutocompleteInput";
+import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -273,9 +273,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
-          helperText={
-            "A pair of custom fields that can be used for filtering. You can add multiple pairs."
-          }
+          helperText="A pair of custom fields that can be used for filtering. You can add multiple pairs."
           ChildComponent={MetaData}
           source="metadata"
           label="Metadata"
@@ -448,7 +446,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           switchable
           fullWidth
         />
-        <CheckBoxGroup initialSourceState="allowedCountries">
+        <CheckBoxGroup initialSourceState="allowedCountries" inputType={type}>
           <ReferenceCustomInput
             component={AutocompleteArrayInput}
             inputType={type}
@@ -472,7 +470,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
             idName="alpha2"
           />
         </CheckBoxGroup>
-        <CheckBoxGroup initialSourceState="allowedApiClientIds">
+        <CheckBoxGroup inputType={type} initialSourceState="allowedApiClientIds">
           <ReferenceArrayInput
             label=""
             source="allowedApiClientIds"

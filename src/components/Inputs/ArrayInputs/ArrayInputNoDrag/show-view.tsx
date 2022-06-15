@@ -9,36 +9,34 @@ import { ArrayInputProps } from "../Arrayinput/array-input";
 import { ExtraVideos, ExtraVideoType, MetadataShow, MetadataType } from "./views/metadata";
 import { AgeRating, RatingShow } from "./views/rating";
 import { ArrayInputItemArrow } from "../../../../constants/icons";
+import { StandardInputShowView } from "../../StandatdInputs/standard-input-show-view";
 
-interface ArrayInputShowProps {
-  system?: string;
-  tag?: string;
-  key?: string;
-  value?: string;
-  kind?: string;
-  name?: string;
-  streamSourceId?: string;
-}
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   ArrayInputShowWrapper: {
     width: "100%",
-    fontSize: 14,
-    "& label": {
-      ...labelStyles,
-      marginBottom: 8,
-      cursor: "pointer",
-      "& svg": {
-        marginLeft: 4,
-      },
-    },
+    paddingTop: 6,
+    marginBottom: 6,
     "& .empty": {
       color: "var(--secondary-color-default)",
       borderBottom: "1px solid #E7E9E9",
-      paddingBottom: 8,
+      paddingBottom: 12,
+    },
+    "& .label": {
+      cursor: "pointer",
+      marginBottom: 8,
+      "& svg": {
+        marginLeft: 9,
+      },
     },
   },
-}));
+  OffWrapper: {
+    padding: 0,
+    margin: 0,
+    "&.active": {
+      paddingBottom: 12,
+    },
+  },
+});
 
 const ShowView: React.FC<ArrayInputProps> = ({ source, label, ...props }) => {
   const { values } = useFormState();
@@ -76,28 +74,38 @@ const ShowView: React.FC<ArrayInputProps> = ({ source, label, ...props }) => {
             return <RatingShow system={el.system} tag={el.tag} key={index.toString()} />;
           })
         ) : (
-          <EmptyInput emptyText="Empty" />
+          <EmptyInput emptyText="Empty" tag="div" />
         );
     }
   };
 
   return (
     <div className={classes.ArrayInputShowWrapper}>
-      <label onClick={() => setOpen((p) => !p)}>
-        {label} <ArrayInputItemArrow color="var(--secondary-color-main)" />
-      </label>
-      <Collapse in={open} timeout="auto">
-        {getValue(source)}
-      </Collapse>
+      <StandardInputShowView
+        label={label}
+        options={{
+          label: {
+            onClick: () => setOpen((p) => !p),
+            icon: <ArrayInputItemArrow color="var(--secondary-color-main)" />,
+            className: "label",
+          },
+        }}
+      >
+        <Collapse in={open} timeout="auto">
+          {getValue(source)}
+        </Collapse>
+      </StandardInputShowView>
     </div>
   );
 };
 
 export const ArrayInputNoDragShow: React.FC<ArrayInputProps> = (props) => {
+  const classes = useStyles();
   return (
     <EditInputComponent
       ComponentInput={ArrayInputNoDragOrigin}
       ComponentShow={ShowView}
+      showWrapperClassName={classes.OffWrapper}
       borderOff
       {...props}
     />

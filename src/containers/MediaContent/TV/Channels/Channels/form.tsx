@@ -311,7 +311,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           resource={resource}
         />
         {formState.values.mediascopeConfig && formState.values.mediascopeConfig.enabled && (
-          <GroupInputsOrigin>
+          <GroupInputsOrigin inputType={type}>
             <TextInput
               resource={resource}
               inputType={type}
@@ -364,7 +364,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           labelPlacement="start"
         />
         {formState.values.vitrinaTvConfig && formState.values.vitrinaTvConfig.enabled && (
-          <GroupInputsOrigin>
+          <GroupInputsOrigin inputType={type}>
             <TextInput
               resource={resource}
               inputType={type}
@@ -427,7 +427,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           switchable
           fullWidth
         />
-        <CheckBoxGroup initialSourceState="allowedCountries">
+        <CheckBoxGroup inputType={type} initialSourceState="allowedCountries">
           <ReferenceCustomInput
             component={AutocompleteArrayInput}
             inputType={type}
@@ -451,7 +451,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
             idName="alpha2"
           />
         </CheckBoxGroup>
-        <CheckBoxGroup initialSourceState="allowedApiClientIds">
+        <CheckBoxGroup inputType={type} initialSourceState="allowedApiClientIds">
           <ReferenceArrayInput
             label=""
             source="allowedApiClientIds"

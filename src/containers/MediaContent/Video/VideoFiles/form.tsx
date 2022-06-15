@@ -87,7 +87,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
           helperText="The default template https://{host}{/encoded_session}{/signature}{/bucket*}{/streaming_uid}{+protocol_suffix}{?params*}"
           fullWidth
         />
-        <CheckBoxGroup initialSourceState="allowedCountries">
+        <CheckBoxGroup inputType={type} initialSourceState="allowedCountries">
           <ReferenceCustomInput
             component={AutocompleteArrayInput}
             inputType={type}

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useTranslate } from "react-admin";
 import { useSubscription } from "@apollo/client";
 import { makeStyles } from "@material-ui/core/styles";
 import { Fade } from "@material-ui/core";
@@ -18,11 +17,10 @@ const useStyles = makeStyles(ExportStatusWidgetStyles);
 const LOADER_SIZE = 12;
 
 export const ExportStatusWidget = React.memo(({ resource }: { resource: string }) => {
-  const translate = useTranslate();
   const { data } = useSubscription(SUBSCRIBE_TO_EXPORT, {
     client: authClient,
   });
-  const { subscription } = useExportStatusWidget(resource, data);
+  const { subscription, setReport } = useExportStatusWidget(resource, data);
   const classes = useStyles();
 
   if (!subscription) return null;
@@ -35,19 +33,17 @@ export const ExportStatusWidget = React.memo(({ resource }: { resource: string }
         </button>
         <span>
           {subscription.status !== "ready" && (
-            <>
-              Preparing a list of {translate(["resources", resource, "name"].join("."))} for
-              downloading&nbsp;
-            </>
+            <>Preparing a list of {subscription.exportType} for downloading&nbsp;</>
           )}
           {subscription.status === "ready" && (
             <>
-              File in the format [format] is ready
+              File in the format .{subscription.format} is ready ({subscription.exportType})
               <StandardButton
                 component="a"
                 target="_blank"
                 href={subscription.file}
                 startIcon={<ExportIcon />}
+                onClick={setReport}
                 text="Export"
                 variant="text"
                 onMobileView

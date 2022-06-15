@@ -51,7 +51,7 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: 
   resource,
 }) => {
   const location = useLocation();
-  const { total, perPage, setPerPage, loading } = useListContext();
+  const { total, setPerPage, ids } = useListContext();
   const queryParams = new URLSearchParams(location.search);
   const classes = useStyles();
 
@@ -78,7 +78,7 @@ export const PerPageCounter: React.FC<{ showBy?: (number | string)[]; resource: 
                   <button
                     className={cn(
                       "sortButton",
-                      queryParams.has("perPage") && perPage === number && "active",
+                      +ids.length === +number && "active",
                       !queryParams.has("perPage") && typeof number === "string" && "active"
                     )}
                     key={number}

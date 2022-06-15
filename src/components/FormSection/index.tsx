@@ -33,9 +33,10 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "22px",
     color: theme.palette.secondary.main,
     marginBottom: 8,
+    display: "inline-block",
     cursor: "pointer",
     "& > svg": {
-      marginLeft: 8,
+      marginLeft: 11,
       verticalAlign: "middle",
     },
   },

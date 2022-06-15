@@ -2,8 +2,10 @@ import * as React from "react";
 import cn from "classnames";
 
 import { Switch } from "../UI/MaterialUI/switch";
-import { makeStyles } from "@material-ui/core";
-import { GroupInputsShow } from "./show-view";
+import { Collapse, makeStyles } from "@material-ui/core";
+import { formHelperText, labelStyles } from "../Inputs/styles";
+import { type InputFormType } from "../Inputs/input-types";
+import { ArrayInputItemArrow } from "../../constants/icons";
 
 const useStyles = makeStyles({
   GroupInputWrapper: {
@@ -22,13 +24,13 @@ const useStyles = makeStyles({
     },
   },
   GroupInputs: {
-    padding: "5px 12px",
+    padding: "12px 24px",
     marginTop: 8,
     backgroundColor: "var(--primary-bg)",
     borderRadius: 4,
     "&.showView": {
       backgroundColor: "transparent",
-      padding: "5px 0px 0px 12px",
+      padding: "8px 0px 0px 12px",
       marginTop: 0,
       paddingRight: 0,
       borderBottom: "1px solid var(--secondary-color-disable)",
@@ -43,65 +45,59 @@ const useStyles = makeStyles({
         marginBottom: 0,
       },
     },
-  },
-  GroupInputsLabelWrapper: {
-    fontSize: 14,
-    fontFamily: "var(--font-family)",
-    fontWeight: 500,
-    marginTop: 8,
-    lineHeight: "20px",
-    display: "inline-block",
-    marginBottom: 5,
-    "& > span": {
-      marginRight: 5,
+    "& > div:first-child": {
+      marginTop: 0,
+    },
+    "& .MuiCollapse-wrapperInner .MuiFormControl-root:first-child": {
+      marginTop: 0,
     },
   },
-  GroupHelperText: {
-    fontFamily: "var(--font-family)",
-    fontSize: 12,
-    color: "var(--secondary-color-default)",
-    lineHeight: "16px",
+  GroupInputsLabelWrapper: {
+    "& .label": { ...labelStyles, marginRight: 9, marginBottom: 0 },
+    display: "inline-block",
+    cursor: "pointer",
+    marginTop: 8,
   },
+  GroupHelperText: formHelperText,
 });
 
 interface GroupInputsProps {
   label?: string;
-  initialView?: boolean;
   switchable?: boolean;
   groupHelperText?: string;
   className?: string;
-  inputType?: string;
+  inputType: InputFormType;
   source?: string;
   resource?: string;
   index?: number | string;
+  onlyCreateView?: boolean;
 }
 
 export const GroupInputsOrigin: React.FC<GroupInputsProps> = ({
   label,
   children,
-  initialView,
   switchable,
   className,
   inputType,
   groupHelperText,
+  onlyCreateView,
 }) => {
   const classes = useStyles();
-  const [show, setShow] = React.useState(
-    initialView || (inputType && ["show", "edit"].includes(inputType)) || false
-  );
+  const [show, setShow] = React.useState(["show", "edit"].includes(inputType) || false);
 
   return (
-    <>
+    <div>
       <div>
         {label && (
           <>
             <span
               style={{ cursor: switchable && inputType !== "show" ? "pointer" : "" }}
-              onClick={() => setShow((p) => (inputType !== "show" ? !p : p))}
+              onClick={() => setShow((p) => !p)}
               className={classes.GroupInputsLabelWrapper}
             >
-              <span>{label && label}</span>
+              <span className="label">{label && label}</span>
               {switchable && inputType !== "show" && <Switch checked={show} />}
+              {inputType === "show" && <ArrayInputItemArrow color="var(--secondary-color-main)" />}
             </span>
             {groupHelperText && inputType !== "show" && (
               <p className={classes.GroupHelperText}>{groupHelperText}</p>
@@ -109,29 +105,43 @@ export const GroupInputsOrigin: React.FC<GroupInputsProps> = ({
           </>
         )}
       </div>
-      <div className={cn(classes.GroupInputWrapper, className)}>
+      <div
+        className={cn(
+          classes.GroupInputWrapper,
+          inputType === "show" && !onlyCreateView && "showView",
+          className
+        )}
+      >
         {switchable ? (
           <>
-            {show && (
-              <div className={cn(classes.GroupInputs, inputType === "show" && "showView")}>
+            <Collapse in={show} timeout="auto">
+              <div
+                className={cn(
+                  classes.GroupInputs,
+                  inputType === "show" && !onlyCreateView && "showView"
+                )}
+              >
                 {children}
               </div>
-            )}
+            </Collapse>
           </>
         ) : (
-          <div className={cn(classes.GroupInputs, inputType === "show" && "showView")}>
-            {children}
+          <div
+            className={cn(
+              classes.GroupInputs,
+              inputType === "show" && !onlyCreateView && "showView"
+            )}
+          >
+            <Collapse in={show} timeout="auto">
+              {children}
+            </Collapse>
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
-export const GroupInputs: React.FC<GroupInputsProps> = (props) => {
-  return props.inputType && props.inputType === "show" ? (
-    <GroupInputsShow {...props} />
-  ) : (
-    <GroupInputsOrigin {...props} />
-  );
-};
+export const GroupInputs: React.FC<GroupInputsProps> = ({ inputType, ...rest }) => (
+  <GroupInputsOrigin inputType={inputType} {...rest} />
+);

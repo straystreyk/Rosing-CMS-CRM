@@ -99,7 +99,7 @@ const Season: React.FC<{
               : "reversedEpisodesOrder"
           }
           inputType={type}
-          label="Distribution"
+          label="Reversed episodes order"
           initialValue={false}
           choices={REVERSED_EPISODES_ORDER}
         />

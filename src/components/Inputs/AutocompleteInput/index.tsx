@@ -24,14 +24,14 @@ export const AutocompleteInputOrigin: React.FC<Omit<AutocompleteInputProps, "inp
   const classes = useStyles();
   return (
     <AutocompleteInputWithOpts
-      fullWidth
+      {...rest}
       options={{
         className: classes.AutocompleteInput,
         onKeyDown: resetOnBackspace,
       }}
       helperText={helperText ?? false}
       resettable={resettable ?? true}
-      {...rest}
+      fullWidth
     />
   );
 };

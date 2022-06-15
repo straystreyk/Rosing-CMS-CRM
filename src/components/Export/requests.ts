@@ -7,6 +7,9 @@ export const SUBSCRIBE_TO_EXPORT = gql`
         status
         progress
         file
+        exportType
+        format
+        id
       }
     }
   }
@@ -18,6 +21,21 @@ export const CHECK_SUBSCRIPTION = gql`
       status
       progress
       file
+      exportType
+      format
+      id
+    }
+  }
+`;
+
+export const SET_REPORT_DOWNLOADED = gql`
+  mutation setReportDownloaded($id: ID!) {
+    data: setReportDownloaded(id: $id) {
+      status
+      progress
+      file
+      exportType
+      format
       id
     }
   }

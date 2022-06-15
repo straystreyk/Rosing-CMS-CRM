@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core";
 import { GET_ONE_VIDEO_FILE } from "../../../../Providers/custom-requests";
 import { authClient } from "../../../../Providers/AuthProvider/client";
 import { UrlField } from "../../../../TableFields/url-field";
+import { StandardInputShowView } from "../../../StandatdInputs/standard-input-show-view";
+import cn from "classnames";
 
 export type MetadataType = {
   key: string;
@@ -10,27 +12,25 @@ export type MetadataType = {
 };
 
 const useStyles = makeStyles({
-  MetadataItem: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "8px 0",
-    marginBottom: 8,
-    marginLeft: "12px",
-    borderBottom: "1px solid #E7E9E9",
-    flexWrap: "wrap",
-    "& .metadataField": {
-      width: "50%",
-      color: "var(--primary-text-default)",
-      "&.field": {
-        width: "100%",
+  ArrayInputShowWrapperItem: {
+    paddingLeft: 12,
+    "& .StandardShowWrapper": {
+      borderBottom: "1px solid var(--secondary-color-disable)",
+      paddingBottom: 12,
+      marginBottom: 6,
+      paddingTop: 6,
+    },
+    "&.ArrayInputShowWrapperItem:first-child": {
+      "& .StandardShowWrapper:first-child": {
+        paddingTop: 0,
       },
-      "& .title": {
-        fontSize: 14,
-        fontWeight: 500,
-        lineHeight: "20px",
-        marginBottom: 4,
-        color: "var(--secondary-color-main)",
+    },
+    "&.ArrayInputShowWrapperItem:last-child": {
+      "& .StandardShowWrapper:last-child": {
+        borderBottom: "none",
+        marginBottom: 0,
       },
+      borderBottom: "1px solid var(--secondary-color-disable)",
     },
   },
 });
@@ -38,15 +38,10 @@ const useStyles = makeStyles({
 export const MetadataShow: React.FC<{ metaKey: string; value: string }> = ({ metaKey, value }) => {
   const classes = useStyles();
   return (
-    <div className={classes.MetadataItem}>
-      <div className="metadataField">
-        <div className="title">Key</div>
-        {metaKey}
-      </div>
-      <div className="metadataField">
-        <div className="title">Value</div>
-        {value}
-      </div>
+    <div className={cn(classes.ArrayInputShowWrapperItem, "ArrayInputShowWrapperItem")}>
+      <StandardInputShowView label="Key-Value">
+        {metaKey}={value}
+      </StandardInputShowView>
     </div>
   );
 };
@@ -89,28 +84,13 @@ export const ExtraVideos: React.FC<ExtraVideoType> = ({ kind, name, streamSource
   }, []);
 
   return (
-    <>
-      <div className={classes.MetadataItem}>
-        <div className="metadataField">
-          <div className="title">Kind</div>
-          {kind}
-        </div>
-      </div>
-      <div className={classes.MetadataItem}>
-        <div className="metadataField">
-          <div className="title">Name</div>
-          {name}
-        </div>
-      </div>
-      <div className={classes.MetadataItem}>
-        <div className="metadataField">
-          <div className="title">Video file</div>
-          <UrlField
-            to={`/media_content/video/video_files/${videoFiles && videoFiles.id}/show`}
-            name={videoFiles && videoFiles.name}
-          />
-        </div>
-      </div>
-    </>
+    <div className={cn(classes.ArrayInputShowWrapperItem, "ArrayInputShowWrapperItem")}>
+      <StandardInputShowView label={kind.charAt(0).toUpperCase() + kind.slice(1)}>
+        <UrlField
+          to={`/media_content/video/video_files/${videoFiles && videoFiles.id}/show`}
+          name={videoFiles && videoFiles.name}
+        />
+      </StandardInputShowView>
+    </div>
   );
 };

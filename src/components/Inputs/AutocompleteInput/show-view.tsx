@@ -35,7 +35,7 @@ const ShowView: React.FC<AutocompleteInputProps> = (props) => {
   const link = getLink(props.source);
 
   return (
-    <StandardInputShowView label={props.label ? props.label : ""}>
+    <StandardInputShowView label={props.label}>
       {!!current && current.name && link && (
         <UrlField to={`${link}/${current.id}/show`} name={current.name} />
       )}

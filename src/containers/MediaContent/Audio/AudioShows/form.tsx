@@ -305,7 +305,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           switchable
           fullWidth
         />
-        <CheckBoxGroup initialSourceState="allowedCountries">
+        <CheckBoxGroup inputType={type} initialSourceState="allowedCountries">
           <ReferenceCustomInput
             component={AutocompleteArrayInput}
             inputType={type}
@@ -329,7 +329,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
             idName="alpha2"
           />
         </CheckBoxGroup>
-        <CheckBoxGroup initialSourceState="allowedApiClients">
+        <CheckBoxGroup inputType={type} initialSourceState="allowedApiClients">
           <ReferenceArrayInput
             label=""
             source="allowedApiClients"

@@ -3,6 +3,12 @@ import { FormControlLabel, Radio } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { labelStyles } from "../../Inputs/styles";
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../../constants/style-constants";
+import { InputFormType } from "../../Inputs/input-types";
+
+interface CheckBoxGroupProps {
+  initialSourceState: string;
+  inputType: InputFormType;
+}
 
 const useStyles = makeStyles({
   CheckBoxGroup: {
@@ -22,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const CheckBoxGroup: React.FC<{ initialSourceState: string }> = React.memo(
+export const CheckBoxGroupOrigin: React.FC<Omit<CheckBoxGroupProps, "inputType">> = React.memo(
   ({ children, initialSourceState }) => {
     const [selectedValue, setSelectedValue] = React.useState(initialSourceState);
     const classes = useStyles();
@@ -31,17 +37,20 @@ export const CheckBoxGroup: React.FC<{ initialSourceState: string }> = React.mem
       setSelectedValue(event.target.value);
     };
 
-    const controlProps = (item: string) => ({
-      checked: selectedValue === item,
-      onChange: handleChange,
-      value: item,
-      name: "size-radio-button-demo",
-      inputProps: { "aria-label": item },
-    });
+    const controlProps = React.useCallback(
+      (item: string) => ({
+        checked: selectedValue === item,
+        onChange: handleChange,
+        value: item,
+        name: "size-radio-button-demo",
+        inputProps: { "aria-label": item },
+      }),
+      [selectedValue]
+    );
 
     return (
       <div className={classes.CheckBoxGroup}>
-        {React.Children.map(children as React.ReactElement, (child: React.ReactElement) => {
+        {React.Children.map(children as React.ReactElement[], (child) => {
           return (
             <>
               <FormControlLabel
@@ -55,7 +64,7 @@ export const CheckBoxGroup: React.FC<{ initialSourceState: string }> = React.mem
             </>
           );
         })}
-        {React.Children.map(children as React.ReactElement, (child: React.ReactElement) => {
+        {React.Children.map(children as React.ReactElement[], (child) => {
           return (
             <div
               style={{ display: selectedValue !== child.props.source ? "none" : "block" }}
@@ -68,4 +77,8 @@ export const CheckBoxGroup: React.FC<{ initialSourceState: string }> = React.mem
       </div>
     );
   }
+);
+
+export const CheckBoxGroup: React.FC<CheckBoxGroupProps> = ({ inputType, ...rest }) => (
+  <CheckBoxGroupOrigin {...rest} />
 );

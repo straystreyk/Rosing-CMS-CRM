@@ -8,8 +8,12 @@ import { TextInputOrigin } from "./text-input";
 import { formatTimeInput } from "../../index";
 import { EmptyInput } from "../../styles";
 import { StandardInputShowView } from "../standard-input-show-view";
+import cn from "classnames";
 
 const useStyles = makeStyles({
+  Active: {
+    display: "block !important",
+  },
   IDField: {
     "& p": {
       wordBreak: "break-all",
@@ -94,7 +98,9 @@ const ShowView: React.FC<InputProps> = (props) => {
 
   return (
     <StandardInputShowView label={props.label}>
-      <p ref={ref}>{getValue(props.source)}</p>
+      <p ref={ref} className={cn(activeText && classes.Active)}>
+        {getValue(props.source)}
+      </p>
       {isBigText && !activeText && (
         <button onClick={showText} className={classes.ShowMoreButton}>
           Show more

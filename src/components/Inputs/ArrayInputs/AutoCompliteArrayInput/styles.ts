@@ -10,7 +10,7 @@ export const AutoCompleteInputStyles = {
       margin: 0,
     },
     "&.Mui-error": {
-      borderColor: "var(--accent-color)",
+      borderColor: "var(--additional-red-default)",
     },
     "& .MuiSvgIcon-root path": {
       color: "var(--accent-color)",

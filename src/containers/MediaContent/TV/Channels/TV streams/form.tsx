@@ -151,7 +151,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         source="previewBucket"
         fullWidth
       />
-      <CheckBoxGroup initialSourceState="allowedCountries">
+      <CheckBoxGroup inputType={type} initialSourceState="allowedCountries">
         <ReferenceCustomInput
           component={AutocompleteArrayInput}
           inputType={type}
