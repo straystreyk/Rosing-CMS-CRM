@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StandardButton } from "../standard-button";
+import { StandardButton } from "../StandardButton/standard-button";
 import { useRefresh } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
@@ -57,9 +57,9 @@ export const RefreshButton: React.FC = () => {
 
   return (
     <StandardButton
-      customColor="var(--primary-button-default)"
       onClick={acceptRefresh}
       variant="icon"
+      buttonType="secondary"
       className={classes.RefreshIcon}
     >
       <RefreshIcon />

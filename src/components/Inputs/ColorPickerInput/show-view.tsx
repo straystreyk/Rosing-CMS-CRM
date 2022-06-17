@@ -1,5 +1,5 @@
 import * as React from "react";
-import { EditInputComponent } from "../edit-input-component";
+import { EditInputComponent } from "../FastEditInput";
 import { makeStyles } from "@material-ui/core";
 import { ColorPickerInputOrigin, ColorPickerInputProps } from "./color-picker-input";
 import { useFormState } from "react-final-form";

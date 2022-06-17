@@ -12,7 +12,7 @@ import { CustomDatagridProps, ToolbarProps } from "./custom-datagrid-types";
 import { PlusIcon } from "../../constants/icons";
 import { AppState } from "../../types";
 import { PerPageCounter } from "../Pagination/per-page-counter";
-import { StandardButton } from "../UI/Buttons/standard-button";
+import { StandardButton } from "../UI/Buttons/StandardButton/standard-button";
 import { Pagination } from "../Pagination";
 import { DatagridStyles } from "./styles";
 import { ArrowFilterIcon } from "../CustomFilters/constants";
@@ -46,7 +46,7 @@ const ToolBar: React.FC<{
             startIcon={<PlusIcon color="#fff" />}
             to={`${basePath}/create`}
             variant="contained"
-            color="primary"
+            buttonType="primary"
             text={`Create ${translate(`resources.${resource}.name`).toLowerCase()}`}
           />
         </div>

@@ -1,12 +1,10 @@
 import * as React from "react";
-import {
-  AutocompleteArrayInput as StandardAutocompleteArrayInput,
-  AutocompleteArrayInputProps,
-} from "react-admin";
+import { AutocompleteArrayInput as StandardAutocompleteArrayInput } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
 import { AutoCompleteInputStyles } from "./styles";
 import { AutoCompleteArrayInputShow } from "./show-view";
+import { InputProps } from "../../input-types";
 
 const useStyles = makeStyles({ AutoCompleteInputStyles });
 
@@ -37,12 +35,9 @@ export const AutocompleteArrayInputOrigin: React.FC<any> = ({
   );
 };
 
-export const AutocompleteArrayInput: React.FC<AutocompleteArrayInputProps> = ({
-  inputType,
-  ...props
-}) => {
+export const AutocompleteArrayInput: React.FC<InputProps> = ({ inputType, ...props }) => {
   return inputType === "show" ? (
-    <AutoCompleteArrayInputShow {...props} />
+    <AutoCompleteArrayInputShow inputType={inputType} {...props} />
   ) : (
     <AutocompleteArrayInputOrigin {...props} />
   );

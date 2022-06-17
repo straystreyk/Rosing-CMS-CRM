@@ -1,7 +1,7 @@
 import * as React from "react";
 import cn from "classnames";
 
-import { Switch } from "../UI/MaterialUI/switch";
+import { Switch } from "../UI/Buttons/switch";
 import { Collapse, makeStyles } from "@material-ui/core";
 import { formHelperText, labelStyles } from "../Inputs/styles";
 import { type InputFormType } from "../Inputs/input-types";
@@ -23,9 +23,8 @@ const useStyles = makeStyles({
       },
     },
   },
-  GroupInputs: {
+  GroupInputsItem: {
     padding: "12px 24px",
-    marginTop: 8,
     backgroundColor: "var(--primary-bg)",
     borderRadius: 4,
     "&.showView": {
@@ -54,11 +53,17 @@ const useStyles = makeStyles({
   },
   GroupInputsLabelWrapper: {
     "& .label": { ...labelStyles, marginRight: 9, marginBottom: 0 },
+    "& span": {
+      cursor: "pointer",
+    },
     display: "inline-block",
-    cursor: "pointer",
     marginTop: 8,
+    marginBottom: 8,
+    "&.showView": {
+      marginBottom: 0,
+    },
   },
-  GroupHelperText: formHelperText,
+  GroupHelperText: { ...formHelperText, marginTop: 0 },
 });
 
 interface GroupInputsProps {
@@ -71,6 +76,7 @@ interface GroupInputsProps {
   resource?: string;
   index?: number | string;
   onlyCreateView?: boolean;
+  nodesWithoutBG?: React.ReactNode;
 }
 
 export const GroupInputsOrigin: React.FC<GroupInputsProps> = ({
@@ -81,63 +87,59 @@ export const GroupInputsOrigin: React.FC<GroupInputsProps> = ({
   inputType,
   groupHelperText,
   onlyCreateView,
+  nodesWithoutBG,
 }) => {
   const classes = useStyles();
-  const [show, setShow] = React.useState(["show", "edit"].includes(inputType) || false);
+  const [show, setShow] = React.useState(true);
 
   return (
     <div>
-      <div>
-        {label && (
-          <>
-            <span
-              style={{ cursor: switchable && inputType !== "show" ? "pointer" : "" }}
-              onClick={() => setShow((p) => !p)}
-              className={classes.GroupInputsLabelWrapper}
-            >
-              <span className="label">{label && label}</span>
-              {switchable && inputType !== "show" && <Switch checked={show} />}
-              {inputType === "show" && <ArrayInputItemArrow color="var(--secondary-color-main)" />}
-            </span>
-            {groupHelperText && inputType !== "show" && (
-              <p className={classes.GroupHelperText}>{groupHelperText}</p>
-            )}
-          </>
-        )}
-      </div>
-      <div
-        className={cn(
-          classes.GroupInputWrapper,
-          inputType === "show" && !onlyCreateView && "showView",
-          className
-        )}
-      >
-        {switchable ? (
-          <>
-            <Collapse in={show} timeout="auto">
+      {label && (
+        <div className={cn(classes.GroupInputsLabelWrapper, inputType === "show" && "showView")}>
+          <span onClick={() => inputType === "show" && setShow((p) => !p)}>
+            <span className="label">{label}</span>
+            {switchable && inputType !== "show" && <Switch checked={show} />}
+            {inputType === "show" && <ArrayInputItemArrow color="var(--secondary-color-main)" />}
+          </span>
+          {groupHelperText && inputType !== "show" && (
+            <p className={classes.GroupHelperText}>{groupHelperText}</p>
+          )}
+        </div>
+      )}
+      <Collapse in={show} timeout="auto">
+        {nodesWithoutBG}
+        <div
+          className={cn(
+            classes.GroupInputWrapper,
+            inputType === "show" && !onlyCreateView && "showView",
+            className
+          )}
+        >
+          {switchable ? (
+            <>
               <div
                 className={cn(
-                  classes.GroupInputs,
+                  classes.GroupInputsItem,
+                  "GroupInputsItem",
                   inputType === "show" && !onlyCreateView && "showView"
                 )}
               >
                 {children}
               </div>
-            </Collapse>
-          </>
-        ) : (
-          <div
-            className={cn(
-              classes.GroupInputs,
-              inputType === "show" && !onlyCreateView && "showView"
-            )}
-          >
-            <Collapse in={show} timeout="auto">
+            </>
+          ) : (
+            <div
+              className={cn(
+                classes.GroupInputsItem,
+                "GroupInputsItem",
+                inputType === "show" && !onlyCreateView && "showView"
+              )}
+            >
               {children}
-            </Collapse>
-          </div>
-        )}
-      </div>
+            </div>
+          )}
+        </div>
+      </Collapse>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { Field } from "react-final-form";
 import { makeStyles } from "@material-ui/core/styles";
 import { formHelperText, labelStyles } from "../styles";
 import { CheckboxShow } from "./show-view";
+import { InputProps } from "../input-types";
 
 const useStyles = makeStyles({
   Checkbox: {
@@ -30,14 +31,9 @@ const useStyles = makeStyles({
   },
 });
 
-export interface CheckboxProps {
-  helperText?: string;
-  source: string;
+export interface CheckboxProps extends InputProps {
   checkboxLabel?: string;
-  label?: string;
   initialValue?: boolean;
-  inputType?: string;
-  resource: string;
 }
 
 export const CheckboxOrigin: React.FC<CheckboxProps> = ({

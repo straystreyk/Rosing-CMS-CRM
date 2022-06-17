@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Create, useRedirect, useRefresh, Edit } from "react-admin";
+import { Create, useRedirect, useRefresh } from "react-admin";
 import { useNotify } from "ra-core";
 import { Box } from "@material-ui/core";
 import { EditForm } from "./FormWithRedirect";
@@ -59,7 +59,7 @@ export const ResourceCreate: React.FC<CreateProps> = ({
         type: "info",
         messageArgs: messageArgs ?? { name: data.name },
       });
-      redirect("list", props.basePath, data.id, data);
+      redirect(`${props.basePath as string}/${data.id}/show`, props.basePath);
       refresh();
     },
     [messageArgs, notify, props.basePath, props.resource, redirect, refresh]

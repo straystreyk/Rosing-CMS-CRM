@@ -17,7 +17,7 @@ import {
   UnPublishedIcons,
   UnPublishIcon,
 } from "../../../../../constants/icons";
-import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../../components/UI/Buttons/StandardButton/standard-button";
 import { useTableActions } from "../../../../../custom-hooks/use-table-actions";
 import { channelFilter } from "./channel-filter";
 import { ToModelField } from "../../../../../components/TableFields/to-model-field";

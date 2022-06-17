@@ -15,7 +15,7 @@ import { EditButton } from "../../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../../components/UI/RA/delete-button";
 import { ReferenceArrayField } from "../../../../../components/TableFields/reference-array-field";
 import { useModalMUI } from "../../../../../components/Modal/use-modal";
-import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../../components/UI/Buttons/StandardButton/standard-button";
 import { TVProgramsIcon } from "../../../../../constants/icons";
 import { ModalTVPrograms, useTVPrograms } from "./tv-programs";
 import { ExpandWrapper } from "../../../../../components/DatagridList/expand-wrapper";

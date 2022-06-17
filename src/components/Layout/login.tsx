@@ -38,7 +38,7 @@ import {
 } from "../../constants/icons";
 import { PasswordInput } from "../Inputs/StandatdInputs/password-input";
 import { ArrowLeftIcon } from "@material-ui/pickers/_shared/icons/ArrowLeftIcon";
-import { StandardButton } from "../UI/Buttons/standard-button";
+import { StandardButton } from "../UI/Buttons/StandardButton/standard-button";
 
 const useStyles = makeStyles((theme) => ({
   mainStyles,
@@ -141,6 +141,8 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
                     label="Email"
                     source="email"
                     placeholder="example@example.com"
+                    inputType="create"
+                    resource="Login"
                   />
                   {!isResetPage && <PasswordInput source="password" fullWidth />}
                   <CardActions className={classes.actionsStyles}>
@@ -163,8 +165,9 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
                   </CardActions>
                   <StandardButton
                     type="submit"
-                    color="primary"
                     className={classes.cardButton}
+                    buttonType="primary"
+                    variant="text"
                     startIcon={
                       !isResetPage ? <LoginIcon color="#ffffff" /> : <ResetIcon color="#ffffff" />
                     }

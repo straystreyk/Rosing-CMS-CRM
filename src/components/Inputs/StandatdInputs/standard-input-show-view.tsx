@@ -37,9 +37,11 @@ export const StandardInputShowView: React.FC<{
   const classes = useStyles();
   return (
     <div className={cn(classes.StandardShowWrapper, "StandardShowWrapper")}>
-      <label className={options?.label?.className} onClick={options?.label?.onClick}>
-        {label} {options?.label?.icon}
-      </label>
+      {label && (
+        <label className={options?.label?.className} onClick={options?.label?.onClick}>
+          {label} {options?.label?.icon}
+        </label>
+      )}
       <div className={cn(classes.TextInputShowValue, "TextInputShowValue", className && className)}>
         {children}
       </div>

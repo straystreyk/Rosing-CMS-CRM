@@ -1,7 +1,7 @@
 import * as React from "react";
 import cn from "classnames";
 
-import { useListContext, useLoading } from "react-admin";
+import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { useLocation } from "react-router-dom";

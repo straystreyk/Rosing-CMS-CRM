@@ -1,7 +1,7 @@
 import * as React from "react";
 import { authClient } from "../../../../../components/Providers/AuthProvider/client";
 import { GET_EPG_SOURCES_TYPES } from "./requests";
-import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../../components/UI/Buttons/StandardButton/standard-button";
 import { ArrayInputItemArrow, PlusIcon } from "../../../../../constants/icons";
 import { Menu, MenuItem } from "@material-ui/core";
 import { Link } from "react-router-dom";

@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Collapse, makeStyles, Tooltip } from "@material-ui/core";
+import { Collapse, makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 
-import { EditInputComponent } from "../../edit-input-component";
+import { EditInputComponent } from "../../FastEditInput";
 import { ArrayInputNoDragOrigin } from "./array-input-no-drag";
-import { EmptyInput, labelStyles } from "../../styles";
+import { EmptyInput } from "../../styles";
 import { ArrayInputProps } from "../Arrayinput/array-input";
 import { ExtraVideos, ExtraVideoType, MetadataShow, MetadataType } from "./views/metadata";
 import { AgeRating, RatingShow } from "./views/rating";

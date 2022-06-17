@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useFormState } from "react-final-form";
 
 import { TitleActionButtonsType } from "../../../../components/ResourceView/ResourceTitle/types";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import { ResourceCountEpisodesIcon } from "../../../../constants/icons";
 
 export const ShowTitleActionButtons: TitleActionButtonsType = React.memo((props) => {

@@ -5,7 +5,7 @@ import { ToolbarProps } from "../../../../components/DatagridList/custom-datagri
 import { BackArrowTitle, ResourceAddIcon } from "../../../../constants/icons";
 import { MainLoader } from "../../../../components/MainLoader";
 import { Link, useHistory } from "react-router-dom";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import { TopToolBar } from "../../../../constants/style-constants";
 
 const LOADER_SIZE = 15;

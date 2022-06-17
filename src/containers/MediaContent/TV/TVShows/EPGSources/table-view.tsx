@@ -12,7 +12,7 @@ import { EPGSourceToolbar } from "./toolbar";
 import { tableLinks } from "./epg-source-links";
 import { MoreActionsButton } from "../../../../../components/UI/Buttons/MoreActionsButton";
 import { DeleteButton } from "../../../../../components/UI/RA/delete-button";
-import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../../components/UI/Buttons/StandardButton/standard-button";
 import { EditIcon } from "../../../../../constants/icons";
 
 const useStyles = makeStyles({
@@ -97,9 +97,9 @@ export const TableView: React.FC<ShowProps> = (props) => {
           <MoreActionsButton>
             <StandardButton
               component={Link}
-              startIcon={<EditIcon color="var(--primary-button-default)" />}
-              customColor="var(--primary-button-default)"
+              startIcon={<EditIcon />}
               variant="text"
+              buttonType="secondary"
               to={`/${props.resource}/${tableLinks[record?.type.split("::")[2]]}/${
                 record?.id
               }/edit`}

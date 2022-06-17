@@ -16,7 +16,7 @@ import { PUBLISHED_CHOICES_FORM } from "../../../../../constants/forms-constants
 import { RadioButtonGroupInput } from "../../../../../components/Inputs/RadioButtonGroupInput";
 import { AutocompleteInput } from "../../../../../components/Inputs/AutocompleteInput";
 import { ReferenceArrayInput } from "../../../../../components/Inputs/ReferenceInputs/reference-array-input";
-import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../../components/UI/Buttons/StandardButton/standard-button";
 import { ArrayInputItemArrow, PlusIcon } from "../../../../../constants/icons";
 import { ModelFormStyles } from "../../../../../components/ResourceView/FormWithRedirect/styles";
 
@@ -108,6 +108,9 @@ const ChannelVersion: React.FC<{
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source={
+              parentSourceWithIndex ? `${parentSourceWithIndex}.streamSourceIds` : "streamSourceIds"
+            }
             resource={resource}
             inputType={type}
             fullWidth
@@ -168,6 +171,7 @@ const ChannelVersion: React.FC<{
         {/*  />*/}
         {/*</ReferenceInput>*/}
         <RadioButtonGroupInput
+          resource={resource}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.published` : "published"}
           label="Publishing"
           initialValue={false}

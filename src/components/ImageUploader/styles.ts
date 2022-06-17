@@ -79,9 +79,7 @@ export const ImageUploaderStyles: any = {
     marginTop: 8,
     display: "flex",
     alignItems: "center",
-    "& > button:first-child": {
-      color: "#D21C1C",
-    },
+    "& .Delete": {},
     "& button": {
       marginRight: 5,
     },

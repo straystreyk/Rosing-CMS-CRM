@@ -35,7 +35,7 @@ import { CheckBoxGroup } from "../../../../../components/UI/MaterialUI/check-box
 import { ReferenceCustomInput } from "../../../../../components/Inputs/ReferenceInputs/reference-custom-input";
 import { ALL_COUNTRIES } from "../../../../../components/Providers/custom-requests";
 import { AutocompleteInput } from "../../../../../components/Inputs/AutocompleteInput";
-import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../../components/UI/Buttons/StandardButton/standard-button";
 import { ResourceCountIcon } from "../../../../../constants/icons";
 import { Link } from "react-router-dom";
 import { AutocompleteArrayFreeSolo } from "../../../../../components/Inputs/ArrayInputs/AutocompleteFreeSolo";
@@ -150,6 +150,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="genreIds"
             resource={resource}
             inputType={type}
             helperText="You can select several genres from the list"
@@ -165,6 +166,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="productionCountryIds"
             resource={resource}
             inputType={type}
             helperText="You can select several countries from the list"
@@ -181,6 +183,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           source="markers"
           label="Label"
           inputType={type}
+          resource={resource}
           choices={SELECT_MARKERS}
           helperText="The element that is displayed on top of the TV channel card in the application"
         />
@@ -208,6 +211,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           <TextInput
             label="Seo keywords"
             source="seoKeywords"
+            resource={resource}
             inputType={type}
             helperText="Keywords optimized for search engines that are used in the HTML markup of the page. To separate words, use a comma with a space."
             fullWidth
@@ -407,6 +411,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           source="published"
           label="Publishing"
           initialValue={false}
+          resource={resource}
           inputType={type}
           choices={PUBLISHED_CHOICES_FORM}
         />
@@ -414,6 +419,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           source="cmsDistribution"
           label="Distribution"
           inputType={type}
+          resource={resource}
           choices={SELECT_DISTRIBUTION}
         />
         <ArrayInputNoDrag
@@ -462,6 +468,8 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           >
             <AutocompleteArrayInput
               optionText="name"
+              source="allowedApiClientIds"
+              resource={resource}
               inputType={type}
               helperText="The list of API clients for which access to the series is allowed, access is denied for other API clients. Leave the field empty if access is allowed for all API clients."
             />
@@ -475,8 +483,10 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
             perPage={INPUT_ITEMS_PER_PAGE}
           >
             <AutocompleteArrayInput
+              source="forbiddenApiClientIds"
               optionText="name"
               inputType={type}
+              resource={resource}
               helperText="List of API clients for which access to the series is prohibited"
             />
           </ReferenceArrayInput>

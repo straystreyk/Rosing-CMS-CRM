@@ -1,8 +1,9 @@
 import * as React from "react";
 import { TextInputOrigin } from "../../Inputs/StandatdInputs/TextInput/text-input";
 import { requiredValidate } from "../../Inputs";
+import { ChildComponentProps } from "../../Inputs/ArrayInputs/ArrayInputNoDrag/array-input-no-drag";
 
-export const MetaData: React.FC<{ parentSourceWithIndex: string; inputType: string }> = React.memo(
+export const MetaData: React.FC<ChildComponentProps> = React.memo(
   ({ parentSourceWithIndex, inputType }) => {
     return (
       <>

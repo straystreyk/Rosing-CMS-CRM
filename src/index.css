@@ -3,6 +3,8 @@
     --accent-color-hover: #00D6B5;
     --accent-color-select: #F2FDFB;
     --additional-red-default: #D21C1C;
+    --additional-red-hover: #FF0000;
+    --additional-red-select: #FFEEEE;
     --additional-green-default: #28A138;
     --secondary-color-main: #0F1F26;
     --secondary-color-default: #9FA5A8;
@@ -14,6 +16,7 @@
     --primary-focus-2: #7FC5FF;
     --primary-bg: #F0F8FF;
     --primary-bg-1: #CCE8FF;
+    --primary-bg-2: #F0F8FF;
     --primary-bg-3: #FAFDFF;
     --font-family: 'Gilroy', sans-serif;
     --fontSizeLG: 14px;

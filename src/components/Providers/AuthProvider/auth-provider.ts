@@ -30,7 +30,7 @@ export const authProvider: AuthProvider = {
     return Promise.resolve();
   },
   checkError: (error) => {
-    if (error instanceof Error && error.message.includes("401")) {
+    if (error instanceof Error && error.message === "Invalid token") {
       localStorage.removeItem("token");
       return Promise.reject();
     }

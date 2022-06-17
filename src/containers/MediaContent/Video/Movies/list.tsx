@@ -15,7 +15,7 @@ import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActions
 import { makeStyles } from "@material-ui/core";
 import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import { Record as RecordRA } from "ra-core";
 import { DatagridList } from "../../../../components/DatagridList";
 import { movieFilters } from "./movie-filters";

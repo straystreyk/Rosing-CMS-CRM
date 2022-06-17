@@ -17,7 +17,9 @@ const INPUT_ITEMS_PER_PAGE = 25;
 export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   return (
     <>
-      {type !== "create" && <TextInput label="ID" source="id" inputType={type} fullWidth />}
+      {type !== "create" && (
+        <TextInput resource={resource} label="ID" source="id" inputType={type} fullWidth />
+      )}
       <ReferenceInput
         label="Channel version"
         source="channelVersionId"

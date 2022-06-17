@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import { TextInput } from "../StandatdInputs/TextInput/text-input";
 import { useForm, useFormState } from "react-final-form";
 import { Validator } from "react-admin";
-import { StandardButton } from "../../UI/Buttons/standard-button";
+import { StandardButton } from "../../UI/Buttons/StandardButton/standard-button";
 import { PlusIcon } from "../../../constants/icons";
 import { ColorPickerShow } from "./show-view";
 import { ColorPickerStyles } from "./styles";
@@ -87,12 +87,14 @@ export const ColorPickerInputOrigin: React.FC<ColorPickerInputProps> = ({
                 style={{ width: 0, height: 0, opacity: 0 }}
               />
               <TextInput
-                helperText={false}
+                helperText={undefined}
                 source={source}
                 resettable={false}
                 disabled={true}
                 validate={validator as Validator}
                 initialValue={value}
+                inputType="create"
+                resource=""
                 label=""
               />
             </div>
@@ -100,12 +102,11 @@ export const ColorPickerInputOrigin: React.FC<ColorPickerInputProps> = ({
         ) : (
           <StandardButton
             startIcon={<PlusIcon color="var(--primary-button-default)" />}
-            color="secondary"
+            buttonType="secondary"
             variant="text"
             onClick={() => setActive(true)}
-          >
-            Add {label}
-          </StandardButton>
+            text={`Add ${label}`}
+          />
         )}
       </div>
     </div>

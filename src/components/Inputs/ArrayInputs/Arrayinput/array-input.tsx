@@ -11,26 +11,23 @@ import {
   HideIcon,
   PlusIcon,
 } from "../../../../constants/icons";
-import { useForm, useFormState } from "react-final-form";
+import { useForm } from "react-final-form";
 import { SelectButton } from "../../../UI/Buttons/select-button";
-import { StandardButton } from "../../../UI/Buttons/standard-button";
+import { StandardButton } from "../../../UI/Buttons/StandardButton/standard-button";
 import { ArrayInputShow } from "./show-view";
+import { InputProps } from "../../input-types";
+import { DocumentNode } from "graphql";
 
-export interface ArrayInputProps {
-  source: string;
-  resource: string;
-  label?: string;
-  helperText?: string;
+export interface ArrayInputProps extends InputProps {
   children?: any;
   getItemLabel?: () => string;
-  inputType: string;
   addReorder?: boolean;
   draggable?: boolean;
   itemClass?: string;
   inputClass?: string;
   ChildComponent: any;
   resettable?: boolean;
-  query?: any;
+  query?: DocumentNode;
   initialPushObject?: {};
 }
 
@@ -206,8 +203,8 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
           <div className={classes.ArrayInputTopButtons}>
             <StandardButton
               type="button"
-              color="secondary"
               variant="text"
+              buttonType="secondary"
               startIcon={<HideIcon color="#005AA3" />}
               onClick={() => setShow((p) => !p)}
               text={show ? "Hide all" : "Show all"}
@@ -278,10 +275,12 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                                     <div className={classes.ArrayInputButtonsWrapper}>
                                       <StandardButton
                                         type="button"
-                                        variant="text"
-                                        startIcon={<DeleteIcon color={"#D21C1C"} />}
+                                        variant="icon"
+                                        buttonType="additional-red"
+                                        startIcon={
+                                          <DeleteIcon color="var(--additional-red-default)" />
+                                        }
                                         onClick={() => fieldProps.fields.remove(index)}
-                                        customColor="#D21C1C"
                                         text="Delete"
                                       />
                                     </div>
@@ -304,10 +303,9 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                               <StandardButton
                                 startIcon={<PlusIcon color="var(--accent-color)" />}
                                 type="button"
-                                color="primary"
                                 onClick={(e) => pushResource()}
-                                customColor="var(--accent-color)"
                                 variant="text"
+                                buttonType="secondary"
                                 text="Add another one"
                               />
                             )}

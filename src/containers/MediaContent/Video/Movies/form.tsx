@@ -22,6 +22,7 @@ import { FormTabs } from "../../../../components/Tabs/form-tabs";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
 import { ImageUploaderV2 } from "../../../../components/ImageUploader";
 import {
+  ANNOUNCED_CHOICES_FORM,
   EXTRA_VIDEO_TYPES,
   INPUT_LABEL_PROPS,
   PUBLISHED_CHOICES_FORM,
@@ -119,17 +120,33 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           label="Description"
           source="description"
         />
-        <TextInput
-          InputLabelProps={INPUT_LABEL_PROPS}
-          resource={resource}
+        <GroupInputsOrigin
+          nodesWithoutBG={
+            <RadioButtonGroupInput
+              source="announced"
+              label=""
+              initialValue={false}
+              style={{ marginTop: 0 }}
+              inputType={type}
+              choices={ANNOUNCED_CHOICES_FORM}
+              resource={resource}
+            />
+          }
+          label="Release"
           inputType={type}
-          resettable={false}
-          helperText="Release date in the country where the application is used. If the release is upcoming, then the date is mandatory."
-          label="Release date"
-          source="releaseDate"
-          type="date"
-          fullWidth
-        />
+        >
+          <TextInput
+            InputLabelProps={INPUT_LABEL_PROPS}
+            resource={resource}
+            inputType={type}
+            resettable={false}
+            helperText="Release date in the country where the application is used. If the release is upcoming, then the date is mandatory."
+            label="Release date"
+            source="releaseDate"
+            type="date"
+            fullWidth
+          />
+        </GroupInputsOrigin>
         <ReferenceArrayInput
           label="Languages"
           source="languageIds"
@@ -140,6 +157,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="languageIds"
             resource={resource}
             inputType={type}
             helperText="The language of the movie's audio track. You can select multiple languages from the list."
@@ -155,6 +173,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="genreIds"
             resource={resource}
             inputType={type}
             helperText="You can select several genres from the list"
@@ -170,6 +189,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="productionCountryIds"
             resource={resource}
             inputType={type}
             helperText="You can select several countries from the list"
@@ -213,6 +233,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
         >
           <AutocompleteArrayInput
             optionText="name"
+            source="studioIds"
             inputType={type}
             resource={resource}
             helperText="A film production or rental company. You can select several studios from the list."
@@ -259,6 +280,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
         <AutocompleteArrayInput
           source="markers"
           label="Label"
+          resource={resource}
           inputType={type}
           choices={SELECT_MARKERS}
           helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
@@ -330,10 +352,11 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           reference="media_content/video/video_files"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
-          validate={requiredValidate}
         >
           <AutocompleteArrayInput
+            source="streamSourceIds"
             optionText="name"
+            resource={resource}
             inputType={type}
             helperText="You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
           />
@@ -446,14 +469,18 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           switchable
           fullWidth
         />
-        <CheckBoxGroup initialSourceState="allowedCountries" inputType={type}>
+        <CheckBoxGroup
+          initialSourceState="allowedCountries"
+          inputType={type}
+          label="Access for countries"
+        >
           <ReferenceCustomInput
             component={AutocompleteArrayInput}
             inputType={type}
             query={ALL_COUNTRIES}
             resource={resource}
             source="allowedCountries"
-            checkBoxLabel="Allowed Countries"
+            checkBoxLabel="Allowed"
             helperText="The list of countries in which the film is available, access is prohibited for other countries. Leave the field empty if access is allowed for all countries."
             label=""
             idName="alpha2"
@@ -463,19 +490,23 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
             inputType={type}
             query={ALL_COUNTRIES}
             resource={resource}
-            checkBoxLabel="Disallowed countries"
+            checkBoxLabel="Disallowed"
             helperText="List of countries where the film is not available"
             label=""
             source="disallowedCountries"
             idName="alpha2"
           />
         </CheckBoxGroup>
-        <CheckBoxGroup inputType={type} initialSourceState="allowedApiClientIds">
+        <CheckBoxGroup
+          inputType={type}
+          initialSourceState="allowedApiClientIds"
+          label="Access for api clients"
+        >
           <ReferenceArrayInput
             label=""
             source="allowedApiClientIds"
             reference="api_clients"
-            checkBoxLabel="Allowed api clients"
+            checkBoxLabel="Allowed"
             resource={resource}
             perPage={INPUT_ITEMS_PER_PAGE}
           >
@@ -491,7 +522,7 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
             label=""
             source="forbiddenApiClientIds"
             reference="api_clients"
-            checkBoxLabel="Forbidden api clients"
+            checkBoxLabel="Disallowed"
             resource={resource}
             perPage={INPUT_ITEMS_PER_PAGE}
           >

@@ -8,9 +8,11 @@ export const ExportStatusWidgetStyles = {
     display: "flex",
     alignItems: "center",
     backgroundColor: "var(--primary-bg)",
-    "& span": {
+    "& span.text": {
       color: "var(--primary-button-default)",
       fontWeight: 500,
+      display: "flex",
+      alignItems: "center",
       fontSize: 14,
       lineHeight: "20px",
       "& a": {

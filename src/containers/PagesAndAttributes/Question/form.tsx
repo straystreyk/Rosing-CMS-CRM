@@ -38,6 +38,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           helperText="Position"
         />
         <RadioButtonGroupInput
+          resource={resource}
           source="published"
           label="Publishing"
           initialValue={false}

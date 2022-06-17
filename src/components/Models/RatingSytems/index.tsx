@@ -2,15 +2,9 @@ import * as React from "react";
 import { ReferenceCustomInput } from "../../Inputs/ReferenceInputs/reference-custom-input";
 import { SelectInputOrigin } from "../../Inputs/StandatdInputs/SelectInput/select-input";
 import { ALL_RATING_SYSTEMS } from "../../Providers/custom-requests";
+import { ChildComponentProps } from "../../Inputs/ArrayInputs/ArrayInputNoDrag/array-input-no-drag";
 
-export const RatingSystems: React.FC<{
-  parentSource: string;
-  resource: string;
-  inputType: string;
-  index: string;
-  parentSourceWithIndex: string;
-  helperText?: string;
-}> = React.memo(
+export const RatingSystems: React.FC<ChildComponentProps> = React.memo(
   ({ parentSource, parentSourceWithIndex, index, inputType, helperText, ...props }) => (
     <ReferenceCustomInput
       component={SelectInputOrigin}

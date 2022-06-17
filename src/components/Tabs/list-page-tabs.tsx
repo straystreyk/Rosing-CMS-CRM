@@ -4,7 +4,7 @@ import { Link } from "ra-ui-materialui";
 import cn from "classnames";
 import { useHistory } from "react-router-dom";
 import { scrollBarStyles } from "../Themes/main-styles";
-import { StandardButton } from "../UI/Buttons/standard-button";
+import { StandardButton } from "../UI/Buttons/StandardButton/standard-button";
 
 export interface ListTabProps {
   link: string;
@@ -100,6 +100,7 @@ export const ListPageTabs: React.FC<ListPageTabsProps> = ({ tabs, isSubTabs }) =
             component={Link}
             to={link}
             variant="text"
+            buttonType="primary"
             className={
               !isSubTabs
                 ? cn(

@@ -32,11 +32,6 @@ const useStyles = makeStyles({
 export const EditButton: React.FC<EditButtonProps> = (props) => {
   const classes = useStyles();
   return (
-    <EditButtonRA
-      {...props}
-      icon={<EditIcon color="#005AA3" />}
-      className={classes.EditButton}
-      label="Edit"
-    />
+    <EditButtonRA {...props} icon={<EditIcon />} className={classes.EditButton} label="Edit" />
   );
 };

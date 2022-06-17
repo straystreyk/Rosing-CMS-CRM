@@ -38,7 +38,7 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           optionValue="id"
           resource={resource}
           inputType={type}
-          helperText={false}
+          helperText={undefined}
           fullWidth
         />
       </ReferenceInput>

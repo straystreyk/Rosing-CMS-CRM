@@ -11,6 +11,7 @@ import {
   CancelFilterIcon,
   ChangeIcon,
   DeleteIcon,
+  DeleteIconNew,
   EditIcon,
   LoopIcon,
   UploadIcon,
@@ -26,7 +27,7 @@ import { STATIC_PARAM } from "../Providers/custom-requests";
 import { StaticParam } from "../StaticParam";
 import { useMutation } from "react-admin";
 import { useNotify } from "ra-core";
-import { StandardButton } from "../UI/Buttons/standard-button";
+import { StandardButton } from "../UI/Buttons/StandardButton/standard-button";
 import { EmptyShow } from "../Inputs/ArrayInputs/Arrayinput/show-view";
 import { ModalMUI } from "../Modal";
 import { ImageUploaderStyles } from "./styles";
@@ -139,9 +140,9 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
               Drag and drop the jpg or png file here to attach it, or click on the button below
               <StandardButton
                 type="button"
-                startIcon={<UploadIcon color="#005AA3" />}
-                color="secondary"
+                startIcon={<UploadIcon color="var(--primary-button-default)" />}
                 variant="icon"
+                buttonType="secondary"
                 text="Upload file"
               />
             </div>
@@ -149,12 +150,15 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
             <>
               {id && url && (
                 <div className={cn(classes.PopupButtonWrapper, "PopupButtonWrapper")}>
-                  <StandardButton
-                    onClick={(e) => openSlider(e, index)}
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openSlider(e, index);
+                    }}
                     className={cn(classes.PopupButton, "PopupButton")}
                   >
                     <LoopIcon color="var(--primary-button-default)" />
-                  </StandardButton>
+                  </button>
                 </div>
               )}
               <img src={url} alt="admin panel" />
@@ -164,12 +168,13 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
         {edit && (
           <div className={classes.ButtonsWrapper}>
             <StandardButton
-              customColor="#D21C1C"
               onClick={id || imageId ? deleteImage : removeImageField}
-              startIcon={<DeleteIcon color="#D21C1C" />}
+              startIcon={<DeleteIconNew />}
               type="button"
+              className="Delete"
               variant="text"
-              text="Delete"
+              text="Delet newe"
+              buttonType="additional-red"
             />
             <SelectButton
               buttonClassName={classes.ImageItemChangeButton}
@@ -351,14 +356,14 @@ export const ImageUploaderV2: React.FC<{
               <StandardButton
                 startIcon={<AcceptFilterIcon color="var(--accent-color)" />}
                 type="button"
-                customColor="var(--accent-color)"
+                buttonType="primary"
                 variant="text"
                 onClick={approve}
                 text="Save"
               />
               <StandardButton
                 type="button"
-                color="secondary"
+                buttonType="secondary"
                 variant="text"
                 startIcon={<CancelFilterIcon color="#005AA3" />}
                 onClick={cancel}
@@ -372,7 +377,7 @@ export const ImageUploaderV2: React.FC<{
                 className={cn(classes.ShowEditButton, "ShowEditButton")}
                 onClick={() => setEdit(true)}
               >
-                <EditIcon color="var(--secondary-color-default)" />
+                <EditIcon />
               </div>
             </Tooltip>
           )}
@@ -414,6 +419,7 @@ export const ImageUploaderV2: React.FC<{
           )}
           <TextInput
             style={{ display: "none" }}
+            resource={resource}
             inputType="create"
             label={sourceIds}
             source={sourceIds}

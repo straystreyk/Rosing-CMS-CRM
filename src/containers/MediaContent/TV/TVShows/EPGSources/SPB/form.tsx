@@ -8,11 +8,20 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   return (
     <>
       {type !== "create" && (
-        <TextInput disabled offFastEdit label="ID" source="id" inputType={type} fullWidth />
+        <TextInput
+          resource={resource}
+          disabled
+          offFastEdit
+          label="ID"
+          source="id"
+          inputType={type}
+          fullWidth
+        />
       )}
       <TextInput
         style={{ display: "none" }}
         initialValue="Spb"
+        resource={resource}
         label="Type"
         source="type"
         inputType={type}

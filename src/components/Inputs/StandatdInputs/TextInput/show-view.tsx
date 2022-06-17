@@ -1,14 +1,14 @@
 import * as React from "react";
-import { InputProps } from "ra-core";
 import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 
-import { EditInputComponent } from "../../edit-input-component";
+import { EditInputComponent } from "../../FastEditInput";
 import { TextInputOrigin } from "./text-input";
 import { formatTimeInput } from "../../index";
 import { EmptyInput } from "../../styles";
 import { StandardInputShowView } from "../standard-input-show-view";
 import cn from "classnames";
+import { InputProps } from "../../input-types";
 
 const useStyles = makeStyles({
   Active: {
@@ -79,6 +79,12 @@ const ShowView: React.FC<InputProps> = (props) => {
           ) : (
             <EmptyInput emptyText="Empty" />
           );
+        case "releaseDate":
+          return values[props.source] ? (
+            <>{new Date(values[props.source]).toLocaleDateString()}</>
+          ) : (
+            <EmptyInput emptyText="Empty" />
+          );
         default:
           return values[props.source] ? (
             <span dangerouslySetInnerHTML={{ __html: values[props.source] }} />
@@ -97,7 +103,10 @@ const ShowView: React.FC<InputProps> = (props) => {
   }, [ref, getValue]);
 
   return (
-    <StandardInputShowView label={props.label}>
+    <StandardInputShowView
+      label={props.label}
+      className={cn(props.source.includes("id") && classes.IDField)}
+    >
       <p ref={ref} className={cn(activeText && classes.Active)}>
         {getValue(props.source)}
       </p>

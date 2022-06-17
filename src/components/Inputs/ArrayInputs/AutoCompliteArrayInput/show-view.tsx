@@ -1,12 +1,11 @@
 import * as React from "react";
 import cn from "classnames";
 import { useFormState } from "react-final-form";
-import { AutocompleteArrayInputProps } from "react-admin";
-import { EditInputComponent } from "../../edit-input-component";
+import { EditInputComponent } from "../../FastEditInput";
 import { makeStyles } from "@material-ui/core";
 import { AutoCompleteInputStyles } from "./styles";
 import { AutocompleteArrayInputOrigin } from "./autocomplite-array-input";
-import { ChoiceInputType } from "../../input-types";
+import { ChoiceInputType, InputProps } from "../../input-types";
 import { UrlField } from "../../../TableFields/url-field";
 import { EmptyInput } from "../../styles";
 
@@ -102,15 +101,13 @@ const ShowView: React.FC<{
   );
 });
 
-export const AutoCompleteArrayInputShow: React.FC<AutocompleteArrayInputProps> = (props) => {
+export const AutoCompleteArrayInputShow: React.FC<InputProps> = (props) => {
   const classes = useStyles();
   return (
     <EditInputComponent
       componentClassName={classes.AutoCompleteInputStyles}
       ComponentInput={AutocompleteArrayInputOrigin}
       ComponentShow={ShowView}
-      resource={props.resource}
-      source={props.source}
       fullWidth
       {...props}
     />

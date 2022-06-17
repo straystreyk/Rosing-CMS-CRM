@@ -1,5 +1,5 @@
 import * as React from "react";
-import { EditInputComponent } from "../edit-input-component";
+import { EditInputComponent } from "../FastEditInput";
 import { useFormState } from "react-final-form";
 import { EmptyInput } from "../styles";
 import { AutocompleteInput as AutocompleteInputProps } from "../input-types";

@@ -17,7 +17,7 @@ import {
   UnPublishIcon,
 } from "../../../constants/icons";
 import { newsFilters } from "./news-filters";
-import { StandardButton } from "../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../components/UI/Buttons/StandardButton/standard-button";
 import { useTableActions } from "../../../custom-hooks/use-table-actions";
 import { PublishedField } from "../../../components/TableFields/published-field";
 

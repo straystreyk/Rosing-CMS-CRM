@@ -141,6 +141,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           <TextInput
             label="Seo keywords"
             source="seoKeywords"
+            resource={resource}
             inputType={type}
             helperText="Keywords optimized for search engines that are used in the HTML markup of the page. To separate words, use a comma with a space."
             fullWidth
@@ -179,6 +180,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
         formType={type}
       >
         <RadioButtonGroupInput
+          resource={resource}
           source="published"
           label="Publishing"
           initialValue={false}

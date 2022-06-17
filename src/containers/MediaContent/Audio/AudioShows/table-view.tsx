@@ -11,7 +11,7 @@ import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActions
 import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 import { ReferenceField } from "../../../../components/TableFields/reference-field";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import {
   ArrowIconDown,
   ArrowIconUp,

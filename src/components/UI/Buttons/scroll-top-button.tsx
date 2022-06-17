@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core";
-import { StandardButton } from "./standard-button";
+import { StandardButton } from "./StandardButton/standard-button";
 
 const MIN_PX_TO_SHOW = 150;
 

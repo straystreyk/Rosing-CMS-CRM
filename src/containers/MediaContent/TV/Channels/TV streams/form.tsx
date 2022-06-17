@@ -13,7 +13,7 @@ import {
   ALL_COUNTRIES,
 } from "../../../../../components/Providers/custom-requests";
 import { ReferenceCustomInput } from "../../../../../components/Inputs/ReferenceInputs/reference-custom-input";
-import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../../components/UI/Buttons/StandardButton/standard-button";
 import { PlusIcon } from "../../../../../constants/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { CheckBoxGroup } from "../../../../../components/UI/MaterialUI/check-box-group";

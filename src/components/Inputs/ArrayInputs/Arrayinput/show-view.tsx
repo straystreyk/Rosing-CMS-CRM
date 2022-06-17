@@ -1,7 +1,7 @@
 import * as React from "react";
 import { makeStyles, Tooltip } from "@material-ui/core";
 import { ArrayInputOrigin, ArrayInputProps } from "./array-input";
-import { EditInputComponent } from "../../edit-input-component";
+import { EditInputComponent } from "../../FastEditInput";
 import { useFormState } from "react-final-form";
 import { IMDBIcon, KinopoiskIcon } from "../../../../constants/icons";
 import avatar from "../../../../images/avatar_empty.jpg";
@@ -10,10 +10,17 @@ import { MEDIA_QUERIES_BREAKPOINTS } from "../../../../constants/style-constants
 const useStyles = makeStyles({
   CastMembersShowWrapper: {
     width: "100%",
-    display: "flex",
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
     justifyContent: "space-between",
     gap: 20,
     flexWrap: "wrap",
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.lg})`]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`]: {
+      gridTemplateColumns: "repeat(1, 1fr)",
+    },
   },
   EmptyShow: {
     color: "var(--secondary-color-default)",
@@ -34,7 +41,6 @@ const useStyles = makeStyles({
     backgroundColor: "var(--primary-bg)",
     padding: 16,
     display: "flex",
-    width: "calc(33.3333% - 60px)",
     borderRadius: 4,
     "& .personInfo": {
       display: "flex",
@@ -78,12 +84,6 @@ const useStyles = makeStyles({
         objectFit: "cover",
         height: "100%",
       },
-    },
-    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.lg})`]: {
-      width: "calc(50% - 60px)",
-    },
-    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.sm})`]: {
-      width: "100%",
     },
   },
   ShowWrapper: {
@@ -146,15 +146,20 @@ const ShowView: React.FC<ShowViewProps> = ({ source }) => {
                       ) : null}
                     </div>
                     <div className="cinemas">
-                      <Tooltip
-                        title={el.person && el.person.kinopoiskId ? el.person.kinopoiskId : ""}
-                        arrow
-                      >
-                        <span>{el.person && el.person.kinopoiskId ? <KinopoiskIcon /> : null}</span>
-                      </Tooltip>
-                      <Tooltip title={el.person && el.person.imdbId ? el.person.imdbId : ""} arrow>
-                        <span>{el.person && el.person.imdbId ? <IMDBIcon /> : ""}</span>
-                      </Tooltip>
+                      {el.person && el.person.kinopoiskId && (
+                        <Tooltip title={el.person.kinopoiskId} arrow>
+                          <span>
+                            <KinopoiskIcon />
+                          </span>
+                        </Tooltip>
+                      )}
+                      {el.person && el.person.imdbId && (
+                        <Tooltip title={el.person.imdbId} arrow>
+                          <span>
+                            <IMDBIcon />
+                          </span>
+                        </Tooltip>
+                      )}
                     </div>
                   </div>
                 </div>

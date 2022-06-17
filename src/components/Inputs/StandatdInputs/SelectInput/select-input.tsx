@@ -7,10 +7,7 @@ import {
 } from "react-admin";
 import { SelectInputShow } from "./show-view";
 import { formHelperText, labelStyles } from "../../styles";
-
-export interface SelectInputProps extends SelectInputPropsRA {
-  inputType: "create" | "edit" | "show";
-}
+import { InputProps } from "../../input-types";
 
 const useStyles = makeStyles({
   SelectInput: {
@@ -48,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const SelectInputOrigin: React.FC<SelectInputProps> = ({
+export const SelectInputOrigin: React.FC<Omit<InputProps, "inputType">> = ({
   inputType,
   className,
   ...props
@@ -66,7 +63,7 @@ export const SelectInputOrigin: React.FC<SelectInputProps> = ({
   );
 };
 
-export const SelectInput: React.FC<SelectInputProps> = React.memo(({ inputType, ...rest }) => {
+export const SelectInput: React.FC<InputProps> = React.memo(({ inputType, ...rest }) => {
   return inputType === "show" ? (
     <SelectInputShow inputType={inputType} {...rest} />
   ) : (

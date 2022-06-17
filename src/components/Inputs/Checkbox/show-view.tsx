@@ -1,5 +1,5 @@
 import * as React from "react";
-import { EditInputComponent } from "../edit-input-component";
+import { EditInputComponent } from "../FastEditInput";
 import { CheckboxOrigin, CheckboxProps } from "./index";
 import { useFormState } from "react-final-form";
 import { makeStyles } from "@material-ui/core/styles";

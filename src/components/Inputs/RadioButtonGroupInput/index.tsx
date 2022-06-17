@@ -1,11 +1,10 @@
 import * as React from "react";
-import {
-  RadioButtonGroupInput as RadioButtonGroupInputRA,
-  RadioButtonGroupInputProps as RadioButtonGroupInputPropsRA,
-} from "ra-ui-materialui";
+import cn from "classnames";
+import { RadioButtonGroupInput as RadioButtonGroupInputRA } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
 import { formHelperText, labelStyles } from "../styles";
 import { RadioButtonGroupInputShow } from "./show-view";
+import { InputProps } from "../input-types";
 
 const useStyles = makeStyles({
   RadioButtonGroupInput: {
@@ -21,25 +20,23 @@ const useStyles = makeStyles({
     },
     "& span.MuiTypography-root": {
       ...labelStyles,
+      color: "var(--primary-text-default)",
+      fontWeight: 400,
       marginBottom: "unset",
     },
     "& .MuiFormHelperText-root": formHelperText,
     "& legend": labelStyles,
+    "&.hideLabel legend": {
+      display: "none",
+    },
   },
 });
 
-export interface RadioButtonGroupInputProps extends Omit<RadioButtonGroupInputPropsRA, "source"> {
-  source: string;
-}
-
-export const RadioButtonGroupInputOrigin: React.FC<RadioButtonGroupInputProps> = ({
-  label,
-  ...props
-}) => {
+export const RadioButtonGroupInputOrigin: React.FC<InputProps> = ({ label, ...props }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.RadioButtonGroupInput}>
+    <div className={cn(classes.RadioButtonGroupInput, !label && "hideLabel")}>
       <RadioButtonGroupInputRA
         size="small"
         helperText={props.helperText ?? false}
@@ -50,10 +47,11 @@ export const RadioButtonGroupInputOrigin: React.FC<RadioButtonGroupInputProps> =
   );
 };
 
-export const RadioButtonGroupInput: React.FC<RadioButtonGroupInputProps> = ({
+export const RadioButtonGroupInput: React.FC<InputProps> = ({
   label,
   inputType,
   source,
+  style,
   ...props
 }) => {
   return (
@@ -63,6 +61,7 @@ export const RadioButtonGroupInput: React.FC<RadioButtonGroupInputProps> = ({
       ) : (
         <RadioButtonGroupInputOrigin
           source={source}
+          style={style}
           inputType={inputType}
           label={label}
           {...props}

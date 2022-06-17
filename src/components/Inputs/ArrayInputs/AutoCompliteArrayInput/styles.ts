@@ -1,39 +1,32 @@
 import { formHelperText, labelStyles } from "../../styles";
 import { ChipStyles } from "../styles";
+import { CommonInputStyles } from "../../styles";
 
 export const AutoCompleteInputStyles = {
   "& .MuiInputBase-root": {
+    ...CommonInputStyles.Input,
     backgroundColor: "#fff !important",
-    border: "1px solid var(--secondary-color-default)",
-    borderRadius: 4,
     "& > div": {
       margin: 0,
     },
-    "&.Mui-error": {
-      borderColor: "var(--additional-red-default)",
-    },
+    "&.Mui-error": CommonInputStyles.Error,
     "& .MuiSvgIcon-root path": {
       color: "var(--accent-color)",
     },
+    "&:hover": CommonInputStyles.Hover,
+    "&:focus": CommonInputStyles.Focus,
     "& .MuiChip-root": ChipStyles,
   },
   "& input": {
-    padding: "8px 12px",
+    ...CommonInputStyles.Input,
+    border: "none",
   },
   "& > p.MuiFormHelperText-root": formHelperText,
   "& label": labelStyles,
   "& div": {
     backgroundColor: "#fff !important",
     padding: "0 4px !important",
-    "&::before": {
-      display: "none",
-    },
-    "&::after": {
-      display: "none",
-    },
-    "&:focus-within": {
-      background: "none",
-    },
+    ...CommonInputStyles.OffRAStyles,
   },
   "& div.AutoCompleteShow": {
     padding: "0 !important",

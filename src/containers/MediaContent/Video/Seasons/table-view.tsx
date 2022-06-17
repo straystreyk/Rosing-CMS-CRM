@@ -5,7 +5,7 @@ import { Record as RecordRA } from "ra-core/esm/types";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { EmptyTablePage } from "../../../../components/EmptyTablePage";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import {
   PublishedIcons,
   PublishIcon,

@@ -8,11 +8,13 @@ import { InputFormType } from "../../Inputs/input-types";
 interface CheckBoxGroupProps {
   initialSourceState: string;
   inputType: InputFormType;
+  label?: string;
 }
 
 const useStyles = makeStyles({
   CheckBoxGroup: {
     paddingTop: 8,
+    "& > label": { ...labelStyles, marginBottom: 8 },
   },
   label: {
     marginRight: 25,
@@ -21,15 +23,20 @@ const useStyles = makeStyles({
       padding: 0,
       marginRight: 5,
     },
-    "& span.MuiTypography-root": { ...labelStyles, marginBottom: "unset" },
+    "& span.MuiTypography-root": {
+      ...labelStyles,
+      marginBottom: "unset",
+      color: "var(--primary-text-default)",
+      fontWeight: 400,
+    },
     [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
-      marginBottom: 5,
+      marginBottom: 4,
     },
   },
 });
 
 export const CheckBoxGroupOrigin: React.FC<Omit<CheckBoxGroupProps, "inputType">> = React.memo(
-  ({ children, initialSourceState }) => {
+  ({ children, initialSourceState, label }) => {
     const [selectedValue, setSelectedValue] = React.useState(initialSourceState);
     const classes = useStyles();
 
@@ -50,9 +57,14 @@ export const CheckBoxGroupOrigin: React.FC<Omit<CheckBoxGroupProps, "inputType">
 
     return (
       <div className={classes.CheckBoxGroup}>
-        {React.Children.map(children as React.ReactElement[], (child) => {
-          return (
-            <>
+        {label && (
+          <>
+            <label>{label}</label>
+          </>
+        )}
+        <div>
+          {React.Children.map(children as React.ReactElement[], (child) => {
+            return (
               <FormControlLabel
                 className={classes.label}
                 value={child.props.source}
@@ -61,9 +73,9 @@ export const CheckBoxGroupOrigin: React.FC<Omit<CheckBoxGroupProps, "inputType">
                 }
                 label={child.props.checkBoxLabel}
               />
-            </>
-          );
-        })}
+            );
+          })}
+        </div>
         {React.Children.map(children as React.ReactElement[], (child) => {
           return (
             <div

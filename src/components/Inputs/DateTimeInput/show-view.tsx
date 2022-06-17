@@ -1,11 +1,11 @@
 import * as React from "react";
-import { InputProps } from "ra-core";
 import { useFormState } from "react-final-form";
 import { makeStyles } from "@material-ui/core";
 
 import { DateTimeInputOrigin } from "./date-time-input";
-import { EditInputComponent } from "../edit-input-component";
+import { EditInputComponent } from "../FastEditInput";
 import { TextInputStyles } from "../StandatdInputs/TextInput/styles";
+import { InputProps } from "../input-types";
 
 const useStyles = makeStyles({
   TextInputStyles,

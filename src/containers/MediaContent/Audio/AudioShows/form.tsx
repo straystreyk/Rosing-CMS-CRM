@@ -34,7 +34,7 @@ import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButton
 import { RatingSystems } from "../../../../components/Models/RatingSytems";
 import { CheckBoxGroup } from "../../../../components/UI/MaterialUI/check-box-group";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import { ResourceCountIcon } from "../../../../constants/icons";
 import { useFormState } from "react-final-form";
 import { Link } from "react-router-dom";
@@ -152,6 +152,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="languagesIds"
             inputType={type}
             resource={resource}
             helperText="The language of the movie's audio track. You can select multiple languages from the list."
@@ -167,6 +168,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="genreIds"
             resource={resource}
             inputType={type}
             helperText="You can select several genres from the list"
@@ -182,6 +184,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="productionCountryIds"
             resource={resource}
             inputType={type}
             helperText="You can select several countries from the list"
@@ -211,6 +214,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         >
           <AutocompleteArrayInput
             optionText="name"
+            source="studioIds"
             inputType={type}
             resource={resource}
             helperText="A film production or rental company. You can select several studios from the list."
@@ -224,6 +228,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         >
           <SelectInput
             optionText="name"
+            source="externalCatalogId"
             resource={resource}
             inputType={type}
             helperText="The partner directory from which the movie is imported. The logo of the external catalog will be displayed when previewing the movie in the app."
@@ -232,6 +237,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         <AutocompleteArrayInput
           source="markers"
           label="Label"
+          resource={resource}
           inputType={type}
           choices={SELECT_MARKERS}
           helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
@@ -280,6 +286,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
         title="Terms of publication"
       >
         <RadioButtonGroupInput
+          resource={resource}
           source="published"
           label="Publishing"
           initialValue={false}
@@ -287,6 +294,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           choices={PUBLISHED_CHOICES_FORM}
         />
         <RadioButtonGroupInput
+          resource={resource}
           source="cmsDistribution"
           label="Distribution"
           inputType={type}
@@ -340,6 +348,8 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           >
             <AutocompleteArrayInput
               optionText="name"
+              source="allowedApiClients"
+              resource={resource}
               inputType={type}
               helperText="The list of API clients for which access to the series is allowed, access is denied for other API clients. Leave the field empty if access is allowed for all API clients."
             />
@@ -354,6 +364,8 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           >
             <AutocompleteArrayInput
               optionText="name"
+              source="forbiddenApiClients"
+              resource={resource}
               inputType={type}
               helperText="List of API clients for which access to the series is prohibited"
             />

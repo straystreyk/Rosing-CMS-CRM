@@ -3,7 +3,7 @@ import { FunctionField, FunctionFieldProps } from "ra-ui-materialui";
 import { Record as RecordRA } from "react-admin";
 import { Link } from "react-router-dom";
 import { ResourceAddIcon, ResourceCountEpisodesIcon } from "../../constants/icons";
-import { StandardButton } from "../UI/Buttons/standard-button";
+import { StandardButton } from "../UI/Buttons/StandardButton/standard-button";
 import { TableFieldsStyles } from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -33,10 +33,9 @@ export const ToModelField: React.FC<ToModelFieldProps> = ({
         <>
           {alwaysButton ? (
             <StandardButton
-              startIcon={<ResourceCountEpisodesIcon color="var(--accent-color)" />}
+              startIcon={<ResourceCountEpisodesIcon />}
               variant="text"
-              customColor="var(--accent-color)"
-              style={{ paddingLeft: 0, paddingRight: 0 }}
+              buttonType="primary"
               text={`${props.label} (${record[props.source].length})`}
               component={Link}
               to={`${props.to}/${record.id}/${props.linkSource ?? props.source}`}
@@ -52,10 +51,9 @@ export const ToModelField: React.FC<ToModelFieldProps> = ({
         </>
       ) : (
         <StandardButton
-          startIcon={<ResourceAddIcon color="var(--accent-color)" />}
+          startIcon={<ResourceAddIcon />}
           variant="text"
-          customColor="var(--accent-color)"
-          style={{ paddingLeft: 0, paddingRight: 0 }}
+          buttonType="primary"
           text={`Add ${props.label}`}
           component={Link}
           to={`${props.to}/${record?.id}/${props.linkSource ?? props.source}/create`}

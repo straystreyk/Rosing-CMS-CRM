@@ -1,18 +1,18 @@
 import * as React from "react";
-import { EditInputComponent } from "../edit-input-component";
+import { EditInputComponent } from "../FastEditInput";
 import { SwitchInputOrigin } from "./index";
 import { makeStyles } from "@material-ui/core";
 import { TextInputStyles } from "../StandatdInputs/TextInput/styles";
 import { TextInputShowValue } from "../styles";
 import { useFormState } from "react-final-form";
-import { ShowInputViewProps } from "../input-types";
+import { InputProps } from "../input-types";
 
 const useStyles = makeStyles({
   TextInputStyles,
   TextInputShowValue,
 });
 
-const ShowView: React.FC<ShowInputViewProps> = ({ label, source }) => {
+const ShowView: React.FC<Omit<InputProps, "inputType">> = ({ label, source }) => {
   const classes = useStyles();
   const { values } = useFormState();
 
@@ -24,7 +24,7 @@ const ShowView: React.FC<ShowInputViewProps> = ({ label, source }) => {
   );
 };
 
-export const SwitchInputShow: React.FC = (props) => {
+export const SwitchInputShow: React.FC<InputProps> = (props) => {
   return (
     <EditInputComponent ComponentInput={SwitchInputOrigin} ComponentShow={ShowView} {...props} />
   );

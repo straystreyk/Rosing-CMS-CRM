@@ -1,30 +1,12 @@
-import { formHelperText, labelStyles } from "../../styles";
+import { CommonInputStyles, formHelperText, labelStyles } from "../../styles";
 
 export const TextInputStyles = {
   backgroundColor: "none !important",
   "& input": {
-    color: "var(--primary-text-default)",
-    padding: "8px 12px",
-    lineHeight: "20px",
-    fontSize: 14,
-    border: "1px solid var(--secondary-color-default)",
-    borderRadius: 4,
-    transition: "0.35s border ease, 0.35s color ease",
-    "&::placeholder": {
-      color: "var(--secondary-color-default) !important",
-      opacity: "1 !important",
-    },
-    "&:hover": {
-      borderColor: "var(--primary-text-default)",
-    },
-    "&:focus": {
-      outline: "2px solid #7FC5FF",
-      borderColor: "#28A138",
-      outlineOffset: "2px",
-    },
-    "&.Mui-disabled": {
-      opacity: 0.4,
-    },
+    ...CommonInputStyles.Input,
+    "&:hover": CommonInputStyles.Hover,
+    "&:focus": CommonInputStyles.Focus,
+    "&.Mui-disabled": CommonInputStyles.Disabled,
   },
   "& .MuiFilledInput-root.Mui-disabled": {
     backgroundColor: "unset",
@@ -34,27 +16,15 @@ export const TextInputStyles = {
     right: 10,
   },
   "& textarea": {
-    lineHeight: "20px",
-    fontSize: 14,
-    border: "1px solid var(--secondary-color-default)",
-    borderRadius: 4,
-    transition: "0.35s border ease, 0.35s color ease",
-    color: "var(--primary-text-default)",
-    padding: "8px 12px",
-    "&:focus": {
-      outline: "2px solid #7FC5FF",
-      borderColor: "#28A138",
-      outlineOffset: "2px",
-    },
+    ...CommonInputStyles.Input,
+    "&:focus": CommonInputStyles.Focus,
   },
   "& > p.MuiFormHelperText-root": formHelperText,
   "& label": labelStyles,
   "& div": {
     backgroundColor: "inherit",
     padding: "0 !important",
-    "&.Mui-error input": {
-      borderColor: "#D21C1C",
-    },
+    "&.Mui-error input": CommonInputStyles.Error,
     "&::before": {
       display: "none",
     },

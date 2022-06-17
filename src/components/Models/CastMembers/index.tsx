@@ -109,8 +109,7 @@ export const CastMembers: React.FC<{
           inputType="create"
           offInfo
         />
-        <TextInput
-          inputType="create"
+        <TextInputOrigin
           fullWidth
           style={{ display: "none" }}
           source={`${parentSourceWithIndex}.person.images`}

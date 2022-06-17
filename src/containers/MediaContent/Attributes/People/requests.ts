@@ -22,6 +22,7 @@ export const GET_ONE_PERSON = gql`
       imdbId
       kinopoiskId
       updatedAt
+      subNames
       __typename
     }
   }
@@ -33,6 +34,7 @@ export const UPDATE_PERSON = gql`
     $imdbId: Int
     $kinopoiskId: Int
     $imageIds: [String!]
+    $subNames: [String!]
     $id: ID!
   ) {
     data: updatePerson(
@@ -40,6 +42,7 @@ export const UPDATE_PERSON = gql`
       imdbId: $imdbId
       kinopoiskId: $kinopoiskId
       imageIds: $imageIds
+      subNames: $subNames
       id: $id
     ) {
       createdAt

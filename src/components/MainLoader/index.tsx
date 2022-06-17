@@ -15,16 +15,19 @@ const useStyles = makeStyles({
     borderRadius: 20,
   },
   BottomCircle: {
-    stroke: "var(--secondary-color-default)",
+    stroke: "var(--secondary-color-disable)",
+    opacity: 0.5,
     position: "absolute",
     left: 0,
     top: 0,
-    zIndex: -1,
+    zIndex: 0,
   },
   TopCircleSvgAnimate: {
     animation: `$rotate 1400ms linear infinite`,
     display: "block",
     borderRadius: 20,
+    position: "relative",
+    zIndex: 1,
   },
   "@keyframes myEffect": {
     "0%": {

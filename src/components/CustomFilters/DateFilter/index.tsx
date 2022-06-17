@@ -5,7 +5,7 @@ import { makeStyles, Menu, TextField } from "@material-ui/core";
 
 import { RoundedFilterShow } from "../RoundedFilterShow";
 import { StandardCustomFilterProps } from "../custom-filters-types";
-import { StandardButton } from "../../UI/Buttons/standard-button";
+import { StandardButton } from "../../UI/Buttons/StandardButton/standard-button";
 import { AcceptFilterIcon, CancelFilterIcon } from "../../../constants/icons";
 import { MenuListProps, PaperProps } from "../constants";
 import { DateFilterStyles } from "./styles";
@@ -133,19 +133,17 @@ export const DateFilter: React.FC<StandardCustomFilterProps> = ({
           <StandardButton
             startIcon={<AcceptFilterIcon color="var(--accent-color)" />}
             variant="text"
-            customColor="var(--accent-color)"
+            buttonType="primary"
             onClick={acceptFilter}
-          >
-            Accept
-          </StandardButton>
+            text="Accept"
+          />
           <StandardButton
-            startIcon={<CancelFilterIcon color="var(--primary-text-default)" />}
+            startIcon={<CancelFilterIcon color="var(--primary-button-default)" />}
             variant="text"
-            customColor="var(--primary-text-default)"
+            buttonType="secondary"
             onClick={handleClose}
-          >
-            Cancel
-          </StandardButton>
+            text="Cancel"
+          />
         </div>
       </Menu>
     </>

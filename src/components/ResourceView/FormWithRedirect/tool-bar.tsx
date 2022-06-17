@@ -11,7 +11,7 @@ import { SaveButton } from "../../UI/RA/save-button";
 import { makeStyles, useMediaQuery } from "@material-ui/core";
 import { FormToolBarStyles } from "./styles";
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../../constants/style-constants";
-import { StandardButton } from "../../UI/Buttons/standard-button";
+import { StandardButton } from "../../UI/Buttons/StandardButton/standard-button";
 
 const useStyles = makeStyles(FormToolBarStyles);
 
@@ -64,8 +64,7 @@ export const Toolbar = (props: ToolbarProps) => {
           variant="outlined"
           text="Cancel"
           onClick={cancel}
-          color="secondary"
-          customColor="var(--primary-button-default)"
+          buttonType="secondary"
           onMobileView
         />
         <SaveButton

@@ -2,14 +2,10 @@ import * as React from "react";
 import { JsonInput as JsonInputRA } from "react-admin-json-view";
 import { makeStyles } from "@material-ui/core";
 import { labelStyles } from "../styles";
-import { EditInputComponent } from "../edit-input-component";
+import { EditInputComponent } from "../FastEditInput";
 import { useFormState } from "react-final-form";
 import { ArrowFilterIcon } from "../../CustomFilters/constants";
-
-interface JsonInputProps extends React.ComponentProps<typeof JsonInputRA> {
-  inputType: "create" | "edit" | "show";
-  resource: string;
-}
+import { InputProps } from "../input-types";
 
 const useStyles = makeStyles({
   JsonInput: {
@@ -30,9 +26,9 @@ const useStyles = makeStyles({
   },
 });
 
-const ShowView: React.FC<React.ComponentProps<typeof JsonInputRA>> = ({ source, label }) => {
+const ShowView: React.FC<InputProps> = ({ source, label }) => {
   const { values } = useFormState();
-  const [active, setActive] = React.useState(true);
+  const [active, setActive] = React.useState(!!Object.keys(values[source]).length);
   const classes = useStyles();
 
   const handleShow = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,14 +61,14 @@ const ShowView: React.FC<React.ComponentProps<typeof JsonInputRA>> = ({ source, 
   );
 };
 
-const JsonInputShow: React.FC<React.ComponentProps<typeof JsonInputRA>> = (props) => {
-  return <EditInputComponent ComponentInput={JsonInput} ComponentShow={ShowView} {...props} />;
+const JsonInputShow: React.FC<InputProps> = (props) => {
+  return <EditInputComponent ComponentInput={JsonInputRA} ComponentShow={ShowView} {...props} />;
 };
 
-export const JsonInput: React.FC<JsonInputProps> = ({ inputType, ...rest }) => {
+export const JsonInput: React.FC<InputProps> = ({ inputType, ...rest }) => {
   const classes = useStyles();
   return inputType === "show" ? (
-    <JsonInputShow {...rest} />
+    <JsonInputShow inputType={inputType} {...rest} />
   ) : (
     <div className={classes.JsonInput}>
       <JsonInputRA {...rest} />

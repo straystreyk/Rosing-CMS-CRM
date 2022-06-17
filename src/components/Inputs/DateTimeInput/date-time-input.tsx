@@ -1,9 +1,9 @@
 import * as React from "react";
-import { InputProps } from "ra-core";
 import { DateTimeInput as DateTimeInputRA } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { TextInputStyles } from "../StandatdInputs/TextInput/styles";
 import { DateTimeInputShow } from "./show-view";
+import { InputProps } from "../input-types";
 
 const useStyles = makeStyles({ TextInputStyles });
 
@@ -35,18 +35,22 @@ export const DateTimeInput: React.FC<InputProps> = ({
   inputType,
   fullWidth,
   ...props
-}) => {
-  const classes = useStyles();
-
-  return inputType === "show" ? (
-    <DateTimeInputShow source={source} resource={resource} helperText={helperText} {...props} />
+}) =>
+  inputType === "show" ? (
+    <DateTimeInputShow
+      inputType={inputType}
+      source={source}
+      resource={resource}
+      helperText={helperText}
+      {...props}
+    />
   ) : (
     <DateTimeInputOrigin
       fullWidth={fullWidth ?? true}
       source={source}
       resource={resource}
-      helperText={helperText ?? false}
+      helperText={helperText ?? undefined}
+      inputType={inputType}
       {...props}
     />
   );
-};

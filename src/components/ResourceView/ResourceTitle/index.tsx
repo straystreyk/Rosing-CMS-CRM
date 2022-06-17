@@ -5,7 +5,7 @@ import { useFormState } from "react-final-form";
 import { EditIcon, InformationIcon, TimeIcon } from "../../../constants/icons";
 import { Breadcrumbs } from "../../Breadcrumbs/breadcrumbs";
 import { DeleteButton } from "../../UI/RA/delete-button";
-import { StandardButton } from "../../UI/Buttons/standard-button";
+import { StandardButton } from "../../UI/Buttons/StandardButton/standard-button";
 import { Link } from "react-router-dom";
 import { ExportStatusWidget } from "../../Export/ExportStatusWidget";
 import { ResourceTitleStyles } from "./styles";
@@ -67,8 +67,8 @@ export const ResourceTitle: React.FC<TitleProps> = ({
                       <StandardButton
                         variant="text"
                         component={Link}
-                        customColor="var(--primary-button-default)"
-                        startIcon={<EditIcon color="var(--primary-button-default)" />}
+                        buttonType="secondary"
+                        startIcon={<EditIcon />}
                         to={props.basePath + `/${props.record.id}`}
                         text="Edit"
                       />

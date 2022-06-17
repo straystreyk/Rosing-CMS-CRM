@@ -46,9 +46,6 @@ const useStyles = makeStyles((theme) => ({
     color: "var(--primary-text-default)",
     marginBottom: 8,
   },
-  ActiveSvg: {
-    transform: "rotate(180deg)",
-  },
 }));
 
 export const ShowDescriptionButton: React.FC<{
@@ -67,8 +64,8 @@ export const ShowDescriptionButton: React.FC<{
   return (
     <button className={classes.DescriptionButton} onClick={descHandler}>
       {showDescription ? "Hide description" : "Show description"}
-      <span className={cn(!showDescription && classes.ActiveSvg)}>
-        <ArrowFilterIcon color="#005AA3" />
+      <span>
+        <ArrowFilterIcon color="var(--secondary-button-default)" />
       </span>
     </button>
   );
@@ -86,7 +83,6 @@ export const FormSection: React.FC<SectionProps> = React.forwardRef(
           <div className={classes.TitleSection} onClick={() => setShowSection((p) => !p)}>
             {title}
             <svg
-              className={cn(!showSection && classes.ActiveSvg)}
               width="8"
               height="5"
               viewBox="0 0 8 5"

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Identifier, useNotify } from "ra-core";
 import { authClient } from "../../../../../components/Providers/AuthProvider/client";
 import { GET_ALL_TV_PROGRAMS } from "./requests";
-import { StandardButton } from "../../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../../components/UI/Buttons/StandardButton/standard-button";
 import { TVProgramsIcon } from "../../../../../constants/icons";
 import { ModalMUI } from "../../../../../components/Modal";
 import { MainLoader } from "../../../../../components/MainLoader";

@@ -2,7 +2,7 @@ import * as React from "react";
 import { FormControlLabel, FormHelperText } from "@material-ui/core";
 import { Field } from "react-final-form";
 import { CheckboxProps } from "../Checkbox";
-import { Switch } from "../../UI/MaterialUI/switch";
+import { Switch } from "../../UI/Buttons/switch";
 import { makeStyles } from "@material-ui/core/styles";
 import { formHelperText, labelStyles } from "../styles";
 import { InputProps } from "../input-types";
@@ -56,7 +56,7 @@ export const SwitchInputOrigin: React.FC<SwitchProps> = ({
 export const SwitchInput: React.FC<InputProps> = React.memo(
   ({ inputType, offFastEdit, ...rest }) => {
     return inputType === "show" ? (
-      <SwitchInputShow {...rest} />
+      <SwitchInputShow inputType={inputType} {...rest} />
     ) : (
       <SwitchInputOrigin inputType={inputType} {...rest} />
     );

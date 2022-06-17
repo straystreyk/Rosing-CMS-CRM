@@ -110,6 +110,7 @@ const Part: React.FC<{
         <AutocompleteArrayInput
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.markers` : "markers"}
           label="Label"
+          resource={resource}
           inputType={inputType}
           choices={SELECT_MARKERS}
           helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
@@ -150,6 +151,7 @@ const Part: React.FC<{
           </GroupInputsOrigin>
         )}
         <RadioButtonGroupInput
+          resource={resource}
           source={parentSourceWithIndex ? `${parentSourceWithIndex}.published` : "published"}
           label="Publishing"
           initialValue={false}
@@ -157,6 +159,7 @@ const Part: React.FC<{
           choices={PUBLISHED_CHOICES_FORM}
         />
         <RadioButtonGroupInput
+          resource={resource}
           source={
             parentSourceWithIndex ? `${parentSourceWithIndex}.cmsDistribution` : "cmsDistribution"
           }

@@ -7,6 +7,7 @@ import { ButtonPrimary } from "./primary-button";
 import { CreateIcon } from "../../../constants/forms-constants";
 import { MainLoader } from "../../MainLoader";
 import { ImageProps } from "../../ImageUploader/types";
+import { outlineStyles } from "../../Themes/main-styles";
 
 const useStyles = makeStyles((theme) => ({
   SelectButtonWrapper: {
@@ -17,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "transparent",
     color: theme.palette.primary.main,
     transition: "0.35s color ease",
-    padding: "6px 8px",
+    padding: "6px 16px",
     "& svg path": {
       transition: "0.35s fill ease",
     },
     "&:focus": {
-      outline: "none",
+      outline: outlineStyles,
     },
     "&:hover": {
       color: "var(--accent-color-hover)",

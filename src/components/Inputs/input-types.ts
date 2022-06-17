@@ -1,4 +1,5 @@
 import { InputProps as InputPropsRA } from "ra-core";
+import { CSSProperties } from "react";
 
 export type InputFormType = "create" | "edit" | "show";
 
@@ -8,15 +9,13 @@ export interface InputProps extends InputPropsRA {
   source: string;
   offFastEdit?: boolean;
   label?: string;
+  helperText?: string;
+  fullWidth?: boolean;
+  style?: CSSProperties;
 }
 
 export interface AutocompleteInput extends InputProps {
   choices?: ChoiceInputType[];
-}
-
-export interface ShowInputViewProps {
-  label: string;
-  source: string;
 }
 
 export type ChoiceInputType = { id: string; name: string };

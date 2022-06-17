@@ -178,6 +178,7 @@ const Episode: React.FC<{
           <AutocompleteArrayInput
             source={parentSourceWithIndex ? `${parentSourceWithIndex}.markers` : "markers"}
             label="Label"
+            resource={resource}
             inputType={inputType}
             choices={SELECT_MARKERS}
             helperText="The element that is displayed on top of the movie card in the application. If the film is to be released, the label will be ignored."
@@ -218,6 +219,12 @@ const Episode: React.FC<{
           >
             <AutocompleteArrayInput
               optionText="name"
+              source={
+                parentSourceWithIndex
+                  ? `${parentSourceWithIndex}.streamSourceIds`
+                  : "streamSourceIds"
+              }
+              resource={resource}
               inputType={inputType}
               helperText="You can select several video files from the list, the first one will be used by default. If the video file is not in the list, make sure that it has been successfully transcoded in the Video files section"
             />
@@ -321,6 +328,7 @@ const Episode: React.FC<{
             </>
           )}
           <RadioButtonGroupInput
+            resource={resource}
             source={parentSourceWithIndex ? `${parentSourceWithIndex}.published` : "published"}
             label="Publishing"
             initialValue={false}
@@ -328,6 +336,7 @@ const Episode: React.FC<{
             choices={PUBLISHED_CHOICES_FORM}
           />
           <RadioButtonGroupInput
+            resource={resource}
             source={
               parentSourceWithIndex ? `${parentSourceWithIndex}.cmsDistribution` : "cmsDistribution"
             }

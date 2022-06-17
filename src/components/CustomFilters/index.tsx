@@ -4,7 +4,7 @@ import * as _ from "lodash";
 import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
-import { StandardButton } from "../UI/Buttons/standard-button";
+import { StandardButton } from "../UI/Buttons/StandardButton/standard-button";
 import { ArrayInputItemArrow, DeleteIcon, PlusIcon } from "../../constants/icons";
 import { CustomFiltersWrapperStyles } from "./styles";
 import { SearchFilters } from "./SearchFilter";
@@ -121,20 +121,19 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
             {initialFilters && initialFilters.length ? (
               <StandardButton
                 variant="text"
-                color="secondary"
                 startIcon={<PlusIcon color="var(--primary-button-default)" />}
                 endIcon={<ArrayInputItemArrow color="var(--primary-button-default)" />}
+                buttonType="secondary"
                 className="filterButton"
                 onClick={handleClick}
-              >
-                Add Filter
-              </StandardButton>
+                text="Add Filter"
+              />
             ) : null}
             {allActiveFiltersWithValue.length !== 0 && (
               <StandardButton
                 variant="text"
                 startIcon={<DeleteIcon color="var(--additional-red-default)" />}
-                customColor="var(--additional-red-default)"
+                buttonType="additional-red"
                 className="filterButton deleteButton"
                 onClick={deleteAllFilters}
               >

@@ -6,6 +6,7 @@ export const GET_ONE_MOVIE = gql`
       allowedApiClientIds
       allowedCountries
       altDescription
+      announced
       castMembers {
         id
         characterName
@@ -55,7 +56,9 @@ export const GET_ONE_MOVIE = gql`
         __typename
       }
       imdbId
+      imdbUrl
       kinopoiskId
+      kinopoiskUrl
       languageIds
       markers
       metadata
@@ -96,6 +99,7 @@ export const UPDATE_MOVIE = gql`
   mutation updateMovie(
     $name: String!
     $slug: String
+    $announced: Boolean
     $originalName: String
     $description: String
     $altDescription: String
@@ -135,6 +139,7 @@ export const UPDATE_MOVIE = gql`
     data: updateMovie(
       name: $name
       slug: $slug
+      announced: $announced
       originalName: $originalName
       description: $description
       altDescription: $altDescription
@@ -174,6 +179,7 @@ export const UPDATE_MOVIE = gql`
       allowedApiClientIds
       allowedCountries
       altDescription
+      announced
       castMembers {
         characterName
         createdAt
@@ -239,7 +245,9 @@ export const UPDATE_MOVIE = gql`
         size
       }
       imdbId
+      imdbUrl
       kinopoiskId
+      kinopoiskUrl
       languageIds
       markers
       metadata

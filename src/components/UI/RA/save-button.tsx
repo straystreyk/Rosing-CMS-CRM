@@ -1,8 +1,9 @@
 import * as React from "react";
+import cn from "classnames";
 import { SaveButton as SaveButtonRA, SaveButtonProps as SaveButtonPropsRA } from "ra-ui-materialui";
 import { makeStyles, useMediaQuery } from "@material-ui/core";
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../../constants/style-constants";
-import cn from "classnames";
+import { outlineStyles } from "../../Themes/main-styles";
 
 interface SaveButtonProps extends SaveButtonPropsRA {
   onMobileText?: boolean;
@@ -11,6 +12,11 @@ interface SaveButtonProps extends SaveButtonPropsRA {
 const useStyles = makeStyles({
   SaveButton: {
     fontFamily: "var(--font-family)",
+    padding: "8px 18px",
+    "&:hover": {
+      backgroundColor: "var(--accent-color-hover)",
+      boxShadow: "unset",
+    },
     "& svg": {
       marginLeft: 0,
       marginRight: 6,
@@ -22,10 +28,7 @@ const useStyles = makeStyles({
     "& .MuiButton-label": {
       textTransform: "none",
     },
-    "&:focus": {
-      outline: "2px solid #7FC5FF",
-      outlineOffset: "2px",
-    },
+    "&:focus": outlineStyles,
   },
   SaveButtonMobile: {
     "& svg": {

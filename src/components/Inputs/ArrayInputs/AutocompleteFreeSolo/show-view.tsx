@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import { InputProps } from "ra-core";
 import { useFormState } from "react-final-form";
 
-import { EditInputComponent } from "../../edit-input-component";
+import { EditInputComponent } from "../../FastEditInput";
 import { AutocompleteArrayFreeSoloOrigin } from "./index";
 import { AutocompleteInput } from "../../input-types";
 import { EmptyInput, TextInputShowValue } from "../../styles";

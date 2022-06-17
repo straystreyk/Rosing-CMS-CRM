@@ -34,7 +34,7 @@ import { RatingSystems } from "../../../../components/Models/RatingSytems";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
 import { useFormState } from "react-final-form";
 import { alwaysEmptyString, scrollToErrorInput } from "../../../../helpers/form";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import { ResourceAddIcon, ResourceCountIcon } from "../../../../constants/icons";
 import { useHistory } from "react-router-dom";
 import { Checkbox } from "../../../../components/Inputs/Checkbox";
@@ -164,6 +164,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="genreIds"
             resource={resource}
             inputType={type}
             helperText="You can select several genres from the list"
@@ -179,6 +180,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="productionCountryIds"
             resource={resource}
             inputType={type}
             helperText="You can select several countries from the list"

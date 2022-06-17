@@ -15,7 +15,7 @@ import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInpu
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 import { AutocompleteInput } from "../../../../components/Inputs/AutocompleteInput";
-import { StandardButton } from "../../../../components/UI/Buttons/standard-button";
+import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import { PlusIcon } from "../../../../constants/icons";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
@@ -79,6 +79,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="genreIds"
             resource={resource}
             inputType={type}
             helperText="You can select several genres from the list"
@@ -94,6 +95,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           <AutocompleteArrayInput
             optionText="name"
             optionValue="id"
+            source="labelIds"
             resource={resource}
             inputType={type}
             helperText="You can select several labels from the list"
@@ -170,6 +172,7 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         formType={type}
       >
         <RadioButtonGroupInput
+          resource={resource}
           source="published"
           label="Publishing"
           initialValue={false}
