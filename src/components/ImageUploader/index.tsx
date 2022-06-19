@@ -10,7 +10,6 @@ import {
   AcceptFilterIcon,
   CancelFilterIcon,
   ChangeIcon,
-  DeleteIcon,
   DeleteIconNew,
   EditIcon,
   LoopIcon,
@@ -18,7 +17,6 @@ import {
 } from "../../constants/icons";
 import { TextInput } from "../Inputs";
 import { SelectButton } from "../UI/Buttons/select-button";
-import { InfoComponent } from "../UI/Info/info-component";
 import { MainLoader } from "../MainLoader";
 import { useImageItem } from "../../custom-hooks/image-uploader";
 import { Slider } from "../Slider";
@@ -119,10 +117,6 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
       <div className={cn(classes.ImageItemWrapper, "ImageItemWrapper")}>
         <div className={classes.ImageTitle}>
           <span>{imageName || kind}</span>
-          <InfoComponent
-            color="var(--secondary-color-default)"
-            info="The image will be used on the screen with the description of the movie in the iOS and Android apps. There are no requirements for the location of the main elements of the image and the presence of inscriptions."
-          />
         </div>
         <div
           className={cn(classes.ImageItem, "ImageItem")}
@@ -140,8 +134,8 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
               Drag and drop the jpg or png file here to attach it, or click on the button below
               <StandardButton
                 type="button"
-                startIcon={<UploadIcon color="var(--primary-button-default)" />}
-                variant="icon"
+                startIcon={<UploadIcon />}
+                variant="text"
                 buttonType="secondary"
                 text="Upload file"
               />
@@ -157,7 +151,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
                     }}
                     className={cn(classes.PopupButton, "PopupButton")}
                   >
-                    <LoopIcon color="var(--primary-button-default)" />
+                    <LoopIcon />
                   </button>
                 </div>
               )}
@@ -173,13 +167,13 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
               type="button"
               className="Delete"
               variant="text"
-              text="Delet newe"
+              text="Delete"
               buttonType="additional-red"
             />
             <SelectButton
               buttonClassName={classes.ImageItemChangeButton}
               label="Change type"
-              icon={<ChangeIcon color="#005AA3" />}
+              icon={<ChangeIcon />}
               pushResource={changeType}
               setServerImages={setServerImages}
               images={serverImages}
@@ -354,7 +348,7 @@ export const ImageUploaderV2: React.FC<{
           {inputType === "show" && edit && (
             <div className={classes.ImageUploaderShowButtons}>
               <StandardButton
-                startIcon={<AcceptFilterIcon color="var(--accent-color)" />}
+                startIcon={<AcceptFilterIcon />}
                 type="button"
                 buttonType="primary"
                 variant="text"
@@ -365,7 +359,7 @@ export const ImageUploaderV2: React.FC<{
                 type="button"
                 buttonType="secondary"
                 variant="text"
-                startIcon={<CancelFilterIcon color="#005AA3" />}
+                startIcon={<CancelFilterIcon />}
                 onClick={cancel}
                 text="Cancel"
               />

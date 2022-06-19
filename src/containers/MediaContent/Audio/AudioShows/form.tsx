@@ -57,11 +57,11 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
       <FormTabs labels={FIXED_TAB_LABELS}>
         {type !== "create" && (
           <StandardButton
-            startIcon={<ResourceCountIcon color="var(--accent-color)" />}
+            startIcon={<ResourceCountIcon />}
             component={Link}
             to={`/${resource}/${formState.values.id}/parts`}
             variant="text"
-            customColor="var(--accent-color)"
+            buttonType="primary"
             text={`Parts (${formState.values.parts.length})`}
           />
         )}

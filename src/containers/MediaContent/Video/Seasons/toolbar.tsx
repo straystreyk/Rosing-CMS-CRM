@@ -43,7 +43,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource, ...rest })
     <div className={classes.ToolBarWrapper}>
       <div className={classes.Title}>
         <button onClick={() => history.goBack()}>
-          <BackArrowTitle color="var(--primary-text-default)" />
+          <BackArrowTitle />
         </button>
         {translate(`resources.${resource}.name`)} (
         {total ?? (
@@ -57,10 +57,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource, ...rest })
       </div>
       <div className={classes.TopToolBar}>
         <StandardButton
-          startIcon={<ResourceAddIcon color="var(--accent-color)" />}
+          startIcon={<ResourceAddIcon />}
           text={"Create " + translate(`resources.${resource}.name`).toLowerCase()}
           variant="text"
-          customColor="var(--accent-color)"
+          buttonType="primary"
           to={basePath + "/create"}
           component={Link}
         />

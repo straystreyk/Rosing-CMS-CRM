@@ -3,4 +3,7 @@ export const ArrayInputStyles = {
   borderRadius: 4,
   padding: "12px 24px",
   backgroundColor: "#fff",
+  "& svg.icon": {
+    width: 8,
+  },
 };

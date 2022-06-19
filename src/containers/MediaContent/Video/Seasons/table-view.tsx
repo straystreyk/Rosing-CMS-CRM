@@ -86,8 +86,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
                   })
                 }
                 disabled={loading}
-                color="secondary"
-                variant="textWithBg"
+                buttonType="secondary"
+                variant="text"
                 startIcon={record?.published ? <UnPublishIcon /> : <PublishIcon />}
               >
                 {record?.published ? <>Unpublish</> : <>Publish</>}

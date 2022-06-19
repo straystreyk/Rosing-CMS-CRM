@@ -101,7 +101,7 @@ export const ColorPickerInputOrigin: React.FC<ColorPickerInputProps> = ({
           </>
         ) : (
           <StandardButton
-            startIcon={<PlusIcon color="var(--primary-button-default)" />}
+            startIcon={<PlusIcon />}
             buttonType="secondary"
             variant="text"
             onClick={() => setActive(true)}

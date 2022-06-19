@@ -59,6 +59,9 @@ const useStyles = makeStyles({
     display: "inline-block",
     marginTop: 8,
     marginBottom: 8,
+    "& .icon": {
+      width: 8,
+    },
     "&.showView": {
       marginBottom: 0,
     },
@@ -99,7 +102,7 @@ export const GroupInputsOrigin: React.FC<GroupInputsProps> = ({
           <span onClick={() => inputType === "show" && setShow((p) => !p)}>
             <span className="label">{label}</span>
             {switchable && inputType !== "show" && <Switch checked={show} />}
-            {inputType === "show" && <ArrayInputItemArrow color="var(--secondary-color-main)" />}
+            {inputType === "show" && <ArrayInputItemArrow className="icon" />}
           </span>
           {groupHelperText && inputType !== "show" && (
             <p className={classes.GroupHelperText}>{groupHelperText}</p>

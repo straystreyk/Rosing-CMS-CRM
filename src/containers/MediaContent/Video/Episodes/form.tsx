@@ -93,7 +93,7 @@ const Episode: React.FC<{
         {index && !["edit", "show"].includes(inputType) && (
           <div className={classes.ArrayInputItemName} onClick={showArrayInputItem}>
             New episode number {+index + 1}
-            <ArrayInputItemArrow color="var(--secondary-color-main)" />
+            <ArrayInputItemArrow className="icon" />
           </div>
         )}
         <Collapse in={showResource || ["edit", "show"].includes(inputType)} timeout="auto">

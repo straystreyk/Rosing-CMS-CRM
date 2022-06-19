@@ -386,9 +386,6 @@ export const lightTheme = {
           transition: "0.35s color ease, 0.35s background-color ease",
           margin: "8px 0",
           overflow: "visible",
-          "&:last-child": {
-            marginBottom: 0,
-          },
           "&.Mui-selected": {
             ...outlineStyles,
             color: "var(--primary-focus)",

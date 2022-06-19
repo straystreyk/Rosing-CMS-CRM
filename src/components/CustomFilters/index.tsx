@@ -121,8 +121,8 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
             {initialFilters && initialFilters.length ? (
               <StandardButton
                 variant="text"
-                startIcon={<PlusIcon color="var(--primary-button-default)" />}
-                endIcon={<ArrayInputItemArrow color="var(--primary-button-default)" />}
+                startIcon={<PlusIcon />}
+                endIcon={<ArrayInputItemArrow />}
                 buttonType="secondary"
                 className="filterButton"
                 onClick={handleClick}
@@ -132,7 +132,7 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
             {allActiveFiltersWithValue.length !== 0 && (
               <StandardButton
                 variant="text"
-                startIcon={<DeleteIcon color="var(--additional-red-default)" />}
+                startIcon={<DeleteIcon />}
                 buttonType="additional-red"
                 className="filterButton deleteButton"
                 onClick={deleteAllFilters}

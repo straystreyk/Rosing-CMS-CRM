@@ -76,10 +76,10 @@ export const TableView: React.FC<ShowProps> = (props) => {
           render={(record?: RecordRA) => (
             <div className={classes.MoreActions}>
               <StandardButton
-                customColor="var(--accent-color)"
-                startIcon={<TVProgramsIcon color="var(--accent-color)" />}
+                startIcon={<TVProgramsIcon />}
                 onClick={() => openTVPrograms(record?.id)}
                 variant="text"
+                buttonType="primary"
                 text="TV programs"
                 onMobileView
               />

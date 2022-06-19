@@ -177,17 +177,19 @@ export const actionsStyles: any = {
 };
 
 export const linkStyles = {
-  color: "#005AA3",
+  color: "var(--primary-button-default)",
   display: "flex",
   alignItems: "center",
   textDecoration: "none",
-  "& svg": {
+  "& .icon": {
     marginRight: 8,
+    width: 20,
+    height: 20,
   },
 };
 
 export const linkHelpStyles = {
-  color: "#005AA3",
+  color: "var(--primary-button-default)",
   display: "flex",
   textDecoration: "none",
   marginTop: 48,

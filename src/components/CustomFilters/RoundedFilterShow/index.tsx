@@ -4,9 +4,8 @@ import { useListContext } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 
 import { ChoicesItem } from "../custom-filters-types";
-import { ArrowFilterIcon } from "../constants";
 import { DefaultRoundedFilterStyles } from "./styles";
-import { CrossIcon } from "../../../constants/icons";
+import { ArrayInputItemArrow, CrossIcon } from "../../../constants/icons";
 
 const useStyles = makeStyles(DefaultRoundedFilterStyles);
 
@@ -69,13 +68,11 @@ export const RoundedFilterShow: React.FC<RoundedFilterShowProps> = ({
             label
           )}
         </span>
-        <ArrowFilterIcon
-          color={!isAlreadyIn ? "var(--primary-focus)" : "var(--primary-button-default)"}
-        />
+        <ArrayInputItemArrow className="icon" />
       </button>
       {isAlreadyIn && (
         <button className="deleteButton" onClick={deleteFilter}>
-          <CrossIcon color="var(--primary-button-default)" />
+          <CrossIcon className="icon" />
         </button>
       )}
     </span>

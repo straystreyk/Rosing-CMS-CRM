@@ -1,5 +1,5 @@
-const generateButtonTypeStyles = (color: string, hoverColor: string, selectColor: string) => ({
-  Contained: {
+const generateButtonVariantsStyles = (color: string, hoverColor: string, selectColor: string) => ({
+  "&.contained": {
     backgroundColor: color,
     "& .MuiButton-label": {
       color: "#fff",
@@ -8,28 +8,22 @@ const generateButtonTypeStyles = (color: string, hoverColor: string, selectColor
       backgroundColor: hoverColor,
     },
   },
-  Outlined: {
+  "&.outlined": {
     border: `1px solid ${color}`,
-    "& svg path, & svg circle, & svg line": {
-      transition: "0.35s all ease",
-    },
     "&:hover": {
-      color: `${hoverColor} !important`,
-      borderColor: `${hoverColor} !important`,
+      color: `${hoverColor}`,
+      borderColor: `${hoverColor}`,
       backgroundColor: selectColor,
     },
   },
-  Text: {
+  "&.text": {
     padding: "4px 6px",
-    "& svg path, & svg circle, & svg line": {
-      transition: "0.35s all ease",
-    },
     "&:hover": {
-      color: `${hoverColor} !important`,
+      color: `${hoverColor} `,
       backgroundColor: "unset",
     },
   },
-  Icon: {
+  "&.icon": {
     minWidth: "auto",
     padding: "4px 6px",
     "&:hover": {
@@ -37,6 +31,33 @@ const generateButtonTypeStyles = (color: string, hoverColor: string, selectColor
     },
   },
 });
+
+const ALL_BUTTON_TYPES = {
+  primary: {
+    color: "var(--accent-color)",
+    ...generateButtonVariantsStyles(
+      "var(--accent-color)",
+      "var(--accent-color-hover)",
+      "var(--accent-color-select)"
+    ),
+  },
+  secondary: {
+    color: "var(--primary-button-default)",
+    ...generateButtonVariantsStyles(
+      "var(--primary-button-default)",
+      "var(--primary-focus)",
+      "var(--primary-bg-2)"
+    ),
+  },
+  "additional-red": {
+    color: "var(--additional-red-default)",
+    ...generateButtonVariantsStyles(
+      "var(--additional-red-default)",
+      "var(--additional-red-hover)",
+      "var(--additional-red-select)"
+    ),
+  },
+};
 
 export const StandardButtonStyles: any = {
   StandardButton: {
@@ -47,61 +68,6 @@ export const StandardButtonStyles: any = {
     fontFamily: "var(--font-family)",
     lineHeight: "20px",
     transition: "0.35s color ease, 0.35s border ease, 0.35s background ease",
-    "&.primary.contained": generateButtonTypeStyles(
-      "var(--accent-color)",
-      "var(--accent-color-hover)",
-      "var(--accent-color-select)"
-    ).Contained,
-    "&.primary.text": generateButtonTypeStyles(
-      "var(--accent-color)",
-      "var(--accent-color-hover)",
-      "var(--accent-color-select)"
-    ).Text,
-    "&.primary.outlined": generateButtonTypeStyles(
-      "var(--accent-color)",
-      "var(--accent-color-hover)",
-      "var(--accent-color-select)"
-    ).Outlined,
-    "&.secondary.contained": generateButtonTypeStyles(
-      "var(--primary-button-default)",
-      "var(--primary-focus)",
-      "var(--primary-bg-2)"
-    ).Contained,
-    "&.secondary.text": generateButtonTypeStyles(
-      "var(--primary-button-default)",
-      "var(--primary-focus)",
-      "var(--primary-bg-2)"
-    ).Text,
-    "&.secondary.outlined": generateButtonTypeStyles(
-      "var(--primary-button-default)",
-      "var(--primary-focus)",
-      "var(--primary-bg-2)"
-    ).Outlined,
-    "&.secondary.icon": generateButtonTypeStyles(
-      "var(--primary-button-default)",
-      "var(--primary-focus)",
-      "var(--primary-bg-2)"
-    ).Icon,
-    "&.additional-red.contained": generateButtonTypeStyles(
-      "var(--additional-red-default)",
-      "var(--additional-red-hover)",
-      "var(--additional-red-select)"
-    ).Contained,
-    "&.additional-red.text": generateButtonTypeStyles(
-      "var(--additional-red-default)",
-      "var(--additional-red-hover)",
-      "var(--additional-red-select)"
-    ).Text,
-    "&.additional-red.outlined": generateButtonTypeStyles(
-      "var(--additional-red-default)",
-      "var(--additional-red-hover)",
-      "var(--additional-red-select)"
-    ).Outlined,
-    "&.additional-red.icon": generateButtonTypeStyles(
-      "var(--additional-red-default)",
-      "var(--additional-red-hover)",
-      "var(--additional-red-select)"
-    ).Icon,
     "& .MuiButton-label": {
       fontWeight: 500,
       "& > .MuiButton-startIcon": {
@@ -120,10 +86,11 @@ export const StandardButtonStyles: any = {
       },
     },
     "&:focus": {
-      outline: "2px solid #7FC5FF",
+      outline: "2px solid var(--primary-focus-2)",
       outlineOffset: "2px",
     },
   },
+  ...ALL_BUTTON_TYPES,
   MobileView: {
     minWidth: "unset",
     "& .MuiButton-label > .MuiButton-startIcon": {

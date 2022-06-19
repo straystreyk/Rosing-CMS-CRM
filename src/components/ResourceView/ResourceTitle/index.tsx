@@ -38,12 +38,12 @@ export const ResourceTitle: React.FC<TitleProps> = ({
           {form === "show" && date && time && (
             <div className={classes.topTitleWrapper}>
               <span className="time">
-                {(date || time) && <TimeIcon color="#005AA3" />}
+                {(date || time) && <TimeIcon className="icon" />}
                 {date && `${date}`}
                 {time && `, ${time}`}
               </span>
               <span className={classes.help}>
-                <InformationIcon color="var(--accent-color)" />
+                <InformationIcon className="icon" />
                 Reference
               </span>
             </div>
@@ -54,7 +54,7 @@ export const ResourceTitle: React.FC<TitleProps> = ({
                 <>
                   <span>{translate(["resources", name, "titles", form].join("."))}</span>
                   <span className={classes.help}>
-                    <InformationIcon color="var(--accent-color)" />
+                    <InformationIcon className="icon" />
                     Reference
                   </span>
                 </>

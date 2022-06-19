@@ -9,14 +9,14 @@ import { MainLoader } from "../../MainLoader";
 import { ImageProps } from "../../ImageUploader/types";
 import { outlineStyles } from "../../Themes/main-styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   SelectButtonWrapper: {
     display: "flex",
     justifyContent: "center",
   },
   PushButton: {
     backgroundColor: "transparent",
-    color: theme.palette.primary.main,
+    color: "var(--accent-color)",
     transition: "0.35s color ease",
     padding: "6px 16px",
     "& svg path": {
@@ -28,12 +28,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "var(--accent-color-hover)",
       backgroundColor: "transparent",
-      "& svg path": {
-        fill: "var(--accent-color-hover)",
-      },
     },
   },
-}));
+});
 
 export interface ImageTypesProps {
   kind: string;

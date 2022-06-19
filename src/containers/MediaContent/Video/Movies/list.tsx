@@ -82,8 +82,8 @@ export const List: React.FC<ShowProps> = (props) => {
                     })
                   }
                   disabled={loading}
-                  color="secondary"
-                  variant="textWithBg"
+                  buttonType="secondary"
+                  variant="text"
                   startIcon={record?.published ? <UnPublishIcon /> : <PublishIcon />}
                 >
                   {record?.published ? <>Unpublish</> : <>Publish</>}
@@ -91,8 +91,8 @@ export const List: React.FC<ShowProps> = (props) => {
                 <StandardButton
                   onClick={() => approve(record?.id, { ...record, downloadable: true })}
                   disabled={loading}
-                  color="secondary"
-                  variant="textWithBg"
+                  buttonType="secondary"
+                  variant="text"
                   startIcon={<AllowDownload />}
                 >
                   Allow downloading
@@ -100,8 +100,8 @@ export const List: React.FC<ShowProps> = (props) => {
                 <StandardButton
                   onClick={() => approve(record?.id, { ...record, downloadable: false })}
                   disabled={loading}
-                  color="secondary"
-                  variant="textWithBg"
+                  buttonType="secondary"
+                  variant="text"
                   startIcon={<ProhibitDownload />}
                 >
                   Prohibit downloading
@@ -109,8 +109,8 @@ export const List: React.FC<ShowProps> = (props) => {
                 <StandardButton
                   onClick={() => approve(record?.id, { ...record, position: 1 })}
                   disabled={loading}
-                  color="secondary"
-                  variant="textWithBg"
+                  buttonType="secondary"
+                  variant="text"
                   startIcon={<ArrowIconUp />}
                 >
                   To the top of the list
@@ -119,8 +119,8 @@ export const List: React.FC<ShowProps> = (props) => {
                   onClick={() => approve(record?.id, { ...record, position: props.total ?? 0 })}
                   startIcon={<ArrowIconDown />}
                   disabled={loading}
-                  variant="textWithBg"
-                  color="secondary"
+                  variant="text"
+                  buttonType="secondary"
                 >
                   To the bottom of the list
                 </StandardButton>

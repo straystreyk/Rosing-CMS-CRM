@@ -8,6 +8,7 @@ export const MoreActionsButtonStyles = {
     transition: "0.35s all ease",
     "& svg": {
       verticalAlign: "middle",
+      width: 12,
     },
   },
   MoreActionButtonChild: {

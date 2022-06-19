@@ -2,6 +2,10 @@ export const ExportStatusWidgetStyles = {
   Icon: {
     display: "flex",
     marginRight: 6,
+    color: "var(--primary-button-default)",
+    "& .icon": {
+      width: 20,
+    },
   },
   ExportWidget: {
     padding: "8px 24px",

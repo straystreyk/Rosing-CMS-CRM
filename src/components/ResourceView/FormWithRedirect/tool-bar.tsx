@@ -60,7 +60,7 @@ export const Toolbar = (props: ToolbarProps) => {
         )}
       >
         <StandardButton
-          startIcon={<CancelFilterIcon color="var(--primary-button-default)" />}
+          startIcon={<CancelFilterIcon />}
           variant="outlined"
           text="Cancel"
           onClick={cancel}
@@ -68,7 +68,7 @@ export const Toolbar = (props: ToolbarProps) => {
           onMobileView
         />
         <SaveButton
-          icon={<AcceptFilterIcon color="#fff" />}
+          icon={<AcceptFilterIcon />}
           label="Save"
           onSuccess={props.onSuccess}
           onFailure={props.onFailure}
@@ -76,7 +76,7 @@ export const Toolbar = (props: ToolbarProps) => {
         {props.formType !== "edit" && !props.offRedirectButton ? (
           <SaveButton
             label={props.redirectButtonLabel ?? `Save and add another one`}
-            icon={props.redirectButtonIcon ?? <PlusIcon color="#fff" />}
+            icon={props.redirectButtonIcon ?? <PlusIcon />}
             onSuccess={props.onSuccessWithRedirect ?? props.onSuccess}
             onFailure={props.onFailure}
           />

@@ -13,9 +13,9 @@ export const ShowTitleActionButtons: TitleActionButtonsType = React.memo((props)
     <>
       <StandardButton
         component={Link}
-        startIcon={<ResourceCountEpisodesIcon color="var(--accent-color)" />}
+        startIcon={<ResourceCountEpisodesIcon />}
         variant="text"
-        customColor="var(--accent-color)"
+        buttonType="primary"
         text={`Episodes (${values.episodes.length})`}
         to={`/media_content/video/seasons/${props.id}/episodes`}
       />

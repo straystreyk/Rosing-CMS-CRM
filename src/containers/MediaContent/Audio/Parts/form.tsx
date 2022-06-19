@@ -62,7 +62,7 @@ const Part: React.FC<{
     <>
       {index && !["edit", "show"].includes(inputType) && (
         <div className={classes.ArrayInputItemName} onClick={showArrayInputItem}>
-          New Part {+index + 1} <ArrayInputItemArrow color="var(--secondary-color-main)" />
+          New Part {+index + 1} <ArrayInputItemArrow className="icon" />
         </div>
       )}
       <div

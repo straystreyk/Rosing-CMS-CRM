@@ -76,14 +76,10 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
                 : `/media_content/video/series/${formState.values.id}/seasons/create`
             }
             startIcon={
-              formState.values.seasons.length ? (
-                <ResourceCountIcon color="var(--accent-color)" />
-              ) : (
-                <ResourceAddIcon color="var(--accent-color)" />
-              )
+              formState.values.seasons.length ? <ResourceCountIcon /> : <ResourceAddIcon />
             }
             variant="text"
-            customColor="var(--accent-color)"
+            buttonType="primary"
             text={
               formState.values.seasons.length
                 ? `Seasons (${formState.values.seasons.length})`

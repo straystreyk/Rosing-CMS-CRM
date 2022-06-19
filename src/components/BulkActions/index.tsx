@@ -18,7 +18,7 @@ export const BulkActions: React.FC = () => {
       <span className="title">Selected: {selectedIds.length}</span>
       <div className={classes.BulkActions}>
         <BulkDeleteButton
-          icon={<DeleteIcon color="var(--additional-red-default)" />}
+          icon={<DeleteIcon />}
           className={cn(classes.Button, "delete")}
           label="Delete"
         />

@@ -9,7 +9,7 @@ import { StandardButtonStyles } from "./styles";
 
 export interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
   buttonType: "primary" | "secondary" | "additional-red";
-  variant?: "text" | "outlined" | "contained" | "textWithBg" | "icon" | undefined;
+  variant?: "text" | "outlined" | "contained" | "icon";
   component?: any;
   to?: string;
   target?: "_blank" | "_parent" | "_self";
@@ -18,12 +18,6 @@ export interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
 }
 
 const useStyles = makeStyles(StandardButtonStyles);
-
-const ALL_BUTTON_COLORS = {
-  primary: "var(--accent-color)",
-  secondary: "var(--primary-button-default)",
-  "additional-red": "var(--additional-red-default)",
-};
 
 export const StandardButton: React.FC<StandardButtonProps> = ({
   children,
@@ -50,14 +44,13 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
       startIcon={startIcon}
       endIcon={endIcon}
       style={{
-        color: buttonType ? ALL_BUTTON_COLORS[buttonType] : "",
         ...style,
       }}
       className={cn(
         classes.StandardButton,
-        "StandardButton",
-        buttonType,
+        classes[buttonType],
         variant,
+        "StandardButton",
         isMobile && onMobileView && classes.MobileView,
         className && className
       )}

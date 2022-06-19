@@ -149,9 +149,9 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         </ReferenceInput>
         <div className={classes.AddResourceButton}>
           <StandardButton
-            startIcon={<PlusIcon color="var(--accent-color)" />}
+            startIcon={<PlusIcon />}
             variant="text"
-            customColor="var(--accent-color)"
+            buttonType="primary"
             onClick={goToLiveStreams}
           >
             Add radio live stream

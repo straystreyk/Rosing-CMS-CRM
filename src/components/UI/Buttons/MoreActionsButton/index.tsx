@@ -9,11 +9,11 @@ import { MoreActionsButtonStyles } from "./styles";
 
 const useStyles = makeStyles(MoreActionsButtonStyles);
 
-const MoreActionsButtonIcon = ({ color }: IconProps) => (
-  <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="6.00032" cy="2.0002" r="1.05" fill={color} />
-    <circle cx="1.9001" cy="2.0002" r="1.05" fill={color} />
-    <circle cx="10.1003" cy="2.0002" r="1.05" fill={color} />
+const MoreActionsButtonIcon = (props: IconProps) => (
+  <svg {...props} viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="6.00032" cy="2.0002" r="1.05" fill="currentColor" />
+    <circle cx="1.9001" cy="2.0002" r="1.05" fill="currentColor" />
+    <circle cx="10.1003" cy="2.0002" r="1.05" fill="currentColor" />
   </svg>
 );
 
@@ -41,7 +41,7 @@ export const MoreActionsButton: React.FC = ({ children }) => {
         onClick={handleClick}
         className={cn(classes.MoreActionsButton, "MoreActionsButton")}
       >
-        <MoreActionsButtonIcon color="var(--primary-button-default)" />
+        <MoreActionsButtonIcon />
       </button>
       <Menu
         id="basic-menu-more-actions"

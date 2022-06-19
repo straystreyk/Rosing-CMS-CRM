@@ -67,7 +67,7 @@ export const CastMembers: React.FC<{
       <div className={classes.CastMemberName} onClick={showCastMember}>
         {name}
         <button>
-          <ArrayInputItemArrow color="var(--secondary-color-main)" />
+          <ArrayInputItemArrow />
         </button>
       </div>
       <div

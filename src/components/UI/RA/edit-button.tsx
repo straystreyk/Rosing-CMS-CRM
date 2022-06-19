@@ -5,12 +5,15 @@ import { EditIcon } from "../../../constants/icons";
 
 const useStyles = makeStyles({
   EditButton: {
-    color: "#005AA3",
+    color: "var(--primary-button-default)",
     padding: "2px 5px",
     minWidth: "auto",
+    transition: "0.35s color ease",
     "& svg": {
       marginLeft: 0,
       marginRight: 6,
+      width: 20,
+      height: 20,
     },
     "& span": {
       fontSize: 14,
@@ -23,8 +26,12 @@ const useStyles = makeStyles({
       fontFamily: "var(--font-family)",
     },
     "&:focus": {
-      outline: "2px solid #7FC5FF",
+      outline: "2px solid var(--primary-focus-2)",
       outlineOffset: "2px",
+    },
+    "&:hover": {
+      backgroundColor: "transparent",
+      color: "var(--primary-focus)",
     },
   },
 });

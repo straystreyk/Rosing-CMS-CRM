@@ -40,7 +40,7 @@ export const ExportResourceButton: React.FC<{ resource: string }> = React.memo((
         className={classes.ExportButton}
       >
         <ExportIcon />
-        <ArrayInputItemArrow color="var(--primary-text-default)" />
+        <ArrayInputItemArrow />
       </StandardButton>
       <Menu
         id="download-basic-menu"

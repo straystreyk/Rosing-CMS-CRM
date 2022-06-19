@@ -64,7 +64,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         to={"/dashboard"}
         primaryText={"Dashboard"}
-        leftIcon={<DashboardIcon color="#fff" />}
+        leftIcon={<DashboardIcon />}
         onClick={React.useCallback(
           () => redirectAdmin("https://dev-admin.spbtv.com/admin/dashboard"),
           []
@@ -80,7 +80,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         primaryText={translate(`resources.admin_users.name`, {
           smart_count: 2,
         })}
-        leftIcon={<users.icon color="#fff" />}
+        leftIcon={<users.icon />}
         tooltipProps={tooltipProps(translate(`resources.admin_users.name`))}
         onClick={onMenuClick}
         sidebarIsOpen={open}
@@ -90,7 +90,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         to={`/payments`}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Payments"}
-        leftIcon={<PaymentIcon color="#fff" />}
+        leftIcon={<PaymentIcon />}
         onClick={React.useCallback(
           () => redirectAdmin("https://dev-admin.spbtv.com/admin/payments"),
           []
@@ -103,7 +103,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         to="/tarrif_plans"
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText="Tariff plans"
-        leftIcon={<TariffIcon color="#fff" />}
+        leftIcon={<TariffIcon />}
         onClick={React.useCallback(
           () => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_rent_plans"),
           []
@@ -116,7 +116,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         to="/promocodes"
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText="Promocode"
-        leftIcon={<PromocodeIcon color="#fff" />}
+        leftIcon={<PromocodeIcon />}
         onClick={React.useCallback(
           () => redirectAdmin("https://dev-admin.spbtv.com/admin/subscriptions_promo_codes"),
           []
@@ -129,7 +129,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         to={`/push_campaigns`}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText="Push campaigns"
-        leftIcon={<PushCopmaniesIcon color="#fff" />}
+        leftIcon={<PushCopmaniesIcon />}
         onClick={React.useCallback(
           () =>
             redirectAdmin("https://dev-admin.spbtv.com/admin/push_notifications_push_campaigns"),
@@ -144,7 +144,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         to={`/pages_and_attributes`}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText={"Pages and attributes"}
-        leftIcon={<PagesAndAttributesIcon color="#fff" />}
+        leftIcon={<PagesAndAttributesIcon />}
         tooltipProps={tooltipProps("Pages and attributes")}
         onClick={onMenuClick}
         sidebarIsOpen={open}
@@ -153,7 +153,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
       <ExpandMenu
         links={["/media_content"]}
         title={translate(`pos.expandMenu.mediaContent`)}
-        icon={<MediaContentIcon color={"#fff"} />}
+        icon={<MediaContentIcon />}
       >
         <MenuItemLink
           to={`/media_content/video`}
@@ -228,7 +228,7 @@ export const Menu: React.FC<MenuProps> = ({ onMenuClick, dense, logout, ...props
         to={`/media_content/environment_settings`}
         className={cn(classes.MenuItemLinkStyles, !open && classes.MenuItemLinkCloseStyles)}
         primaryText="Environment settings"
-        leftIcon={<SettingsMenuIcon color="#fff" />}
+        leftIcon={<SettingsMenuIcon />}
         tooltipProps={tooltipProps("Environment settings")}
         onClick={onMenuClick}
         sidebarIsOpen={open}

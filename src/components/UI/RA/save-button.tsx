@@ -20,6 +20,7 @@ const useStyles = makeStyles({
     "& svg": {
       marginLeft: 0,
       marginRight: 6,
+      width: 20,
     },
     "& span": {
       fontSize: 14,

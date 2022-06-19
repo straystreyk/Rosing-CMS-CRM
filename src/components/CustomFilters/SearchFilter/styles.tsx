@@ -58,6 +58,11 @@ export const SearchFilterStyles: any = {
     top: "50%",
     transform: "translateY(-50%)",
     display: "flex",
-    "& button": { display: "flex" },
+    "& .icon": {
+      color: "var(--secondary-color-default)",
+      width: 20,
+      height: 20,
+      display: "flex",
+    },
   },
 };

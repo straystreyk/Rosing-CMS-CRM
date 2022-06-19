@@ -59,7 +59,7 @@ export const RatingShow: React.FC<AgeRating> = ({ tag, system }) => {
         arrow
       >
         <button className={classes.InformationButton}>
-          <InformationIcon color="var(--secondary-color-default)" />
+          <InformationIcon />
         </button>
       </Tooltip>
     </div>

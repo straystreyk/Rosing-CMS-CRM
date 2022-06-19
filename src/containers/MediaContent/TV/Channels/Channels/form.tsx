@@ -81,9 +81,9 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
           <StandardButton
             component={Link}
             to={`/${resource}/${formState.values.id}/channel_versions`}
-            startIcon={<ResourceCountIcon color="var(--accent-color)" />}
+            startIcon={<ResourceCountIcon />}
             variant="text"
-            customColor="var(--accent-color)"
+            buttonType="primary"
           >
             Channel versions ({formState.values.channelVersions.length})
           </StandardButton>

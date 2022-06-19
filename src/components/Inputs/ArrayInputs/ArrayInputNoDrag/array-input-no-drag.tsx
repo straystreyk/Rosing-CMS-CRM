@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  ArrayInput as ArrayInputRA,
-  ArrayInputProps as ArrayInputPropsRA,
-  ChoicesProps,
-} from "react-admin";
+import { ArrayInput as ArrayInputRA, ArrayInputProps as ArrayInputPropsRA } from "react-admin";
 import { makeStyles } from "@material-ui/core";
 import { useFormState } from "react-final-form";
 import { FieldArray } from "react-final-form-arrays";
@@ -138,9 +134,9 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                                 choices={props.choices ?? undefined}
                               />
                               <StandardButton
-                                startIcon={<DeleteIcon color="var(--additional-red-default)" />}
+                                startIcon={<DeleteIcon />}
                                 type="button"
-                                variant="icon"
+                                variant="text"
                                 buttonType="additional-red"
                                 className={classes.DeleteButton}
                                 onClick={() => fieldProps.fields.remove(index)}
@@ -166,7 +162,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                                 type="button"
                                 variant="text"
                                 buttonType="secondary"
-                                startIcon={<PlusIcon color="var(--primary-button-default)" />}
+                                startIcon={<PlusIcon />}
                                 onClick={() => fieldProps.fields.push(undefined)}
                                 text="Add another one"
                               />
@@ -181,7 +177,7 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
                           type="button"
                           variant="text"
                           buttonType="secondary"
-                          startIcon={<PlusIcon color="var(--primary-button-default)" />}
+                          startIcon={<PlusIcon />}
                           onClick={() => fieldProps.fields.push(initialPushObject ?? undefined)}
                           text="Add another one"
                         />

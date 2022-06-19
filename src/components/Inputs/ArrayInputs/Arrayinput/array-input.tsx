@@ -205,7 +205,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
               type="button"
               variant="text"
               buttonType="secondary"
-              startIcon={<HideIcon color="#005AA3" />}
+              startIcon={<HideIcon />}
               onClick={() => setShow((p) => !p)}
               text={show ? "Hide all" : "Show all"}
             />
@@ -277,9 +277,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                                         type="button"
                                         variant="icon"
                                         buttonType="additional-red"
-                                        startIcon={
-                                          <DeleteIcon color="var(--additional-red-default)" />
-                                        }
+                                        startIcon={<DeleteIcon />}
                                         onClick={() => fieldProps.fields.remove(index)}
                                         text="Delete"
                                       />
@@ -301,7 +299,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                               />
                             ) : (
                               <StandardButton
-                                startIcon={<PlusIcon color="var(--accent-color)" />}
+                                startIcon={<PlusIcon />}
                                 type="button"
                                 onClick={(e) => pushResource()}
                                 variant="text"

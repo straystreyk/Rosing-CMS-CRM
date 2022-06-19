@@ -1,5 +1,5 @@
 import { Styles } from "@material-ui/core/styles/withStyles";
-import { outlineStyles, scrollBarStyles } from "../Themes/main-styles";
+import { scrollBarStyles } from "../Themes/main-styles";
 import { Theme } from "@material-ui/core";
 import { MEDIA_QUERIES_BREAKPOINTS, TopToolBar } from "../../constants/style-constants";
 
@@ -142,15 +142,12 @@ export const TableStyles: Styles<Theme, {}, string> = {
       fontWeight: 500,
       textAlign: "left",
       fontSize: 14,
-      transition: "0.35s color ease",
-      "& svg line": {
-        transition: "0.35s all ease",
+      transition: "0.35s all ease",
+      "& svg": {
+        width: 20,
       },
       "&:hover": {
         color: "var(--primary-focus)",
-        "& svg line": {
-          stroke: "var(--primary-focus)",
-        },
       },
     },
     "&.active button": {

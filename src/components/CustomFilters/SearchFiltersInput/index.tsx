@@ -46,7 +46,7 @@ export const SearchFiltersInput = React.forwardRef<HTMLDivElement, SearchFilters
           onChange={searchFilters}
         />
         <div className={classes.LoopIcon}>
-          <LoopInputIcon color="var(--secondary-color-default)" />
+          <LoopInputIcon />
         </div>
       </div>
     );

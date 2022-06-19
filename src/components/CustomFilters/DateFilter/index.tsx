@@ -131,14 +131,14 @@ export const DateFilter: React.FC<StandardCustomFilterProps> = ({
         </div>
         <div className={classes.ButtonsWrapper}>
           <StandardButton
-            startIcon={<AcceptFilterIcon color="var(--accent-color)" />}
+            startIcon={<AcceptFilterIcon />}
             variant="text"
             buttonType="primary"
             onClick={acceptFilter}
             text="Accept"
           />
           <StandardButton
-            startIcon={<CancelFilterIcon color="var(--primary-button-default)" />}
+            startIcon={<CancelFilterIcon />}
             variant="text"
             buttonType="secondary"
             onClick={handleClose}

@@ -58,13 +58,7 @@ export const EditInputComponent: React.FC<EditInputComponentProps> = ({
       {showInput ? (
         <div className={classes.ShowEditButtonsWrapper}>
           <StandardButton
-            startIcon={
-              loading ? (
-                <MainLoader flex size={10} />
-              ) : (
-                <AcceptFilterIcon color="var(--accent-color)" />
-              )
-            }
+            startIcon={loading ? <MainLoader flex size={10} /> : <AcceptFilterIcon />}
             type="button"
             buttonType="primary"
             variant="text"
@@ -75,7 +69,7 @@ export const EditInputComponent: React.FC<EditInputComponentProps> = ({
             type="button"
             buttonType="secondary"
             variant="text"
-            startIcon={<CancelFilterIcon color="var(--primary-button-default)" />}
+            startIcon={<CancelFilterIcon />}
             onClick={cancelEdit}
             text="Cancel"
           />

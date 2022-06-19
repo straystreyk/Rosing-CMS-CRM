@@ -1,7 +1,11 @@
 export const ExportButtonStyles = {
   ExportButton: {
-    "& .MuiButton-label svg:first-child": {
-      marginRight: 4,
+    "& svg:first-child": {
+      width: 20,
+    },
+    "& svg:last-child": {
+      width: 8,
+      marginLeft: 4,
     },
   },
 };

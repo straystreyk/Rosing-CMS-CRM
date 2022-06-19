@@ -60,7 +60,7 @@ export const Create: React.FC<CreateProps> = (props) => {
     <ResourceCreate
       {...props}
       resource={resource}
-      redirectButtonIcon={<RedirectButtonIcon color="#fff" />}
+      redirectButtonIcon={<RedirectButtonIcon />}
       redirectButtonLabel="Save and add channel versions"
       onSuccessWithRedirect={onSuccessWithRedirect}
     >

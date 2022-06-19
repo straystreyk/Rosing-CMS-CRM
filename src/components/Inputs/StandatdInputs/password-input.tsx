@@ -27,8 +27,8 @@ const useStyles = makeStyles({
         borderColor: "var(--primary-text-default)",
       },
       "&:focus": {
-        outline: "2px solid #7FC5FF",
-        borderColor: "#28A138",
+        outline: "2px solid var(--primary-focus-2)",
+        borderColor: "var(--additional-green-default)",
         outlineOffset: "2px",
       },
     },

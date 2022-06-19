@@ -4,8 +4,8 @@ import { makeStyles } from "@material-ui/core";
 import { labelStyles } from "../styles";
 import { EditInputComponent } from "../FastEditInput";
 import { useFormState } from "react-final-form";
-import { ArrowFilterIcon } from "../../CustomFilters/constants";
 import { InputProps } from "../input-types";
+import { ArrayInputItemArrow } from "../../../constants/icons";
 
 const useStyles = makeStyles({
   JsonInput: {
@@ -22,6 +22,9 @@ const useStyles = makeStyles({
       position: "absolute",
       top: 0,
       left: 0,
+      "& .icon": {
+        width: 8,
+      },
     },
   },
 });
@@ -41,7 +44,7 @@ const ShowView: React.FC<InputProps> = ({ source, label }) => {
       <label>{label}</label>
       <div className={classes.JsonInputShow}>
         <button onClick={handleShow}>
-          <ArrowFilterIcon color="#005AA3" />
+          <ArrayInputItemArrow className="icon" />
         </button>
         <div>&#123; {!active && <>... &#125;</>}</div>
         {active && (

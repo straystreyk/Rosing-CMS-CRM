@@ -115,7 +115,7 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
       <div className={classes.mainStyles}>
         <div className={classes.authBgStyles}>
           <div className={classes.logoStyles}>
-            <RosingLogo color={""} />
+            <RosingLogo />
           </div>
         </div>
         <div className={classes.formWrapperStyles}>
@@ -128,7 +128,7 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
                   <div className={classes.titleStyles}>
                     {!isResetPage ? "Авторизация" : "Восстановление пароля"}
                     <div className={classes.annotationWrapperStyles}>
-                      <InformationIcon color="var(--secondary-color-default)" />
+                      <InformationIcon />
                       <div className={classes.annotationStyles}>
                         В целях безопасности используемый для авторизации email должен быть
                         добавлен админом в список пользователей. Если система не узнает email,
@@ -152,14 +152,14 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
                           <label htmlFor="remember">Stay logged in</label>
                           <BooleanInput helperText="" source="remember" label="" />
                         </div>
-                        <Link className={classes.linkStyles} to={"/login/reset"}>
-                          <AnnotationIcon color="var(--primary-button-default)" />
+                        <Link className={classes.linkStyles} to="/login/reset">
+                          <AnnotationIcon className="icon" />
                           Forgot password
                         </Link>
                       </>
                     ) : (
-                      <Link className={classes.linkStyles} to={"/login"}>
-                        <BackIcon color="var(--primary-button-default)" />I remember the password
+                      <Link className={classes.linkStyles} to="/login">
+                        <BackIcon className="icon" />I remember the password
                       </Link>
                     )}
                   </CardActions>
@@ -167,10 +167,8 @@ const Login: React.FC<{ isResetPage?: boolean }> = ({ isResetPage }) => {
                     type="submit"
                     className={classes.cardButton}
                     buttonType="primary"
-                    variant="text"
-                    startIcon={
-                      !isResetPage ? <LoginIcon color="#ffffff" /> : <ResetIcon color="#ffffff" />
-                    }
+                    variant="contained"
+                    startIcon={!isResetPage ? <LoginIcon /> : <ResetIcon />}
                     text={translate(!isResetPage ? "actions.login" : "actions.reset")}
                   />
                 </Card>

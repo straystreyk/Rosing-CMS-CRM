@@ -63,10 +63,10 @@ const SearchInputFilter: React.FC<StandardCustomFilterProps> = ({ source }) => {
 
       <div className={classes.Icon}>
         {!inputValue ? (
-          <LoopInputIcon color="var(--secondary-color-default)" />
+          <LoopInputIcon className="icon" />
         ) : (
           <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => changeInput(e, true)}>
-            <CrossIcon color="var(--secondary-color-default)" />
+            <CrossIcon className="icon" />
           </button>
         )}
       </div>

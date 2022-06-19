@@ -55,10 +55,10 @@ export const EPGSourceToolbar = React.memo(() => {
     <div className={classes.TopToolBar}>
       <StandardButton
         variant="contained"
-        color="primary"
+        buttonType="primary"
         onClick={handleClick}
-        startIcon={<PlusIcon color="#fff" />}
-        endIcon={<ArrayInputItemArrow color="#fff" />}
+        startIcon={<PlusIcon />}
+        endIcon={<ArrayInputItemArrow />}
         text="Create EPG source"
       />
       <Menu

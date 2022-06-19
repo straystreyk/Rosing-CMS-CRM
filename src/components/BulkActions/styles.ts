@@ -30,16 +30,23 @@ export const BulkActionsStyles: any = {
     fontSize: 14,
     textTransform: "unset",
     fontFamily: "var(--font-family)",
+    transition: "0.35s color ease",
     "& .MuiButton-label": {
       "& span": {
         paddingLeft: 4,
         lineHeight: "20px",
         verticalAlign: "middle",
       },
+      "& svg": {
+        width: 20,
+      },
     },
     "&.delete": {
       backgroundColor: "unset",
       color: "var(--additional-red-default)",
+      "&:hover": {
+        color: "var(--additional-red-hover)",
+      },
     },
   },
 };

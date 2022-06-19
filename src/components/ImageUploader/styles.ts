@@ -32,7 +32,6 @@ export const ImageUploaderStyles: any = {
       objectFit: "contain",
     },
   },
-  ModalOverride: {},
   ImageItem: {
     marginTop: 8,
     border: "1px dashed var(--secondary-color-default)",
@@ -58,13 +57,16 @@ export const ImageUploaderStyles: any = {
   },
   ImageItemChangeButton: {
     color: "var(--primary-button-default)",
-    transition: "0.35s all ease",
+    transition: "0.35s color ease",
+    padding: "4px 6px",
+    "& .MuiButton-startIcon": {
+      marginLeft: 0,
+    },
+    "& svg": {
+      width: 20,
+    },
     "&:hover": {
-      color: "var(--primary-button-default)",
-      backgroundColor: "rgba(0, 0, 0, 0.04)",
-      "& svg path": {
-        fill: "var(--primary-button-default)",
-      },
+      color: "var(--primary-focus)",
     },
   },
   UploadWrapper: {

@@ -29,7 +29,7 @@ export const ExportStatusWidget = React.memo(({ resource }: { resource: string }
     <Fade in={!!subscription} unmountOnExit>
       <div className={classes.ExportWidget}>
         <button className={classes.Icon}>
-          <InformationIcon color="var(--primary-button-default)" />
+          <InformationIcon className="icon" />
         </button>
         <span className="text">
           {subscription.status !== "ready" && (

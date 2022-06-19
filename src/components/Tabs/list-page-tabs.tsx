@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "var(--accent-color-hover)",
       borderColor: "var(--accent-color-hover)",
+      backgroundColor: "transparent",
     },
     "&:focus": {
       outline: "none",
@@ -66,11 +67,12 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: `3px solid transparent`,
     marginRight: 12,
     borderRadius: 0,
-    paddingBottom: 4,
+    padding: "0 0 10px 0",
     flexShrink: 0,
     "&:hover": {
       color: "var(--secondary-color-main)",
       borderBottom: `3px solid var(--secondary-color-main)`,
+      backgroundColor: "transparent",
     },
     "&:focus": {
       outline: "none",
@@ -99,7 +101,6 @@ export const ListPageTabs: React.FC<ListPageTabsProps> = ({ tabs, isSubTabs }) =
           <StandardButton
             component={Link}
             to={link}
-            variant="text"
             buttonType="primary"
             className={
               !isSubTabs

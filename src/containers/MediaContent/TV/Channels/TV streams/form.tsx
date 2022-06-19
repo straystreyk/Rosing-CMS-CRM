@@ -69,9 +69,9 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
       </ReferenceInput>
       <div className={classes.AddResourceButtonWrapper}>
         <StandardButton
-          startIcon={<PlusIcon color="var(--accent-color)" />}
+          startIcon={<PlusIcon />}
           variant="text"
-          customColor="var(--accent-color)"
+          buttonType="primary"
           text="Add new Datacenter"
         />
       </div>
@@ -129,9 +129,9 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
       </ReferenceInput>
       <div className={classes.AddResourceButtonWrapper}>
         <StandardButton
-          startIcon={<PlusIcon color="var(--accent-color)" />}
+          startIcon={<PlusIcon />}
           variant="text"
-          customColor="var(--accent-color)"
+          buttonType="primary"
           text="Add new Datacenter"
         />
       </div>

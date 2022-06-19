@@ -28,6 +28,9 @@ const useStyles = makeStyles({
         marginLeft: 9,
       },
     },
+    "& .icon": {
+      width: 8,
+    },
   },
   OffWrapper: {
     padding: 0,
@@ -86,7 +89,7 @@ const ShowView: React.FC<ArrayInputProps> = ({ source, label, ...props }) => {
         options={{
           label: {
             onClick: () => setOpen((p) => !p),
-            icon: <ArrayInputItemArrow color="var(--secondary-color-main)" />,
+            icon: <ArrayInputItemArrow className="icon" />,
             className: "label",
           },
         }}

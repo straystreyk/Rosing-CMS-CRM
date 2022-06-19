@@ -62,13 +62,13 @@ export const ScrollTopButton: React.FC = () => {
   const classes = useStyles();
   const [visible, setVisible] = React.useState(false);
 
-  const checkButton = () => {
+  const checkButton = React.useCallback(() => {
     if (window.scrollY > MIN_PX_TO_SHOW && !visible) {
       setVisible(true);
     } else if (window.scrollY <= MIN_PX_TO_SHOW && visible) {
       setVisible(false);
     }
-  };
+  }, [visible]);
 
   React.useEffect(() => {
     window.addEventListener("scroll", checkButton);
@@ -78,10 +78,15 @@ export const ScrollTopButton: React.FC = () => {
     };
   }, [checkButton]);
 
+  const scroll = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <StandardButton
       style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? "all" : "none" }}
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      onClick={scroll}
+      buttonType="secondary"
       className={classes.ScrollButton}
     >
       <ScrollTopIcon />

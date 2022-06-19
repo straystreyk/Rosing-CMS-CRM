@@ -67,8 +67,7 @@ const ChannelVersion: React.FC<{
     <>
       {index && !["edit", "show"].includes(type) && (
         <div className={classes.ArrayInputItemName} onClick={showArrayInputItem}>
-          New channel version {+index + 1}{" "}
-          <ArrayInputItemArrow color="var(--secondary-color-main)" />
+          New channel version {+index + 1} <ArrayInputItemArrow />
         </div>
       )}
       <div
@@ -119,13 +118,12 @@ const ChannelVersion: React.FC<{
         </ReferenceArrayInput>
         <div className={classes.AddResourceButtonWrapper}>
           <StandardButton
-            startIcon={<PlusIcon color="var(--accent-color)" />}
+            startIcon={<PlusIcon />}
             variant="text"
-            customColor="var(--accent-color)"
+            buttonType="primary"
             onClick={() => goToResource("/media_content/tv/channels/live_streams/create")}
-          >
-            Add new TV stream
-          </StandardButton>
+            text="Add new TV stream"
+          />
         </div>
         <ReferenceInput
           label="EPG source"
@@ -146,9 +144,9 @@ const ChannelVersion: React.FC<{
         </ReferenceInput>
         <div className={classes.AddResourceButtonWrapper}>
           <StandardButton
-            startIcon={<PlusIcon color="var(--accent-color)" />}
+            startIcon={<PlusIcon />}
             variant="text"
-            customColor="var(--accent-color)"
+            buttonType="primary"
             onClick={() => goToResource("/media_content/tv/tv_shows/epg_sources/create")}
           >
             Add new EPG source

@@ -9,8 +9,10 @@ export const DefaultRoundedFilterStyles = {
       color: "var(--primary-focus)",
       fontSize: 14,
       fontWeight: 500,
-      "& span.label + svg": {
+      "& span.label + .icon": {
         marginLeft: 10,
+        width: 8,
+        height: 8,
       },
     },
     "& .pinIcon": {

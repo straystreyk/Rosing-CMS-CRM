@@ -1,27 +1,30 @@
 import * as React from "react";
 import cn from "classnames";
+
 import { useLoading } from "react-admin";
 import { useTranslate } from "ra-core";
 import { useSelector } from "react-redux";
 import { Backdrop, Collapse, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
 import { MainLoader } from "../MainLoader";
 import { Filters } from "../CustomFilters";
 import { CustomDatagridProps, ToolbarProps } from "./custom-datagrid-types";
-import { PlusIcon } from "../../constants/icons";
+import { ArrayInputItemArrow, PlusIcon } from "../../constants/icons";
 import { AppState } from "../../types";
 import { PerPageCounter } from "../Pagination/per-page-counter";
 import { StandardButton } from "../UI/Buttons/StandardButton/standard-button";
 import { Pagination } from "../Pagination";
 import { DatagridStyles } from "./styles";
-import { ArrowFilterIcon } from "../CustomFilters/constants";
 import { outlineStyles } from "../Themes/main-styles";
 
 const useStyles = makeStyles({
   ...DatagridStyles,
   Outline: {
     "&:focus-visible": outlineStyles,
+    "& .icon": {
+      width: 8,
+      height: 8,
+    },
   },
 });
 
@@ -43,7 +46,7 @@ const ToolBar: React.FC<{
         <div className={classes.TopToolBar}>
           <StandardButton
             component={Link}
-            startIcon={<PlusIcon color="#fff" />}
+            startIcon={<PlusIcon />}
             to={`${basePath}/create`}
             variant="contained"
             buttonType="primary"
@@ -77,7 +80,7 @@ export const DatagridWrapper: React.FC<CustomDatagridProps> = ({
           <div className={classes.TopToolBarName}>
             <button className={classes.Outline} onClick={show}>
               <span className="title">{translate(`resources.${props.resource}.name`)}</span>
-              <ArrowFilterIcon color="var(--secondary-color-main)" />
+              <ArrayInputItemArrow className="icon" />
             </button>
             <ToolBar toolbar={props.toolbar} basePath={props.basePath} resource={props.resource} />
           </div>

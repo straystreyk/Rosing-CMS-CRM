@@ -44,7 +44,7 @@ const useStyles = makeStyles({
       },
     },
     "&:focus": {
-      outline: "2px solid #7FC5FF",
+      outline: "2px solid var(--primary-focus-2)",
       outlineOffset: "2px",
     },
   },

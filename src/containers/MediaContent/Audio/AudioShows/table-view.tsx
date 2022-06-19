@@ -15,13 +15,12 @@ import { StandardButton } from "../../../../components/UI/Buttons/StandardButton
 import {
   ArrowIconDown,
   ArrowIconUp,
-  PublishedIcons,
   PublishIcon,
-  UnPublishedIcons,
   UnPublishIcon,
 } from "../../../../constants/icons";
 import { useTableActions } from "../../../../custom-hooks/use-table-actions";
 import { ToModelField } from "../../../../components/TableFields/to-model-field";
+import { PublishedField } from "../../../../components/TableFields/published-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -75,15 +74,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
         className={classes.MoreActions}
         render={(record?: RecordRA) => (
           <div>
-            {record?.published ? (
-              <button>
-                <PublishedIcons />
-              </button>
-            ) : (
-              <button>
-                <UnPublishedIcons />
-              </button>
-            )}
+            <PublishedField published={record?.published} />
             <MoreActionsButton>
               <StandardButton
                 onClick={() =>
@@ -93,16 +84,16 @@ export const TableView: React.FC<ShowProps> = (props) => {
                   })
                 }
                 disabled={loading}
-                color="secondary"
-                variant="textWithBg"
+                variant="text"
+                buttonType="secondary"
                 text={record?.published ? "Unpublish" : "Publish"}
                 startIcon={record?.published ? <UnPublishIcon /> : <PublishIcon />}
               />
               <StandardButton
                 onClick={() => approve(record?.id, { ...record, position: 1 })}
                 disabled={loading}
-                color="secondary"
-                variant="textWithBg"
+                variant="text"
+                buttonType="secondary"
                 startIcon={<ArrowIconUp />}
                 text="To the top of the list"
               />
@@ -110,8 +101,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
                 onClick={() => approve(record?.id, { ...record, position: props.total ?? 0 })}
                 startIcon={<ArrowIconDown />}
                 disabled={loading}
-                variant="textWithBg"
-                color="secondary"
+                variant="text"
+                buttonType="secondary"
                 text="To the bottom of the list"
               />
               <EditButton color="secondary" record={record} basePath={props.basePath} />

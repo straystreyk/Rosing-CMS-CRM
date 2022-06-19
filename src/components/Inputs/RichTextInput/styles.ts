@@ -25,7 +25,7 @@ export const RaRichTextInputStyles: any = {
         borderColor: "var(--primary-text-default)",
       },
       "&:focus": {
-        outline: "2px solid #7FC5FF",
+        outline: "2px solid var(--primary-focus-2)",
         borderColor: "#28A138",
         outlineOffset: "2px",
       },

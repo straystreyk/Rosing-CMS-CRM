@@ -115,9 +115,9 @@ const TVProgramItem: React.FC<{ program: EPG }> = ({ program }) => {
         <div className="DatOfTheWeek">{days[new Date(program.day).getDay()]}</div>
       </div>
       <StandardButton
-        startIcon={<TVProgramsIcon color="var(--accent-color)" />}
+        startIcon={<TVProgramsIcon />}
         variant="text"
-        customColor="var(--accent-color)"
+        buttonType="primary"
         component={Link}
         to={`/media_content/tv/channels/channel_versions/${program.channelVersionId}/${program.epgSourceId}/${program.day}/program_events`}
       >

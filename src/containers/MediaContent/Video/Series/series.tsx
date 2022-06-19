@@ -44,7 +44,7 @@ export const Create: React.FC<CreateProps> = (props) => {
 
   return (
     <ResourceCreate
-      redirectButtonIcon={<RedirectButtonIcon color="#fff" />}
+      redirectButtonIcon={<RedirectButtonIcon />}
       redirectButtonLabel="Save and add seasons"
       onSuccessWithRedirect={onSuccessWithRedirect}
       {...props}

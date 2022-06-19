@@ -2,6 +2,9 @@ export const ResourceTitleStyles: any = {
   titleWrapper: {
     backgroundColor: "var(--primary-bg-3)",
     padding: "16px 24px",
+    "& .icon": {
+      width: 20,
+    },
   },
   ButtonsShow: {
     flexShrink: 0,
@@ -37,8 +40,10 @@ export const ResourceTitleStyles: any = {
     fontWeight: 500,
     display: "flex",
     alignItems: "center",
-    "& svg": {
+    "& .icon": {
       marginRight: 5,
+      width: 20,
+      height: 20,
     },
   },
   backIcon: {

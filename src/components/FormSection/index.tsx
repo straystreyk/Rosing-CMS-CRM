@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Collapse, makeStyles } from "@material-ui/core";
-import cn from "classnames";
-import { ArrowFilterIcon } from "../CustomFilters/constants";
+import { ArrayInputItemArrow } from "../../constants/icons";
 
 interface SectionProps {
   text: string | any[];
@@ -65,7 +64,7 @@ export const ShowDescriptionButton: React.FC<{
     <button className={classes.DescriptionButton} onClick={descHandler}>
       {showDescription ? "Hide description" : "Show description"}
       <span>
-        <ArrowFilterIcon color="var(--secondary-button-default)" />
+        <ArrayInputItemArrow className="icon" />
       </span>
     </button>
   );

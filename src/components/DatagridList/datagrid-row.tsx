@@ -105,7 +105,7 @@ export const MyDatagridRow: React.FC<DatagridRowProps> = ({
                 })}
                 {index === 0 && expandElement && (
                   <button className={classes.ExpandIcon} onClick={expand}>
-                    <ArrayInputItemArrow color="var(--secondary-color-main)" />
+                    <ArrayInputItemArrow />
                   </button>
                 )}
               </TableCell>
