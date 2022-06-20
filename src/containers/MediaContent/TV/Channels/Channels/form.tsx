@@ -39,6 +39,7 @@ import { StandardButton } from "../../../../../components/UI/Buttons/StandardBut
 import { ResourceCountIcon } from "../../../../../constants/icons";
 import { Link } from "react-router-dom";
 import { AutocompleteArrayFreeSolo } from "../../../../../components/Inputs/ArrayInputs/AutocompleteFreeSolo";
+import { ToModelField } from "../../../../../components/TableFields/to-model-field";
 
 const useStyles = makeStyles({
   formHelperText: { ...formHelperText, marginTop: -16, marginBottom: 8 },
@@ -80,13 +81,20 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         {type !== "create" && (
           <StandardButton
             component={Link}
-            to={`/${resource}/${formState.values.id}/channel_versions`}
+            to={
+              formState.values.channelVersions.length
+                ? `/${resource}/${formState.values.id}/channel_versions`
+                : `/${resource}/${formState.values.id}/channel_versions/create`
+            }
             startIcon={<ResourceCountIcon />}
             variant="text"
             buttonType="primary"
-          >
-            Channel versions ({formState.values.channelVersions.length})
-          </StandardButton>
+            text={
+              formState.values.channelVersions.length
+                ? `Channel versions (${formState.values.channelVersions.length})`
+                : "Add channel versions"
+            }
+          />
         )}
       </FormTabs>
       <FormSection

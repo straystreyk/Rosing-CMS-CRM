@@ -70,7 +70,7 @@ export const Pagination = () => {
               className={cn(classes.Button, "buttonPrev", page <= 1 && "disabled")}
               onClick={() => changePage(page - 1)}
             >
-              <Arrow />
+              <Arrow className="icon" />
             </button>
             {arrOfPages.map((el, index) => {
               return (
@@ -89,7 +89,7 @@ export const Pagination = () => {
               onClick={() => changePage(page + 1)}
               disabled={page === nbPages}
             >
-              <Arrow />
+              <Arrow className="icon" />
             </button>
           </div>
           {currentPagesArray.length > MAX_PAGES && <GoToCurrentPage />}

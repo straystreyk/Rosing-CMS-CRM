@@ -79,7 +79,7 @@ export const EditInputComponent: React.FC<EditInputComponentProps> = ({
           {props.source !== "slug" && !props.offFastEdit ? (
             <Tooltip title="Fast edit" placement="left" arrow>
               <div className={cn(classes.ShowEditButton, "ShowEditButton")} onClick={showEditInput}>
-                <EditIcon />
+                <EditIcon className="icon" />
               </div>
             </Tooltip>
           ) : null}

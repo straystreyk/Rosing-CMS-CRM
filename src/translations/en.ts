@@ -132,6 +132,29 @@ export const en: TranslationMessages = {
         },
       },
     },
+    "pages_and_attributes/screen_configs": {
+      name: "Screen configs",
+      titles: {
+        create: "New Screen config",
+        edit: "Edit Screen config",
+        list: "Pages and attributes",
+        show: "Screen config",
+      },
+      mutations: {
+        create: {
+          success: "New screen config was created",
+          error: "Cant create screen config: %{error}",
+        },
+        edit: {
+          success: "Screen config was updated",
+          error: "Cant update screen config: %{error}",
+        },
+        list: {
+          success: "Screen config was successfully updated",
+          error: "Cant update screen config: %{error}",
+        },
+      },
+    },
     "media_content/attributes/genres": {
       name: "Genres",
       titles: {

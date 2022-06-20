@@ -16,8 +16,16 @@ export const ShowTitleActionButtons: TitleActionButtonsType = React.memo((props)
         startIcon={<ResourceCountEpisodesIcon />}
         variant="text"
         buttonType="primary"
-        text={`Episodes (${values.episodes.length})`}
-        to={`/media_content/video/seasons/${props.id}/episodes`}
+        text={
+          values.episodes && values.episodes.length
+            ? `Episodes (${values.episodes.length})`
+            : "Add episodes"
+        }
+        to={
+          values.episodes && values.episodes.length
+            ? `/media_content/video/seasons/${props.id}/episodes`
+            : `/media_content/video/seasons/${props.id}/episodes/create`
+        }
       />
     </>
   );

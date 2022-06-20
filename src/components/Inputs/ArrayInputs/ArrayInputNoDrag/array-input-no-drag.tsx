@@ -33,6 +33,7 @@ export interface ArrayInputProps extends Omit<ArrayInputPropsRA, "children"> {
 const useStyles = makeStyles((theme) => ({
   GroupInputsLabel: {
     ...labelStyles,
+    marginBottom: 8,
     marginTop: 8,
     "& > span": {
       marginRight: 8,
@@ -59,15 +60,20 @@ const useStyles = makeStyles((theme) => ({
     },
     "&.first": {
       paddingLeft: 0,
+      "& button": {
+        padding: "4px 0",
+      },
     },
   },
   DeleteButton: {
-    marginTop: 5,
-    padding: 0,
+    "&.text": {
+      marginTop: 5,
+      padding: "4px 0",
+    },
   },
   GroupInputWrapper: {
     "& .GroupInputsItem": {
-      marginTop: 5,
+      marginTop: 8,
     },
   },
 }));
@@ -96,19 +102,22 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
 
     return (
       <div className={classes.ArrayInputWrapper}>
-        <span
-          style={{ cursor: switchable ? "pointer" : "" }}
-          onClick={() => (switchable ? setShow((p: boolean) => !p) : null)}
-          className={classes.GroupInputsLabel}
-        >
-          {label && <span>{label}</span>}
-          {switchable && <Switch checked={show} />}
-        </span>
+        {label && (
+          <span
+            style={{ cursor: switchable ? "pointer" : "" }}
+            onClick={() => (switchable ? setShow((p: boolean) => !p) : null)}
+            className={classes.GroupInputsLabel}
+          >
+            <span>{label}</span>
+            {switchable && <Switch checked={show} />}
+          </span>
+        )}
         {helperText && <p className={classes.GroupHelperText}>{helperText}</p>}
         {show && (
           <ArrayInputRA {...props} source={source} resource={resource} label="">
             <FieldArray name={source}>
               {(fieldProps) => {
+                console.log(fieldProps);
                 return (
                   <>
                     {fieldProps.fields.map((item, index) => {

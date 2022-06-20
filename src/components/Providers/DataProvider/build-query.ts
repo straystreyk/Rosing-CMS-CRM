@@ -14,14 +14,18 @@ type FetchTypes =
   | "CREATE"
   | "DELETE";
 
-const getFinalBuiltQuery = (resource: string, fetchType: string, builtQuery: BuildQueryResult) => {
+const getFinalBuiltQuery = (
+  resource: string,
+  fetchType: FetchTypes,
+  builtQuery: BuildQueryResult
+) => {
   let finalBuiltQuery = builtQuery;
 
   MODELS_WITH_CUSTOM_REQUESTS.forEach((model) => {
-    if (model.resource === resource && model.queries[fetchType as FetchTypes]) {
+    if (model.resource === resource && model.queries[fetchType]) {
       finalBuiltQuery = {
         ...builtQuery,
-        query: model.queries[fetchType as FetchTypes] as DocumentNode,
+        query: model.queries[fetchType] as DocumentNode,
       };
     }
   });
@@ -35,5 +39,5 @@ export const customBuildQuery =
     const builtQuery = buildQueryFactory(introspection)(fetchType, resource, params);
     builtQuery.parseResponse = customParseResponse(fetchType);
 
-    return getFinalBuiltQuery(resource, fetchType, builtQuery);
+    return getFinalBuiltQuery(resource, fetchType as FetchTypes, builtQuery);
   };

@@ -12,9 +12,7 @@ import { DeleteButton } from "../../../../../components/UI/RA/delete-button";
 import {
   ArrowIconDown,
   ArrowIconUp,
-  PublishedIcons,
   PublishIcon,
-  UnPublishedIcons,
   UnPublishIcon,
 } from "../../../../../constants/icons";
 import { StandardButton } from "../../../../../components/UI/Buttons/StandardButton/standard-button";
@@ -81,6 +79,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       />
       <FunctionField
         label="Channel versions"
+        className={classes.ButtonCell}
         render={(record?: RecordRA) => (
           <ToModelField
             record={record!}

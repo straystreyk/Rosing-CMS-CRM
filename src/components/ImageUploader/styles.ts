@@ -108,10 +108,12 @@ export const ImageUploaderStyles: any = {
     display: "flex",
     textAlign: "center",
     flexDirection: "column",
-    padding: "24px 8px",
+    padding: 8,
+    fontSize: 14,
     lineHeight: "20px",
+    margin: "0 -24px",
     "& > span:first-child": {
-      color: "#005AA3",
+      color: "var(--primary-button-default)",
       fontWeight: 500,
       marginBottom: 5,
     },
@@ -149,15 +151,14 @@ export const ImageUploaderStyles: any = {
     padding: 15,
     borderRadius: 5,
     transform: "translate(-50%, -50%)",
+    transition: "0.35s color ease",
+    color: "var(--primary-button-default)",
     cursor: "pointer",
-    "& svg path": {
-      transition: "0.35s all ease",
-    },
     "&:hover": {
-      "& svg path": {
-        stroke: "var(--primary-focus)",
-        fill: "var(--primary-focus)",
-      },
+      color: "var(--primary-focus)",
+    },
+    "& .icon": {
+      width: 40,
     },
   },
   ImageSize: {

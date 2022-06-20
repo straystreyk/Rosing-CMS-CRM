@@ -1,5 +1,4 @@
 import { Admin, Resource } from "react-admin";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { Providers } from "../../components/Providers";
 import { Layouts } from "../../components/Layout";
 import { getRoutes } from "./get-custom-routes";
@@ -36,6 +35,7 @@ import { EPGLocalEventsVariables as epgLocalEvents } from "../MediaContent/TV/TV
 import { EPGVariables as epg } from "../MediaContent/TV/TVShows/EPG";
 import { ProgramEventsVariables as programEvents } from "../MediaContent/TV/Channels/ProgramEvents";
 import { QuestionVariables as questions } from "../PagesAndAttributes/Question";
+import { ScreenConfigVariables as screenConfigs } from "../PagesAndAttributes/ScreenConfig";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 import { MainLoader } from "../../components/MainLoader";
@@ -124,6 +124,7 @@ export const App = () => {
       <Resource name="media_content/attributes/labels" {...labels} />
       <Resource name="media_content/news" {...news} />
       <Resource name="pages_and_attributes/questions" {...questions} />
+      <Resource name="pages_and_attributes/screen_configs" {...screenConfigs} />
       <Resource name="castMembers" />
       <Resource name="countries" />
       <Resource name="production_countries" />

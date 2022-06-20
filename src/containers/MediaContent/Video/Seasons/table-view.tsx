@@ -1,19 +1,11 @@
 import React from "react";
 import { FunctionField, Record } from "react-admin";
-import { Link, useHistory } from "react-router-dom";
 import { Record as RecordRA } from "ra-core/esm/types";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { EmptyTablePage } from "../../../../components/EmptyTablePage";
 import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
-import {
-  PublishedIcons,
-  PublishIcon,
-  ResourceAddIcon,
-  ResourceCountEpisodesIcon,
-  UnPublishedIcons,
-  UnPublishIcon,
-} from "../../../../constants/icons";
+import { PublishIcon, UnPublishIcon } from "../../../../constants/icons";
 import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActionsButton";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 import { EditButton } from "../../../../components/UI/RA/edit-button";
@@ -25,9 +17,8 @@ import { ExpandWrapper } from "../../../../components/DatagridList/expand-wrappe
 import { Toolbar } from "./toolbar";
 import { Form } from "./form";
 import { ToModelField } from "../../../../components/TableFields/to-model-field";
-import cn from "classnames";
-import { UrlField } from "../../../../components/TableFields/url-field";
 import { PublishedField } from "../../../../components/TableFields/published-field";
+import { ExpandNameField } from "../../../../components/TableFields/expand-name-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -58,8 +49,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
         label="Name"
         source="name"
         render={(record?: RecordRA) => (
-          <UrlField
-            className="Expand"
+          <ExpandNameField
+            title={`Season ${record?.number}`}
             to={`${props.basePath}/${record?.id}/show`}
             name={record?.name}
           />
@@ -67,6 +58,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       />
       <FunctionField
         label=""
+        className={classes.ButtonCell}
         render={(record?: Record) => (
           <div className={classes.MoreActions}>
             <ToModelField

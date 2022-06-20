@@ -36,6 +36,7 @@ export const ShowEditButton: any = {
   top: 8,
   right: 0,
   transition: "0.35s all ease",
+  width: 20,
   "& svg path": {
     fill: "var(--primary-button-default)",
     transition: "0.35s all ease",

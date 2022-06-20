@@ -13,6 +13,7 @@ const useStyles = makeStyles({
   SaveButton: {
     fontFamily: "var(--font-family)",
     padding: "8px 18px",
+    minWidth: "unset",
     "&:hover": {
       backgroundColor: "var(--accent-color-hover)",
       boxShadow: "unset",

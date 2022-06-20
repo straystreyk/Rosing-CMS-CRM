@@ -25,6 +25,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ArrayInputStyles as ArrayInputItemStyles } from "../../../../components/Models/CastMembers/styles";
 import { ArrayInputItemArrow } from "../../../../constants/icons";
 import { ModelFormStyles } from "../../../../components/ResourceView/FormWithRedirect/styles";
+import { FormSection } from "../../../../components/FormSection";
 
 const FIXED_HEADER_OFFSET = 80;
 
@@ -184,7 +185,11 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
 
   return (
     <>
-      {type !== "create" && <Part resource={resource} inputType={type} />}
+      {type !== "create" && (
+        <FormSection text="" title="" formType={type} id="">
+          <Part resource={resource} inputType={type} />
+        </FormSection>
+      )}
       {type === "create" && (
         <ArrayInput
           source="parts"

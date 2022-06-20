@@ -8,9 +8,6 @@ export const TableFieldsStyles: any = {
     "&:hover": {
       color: "var(--primary-focus)",
     },
-    "&.Expand": {
-      marginLeft: 20,
-    },
   },
   MoreActions: {
     display: "flex !important",
@@ -28,6 +25,32 @@ export const TableFieldsStyles: any = {
   },
   Empty: {
     color: "var(--secondary-color-default)",
+  },
+  Expand: {
+    "& .expandButton": {
+      marginLeft: 8,
+      display: "inline-block",
+      "& .icon": {
+        width: 8,
+      },
+    },
+    "& .title": {
+      fontWeight: 500,
+      color: "var(--secondary-color-main)",
+      cursor: "pointer",
+      marginBottom: 4,
+      display: "inline-block",
+    },
+  },
+  ButtonCell: {
+    "&.MuiTableCell-root": {
+      "& .MuiTypography-root": {
+        overflow: "visible",
+        "& a": {
+          padding: "4px 0",
+        },
+      },
+    },
   },
   IDField: { wordBreak: "break-all" },
 };

@@ -9,6 +9,7 @@ const generateButtonVariantsStyles = (color: string, hoverColor: string, selectC
     },
   },
   "&.outlined": {
+    padding: "7px 16px",
     border: `1px solid ${color}`,
     "&:hover": {
       color: `${hoverColor}`,

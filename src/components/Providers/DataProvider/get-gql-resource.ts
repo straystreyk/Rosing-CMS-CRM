@@ -14,6 +14,8 @@ export const getGqlResource = (resource: string) => {
       return "StaticData";
     case "pages_and_attributes/questions":
       return "Question";
+    case "pages_and_attributes/screen_configs":
+      return "ScreenCardConfig";
     case "media_content/tv/channels/channels/:channelId/channel_versions":
       return "ChannelVersion";
     case "media_content/tv/channels/channel_versions/:channelVersionId/:epgSourceId/:startAt/program_events":

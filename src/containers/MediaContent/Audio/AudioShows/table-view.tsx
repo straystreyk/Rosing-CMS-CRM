@@ -65,6 +65,7 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <FunctionField
         offsort
         label="Parts"
+        className={classes.ButtonCell}
         render={(record?: RecordRA) => (
           <ToModelField record={record!} to={`/${props.resource}`} source="parts" label="Parts" />
         )}

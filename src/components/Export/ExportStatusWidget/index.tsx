@@ -32,27 +32,32 @@ export const ExportStatusWidget = React.memo(({ resource }: { resource: string }
           <InformationIcon className="icon" />
         </button>
         <span className="text">
-          {subscription.status !== "ready" && (
-            <>Preparing a list of {subscription.exportType} for downloading&nbsp; </>
-          )}
-          {subscription.status === "ready" && (
+          {subscription.status === "error" ? (
+            <>Something went wrong :(</>
+          ) : (
             <>
-              File in the format .{subscription.format} is ready ({subscription.exportType})
-              <StandardButton
-                component="a"
-                target="_blank"
-                href={subscription.file}
-                startIcon={<ExportIcon />}
-                onClick={setReport}
-                text="Export"
-                className="Button"
-                buttonType="secondary"
-                variant="text"
-                onMobileView
-              />
+              {subscription.status !== "ready" && (
+                <>Preparing a list of {subscription.exportType} for downloading&nbsp; </>
+              )}
+              {subscription.status === "ready" && (
+                <>
+                  File in the format .{subscription.format} is ready ({subscription.exportType})
+                  <StandardButton
+                    component="a"
+                    target="_blank"
+                    href={subscription.file}
+                    startIcon={<ExportIcon />}
+                    onClick={setReport}
+                    text="Export"
+                    className="Button"
+                    buttonType="secondary"
+                    variant="text"
+                    onMobileView
+                  />
+                </>
+              )}
             </>
           )}
-          {subscription.status === "error" && <>Something went wrong :(</>}
         </span>
         {subscription.status === "in_progress" && (
           <span className="text">

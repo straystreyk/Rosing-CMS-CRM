@@ -21,7 +21,8 @@
     --font-family: 'Gilroy', sans-serif;
     --fontSizeLG: 14px;
     --main-gradient: linear-gradient(90.33deg, #00FFD9 2.27%, #00C0FF 68.93%, #008DFF 99.69%);
-    --secondary-gradient: linear-gradient(to right, var(--primary-bg) 80%, #fff)
+    --secondary-gradient: linear-gradient(to right, var(--primary-bg) 80%, #fff);
+    --scrollbar-width: calc(100vw - 100%);
 }
 
 input {

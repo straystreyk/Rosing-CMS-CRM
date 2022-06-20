@@ -10,7 +10,6 @@ import {
   ReferenceInput,
   requiredValidate,
   RichTextInput,
-  SelectInput,
   slugValidate,
   TextInput,
 } from "../../../../components/Inputs";
@@ -36,7 +35,6 @@ import { useFormState } from "react-final-form";
 import { alwaysEmptyString, scrollToErrorInput } from "../../../../helpers/form";
 import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import { ResourceAddIcon, ResourceCountIcon } from "../../../../constants/icons";
-import { useHistory } from "react-router-dom";
 import { Checkbox } from "../../../../components/Inputs/Checkbox";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 import { AutocompleteInput } from "../../../../components/Inputs/AutocompleteInput";
@@ -50,19 +48,12 @@ const useStyles = makeStyles((theme) => ({
   ArrayInputStyles,
 }));
 
-const FIXED_HEADER_OFFSET = 130;
 const IMAGE_REQUEST_VARS = { fieldName: "Series" };
 const INPUT_ITEMS_PER_PAGE = 25;
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   const classes = useStyles();
   const formState = useFormState();
-
-  React.useEffect(() => {
-    if (formState.submitFailed) {
-      scrollToErrorInput(FIXED_HEADER_OFFSET);
-    }
-  }, [formState.submitFailed]);
 
   return (
     <>

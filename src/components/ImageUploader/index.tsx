@@ -151,11 +151,11 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
                     }}
                     className={cn(classes.PopupButton, "PopupButton")}
                   >
-                    <LoopIcon />
+                    <LoopIcon className="icon" />
                   </button>
                 </div>
               )}
-              <img src={url} alt="admin panel" />
+              <img src={url} alt={`admin panel, imageId: ${id}`} />
             </>
           )}
         </div>

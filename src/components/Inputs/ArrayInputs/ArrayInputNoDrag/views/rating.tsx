@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   RatingItem: {
-    borderBottom: "1px solid #E7E9E9",
+    borderBottom: "1px solid var(--secondary-color-disable)",
     color: "var(--primary-text-default)",
     paddingBottom: 12,
     paddingTop: 12,
@@ -19,15 +19,13 @@ const useStyles = makeStyles({
   InformationButton: {
     display: "flex",
     marginLeft: 4,
+    transition: "0.35s color ease",
+    color: "var(--secondary-color-default)",
     "&:hover": {
-      "& svg": {
-        "& path": {
-          fill: "var(--secondary-color-main)",
-        },
-        "& circle": {
-          stroke: "var(--secondary-color-main)",
-        },
-      },
+      color: "var(--secondary-menu-2)",
+    },
+    "& svg.icon": {
+      width: 20,
     },
   },
   RatingTooltip: {
@@ -59,7 +57,7 @@ export const RatingShow: React.FC<AgeRating> = ({ tag, system }) => {
         arrow
       >
         <button className={classes.InformationButton}>
-          <InformationIcon />
+          <InformationIcon className="icon" />
         </button>
       </Tooltip>
     </div>

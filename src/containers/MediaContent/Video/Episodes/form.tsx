@@ -40,18 +40,6 @@ const useStyles = makeStyles({
   ArrayInputWrapper: {
     marginTop: 15,
   },
-  EpisodeImage: {
-    display: "block",
-    "& .ImageItemWrapper": {
-      marginBottom: 16,
-      "&:last-child": {
-        marginBottom: 0,
-      },
-    },
-    "& .ImageItem": {
-      borderStyle: "solid",
-    },
-  },
   ...ModelFormStyles,
 });
 
@@ -198,7 +186,6 @@ const Episode: React.FC<{
             fullWidth
           />
           <ImageUploaderV2
-            wrapperClassName={classes.EpisodeImage}
             requestVariables={IMAGE_REQUEST_VARS}
             sourceIds={parentSourceWithIndex ? `${parentSourceWithIndex}.imageIds` : "imageIds"}
             source={parentSourceWithIndex ? `${parentSourceWithIndex}.images` : "images"}

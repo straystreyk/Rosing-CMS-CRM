@@ -3,10 +3,18 @@ import { useQuery } from "@apollo/client";
 import { authClient } from "../../Providers/AuthProvider/client";
 import { MainLoader } from "../../MainLoader";
 import { useFormState } from "react-final-form";
+import { makeStyles } from "@material-ui/core/styles";
+import { DocumentNode } from "graphql";
+
+const useStyles = makeStyles({
+  Loader: {
+    margin: "8px 0",
+  },
+});
 
 export interface ReferenceCustomInputProps {
   component: any;
-  query: any;
+  query: DocumentNode;
   source: string;
   idName: string;
   inputType: string;
@@ -45,13 +53,15 @@ export const ReferenceCustomInput: React.FC<ReferenceCustomInputProps> = React.m
     parentSource,
     inputType,
     index,
+    query,
     ...props
   }) => {
     const { values } = useFormState();
-    const { loading, data, error } = useQuery(props.query, {
+    const { loading, data, error } = useQuery(query, {
       client: authClient,
     });
     const [filteredData, setFilteredData] = React.useState<any>([]);
+    const classes = useStyles();
 
     const filterData = React.useCallback(
       (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -81,7 +91,7 @@ export const ReferenceCustomInput: React.FC<ReferenceCustomInputProps> = React.m
       }
     }, [data, idName, index, parentSource, dependencyIdName, values, inputType]);
 
-    if (loading) return <MainLoader size={20} />;
+    if (loading) return <MainLoader className={classes.Loader} size={20} />;
     if (error) return <span>error</span>;
 
     return (

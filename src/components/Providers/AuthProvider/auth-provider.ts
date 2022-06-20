@@ -30,7 +30,12 @@ export const authProvider: AuthProvider = {
     return Promise.resolve();
   },
   checkError: (error) => {
-    if (error instanceof Error && error.message === "Invalid token") {
+    const errorObj = JSON.parse(JSON.stringify(error));
+    if (
+      error instanceof Error &&
+      errorObj.networkError &&
+      errorObj.networkError.statusCode === 401
+    ) {
       localStorage.removeItem("token");
       return Promise.reject();
     }

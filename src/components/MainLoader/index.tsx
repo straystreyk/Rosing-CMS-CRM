@@ -7,6 +7,7 @@ interface MainLoaderProps {
   flex?: boolean;
   component?: React.ElementType;
   display?: string;
+  className?: string;
 }
 
 const useStyles = makeStyles({
@@ -90,10 +91,14 @@ export const MainLoader: React.FC<MainLoaderProps> = ({
   flex,
   display = "inherit",
   component: Component = "div",
+  ...props
 }) => {
   return (
     <>
-      <Component style={{ display: flex ? "flex" : display, margin: centered ? "0 auto" : "0px" }}>
+      <Component
+        {...props}
+        style={{ display: flex ? "flex" : display, margin: centered ? "0 auto" : "" }}
+      >
         <Loader size={+size} />
       </Component>
     </>

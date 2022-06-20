@@ -154,15 +154,4 @@ export const TableStyles: Styles<Theme, {}, string> = {
       color: "var(--primary-focus)",
     },
   },
-  ExpandIcon: {
-    marginLeft: 5,
-    padding: "5px 10px",
-    top: "50%",
-    left: 0,
-    transform: "translateY(-50%)",
-    position: "absolute",
-    [`@media (max-width: ${MEDIA_QUERIES_BREAKPOINTS.xs})`]: {
-      right: 0,
-    },
-  },
 };

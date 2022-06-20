@@ -5,23 +5,24 @@ export const PaginationStyles: Styles<Theme, {}, string> = {
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
+    transition: "0.35s color ease",
     "&.buttonPrev": {
       transform: "rotate(180deg)",
     },
-    "& svg circle, & svg line, & svg path": {
-      transition: "0.2s all ease",
-      stroke: "var(--secondary-color-main)",
+    "&.currentButton": {
+      "&.disabled": {
+        color: "var(--secondary-color-disable)",
+        pointerEvents: "none",
+      },
+      "& .currentIcon": {
+        width: 20,
+      },
     },
     "&:hover": {
-      "& svg circle, & svg line, & svg path": {
-        stroke: "var(--accent-color)",
-      },
+      color: "var(--accent-color)",
     },
-    "&.disabled": {
-      pointerEvents: "none",
-      "& svg circle, & svg line, & svg path": {
-        stroke: "var(--secondary-color-disable)",
-      },
+    "& .icon": {
+      width: 20,
     },
   },
   Page: {

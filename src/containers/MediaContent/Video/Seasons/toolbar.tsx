@@ -22,6 +22,10 @@ const useStyles = makeStyles({
     "& > button": {
       display: "inline-block",
       marginRight: 7,
+      color: "var(--primary-button-default)",
+      "& .icon": {
+        width: 15,
+      },
     },
   },
   ActionsButtons: {
@@ -43,7 +47,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ basePath, resource, ...rest })
     <div className={classes.ToolBarWrapper}>
       <div className={classes.Title}>
         <button onClick={() => history.goBack()}>
-          <BackArrowTitle />
+          <BackArrowTitle className="icon" />
         </button>
         {translate(`resources.${resource}.name`)} (
         {total ?? (

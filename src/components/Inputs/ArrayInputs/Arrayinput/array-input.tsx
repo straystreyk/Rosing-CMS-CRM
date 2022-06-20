@@ -303,7 +303,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                                 type="button"
                                 onClick={(e) => pushResource()}
                                 variant="text"
-                                buttonType="secondary"
+                                buttonType="primary"
                                 text="Add another one"
                               />
                             )}

@@ -6,9 +6,7 @@ import {
   ArrowIconDown,
   ArrowIconUp,
   ProhibitDownload,
-  PublishedIcons,
   PublishIcon,
-  UnPublishedIcons,
   UnPublishIcon,
 } from "../../../../constants/icons";
 import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActionsButton";

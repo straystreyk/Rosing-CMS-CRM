@@ -41,6 +41,7 @@ export const List: React.FC<ShowProps> = (props) => {
       <TextField source="slug" label="Slug" />
       <FunctionField
         label="Seasons"
+        className={classes.ButtonCell}
         render={(record?: RecordRA) => (
           <ToModelField
             record={record!}

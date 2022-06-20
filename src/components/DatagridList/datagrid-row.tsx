@@ -5,11 +5,10 @@ import { TableRow, Checkbox, TableCell, Collapse, makeStyles } from "@material-u
 
 import { EditForm } from "../ResourceView/FormWithRedirect";
 import { DatagridRowProps } from "./custom-datagrid-types";
-import { ArrayInputItemArrow, DNDIcon } from "../../constants/icons";
+import { DNDIcon } from "../../constants/icons";
 
 import { TableStyles } from "./styles";
 import { Identifier } from "ra-core";
-import { MouseEvent, TouchEvent } from "react";
 
 const useStyles = makeStyles(TableStyles);
 
@@ -50,6 +49,11 @@ const ExpandRow: React.FC<any> = ({ open, record, resource, expandElement }) => 
   );
 };
 
+export const ExpandContext = React.createContext<{
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  open: boolean;
+}>({ open: false, setOpen: () => "" });
+
 export const MyDatagridRow: React.FC<DatagridRowProps> = ({
   record,
   resource,
@@ -66,13 +70,8 @@ export const MyDatagridRow: React.FC<DatagridRowProps> = ({
   const [open, setOpen] = React.useState(false);
   const { onToggleCheckbox } = useTableRow(id, onToggleItem);
 
-  const expand = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    setOpen((p) => !p);
-  };
-
   return (
-    <>
+    <ExpandContext.Provider value={{ setOpen, open }}>
       <TableRow
         className={classes.TableRow}
         key={id}
@@ -96,18 +95,13 @@ export const MyDatagridRow: React.FC<DatagridRowProps> = ({
                 scope="row"
                 size="small"
                 key={`${id}-${(field as any).props.source}`}
-                className={classes.TableCell}
+                className={cn(classes.TableCell, (field as any).props.className)}
               >
                 {React.cloneElement(field as any, {
                   record,
                   basePath,
                   resource,
                 })}
-                {index === 0 && expandElement && (
-                  <button className={classes.ExpandIcon} onClick={expand}>
-                    <ArrayInputItemArrow />
-                  </button>
-                )}
               </TableCell>
             </>
           );
@@ -116,7 +110,7 @@ export const MyDatagridRow: React.FC<DatagridRowProps> = ({
       {expandElement && (
         <ExpandRow open={open} record={record} resource={resource} expandElement={expandElement} />
       )}
-    </>
+    </ExpandContext.Provider>
   );
 };
 
@@ -158,6 +152,7 @@ export const MyDatagridRowWithDnd: React.FC<DatagridRowProps> = ({
                 scope="row"
                 size="small"
                 key={`${id}-${(field as any).props.source}`}
+                className={(field as any).props.className}
               >
                 {React.cloneElement(field as any, {
                   record,

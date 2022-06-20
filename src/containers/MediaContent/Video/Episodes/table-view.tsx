@@ -15,6 +15,7 @@ import { PublishedIcons, UnPublishedIcons } from "../../../../constants/icons";
 import { ExpandWrapper } from "../../../../components/DatagridList/expand-wrapper";
 import { Form } from "./form";
 import cn from "classnames";
+import { ExpandNameField } from "../../../../components/TableFields/expand-name-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -46,12 +47,11 @@ export const TableView: React.FC<ShowProps> = (props) => {
           label="Name"
           source="name"
           render={(record?: RecordRA) => (
-            <Link
-              className={cn(classes.NameField, "Expand")}
+            <ExpandNameField
+              name={record?.name}
+              title={`Episode ${record?.number}`}
               to={`${props.basePath}/${record?.id}/show`}
-            >
-              {record?.name}
-            </Link>
+            />
           )}
         />
         <FunctionField
