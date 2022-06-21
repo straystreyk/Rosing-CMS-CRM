@@ -10,12 +10,7 @@ import { ShowProps } from "../../../types";
 import { MoreActionsButton } from "../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../components/UI/RA/delete-button";
-import {
-  PublishedIcons,
-  PublishIcon,
-  UnPublishedIcons,
-  UnPublishIcon,
-} from "../../../constants/icons";
+import { PublishIcon, UnPublishIcon } from "../../../constants/icons";
 import { newsFilters } from "./news-filters";
 import { StandardButton } from "../../../components/UI/Buttons/StandardButton/standard-button";
 import { useTableActions } from "../../../custom-hooks/use-table-actions";

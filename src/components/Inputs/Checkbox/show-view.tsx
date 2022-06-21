@@ -3,7 +3,8 @@ import { EditInputComponent } from "../FastEditInput";
 import { CheckboxOrigin, CheckboxProps } from "./index";
 import { useFormState } from "react-final-form";
 import { makeStyles } from "@material-ui/core/styles";
-import { labelStyles } from "../styles";
+import { EmptyInput, labelStyles } from "../styles";
+import { UrlField } from "../../TableFields/url-field";
 
 const useStyles = makeStyles({
   CheckboxShowView: {
@@ -32,17 +33,27 @@ const useStyles = makeStyles({
   },
 });
 
-export const ShowView: React.FC<{ source: string; label: string }> = ({ source, label }) => {
+export const ShowView: React.FC<{ source: string; label: string }> = ({
+  source,
+  label,
+  ...props
+}) => {
   const { values } = useFormState();
   const classes = useStyles();
 
   const getValue = (source: string) => {
     switch (source) {
-      default:
+      case "hasSeason":
         return values[source] ? (
           <span className="value">{values.seasons.length}</span>
         ) : (
-          <span className="empty">Has no seasons</span>
+          <EmptyInput emptyText="Empty" />
+        );
+      default:
+        return values[source] !== undefined || values[source] !== null ? (
+          <span className="value">{values[source] ? "Yes" : "No"}</span>
+        ) : (
+          <EmptyInput emptyText="Empty" />
         );
     }
   };

@@ -1,4 +1,5 @@
 import * as React from "react";
+import _ from "lodash";
 import { useForm, useFormState } from "react-final-form";
 import { useMutation } from "react-admin";
 import { useNotify } from "ra-core";
@@ -6,9 +7,10 @@ import { useNotify } from "ra-core";
 export const useFastEdit = (resource: string, source: string) => {
   const form = useForm();
   const { values } = useFormState();
+  const currentFieldValue = _.get(values, source);
   const [mutate, { loading, error, data }] = useMutation();
   const [showInput, setShowInput] = React.useState(false);
-  const [initialValue, setInitialValue] = React.useState(values[source]);
+  const [initialValue, setInitialValue] = React.useState(currentFieldValue);
   const notify = useNotify();
 
   React.useEffect(() => {
@@ -33,7 +35,7 @@ export const useFastEdit = (resource: string, source: string) => {
     await mutate({
       type: "update",
       resource: resource,
-      payload: { id: values.id, data: { ...values, [source]: values[source] ?? null } },
+      payload: { id: values.id, data: { ...values, [source]: currentFieldValue ?? null } },
     });
 
     setShowInput(false);
@@ -45,10 +47,10 @@ export const useFastEdit = (resource: string, source: string) => {
   }, [source, form, initialValue]);
 
   const showEditInput = React.useCallback(() => {
-    setInitialValue(values[source]);
+    setInitialValue(currentFieldValue);
 
     setShowInput(true);
-  }, [values[source]]);
+  }, [currentFieldValue]);
 
   return {
     approve,

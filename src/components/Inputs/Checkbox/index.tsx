@@ -10,7 +10,6 @@ const useStyles = makeStyles({
   Checkbox: {
     margin: "8px 0",
     "& .label": {
-      marginBottom: 8,
       "& > span": labelStyles,
     },
     "& label": {
@@ -59,7 +58,6 @@ export const CheckboxOrigin: React.FC<CheckboxProps> = ({
                 label={checkboxLabel}
               />
               {helperText && <FormHelperText>{helperText}</FormHelperText>}
-              {/*{meta.error && meta.touched && <span>{meta.error}</span>}*/}
             </>
           );
         }}

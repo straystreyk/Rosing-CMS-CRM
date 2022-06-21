@@ -33,6 +33,7 @@ export interface ReferenceCustomInputProps {
   helperText?: string | any[];
   fullWidth?: boolean;
   checkBoxLabel?: string;
+  currentField?: string;
 }
 
 interface ReferenceCustomInputElementProps {
@@ -54,14 +55,17 @@ export const ReferenceCustomInput: React.FC<ReferenceCustomInputProps> = React.m
     inputType,
     index,
     query,
+    currentField,
+    source,
     ...props
   }) => {
+    const classes = useStyles();
     const { values } = useFormState();
     const { loading, data, error } = useQuery(query, {
       client: authClient,
     });
+
     const [filteredData, setFilteredData] = React.useState<any>([]);
-    const classes = useStyles();
 
     const filterData = React.useCallback(
       (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -72,7 +76,8 @@ export const ReferenceCustomInput: React.FC<ReferenceCustomInputProps> = React.m
       },
       [data, idName]
     );
-
+    console.log(source);
+    console.log(values[source]);
     React.useEffect(() => {
       if (
         data &&
@@ -102,7 +107,7 @@ export const ReferenceCustomInput: React.FC<ReferenceCustomInputProps> = React.m
               {...props}
               onChange={dependencyInput ? filterData : false}
               label={props.label}
-              source={props.source}
+              source={source}
               helperText={helperText ?? false}
               choices={
                 data
@@ -135,7 +140,7 @@ export const ReferenceCustomInput: React.FC<ReferenceCustomInputProps> = React.m
           <props.component
             {...props}
             label={props.label}
-            source={props.source}
+            source={source}
             helperText={helperText ?? false}
             choices={
               data

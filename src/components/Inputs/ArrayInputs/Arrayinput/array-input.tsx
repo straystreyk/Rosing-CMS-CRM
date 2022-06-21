@@ -17,6 +17,7 @@ import { StandardButton } from "../../../UI/Buttons/StandardButton/standard-butt
 import { ArrayInputShow } from "./show-view";
 import { InputProps } from "../../input-types";
 import { DocumentNode } from "graphql";
+import cn from "classnames";
 
 export interface ArrayInputProps extends InputProps {
   children?: any;
@@ -93,6 +94,11 @@ const useStyles = makeStyles((theme) => ({
   AddButtonWrapper: {
     display: "flex",
     justifyContent: "center",
+  },
+  ArrayInput: {
+    "& .MuiFormControl-root": {
+      width: "100%",
+    },
   },
 }));
 
@@ -192,7 +198,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
     );
 
     return (
-      <div className={inputClass}>
+      <div className={cn(classes.ArrayInput, inputClass && inputClass)}>
         {label && (
           <span className={classes.GroupInputsLabel}>
             <span>{label}</span>

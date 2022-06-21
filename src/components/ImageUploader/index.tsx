@@ -155,7 +155,7 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
                   </button>
                 </div>
               )}
-              <img src={url} alt={`admin panel, imageId: ${id}`} />
+              <img src={url} alt="admin panel" />
             </>
           )}
         </div>

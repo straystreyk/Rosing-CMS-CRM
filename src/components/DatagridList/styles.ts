@@ -4,11 +4,10 @@ import { Theme } from "@material-ui/core";
 import { MEDIA_QUERIES_BREAKPOINTS, TopToolBar } from "../../constants/style-constants";
 
 const TableRow = {
-  borderBottom: "1px solid var(--secondary-color-disable)",
   height: 62,
+  borderBottom: "1px solid var(--secondary-color-disable)",
   "&.MuiTableRow-root.MuiTableRow-hover:hover": {
     backgroundColor: "var(--primary-bg)",
-    borderColor: "transparent",
   },
   "& .MuiTableCell-root": {
     borderBottom: "none",

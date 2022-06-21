@@ -124,7 +124,6 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
                 startIcon={<PlusIcon />}
                 endIcon={<ArrayInputItemArrow />}
                 buttonType="secondary"
-                className="filterButton"
                 onClick={handleClick}
                 text="Add Filter"
               />
@@ -134,7 +133,6 @@ export const Filters: React.FC<{ filters?: FilterTemplate[] }> = ({ filters }) =
                 variant="text"
                 startIcon={<DeleteIcon />}
                 buttonType="additional-red"
-                className="filterButton deleteButton"
                 onClick={deleteAllFilters}
               >
                 Delete ({allActiveFiltersWithValue.length})

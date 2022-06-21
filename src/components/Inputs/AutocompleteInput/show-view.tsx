@@ -1,4 +1,5 @@
 import * as React from "react";
+import _ from "lodash";
 import { EditInputComponent } from "../FastEditInput";
 import { useFormState } from "react-final-form";
 import { EmptyInput } from "../styles";
@@ -25,10 +26,12 @@ const getLink = (source: string) => {
 
 const ShowView: React.FC<AutocompleteInputProps> = (props) => {
   const { values } = useFormState();
+  const value = _.get(values, props.source);
+
   const current =
-    values[props.source] && props.choices && props.choices.length
+    value && props.choices && props.choices.length
       ? props.choices.filter((choice) =>
-          choice && choice.id ? values[props.source].toString() === choice.id.toString() : []
+          choice && choice.id ? value.toString() === choice.id.toString() : []
         )[0]
       : "";
 

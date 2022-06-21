@@ -1,6 +1,5 @@
 import * as React from "react";
 import { FunctionField, Record, Record as RecordRA } from "react-admin";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 
 import { EmptyTablePage } from "../../../../components/EmptyTablePage";
@@ -14,7 +13,6 @@ import { Toolbar } from "../Seasons/toolbar";
 import { PublishedIcons, UnPublishedIcons } from "../../../../constants/icons";
 import { ExpandWrapper } from "../../../../components/DatagridList/expand-wrapper";
 import { Form } from "./form";
-import cn from "classnames";
 import { ExpandNameField } from "../../../../components/TableFields/expand-name-field";
 
 const useStyles = makeStyles(TableFieldsStyles);

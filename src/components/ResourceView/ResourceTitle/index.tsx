@@ -29,7 +29,6 @@ export const ResourceTitle: React.FC<TitleProps> = ({
   const [title] = React.useState<string>(
     (values.name || values.fullName || values.questionTemplate) ?? ""
   );
-
   return (
     <>
       <ExportStatusWidget resource={name} />
@@ -60,10 +59,10 @@ export const ResourceTitle: React.FC<TitleProps> = ({
                 </>
               ) : (
                 <>
-                  {title ?? translate(["resources", name, "titles", form].join("."))}
+                  {!!title ? title : translate(["resources", name, "titles", form].join("."))}
                   {form === "show" && (
                     <div className={classes.ButtonsShow}>
-                      {ActionButtons && <ActionButtons />}
+                      {ActionButtons && <ActionButtons {...props} />}
                       <StandardButton
                         variant="text"
                         component={Link}

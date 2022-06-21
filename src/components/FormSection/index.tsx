@@ -3,10 +3,10 @@ import { Collapse, makeStyles } from "@material-ui/core";
 import { ArrayInputItemArrow } from "../../constants/icons";
 
 interface SectionProps {
-  text: string | any[];
-  title: string;
+  text?: string | any[];
+  title?: string;
   formType: string;
-  id: string;
+  id?: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -21,8 +21,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     cursor: "pointer",
     marginBottom: 4,
-    "& span": {
+    "& .icon": {
       marginLeft: 11,
+      width: 8,
       display: "inline-block",
     },
   },
@@ -34,9 +35,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 8,
     display: "inline-block",
     cursor: "pointer",
-    "& > svg": {
-      marginLeft: 11,
+    "& .icon": {
+      width: 8,
       verticalAlign: "middle",
+      marginLeft: 11,
     },
   },
   TextSection: {
@@ -81,31 +83,16 @@ export const FormSection: React.FC<SectionProps> = React.forwardRef(
         {title && (
           <div className={classes.TitleSection} onClick={() => setShowSection((p) => !p)}>
             {title}
-            <svg
-              width="8"
-              height="5"
-              viewBox="0 0 8 5"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6.61621 0.691425L3.99992 3.30772L1.38379 0.691406"
-                stroke="#005AA3"
-                strokeWidth="1.3"
-                strokeLinecap="round"
-              />
-            </svg>
+            <ArrayInputItemArrow className="icon" />
           </div>
         )}
         <Collapse in={showSection} timeout="auto">
-          {["create", "edit"].includes(formType) && (
+          {["create", "edit"].includes(formType) && text && (
             <>
-              {text && (
-                <ShowDescriptionButton
-                  setShowDescription={setShowDescription}
-                  showDescription={showDescription}
-                />
-              )}
+              <ShowDescriptionButton
+                setShowDescription={setShowDescription}
+                showDescription={showDescription}
+              />
 
               <Collapse in={showDescription} timeout="auto">
                 <div className={classes.TextSection}>

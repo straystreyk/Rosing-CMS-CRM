@@ -24,6 +24,8 @@ import { videoFilesLinks } from "../../containers/MediaContent/Video/VideoFiles/
 import { epgSourceLinks } from "../../containers/MediaContent/TV/TVShows/EPGSources/epg-source-links";
 import { epgLocalEventsLinks } from "../../containers/MediaContent/TV/TVShows/EPGLocalEvents/epg-local-events-links";
 import { programEventsLinks } from "../../containers/MediaContent/TV/Channels/ProgramEvents/program-events-links";
+import { screenConfigLinks } from "../../containers/PagesAndAttributes/ScreenConfig/screen-config-links";
+import { questionLinks } from "../../containers/PagesAndAttributes/Question/question-links";
 
 export type Breadcrumb = {
   name: string;
@@ -43,6 +45,10 @@ export const breadcrumbsLinks: Breadcrumb[] = [
   {
     name: "Media content",
     href: "/media_content",
+  },
+  {
+    name: "Pages and attributes",
+    href: "/pages_and_attributes",
   },
   {
     name: "Video",
@@ -137,6 +143,12 @@ export const breadcrumbsLinks: Breadcrumb[] = [
 
   //EPG Local Source Links
   ...epgLocalEventsLinks,
+
+  // Screen config links
+  ...screenConfigLinks,
+
+  // Question Links
+  ...questionLinks,
 
   //Content Providers (External catalog)
   {

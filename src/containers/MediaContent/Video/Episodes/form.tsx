@@ -33,6 +33,7 @@ import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButton
 import { ModelFormStyles } from "../../../../components/ResourceView/FormWithRedirect/styles";
 import { ArrayInputItemArrow } from "../../../../constants/icons";
 import { Collapse } from "@material-ui/core";
+import { FormSection } from "../../../../components/FormSection";
 
 const FIXED_HEADER_OFFSET = 80;
 const useStyles = makeStyles({
@@ -342,7 +343,11 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
 
   return (
     <>
-      {type !== "create" && <Episode resource={resource} inputType={type} />}
+      {type !== "create" && (
+        <FormSection formType={type}>
+          <Episode resource={resource} inputType={type} />
+        </FormSection>
+      )}
       {type === "create" && (
         <ArrayInput
           source="episodes"

@@ -7,7 +7,7 @@ import { StandardButton } from "../../../../components/UI/Buttons/StandardButton
 import { ResourceCountEpisodesIcon } from "../../../../constants/icons";
 
 export const ShowTitleActionButtons: TitleActionButtonsType = React.memo((props) => {
-  const { values } = useFormState();
+  console.log(props);
 
   return (
     <>
@@ -17,12 +17,12 @@ export const ShowTitleActionButtons: TitleActionButtonsType = React.memo((props)
         variant="text"
         buttonType="primary"
         text={
-          values.episodes && values.episodes.length
-            ? `Episodes (${values.episodes.length})`
+          props.record.episodes && props.record.episodes.length
+            ? `Episodes (${props.record.episodes.length})`
             : "Add episodes"
         }
         to={
-          values.episodes && values.episodes.length
+          props.record.episodes && props.record.episodes.length
             ? `/media_content/video/seasons/${props.id}/episodes`
             : `/media_content/video/seasons/${props.id}/episodes/create`
         }

@@ -117,7 +117,6 @@ export const ArrayInputNoDragOrigin: React.FC<ArrayInputProps> = React.memo(
           <ArrayInputRA {...props} source={source} resource={resource} label="">
             <FieldArray name={source}>
               {(fieldProps) => {
-                console.log(fieldProps);
                 return (
                   <>
                     {fieldProps.fields.map((item, index) => {

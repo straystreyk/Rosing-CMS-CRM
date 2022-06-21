@@ -32,6 +32,7 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
   onMobileView,
   component,
   buttonType,
+  to,
   ...props
 }) => {
   const classes = useStyles();
@@ -54,8 +55,8 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
         isMobile && onMobileView && classes.MobileView,
         className && className
       )}
+      to={to}
       component={component}
-      {...props}
     >
       {isMobile && onMobileView ? null : text}
       {children}

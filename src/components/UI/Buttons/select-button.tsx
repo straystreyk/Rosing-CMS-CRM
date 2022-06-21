@@ -3,11 +3,11 @@ import cn from "classnames";
 import { makeStyles, Menu, MenuItem } from "@material-ui/core";
 import { authClient } from "../../Providers/AuthProvider/client";
 import { DocumentNode, useQuery } from "@apollo/client";
-import { ButtonPrimary } from "./primary-button";
-import { CreateIcon } from "../../../constants/forms-constants";
 import { MainLoader } from "../../MainLoader";
 import { ImageProps } from "../../ImageUploader/types";
 import { outlineStyles } from "../../Themes/main-styles";
+import { StandardButton } from "./StandardButton/standard-button";
+import { PlusIcon } from "../../../constants/icons";
 
 const useStyles = makeStyles({
   SelectButtonWrapper: {
@@ -29,6 +29,9 @@ const useStyles = makeStyles({
       color: "var(--accent-color-hover)",
       backgroundColor: "transparent",
     },
+  },
+  Icon: {
+    width: 20,
   },
 });
 
@@ -105,18 +108,18 @@ export const SelectButton: React.FC<{
 
     return (
       <div className={classes.SelectButtonWrapper}>
-        <ButtonPrimary
+        <StandardButton
           id="basic-button"
           className={cn(classes.PushButton, buttonClassName && buttonClassName)}
           variant="text"
-          startIcon={icon ?? <CreateIcon color="var(--accent-color)" />}
+          startIcon={icon ?? <PlusIcon className={classes.Icon} />}
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
+          buttonType="primary"
           onClick={handleClick}
-        >
-          {label}
-        </ButtonPrimary>
+          text={label}
+        />
         <Menu
           id="select-basic-menu"
           anchorEl={anchorEl}

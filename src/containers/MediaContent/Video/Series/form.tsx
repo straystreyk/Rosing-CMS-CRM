@@ -32,7 +32,7 @@ import { ExtraVideos } from "../../../../components/Models/ExtraVideos";
 import { RatingSystems } from "../../../../components/Models/RatingSytems";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
 import { useFormState } from "react-final-form";
-import { alwaysEmptyString, scrollToErrorInput } from "../../../../helpers/form";
+import { alwaysEmptyString } from "../../../../helpers/form";
 import { StandardButton } from "../../../../components/UI/Buttons/StandardButton/standard-button";
 import { ResourceAddIcon, ResourceCountIcon } from "../../../../constants/icons";
 import { Checkbox } from "../../../../components/Inputs/Checkbox";
@@ -229,16 +229,13 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
           initialValue={false}
           resource={resource}
           inputType={type}
-          helperText="
-On the series page, users will see a menu with the numbering of seasons, the season number in the episode preview card and in the title on the player. If the series has only one season or it is a multi-part movie, you can deactivate the checkbox so that the application does not display information about the seasons."
+          helperText="On the series page, users will see a menu with the numbering of seasons, the season number in the episode preview card and in the title on the player. If the series has only one season or it is a multi-part movie, you can deactivate the checkbox so that the application does not display information about the seasons."
         />
         <ArrayInputNoDrag
           resource={resource}
           inputType={type}
           getItemLabel={alwaysEmptyString}
-          helperText={
-            "A pair of custom fields that can be used for filtering. You can add multiple pairs."
-          }
+          helperText="A pair of custom fields that can be used for filtering. You can add multiple pairs."
           ChildComponent={MetaData}
           source="metadata"
           label="Metadata"
@@ -314,9 +311,7 @@ On the series page, users will see a menu with the numbering of seasons, the sea
           resource={resource}
           inputType={type}
           getItemLabel={alwaysEmptyString}
-          helperText={
-            "The age rating of the film in accordance with the legislation of the country in which the application is used"
-          }
+          helperText="The age rating of the film in accordance with the legislation of the country in which the application is used"
           source="certificationRatings"
           label="Age rating"
           ChildComponent={RatingSystems}

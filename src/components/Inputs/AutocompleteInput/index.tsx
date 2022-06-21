@@ -19,15 +19,18 @@ const useStyles = makeStyles({
 export const AutocompleteInputOrigin: React.FC<Omit<AutocompleteInputProps, "inputType">> = ({
   helperText,
   resettable,
+  options,
   ...rest
 }) => {
   const classes = useStyles();
+
   return (
     <AutocompleteInputWithOpts
       {...rest}
       options={{
         className: classes.AutocompleteInput,
         onKeyDown: resetOnBackspace,
+        ...options,
       }}
       helperText={helperText ?? false}
       resettable={resettable ?? true}

@@ -9,19 +9,17 @@ const generateButtonVariantsStyles = (color: string, hoverColor: string, selectC
     },
   },
   "&.outlined": {
-    padding: "7px 16px",
-    border: `1px solid ${color}`,
+    padding: "8px 16px",
+    backgroundColor: selectColor,
     "&:hover": {
       color: `${hoverColor}`,
-      borderColor: `${hoverColor}`,
-      backgroundColor: selectColor,
     },
   },
   "&.text": {
     padding: "4px 6px",
     "&:hover": {
       color: `${hoverColor} `,
-      backgroundColor: "unset",
+      backgroundColor: selectColor,
     },
   },
   "&.icon": {
@@ -29,6 +27,7 @@ const generateButtonVariantsStyles = (color: string, hoverColor: string, selectC
     padding: "4px 6px",
     "&:hover": {
       backgroundColor: selectColor,
+      color: `${hoverColor}`,
     },
   },
 });

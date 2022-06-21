@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   DeleteButton: {
     color: "var(--additional-red-default)",
     padding: "4px 6px",
-    transition: "0.35s color ease",
+    transition: "0.35s color ease, 0.35s background-color ease",
     "& svg": {
       marginLeft: 0,
       marginRight: 4,
@@ -31,12 +31,8 @@ const useStyles = makeStyles({
     },
     "&:hover": {
       color: "var(--additional-red-hover)",
-      backgroundColor: "transparent",
+      backgroundColor: "var(--additional-red-select)",
     },
-  },
-  TextButton: {
-    padding: "4px 6px",
-    backgroundColor: "unset !important",
   },
 });
 
@@ -52,7 +48,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({
     <DeleteButtonRA
       icon={<DeleteIcon />}
       basePath={basePath}
-      className={cn(classes.DeleteButton, "DeleteButton", variant === "text" && classes.TextButton)}
+      className={cn(classes.DeleteButton, "DeleteButton")}
       {...props}
     />
   );

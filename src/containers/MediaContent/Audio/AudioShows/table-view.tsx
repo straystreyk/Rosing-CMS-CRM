@@ -72,9 +72,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
       />
       <FunctionField
         label=""
-        className={classes.MoreActions}
         render={(record?: RecordRA) => (
-          <div>
+          <div className={classes.MoreActions}>
             <PublishedField published={record?.published} />
             <MoreActionsButton>
               <StandardButton

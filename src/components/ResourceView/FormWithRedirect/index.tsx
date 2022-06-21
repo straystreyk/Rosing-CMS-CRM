@@ -11,7 +11,22 @@ import { EditFormStyles } from "./styles";
 const useStyles = makeStyles(EditFormStyles);
 
 export const EditForm: React.FC<EditFormProps> = React.memo(
-  ({ offToolbar, offTitle, form, offRedirectButton, actionButtons, ...props }) => {
+  ({
+    offToolbar,
+    offTitle,
+    form,
+    offRedirectButton,
+    actionButtons,
+    onSuccessWithRedirect,
+    redirectButtonIcon,
+    redirectButtonLabel,
+    onSuccess,
+    onFailure,
+    redirect,
+    resource,
+    children,
+    ...props
+  }) => {
     const classes = useStyles();
 
     return (
@@ -35,7 +50,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
                       record={record}
                       basePath={basePath}
                       actionButtons={actionButtons}
-                      name={props.resource}
+                      name={resource}
                       form={form}
                     />
                   )}
@@ -46,7 +61,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
                     <form>
                       <CardContent>
                         <Box display={{ md: "block", lg: "flex" }}>
-                          <Box flex={1}>{props.children}</Box>
+                          <Box flex={1}>{children}</Box>
                         </Box>
                       </CardContent>
                       {!offToolbar && (
@@ -56,15 +71,15 @@ export const EditForm: React.FC<EditFormProps> = React.memo(
                           invalid={invalid}
                           handleSubmit={handleSubmit}
                           handleSubmitWithRedirect={handleSubmitWithRedirect}
-                          onSuccessWithRedirect={props.onSuccessWithRedirect}
-                          redirectButtonIcon={props.redirectButtonIcon}
-                          redirectButtonLabel={props.redirectButtonLabel}
-                          onSuccess={props.onSuccess}
-                          onFailure={props.onFailure}
+                          onSuccessWithRedirect={onSuccessWithRedirect}
+                          redirectButtonIcon={redirectButtonIcon}
+                          redirectButtonLabel={redirectButtonLabel}
+                          onSuccess={onSuccess}
+                          onFailure={onFailure}
                           saving={formProps.saving}
                           formType={form}
-                          redirect={props.redirect}
-                          resource={props.resource}
+                          redirect={redirect}
+                          resource={resource}
                           offRedirectButton={offRedirectButton}
                         />
                       )}

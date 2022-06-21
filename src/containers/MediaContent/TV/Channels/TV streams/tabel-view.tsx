@@ -61,12 +61,13 @@ export const TableView: React.FC<ShowProps> = (props) => {
       />
       <FunctionField
         label=""
-        className={classes.MoreActions}
         render={(record?: RecordRA) => (
-          <MoreActionsButton>
-            <EditButton color="secondary" record={record} basePath={props.basePath} />
-            <DeleteButton record={record} basePath={props.basePath} />
-          </MoreActionsButton>
+          <div className={classes.MoreActions}>
+            <MoreActionsButton>
+              <EditButton color="secondary" record={record} basePath={props.basePath} />
+              <DeleteButton record={record} basePath={props.basePath} />
+            </MoreActionsButton>
+          </div>
         )}
       />
     </DatagridList>
