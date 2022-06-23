@@ -36,6 +36,8 @@ import { EPGVariables as epg } from "../MediaContent/TV/TVShows/EPG";
 import { ProgramEventsVariables as programEvents } from "../MediaContent/TV/Channels/ProgramEvents";
 import { QuestionVariables as questions } from "../PagesAndAttributes/Question";
 import { ScreenConfigVariables as screenConfigs } from "../PagesAndAttributes/ScreenConfig";
+import { SearchFilterGroupVariables as searchFiltersGroup } from "../PagesAndAttributes/Filters/SearchFilterGroup";
+import { FilterVariables as filters } from "../PagesAndAttributes/Filters/Filter";
 
 import "../../components/UI/fonts/Gilroy/stylesheet.css";
 import { MainLoader } from "../../components/MainLoader";
@@ -125,11 +127,14 @@ export const App = () => {
       <Resource name="media_content/news" {...news} />
       <Resource name="pages_and_attributes/questions" {...questions} />
       <Resource name="pages_and_attributes/screen_configs" {...screenConfigs} />
+      <Resource name="pages_and_attributes/filters/search_filters_groups" {...searchFiltersGroup} />
+      <Resource name="pages_and_attributes/filters/filters" {...filters} />
       <Resource name="castMembers" />
       <Resource name="countries" />
       <Resource name="production_countries" />
       <Resource name="regions" />
       <Resource name="api_clients" />
+      <Resource name="search_filters" />
       <Resource name="images" />
     </Admin>
   );

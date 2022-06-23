@@ -9,7 +9,7 @@ export const SearchFilterStyles: any = {
   SearchInput: {
     width: "100%",
     outline: "none",
-    border: "1px solid var(--secondary-color-default)",
+    border: "1px solid var(--secondary-color-chevron)",
     borderLeft: "none",
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
@@ -22,7 +22,7 @@ export const SearchFilterStyles: any = {
     },
   },
   SelectInput: {
-    border: "1px solid var(--secondary-color-default)",
+    border: "1px solid var(--secondary-color-chevron)",
     borderTopLeftRadius: 4,
     borderBottomLeftRadius: 4,
     width: 200,

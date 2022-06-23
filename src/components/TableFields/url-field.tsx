@@ -3,6 +3,7 @@ import cn from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { TableFieldsStyles } from "./styles";
+import { useRecordContext } from "react-admin";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -23,7 +24,6 @@ export const UrlField: React.FC<UrlFieldProps> = ({
   ...rest
 }) => {
   const classes = useStyles();
-
   return (
     <Component {...rest} className={cn(classes.NameField, className && className)} to={to}>
       {name}

@@ -226,7 +226,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           reference="media_content/attributes/providers/content_providers"
           resource={resource}
         >
-          <SelectInput
+          <AutocompleteInput
             optionText="name"
             source="externalCatalogId"
             resource={resource}
@@ -325,6 +325,7 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
             label=""
             idName="alpha2"
           />
+
           <ReferenceCustomInput
             component={AutocompleteArrayInput}
             inputType={type}

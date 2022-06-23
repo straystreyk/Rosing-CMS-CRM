@@ -32,7 +32,8 @@ export const TableView: React.FC<ShowProps> = (props) => {
           <UrlField to={`${props.basePath}/${record?.id}/show`} name={record?.screen} />
         )}
       />
-      <TextField label="id" source="id" />
+      <TextField className={classes.IDField} label="id" source="id" />
+      <TextField label="Additional Name" source="cardConfig.additionalNameAttribute" />
       <FunctionField
         label=""
         render={(record?: RecordRA) => {

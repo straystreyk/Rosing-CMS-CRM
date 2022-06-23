@@ -26,6 +26,7 @@ import { epgLocalEventsLinks } from "../../containers/MediaContent/TV/TVShows/EP
 import { programEventsLinks } from "../../containers/MediaContent/TV/Channels/ProgramEvents/program-events-links";
 import { screenConfigLinks } from "../../containers/PagesAndAttributes/ScreenConfig/screen-config-links";
 import { questionLinks } from "../../containers/PagesAndAttributes/Question/question-links";
+import { searchFiltersGroupLinks } from "../../containers/PagesAndAttributes/Filters/SearchFilterGroup/search-filters-group-links";
 
 export type Breadcrumb = {
   name: string;
@@ -149,6 +150,9 @@ export const breadcrumbsLinks: Breadcrumb[] = [
 
   // Question Links
   ...questionLinks,
+
+  // Question Links
+  ...searchFiltersGroupLinks,
 
   //Content Providers (External catalog)
   {

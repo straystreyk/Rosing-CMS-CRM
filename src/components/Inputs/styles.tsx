@@ -13,7 +13,7 @@ export const CommonInputStyles: {
     padding: "8px 12px",
     lineHeight: "20px",
     fontSize: 14,
-    border: "1px solid var(--secondary-color-default)",
+    border: "1px solid var(--secondary-color-chevron)",
     borderRadius: 4,
     transition: "0.35s border ease, 0.35s color ease",
   },
@@ -87,4 +87,7 @@ export const TextInputShowValue: any = {
 export const EmptyInput: React.FC<{
   emptyText: string | React.ReactElement;
   tag?: keyof JSX.IntrinsicElements;
-}> = ({ emptyText, tag: Tag = "span" }) => <Tag className="empty">{emptyText}</Tag>;
+  className?: string;
+}> = ({ emptyText, tag: Tag = "span", className }) => (
+  <Tag className={"empty" + " " + className}>{emptyText}</Tag>
+);

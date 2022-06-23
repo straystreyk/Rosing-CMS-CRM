@@ -7,8 +7,10 @@ import { makeStyles } from "@material-ui/core";
 import { MEDIA_QUERIES_BREAKPOINTS } from "../../../../constants/style-constants";
 import { StandardButtonStyles } from "./styles";
 
+export type ButtonTypes = "primary" | "secondary" | "additional-red";
+
 export interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
-  buttonType: "primary" | "secondary" | "additional-red";
+  buttonType: ButtonTypes;
   variant?: "text" | "outlined" | "contained" | "icon";
   component?: any;
   to?: string;
@@ -57,6 +59,7 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
       )}
       to={to}
       component={component}
+      {...props}
     >
       {isMobile && onMobileView ? null : text}
       {children}

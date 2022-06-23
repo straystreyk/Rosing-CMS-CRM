@@ -3,6 +3,11 @@ import { formHelperText, CommonInputStyles, labelStyles } from "../../styles";
 export const NumberInputStyles: any = {
   backgroundColor: "none !important",
   fontFamily: "var(--font-family)",
+  "& .Mui-error": {
+    "& input": {
+      ...CommonInputStyles.Error,
+    },
+  },
   "& input": {
     ...CommonInputStyles.Input,
     "&:focus": CommonInputStyles.Focus,

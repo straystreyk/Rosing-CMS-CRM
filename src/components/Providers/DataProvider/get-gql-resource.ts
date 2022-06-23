@@ -8,12 +8,18 @@ export const getGqlResource = (resource: string) => {
       return "Stream";
     case "region":
       return "Region";
+    case "search_filters":
+      return "SearchFilter";
     case "images":
       return "Image";
     case "static_data":
       return "StaticData";
     case "pages_and_attributes/questions":
       return "Question";
+    case "pages_and_attributes/filters/search_filters_groups":
+      return "SearchFilterGroup";
+    case "pages_and_attributes/filters/filters":
+      return "QuickFilter";
     case "pages_and_attributes/screen_configs":
       return "ScreenCardConfig";
     case "media_content/tv/channels/channels/:channelId/channel_versions":

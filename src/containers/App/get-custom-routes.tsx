@@ -8,7 +8,16 @@ export const getRoutes: (token: string | null) => ReactElement[] = (token) => {
   if (token) {
     return [
       <Route exact path="/configuration" render={() => <Configuration />} />,
-      <Redirect exact from="/pages_and_attributes" to="/pages_and_attributes/questions" />,
+      <Redirect
+        exact
+        from="/pages_and_attributes"
+        to="/pages_and_attributes/filters/search_filters_groups"
+      />,
+      <Redirect
+        exact
+        from="/pages_and_attributes/filters"
+        to="/pages_and_attributes/filters/search_filters_groups"
+      />,
       <Redirect exact from="/media_content" to="/media_content/video/movies" />,
       <Redirect exact from="/media_content/video" to="/media_content/video/movies" />,
       <Redirect exact from="/media_content/radio" to="/media_content/radio/radio_stations" />,

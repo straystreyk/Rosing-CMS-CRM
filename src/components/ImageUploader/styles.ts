@@ -55,20 +55,6 @@ export const ImageUploaderStyles: any = {
       pointerEvents: "all",
     },
   },
-  ImageItemChangeButton: {
-    color: "var(--primary-button-default)",
-    transition: "0.35s color ease",
-    padding: "4px 6px",
-    "& .MuiButton-startIcon": {
-      marginLeft: 0,
-    },
-    "& svg": {
-      width: 20,
-    },
-    "&:hover": {
-      color: "var(--primary-focus)",
-    },
-  },
   UploadWrapper: {
     display: "flex",
     flexDirection: "column",

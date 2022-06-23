@@ -90,7 +90,6 @@ export type ReviewStatus = "accepted" | "pending" | "rejected";
 
 export interface ResourceMatch {
   id: string;
-
   [k: string]: string;
 }
 
@@ -140,55 +139,4 @@ export interface ResourceComponentProps<
   hasShow: boolean;
   hasCreate: boolean;
   permissions: ReturnType<typeof usePermissions>["permissions"];
-}
-
-declare global {
-  interface Window {
-    restServer: any;
-  }
-}
-
-/**
- * Filters types
- */
-
-export interface filterTypes {
-  title: string;
-  source: string;
-  component: any;
-}
-
-/**
- * Types for server rest api
- */
-
-export interface SelectItemsTypes {
-  name: string;
-  value: string;
-}
-
-export interface ServerImage {
-  updatedAt?: string;
-  createdAt?: string;
-  height: number;
-  width: number;
-  id: string;
-  file: string;
-  kind: string;
-}
-
-export interface MoviesFormState {
-  images: ServerImage[];
-  imageIds: string[];
-}
-
-export interface imageUploaderProps {
-  getImageId: (id: string) => void;
-  deleteImageId: (id: string) => void;
-  type: string;
-  typeName: string;
-  imageId?: string;
-  serverUrl?: string;
-  imageWidth?: number;
-  imageHeight?: number;
 }

@@ -132,6 +132,52 @@ export const en: TranslationMessages = {
         },
       },
     },
+    "pages_and_attributes/filters/search_filters_groups": {
+      name: "Search filters groups",
+      titles: {
+        create: "New search filter group",
+        edit: "Edit search filter group",
+        list: "Pages and attributes",
+        show: "Search filter group",
+      },
+      mutations: {
+        create: {
+          success: "New search filter group was created",
+          error: "Cant create search filter group: %{error}",
+        },
+        edit: {
+          success: "Search filter group was updated",
+          error: "Cant update search filter group: %{error}",
+        },
+        list: {
+          success: "Search filter group was successfully updated",
+          error: "Cant update search filter group: %{error}",
+        },
+      },
+    },
+    "pages_and_attributes/filters/filters": {
+      name: "Filters",
+      titles: {
+        create: "New filter",
+        edit: "Edit filter",
+        list: "Pages and attributes",
+        show: "Filter",
+      },
+      mutations: {
+        create: {
+          success: "New filter was created",
+          error: "Cant create filter: %{error}",
+        },
+        edit: {
+          success: "Filter was updated",
+          error: "Cant update filter: %{error}",
+        },
+        list: {
+          success: "Filter was successfully updated",
+          error: "Cant update filter: %{error}",
+        },
+      },
+    },
     "pages_and_attributes/screen_configs": {
       name: "Screen configs",
       titles: {

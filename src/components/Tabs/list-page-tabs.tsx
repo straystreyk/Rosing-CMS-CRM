@@ -1,7 +1,7 @@
 import * as React from "react";
+import cn from "classnames";
 import { Box, makeStyles } from "@material-ui/core";
 import { Link } from "ra-ui-materialui";
-import cn from "classnames";
 import { useHistory } from "react-router-dom";
 import { scrollBarStyles } from "../Themes/main-styles";
 import { StandardButton } from "../UI/Buttons/StandardButton/standard-button";
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 0,
     marginRight: 24,
     transition: "0.35s all ease",
+    minWidth: "unset",
     flexShrink: 0,
     borderBottom: `3px solid transparent`,
     "&:hover": {
@@ -64,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     transition: "0.35s all ease",
     fontSize: 14,
     lineHeight: "20px",
+    minWidth: "unset",
     borderBottom: `3px solid transparent`,
     marginRight: 12,
     borderRadius: 0,

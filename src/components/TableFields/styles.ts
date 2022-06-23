@@ -25,6 +25,7 @@ export const TableFieldsStyles: any = {
   },
   Empty: {
     color: "var(--secondary-color-default)",
+    fontSize: 14,
   },
   Expand: {
     "& .expandButton": {

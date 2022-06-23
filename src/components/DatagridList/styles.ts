@@ -59,18 +59,6 @@ export const DatagridStyles: any = {
       },
     },
   },
-  LoaderWrapper: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "fixed",
-    width: "100%",
-    height: "100%",
-    zIndex: 200,
-    top: 0,
-    left: 0,
-  },
   TopToolBarWrapper: {
     marginTop: 16,
     padding: "0px 20px 0 24px",

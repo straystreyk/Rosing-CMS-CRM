@@ -1,4 +1,4 @@
-import { labelStyles } from "../styles";
+import { CommonInputStyles, labelStyles } from "../styles";
 
 export const RaRichTextInputStyles: any = {
   RaRichTextInput: {
@@ -17,7 +17,7 @@ export const RaRichTextInputStyles: any = {
     "& .ql-editor": {
       padding: "8px 12px 50px 12px",
       backgroundColor: "#fff",
-      border: "1px solid var(--secondary-color-default)",
+      border: "1px solid var(--secondary-color-chevron)",
       fontSize: 14,
       borderRadius: 4,
       transition: "0.35s border-color ease",
@@ -43,7 +43,7 @@ export const RaRichTextInputStyles: any = {
       display: "flex",
       justifyContent: "space-between",
       border: "none",
-      borderTop: "1px solid var(--secondary-color-disable)",
+      borderTop: "1px solid var(--secondary-color-chevron)",
       margin: "0px 1px 1px 1px",
       borderBottomLeftRadius: 4,
       borderBottomRightRadius: 4,

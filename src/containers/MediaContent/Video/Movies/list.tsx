@@ -1,5 +1,11 @@
 import * as React from "react";
-import { FunctionField, TextField } from "react-admin";
+import {
+  ChipField,
+  FunctionField,
+  ReferenceArrayField,
+  SingleFieldList,
+  TextField,
+} from "react-admin";
 import { EmptyTablePage } from "../../../../components/EmptyTablePage";
 import {
   AllowDownload,

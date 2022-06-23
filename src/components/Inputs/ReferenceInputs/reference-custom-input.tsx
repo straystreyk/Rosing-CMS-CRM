@@ -76,8 +76,6 @@ export const ReferenceCustomInput: React.FC<ReferenceCustomInputProps> = React.m
       },
       [data, idName]
     );
-    console.log(source);
-    console.log(values[source]);
     React.useEffect(() => {
       if (
         data &&

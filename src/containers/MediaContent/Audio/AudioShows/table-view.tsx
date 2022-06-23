@@ -55,12 +55,13 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <TextField label="Slug" source="slug" />
       <ReferenceField
         label="External catalog"
-        source="media_content/attributes/providers/content_providers"
+        source="externalCatalogId"
         emptyText={<span className={classes.Empty}>Empty</span>}
-        reference="datacenters"
+        reference="media_content/attributes/providers/content_providers"
+        linkType={false}
         offsort
       >
-        <TextField source="name" fullWidth />
+        <TextField source="name" />
       </ReferenceField>
       <FunctionField
         offsort

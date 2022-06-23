@@ -171,13 +171,13 @@ const ImageItem: React.FC<ImageItemProps> = React.memo(
               buttonType="additional-red"
             />
             <SelectButton
-              buttonClassName={classes.ImageItemChangeButton}
               label="Change type"
               icon={<ChangeIcon />}
               pushResource={changeType}
               setServerImages={setServerImages}
               images={serverImages}
               variables={requestVariables}
+              buttonType="secondary"
               query={GET_IMAGES_TYPES}
             />
             {imageSize && (

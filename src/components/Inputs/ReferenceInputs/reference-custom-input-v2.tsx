@@ -4,7 +4,6 @@ import { authClient } from "../../Providers/AuthProvider/client";
 import type { AutocompleteInput, InputProps } from "../input-types";
 import { MainLoader } from "../../MainLoader";
 import { makeStyles } from "@material-ui/core/styles";
-import { AutocompleteInput as ASSS } from "react-admin";
 
 const useStyles = makeStyles({
   Loader: {
@@ -60,11 +59,15 @@ export const ReferenceCustomInputV2: React.FC<ReferenceCustomInputV2Props> = ({
         {...rest}
         optionText="name"
         optionValue="value"
-        choices={data.map((item: any, index) => ({
-          id: index,
-          name: item[optionText],
-          value: item[optionValue],
-        }))}
+        choices={
+          data && data.length
+            ? data.map((item: any, index) => ({
+                id: index,
+                name: item[optionText],
+                value: item[optionValue],
+              }))
+            : []
+        }
         options={{
           InputProps: {
             endAdornment:

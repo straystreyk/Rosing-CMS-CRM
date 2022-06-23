@@ -1,16 +1,14 @@
 import * as React from "react";
-import { ShowProps } from "../../../types";
-import { DatagridList } from "../../../components/DatagridList";
-import { EmptyTablePage } from "../../../components/EmptyTablePage";
-import { UrlField } from "../../../components/TableFields/url-field";
-import { FunctionField } from "ra-ui-materialui";
 import { Record as RecordRA } from "react-admin";
+import { FunctionField } from "ra-ui-materialui";
 import { makeStyles } from "@material-ui/core";
-import { TableFieldsStyles } from "../../../components/TableFields/styles";
-import { MoreActionsButton } from "../../../components/UI/Buttons/MoreActionsButton";
-import { EditButton } from "../../../components/UI/RA/edit-button";
-import { DeleteButton } from "../../../components/UI/RA/delete-button";
-import { PublishedField } from "../../../components/TableFields/published-field";
+import { ShowProps } from "../../../../types";
+import { DatagridList } from "../../../../components/DatagridList";
+import { EmptyTablePage } from "../../../../components/EmptyTablePage";
+import { TableFieldsStyles } from "../../../../components/TableFields/styles";
+import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActionsButton";
+import { EditButton } from "../../../../components/UI/RA/edit-button";
+import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -26,12 +24,6 @@ export const TableView: React.FC<ShowProps> = (props) => {
       draggable
     >
       <FunctionField
-        label="Question"
-        render={(record?: RecordRA) => (
-          <UrlField to={`/${props.resource}/${record?.id}/show`} name={record?.questionTemplate} />
-        )}
-      />
-      <FunctionField
         label="Position"
         source="position"
         render={(record?: RecordRA) =>
@@ -39,22 +31,10 @@ export const TableView: React.FC<ShowProps> = (props) => {
         }
       />
       <FunctionField
-        label="Platforms"
-        source="platforms"
-        render={(record?: RecordRA) =>
-          record?.platforms.length ? (
-            <span>{record?.platforms.join(", ")}</span>
-          ) : (
-            <span className={classes.Empty}>Empty</span>
-          )
-        }
-      />
-      <FunctionField
         label=""
         render={(record?: RecordRA) => {
           return (
             <div className={classes.MoreActions}>
-              <PublishedField published={record?.published} />
               <MoreActionsButton>
                 <EditButton color="secondary" record={record} basePath={props.basePath} />
                 <DeleteButton record={record} basePath={props.basePath} />

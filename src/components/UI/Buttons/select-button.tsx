@@ -6,7 +6,7 @@ import { DocumentNode, useQuery } from "@apollo/client";
 import { MainLoader } from "../../MainLoader";
 import { ImageProps } from "../../ImageUploader/types";
 import { outlineStyles } from "../../Themes/main-styles";
-import { StandardButton } from "./StandardButton/standard-button";
+import { ButtonTypes, StandardButton } from "./StandardButton/standard-button";
 import { PlusIcon } from "../../../constants/icons";
 
 const useStyles = makeStyles({
@@ -15,9 +15,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
   PushButton: {
-    backgroundColor: "transparent",
-    color: "var(--accent-color)",
-    transition: "0.35s color ease",
+    transition: "0.35s color ease, 0.35s background-color ease",
     padding: "6px 16px",
     "& svg path": {
       transition: "0.35s fill ease",
@@ -51,6 +49,7 @@ export const SelectButton: React.FC<{
   name?: string;
   value?: string;
   variables?: {};
+  buttonType?: ButtonTypes;
 }> = React.memo(
   ({
     query,
@@ -62,6 +61,7 @@ export const SelectButton: React.FC<{
     name,
     value,
     variables,
+    buttonType = "primary",
     ...props
   }) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -116,7 +116,7 @@ export const SelectButton: React.FC<{
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
-          buttonType="primary"
+          buttonType={buttonType}
           onClick={handleClick}
           text={label}
         />

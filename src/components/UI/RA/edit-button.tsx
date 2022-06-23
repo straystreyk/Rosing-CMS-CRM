@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     color: "var(--primary-button-default)",
     padding: "2px 5px",
     minWidth: "auto",
-    transition: "0.35s color ease",
+    transition: "0.35s color ease, 0.35s background-color ease",
     "& svg": {
       marginLeft: 0,
       marginRight: 6,
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
       outlineOffset: "2px",
     },
     "&:hover": {
-      backgroundColor: "transparent",
+      backgroundColor: "var(--primary-bg-2)",
       color: "var(--primary-focus)",
     },
   },
