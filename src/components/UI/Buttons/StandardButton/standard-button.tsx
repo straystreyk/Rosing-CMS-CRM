@@ -17,6 +17,13 @@ export interface StandardButtonProps extends Omit<ButtonProps, "variant"> {
   target?: "_blank" | "_parent" | "_self";
   text?: string;
   onMobileView?: boolean;
+  handleSubmit?: () => void;
+  handleSubmitWithRedirect?: (redirectTo: string) => void;
+  submitOnEnter?: boolean;
+  onSave?: () => void;
+  saving?: boolean;
+  invalid?: boolean;
+  basePath?: string;
 }
 
 const useStyles = makeStyles(StandardButtonStyles);
@@ -35,6 +42,13 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
   component,
   buttonType,
   to,
+  handleSubmit,
+  handleSubmitWithRedirect,
+  onSave,
+  submitOnEnter,
+  saving,
+  invalid,
+  basePath,
   ...props
 }) => {
   const classes = useStyles();
@@ -42,6 +56,7 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
 
   return (
     <Button
+      {...props}
       color={color}
       onClick={onClick}
       startIcon={startIcon}
@@ -59,7 +74,6 @@ export const StandardButton: React.FC<StandardButtonProps> = ({
       )}
       to={to}
       component={component}
-      {...props}
     >
       {isMobile && onMobileView ? null : text}
       {children}

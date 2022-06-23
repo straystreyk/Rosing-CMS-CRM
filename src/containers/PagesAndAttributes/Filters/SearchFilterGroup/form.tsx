@@ -9,6 +9,16 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
   return (
     <>
       <FormSection text="" title="" formType={type} id="">
+        {type !== "create" && (
+          <TextInput
+            resource={resource}
+            offFastEdit
+            label="ID"
+            source="id"
+            inputType={type}
+            fullWidth
+          />
+        )}
         <TextInput
           resource={resource}
           validate={requiredValidate}

@@ -1,12 +1,6 @@
 import * as React from "react";
 import { FormProps } from "../../../../types";
-import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input";
-import {
-  AutocompleteArrayInput,
-  requiredValidate,
-  SelectInput,
-  TextInput,
-} from "../../../../components/Inputs";
+import { AutocompleteArrayInput, requiredValidate, TextInput } from "../../../../components/Inputs";
 import {
   ALL_ALLOWED_DRMS,
   ALL_COUNTRIES,
@@ -17,6 +11,7 @@ import { scrollToErrorInput } from "../../../../helpers/form";
 import { useFormState } from "react-final-form";
 import { CheckBoxGroup } from "../../../../components/UI/MaterialUI/check-box-group";
 import { FormSection } from "../../../../components/FormSection";
+import { ReferenceCustomInputV2 } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input-v2";
 
 const FIXED_HEADER_OFFSET = 80;
 
@@ -58,26 +53,27 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
           fullWidth
           helperText="Title for a video file to distinguish between video files with a common theme"
         />
-        <ReferenceCustomInput
-          component={SelectInput}
+        <ReferenceCustomInputV2
+          inputType={type}
           query={ALL_DATACENTERS}
-          inputType={type}
           resource={resource}
-          label="Datacenter UID"
           source="datacenterId"
-          idName="id"
-          helperText="The company - the copyright holder of the film"
-        />
-        <ReferenceCustomInput
           component={AutocompleteArrayInput}
-          query={ALL_ALLOWED_DRMS}
+          label="Datacenter UID"
+          helperText="The company - the copyright holder of the film"
+          optionText="name"
+          optionValue="id"
+        />
+        <ReferenceCustomInputV2
           inputType={type}
-          validate={requiredValidate}
+          query={ALL_ALLOWED_DRMS}
           resource={resource}
-          label="Allowed drms"
           source="allowedDrms"
-          idName="id"
+          component={AutocompleteArrayInput}
+          label="Allowed drms"
           helperText="Access control and management system, copyright protection. You can select several DRM systems from the list."
+          optionText="name"
+          optionValue="id"
         />
         <TextInput
           resource={resource}
@@ -87,28 +83,34 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
           helperText="The default template https://{host}{/encoded_session}{/signature}{/bucket*}{/streaming_uid}{+protocol_suffix}{?params*}"
           fullWidth
         />
-        <CheckBoxGroup inputType={type} initialSourceState="allowedCountries">
-          <ReferenceCustomInput
-            component={AutocompleteArrayInput}
+        <CheckBoxGroup
+          initialSourceState="allowedCountries"
+          inputType={type}
+          label="Access for countries"
+        >
+          <ReferenceCustomInputV2
             inputType={type}
             query={ALL_COUNTRIES}
             resource={resource}
             source="allowedCountries"
+            component={AutocompleteArrayInput}
+            label=""
             checkBoxLabel="Allowed Countries"
             helperText="The list of countries in which the film is available, access is prohibited for other countries. Leave the field empty if access is allowed for all countries."
-            label=""
-            idName="alpha2"
+            optionText="name"
+            optionValue="alpha2"
           />
-          <ReferenceCustomInput
-            component={AutocompleteArrayInput}
+          <ReferenceCustomInputV2
             inputType={type}
             query={ALL_COUNTRIES}
             resource={resource}
+            source="disallowedCountries"
+            component={AutocompleteArrayInput}
+            label=""
             checkBoxLabel="Disallowed countries"
             helperText="List of countries where the film is not available"
-            label=""
-            source="disallowedCountries"
-            idName="alpha2"
+            optionText="name"
+            optionValue="alpha2"
           />
         </CheckBoxGroup>
         {type === "show" && <SPBTVPlayer streamSourceId={props.id ? props.id : ""} />}

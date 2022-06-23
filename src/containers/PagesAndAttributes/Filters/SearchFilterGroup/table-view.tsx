@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Record as RecordRA, TextField, FunctionField, ReferenceArrayField } from "react-admin";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Tooltip } from "@material-ui/core";
 import { ShowProps } from "../../../../types";
 import { TableFieldsStyles } from "../../../../components/TableFields/styles";
 import { DatagridList } from "../../../../components/DatagridList";
@@ -11,8 +11,26 @@ import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActions
 import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
 import { SingleFieldList } from "../../../../components/TableFields/single-field-list";
+import { AcceptFilterIcon } from "../../../../constants/icons";
 
-const useStyles = makeStyles(TableFieldsStyles);
+const useStyles = makeStyles({
+  ...TableFieldsStyles,
+  Icon: {
+    color: "var(--accent-color)",
+    width: 20,
+    height: 20,
+    verticalAlign: "middle",
+    marginLeft: 10,
+    cursor: "help",
+    display: "inline-block",
+  },
+  Tooltip: {
+    "& > div": {
+      fontSize: 11,
+    },
+    maxWidth: 200,
+  },
+});
 
 const FiltersField: React.FC<{ record?: { id: string; name: string } }> = ({ record }) => {
   return <span>{record && record.name},&nbsp;</span>;
@@ -32,7 +50,21 @@ export const TableView: React.FC<ShowProps> = (props) => {
       <FunctionField
         label="Name"
         render={(record?: RecordRA) => (
-          <UrlField to={`/${props.resource}/${record?.id}/show`} name={record?.name} />
+          <>
+            <UrlField to={`/${props.resource}/${record?.id}/show`} name={record?.name} />
+            {record?.default && (
+              <Tooltip
+                arrow
+                placement="bottom"
+                title="A group of filters that will be returned to the client when requesting filters without specifying an ID"
+                classes={{ popper: classes.Tooltip }}
+              >
+                <span className={classes.Icon}>
+                  <AcceptFilterIcon />
+                </span>
+              </Tooltip>
+            )}
+          </>
         )}
       />
       <TextField className={classes.IDField} label="id" source="id" />

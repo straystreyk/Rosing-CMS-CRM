@@ -13,7 +13,6 @@ import {
   ReferenceInput,
   requiredValidate,
   RichTextInput,
-  SelectInput,
   slugValidate,
   TextInput,
 } from "../../../../components/Inputs";
@@ -23,7 +22,6 @@ import {
   SELECT_DISTRIBUTION,
   SELECT_MARKERS,
 } from "../../../../constants/forms-constants";
-import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input";
 import { ALL_COUNTRIES, ALL_ROLES } from "../../../../components/Providers/custom-requests";
 import { FormSection } from "../../../../components/FormSection";
 import { MetaData } from "../../../../components/Models/Metadata";
@@ -40,6 +38,7 @@ import { useFormState } from "react-final-form";
 import { Link } from "react-router-dom";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { AutocompleteInput } from "../../../../components/Inputs/AutocompleteInput";
+import { ReferenceCustomInputV2 } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input-v2";
 
 const useStyles = makeStyles({
   ArrayInputStyles,
@@ -314,28 +313,29 @@ export const Form: React.FC<FormProps> = ({ type, resource, ...props }) => {
           fullWidth
         />
         <CheckBoxGroup inputType={type} initialSourceState="allowedCountries">
-          <ReferenceCustomInput
-            component={AutocompleteArrayInput}
+          <ReferenceCustomInputV2
             inputType={type}
             query={ALL_COUNTRIES}
             resource={resource}
             source="allowedCountries"
+            component={AutocompleteArrayInput}
+            label=""
             checkBoxLabel="Allowed Countries"
             helperText="The list of countries in which the film is available, access is prohibited for other countries. Leave the field empty if access is allowed for all countries."
-            label=""
-            idName="alpha2"
+            optionText="name"
+            optionValue="alpha2"
           />
-
-          <ReferenceCustomInput
-            component={AutocompleteArrayInput}
+          <ReferenceCustomInputV2
             inputType={type}
             query={ALL_COUNTRIES}
             resource={resource}
+            source="disallowedCountries"
+            component={AutocompleteArrayInput}
+            label=""
             checkBoxLabel="Disallowed countries"
             helperText="List of countries where the film is not available"
-            label=""
-            source="disallowedCountries"
-            idName="alpha2"
+            optionText="name"
+            optionValue="alpha2"
           />
         </CheckBoxGroup>
         <CheckBoxGroup inputType={type} initialSourceState="allowedApiClients">

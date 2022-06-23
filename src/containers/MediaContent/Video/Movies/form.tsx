@@ -42,7 +42,7 @@ import { SwitchInput } from "../../../../components/Inputs/SwitchInput";
 import { RadioButtonGroupInput } from "../../../../components/Inputs/RadioButtonGroupInput";
 import { ReferenceArrayInput } from "../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { AutocompleteInput } from "../../../../components/Inputs/AutocompleteInput";
-import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input";
+import { ReferenceCustomInputV2 } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input-v2";
 
 const useStyles = makeStyles((theme) => ({
   Link: {
@@ -474,27 +474,29 @@ export const Form: React.FC<FormProps> = React.memo(({ type, resource, ...rest }
           inputType={type}
           label="Access for countries"
         >
-          <ReferenceCustomInput
-            component={AutocompleteArrayInput}
+          <ReferenceCustomInputV2
             inputType={type}
             query={ALL_COUNTRIES}
             resource={resource}
             source="allowedCountries"
-            checkBoxLabel="Allowed"
-            helperText="The list of countries in which the film is available, access is prohibited for other countries. Leave the field empty if access is allowed for all countries."
-            label=""
-            idName="alpha2"
-          />
-          <ReferenceCustomInput
             component={AutocompleteArrayInput}
+            label=""
+            checkBoxLabel="Allowed Countries"
+            helperText="The list of countries in which the film is available, access is prohibited for other countries. Leave the field empty if access is allowed for all countries."
+            optionText="name"
+            optionValue="alpha2"
+          />
+          <ReferenceCustomInputV2
             inputType={type}
             query={ALL_COUNTRIES}
             resource={resource}
-            checkBoxLabel="Disallowed"
-            helperText="List of countries where the film is not available"
-            label=""
             source="disallowedCountries"
-            idName="alpha2"
+            component={AutocompleteArrayInput}
+            label=""
+            checkBoxLabel="Disallowed countries"
+            helperText="List of countries where the film is not available"
+            optionText="name"
+            optionValue="alpha2"
           />
         </CheckBoxGroup>
         <CheckBoxGroup

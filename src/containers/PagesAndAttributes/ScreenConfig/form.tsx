@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ScrollTopButton } from "../../../components/UI/Buttons/scroll-top-button";
 import { FormProps } from "../../../types";
-import { BooleanInput, requiredValidate, TextInput } from "../../../components/Inputs";
+import { requiredValidate, TextInput } from "../../../components/Inputs";
 import { GroupInputsOrigin } from "../../../components/GroupInputs";
 import { FormSection } from "../../../components/FormSection";
 import { ReferenceCustomInputV2 } from "../../../components/Inputs/ReferenceInputs/reference-custom-input-v2";

@@ -16,28 +16,23 @@ const useStyles = makeStyles({
   },
 });
 
-export const AutocompleteInputOrigin: React.FC<Omit<AutocompleteInputProps, "inputType">> = ({
-  helperText,
-  resettable,
-  options,
-  ...rest
-}) => {
-  const classes = useStyles();
-
-  return (
-    <AutocompleteInputWithOpts
-      {...rest}
-      options={{
-        className: classes.AutocompleteInput,
-        onKeyDown: resetOnBackspace,
-        ...options,
-      }}
-      helperText={helperText ?? false}
-      resettable={resettable ?? true}
-      fullWidth
-    />
-  );
-};
+export const AutocompleteInputOrigin: React.FC<Omit<AutocompleteInputProps, "inputType">> =
+  React.memo(({ helperText, resettable, options, ...rest }) => {
+    const classes = useStyles();
+    return (
+      <AutocompleteInputWithOpts
+        {...rest}
+        options={{
+          className: classes.AutocompleteInput,
+          onKeyDown: resetOnBackspace,
+          ...options,
+        }}
+        helperText={helperText ?? false}
+        resettable={resettable ?? true}
+        fullWidth
+      />
+    );
+  });
 
 const resetOnBackspace = (e: React.KeyboardEvent) => {
   if (e.code === "Backspace" || e.code === "Escape") {
@@ -49,15 +44,12 @@ const resetOnBackspace = (e: React.KeyboardEvent) => {
   }
 };
 
-export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
-  inputType,
-  helperText,
-  resettable,
-  ...rest
-}) => {
-  return inputType === "show" ? (
-    <AutocompleteShow {...rest} inputType={inputType} resettable={resettable ?? true} />
-  ) : (
-    <AutocompleteInputOrigin resettable={resettable} helperText={helperText} {...rest} />
-  );
-};
+export const AutocompleteInput: React.FC<AutocompleteInputProps> = React.memo(
+  ({ inputType, helperText, resettable, ...rest }) => {
+    return inputType === "show" ? (
+      <AutocompleteShow {...rest} inputType={inputType} resettable={resettable ?? true} />
+    ) : (
+      <AutocompleteInputOrigin resettable={resettable} helperText={helperText} {...rest} />
+    );
+  }
+);

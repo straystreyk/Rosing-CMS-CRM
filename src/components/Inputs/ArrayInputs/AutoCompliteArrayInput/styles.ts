@@ -5,9 +5,11 @@ import { CommonInputStyles } from "../../styles";
 export const AutoCompleteInputStyles = {
   "& .MuiInputBase-root": {
     ...CommonInputStyles.Input,
+    padding: 1,
     backgroundColor: "#fff !important",
     "& > div": {
       margin: 0,
+      padding: "0px 8px",
     },
     "&.Mui-error": CommonInputStyles.Error,
     "& .MuiSvgIcon-root path": {
@@ -25,7 +27,6 @@ export const AutoCompleteInputStyles = {
   "& label": labelStyles,
   "& div": {
     backgroundColor: "#fff !important",
-    padding: "0 4px !important",
     ...CommonInputStyles.OffRAStyles,
   },
   "& div.AutoCompleteShow": {

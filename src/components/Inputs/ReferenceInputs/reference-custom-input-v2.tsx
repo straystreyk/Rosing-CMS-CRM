@@ -3,15 +3,8 @@ import { type DocumentNode } from "graphql";
 import { authClient } from "../../Providers/AuthProvider/client";
 import type { AutocompleteInput, InputProps } from "../input-types";
 import { MainLoader } from "../../MainLoader";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
-  Loader: {
-    marginLeft: 10,
-  },
-});
-
-interface ReferenceCustomInputV2Props extends InputProps {
+export interface ReferenceCustomInputV2Props extends InputProps {
   component: React.FC<AutocompleteInput>;
   query: DocumentNode;
   variables?: Record<string, string>;
@@ -20,17 +13,27 @@ interface ReferenceCustomInputV2Props extends InputProps {
   optionValue: string;
 }
 
-const useReferenceCustomInputV2 = ({
+export const useReferenceCustomInputV2 = ({
   query,
   variables,
   currentField,
 }: Omit<ReferenceCustomInputV2Props, "component">) => {
   const [data, setData] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     const getData = async () => {
-      const data: any = await authClient.query({ query: query, variables: variables });
-      setData(currentField ? data.data.items[currentField] : data.items);
+      try {
+        setIsLoading(true);
+        const data: any = await authClient.query({ query: query, variables: variables });
+        setData(currentField ? data.data.items[currentField] : data.data.items);
+      } catch (e) {
+        if (e instanceof Error) {
+          console.log(e.message);
+        }
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     getData();
@@ -38,6 +41,7 @@ const useReferenceCustomInputV2 = ({
 
   return {
     data,
+    isLoading,
   };
 };
 
@@ -48,20 +52,25 @@ export const ReferenceCustomInputV2: React.FC<ReferenceCustomInputV2Props> = ({
   currentField,
   optionText,
   optionValue,
+  resource,
+  inputType,
+  source,
   ...rest
 }) => {
-  const classes = useStyles();
-  const { data } = useReferenceCustomInputV2({ query, variables, currentField });
+  const { data, isLoading } = useReferenceCustomInputV2({ query, variables, currentField });
 
   return (
     <>
       <Component
         {...rest}
+        inputType={inputType}
+        source={source}
+        resource={resource}
         optionText="name"
         optionValue="value"
         choices={
           data && data.length
-            ? data.map((item: any, index) => ({
+            ? data.map((item: Record<string, string>, index) => ({
                 id: index,
                 name: item[optionText],
                 value: item[optionValue],
@@ -70,8 +79,7 @@ export const ReferenceCustomInputV2: React.FC<ReferenceCustomInputV2Props> = ({
         }
         options={{
           InputProps: {
-            endAdornment:
-              !data || !data.length ? <MainLoader className={classes.Loader} size={20} /> : null,
+            endAdornment: (!data || !data.length) && isLoading ? <MainLoader size={20} /> : null,
           },
         }}
       />

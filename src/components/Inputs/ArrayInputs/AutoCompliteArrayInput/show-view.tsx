@@ -66,7 +66,9 @@ const ShowView: React.FC<{
   const current =
     values[props.source] && props.choices.length
       ? props.choices.filter((choice) =>
-          choice && choice.id ? values[props.source].includes(choice.id) : []
+          choice && (choice.value || choice.id)
+            ? values[props.source].includes(choice.value || choice.id)
+            : []
         )
       : [];
   const link = getLink(props.source);

@@ -2,9 +2,9 @@ import * as React from "react";
 import { FormProps } from "../../../../types";
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
 import { AutocompleteArrayInput, requiredValidate, TextInput } from "../../../../components/Inputs";
-import { ReferenceCustomInput } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input";
 import { ALL_ALLOWED_DRMS, ALL_COUNTRIES } from "../../../../components/Providers/custom-requests";
 import { CheckBoxGroup } from "../../../../components/UI/MaterialUI/check-box-group";
+import { ReferenceCustomInputV2 } from "../../../../components/Inputs/ReferenceInputs/reference-custom-input-v2";
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
   return (
@@ -37,39 +37,46 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         helperText="The default template https://{host}{/encoded_session}{/signature}{/bucket*}{/streaming_uid}{+protocol_suffix}{?params*}"
         fullWidth
       />
-      <CheckBoxGroup inputType={type} initialSourceState="allowedCountries">
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
+      <CheckBoxGroup
+        initialSourceState="allowedCountries"
+        inputType={type}
+        label="Access for countries"
+      >
+        <ReferenceCustomInputV2
           inputType={type}
           query={ALL_COUNTRIES}
           resource={resource}
           source="allowedCountries"
+          component={AutocompleteArrayInput}
+          label=""
           checkBoxLabel="Allowed Countries"
           helperText="The list of countries in which the film is available, access is prohibited for other countries. Leave the field empty if access is allowed for all countries."
-          label=""
-          idName="alpha2"
+          optionText="name"
+          optionValue="alpha2"
         />
-        <ReferenceCustomInput
-          component={AutocompleteArrayInput}
+        <ReferenceCustomInputV2
           inputType={type}
           query={ALL_COUNTRIES}
           resource={resource}
+          source="disallowedCountries"
+          component={AutocompleteArrayInput}
+          label=""
           checkBoxLabel="Disallowed countries"
           helperText="List of countries where the film is not available"
-          label=""
-          source="disallowedCountries"
-          idName="alpha2"
+          optionText="name"
+          optionValue="alpha2"
         />
       </CheckBoxGroup>
-      <ReferenceCustomInput
-        component={AutocompleteArrayInput}
-        query={ALL_ALLOWED_DRMS}
+      <ReferenceCustomInputV2
         inputType={type}
+        query={ALL_ALLOWED_DRMS}
         resource={resource}
-        label="Allowed drms"
         source="allowedDrms"
-        idName="id"
+        component={AutocompleteArrayInput}
+        label="Allowed drms"
         helperText="Access control and management system, copyright protection. You can select several DRM systems from the list."
+        optionText="name"
+        optionValue="id"
       />
       <ScrollTopButton />
     </>

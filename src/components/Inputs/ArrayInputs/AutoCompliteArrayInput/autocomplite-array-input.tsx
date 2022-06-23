@@ -15,6 +15,7 @@ export const AutocompleteArrayInputOrigin: React.FC<any> = ({
   source,
   choices,
   optionText,
+  options,
   ...props
 }) => {
   const classes = useStyles();
@@ -23,7 +24,7 @@ export const AutocompleteArrayInputOrigin: React.FC<any> = ({
     <>
       <StandardAutocompleteArrayInput
         helperText={helperText ?? false}
-        options={{ className: classes.AutoCompleteInputStyles }}
+        options={{ className: classes.AutoCompleteInputStyles, ...options }}
         validate={validate}
         source={source}
         choices={choices}
