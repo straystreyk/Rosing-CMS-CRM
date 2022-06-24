@@ -18,4 +18,11 @@ export interface AutocompleteInput extends InputProps {
   choices?: ChoiceInputType[];
 }
 
+export interface ComponentArrayInputType {
+  parentSourceWithIndex: string;
+  parentSource: string;
+  index: string | number;
+  resource: string;
+}
+
 export type ChoiceInputType = { name: string; id: string | number; value?: string };

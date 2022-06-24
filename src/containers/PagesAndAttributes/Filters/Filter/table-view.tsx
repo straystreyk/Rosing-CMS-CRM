@@ -9,6 +9,7 @@ import { TableFieldsStyles } from "../../../../components/TableFields/styles";
 import { MoreActionsButton } from "../../../../components/UI/Buttons/MoreActionsButton";
 import { EditButton } from "../../../../components/UI/RA/edit-button";
 import { DeleteButton } from "../../../../components/UI/RA/delete-button";
+import { UrlField } from "../../../../components/TableFields/url-field";
 
 const useStyles = makeStyles(TableFieldsStyles);
 
@@ -23,6 +24,13 @@ export const TableView: React.FC<ShowProps> = (props) => {
       optimized
       draggable
     >
+      <FunctionField
+        label="Name"
+        source="name"
+        render={(record?: RecordRA) => (
+          <UrlField name={record?.name} to={`/${props.resource}/${record?.id}/show`} />
+        )}
+      />
       <FunctionField
         label="Position"
         source="position"

@@ -27,6 +27,7 @@ const useStyles = makeStyles({
   Tooltip: {
     "& > div": {
       fontSize: 11,
+      fontFamily: "var(--font-family)",
     },
     maxWidth: 200,
   },

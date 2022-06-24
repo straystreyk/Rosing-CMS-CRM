@@ -21,5 +21,9 @@ export const SearchFiltersInputStyles: any = {
     top: "calc(50% - 6px);",
     right: 8,
     transform: "translateY(-50%)",
+    color: "var(--secondary-color-chevron)",
+    "& svg": {
+      width: 20,
+    },
   },
 };

@@ -51,3 +51,8 @@ export const LIVE_AVAILABLE = [
   { name: "Unavailable", id: false },
   { name: "Available", id: true },
 ];
+
+export const AGGREGATION_CHOICES = [
+  { id: "union", name: "union" },
+  { id: "intersection", name: "intersection" },
+];

@@ -271,7 +271,7 @@ export const ArrayInputOrigin: React.FC<ArrayInputProps> = React.memo(
                                       />
                                       <ChildComponent
                                         parentSourceWithIndex={`${source}[${index}]`}
-                                        parentSource={`${source}`}
+                                        parentSource={source}
                                         resource={resource}
                                         inputType={inputType}
                                         show={show}

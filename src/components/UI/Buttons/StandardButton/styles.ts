@@ -83,6 +83,8 @@ export const StandardButtonStyles: any = {
       },
       "& > .MuiButton-endIcon": {
         marginRight: 0,
+        width: 8,
+        height: 8,
       },
     },
     "&:focus": {

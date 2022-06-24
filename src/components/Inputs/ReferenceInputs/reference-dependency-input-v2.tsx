@@ -44,8 +44,7 @@ const useReferenceDependencyInputV2 = ({
   if (data && data.length && !filteredData.length) {
     const parentFieldValue = _.get(values, source);
     if (parentFieldValue) {
-      const current = data.find((elem) => elem[findField] === parentFieldValue);
-      setFilteredData(!!current ? current[dependencyFindField] : []);
+      changeParentInput(parentFieldValue);
     }
   }
 
@@ -119,6 +118,7 @@ export const ReferenceDependencyInputV2: React.FC<ReferenceDependencyInputV2Prop
         resource={resource}
         optionText="name"
         optionValue="value"
+        disabled={!filteredData.length}
         choices={
           filteredData && filteredData.length
             ? (filteredData.map((item: Record<string, string>, index) => ({

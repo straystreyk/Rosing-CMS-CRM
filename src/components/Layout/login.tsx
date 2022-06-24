@@ -37,7 +37,6 @@ import {
   RosingLogo,
 } from "../../constants/icons";
 import { PasswordInput } from "../Inputs/StandatdInputs/password-input";
-import { ArrowLeftIcon } from "@material-ui/pickers/_shared/icons/ArrowLeftIcon";
 import { StandardButton } from "../UI/Buttons/StandardButton/standard-button";
 
 const useStyles = makeStyles((theme) => ({

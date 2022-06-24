@@ -60,6 +60,7 @@ export const titleStyles = {
 export const annotationWrapperStyles: any = {
   position: "relative",
   "& svg": {
+    width: 20,
     cursor: "pointer",
     "& circle, & path": {
       transition: "0.35s all ease",

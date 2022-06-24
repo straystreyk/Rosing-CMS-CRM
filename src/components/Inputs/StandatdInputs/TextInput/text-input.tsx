@@ -19,7 +19,7 @@ export const TextInputOrigin: React.FC<Omit<InputProps, "resource">> = ({
       <TextInputInner
         {...props}
         source={source}
-        fullWidth={props.fullWidth ?? false}
+        fullWidth={props.fullWidth ?? true}
         helperText={props.helperText ?? false}
         resettable={props.resettable ?? true}
         className={classes.TextInputStyles}
