@@ -5,7 +5,7 @@ import { CHECK_SUBSCRIPTION, SET_REPORT_DOWNLOADED } from "../requests";
 import { useNotify } from "ra-core";
 
 export type ExportType = {
-  status: "in_progress" | "ready" | "error";
+  status: "in_progress" | "ready" | "error" | "downloaded";
   progress: number;
   file: string;
   exportType: string;

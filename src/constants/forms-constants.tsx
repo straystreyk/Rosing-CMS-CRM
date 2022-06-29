@@ -27,6 +27,11 @@ export const SELECT_DISTRIBUTION = [
   { id: "freemium", name: "Freemium" },
 ];
 
+export const INVERSE_SELECT = [
+  { id: true, name: "Yes" },
+  { id: false, name: "No" },
+];
+
 export const EXTRA_VIDEO_TYPES = [
   { id: "teaser", name: "teaser" },
   { id: "trailer", name: "trailer" },

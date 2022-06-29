@@ -26,7 +26,17 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...props }) => {
 
   return (
     <>
-      <FormSection text="" title="" formType={type} id="">
+      <FormSection formType={type}>
+        {type !== "create" && (
+          <TextInput
+            offFastEdit
+            resource={resource}
+            label="ID"
+            source="id"
+            inputType={type}
+            fullWidth
+          />
+        )}
         <TextInput
           resource={resource}
           validate={requiredValidate}

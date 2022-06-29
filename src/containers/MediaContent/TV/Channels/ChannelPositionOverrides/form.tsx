@@ -2,7 +2,13 @@ import * as React from "react";
 import { FormProps } from "../../../../../types";
 import { ScrollTopButton } from "../../../../../components/UI/Buttons/scroll-top-button";
 import { AutocompleteInput } from "../../../../../components/Inputs/AutocompleteInput";
-import { NumberInput, ReferenceInput, requiredValidate } from "../../../../../components/Inputs";
+import {
+  NumberInput,
+  ReferenceInput,
+  requiredValidate,
+  TextInput,
+} from "../../../../../components/Inputs";
+import { FormSection } from "../../../../../components/FormSection";
 
 const INPUT_ITEMS_PER_PAGE = 25;
 
@@ -23,7 +29,17 @@ const REGION_CHOICES = [
 
 export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
   return (
-    <>
+    <FormSection formType={type}>
+      {type === "show" && (
+        <TextInput
+          offFastEdit
+          resource={resource}
+          label="ID"
+          source="id"
+          inputType={type}
+          fullWidth
+        />
+      )}
       <ReferenceInput
         label="TV channel"
         source="channelId"
@@ -60,6 +76,6 @@ export const Form: React.FC<FormProps> = ({ resource, type, ...rest }) => {
         fullWidth
       />
       <ScrollTopButton />
-    </>
+    </FormSection>
   );
 };

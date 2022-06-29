@@ -16,6 +16,7 @@ export const CommonInputStyles: {
     border: "1px solid var(--secondary-color-chevron)",
     borderRadius: 4,
     transition: "0.35s border ease, 0.35s color ease",
+    backgroundColor: "#fff",
   },
   Hover: {
     borderColor: "var(--primary-text-default)",

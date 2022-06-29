@@ -83,3 +83,9 @@ export const getYearsChoices = () =>
     id: year.toString(),
     name: year.toString(),
   }));
+
+export const getRatings = () =>
+  range(0, 10.5, 0.5).map((rating) => ({
+    id: rating.toString(),
+    name: rating.toString(),
+  }));

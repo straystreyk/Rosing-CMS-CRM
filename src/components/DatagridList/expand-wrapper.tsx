@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   ExpandWrapper: {
-    padding: "0 20px 30px 28px",
+    padding: "0 20px 2px 76px",
   },
 });
 

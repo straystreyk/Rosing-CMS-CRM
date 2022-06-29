@@ -1,124 +1,169 @@
 import * as React from "react";
 import { FieldArray } from "react-final-form-arrays";
 import { StandardButton } from "../../../UI/Buttons/StandardButton/standard-button";
-import { DeleteIcon, PlusIcon } from "../../../../constants/icons";
+import { ArrayInputItemArrow, DeleteIcon, PlusIcon } from "../../../../constants/icons";
 import { ComponentArrayInputType, InputProps } from "../../input-types";
-import { TextInput } from "../../StandatdInputs/TextInput/text-input";
-import { SelectStaticButton } from "../../select-models-input";
+import { Collapse, makeStyles } from "@material-ui/core";
+import { GroupInputsV2Props } from "../../../GroupInputs/group-inputs-v2";
 
-interface NewArrayInputProps {
-  source: string;
-  // component: React.FC<ComponentArrayInputType>;
+interface ArrayInputWithDifferentFieldsProps extends InputProps {
   buttonText: string;
-  resource: string;
+  component: React.FC<ComponentArrayInputType>;
+  notArrayField?: React.FC<InputProps>;
+  componentWrapper?: React.FC<GroupInputsV2Props>;
+  componentWrapperTitle?: string;
+  headerTitle: string;
 }
 
-export const ArrayInputWithDifferentFields: React.FC<NewArrayInputProps> = ({
+const useStyles = makeStyles({
+  ArrayInputWithDifferentFields: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    border: "1px dashed var(--secondary-color-default)",
+    borderRadius: 4,
+    padding: "12px 24px",
+    margin: "8px 0",
+  },
+  ArrayInputHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    "& .title": {
+      fontSize: 16,
+      color: "car(--secondary-color-main)",
+      fontWeight: 600,
+    },
+    "& .icon": {
+      width: 8,
+      marginLeft: 8,
+      verticalAlign: "middle",
+    },
+  },
+  Item: {
+    width: "100%",
+    position: "relative",
+  },
+  Centered: {
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+    margin: "8px 0",
+  },
+  DeleteButton: {
+    position: "absolute",
+    top: 8,
+    right: 24,
+  },
+});
+
+const ArrayInputHeader: React.FC<{ title: string; onClick?: (e: React.MouseEvent) => void }> = ({
+  title,
+  onClick,
+}) => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.ArrayInputHeader}>
+      <button onClick={onClick} className="title">
+        {title} <ArrayInputItemArrow className="icon" />
+      </button>
+    </div>
+  );
+};
+
+export const ArrayInputWithDifferentFields: React.FC<ArrayInputWithDifferentFieldsProps> = ({
   source,
-  // component: Component,
   buttonText,
   resource,
+  headerTitle,
+  componentWrapperTitle,
+  component: Component,
+  inputType,
+  notArrayField: NotArrayField,
+  componentWrapper: ComponentWrapper,
 }) => {
-  const [initialFields, setInitialFields] = React.useState<InputProps[]>([
-    { component: TextInput, source: "jopa", label: "jopa", inputType: "create", resource },
-  ]);
-  const [activeFields, setActiveFields] = React.useState<InputProps[]>([]);
+  const classes = useStyles();
+  const [show, setShow] = React.useState(true);
+
+  const showChildren = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShow((p) => !p);
+  };
 
   return (
     <FieldArray name={source}>
       {({ fields }) => (
-        <div>
-          {fields.map((name, index) => {
-            return (
-              <React.Fragment key={index}>
-                <div key={name + index}>
-                  {/*<Component*/}
-                  {/*  parentSourceWithIndex={name}*/}
-                  {/*  parentSource={source}*/}
-                  {/*  index={index}*/}
-                  {/*  resource={resource}*/}
-                  {/*/>*/}
-                  {activeFields.map(({ component: Component, source, ...rest }) => {
-                    return index === rest.index ? (
-                      <Component {...rest} source={`${name}.${source}`} />
-                    ) : null;
-                  })}
-                  <SelectStaticButton
-                    items={initialFields}
-                    selectValue="source"
-                    selectItemName="label"
-                    buttonText="Add"
-                    buttonType="additional-red"
-                    handleCloseFunc={(value: string) => {
-                      setActiveFields((p) => [
-                        ...p,
-                        {
-                          ...initialFields.find((el) => el.source === value),
-                          index: index,
-                        } as InputProps,
-                      ]);
-                    }}
-                  />
-                  <StandardButton
-                    buttonType="additional-red"
-                    variant="text"
-                    startIcon={<DeleteIcon />}
-                    text="Delete"
-                    onClick={() => fields.remove(index)}
-                  />
-                </div>
-                {fields.length && fields.length >= 2 && index === 0 && (
-                  <div>
+        <div className={classes.ArrayInputWithDifferentFields}>
+          <ArrayInputHeader title={headerTitle} onClick={showChildren} />
+          <Collapse style={{ width: "100%" }} in={show} timeout="auto">
+            {NotArrayField && (
+              <NotArrayField resource={resource} inputType={inputType} source={source} />
+            )}
+            {fields.map((name, index) => {
+              return (
+                <React.Fragment key={index}>
+                  <div className={classes.Item} key={name + index}>
+                    {ComponentWrapper ? (
+                      <ComponentWrapper title={componentWrapperTitle}>
+                        <Component
+                          parentSourceWithIndex={name}
+                          parentSource={source}
+                          index={index}
+                          resource={resource}
+                          inputType={inputType}
+                          source={source}
+                        />
+                      </ComponentWrapper>
+                    ) : (
+                      <Component
+                        parentSourceWithIndex={name}
+                        parentSource={source}
+                        index={index}
+                        resource={resource}
+                        inputType={inputType}
+                        source={source}
+                      />
+                    )}
                     <StandardButton
-                      buttonType="primary"
+                      buttonType="additional-red"
                       variant="text"
-                      startIcon={<PlusIcon />}
-                      text={buttonText}
-                      onClick={() => fields.push(undefined)}
+                      startIcon={<DeleteIcon />}
+                      text="Delete"
+                      className={classes.DeleteButton}
+                      onClick={() => {
+                        fields.remove(index);
+                      }}
                     />
                   </div>
-                )}
-              </React.Fragment>
-            );
-          })}
-          {fields.length && fields.length > 1 ? null : (
-            <StandardButton
-              buttonType="primary"
-              variant="text"
-              startIcon={<PlusIcon />}
-              text={buttonText}
-              onClick={() => fields.push(undefined)}
-            />
-          )}
+                  {fields.length && fields.length >= 2 && index === 0 && (
+                    <div className={classes.Centered}>
+                      <StandardButton
+                        buttonType="primary"
+                        variant="text"
+                        startIcon={<PlusIcon />}
+                        text={buttonText}
+                        onClick={() => fields.push(undefined)}
+                      />
+                    </div>
+                  )}
+                </React.Fragment>
+              );
+            })}
+            {fields.length && fields.length > 1 ? null : (
+              <div className={classes.Centered}>
+                <StandardButton
+                  buttonType="primary"
+                  variant="text"
+                  startIcon={<PlusIcon />}
+                  text={buttonText}
+                  onClick={() => fields.push(undefined)}
+                />
+              </div>
+            )}
+          </Collapse>
         </div>
       )}
     </FieldArray>
   );
 };
-
-// export const ArrayInputWithDifferentFields = () => (
-//   <FieldArray name="customers">
-//     {({ fields }) => (
-//       <div>
-//         {fields.map((name, index) => (
-//           <div key={name}>
-//             <div>
-//               <label>First Name</label>
-//               <Field name={`${name}.firstName`} component="input" />
-//             </div>
-//             <div>
-//               <label>Last Name</label>
-//               <Field name={`${name}.lastName`} component="input" />
-//             </div>
-//             <button type="button" onClick={() => fields.remove(index)}>
-//               Remove
-//             </button>
-//           </div>
-//         ))}
-//         <button type="button" onClick={() => fields.push({ firstName: "", lastName: "" })}>
-//           Add
-//         </button>
-//       </div>
-//     )}
-//   </FieldArray>
-// );

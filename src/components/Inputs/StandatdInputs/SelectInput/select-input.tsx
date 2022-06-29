@@ -1,13 +1,10 @@
 import * as React from "react";
 import cn from "classnames";
 import { makeStyles } from "@material-ui/core";
-import {
-  SelectInput as SelectInputInner,
-  SelectInputProps as SelectInputPropsRA,
-} from "react-admin";
+import { SelectInput as SelectInputInner } from "react-admin";
 import { SelectInputShow } from "./show-view";
 import { formHelperText, labelStyles } from "../../styles";
-import { InputProps } from "../../input-types";
+import { AutocompleteInput } from "../../input-types";
 
 const useStyles = makeStyles({
   SelectInput: {
@@ -45,7 +42,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const SelectInputOrigin: React.FC<Omit<InputProps, "inputType">> = ({
+export const SelectInputOrigin: React.FC<Omit<AutocompleteInput, "inputType">> = ({
   inputType,
   className,
   ...props
@@ -63,7 +60,7 @@ export const SelectInputOrigin: React.FC<Omit<InputProps, "inputType">> = ({
   );
 };
 
-export const SelectInput: React.FC<InputProps> = React.memo(({ inputType, ...rest }) => {
+export const SelectInput: React.FC<AutocompleteInput> = React.memo(({ inputType, ...rest }) => {
   return inputType === "show" ? (
     <SelectInputShow inputType={inputType} {...rest} />
   ) : (

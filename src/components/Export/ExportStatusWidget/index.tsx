@@ -26,14 +26,26 @@ export const ExportStatusWidget = React.memo(({ resource }: { resource: string }
   if (!subscription) return null;
 
   return (
-    <Fade in={!!subscription} unmountOnExit>
+    <Fade in={!!subscription && subscription.status !== "downloaded"} unmountOnExit>
       <div className={classes.ExportWidget}>
         <button className={classes.Icon}>
           <InformationIcon className="icon" />
         </button>
         <span className="text">
           {subscription.status === "error" ? (
-            <>Something went wrong :(</>
+            <>
+              Something went wrong :(
+              <StandardButton
+                target="_blank"
+                href={subscription.file}
+                onClick={setReport}
+                className="Button"
+                buttonType="additional-red"
+                variant="text"
+                text="Exit"
+                onMobileView
+              />
+            </>
           ) : (
             <>
               {subscription.status !== "ready" && (

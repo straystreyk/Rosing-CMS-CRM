@@ -1,38 +1,49 @@
 import * as React from "react";
+
 import { ScrollTopButton } from "../../../../components/UI/Buttons/scroll-top-button";
 import { FormProps } from "../../../../types";
-import {
-  NumberInput,
-  requiredValidate,
-  SelectInput,
-  TextInput,
-} from "../../../../components/Inputs";
+import { NumberInput, requiredValidate, TextInput } from "../../../../components/Inputs";
 import { FormSection } from "../../../../components/FormSection";
 import { SelectModelsInput } from "../../../../components/Inputs/select-models-input";
-import { ComponentArrayInputType, InputProps } from "../../../../components/Inputs/input-types";
-import { AGGREGATION_CHOICES } from "../../../../constants/forms-constants";
-import { ArrayInputWithDifferentFields } from "../../../../components/Inputs/ArrayInputs/ArrayInputWithDifferentFields";
+import { SeriesAndMoviesQuickFilterModel } from "./QuikFiltersModels/series-and-movies-quick-filter";
+import { AudioShowQuickFilterModel } from "./QuikFiltersModels/audio-shows-quick-filter";
+import { InputProps } from "../../../../components/Inputs/input-types";
+import { ChannelsQuickFilterModel } from "./QuikFiltersModels/channels-quick-filter";
 import { useFormState } from "react-final-form";
 
-const MovieFiltersModel: React.FC<InputProps> = ({ source, resource, inputType }) => {
-  console.log(useFormState().values);
-  return (
-    <>
-      <SelectInput
-        label="movie aggregation"
-        defaultValue="intersection"
-        resource={resource}
-        inputType={inputType}
-        source={`${source}Aggregation`}
-        choices={AGGREGATION_CHOICES}
-        fullWidth
-      />
-      <ArrayInputWithDifferentFields buttonText="Add filter" resource={resource} source={source} />
-    </>
-  );
-};
+const quickFiltersModels: (resource: string) => InputProps[] = (resource) => [
+  {
+    inputType: "create",
+    source: "moviesFilters",
+    label: "Movies filters",
+    resource,
+    component: SeriesAndMoviesQuickFilterModel,
+  },
+  {
+    inputType: "create",
+    source: "seriesFilters",
+    label: "Series filters",
+    resource,
+    component: SeriesAndMoviesQuickFilterModel,
+  },
+  {
+    inputType: "create",
+    source: "audioShowsFilters",
+    label: "Audio shows filters",
+    resource,
+    component: AudioShowQuickFilterModel,
+  },
+  {
+    inputType: "create",
+    source: "channelsFilters",
+    label: "Channels filters",
+    resource,
+    component: ChannelsQuickFilterModel,
+  },
+];
 
 export const Form: React.FC<FormProps> = ({ type, resource }) => {
+  console.log(useFormState().values);
   return (
     <>
       <FormSection formType={type}>
@@ -57,15 +68,8 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         <SelectModelsInput
           inputType={type}
           resource={resource}
-          initialItems={[
-            {
-              inputType: "create",
-              source: "moviesFilters",
-              label: "movieFilter",
-              resource,
-              component: MovieFiltersModel,
-            },
-          ]}
+          buttonText="Add filter for media content"
+          initialItems={quickFiltersModels(resource)}
         />
       </FormSection>
       <ScrollTopButton />

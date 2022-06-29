@@ -12,6 +12,9 @@ export const ExportStatusWidgetStyles = {
     display: "flex",
     alignItems: "center",
     backgroundColor: "var(--primary-bg)",
+    "& .Button": {
+      marginLeft: 10,
+    },
     "& span.text": {
       color: "var(--primary-button-default)",
       fontWeight: 500,

@@ -33,7 +33,11 @@ const useStyles = makeStyles({
     "&.MuiTab-root": {
       opacity: 1,
       color: "var(--secondary-color-default)",
+      transition: "0.35s color ease",
       "&.Mui-selected": {
+        color: "var(--secondary-color-main)",
+      },
+      "&:hover": {
         color: "var(--secondary-color-main)",
       },
     },
@@ -61,20 +65,25 @@ const useFormTabs = ({
   tabRef,
   fixed,
   setFixed,
+  labels,
 }: {
   tabRef: React.RefObject<HTMLDivElement>;
   fixed: boolean;
   setFixed: React.Dispatch<React.SetStateAction<boolean>>;
+  labels: string[];
 }) => {
+  const [value, setValue] = React.useState(0);
+
   const scrollToSection = (label: string) => {
     const element = document.getElementById(label);
     if (element) {
-      const top = element.getBoundingClientRect().top + window.scrollY - 110;
+      const top = element.getBoundingClientRect().top + window.scrollY - 127;
       if (top !== 0) {
         window.scrollTo({ top });
       }
     }
   };
+
   const checkTabPosition = React.useCallback(() => {
     if (
       tabRef.current &&
@@ -89,17 +98,7 @@ const useFormTabs = ({
     ) {
       setFixed(false);
     }
-  }, [fixed]);
-  return { scrollToSection, checkTabPosition };
-};
-
-export const FormTabs: React.FC<FormTabProps> = React.memo(({ labels, children }) => {
-  const [value, setValue] = React.useState(0);
-  const [fixed, setFixed] = React.useState(false);
-  const tabRef = React.useRef<HTMLDivElement>(null);
-  const { scrollToSection, checkTabPosition } = useFormTabs({ tabRef, fixed, setFixed });
-
-  const classes = useStyles();
+  }, [fixed, setFixed, tabRef]);
 
   const observer = new IntersectionObserver(
     (entries, observer) => {
@@ -122,6 +121,15 @@ export const FormTabs: React.FC<FormTabProps> = React.memo(({ labels, children }
       window.removeEventListener("scroll", checkTabPosition);
     };
   }, [tabRef, checkTabPosition]);
+
+  return { scrollToSection, value, setValue };
+};
+
+export const FormTabs: React.FC<FormTabProps> = React.memo(({ labels, children }) => {
+  const [fixed, setFixed] = React.useState(false);
+  const tabRef = React.useRef<HTMLDivElement>(null);
+  const { scrollToSection, value, setValue } = useFormTabs({ tabRef, fixed, setFixed, labels });
+  const classes = useStyles();
 
   return (
     <div ref={tabRef} className={classes.FormTabWrapper}>

@@ -3,12 +3,28 @@ import { Menu, MenuItem } from "@material-ui/core";
 import { StandardButton, StandardButtonProps } from "../UI/Buttons/StandardButton/standard-button";
 import { InputProps } from "./input-types";
 import { useForm } from "react-final-form";
-import { ArrayInputItemArrow, PlusIcon } from "../../constants/icons";
+import { ArrayInputItemArrow, DeleteIcon, PlusIcon } from "../../constants/icons";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  Centered: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  ActiveModelsWrapper: {
+    position: "relative",
+  },
+  Button: {
+    position: "absolute",
+    top: 8,
+    right: 24,
+  },
+});
 
 interface SelectStaticButtonProps extends StandardButtonProps {
   items: InputProps[];
   selectValue: string;
-  buttonText: string;
+  buttonText?: string;
   selectItemName?: string;
   handleClickFunc?: () => void;
   handleCloseFunc?: (value: string) => void;
@@ -66,8 +82,8 @@ export const SelectStaticButton: React.FC<SelectStaticButtonProps> = React.memo(
             >
               {items.map((el, index: number) => {
                 return (
-                  <MenuItem onClick={handleClose} key={index} value={el[selectValue]}>
-                    {el[selectItemName]}
+                  <MenuItem onClick={handleClose} key={index} value={el && el[selectValue]}>
+                    {el && el[selectItemName]}
                   </MenuItem>
                 );
               })}
@@ -81,74 +97,89 @@ export const SelectStaticButton: React.FC<SelectStaticButtonProps> = React.memo(
 
 interface SelectModelsInputProps extends Omit<InputProps, "source"> {
   initialItems: InputProps[];
+  buttonText?: string;
 }
 
-export const SelectModelsInput: React.FC<SelectModelsInputProps> = ({
-  resource,
-  inputType,
-  label,
-  initialItems,
-}) => {
-  const form = useForm();
-  const [items, setItems] = React.useState(initialItems);
-  const [activeItems, setActiveItems] = React.useState<InputProps[]>([]);
+export const SelectModelsInput: React.FC<SelectModelsInputProps> = React.memo(
+  ({ resource, label, inputType, initialItems, buttonText }) => {
+    const form = useForm();
+    const classes = useStyles();
+    const [items, setItems] = React.useState(initialItems);
+    const [activeItems, setActiveItems] = React.useState<InputProps[]>([]);
 
-  const handleClose = React.useCallback(
-    (value: string) => {
-      setActiveItems((p) => [...p, items.find((el) => el.source === value) as InputProps]);
-      setItems((p) => p.filter((el) => el.source !== value));
-    },
-    [items]
-  );
+    const handleClose = React.useCallback(
+      (value: string) => {
+        setActiveItems((p) => [...p, items.find((el) => el.source === value) as InputProps]);
+        setItems((p) => p.filter((el) => el.source !== value));
+      },
+      [items]
+    );
 
-  React.useEffect(() => {
-    if (inputType === "create") return;
-    Object.keys(form.getState().values).forEach((source) => {
-      items.forEach((item) => {
-        if (
-          item.props.source === source &&
-          form.getState().values[item.props.source] &&
-          form.getState().values[item.props.source].length
-        )
-          setActiveItems((p) => [...p, item]);
+    const deleteItem = React.useCallback((item: InputProps) => {
+      form.change(item.source, []);
+      setActiveItems((p) => p.filter((el) => el.source !== item.source));
+      setItems((p) => [...p, item]);
+    }, []);
+
+    React.useEffect(() => {
+      if (inputType === "create") return;
+      Object.keys(form.getState().values).forEach((source) => {
+        items.forEach((item) => {
+          if (item.source === source && form.getState().values[`${item.source}Aggregation`]) {
+            setActiveItems((p) => [...p, item]);
+            setItems((p) => p.filter((item) => item.source !== source));
+          }
+        });
       });
-    });
-  }, []);
+    }, []);
 
-  return (
-    <>
-      {label}
-      {activeItems.map(({ component: Component, ...rest }, index) => {
-        return (
-          <React.Fragment key={index}>
-            <div>
-              <Component {...rest} />
-            </div>
-            {activeItems.length > 1 && index === 0 && (
-              <SelectStaticButton
-                selectValue="source"
-                buttonType="primary"
-                variant="text"
-                buttonText="jopa"
-                selectItemName="label"
-                items={items}
-                handleCloseFunc={handleClose}
-              />
-            )}
-          </React.Fragment>
-        );
-      })}
-      {activeItems.length <= 1 && (
-        <SelectStaticButton
-          selectValue="source"
-          buttonType="primary"
-          variant="text"
-          buttonText="jopa"
-          selectItemName="label"
-          items={items}
-          handleCloseFunc={handleClose}
-        />
-      )}
-    </>
-  );
-};
+    return (
+      <>
+        {activeItems.map(({ component: Component, ...rest }, index) => {
+          return (
+            <React.Fragment key={index}>
+              <div className={classes.ActiveModelsWrapper}>
+                <Component {...rest} />
+                <StandardButton
+                  buttonType="additional-red"
+                  text="Delete"
+                  startIcon={<DeleteIcon />}
+                  variant="text"
+                  className={classes.Button}
+                  onClick={() => deleteItem({ component: Component, ...rest })}
+                  onMobileView
+                />
+              </div>
+              {activeItems.length > 1 && index === 0 && (
+                <div className={classes.Centered}>
+                  <SelectStaticButton
+                    selectValue="source"
+                    buttonType="primary"
+                    variant="text"
+                    buttonText={buttonText}
+                    selectItemName="label"
+                    items={items}
+                    handleCloseFunc={handleClose}
+                  />
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
+        {activeItems.length <= 1 && (
+          <div className={classes.Centered}>
+            <SelectStaticButton
+              selectValue="source"
+              buttonType="primary"
+              variant="text"
+              buttonText={buttonText}
+              selectItemName="label"
+              items={items}
+              handleCloseFunc={handleClose}
+            />
+          </div>
+        )}
+      </>
+    );
+  }
+);

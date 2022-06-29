@@ -142,12 +142,7 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
 
   return (
     <>
-      {type !== "create" && (
-        <FormSection text="" title="" formType={type} id="">
-          <Season resource={resource} type={type} />
-        </FormSection>
-      )}
-      {type === "create" && (
+      {type === "create" ? (
         <ArrayInput
           source="seasons"
           getItemLabel={alwaysEmptyString}
@@ -158,6 +153,10 @@ export const Form: React.FC<FormProps> = ({ resource, type }) => {
           inputClass={classes.ArrayInputWrapper}
           inputType={type}
         />
+      ) : (
+        <FormSection formType={type}>
+          <Season resource={resource} type={type} />
+        </FormSection>
       )}
       <ScrollTopButton />
     </>

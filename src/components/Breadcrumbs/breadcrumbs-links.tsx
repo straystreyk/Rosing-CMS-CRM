@@ -27,6 +27,7 @@ import { programEventsLinks } from "../../containers/MediaContent/TV/Channels/Pr
 import { screenConfigLinks } from "../../containers/PagesAndAttributes/ScreenConfig/screen-config-links";
 import { questionLinks } from "../../containers/PagesAndAttributes/Question/question-links";
 import { searchFiltersGroupLinks } from "../../containers/PagesAndAttributes/Filters/SearchFilterGroup/search-filters-group-links";
+import { quickFiltersLinks } from "../../containers/PagesAndAttributes/Filters/Filter/filters-links";
 
 export type Breadcrumb = {
   name: string;
@@ -86,6 +87,10 @@ export const breadcrumbsLinks: Breadcrumb[] = [
   {
     name: "TV shows",
     href: "/media_content/tv/tv_shows",
+  },
+  {
+    name: "Filters",
+    href: "/pages_and_attributes/filters",
   },
 
   //Movie
@@ -153,6 +158,9 @@ export const breadcrumbsLinks: Breadcrumb[] = [
 
   // Question Links
   ...searchFiltersGroupLinks,
+
+  //Filters (Quick filters)
+  ...quickFiltersLinks,
 
   //Content Providers (External catalog)
   {

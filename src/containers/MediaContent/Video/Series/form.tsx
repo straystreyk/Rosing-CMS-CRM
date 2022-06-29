@@ -85,6 +85,16 @@ export const Form: React.FC<FormProps> = ({ type, resource }) => {
         id="Attributes"
         formType={type}
       >
+        {type === "show" && (
+          <TextInput
+            offFastEdit
+            resource={resource}
+            label="ID"
+            source="id"
+            inputType={type}
+            fullWidth
+          />
+        )}
         <TextInput
           resource={resource}
           validate={requiredValidate}
