@@ -47,6 +47,7 @@ export const EditInputComponent: React.FC<EditInputComponentProps> = ({
       {showInput && ComponentInput && (
         <ComponentInput
           {...props}
+          inputType="create"
           fullWidth={props.fullWidth ?? false}
           helperText={props.helperText && showInput ? props.helperText : false}
           resettable={props.resettable && showInput ? props.resettable : false}

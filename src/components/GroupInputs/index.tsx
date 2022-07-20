@@ -80,6 +80,7 @@ interface GroupInputsProps {
   index?: number | string;
   onlyCreateView?: boolean;
   nodesWithoutBG?: React.ReactNode;
+  wrapperClassName?: string;
 }
 
 export const GroupInputsOrigin: React.FC<GroupInputsProps> = ({
@@ -91,12 +92,13 @@ export const GroupInputsOrigin: React.FC<GroupInputsProps> = ({
   groupHelperText,
   onlyCreateView,
   nodesWithoutBG,
+  wrapperClassName,
 }) => {
   const classes = useStyles();
   const [show, setShow] = React.useState(true);
 
   return (
-    <div>
+    <div className={wrapperClassName}>
       {label && (
         <div className={cn(classes.GroupInputsLabelWrapper, inputType === "show" && "showView")}>
           <span onClick={() => inputType === "show" && setShow((p) => !p)}>

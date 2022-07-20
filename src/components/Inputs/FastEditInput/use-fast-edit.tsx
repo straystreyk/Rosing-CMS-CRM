@@ -1,7 +1,7 @@
 import * as React from "react";
 import _ from "lodash";
 import { useForm, useFormState } from "react-final-form";
-import { useMutation } from "react-admin";
+import { useMutation, useRefresh } from "react-admin";
 import { useNotify } from "ra-core";
 
 export const useFastEdit = (resource: string, source: string) => {
@@ -11,6 +11,7 @@ export const useFastEdit = (resource: string, source: string) => {
   const [mutate, { loading, error, data }] = useMutation();
   const [showInput, setShowInput] = React.useState(false);
   const [initialValue, setInitialValue] = React.useState(currentFieldValue);
+  const refresh = useRefresh();
   const notify = useNotify();
 
   React.useEffect(() => {
@@ -22,6 +23,7 @@ export const useFastEdit = (resource: string, source: string) => {
       });
 
       setInitialValue(data[source]);
+      refresh();
     }
 
     if (error) {

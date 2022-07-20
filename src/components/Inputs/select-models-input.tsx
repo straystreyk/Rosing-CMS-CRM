@@ -140,15 +140,17 @@ export const SelectModelsInput: React.FC<SelectModelsInputProps> = React.memo(
             <React.Fragment key={index}>
               <div className={classes.ActiveModelsWrapper}>
                 <Component {...rest} />
-                <StandardButton
-                  buttonType="additional-red"
-                  text="Delete"
-                  startIcon={<DeleteIcon />}
-                  variant="text"
-                  className={classes.Button}
-                  onClick={() => deleteItem({ component: Component, ...rest })}
-                  onMobileView
-                />
+                {inputType !== "show" && (
+                  <StandardButton
+                    buttonType="additional-red"
+                    text="Delete"
+                    startIcon={<DeleteIcon />}
+                    variant="text"
+                    className={classes.Button}
+                    onClick={() => deleteItem({ component: Component, ...rest })}
+                    onMobileView
+                  />
+                )}
               </div>
               {activeItems.length > 1 && index === 0 && (
                 <div className={classes.Centered}>

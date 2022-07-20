@@ -8,6 +8,7 @@ import { AutocompleteArrayInputOrigin } from "./autocomplite-array-input";
 import { ChoiceInputType, InputProps } from "../../input-types";
 import { UrlField } from "../../../TableFields/url-field";
 import { EmptyInput } from "../../styles";
+import _ from "lodash";
 
 const useStyles = makeStyles({
   AutoCompleteInputStyles,
@@ -63,12 +64,12 @@ const ShowView: React.FC<{
 }> = React.memo((props) => {
   const { values } = useFormState();
   const classes = useStyles();
+  const value = _.get(values, props.source);
+
   const current =
-    values[props.source] && props.choices.length
+    value && props.choices.length
       ? props.choices.filter((choice) =>
-          choice && (choice.value || choice.id)
-            ? values[props.source].includes(choice.value || choice.id)
-            : []
+          choice && (choice.value || choice.id) ? value.includes(choice.value || choice.id) : []
         )
       : [];
   const link = getLink(props.source);

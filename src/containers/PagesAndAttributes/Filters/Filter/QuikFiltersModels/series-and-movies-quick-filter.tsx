@@ -26,7 +26,7 @@ const NotArrayField: React.FC<InputProps> = React.memo(({ resource, source, inpu
         label={source === "moviesFilters" ? "Movies aggregation" : "Series aggregation"}
         defaultValue="intersection"
         resource={resource}
-        inputType="create"
+        inputType={inputType}
         source={`${source}Aggregation`}
         choices={AGGREGATION_CHOICES}
         fullWidth
@@ -35,7 +35,7 @@ const NotArrayField: React.FC<InputProps> = React.memo(({ resource, source, inpu
   );
 });
 
-const SeriesAndMoviesQuickFilterInputs: React.FC<ComponentArrayInputType> = React.memo(
+export const SeriesAndMoviesQuickFilterInputs: React.FC<ComponentArrayInputType> = React.memo(
   ({ resource, inputType, source, index, parentSourceWithIndex }) => {
     return (
       <>
@@ -51,8 +51,9 @@ const SeriesAndMoviesQuickFilterInputs: React.FC<ComponentArrayInputType> = Reac
             optionValue="id"
             source={`${parentSourceWithIndex}.genreIdsIn`}
             resource={resource}
-            inputType="create"
+            inputType={inputType}
             helperText="You can select several genres from the list"
+            offFastEdit
           />
         </ReferenceArrayInput>
         <ReferenceArrayInput
@@ -64,10 +65,11 @@ const SeriesAndMoviesQuickFilterInputs: React.FC<ComponentArrayInputType> = Reac
         >
           <AutocompleteArrayInput
             resource={resource}
-            inputType="create"
+            inputType={inputType}
             source={`${parentSourceWithIndex}.rightHolderIdIn`}
             helperText="The company - the copyright holder of the film"
             fullWidth
+            offFastEdit
           />
         </ReferenceArrayInput>
         <ReferenceArrayInput
@@ -80,7 +82,8 @@ const SeriesAndMoviesQuickFilterInputs: React.FC<ComponentArrayInputType> = Reac
             optionText="name"
             source={`${parentSourceWithIndex}.externalCatalogIdIn`}
             resource={resource}
-            inputType="create"
+            inputType={inputType}
+            offFastEdit
             helperText="The partner directory from which the movie is imported. The logo of the external catalog will be displayed when previewing the movie in the app."
           />
         </ReferenceArrayInput>
@@ -95,9 +98,10 @@ const SeriesAndMoviesQuickFilterInputs: React.FC<ComponentArrayInputType> = Reac
             optionText="name"
             optionValue="id"
             source={`${parentSourceWithIndex}.languageIdIn`}
-            inputType="create"
+            inputType={inputType}
             resource={resource}
             helperText="hint"
+            offFastEdit
           />
         </ReferenceArrayInput>
         <ReferenceArrayInput
@@ -112,109 +116,124 @@ const SeriesAndMoviesQuickFilterInputs: React.FC<ComponentArrayInputType> = Reac
             resource={resource}
             source={`${parentSourceWithIndex}.castMemberIdIn`}
             optionText="fullName"
-            inputType="create"
+            inputType={inputType}
             fullWidth
+            offFastEdit
           />
         </ReferenceArrayInput>
         <AutocompleteArrayInput
           source={`${parentSourceWithIndex}.distributionIn`}
           label="CMS distribution"
-          inputType="create"
+          inputType={inputType}
           resource={resource}
           choices={SELECT_DISTRIBUTION}
           helperText="Distribution"
+          offFastEdit
         />
         <DateTimeInput
           source={`${parentSourceWithIndex}.createdAtGteq`}
           label="Created at greater than or equal to"
           resource={resource}
-          inputType="create"
+          inputType={inputType}
           helperText="hint"
+          offFastEdit
         />
         <DateTimeInput
           source={`${parentSourceWithIndex}.createdAtLteq`}
           label="Created at lesser than or equal to"
           resource={resource}
-          inputType="create"
+          inputType={inputType}
           helperText="hint"
+          offFastEdit
         />
         <AutocompleteInput
           resource={resource}
           choices={getYearsChoices()}
           label="Production year greater than or equal to"
-          inputType="create"
+          inputType={inputType}
           source={`${parentSourceWithIndex}.productionYearGteq`}
+          offFastEdit
         />
         <AutocompleteInput
           resource={resource}
           choices={getYearsChoices()}
           label="Production year lesser than or equal to"
-          inputType="create"
+          inputType={inputType}
           source={`${parentSourceWithIndex}.productionYearLteq`}
+          offFastEdit
         />
         <DateTimeInput
-          source={`${parentSourceWithIndex}.releaseDateGteg`}
+          source={`${parentSourceWithIndex}.releaseDateGteq`}
           label="Release date greater than or equal to"
           resource={resource}
-          inputType="create"
+          inputType={inputType}
           helperText="hint"
+          offFastEdit
         />
         <DateTimeInput
           source={`${parentSourceWithIndex}.releaseDateLteq`}
           label="Release date lesser than or equal to"
           resource={resource}
-          inputType="create"
+          inputType={inputType}
           helperText="hint"
+          offFastEdit
         />
         <AutocompleteInput
           resource={resource}
           choices={getRatings()}
           label="IMDB Rating greater than or equal to"
-          inputType="create"
+          inputType={inputType}
           source={`${parentSourceWithIndex}.imdbRatingGteq`}
+          offFastEdit
         />
         <AutocompleteInput
           resource={resource}
           choices={getRatings()}
           label="IMDB Rating lesser than or equal to"
-          inputType="create"
+          inputType={inputType}
           source={`${parentSourceWithIndex}.imdbRatingLteq`}
+          offFastEdit
         />
         <AutocompleteInput
           resource={resource}
           choices={getRatings()}
           label="Kinopoisk Rating greater than or equal to"
-          inputType="create"
+          inputType={inputType}
           source={`${parentSourceWithIndex}.kinopoiskRatingGteq`}
+          offFastEdit
         />
         <AutocompleteInput
           resource={resource}
           choices={getRatings()}
           label="Kinopoisk Rating lesser than or equal to"
-          inputType="create"
+          inputType={inputType}
           source={`${parentSourceWithIndex}.kinopoiskRatingLteq`}
+          offFastEdit
         />
         <AutocompleteInput
           resource={resource}
           choices={getRatings()}
           label="User Rating greater than or equal to"
-          inputType="create"
+          inputType={inputType}
           source={`${parentSourceWithIndex}.userRatingGteq`}
+          offFastEdit
         />
         <AutocompleteInput
           resource={resource}
           choices={getRatings()}
           label="User Rating lesser than or equal to"
-          inputType="create"
+          inputType={inputType}
           source={`${parentSourceWithIndex}.userRatingLteq`}
+          offFastEdit
         />
         <SelectInput
           label="Invert results"
           resource={resource}
-          inputType="create"
+          inputType={inputType}
           source={`${parentSourceWithIndex}.invertResults`}
           choices={INVERSE_SELECT}
           defaultValue={false}
+          offFastEdit
         />
       </>
     );

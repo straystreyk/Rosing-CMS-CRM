@@ -32,11 +32,18 @@ type StandardInputShowViewType = {
 export const StandardInputShowView: React.FC<{
   label?: string;
   className?: string;
+  wrapperClassName?: string;
   options?: StandardInputShowViewType;
-}> = ({ label, className, options, children }) => {
+}> = ({ label, className, options, wrapperClassName, children }) => {
   const classes = useStyles();
   return (
-    <div className={cn(classes.StandardShowWrapper, "StandardShowWrapper")}>
+    <div
+      className={cn(
+        classes.StandardShowWrapper,
+        "StandardShowWrapper",
+        wrapperClassName && wrapperClassName
+      )}
+    >
       {label && (
         <label className={options?.label?.className} onClick={options?.label?.onClick}>
           {label} {options?.label?.icon}

@@ -5,6 +5,7 @@ import { ArrayInputItemArrow, DeleteIcon, PlusIcon } from "../../../../constants
 import { ComponentArrayInputType, InputProps } from "../../input-types";
 import { Collapse, makeStyles } from "@material-ui/core";
 import { GroupInputsV2Props } from "../../../GroupInputs/group-inputs-v2";
+import { ArrayInputWithDifferentFieldsShow } from "./show-view";
 
 interface ArrayInputWithDifferentFieldsProps extends InputProps {
   buttonText: string;
@@ -72,7 +73,7 @@ const ArrayInputHeader: React.FC<{ title: string; onClick?: (e: React.MouseEvent
   );
 };
 
-export const ArrayInputWithDifferentFields: React.FC<ArrayInputWithDifferentFieldsProps> = ({
+export const ArrayInputWithDifferentFieldsOrigin: React.FC<ArrayInputWithDifferentFieldsProps> = ({
   source,
   buttonText,
   resource,
@@ -165,5 +166,16 @@ export const ArrayInputWithDifferentFields: React.FC<ArrayInputWithDifferentFiel
         </div>
       )}
     </FieldArray>
+  );
+};
+
+export const ArrayInputWithDifferentFields: React.FC<ArrayInputWithDifferentFieldsProps> = ({
+  inputType,
+  ...rest
+}) => {
+  return inputType === "show" ? (
+    <ArrayInputWithDifferentFieldsShow inputType={inputType} {...rest} />
+  ) : (
+    <ArrayInputWithDifferentFieldsOrigin inputType={inputType} {...rest} />
   );
 };

@@ -7,7 +7,6 @@ export const BreadCrumbsStyles: Styles<Theme, {}, string> = {
   },
   breadcrumb: {
     color: "var(--primary-button-default)",
-    fontWeight: 500,
     fontSize: 12,
   },
   crumbLink: {

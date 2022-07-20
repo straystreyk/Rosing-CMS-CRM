@@ -9,7 +9,7 @@ import { AutocompleteInput } from "../../input-types";
 const useStyles = makeStyles({
   SelectInput: {
     "& .MuiInputBase-root": {
-      backgroundColor: "transparent",
+      backgroundColor: "#fff",
     },
     "& .MuiSelect-root": {
       padding: "7px 12px",

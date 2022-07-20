@@ -3,7 +3,6 @@ import { ComponentArrayInputType, InputProps } from "../../../../../components/I
 import {
   AutocompleteArrayInput,
   DateTimeInput,
-  getRatings,
   SelectInput,
 } from "../../../../../components/Inputs";
 import {
@@ -13,7 +12,6 @@ import {
 } from "../../../../../constants/forms-constants";
 import { ReferenceArrayInput } from "../../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { ArrayInputWithDifferentFields } from "../../../../../components/Inputs/ArrayInputs/ArrayInputWithDifferentFields";
-import { AutocompleteInput } from "../../../../../components/Inputs/AutocompleteInput";
 import { GroupInputsV2 } from "../../../../../components/GroupInputs/group-inputs-v2";
 
 const INPUT_ITEMS_PER_PAGE = 25;
@@ -34,7 +32,7 @@ const NotArrayField: React.FC<InputProps> = React.memo(({ resource, source, inpu
   );
 });
 
-const ChannelsQuickFilterInputs: React.FC<ComponentArrayInputType> = React.memo(
+export const ChannelsQuickFilterInputs: React.FC<ComponentArrayInputType> = React.memo(
   ({ resource, inputType, source, index, parentSourceWithIndex }) => {
     return (
       <>

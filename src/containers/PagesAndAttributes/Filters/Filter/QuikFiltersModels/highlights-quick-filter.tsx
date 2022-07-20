@@ -3,13 +3,11 @@ import { ComponentArrayInputType, InputProps } from "../../../../../components/I
 import {
   AutocompleteArrayInput,
   DateTimeInput,
-  getRatings,
   SelectInput,
 } from "../../../../../components/Inputs";
 import { AGGREGATION_CHOICES, INVERSE_SELECT } from "../../../../../constants/forms-constants";
 import { ReferenceArrayInput } from "../../../../../components/Inputs/ReferenceInputs/reference-array-input";
 import { ArrayInputWithDifferentFields } from "../../../../../components/Inputs/ArrayInputs/ArrayInputWithDifferentFields";
-import { AutocompleteInput } from "../../../../../components/Inputs/AutocompleteInput";
 import { GroupInputsV2 } from "../../../../../components/GroupInputs/group-inputs-v2";
 
 const INPUT_ITEMS_PER_PAGE = 25;
@@ -18,7 +16,7 @@ const NotArrayField: React.FC<InputProps> = React.memo(({ resource, source, inpu
   return (
     <>
       <SelectInput
-        label="Audio show aggregation"
+        label="Highlights aggregation"
         defaultValue="intersection"
         resource={resource}
         inputType="create"
@@ -30,53 +28,25 @@ const NotArrayField: React.FC<InputProps> = React.memo(({ resource, source, inpu
   );
 });
 
-export const AudioShowsQuickFilterInputs: React.FC<ComponentArrayInputType> = React.memo(
+export const HighlightsQuickFilterInputs: React.FC<ComponentArrayInputType> = React.memo(
   ({ resource, inputType, source, index, parentSourceWithIndex }) => {
     return (
       <>
         <ReferenceArrayInput
-          label="Genres"
-          source={`${parentSourceWithIndex}.genreIdsIn`}
-          reference="media_content/attributes/genres"
+          label="TV channel"
+          source={`${parentSourceWithIndex}.channelIdsIn`}
+          reference="media_content/tv/channels/channels"
           resource={resource}
           perPage={INPUT_ITEMS_PER_PAGE}
         >
           <AutocompleteArrayInput
+            source={`${parentSourceWithIndex}.channelIdsIn`}
             optionText="name"
             optionValue="id"
-            source={`${parentSourceWithIndex}.genreIdsIn`}
             resource={resource}
-            inputType="create"
-            helperText="You can select several genres from the list"
-          />
-        </ReferenceArrayInput>
-        <ReferenceArrayInput
-          label="Right Holder"
-          source={`${parentSourceWithIndex}.rightHolderIdIn`}
-          reference="media_content/attributes/providers/right_holders"
-          resource={resource}
-          perPage={INPUT_ITEMS_PER_PAGE}
-        >
-          <AutocompleteArrayInput
-            resource={resource}
-            inputType="create"
-            source={`${parentSourceWithIndex}.rightHolderIdIn`}
-            helperText="The company - the copyright holder of the film"
+            inputType={inputType}
+            helperText={undefined}
             fullWidth
-          />
-        </ReferenceArrayInput>
-        <ReferenceArrayInput
-          label="External catalog"
-          source={`${parentSourceWithIndex}.externalCatalogIdIn`}
-          reference="media_content/attributes/providers/content_providers"
-          resource={resource}
-        >
-          <AutocompleteArrayInput
-            optionText="name"
-            source={`${parentSourceWithIndex}.externalCatalogIdIn`}
-            resource={resource}
-            inputType="create"
-            helperText="The partner directory from which the movie is imported. The logo of the external catalog will be displayed when previewing the movie in the app."
           />
         </ReferenceArrayInput>
         <DateTimeInput
@@ -93,19 +63,33 @@ export const AudioShowsQuickFilterInputs: React.FC<ComponentArrayInputType> = Re
           inputType="create"
           helperText="hint"
         />
-        <AutocompleteInput
+        <DateTimeInput
+          source={`${parentSourceWithIndex}.startAtGteq`}
+          label="Start at greater than or equal to"
           resource={resource}
-          choices={getRatings()}
-          label="Kinopoisk Rating lesser than or equal to"
           inputType="create"
-          source={`${parentSourceWithIndex}.kinopoiskRatingLteq`}
+          helperText="hint"
         />
-        <AutocompleteInput
+        <DateTimeInput
+          source={`${parentSourceWithIndex}.startAtLteq`}
+          label="Start at lesser than or equal to"
           resource={resource}
-          choices={getRatings()}
-          label="User Rating greater than or equal to"
           inputType="create"
-          source={`${parentSourceWithIndex}.userRatingGteq`}
+          helperText="hint"
+        />
+        <DateTimeInput
+          source={`${parentSourceWithIndex}.endAtGteq`}
+          label="End at greater than or equal to"
+          resource={resource}
+          inputType="create"
+          helperText="hint"
+        />
+        <DateTimeInput
+          source={`${parentSourceWithIndex}.endAtLteq`}
+          label="End at lesser than or equal to"
+          resource={resource}
+          inputType="create"
+          helperText="hint"
         />
         <SelectInput
           label="Invert results"
@@ -120,16 +104,16 @@ export const AudioShowsQuickFilterInputs: React.FC<ComponentArrayInputType> = Re
   }
 );
 
-export const AudioShowQuickFilterModel: React.FC<ComponentArrayInputType> = React.memo(
+export const HighlightsQuickFilter: React.FC<ComponentArrayInputType> = React.memo(
   ({ resource, source, inputType }) => {
     return (
       <ArrayInputWithDifferentFields
         componentWrapper={GroupInputsV2}
         componentWrapperTitle="Filters"
         notArrayField={NotArrayField}
-        component={AudioShowsQuickFilterInputs}
+        component={HighlightsQuickFilterInputs}
         buttonText="Add filters"
-        headerTitle="Audio show"
+        headerTitle="Highlights"
         resource={resource}
         source={source}
         inputType={inputType}

@@ -50,9 +50,11 @@ export const CheckboxOrigin: React.FC<CheckboxProps> = ({
         {({ input, meta, ...rest }) => {
           return (
             <>
-              <div className="label">
-                <span>{label}</span>
-              </div>
+              {label && (
+                <div className="label">
+                  <span>{label}</span>
+                </div>
+              )}
               <FormControlLabel
                 control={<CheckboxMUI color="primary" size="small" {...input} />}
                 label={checkboxLabel}
